@@ -1,0 +1,35 @@
+(a) usuários:  Administrador.
+
+(b) Pré-condições:
+	1. Ter pelo menos um item de acesso salvo no sistema.
+
+(c) Pós-condições:
+	1. O perfil de acesso estará salvo no sistema, vinculado à itens de acesso.
+
+Fluxo Básico:
+	1.	Deverá ser informado o campo nome.
+	
+	2.	Deverá ser inserido itens de acesso.
+	
+	3.	Salvar PerfilDeAcesso.
+		3.1	Validar campos obrigatórios.
+		3.2 Validar se ao menos um item de acesso foi informado.
+		3.3 Validar se PerfilDeAcesso é único.
+	
+	2.  Salvar Pessoa 
+		2.1	Validar campos obrigatórios
+		2.2	Validar senha apartir critérios definidos
+			2.2.1	Exige senha com mínimo de 6 caracteres
+			2.2.2	Exige senha com letras e números
+		2.3	Validar nome de usuário se não existe mais de um no sistema
+		2.4 Validar se Pessoa já possui usuário cadastrado
+		
+
+Fluxo Alternativo A:
+	1. No passo 2.1 do Fluxo Básico, caso haja algum campo obrigatório não preenchido:
+	2. O sistema informa o erro ao ator.
+	3. O fluxo retorna ao passo 1 do fluxo básico.
+Fluxo Alternativo B:
+	1. No passo 2.2 do Fluxo Básico, caso verifique que só possuam letras na senha:
+	2. O sistema informa senha inválida ao ator.
+	3. O fluxo retorna ao passo 1 do fluxo básico.
