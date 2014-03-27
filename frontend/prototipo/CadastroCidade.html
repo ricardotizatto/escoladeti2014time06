@@ -2,25 +2,28 @@
 <html lang="pt">
 	<head>
 		<meta charset="UTF-8">
-		<title> Esola de TI - Time 06</title>
+		<title> Escola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
+		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
-		<script src="./Lib/js/bootstrap.min.js"></script>		
+		<script src="./Lib/js/bootstrap.min.js"></script>
+		<script src="./Lib/js/bootstrap-select.js"></script>
+		<script src="./Lib/js/funcoes.js"></script>				
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
-		  <!-- Brand and toggle get grouped for better mobile display -->
-		  <div class="navbar-header">
-		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-		      <span class="sr-only">Toggle navigation</span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		    </button>
-		    <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
-		  </div>
-		  <!-- Collect the nav links, forms, and other content for toggling -->
-		   <div class="collapse navbar-collapse navbar-ex1-collapse">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			    	<span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
+		    </div>
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse navbar-ex1-collapse">
 			    <ul class="nav navbar-nav">
 			      <li class="dropdown">
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
@@ -46,6 +49,7 @@
 		  				<li><a href="CadastroPais.html">Pais</a></li>
 		 				<li><a href="CadastroEstado.html">Estado</a></li>
 		 				<li class="active" ><a href="CadastroCidade.html">Cidade</a></li>
+		 				<li><a href="CadastroDistrito.html">Distrito</a></li>
 		 				<li><a href="CadastroBairro.html">Bairro</a></li>
 		 				<li><a href="CadastroLogradouro.html">Logradouro</a></li>
 		 				<li><a href="CadastroCep.html">CEP</a></li>
@@ -81,25 +85,14 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-3 col-sm-offset-3">
-							<label>Tipo</label>
-							<div>
-								<div class="btn-group" data-toggle="buttons">
-									 <label class="btn btn-primary ">
-										<input name="sexo" value="M" type="radio" /> <label>Município</label>
-									 </label>
-									 <label class="btn btn-primary">
-										<input name="sexo" value="D" type="radio" />  <label>Distrito</label>
-									 </label>
-								</div>
-							</div>
-						</div>
-						<div class="form-group col-sm-3">
-							<label> Estado </label>
-							<select class="form-control" name="estado">
+						<div class="form-group col-sm-6 col-sm-offset-3">
+							<label for="pais"> Estado </label>
+							<select id="estado" class="selectpicker show-tick form-control" data-live-search="true" >
+								<option selected>Selecione</option>
 								<option>Paraná</option>
 								<option>Santa Catarina</option>
-								<option>Rio de Janeiro</option>		
+								<option>Rio de Janeiro</option>
+								<option>São Paulo</option>			
 							</select>
 						</div>
 					</div>	

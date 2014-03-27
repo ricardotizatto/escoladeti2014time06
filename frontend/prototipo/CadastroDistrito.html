@@ -4,12 +4,15 @@
 		<meta charset="UTF-8">
 		<title> Escola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
+		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
-		<script src="./Lib/js/bootstrap.min.js"></script>		
+		<script src="./Lib/js/bootstrap.min.js"></script>
+		<script src="./Lib/js/bootstrap-select.js"></script>
+		<script src="./Lib/js/funcoes.js"></script>				
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
-		  	<!-- Brand and toggle get grouped for better mobile display -->
+		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
 			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 			    	<span class="sr-only">Toggle navigation</span>
@@ -20,7 +23,7 @@
 			    <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
 		    </div>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse navbar-ex1-collapse">
+		   <div class="collapse navbar-collapse navbar-ex1-collapse">
 			    <ul class="nav navbar-nav">
 			      <li class="dropdown">
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
@@ -43,12 +46,12 @@
 			<div class="row">
 				<div class="form-group col-sm-6 col-sm-offset-3">
 					<ul class="nav nav-tabs">
-		  				<li class="active"><a href="CadastroPais.html">Pais</a></li>
+		  				<li><a href="CadastroPais.html">Pais</a></li>
 		 				<li><a href="CadastroEstado.html">Estado</a></li>
 		 				<li><a href="CadastroCidade.html">Cidade</a></li>
-		 				<li><a href="CadastroDistrito.html">Distrito</a></li>
+		 				<li class="active" ><a href="CadastroDistrito.html">Distrito</a></li>
 		 				<li><a href="CadastroBairro.html">Bairro</a></li>
-		 				<li><a href="CadastroLogradouro.html">Logradouro</a></li>
+		 				<li><a href="CadastroLogradouro.html">Logradouro</a></li>	
 		 				<li><a href="CadastroCep.html">CEP</a></li>
 					</ul>
 				</div>	
@@ -57,7 +60,7 @@
 			<fieldset>
 				<div class="row">
 					<div class="form-group col-sm-6 col-sm-offset-3">
-						<legend> Cadastro de País </legend>
+						<legend> Cadastro de Distrito </legend>
 					</div>
 				</div>
 				<form action="" method="POST" role="form">							
@@ -76,7 +79,28 @@
 							<label> Nome </label>
 							<input class="form-control" name="nome" type="text" />
 						</div>
-					</div>	
+					</div>
+					<div class="row ">
+						<div class="form-group col-sm-3 col-sm-offset-3">
+							<label>Início da Vigencia</label>
+							<input  class="form-control" name="fundacao" type="date"/>
+						</div>
+						<div class="form-group col-sm-3">
+							<label>Fim da Vigencia</label>
+							<input  class="form-control" name="fundacao" type="date"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-6 col-sm-offset-3">
+							<label for="cidade"> Cidade </label>
+							<select id="cidade" class="selectpicker show-tick form-control" data-live-search="true" >
+								<option selected>Selecione</option>
+								<option>Maringá</option>
+								<option>Astorga</option>
+								<option>Sarandi</option>		
+							</select>
+						</div>
+					</div>		
 					<div class="row">
 						<div class="col-sm-9">
 							<span class="pull-right">	

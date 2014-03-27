@@ -1,25 +1,29 @@
 ﻿<!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" ng-app>
 	<head>
 		<meta charset="UTF-8">
-		<title> Esola de TI - Time 06</title>
+		<title> Escola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
+		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
 		<script src="./Lib/js/bootstrap.min.js"></script>
+		<script src="./Lib/js/bootstrap-select.js"></script>
+		<script type="text/javascript" src="./Lib/js/angular.min.js"></script>
+		<script src="./Lib/js/funcoes.js"></script>				
 	</head>
-	<body>
+	<body  ng-controller="MainController" >
 		<nav class="navbar navbar-inverse" role="navigation">
-		  <!-- Brand and toggle get grouped for better mobile display -->
-		  <div class="navbar-header">
-		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-		      <span class="sr-only">Toggle navigation</span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		      <span class="icon-bar"></span>
-		    </button>
-		    <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
-		  </div>
-		  <!-- Collect the nav links, forms, and other content for toggling -->
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			    	<span class="sr-only">Toggle navigation</span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
+		    </div>
+		    <!-- Collect the nav links, forms, and other content for toggling -->
 		   <div class="collapse navbar-collapse navbar-ex1-collapse">
 			    <ul class="nav navbar-nav">
 			      <li class="dropdown">
@@ -62,13 +66,24 @@
 							<input class="form-control" name="nome" type="text" />
 						</div>
 						<div class="form-group col-sm-3">
-							<label> &nbsp; </label>
-							<legend>
-							 	<span class="glyphicon glyphicon"></span> Telas Permitidas 
-							 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTela">
-										<span class="glyphicon glyphicon-plus" ></span>	
-									</button>
-							</legend>
+							<label> Telas </label>
+		                    <select id="telas" class="selectpicker show-tick form-control" data-live-search="true">
+		                        <option selected>Selecione</option>
+		                        <option>Lista PF</option>
+		                        <option>Lista PJ</option>
+		                        <option>Cadastro PF</option>
+		                        <option>Cadastro PJ</option>
+		                    </select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-3 col-sm-offset-3">
+							<label>Início Vigência</label>
+							<input  class="form-control" name="inicioVigencia" type="date"/>
+						</div>
+						<div class="form-group col-sm-3">
+							<label>Fim Vigência</label>
+							<input  class="form-control" name="fimVigencia" type="date"/>
 						</div>
 					</div>
 					<div class="row">
@@ -87,45 +102,50 @@
 						<div class="col-sm-6 col-sm-offset-3"><hr></div>
 					</div>
 					<!-- Modal telas-->
-					<div class="modal fade" id="modalTela" tabindex="-1" role="dialog" aria-labelledby="modalContatoLabel" aria-hidden="true">
-					  <div class="modal-dialog">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					        <h4 class="modal-title" id="modalContatoLabel">Cadastro de telas permitidas</h4>
-					      </div>
-					      <div class="modal-body">
-							<div class="row ">
-								<div class="form-group col-sm-8 col-sm-offset-2">
-									<label> Telas </label>
-				                    <select class="form-control">
-				                        <option selected>Selecione</option>
-				                        <option>Lista PF</option>
-				                        <option>Lista PJ</option>
-				                        <option>Cadastro PF</option>
-				                        <option>Cadastro PJ</option>
-				                    </select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-4 col-sm-offset-2">
-									<label>Início Vigência</label>
-									<input  class="form-control" name="inicioVigencia" type="date"/>
-								</div>
-								<div class="form-group col-sm-4">
-									<label>Fim Vigência</label>
-									<input  class="form-control" name="fimVigencia" type="date"/>
-								</div>
-							</div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
-					        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>				
 				</form>
 			</fieldset>
 		</div>
 	</body>
 </html>
+
+<script type="text/javascript">
+
+    function MainController( $scope )
+    {
+        $scope.telas = [ 
+        	{id_tela : "1", nometela : "Lista PF",    inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
+        	{id_tela : "2", nometela : "Lista PJ",    inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
+        	{id_tela : "3", nometela : "Cadastro PF", inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
+        	{id_tela : "4", nometela : "Cadastro PJ", inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" }
+        ];
+
+        $scope.tela = null;
+
+        $scope.getTela = function(id_tela){
+            for(i=0;i<$scope.telas.length;i++){
+                if(id_tela == $scope.telas[i].id_tela){
+                  return $scope.tela =  $scope.telas[i];
+                }
+            }
+            $scope.pessoa = null;
+            return false;
+        }
+
+        $scope.getTelas = function(){
+          var array = [];
+          for(i=0;i<$scope.telas;i++)
+            array.push(i);
+          return array;
+        }
+
+        $scope.addTela = function(){
+          $scope.telas.push($scope.tela);
+          $scope.tela = null;      
+        };
+
+        $scope.delTela = function(index){
+          $scope.telas.splice(index,1);
+        };       
+    }
+  
+</script>
