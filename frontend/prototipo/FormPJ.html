@@ -122,39 +122,52 @@
 				        <h4 class="modal-title" id="modalContatoLabel">Cadastro de contato</h4>
 				      </div>
 				      <div class="modal-body">
-				      	<div class="row">
-							<div class="form-group col-sm-4 col-sm-offset-2">
-								<label> Telefone</label>
-								<div class="input-group">
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-phone-alt"></span>
-									</span>
-									<select class="form-control" name="tipoTelefone">
-											<option>Celular</option>
-											<option>Residencial</option>
-											<option>Comercial</option>		
-									</select>
-									
-								</div>
-							</div>
-							<div class="form-group col-sm-4">
-								<label>Número</label>
-								<div class="input-group">
-							  		<input class="form-control" name="numeroTelefone" type="text" ng-model="pessoa.telefone">			  
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-8 col-sm-offset-2">
-								<label>Email</label>
-								<div class="input-group" >
-									<span class="input-group-addon" >
-										<span class="glyphicon glyphicon-envelope"></span>
-									</span>
-									<input class="form-control" name="email" type="text">
-								</div>
-							</div>
-						</div>
+		      	      	<div class="row">
+		      				<div class="form-group col-sm-4 col-sm-offset-2">
+		      					<label> Telefone</label>
+		      					<div class="input-group">
+		      						<span class="input-group-addon">
+		      							<span class="glyphicon glyphicon-phone-alt"></span>
+		      						</span>
+		      						<select class="form-control" name="tipoTelefone">
+		      							<option>Celular</option>
+		      							<option>Residencial</option>
+		      							<option>Comercial</option>		
+		      						</select>
+		      					</div>
+		      				</div>
+		      				<div class="form-group col-sm-3 col-sm-offset-1">
+		      					<label>DDD</label>
+		      					<div class="input-group">
+		      				  		<input class="form-control" name="numeroDDD" type="text" ng-model="pessoa.telefone">			  
+		      					</div>
+		      				</div>
+		      			</div>
+		      	      	<div class="row">
+		      				<div class="form-group col-sm-5 col-sm-offset-2">
+		      					<label>Número</label>
+		      					<div class="input-group">
+		      				  		<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.telefone">			  
+		      					</div>
+		      				</div>
+		      				<div class="form-group col-sm-3">
+		      					<label>Ramal</label>
+		      					<div class="input-group">
+		      				  		<input class="form-control" name="numeroRamal" type="text" ng-model="pessoa.telefone">			  
+		      					</div>
+		      				</div>
+		      			</div>
+		      			<div class="row">
+		      				<div class="form-group col-sm-8 col-sm-offset-2">
+		      					<label>Email</label>
+		      					<div class="input-group" >
+		      						<span class="input-group-addon" >
+		      							<span class="glyphicon glyphicon-envelope"></span>
+		      						</span>
+		      						<input class="form-control" name="email" type="text">
+		      					</div>
+		      				</div>
+		      			</div>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
@@ -175,30 +188,45 @@
 				        <legend> <span class="glyphicon glyphicon-home"></span> Endereço </legend>
 							<div class="row">
 								<div class="form-group col-sm-3">
-									<label>Tipo</label>
-									<select class="form-control" name="tipoEndereco">
-											<option>Avenida</option>
-											<option>Rua</option>
-											<option>Praça</option>
-											<option>Estrada</option>
-											<option>Alameda</option>
-											<option>Ladeira</option>
-											<option>Travessa</option>
-											<option>Rodovia</option>
-											<option>Outros</option>
-									</select>
+									<label>Principal</label>
+									<div>
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-primary ">
+												<input name="principal" value="S" type="radio" /> <label>Sim</label>
+											</label>
+											<label class="btn btn-primary">
+												<input name="principal" value="N" type="radio" />  <label>Não</label
+											</label>
+										</div>
+									</div>
 								</div>
 								<div class="form-group col-sm-4">
+									<label>Cep</label>
+									<input  class="form-control" name="cep" type="text"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<label>Tipo</label>
+									<select class="form-control" name="tipoEndereco">
+										<option>Avenida</option>
+										<option>Rua</option>
+										<option>Praça</option>
+										<option>Estrada</option>
+										<option>Alameda</option>
+										<option>Ladeira</option>
+										<option>Travessa</option>
+										<option>Rodovia</option>
+										<option>Outros</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-6">
 									<label>Logradouro</label>
 									<input  class="form-control" name="descEndereco" type="text"/>
 								</div>
-								<div class="form-group col-sm-2">
+								<div class="form-group col-sm-3">
 									<label>Número</label>
 									<input  class="form-control" name="numero" type="text"/>
-								</div>
-								<div class="form-group col-sm-3">
-									<label>Cep</label>
-									<input  class="form-control" name="cep" type="text"/>
 								</div>
 							</div>
 							<div class="row">
@@ -219,17 +247,17 @@
 								<div class="form-group col-sm-3">
 									<label>Estado</label>
 									<select class="form-control" name="estado">
-											<option>Estado</option>
-											<option>Estado</option>
-											<option>Estado</option>
+										<option>Estado</option>
+										<option>Estado</option>
+										<option>Estado</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-3">
 									<label>Pais</label>
 									<select class="form-control" name="estado">
-											<option>Pais</option>
-											<option>Pais</option>
-											<option>Pais</option>
+										<option>Pais</option>
+										<option>Pais</option>
+										<option>Pais</option>
 									</select>
 								</div>
 							</div>			
