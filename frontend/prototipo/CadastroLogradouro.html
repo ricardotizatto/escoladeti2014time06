@@ -4,11 +4,8 @@
 		<meta charset="UTF-8">
 		<title> Esola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
-		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
-		<script src="./Lib/js/bootstrap.min.js"></script>
-		<script src="./Lib/js/bootstrap-select.js"></script>
-		<script src="./Lib/js/funcoes.js"></script>				
+		<script src="./Lib/js/bootstrap.min.js"></script>		
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
@@ -50,8 +47,8 @@
 		 				<li><a href="CadastroEstado.html">Estado</a></li>
 		 				<li><a href="CadastroCidade.html">Cidade</a></li>
 		 				<li><a href="CadastroBairro.html">Bairro</a></li>
-		 				<li><a href="CadastroLogradouro.html">Logradouro</a></li>
-		 				<li class="active" ><a href="CadastroCep.html">CEP</a></li>
+		 				<li class="active"><a href="CadastroLogradouro.html">Logradouro</a></li>
+		 				<li><a href="CadastroCep.html">CEP</a></li>
 					</ul>
 				</div>	
 			</div>	
@@ -59,40 +56,40 @@
 			<fieldset>
 				<div class="row">
 					<div class="form-group col-sm-6 col-sm-offset-3">
-						<legend> Cadastro de CEP </legend>
+						<legend> Cadastro de Logradouro </legend>
 					</div>
 				</div>
 				<form action="" method="POST" role="form">							
 					<div class="row ">
 						<div class="form-group col-sm-3 col-sm-offset-3">
-							<label> CEP inicial </label>
-							<input class="form-control" name="cepInicial" type="number" />
+							<label>Tipo</label>
+							<select class="form-control" name="tipoEndereco">
+									<option>Avenida</option>
+									<option>Rua</option>
+									<option>Praça</option>
+									<option>Estrada</option>
+									<option>Alameda</option>
+									<option>Ladeira</option>
+									<option>Travessa</option>
+									<option>Rodovia</option>
+									<option>Outros</option>
+							</select>
 						</div>
 						<div class="form-group col-sm-3">
-							<label> CEP final </label>
-							<input class="form-control" name="cepFinal" type="number" />
+							<label> Faixa de CEP </label>
+							<select class="form-control" name="estado">
+								<option>01000-000 - 02000-000</option>
+								<option>02001-000 - 03000-000</option>
+								<option>03001-000 - 04001-000</option>		
+							</select>
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-3 col-sm-offset-3">
-							<label for="bairro"> Bairro </label>
-		                    <select id="bairro" class="selectpicker show-tick form-control" multiple data-live-search="true">
-		                        <option selected>Selecione</option>
-		                        <option>Zona 02</option>
-		                        <option>Zona 03</option>
-		                        <option>Zona 04</option>
-		                    </select>
+						<div class="form-group col-sm-6 col-sm-offset-3">
+							<label> Nome </label>
+							<input class="form-control" name="nome" type="text" />
 						</div>
-						<div class="form-group col-sm-3">
-							<label for="logradouro"> Logradouro </label>
-		                    <select id="logradouro" class="selectpicker show-tick form-control" multiple data-live-search="true">
-		                        <option selected>Selecione</option>
-		                        <option>Av. Tiradentes</option>
-		                        <option>Av. São Paulo</option>
-		                        <option>Rua Londrina</option>
-		                    </select>
-						</div>
-					</div>		
+					</div>
 					<div class="row">
 						<div class="col-sm-9">
 							<span class="pull-right">	

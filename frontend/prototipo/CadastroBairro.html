@@ -37,7 +37,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="form-group col-sm-6 col-sm-offset-3">
-					<legend> Cadastro </legend>
+					<legend> Cadastro de localidade</legend>
 				</div>
 			</div>
 			<div class="row">
@@ -47,6 +47,7 @@
 		 				<li><a href="CadastroEstado.html">Estado</a></li>
 		 				<li><a href="CadastroCidade.html">Cidade</a></li>
 		 				<li class="active" ><a href="CadastroBairro.html">Bairro</a></li>
+		 				<li><a href="CadastroLogradouro.html">Logradouro</a></li>	
 		 				<li><a href="CadastroCep.html">CEP</a></li>
 					</ul>
 				</div>	
@@ -61,22 +62,22 @@
 				<form action="" method="POST" role="form">							
 					<div class="row ">
 						<div class="form-group col-sm-3 col-sm-offset-3">
-								<label> Código </label>
-								<input class="form-control" name="codigo" type="number" />
+							<label> Código </label>
+							<input class="form-control" name="codigo" type="number" />
 						</div>
 						<div class="form-group col-sm-3">
-								<label> Sigla </label>
-								<input class="form-control" name="nome" type="text" />
+							<label> Sigla </label>
+							<input class="form-control" name="nome" type="text" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6 col-sm-offset-3">
-								<label> Nome </label>
-								<input class="form-control" name="nome" type="text" />
+							<label> Nome </label>
+							<input class="form-control" name="nome" type="text" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-6 col-sm-offset-3">
+						<div class="form-group col-sm-3 col-sm-offset-3">
 							<label> Cidade </label>
 							<select class="form-control" name="estado">
 								<option>Maringá</option>
@@ -84,7 +85,15 @@
 								<option>Sarandi</option>		
 							</select>
 						</div>
-					</div>	
+						<div class="form-group col-sm-3 ">
+							<label> Faixa de CEP </label>
+							<select class="form-control" name="estado">
+								<option>01000-000 - 02000-000</option>
+								<option>02001-000 - 03000-000</option>
+								<option>03001-000 - 04001-000</option>		
+							</select>
+						</div>
+					</div>		
 					<div class="row">
 						<div class="col-sm-9">
 							<span class="pull-right">	

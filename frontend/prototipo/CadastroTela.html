@@ -4,11 +4,8 @@
 		<meta charset="UTF-8">
 		<title> Esola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
-		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
-		<script src="./Lib/js/bootstrap.min.js"></script>
-		<script src="./Lib/js/bootstrap-select.js"></script>
-		<script src="./Lib/js/funcoes.js"></script>				
+		<script src="./Lib/js/bootstrap.min.js"></script>		
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
@@ -40,18 +37,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="form-group col-sm-6 col-sm-offset-3">
-					<legend> Cadastro de localidade</legend>
+					<legend> Cadastro do sistema</legend>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6 col-sm-offset-3">
 					<ul class="nav nav-tabs">
-		  				<li><a href="CadastroPais.html">Pais</a></li>
-		 				<li><a href="CadastroEstado.html">Estado</a></li>
-		 				<li><a href="CadastroCidade.html">Cidade</a></li>
-		 				<li><a href="CadastroBairro.html">Bairro</a></li>
-		 				<li><a href="CadastroLogradouro.html">Logradouro</a></li>
-		 				<li class="active" ><a href="CadastroCep.html">CEP</a></li>
+		  				<li class="active"><a href="CadastroTela.html">Telas</a></li>
+		 				<li><a href="CadastroPerfilUsuario.html">Perfil de usuário</a></li>
 					</ul>
 				</div>	
 			</div>	
@@ -59,40 +52,20 @@
 			<fieldset>
 				<div class="row">
 					<div class="form-group col-sm-6 col-sm-offset-3">
-						<legend> Cadastro de CEP </legend>
+						<legend> Cadastro de Telas </legend>
 					</div>
 				</div>
 				<form action="" method="POST" role="form">							
 					<div class="row ">
 						<div class="form-group col-sm-3 col-sm-offset-3">
-							<label> CEP inicial </label>
-							<input class="form-control" name="cepInicial" type="number" />
+							<label> Nome </label>
+							<input class="form-control" name="nome" type="text" />
 						</div>
-						<div class="form-group col-sm-3">
-							<label> CEP final </label>
-							<input class="form-control" name="cepFinal" type="number" />
+						<div class="form-group col-sm-3 ">
+							<label> Descrição </label>
+							<input class="form-control" name="descricao" type="text" />
 						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-3 col-sm-offset-3">
-							<label for="bairro"> Bairro </label>
-		                    <select id="bairro" class="selectpicker show-tick form-control" multiple data-live-search="true">
-		                        <option selected>Selecione</option>
-		                        <option>Zona 02</option>
-		                        <option>Zona 03</option>
-		                        <option>Zona 04</option>
-		                    </select>
-						</div>
-						<div class="form-group col-sm-3">
-							<label for="logradouro"> Logradouro </label>
-		                    <select id="logradouro" class="selectpicker show-tick form-control" multiple data-live-search="true">
-		                        <option selected>Selecione</option>
-		                        <option>Av. Tiradentes</option>
-		                        <option>Av. São Paulo</option>
-		                        <option>Rua Londrina</option>
-		                    </select>
-						</div>
-					</div>		
+					</div>	
 					<div class="row">
 						<div class="col-sm-9">
 							<span class="pull-right">	
