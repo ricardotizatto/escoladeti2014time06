@@ -2,7 +2,7 @@
 <html lang="pt" ng-app>
 	<head>
 		<meta charset="UTF-8">
-		<title> Esola de TI - Time 06</title>
+		<title> Escola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
 		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
@@ -67,25 +67,25 @@
 				<div class="row ">
 					<div class="form-group col-sm-6 col-sm-offset-2">
 						<label> Razão Social </label>
-						<input class="form-control" name="razaoSocial" type="text" />
+						<input class="form-control" name="razaoSocial" type="text" placeholder="Razão Social" />
 					</div>
 					<div class="form-group col-sm-2">
 						<label> Data de Criação </label>
-						<input class="form-control" name="dataNascimento" type="text" />
+						<input class="form-control" name="dataNascimento" type="date"  />
 					</div>
 				</div>	
 				<div class="row ">
 					<div class="form-group col-sm-2 col-sm-offset-2">
 						<label> CNPJ </label>
-						<input class="form-control" name="cnpj" type="text" />
+						<input class="form-control" name="cnpj" type="text" placeholder="CNPJ" />
 					</div>
 					<div class="form-group col-sm-3">
 						<label> Inscrição Municipal </label>
-						<input class="form-control" name="inscricaoEstadual" type="text" />
+						<input class="form-control" name="inscricaoEstadual" type="text" placeholder="Inscrição Municipal" />
 					</div>
 					<div class="form-group col-sm-3">
 						<label> Inscrição Estadual </label>
-						<input class="form-control" name="dataCriacao" type="text" />
+						<input class="form-control" name="dataCriacao" type="text" placeholder="Inscrição Estadual" />
 					</div>
 				</div>	
 				<div class="row">
@@ -95,7 +95,7 @@
 	  						<span class="input-group-addon" >
 	  							<span class="glyphicon glyphicon-envelope"></span>
 	  						</span>
-	  						<input class="form-control" name="email" type="text">
+	  						<input class="form-control" name="email" type="text" placeholder="Endereço de email">
 	  					</div>
 	  				</div>
 	  			</div>
@@ -161,13 +161,13 @@
 				      				<div class="form-group col-sm-2">
 				      					<label>DDD</label>
 				      					<div class="input-group">
-				      				  		<input class="form-control" name="numeroDDD" type="text" ng-model="pessoa.pessoa.telefone">			  
+				      				  		<input class="form-control" name="numeroDDD" type="text" ng-model="pessoa.pessoa.telefone" placeholder="DDD" >			  
 				      					</div>
 				      				</div>
 				      				<div class="form-group col-sm-5">
 				      					<label>Número</label>
 				      					<div class="input-group">
-				      				  		<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone">  
+				      				  		<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone" placeholder="N° de telefone" >   
 				      					</div>
 				      				</div>
 		      					</div>
@@ -175,7 +175,7 @@
 				      	      		<div class="form-group col-sm-4 col-sm-offset-1">
 				      	      			<label>Ramal</label>
 				      					<div class="input-group">
-				      						<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone">  
+				      						<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone" placeholder="N° de ramal">  
 				      					</div>
 				      				</div>
 				      				<div class="form-group col-sm-1 col-sm-offset-5">
@@ -240,7 +240,7 @@
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Cep</label>
-										<input  class="form-control" name="cep" type="text" ng-model="pessoa.cep" />
+										<input  class="form-control maskCep" name="cep" type="text" ng-model="pessoa.cep" placeholder="99999-999" />
 									</div>
 								</div>
 								<div class="row">
@@ -260,27 +260,27 @@
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Logradouro</label>
-										<input  class="form-control" name="descEndereco" type="text" ng-model="pessoa.logradouro" />
+										<input  class="form-control" name="descEndereco" type="text" ng-model="pessoa.logradouro" placeholder="Logradouro" />
 									</div>
 									<div class="form-group col-sm-3">
 										<label>Número</label>
-										<input  class="form-control" name="numero" type="text" ng-model="pessoa.numero" />
+										<input  class="form-control" name="numero" type="text" ng-model="pessoa.numero" placeholder="N°" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Bairro</label>
-										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.bairro" />
+										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.bairro" placeholder="Bairro" />
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Complemento</label>
-										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.complemento" />
+										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.complemento" placeholder="Complemento" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Cidade</label>
-										<input  class="form-control" name="cidade" type="text" ng-model="pessoa.cidade" />
+										<input  class="form-control" name="cidade" type="text" ng-model="pessoa.cidade" placeholder="Cidade" />
 									</div>
 									<div class="form-group col-sm-3">
 										<label> Estado </label>
