@@ -1,0 +1,1 @@
+Os arquivos ListaPF e ListaPJ não estão nos diagramas, verificar se é necessário e implementar.

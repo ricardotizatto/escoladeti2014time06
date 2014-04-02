@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt" ng-app>
+	<head>
+		<meta charset="UTF-8">
+		<title> Escola de TI - Time 06</title>
+		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
+		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
+		<script src="./Lib/js/jquery.js"></script>
+		<script src="./Lib/js/bootstrap.min.js"></script>
+		<script src="./Lib/js/bootstrap-select.js"></script>
+		<script type="text/javascript" src="./Lib/js/angular.min.js"></script>
+		<script src="./Lib/js/funcoes.js"></script>				
+	</head>
+	<body  ng-controller="MainController" >
+		<nav class="navbar navbar-inverse" role="navigation">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			    	<span class="sr-only">Toggle navigation</span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
+		    </div>
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse navbar-ex1-collapse">
+			    <ul class="nav navbar-nav">
+			      <li class="dropdown">
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
+			        <ul class="dropdown-menu">
+			          <li><a href="#">Cliente</a></li>
+			        </ul>
+			      </li>
+			    </ul>
+			    <ul class="nav navbar-nav">
+			      <li class="dropdown">
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <b class="caret"></b></a>
+			        <ul class="dropdown-menu">
+			          <li><a href="#">Usuario</a></li>
+			          <li><a href="#">Perfil de Acesso</a></li>
+			        </ul>
+			      </li>
+			    </ul>
+		    	<ul class="nav navbar-nav navbar-right">
+		      		<li><a href="#">Sair</a></li>
+		   		</ul>
+		  	</div><!-- /.navbar-collapse -->
+		</nav>
+		<div class="container">
+			<label> &nbsp; </label>
+			<fieldset>
+					<div class="row">
+						<div class="form-group col-sm-6 col-sm-offset-3">
+							<legend> 
+								<span class="glyphicon glyphicon-user"></span> Cadastro de Usuário 
+							</legend>
+						</div>
+					</div>
+					<form action="" method="POST" role="form">		
+						<div class="row">
+							<div class="form-group col-sm-6 col-sm-offset-3">
+								<label> Nome </label>
+								<input class="form-control" name="nome" type="text" placeholder="Nome Completo" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-6 col-sm-offset-3">
+								<label> E-mail </label>
+								<input class="form-control" name="email" type="text" placeholder="Email" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-3 col-sm-offset-3">
+								<label>Senha</label>
+								<input  class="form-control" name="senha" type="password" placeholder="Senha"/>
+							</div>
+							<div class="form-group col-sm-3">
+								<label>Confirmar senha</label>
+								<input  class="form-control" name="senha" type="password" placeholder="Confirmar senha"/>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="form-group col-sm-2 col-sm-offset-3">
+								<label>Perfil</label>
+								<select class="form-control" name="tipoEndereco">
+										<option>Vendedor</option>
+										<option>Estagiario</option>
+										<option>Outros</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-2">
+								<label>Início Vigência</label>
+								<input  class="form-control" name="inicioVigencia" type="date"/>
+							</div>
+							<div class="form-group col-sm-2">
+								<label>Fim Vigência</label>
+								<input  class="form-control" name="fimVigencia" type="date"/>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="form-group col-sm-6 col-sm-offset-3">
+								<label> &nbsp; </label>
+								<legend>
+								 	<span class="glyphicon glyphicon-th-large"></span> Itens Especiais  
+								 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTela">
+											<span class="glyphicon glyphicon-plus" ></span>	
+										</button>
+								</legend>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-9">
+								<span class="pull-right">	
+								<a href="#" class="btn btn-danger ">
+									<span class="glyphicon glyphicon-remove" ></span>Cancelar 
+								</a>
+								<button type="submit" class="btn btn-success" >
+									<span class="glyphicon glyphicon-ok" ></span>Salvar </a>	
+								</button>
+								</span>		
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3"><hr></div>
+						</div>
+						<!-- Modal telas-->
+						<div class="modal fade" id="modalTela" tabindex="-1" role="dialog" aria-labelledby="modalContatoLabel" aria-hidden="true">
+							<div class="modal-dialog">
+						    	<div class="modal-content">
+								    <div class="modal-header">
+								    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								        <h4 class="modal-title" id="modalContatoLabel">Itens Especiais</h4>
+								    </div>
+								    <div class="modal-body">
+										<div class="row ">
+											<div class="form-group col-sm-8 col-sm-offset-2">
+												<label> Telas </label>
+							                    <select id="telas" class="selectpicker show-tick form-control" data-live-search="true">
+							                        <option selected>Selecione</option>
+							                        <option>Lista PF</option>
+							                        <option>Lista PJ</option>
+							                        <option>Cadastro PF</option>
+							                        <option>Cadastro PJ</option>
+							                    </select>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-sm-4 col-sm-offset-2">
+												<label>Início Vigência</label>
+												<input  class="form-control" name="inicioVigencia" type="date"/>
+											</div>
+											<div class="form-group col-sm-4">
+												<label>Fim Vigência</label>
+												<input  class="form-control" name="fimVigencia" type="date"/>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-sm-12">
+										        <table class="table table-hover table-striped">
+													<thead>
+													    <tr>          
+													    	<th class="col-sm-4 text-center"> Telas e Vigencias </th> 
+													        <th class="col-sm-1"> &nbsp; </th>
+													        <th class="col-sm-1"> &nbsp; </th>         
+													    </tr>
+												    </thead>
+												    <tbody>
+													    <tr ng-repeat="tela in telas">
+													    	<td class="text-center"> {{tela.nometela + " Ini: " + tela.inicioVigencia + " Fim: " + tela.fimVigencia}} </td>
+													        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getTela($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
+													        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delTela($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+													    </tr>        
+												    </tbody>      
+												</table>
+											</div>	
+										</div>
+									</div>
+								    <div class="modal-footer">
+								        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span> Cancelar</button>
+								    	<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" ></span> Salvar</button>
+								    </div>	
+						    	</div>
+						    </div>
+						</div>						
+					</form>
+			</fieldset>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+
+    function MainController( $scope )
+    {
+        $scope.telas = [ 
+        	{id_tela : "1", nometela : "Lista PF",    inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
+        	{id_tela : "2", nometela : "Lista PJ",    inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
+        	{id_tela : "3", nometela : "Cadastro PF", inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
+        	{id_tela : "4", nometela : "Cadastro PJ", inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" }
+        ];
+
+        $scope.tela = null;
+
+        $scope.getTela = function(id_tela){
+            for(i=0;i<$scope.telas.length;i++){
+                if(id_tela == $scope.telas[i].id_tela){
+                  return $scope.tela =  $scope.telas[i];
+                }
+            }
+            $scope.pessoa = null;
+            return false;
+        }
+
+        $scope.getTelas = function(){
+          var array = [];
+          for(i=0;i<$scope.telas;i++)
+            array.push(i);
+          return array;
+        }
+
+        $scope.addTela = function(){
+          $scope.telas.push($scope.tela);
+          $scope.tela = null;      
+        };
+
+        $scope.delTela = function(index){
+          $scope.telas.splice(index,1);
+        };       
+    }
+  
+</script>
