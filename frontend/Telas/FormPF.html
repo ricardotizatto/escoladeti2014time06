@@ -9,7 +9,8 @@
 		<script src="./Lib/js/bootstrap.min.js"></script>
 		<script src="./Lib/js/bootstrap-select.js"></script>
 		<script type="text/javascript" src="./Lib/js/angular.min.js"></script>
-		<script src="./Lib/js/funcoes.js"></script>		
+		<script src="./Lib/js/funcoes.js"></script>
+		<script type="text/javascript" src="./Lib/js/MascaraValidacao.js" ></script>
 	</head>
 	<body  ng-controller="MainController" >
 		<nav class="navbar navbar-inverse" role="navigation">
@@ -63,7 +64,7 @@
 					<legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Cliente </legend>
 				</div>
 			</div>	
-			<form action="" method="POST" role="form">						
+			<form action="" method="POST" role="form" name="formPF">						
 				<div class="row ">
 					<div class="form-group col-sm-3 col-sm-offset-2">
 						<label> Nome </label>
@@ -94,11 +95,11 @@
 					</div>	
 					<div class="form-group col-sm-3">
 						<label> RG </label>
-						<input class="form-control" name="dataNascimento" type="text" placeholder="R.G." />
+						<input class="form-control" name="rg" type="text" onKeyPress="MascaraRG(formPF.rg);" maxlength="12" placeholder="R.G." />
 					</div>
 					<div class="form-group col-sm-3">
 						<label> CPF </label>
-						<input class="form-control maskCPF" name="dataNascimento" type="text" placeholder="Número do CPF" />
+						<input class="form-control" name="cpf" type="text" onBlur="ValidarCPF(fordmPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
 					</div>	
 				</div>
 				<div class="row">
@@ -174,13 +175,13 @@
 				      				<div class="form-group col-sm-2">
 				      					<label>DDD</label>
 				      					<div class="input-group">
-				      				  		<input class="form-control" name="numeroDDD" type="text" ng-model="pessoa.pessoa.telefone" placeholder="DDD">			  
+				      				  		<input class="form-control" name="ddd" type="text" maxlength="4" onKeyPress="MascaraDDD(formPF.ddd);" placeholder="DDD">			  
 				      					</div>
 				      				</div>
 				      				<div class="form-group col-sm-5">
 				      					<label>Número</label>
 				      					<div class="input-group">
-				      				  		<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone" placeholder="Nº de telefone">  
+				      				  		<input class="form-control" name="tel" type="text" ng-model="pessoa.pessoa.telefone" onKeyPress="MascaraTelefone(formPF.tel);" maxlength="10"  onBlur="ValidaTelefone(formPF.tel);"  placeholder="Nº de telefone">  
 				      					</div>
 				      				</div>
 		      					</div>
@@ -188,7 +189,7 @@
 				      	      		<div class="form-group col-sm-4 col-sm-offset-1">
 				      	      			<label>Ramal</label>
 				      					<div class="input-group">
-				      						<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone" placeholder="N° de ramal">  
+				      						<input class="form-control" name="numeroTelefone" type="number" placeholder="N° de ramal">  
 				      					</div>
 				      				</div>
 				      				<div class="form-group col-sm-1 col-sm-offset-5">
@@ -253,13 +254,15 @@
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Cep</label>
-										<input  class="form-control maskCep" name="cep" type="text" ng-model="pessoa.cep" placeholder="99999-999" />
+										<input  class="form-control maskCep" name="cep" type="text" ng-model="pessoa.cep" onKeyPress="MascaraCep(formPF.cep);"
+ 										maxlength="10" onBlur="ValidaCep(formPF.cep)" placeholder="99999-999" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-3">
 										<label>Tipo</label>
-										<select class="form-control" name="tipoEndereco" ng-model="pessoa.tipoEndereco">
+										<select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="pessoa.tipoEndereco" data-live-search="true">
+											<option selected>Selecione</option>
 											<option>Avenida</option>
 											<option>Rua</option>
 											<option>Praça</option>
