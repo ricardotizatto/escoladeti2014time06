@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title> Escola de TI - Time 06</title>
+		<link href="./Lib/css/submenudropdown.css" rel="stylesheet">
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
 		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
@@ -27,19 +28,20 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		   <div class="collapse navbar-collapse navbar-ex1-collapse">
 			    <ul class="nav navbar-nav">
-			      <li class="dropdown">
-			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
-			       		
-			        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			          <li class="dropdown-submenu">
-			          	<a tabindex="-1" href="FormPF.html">Cliente</a>
-			          	<ul class="dropdown-menu">Pessoa fisica</ul>
-			         
+			    	<li class="dropdown">
+			        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
+			        	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			        		<li class="dropdown-submenu">
+	                    		<a tabindex="-1" href="#">Cliente</a>
+	                    		<ul class="dropdown-menu">
+	                      			<li><a tabindex="-1" href="FormPF.html">Pessoa Física</a></li>
+	                      			<li><a href="FormPJ.html">Pessoa Jurídica</a></li>
+	                    		</ul>
+	             			</li>
 			          </li>
 			        </ul>
 			      </li>
 			    </ul>
-																	   
 		    	<ul class="nav navbar-nav navbar-right">
 		      		<li><a href="#">Sair</a></li>
 		   		</ul>
@@ -131,7 +133,6 @@
 						</legend>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="form-group col-sm-4 col-sm-offset-2">
       			        <table class="table table-hover table-striped">
@@ -151,7 +152,6 @@
       					    </tbody>      
       					</table>
       				</div>
-
 					<div class="form-group col-sm-4">
 				        <table class="table table-hover table-striped">
 							<thead>
@@ -186,8 +186,6 @@
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2"><hr></div>
 				</div>
-
-
 				<!-- Modal contato-->
 				<div class="modal fade" id="modalContato" tabindex="-1" role="dialog" aria-labelledby="modalContatoLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -211,7 +209,6 @@
 				      						</select>
 				      					</div>
 		      						</div>
-				      				
 				      				<div class="form-group col-sm-5">
 				      					<label>Número</label>
 				      					<div class="input-group">
@@ -226,10 +223,8 @@
 				      						<input class="form-control" name="numeroTelefone" type="number" placeholder="N° de ramal">  
 				      					</div>
 				      				</div>
-				      				
 				      			</div>
 				      			<div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
-				      				
 						    </div>
 					        <div class="modal-footer">
 						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
@@ -327,8 +322,6 @@
 					                    </select>
 									</div>
 								</div>
-									
-										
 				      		</div>
 					        <div class="modal-footer">
 						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
