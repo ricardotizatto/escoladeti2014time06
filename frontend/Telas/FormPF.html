@@ -49,7 +49,7 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="form-group col-sm-8 col-sm-offset-2">
+				<div class="form-group col-sm-12">
 					<ul class="nav nav-tabs">
 		  				<li class="active"><a href="FormPF.html">Pessoa Física</a></li>
 		 				<li><a href="FormPJ.html">Pessoa Jurídica</a></li>
@@ -58,22 +58,22 @@
 			</div>
 			<label> &nbsp; </label>
 			<div class="row">
-			<div class="form-group col-sm-8 col-sm-offset-2">
+			<div class="form-group col-sm-12">
 				<fieldset>
 					<legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Cliente </legend>
 				</div>
 			</div>	
 			<form action="" method="POST" role="form" name="formPF">						
 				<div class="row ">
-					<div class="form-group col-sm-3 col-sm-offset-2">
+					<div class="form-group col-sm-5">
 						<label> Nome </label>
 						<input class="form-control" name="nome" type="text" placeholder="Nome" />
 					</div>
-					<div class="form-group col-sm-3">
+					<div class="form-group col-sm-5">
 						<label> Sobrenome </label>
 						<input class="form-control" name="sobrenome" type="text" placeholder="Sobrenome" />
 					</div>
-					<div class="form-group col-sm-2 col-sm-offset-1">
+					<div class="form-group col-sm-2">
 						<label>Sexo</label>
 						<div>
 							<div class="btn-group" data-toggle="buttons">
@@ -88,21 +88,20 @@
 					</div>
 				</div>		
 				<div class="row">
-					<div class="form-group col-sm-2 col-sm-offset-2">
-						<label>Nascimento </label>
-						<input class="form-control maskNascimento" name="dataNascimento" type="date" placeholder="dd/mm/aaaa" />
-					</div>	
-					<div class="form-group col-sm-3">
+						
+					<div class="form-group col-sm-2">
 						<label> RG </label>
 						<input class="form-control" name="rg" type="text" onKeyPress="MascaraRG(formPF.rg);" maxlength="12" placeholder="R.G." />
 					</div>
-					<div class="form-group col-sm-3">
+					<div class="form-group col-sm-2">
 						<label> CPF </label>
 						<input class="form-control" name="cpf" type="text" onBlur="ValidarCPF(fordmPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
 					</div>	
-				</div>
-				<div class="row">
-	  				<div class="form-group col-sm-5 col-sm-offset-2">
+					<div class="form-group col-sm-2">
+						<label>Nascimento </label>
+						<input class="form-control maskNascimento" name="dataNascimento" type="date" placeholder="dd/mm/aaaa" />
+					</div>
+	  				<div class="form-group col-sm-5">
 	  					<label>Email</label>
 	  					<div class="input-group" >
 	  						<span class="input-group-addon" >
@@ -114,16 +113,8 @@
 	  			</div>
 				<label>  &nbsp; </label>
 				<div class="row">
-					<div class="form-group col-sm-4 col-sm-offset-2">
-						<legend>
-						 	<span class="glyphicon glyphicon-phone-alt"></span> Telefone 
-						 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalContato">
-									<span class="glyphicon glyphicon-plus" ></span>	
-								</button>
-								<label> &nbsp; </label>
-						</legend>
-					</div>
-					<div class="form-group col-sm-4">
+					
+					<div class="form-group col-sm-7">
 						<legend>
 						 	<span class="glyphicon glyphicon-home"></span> Endereço 
 						 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEndereco">
@@ -132,9 +123,37 @@
 								<label> &nbsp; </label>
 						</legend>
 					</div>
+					<div class="form-group col-sm-5">
+						<legend>
+						 	<span class="glyphicon glyphicon-phone-alt"></span> Telefone 
+						 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalContato">
+									<span class="glyphicon glyphicon-plus" ></span>	
+								</button>
+								<label> &nbsp; </label>
+						</legend>
+					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-sm-4 col-sm-offset-2">
+					
+					<div class="form-group col-sm-7">
+				        <table class="table table-hover table-striped">
+							<thead>
+							    <tr>          
+							    	<th class="col-sm-4 text-center"> Endereço </th> 
+							        <th class="col-sm-1"> &nbsp; </th>
+							        <th class="col-sm-1"> &nbsp; </th>         
+							    </tr>
+						    </thead>
+						    <tbody>
+							    <tr ng-repeat="pessoa in pessoas">
+							    	<td class="text-center"> {{pessoa.tipoEndereco + "  " + pessoa.logradouro + " " + pessoa.numero + " - " + pessoa.cidade + " - " + pessoa.estado}} </td>
+							        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
+							        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+							    </tr>        
+						    </tbody>      
+						</table>
+					</div>
+					<div class="form-group col-sm-5">
       			        <table class="table table-hover table-striped">
       						<thead>
       						    <tr>          
@@ -152,27 +171,9 @@
       					    </tbody>      
       					</table>
       				</div>
-					<div class="form-group col-sm-4">
-				        <table class="table table-hover table-striped">
-							<thead>
-							    <tr>          
-							    	<th class="col-sm-4 text-center"> Endereço </th> 
-							        <th class="col-sm-1"> &nbsp; </th>
-							        <th class="col-sm-1"> &nbsp; </th>         
-							    </tr>
-						    </thead>
-						    <tbody>
-							    <tr ng-repeat="pessoa in pessoas">
-							    	<td class="text-center"> {{pessoa.tipoEndereco + "  " + pessoa.logradouro + " " + pessoa.numero + " - " + pessoa.cidade + " - " + pessoa.estado}} </td>
-							        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
-							        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
-							    </tr>        
-						    </tbody>      
-						</table>
-					</div>	
 				</div>	
 				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
+					<div class="col-sm-12">
 						<span class="pull-right">	
 						<a href="AcaoCliente.html" class="btn btn-danger">
 							<span class="glyphicon glyphicon-remove" ></span> Cancelar 
@@ -184,7 +185,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2"><hr></div>
+					<div class="col-sm-12"><hr></div>
 				</div>
 				<!-- Modal contato-->
 				<div class="modal fade" id="modalContato" tabindex="-1" role="dialog" aria-labelledby="modalContatoLabel" aria-hidden="true">
