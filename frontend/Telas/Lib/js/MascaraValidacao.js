@@ -28,15 +28,7 @@ function MascaraTelefone(tel){
 	if(mascaraInteiro(tel)==false){
 		event.returnValue = false;
 	}	
-	return formataCampo(tel, '0000-0000', event);
-}
-
-//adiciona mascara ao ddd
-function MascaraDDD(ddd){	
-	if(mascaraInteiro(ddd)==false){
-		event.returnValue = false;
-	}	
-	return formataCampo(ddd, '(00)', event);
+	return formataCampo(tel, '(00) 0000-0000', event);
 }
 
 //adiciona mascara ao CPF

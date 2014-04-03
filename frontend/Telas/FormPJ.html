@@ -9,7 +9,8 @@
 		<script src="./Lib/js/bootstrap.min.js"></script>
 		<script src="./Lib/js/bootstrap-select.js"></script>
 		<script type="text/javascript" src="./Lib/js/angular.min.js"></script>
-		<script src="./Lib/js/funcoes.js"></script>		
+		<script src="./Lib/js/funcoes.js"></script>
+		<script type="text/javascript" src="./Lib/js/MascaraValidacao.js" ></script>		
 	</head>
 	<body  ng-controller="MainController" >
 		<nav class="navbar navbar-inverse" role="navigation">
@@ -63,7 +64,7 @@
 					<legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Empresa </legend>
 				</div>
 			</div>	
-			<form action="" method="POST" role="form">						
+			<form action="" method="POST" role="form" name="formPJ">						
 				<div class="row ">
 					<div class="form-group col-sm-6 col-sm-offset-2">
 						<label> Razão Social </label>
@@ -120,6 +121,48 @@
 						</legend>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="form-group col-sm-4 col-sm-offset-2">
+      			        <table class="table table-hover table-striped">
+      						<thead>
+      						    <tr>          
+      						    	<th class="col-sm-4 text-center"> Telefones </th> 
+      						    	<th class="col-sm-1"> &nbsp; </th>
+      						    	<th class="col-sm-1"> &nbsp; </th>           
+      						    </tr>
+      					    </thead>
+      					    <tbody>
+      						    <tr ng-repeat="pessoa in pessoas">
+      						    	<td class="text-center"> {{pessoa.telefone}} </td>
+      						        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
+      						        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+      						    </tr>        
+      					    </tbody>      
+      					</table>
+      				</div>
+
+					<div class="form-group col-sm-4">
+				        <table class="table table-hover table-striped">
+							<thead>
+							    <tr>          
+							    	<th class="col-sm-4 text-center"> Endereço </th> 
+							        <th class="col-sm-1"> &nbsp; </th>
+							        <th class="col-sm-1"> &nbsp; </th>         
+							    </tr>
+						    </thead>
+						    <tbody>
+							    <tr ng-repeat="pessoa in pessoas">
+							    	<td class="text-center"> {{pessoa.tipoEndereco + "  " + pessoa.logradouro + " " + pessoa.numero + " - " + pessoa.cidade + " - " + pessoa.estado}} </td>
+							        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
+							        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+							    </tr>        
+						    </tbody>      
+						</table>
+					</div>	
+				</div>	
+
+
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2">
 						<span class="pull-right">	
@@ -158,18 +201,14 @@
 				      						</select>
 				      					</div>
 		      						</div>
-				      				<div class="form-group col-sm-2">
-				      					<label>DDD</label>
-				      					<div class="input-group">
-				      				  		<input class="form-control" name="numeroDDD" type="text" ng-model="pessoa.pessoa.telefone" placeholder="DDD" >			  
-				      					</div>
-				      				</div>
+				      		
 				      				<div class="form-group col-sm-5">
 				      					<label>Número</label>
 				      					<div class="input-group">
-				      				  		<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone" placeholder="N° de telefone" >   
+				      				  		<input class="form-control" name="tel" type="text" ng-model="pessoa.pessoa.telefone" onKeyPress="MascaraTelefone(formPJ.tel);" maxlength="15"  onBlur="ValidaTelefone(formPJ.tel);"  placeholder="(44) 9999-9999">  
 				      					</div>
 				      				</div>
+
 		      					</div>
 				      	      	<div class="row">
 				      	      		<div class="form-group col-sm-4 col-sm-offset-1">
@@ -178,34 +217,8 @@
 				      						<input class="form-control" name="numeroTelefone" type="number" ng-model="pessoa.pessoa.telefone" placeholder="N° de ramal">  
 				      					</div>
 				      				</div>
-				      				<div class="form-group col-sm-1 col-sm-offset-5">
-				      					<label>&nbsp;</label>
-				      					<button type="submit" title="Adicionar telefone" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTelefone">
-											<span class="glyphicon glyphicon-plus" ></span>	
-										</button>
-				      				</div>
 				      			</div>
 				      			<div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
-				      			<div class="row">
-				      				<div class="form-group col-sm-6 col-sm-offset-3">
-				      			        <table class="table table-hover table-striped">
-				      						<thead>
-				      						    <tr>          
-				      						    	<th class="col-sm-4 text-center"> Telefones </th> 
-				      						    	<th class="col-sm-1"> &nbsp; </th>
-				      						    	<th class="col-sm-1"> &nbsp; </th>           
-				      						    </tr>
-				      					    </thead>
-				      					    <tbody>
-				      						    <tr ng-repeat="pessoa in pessoas">
-				      						    	<td class="text-center"> {{pessoa.telefone}} </td>
-				      						        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
-				      						        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
-				      						    </tr>        
-				      					    </tbody>      
-				      					</table>
-				      				</div>
-				      			</div>			
 						    </div>
 					        <div class="modal-footer">
 						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
@@ -301,34 +314,6 @@
 					                    </select>
 									</div>
 								</div>
-								<div class="row">
-									<div class="form-group col-sm-12">
-										<hr>
-										<span class="pull-right">	
-										<button type="button" class="btn btn-primary" ng-click="addPessoa()" ><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
-									    </span>
-									</div>	
-								</div>		
-								<div class="row">
-									<div class="form-group col-sm-12">
-								        <table class="table table-hover table-striped">
-											<thead>
-											    <tr>          
-											    	<th class="col-sm-4 text-center"> Endereço </th> 
-											        <th class="col-sm-1"> &nbsp; </th>
-											        <th class="col-sm-1"> &nbsp; </th>         
-											    </tr>
-										    </thead>
-										    <tbody>
-											    <tr ng-repeat="pessoa in pessoas">
-											    	<td class="text-center"> {{pessoa.tipoEndereco + "  " + pessoa.logradouro + " " + pessoa.numero + " - " + pessoa.cidade + " - " + pessoa.estado}} </td>
-											        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
-											        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
-											    </tr>        
-										    </tbody>      
-										</table>
-									</div>	
-								</div>			
 				      		</div>
 					        <div class="modal-footer">
 						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
