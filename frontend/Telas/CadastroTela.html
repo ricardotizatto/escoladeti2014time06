@@ -4,9 +4,14 @@
 		<meta charset="UTF-8">
 		<title> Escola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
+		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
-		<script src="./Lib/js/bootstrap.min.js"></script>		
+		<script src="./Lib/js/bootstrap.min.js"></script>
+		<script src="./Lib/js/bootstrap-select.js"></script>
+		<script type="text/javascript" src="./Lib/js/angular.min.js"></script>
+		<script src="./Lib/js/funcoes.js"></script>				
 	</head>
+	
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
 		  	<!-- Brand and toggle get grouped for better mobile display -->
@@ -45,12 +50,12 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="form-group col-sm-6 col-sm-offset-3">
+				<div class="form-group col-sm-12">
 					<legend> Cadastro do sistema</legend>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6 col-sm-offset-3">
+				<div class="form-group col-sm-12">
 					<ul class="nav nav-tabs">
 		  				<li class="active"><a href="CadastroTela.html">Telas</a></li>
 		 				<li><a href="CadastroPerfilUsuario.html">Perfil de usuário</a></li>
@@ -60,35 +65,35 @@
 			<label> &nbsp; </label>
 			<fieldset>
 				<div class="row">
-					<div class="form-group col-sm-6 col-sm-offset-3">
+					<div class="form-group col-sm-12">
 						<legend> Cadastro de Telas </legend>
 					</div>
 				</div>
 				<form action="" method="POST" role="form">							
 					<div class="row ">
-						<div class="form-group col-sm-3 col-sm-offset-3">
+						<div class="form-group col-sm-6">
 							<label> Nome </label>
 							<input class="form-control" name="nome" type="text" placeholder="Nome" />
 						</div>
-						<div class="form-group col-sm-3 ">
+						<div class="form-group col-sm-6 ">
 							<label> Descrição </label>
 							<input class="form-control" name="descricao" type="text" placeholder="Descrição" />
 						</div>
 					</div>	
 					<div class="row">
-						<div class="col-sm-9">
+						<div class="col-sm-12">
 							<span class="pull-right">	
 							<a href="AcaoCliente.html" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" ></span>Cancelar 
+								<span class="glyphicon glyphicon-remove" ></span> Cancelar 
 							</a>
 							<button type="submit" class="btn btn-success" >
-								<span class="glyphicon glyphicon-ok" ></span>Salvar </a>	
+								<span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
 							</button>
 							</span>		
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-6 col-sm-offset-3"><hr></div>
+						<div class="col-sm-12"><hr></div>
 					</div>			
 				</form>
 			</fieldset>
