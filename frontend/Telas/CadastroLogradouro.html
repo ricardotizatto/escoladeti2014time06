@@ -4,12 +4,10 @@
 		<meta charset="UTF-8">
 		<title> Escola de TI - Time 06</title>
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
-		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
 		<script src="./Lib/js/jquery.js"></script>
 		<script src="./Lib/js/bootstrap.min.js"></script>
-		<script src="./Lib/js/bootstrap-select.js"></script>
-		<script src="./Lib/js/funcoes.js"></script>				
 	</head>
+	
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
 		    <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,12 +46,12 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="form-group col-sm-6 col-sm-offset-3">
+				<div class="form-group col-sm-12">
 					<legend> Cadastro de localidade</legend>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6 col-sm-offset-3">
+				<div class="form-group col-sm-12">
 					<ul class="nav nav-tabs">
 		  				<li><a href="CadastroPais.html">Pais</a></li>
 		 				<li><a href="CadastroEstado.html">Estado</a></li>
@@ -68,13 +66,13 @@
 			<label> &nbsp; </label>
 			<fieldset>
 				<div class="row">
-					<div class="form-group col-sm-6 col-sm-offset-3">
+					<div class="form-group col-sm-12">
 						<legend> Cadastro de Logradouro </legend>
 					</div>
 				</div>
 				<form action="" method="POST" role="form">							
 					<div class="row ">
-						<div class="form-group col-sm-3 col-sm-offset-3">
+						<div class="form-group col-sm-2">
 							<label>Tipo</label>
 							<select id="tipoEndereco" class="selectpicker show-tick form-control" data-live-search="true" >
 									<option selected>Selecione</option>
@@ -89,6 +87,11 @@
 									<option>Outros</option>
 							</select>
 						</div>
+						
+						<div class="form-group col-sm-7">
+							<label> Nome </label>
+							<input class="form-control" name="nome" type="text" placeholder="Nome" />
+						</div>
 						<div class="form-group col-sm-3 ">
 							<label> Faixa de CEP </label>
 							<select id="faixaCep" class="selectpicker show-tick form-control" data-live-search="true" >
@@ -98,15 +101,15 @@
 								<option>03001-000 - 04001-000</option>		
 							</select>
 						</div>
+					
+						
+
+
+
+
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-6 col-sm-offset-3">
-							<label> Nome </label>
-							<input class="form-control" name="nome" type="text" placeholder="Nome" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-9">
+						<div class="col-sm-12">
 							<span class="pull-right">	
 							<a href="AcaoCliente.html" class="btn btn-danger">
 								<span class="glyphicon glyphicon-remove" ></span>Cancelar 
@@ -118,7 +121,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-6 col-sm-offset-3"><hr></div>
+						<div class="col-sm-12"><hr></div>
 					</div>			
 				</form>
 			</fieldset>
