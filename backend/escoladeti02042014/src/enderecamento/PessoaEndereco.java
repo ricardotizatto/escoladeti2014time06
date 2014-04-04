@@ -2,11 +2,11 @@ package enderecamento;
 
 import java.util.Date;
 
-class Distrito {
+public class PessoaEndereco {
     private Date inicioVigencia;
     private Date fimVigencia;
-    private Cidade municipio;
-    private Cidade distrito;
+    private Endereco endereco;
+    private Pessoa pessoa;
 
     public Date getInicioVigencia() {
         return inicioVigencia;
@@ -24,19 +24,19 @@ class Distrito {
         this.fimVigencia = fimVigencia;
     }
 
-    public Cidade getMunicipio() {
-        return municipio;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setMunicipio(Cidade municipio) {
-        this.municipio = municipio;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-    public Cidade getDistrito() {
-        return distrito;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setDistrito(Cidade distrito) {
-        this.distrito = distrito;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }
