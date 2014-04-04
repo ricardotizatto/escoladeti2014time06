@@ -1,5 +1,13 @@
 package enderecamento;
 
 class ItemDeAcesso {
-    public String nomeComponente;
+    private String nomeComponente;
+
+    public String getNomeComponente() {
+        return nomeComponente;
+    }
+
+    public void setNomeComponente(String nomeComponente) {
+        this.nomeComponente = nomeComponente;
+    }
 }
