@@ -1,0 +1,328 @@
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<ul class="nav nav-tabs">
+		  				<li class="active"><a href="FormPF.html">Pessoa Física</a></li>
+		 				<li><a href="FormPJ.html">Pessoa Jurídica</a></li>
+					</ul>
+				</div>
+			</div>
+			<label> &nbsp; </label>
+			<div class="row">
+			<div class="form-group col-sm-12">
+				<fieldset>
+					<legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Cliente </legend>
+				</div>
+			</div>	
+			<form action="" method="POST" role="form" name="formPF">						
+				<div class="row ">
+					<div class="form-group col-sm-5">
+						<label> Nome </label>
+						<input class="form-control" name="nome" type="text" placeholder="Nome" />
+					</div>
+					<div class="form-group col-sm-5">
+						<label> Sobrenome </label>
+						<input class="form-control" name="sobrenome" type="text" placeholder="Sobrenome" />
+					</div>
+					<div class="form-group col-sm-2">
+						<label>Sexo</label>
+						<div>
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-primary ">
+									<input name="sexo" value="M" type="radio" /> <label>M</label>
+								</label>
+								<label class="btn btn-primary">
+									<input name="sexo" value="F" type="radio" />  <label>F</label
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>		
+				<div class="row">
+						
+					<div class="form-group col-sm-2">
+						<label> RG </label>
+						<input class="form-control" name="rg" type="text" onKeyPress="MascaraRG(formPF.rg);" maxlength="12" placeholder="R.G." />
+					</div>
+					<div class="form-group col-sm-2">
+						<label> CPF </label>
+						<input class="form-control" name="cpf" type="text" onBlur="ValidarCPF(fordmPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
+					</div>	
+					<div class="form-group col-sm-2">
+						<label>Nascimento </label>
+						<input class="form-control maskNascimento" name="dataNascimento" type="date" placeholder="dd/mm/aaaa" />
+					</div>
+	  				<div class="form-group col-sm-5">
+	  					<label>Email</label>
+	  					<div class="input-group" >
+	  						<span class="input-group-addon" >
+	  							<span class="glyphicon glyphicon-envelope"></span>
+	  						</span>
+	  						<input class="form-control" name="email" type="text" placeholder="Endereço de email">
+	  					</div>
+	  				</div>
+	  			</div>
+				<label>  &nbsp; </label>
+				<div class="row">
+					
+					<div class="form-group col-sm-7">
+						<legend>
+						 	<span class="glyphicon glyphicon-home"></span> Endereço 
+						 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEndereco">
+									<span class="glyphicon glyphicon-plus" ></span>	
+								</button>
+								<label> &nbsp; </label>
+						</legend>
+					</div>
+					<div class="form-group col-sm-5">
+						<legend>
+						 	<span class="glyphicon glyphicon-phone-alt"></span> Telefone 
+						 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalContato">
+									<span class="glyphicon glyphicon-plus" ></span>	
+								</button>
+								<label> &nbsp; </label>
+						</legend>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-7">
+				        <table class="table table-hover table-striped">
+							<thead>
+							    <tr>          
+							    	<th class="col-sm-4 text-center"> Endereço </th> 
+							        <th class="col-sm-1"> &nbsp; </th>
+							        <th class="col-sm-1"> &nbsp; </th>         
+							    </tr>
+						    </thead>
+						    <tbody>
+							    <tr ng-repeat="pessoa in pessoas">
+							    	<td class="text-center"> {{pessoa.tipoEndereco + "  " + pessoa.logradouro + " " + pessoa.numero + " - " + pessoa.cidade + " - " + pessoa.estado}} </td>
+							        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
+							        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+							    </tr>        
+						    </tbody>      
+						</table>
+					</div>
+					<div class="form-group col-sm-5">
+      			        <table class="table table-hover table-striped">
+      						<thead>
+      						    <tr>          
+      						    	<th class="col-sm-4 text-center"> Telefones </th> 
+      						    	<th class="col-sm-1"> &nbsp; </th>
+      						    	<th class="col-sm-1"> &nbsp; </th>           
+      						    </tr>
+      					    </thead>
+      					    <tbody>
+      						    <tr ng-repeat="pessoa in pessoas">
+      						    	<td class="text-center"> {{pessoa.telefone}} </td>
+      						        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
+      						        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+      						    </tr>        
+      					    </tbody>      
+      					</table>
+      				</div>
+				</div>	
+				<div class="row">
+					<div class="col-sm-12">
+						<span class="pull-right">	
+						<a href="AcaoCliente.html" class="btn btn-danger">
+							<span class="glyphicon glyphicon-remove" ></span> Cancelar 
+						</a>
+						<button type="submit" class="btn btn-success" >
+							<span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+						</button>
+						</span>		
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12"><hr></div>
+				</div>
+				<!-- Modal contato-->
+				<div class="modal fade" id="modalContato" tabindex="-1" role="dialog" aria-labelledby="modalContatoLabel" aria-hidden="true">
+					<div class="modal-dialog">
+				    	<div class="modal-content">
+				      		<div class="modal-header">
+				        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				        		<h4 class="modal-title" id="modalContatoLabel">Cadastro de telefone</h4>
+				      		</div>
+				      		<div class="modal-body">
+							   	<div class="row">
+		      						<div class="form-group col-sm-4 col-sm-offset-1">
+			      						<label> Telefone</label>
+				      					<div class="input-group">
+				      						<span class="input-group-addon">
+				      							<span class="glyphicon glyphicon-phone-alt"></span>
+				      						</span>
+				      						<select class="form-control" name="tipoTelefone">
+				      							<option>Celular</option>
+				      							<option>Residencial</option>
+				      							<option>Comercial</option>		
+				      						</select>
+				      					</div>
+		      						</div>
+				      				<div class="form-group col-sm-5">
+				      					<label>Número</label>
+				      					<div class="input-group">
+				      				  		<input class="form-control" name="tel" type="text" ng-model="pessoa.pessoa.telefone" onKeyPress="MascaraTelefone(formPF.tel);" maxlength="15"  onBlur="ValidaTelefone(formPF.tel);"  placeholder="(44) 9999-9999">  
+				      					</div>
+				      				</div>
+		      					</div>
+				      	      	<div class="row">
+				      	      		<div class="form-group col-sm-4 col-sm-offset-1">
+				      	      			<label>Ramal</label>
+				      					<div class="input-group">
+				      						<input class="form-control" name="numeroTelefone" type="number" placeholder="N° de ramal">  
+				      					</div>
+				      				</div>
+				      			</div>
+				      			<div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
+						    </div>
+					        <div class="modal-footer">
+						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+						        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+					        </div>
+				    	</div>
+				    </div>
+				</div>	
+				<!-- Modal endereço-->
+				<div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
+					<div class="modal-dialog">
+				    	<div class="modal-content">
+				      		<div class="modal-header">
+				        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				        		<h4 class="modal-title" id="modalEnderecoLabel">Cadastro de Endereço</h4>
+				      		</div>
+				      		<div class="modal-body">
+				        		<legend> <span class="glyphicon glyphicon-home"></span> Endereço </legend>
+								<div class="row">
+									<div class="form-group col-sm-6">
+										<label>Principal</label>
+										<div>
+											<div class="btn-group" data-toggle="buttons">
+												<label class="btn btn-primary ">
+													<input name="principal" value="S" type="radio" /> <label>Sim</label>
+												</label>
+												<label class="btn btn-primary">
+													<input name="principal" value="N" type="radio" />  <label>Não</label>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Cep</label>
+										<input  class="form-control maskCep" name="cep" type="text" ng-model="pessoa.cep" onKeyPress="MascaraCep(formPF.cep);"
+ 										maxlength="10" onBlur="ValidaCep(formPF.cep)" placeholder="99999-999" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-sm-3">
+										<label>Tipo</label>
+										<select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="pessoa.tipoEndereco" data-live-search="true">
+											<option selected>Selecione</option>
+											<option>Avenida</option>
+											<option>Rua</option>
+											<option>Praça</option>
+											<option>Estrada</option>
+											<option>Alameda</option>
+											<option>Ladeira</option>
+											<option>Travessa</option>
+											<option>Rodovia</option>
+											<option>Outros</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Logradouro</label>
+										<input  class="form-control" name="descEndereco" type="text" ng-model="pessoa.logradouro" placeholder="Logradouro" />
+									</div>
+									<div class="form-group col-sm-3">
+										<label>Número</label>
+										<input  class="form-control" name="numero" type="text" ng-model="pessoa.numero" placeholder="N°" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-sm-6">
+										<label>Bairro</label>
+										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.bairro" placeholder="Bairro"/>
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Complemento</label>
+										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.complemento" placeholder="Complemento" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-sm-6">
+										<label>Cidade</label>
+										<input  class="form-control" name="cidade" type="text" ng-model="pessoa.cidade" placeholder="Cidade" />
+									</div>
+									<div class="form-group col-sm-3">
+										<label> Estado </label>
+					                    <select id="estado" class="selectpicker show-tick form-control" data-live-search="true">
+					                        <option selected>Selecione</option>
+											<option>Paraná</option>
+											<option>São Paulo</option>
+											<option>Rio de Janeiro</option>
+					                    </select>
+									</div>
+									<div class="form-group col-sm-3">
+										<label> Pais </label>
+					                    <select id="pais" class="selectpicker show-tick form-control" data-live-search="true">
+					                        <option selected>Selecione</option>
+											<option>Brasil</option>
+											<option>Argentina</option>
+											<option>Paraguai</option>
+					                    </select>
+									</div>
+								</div>
+				      		</div>
+					        <div class="modal-footer">
+						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+						        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+					        </div>
+				    	</div>
+				    </div>
+				</div>			
+			</form>
+			</fieldset>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+
+    function MainController( $scope )
+    {
+        $scope.pessoas = [
+          {cpf : "111.111.111-11", nome : "Maria",  sobrenome : "da Silva", telefone : "9999-9988", cep : "7777777-000", tipoEndereco : "Rua", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "maria@gmail.com" },
+          {cpf : "222.222.222-22", nome : "João",   sobrenome : "de Souza", telefone : "9999-9977", cep : "8888888-000", tipoEndereco : "Rua", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "joao@gmail.com" },
+          {cpf : "333.333.333-33", nome : "Carlos", sobrenome : "de Jesus", telefone : "9999-9966", cep : "9999999-000", tipoEndereco : "Av.", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "carlos@gmail.com" }
+
+        ];
+
+        $scope.pessoa = null;
+
+        $scope.getPessoa = function(cpf){
+            for(i=0;i<$scope.pessoas.length;i++){
+                if(cpf == $scope.pessoas[i].cpf){
+                  return $scope.pessoa =  $scope.pessoas[i];
+                }
+            }
+            $scope.pessoa = null;
+            return false;
+        }
+
+        $scope.getPessoas = function(){
+          var array = [];
+          for(i=0;i<$scope.pessoas;i++)
+            array.push(i);
+          return array;
+        }
+
+        $scope.addPessoa = function(){
+          $scope.pessoas.push($scope.pessoa);
+          $scope.pessoa = null;      
+        };
+
+        $scope.delPessoa = function(index){
+          $scope.pessoas.splice(index,1);
+        };       
+    }
+  
+</script>
