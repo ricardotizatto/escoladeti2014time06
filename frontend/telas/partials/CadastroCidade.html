@@ -1,0 +1,77 @@
+﻿		<div class="container">
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<legend> Cadastro de localidade </legend>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<ul class="nav nav-tabs">
+		  				<li><a href="#/cadastropais">Pais</a></li>
+		 				<li><a href="#/cadastroestado">Estado</a></li>
+		 				<li  class="active"><a href="#/cadastrocidade">Cidade</a></li>
+		 				<li><a href="#/cadastrodistrito">Distrito</a></li>
+		 				<li><a href="#/cadastrobairro">Bairro</a></li>
+		 				<li><a href="#/cadastrocep">CEP</a></li>
+					</ul>
+				</div>	
+			</div>	
+			<label> &nbsp; </label>
+			<fieldset>
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<legend> Cadastro de Cidade </legend>
+					</div>
+				</div>
+				<form action="" method="POST" role="form">							
+					<div class="row ">
+						<div class="form-group col-sm-2">
+							<label> Código </label>
+							<input type="number" class="form-control"/>
+						</div>
+						<div class="form-group col-sm-2">
+							<label> Sigla </label>
+							<input class="form-control" name="nome" type="text" placeholder="Sigla" />
+						</div>
+						<div class="form-group col-sm-2">
+							<label>Fundação</label>
+							<input  class="form-control" name="fundacao" type="date"/>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-9">
+								<label> Nome </label>
+								<input class="form-control" name="nome" type="text" placeholder="Nome" />
+						</div>
+						<div class="form-group col-sm-3">
+							<label for="pais"> Estado </label>
+							<select id="estado" class="selectpicker show-tick form-control" data-live-search="true" >								
+								<option>Paraná</option>
+								<option>Santa Catarina</option>
+								<option>Rio de Janeiro</option>
+								<option>São Paulo</option>			
+							</select>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<span class="pull-right">	
+							<a href="AcaoCliente.html" class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove" ></span> Cancelar
+							</a>
+							<button type="submit" class="btn btn-success" >
+								<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+							</button>
+							</span>		
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12"><hr></div>
+					</div>			
+				</form>
+			</fieldset>
+		</div>
+	</body>
+</html>
