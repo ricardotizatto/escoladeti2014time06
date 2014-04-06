@@ -21,7 +21,34 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : 'partials/CadastroPerfilUsuario.html',
 			controller : 'CadastroPerfilUsuarioController'
 		})
-
+		.when('/cadastrotela',{
+			templateUrl : 'partials/CadastroTela.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/cadastropais',{
+			templateUrl : 'partials/CadastroPais.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/cadastroestado',{
+			templateUrl : 'partials/CadastroEstado.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/cadastrocidade',{
+			templateUrl : 'partials/CadastroCidade.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/cadastrodistrito',{
+			templateUrl : 'partials/CadastroDistrito.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/cadastrobairro',{
+			templateUrl : 'partials/CadastroBairro.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/cadastrocep',{
+			templateUrl : 'partials/CadastroCep.html',
+			// controller : 'nomeDoController'
+		})
 		.otherwise({redirectTo: '/'
 		});
 	}
