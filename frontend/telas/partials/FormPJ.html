@@ -1,8 +1,9 @@
-﻿			<div class="row">
+﻿		<div class="container" ng-controller="PessoaJuridicaController">	
+			<div class="row">
 				<div class="form-group col-sm-12">
 					<ul class="nav nav-tabs">
-		  				<li><a href="FormPF.html">Pessoa Física</a></li>
-		 				<li class="active"><a href="FormPJ.html">Pessoa Jurídica</a></li>
+		  				<li><a href="#/pessoafisica">Pessoa Física</a></li>
+		 				<li class="active"><a href="#/pessoajuridica">Pessoa Jurídica</a></li>
 					</ul>
 				</div>
 			</div>
@@ -279,7 +280,7 @@
 </html>
 <script type="text/javascript">
 
-    function MainController( $scope )
+    function PessoaJuridicaController( $scope )
     {
         $scope.pessoas = [
           {cpf : "111.111.111-11", nome : "Maria",  sobrenome : "da Silva", telefone : "9999-9988", cep : "7777777-000", tipoEndereco : "Rua", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "maria@gmail.com" },

@@ -1,8 +1,9 @@
+		<div class="container" ng-controller="PessoaFisicaController">
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<ul class="nav nav-tabs">
-		  				<li class="active"><a href="FormPF.html">Pessoa Física</a></li>
-		 				<li><a href="FormPJ.html">Pessoa Jurídica</a></li>
+		  				<li class="active"><a href="#/pessoafisica">Pessoa Física</a></li>
+		 				<li><a href="#/pessoajuridica">Pessoa Jurídica</a></li>
 					</ul>
 				</div>
 			</div>
@@ -216,7 +217,7 @@
 								<div class="row">
 									<div class="form-group col-sm-3">
 										<label>Tipo</label>
-										<select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="pessoa.tipoEndereco" data-live-search="true">
+										<select class="selectpicker show-tick form-control" name="tipoEndereco"  data-live-search="true">
 											<option selected>Selecione</option>
 											<option>Avenida</option>
 											<option>Rua</option>
@@ -286,8 +287,9 @@
 	</body>
 </html>
 <script type="text/javascript">
+'use strict;'
 
-    function MainController( $scope )
+    function PessoaFisicaController( $scope )
     {
         $scope.pessoas = [
           {cpf : "111.111.111-11", nome : "Maria",  sobrenome : "da Silva", telefone : "9999-9988", cep : "7777777-000", tipoEndereco : "Rua", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "maria@gmail.com" },
