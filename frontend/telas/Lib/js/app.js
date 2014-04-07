@@ -80,7 +80,7 @@ appCabecalho.config(['$routeProvider',
 		.when('/listacep',{
 			templateUrl : 'partials/ListaCep.html',
 			// controller : 'nomeDoController'
-		})
+		}) 
 		.otherwise({redirectTo: '/'
 		});
 	}
