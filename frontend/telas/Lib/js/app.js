@@ -3,6 +3,7 @@ var appCabecalho = angular.module('cabecalho', ['ngRoute']);
 
 appCabecalho.config(['$routeProvider',
 	function ($routeProvider) {
+		
 		$routeProvider
 		.when('/pessoafisica',{
 			templateUrl : 'partials/FormPF.html',
@@ -78,7 +79,12 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/listacep',{
 			templateUrl : 'partials/ListaCep.html',
-		}) 
+			// controller : 'nomeDoController'
+		})
+		.when('/listausuario',{
+			templateUrl : 'partials/ListaUsuario.html',
+			// controller : 'nomeDoController'
+		})
 		.otherwise({redirectTo: '/'
 		});
 	}
