@@ -69,6 +69,14 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : 'partials/ListaPJ.html',
 			// controller : 'nomeDoController'
 		})
+		.when('/listacidade',{
+			templateUrl : 'partials/ListaCidade.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/listabairro',{
+			templateUrl : 'partials/ListaBairro.html',
+			// controller : 'nomeDoController'
+		})
 		.otherwise({redirectTo: '/'
 		});
 	}
