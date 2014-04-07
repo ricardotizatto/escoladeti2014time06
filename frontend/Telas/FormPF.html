@@ -66,7 +66,7 @@
 		   		</ul>
 		  	</div><!-- /.navbar-collapse -->
 		</nav>
-		<div class="container" ng-controller="MainController" >
+		<div class="container" ng-controller="PessoaFisicaController" >
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<ul class="nav nav-tabs">
@@ -145,7 +145,7 @@
 					<div class="form-group col-sm-5">
 						<legend>
 						 	<span class="glyphicon glyphicon-phone-alt"></span> Telefone 
-						 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalContato">
+						 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTelefone">
 									<span class="glyphicon glyphicon-plus" ></span>	
 								</button>
 								<label> &nbsp; </label>
@@ -185,7 +185,7 @@
       						    	<td class="text-center"> {{telefone.tipo + " - " + telefone.numero + " - " +telefone.ramal}} </td>
    
       						        <td>
-      						        	<button type="button" class="btn btn-link btn-xs" title="Editar" ng-click="editarTelefone($index)" data-toggle="modal" data-target="#modalContato" ><i class="glyphicon glyphicon-pencil"></i> </button>
+      						        	<button type="button" class="btn btn-link btn-xs" title="Editar" ng-click="editarTelefone($index)" data-toggle="modal" data-target="#modalTelefone" ><i class="glyphicon glyphicon-pencil"></i> </button>
       						        	<button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delTelefone($index)"><i class="glyphicon glyphicon-trash"></i> </button>
       						        </td>
       						    </tr>        
@@ -209,12 +209,12 @@
 					<div class="col-sm-12"><hr></div>
 				</div>
 				<!-- Modal contato-->
-				<div class="modal fade" id="modalContato" tabindex="-1" role="dialog" aria-labelledby="modalContatoLabel" aria-hidden="true">
+				<div class="modal fade" id="modalTelefone" tabindex="-1" role="dialog" aria-labelledby="modalTelefoneLabel" aria-hidden="true">
 					<div class="modal-dialog">
 				    	<div class="modal-content">
 				      		<div class="modal-header">
 				        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        		<h4 class="modal-title" id="modalContatoLabel">Cadastro de telefone</h4>
+				        		<h4 class="modal-title" id="modalTelefoneLabel">Cadastro de telefone</h4>
 				      		</div>
 				      		<div class="modal-body">
 							   	<div class="row">

@@ -1,4 +1,4 @@
-function PessoaFisicaController( $scope )
+function PessoaJuridicaController( $scope )
 {
 $scope.pessoas = [];
 $scope.pessoa = null;
