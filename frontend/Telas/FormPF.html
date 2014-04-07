@@ -12,8 +12,9 @@
 		<script type="text/javascript" src="./Lib/js/angular.min.js"></script>
 		<script src="./Lib/js/funcoes.js"></script>
 		<script type="text/javascript" src="./Lib/js/MascaraValidacao.js" ></script>
+		<script type="text/javascript" src="./Lib/js/PessoaFisicaController.js" ></script>
 	</head>
-	<body  ng-controller="MainController" >
+	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
 		  <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -65,7 +66,7 @@
 		   		</ul>
 		  	</div><!-- /.navbar-collapse -->
 		</nav>
-		<div class="container">
+		<div class="container" ng-controller="MainController" >
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<ul class="nav nav-tabs">
@@ -85,21 +86,21 @@
 				<div class="row ">
 					<div class="form-group col-sm-5">
 						<label> Nome </label>
-						<input class="form-control" name="nome" type="text" placeholder="Nome" />
+						<input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome" />
 					</div>
 					<div class="form-group col-sm-5">
 						<label> Sobrenome </label>
-						<input class="form-control" name="sobrenome" type="text" placeholder="Sobrenome" />
+						<input class="form-control" name="sobrenome" type="text" ng-model="pessoa.sobrenome" placeholder="Sobrenome" />
 					</div>
 					<div class="form-group col-sm-2">
 						<label>Sexo</label>
 						<div>
 							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-primary ">
-									<input name="sexo" value="M" type="radio" /> <label>M</label>
+								<label class="btn btn-primary radio-inline">
+									<input name="sexo" value="M" type="radio" ng-model="pessoa.sexo" /> <label>M</label>
 								</label>
-								<label class="btn btn-primary">
-									<input name="sexo" value="F" type="radio" />  <label>F</label
+								<label class="btn btn-primary radio-inline">
+									<input name="sexo" value="F" type="radio" ng-model="pessoa.sexo" />  <label>F</label
 								</label>
 							</div>
 						</div>
@@ -109,15 +110,15 @@
 						
 					<div class="form-group col-sm-2">
 						<label> RG </label>
-						<input class="form-control" name="rg" type="text" onKeyPress="MascaraRG(formPF.rg);" maxlength="12" placeholder="R.G." />
+						<input class="form-control" name="rg" type="text" ng-model="pessoa.rg" onKeyPress="MascaraRG(formPF.rg);" maxlength="12" placeholder="R.G." />
 					</div>
 					<div class="form-group col-sm-2">
 						<label> CPF </label>
-						<input class="form-control" name="cpf" type="text" onBlur="ValidarCPF(fordmPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
+						<input class="form-control" name="cpf" type="text" ng-model="pessoa.cpf" onBlur="ValidarCPF(fordmPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
 					</div>	
 					<div class="form-group col-sm-2">
 						<label>Nascimento </label>
-						<input class="form-control maskNascimento" name="dataNascimento" type="date" placeholder="dd/mm/aaaa" />
+						<input class="form-control maskNascimento" name="dataNascimento" type="date" ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa" />
 					</div>
 	  				<div class="form-group col-sm-5">
 	  					<label>Email</label>
@@ -125,7 +126,7 @@
 	  						<span class="input-group-addon" >
 	  							<span class="glyphicon glyphicon-envelope"></span>
 	  						</span>
-	  						<input class="form-control" name="email" type="text" placeholder="Endereço de email">
+	  						<input class="form-control" name="email" type="text" ng-model="pessoa.email" placeholder="Endereço de email">
 	  					</div>
 	  				</div>
 	  			</div>
@@ -156,16 +157,17 @@
 				        <table class="table table-hover table-striped">
 							<thead>
 							    <tr>          
-							    	<th class="col-sm-4 text-center"> Endereço </th> 
-							        <th class="col-sm-1"> &nbsp; </th>
-							        <th class="col-sm-1"> &nbsp; </th>         
+							    	<th class="col-sm-5 text-center"> Endereço </th> 
+							        <th class="col-sm-1"> &nbsp; </th>        
 							    </tr>
 						    </thead>
 						    <tbody>
-							    <tr ng-repeat="pessoa in pessoas">
-							    	<td class="text-center"> {{pessoa.tipoEndereco + "  " + pessoa.logradouro + " " + pessoa.numero + " - " + pessoa.cidade + " - " + pessoa.estado}} </td>
-							        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
-							        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+							    <tr ng-repeat="endereco in enderecos">
+							    	<td class="text-center"> {{endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
+							        <td>
+							        	<button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="editarEndereco($index)" data-toggle="modal" data-target="#modalEndereco" ><i class="glyphicon glyphicon-pencil"></i> </button>
+							        	<button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delEndereco($index)"><i class="glyphicon glyphicon-trash"></i> </button>
+							        </td>
 							    </tr>        
 						    </tbody>      
 						</table>
@@ -174,16 +176,18 @@
       			        <table class="table table-hover table-striped">
       						<thead>
       						    <tr>          
-      						    	<th class="col-sm-4 text-center"> Telefones </th> 
-      						    	<th class="col-sm-1"> &nbsp; </th>
+      						    	<th class="col-sm-5 text-center"> Telefones </th> 
       						    	<th class="col-sm-1"> &nbsp; </th>           
       						    </tr>
       					    </thead>
       					    <tbody>
-      						    <tr ng-repeat="pessoa in pessoas">
-      						    	<td class="text-center"> {{pessoa.telefone}} </td>
-      						        <td><button type="button" class="btn btn-link btn-xs" title="Editar" ng:click="getPessoa($index)"><i class="glyphicon glyphicon-pencil"></i> </button></td>
-      						        <td><button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delPessoa($index)"><i class="glyphicon glyphicon-trash"></i> </button></td>
+      						    <tr ng-repeat="telefone in telefones">
+      						    	<td class="text-center"> {{telefone.tipo + " - " + telefone.numero + " - " +telefone.ramal}} </td>
+   
+      						        <td>
+      						        	<button type="button" class="btn btn-link btn-xs" title="Editar" ng-click="editarTelefone($index)" data-toggle="modal" data-target="#modalContato" ><i class="glyphicon glyphicon-pencil"></i> </button>
+      						        	<button type="button" class="btn btn-link btn-xs" title="Excluir" ng:click="delTelefone($index)"><i class="glyphicon glyphicon-trash"></i> </button>
+      						        </td>
       						    </tr>        
       					    </tbody>      
       					</table>
@@ -192,10 +196,10 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<span class="pull-right">	
-						<a href="AcaoCliente.html" class="btn btn-danger">
+						<a class="btn btn-danger">
 							<span class="glyphicon glyphicon-remove" ></span> Cancelar 
 						</a>
-						<button type="submit" class="btn btn-success" >
+						<button type="submit" class="btn btn-success" ng-click="addPessoa()" >
 							<span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
 						</button>
 						</span>		
@@ -214,39 +218,39 @@
 				      		</div>
 				      		<div class="modal-body">
 							   	<div class="row">
-		      						<div class="form-group col-sm-4 col-sm-offset-1">
+		      						<div class="form-group col-sm-4 col-sm-offset-2">
 			      						<label> Telefone</label>
 				      					<div class="input-group">
 				      						<span class="input-group-addon">
 				      							<span class="glyphicon glyphicon-phone-alt"></span>
 				      						</span>
-				      						<select class="form-control" name="tipoTelefone">
-				      							<option>Celular</option>
-				      							<option>Residencial</option>
-				      							<option>Comercial</option>		
+				      						<select class="form-control" name="tipoTelefone" ng-model="telefone.tipo" >
+				      							<option value="celular" >Celular</option>
+				      							<option value="comercial" >Comercial</option>
+				      							<option value="residencial" >Residencial</option>
 				      						</select>
 				      					</div>
 		      						</div>
 				      				<div class="form-group col-sm-5">
 				      					<label>Número</label>
 				      					<div class="input-group">
-				      				  		<input class="form-control" name="tel" type="text" ng-model="pessoa.pessoa.telefone" onKeyPress="MascaraTelefone(formPF.tel);" maxlength="15"  onBlur="ValidaTelefone(formPF.tel);"  placeholder="(44) 9999-9999">  
+				      				  		<input class="form-control" name="tel" type="text" ng-model="telefone.numero" onKeyPress="MascaraTelefone(formPF.tel);" maxlength="15"  onBlur="ValidaTelefone(formPF.tel);"  placeholder="(44) 9999-9999">  
 				      					</div>
 				      				</div>
 		      					</div>
 				      	      	<div class="row">
-				      	      		<div class="form-group col-sm-4 col-sm-offset-1">
+				      	      		<div class="form-group col-sm-4 col-sm-offset-2">
 				      	      			<label>Ramal</label>
 				      					<div class="input-group">
-				      						<input class="form-control" name="numeroTelefone" type="number" placeholder="N° de ramal">  
+				      						<input class="form-control" name="numeroTelefone" type="number" ng-model="telefone.ramal" placeholder="N° de ramal">  
 				      					</div>
 				      				</div>
 				      			</div>
 				      			<div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
 						    </div>
 					        <div class="modal-footer">
-						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
-						        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+						        <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+						        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="salvarTelefone()" ><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
 					        </div>
 				    	</div>
 				    </div>
@@ -267,83 +271,83 @@
 										<div>
 											<div class="btn-group" data-toggle="buttons">
 												<label class="btn btn-primary ">
-													<input name="principal" value="S" type="radio" /> <label>Sim</label>
+													<input ng-model="endereco.principal" name="principal" value="S" type="radio" /> <label>Sim</label>
 												</label>
 												<label class="btn btn-primary">
-													<input name="principal" value="N" type="radio" />  <label>Não</label>
+													<input ng-model="endereco.principal" name="principal" value="N" type="radio" />  <label>Não</label>
 												</label>
 											</div>
 										</div>
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Cep</label>
-										<input  class="form-control maskCep" name="cep" type="text" ng-model="pessoa.cep" onKeyPress="MascaraCep(formPF.cep);"
+										<input  class="form-control maskCep" name="cep" type="text" ng-model="endereco.cep" onKeyPress="MascaraCep(formPF.cep);"
  										maxlength="10" onBlur="ValidaCep(formPF.cep)" placeholder="99999-999" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-3">
 										<label>Tipo</label>
-										<select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="pessoa.tipoEndereco" data-live-search="true">
-											<option selected>Selecione</option>
-											<option>Avenida</option>
-											<option>Rua</option>
-											<option>Praça</option>
-											<option>Estrada</option>
-											<option>Alameda</option>
-											<option>Ladeira</option>
-											<option>Travessa</option>
-											<option>Rodovia</option>
-											<option>Outros</option>
+										<select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="endereco.tipoEndereco" data-live-search="true">
+											<option value="se" selected>Selecione</option>
+											<option value="avenida" >Avenida</option>
+											<option value="rua" >Rua</option>
+											<option value="praca" >Praça</option>
+											<option value="estrada" >Estrada</option>
+											<option value="alameda">Alameda</option>
+											<option value="ladeira">Ladeira</option>
+											<option value="travessa">Travessa</option>
+											<option value="rodovia">Rodovia</option>
+											<option value="outros">Outros</option>
 										</select>
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Logradouro</label>
-										<input  class="form-control" name="descEndereco" type="text" ng-model="pessoa.logradouro" placeholder="Logradouro" />
+										<input  class="form-control" name="descEndereco" type="text" ng-model="endereco.logradouro" placeholder="Logradouro" />
 									</div>
 									<div class="form-group col-sm-3">
 										<label>Número</label>
-										<input  class="form-control" name="numero" type="text" ng-model="pessoa.numero" placeholder="N°" />
+										<input  class="form-control" name="numero" type="text" ng-model="endereco.numero" placeholder="N°" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Bairro</label>
-										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.bairro" placeholder="Bairro"/>
+										<input  class="form-control" name="complemento" type="text" ng-model="endereco.bairro" placeholder="Bairro"/>
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Complemento</label>
-										<input  class="form-control" name="complemento" type="text" ng-model="pessoa.complemento" placeholder="Complemento" />
+										<input  class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Cidade</label>
-										<input  class="form-control" name="cidade" type="text" ng-model="pessoa.cidade" placeholder="Cidade" />
+										<input  class="form-control" name="cidade" type="text" ng-model="endereco.cidade" placeholder="Cidade" />
 									</div>
 									<div class="form-group col-sm-3">
 										<label> Estado </label>
-					                    <select id="estado" class="selectpicker show-tick form-control" data-live-search="true">
-					                        <option selected>Selecione</option>
-											<option>Paraná</option>
-											<option>São Paulo</option>
-											<option>Rio de Janeiro</option>
+					                    <select id="estado" ng-model="endereco.estado" class="selectpicker show-tick form-control" data-live-search="true">
+					                        <option value="se" selected>Selecione</option>
+											<option value="pr" >Paraná</option>
+											<option value="sp" >São Paulo</option>
+											<option value="rj" >Rio de Janeiro</option>
 					                    </select>
 									</div>
 									<div class="form-group col-sm-3">
 										<label> Pais </label>
-					                    <select id="pais" class="selectpicker show-tick form-control" data-live-search="true">
-					                        <option selected>Selecione</option>
-											<option>Brasil</option>
-											<option>Argentina</option>
-											<option>Paraguai</option>
+					                    <select id="pais" ng-model="endereco.pais" class="selectpicker show-tick form-control" data-live-search="true">
+					                        <option value="se" selected>Selecione</option>
+											<option value="brasil" >Brasil</option>
+											<option value="argentina" >Argentina</option>
+											<option value="paraguai" >Paraguai</option>
 					                    </select>
 									</div>
 								</div>
 				      		</div>
 					        <div class="modal-footer">
-						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
-						        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+						        <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+						        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="salvarEndereco()" ><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
 					        </div>
 				    	</div>
 				    </div>
@@ -353,44 +357,3 @@
 		</div>
 	</body>
 </html>
-<script type="text/javascript">
-
-    function MainController( $scope )
-    {
-        $scope.pessoas = [
-          {cpf : "111.111.111-11", nome : "Maria",  sobrenome : "da Silva", telefone : "9999-9988", cep : "7777777-000", tipoEndereco : "Rua", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "maria@gmail.com" },
-          {cpf : "222.222.222-22", nome : "João",   sobrenome : "de Souza", telefone : "9999-9977", cep : "8888888-000", tipoEndereco : "Rua", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "joao@gmail.com" },
-          {cpf : "333.333.333-33", nome : "Carlos", sobrenome : "de Jesus", telefone : "9999-9966", cep : "9999999-000", tipoEndereco : "Av.", logradouro : "Guedner", numero : 1610, bairro : "Jardim Aclimação", cidade : "Maringa", estado : "PR", email : "carlos@gmail.com" }
-
-        ];
-
-        $scope.pessoa = null;
-
-        $scope.getPessoa = function(cpf){
-            for(i=0;i<$scope.pessoas.length;i++){
-                if(cpf == $scope.pessoas[i].cpf){
-                  return $scope.pessoa =  $scope.pessoas[i];
-                }
-            }
-            $scope.pessoa = null;
-            return false;
-        }
-
-        $scope.getPessoas = function(){
-          var array = [];
-          for(i=0;i<$scope.pessoas;i++)
-            array.push(i);
-          return array;
-        }
-
-        $scope.addPessoa = function(){
-          $scope.pessoas.push($scope.pessoa);
-          $scope.pessoa = null;      
-        };
-
-        $scope.delPessoa = function(index){
-          $scope.pessoas.splice(index,1);
-        };       
-    }
-  
-</script>
