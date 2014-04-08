@@ -85,6 +85,14 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : 'partials/ListaUsuario.html',
 			// controller : 'nomeDoController'
 		})
+		.when('/listaperfilusuario',{
+			templateUrl : 'partials/ListaPerfilUsuario.html',
+			// controller : 'nomeDoController'
+		})
+		.when('/listatela',{
+			templateUrl : 'partials/ListaTela.html',
+			// controller : 'nomeDoController'
+		})
 		.otherwise({redirectTo: '/'
 		});
 	}

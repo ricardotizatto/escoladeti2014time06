@@ -1,0 +1,50 @@
+﻿		<div class="container">
+			<label>  </label>
+			<fieldset>
+				<legend> <span class="glyphicon glyphicon-list-alt"></span> Lista Tela</legend>
+					<form action="" method="POST" role="form">
+						<div class="row">
+							<div class="form-group col-sm-11">
+								<label>Busca</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+											<span class="glyphicon glyphicon-search"></span>
+									</span>
+									<input  class="form-control" name="busca" type="text"/>
+								</div>
+							</div>
+							<div class="form-group col-sm-1">
+								<label> &nbsp; </label>
+								<a href="#" class="btn btn-primary" role="button">
+									<span class="glyphicon glyphicon-plus-sign" ></span> Novo
+								</a>
+							</div>
+						</div>
+						<table width="100%" border="0" class="table table-striped table-hover" >
+							<tr>
+								<th width="45%">Nome</th>
+								<th width="45%">Descrição</th>
+								<th width="5%">Alterar</th>
+								<th width="5%">Excluir</th>
+							</tr>
+							<tr>
+								<td>FormPF</td>
+								<td>Formulário de Pessoa Física</td>
+								<td>
+									<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' >
+					  					<span class='glyphicon glyphicon-edit'></span>
+									</button>
+								</td>
+								<td>
+									<button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='alterar' >
+					  					<span class='glyphicon glyphicon-remove-circle'></span>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+			</fieldset>
+			<hr>
+		</div>
+	</body>
+</html>
