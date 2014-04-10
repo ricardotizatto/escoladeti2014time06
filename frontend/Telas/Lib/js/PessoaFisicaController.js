@@ -1,7 +1,10 @@
-function PessoaFisicaController( $scope )
+function PessoaFisicaController( $scope, bd )
 {
 $scope.pessoas = [];
 $scope.pessoa = null;
+
+bd.pessoas = bd.pessoas || [];
+
 
 $scope.getPessoa = function(cpf){
     for(i=0;i<$scope.pessoas.length;i++){
@@ -22,7 +25,7 @@ $scope.getPessoas = function(){
 
 $scope.addPessoa = function(){
   
-	$scope.pessoas.push($scope.pessoa);
+	bd.pessoas.push($scope.pessoa);
 	$scope.pessoa = null;      
 };
 

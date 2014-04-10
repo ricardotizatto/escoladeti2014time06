@@ -19,7 +19,7 @@
 					<div class="form-group col-sm-2">
 						<label>Sexo</label>
 						<div>
-							<div class="btn-group" data-toggle="buttons">
+							<div class="btn-group"><!--data-toggle="buttons" verificar uso-->
 								<label class="btn btn-primary radio-inline">
 									<input name="sexo" value="M" type="radio" ng-model="pessoa.sexo" /> <label>M</label>
 								</label>
@@ -38,7 +38,7 @@
 					</div>
 					<div class="form-group col-sm-2">
 						<label> CPF </label>
-						<input class="form-control" name="cpf" type="text" ng-model="pessoa.cpf" onBlur="ValidarCPF(fordmPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
+						<input class="form-control" name="cpf" type="text" ng-model="pessoa.cpf" onBlur="ValidarCPF(formPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
 					</div>	
 					<div class="form-group col-sm-2">
 						<label>Nascimento </label>
@@ -188,14 +188,15 @@
 				        		<h4 class="modal-title" id="modalEnderecoLabel">Cadastro de Endereço</h4>
 				      		</div>
 				      		<div class="modal-body">
+				      			{{endereco}}
 				        		<legend> <span class="glyphicon glyphicon-home"></span> Endereço </legend>
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Principal</label>
 										<div>
-											<div class="btn-group" data-toggle="buttons">
+											<div class="btn-group"><!--data-toggle="buttons" verificar uso-->
 												<label class="btn btn-primary ">
-													<input ng-model="endereco.principal" name="principal" value="S" type="radio" /> <label>Sim</label>
+													<input ng-model="endereco.principal" name="principal" value="S" type="radio" ng-click="alert('qualquercoisaai');"/> <label>Sim</label>
 												</label>
 												<label class="btn btn-primary">
 													<input ng-model="endereco.principal" name="principal" value="N" type="radio" />  <label>Não</label>
