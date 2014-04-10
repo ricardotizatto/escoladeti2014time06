@@ -1,15 +1,27 @@
 function CadastroUsuarioController( $scope, bd )
 {
+
   $scope.usuario = bd.usuario || [];
   bd.usuarios = bd.usuarios || [];
 
+  $scope.id_Usuario = 0;
+  $scope.usuarios = [];
+  $scope.usuario = {}; 
+
   $scope.salvarUsuario = function(){
-      bd.usuarios.push($scope.usuario);
+
+    if(!$scope.usuario.id_Usuario){
+        $scope.id_Usuario++;
+        $scope.usuario.id_Usuario = $scope.id_Usuario;
+        $scope.usuarios.push( $scope.usuario );
+        bd.usuarios.push($scope.usuario);
+    }
+    $scope.usuario = {};
   };
 
   $scope.id_temEspecial = 0;
   $scope.itensEspeciais = [];
-  $scope.itemEspecial = null; 
+  $scope.itemEspecial = {}; 
 
   $scope.salvarItemEspecial = function(){
 
@@ -18,7 +30,7 @@ function CadastroUsuarioController( $scope, bd )
         $scope.itemEspecial.id_temEspecial = $scope.id_temEspecial;
         $scope.itensEspeciais.push( $scope.itemEspecial );
     }
-    $scope.itemEspecial = null;
+    $scope.itemEspecial = {};
   };
 
   $scope.editarItemEspecial = function( indice ){
