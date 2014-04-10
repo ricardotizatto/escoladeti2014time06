@@ -19,7 +19,7 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/cadastroperfilusuario',{
 			templateUrl : 'partials/CadastroPerfilUsuario.html',
-			controller : 'CadastroPerfilUsuarioController'
+			controller : 'perfilUsuarioController'
 		})
 		.when('/cadastrotela',{
 			templateUrl : 'partials/CadastroTela.html',
@@ -97,3 +97,8 @@ appCabecalho.config(['$routeProvider',
 		});
 	}
 ]);
+
+
+appCabecalho.factory('bd', function(){	
+	return { name : 'banco de dados' };
+});
