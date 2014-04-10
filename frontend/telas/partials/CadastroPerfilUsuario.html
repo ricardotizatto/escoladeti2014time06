@@ -1,109 +1,47 @@
-﻿		<div class="container" ng-controller="CadastroPerfilUsuarioController">
-			<div class="row">
-				<div class="form-group col-sm-12">
-					<legend> Cadastro do sistema</legend>
+﻿<div class="container" ng-controller="perfilUsuarioController">
+	<div class="row">
+	</div>
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<ul class="nav nav-tabs">
+  				<li><a href="#/cadastrotela">Telas</a></li>
+ 				<li class="active"><a href="#/cadastroperfilusuario">Perfil de usuário</a></li>
+			</ul>
+		</div>	
+	</div>	
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de Perfil </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form" ng-submit="addPerfilUsuario()">							
+			<div class="row ">
+				<div class="form-group col-sm-5">
+					<input class="form-control" name="nome" type="text" placeholder="Nome" ng-model="perfilUsuario.nome" required/>
+				</div>
+				<div class="form-group col-sm-3">
+                    <select class="selectpicker show-tick form-control" ng-model="perfilUsuario.tela" ng-options="t.nome for t in telas" required>
+                     <option value="">Selecione</option>
+                    </select>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-12">
-					<ul class="nav nav-tabs">
-		  				<li><a href="#/cadastrotela">Telas</a></li>
-		 				<li class="active"><a href="#/cadastroperfilusuario">Perfil de usuário</a></li>
-					</ul>
-				</div>	
-			</div>	
-			<label> &nbsp; </label>
-			<fieldset>
-				<div class="row">
-					<div class="form-group col-sm-12">
-						<legend> Cadastro de Perfil </legend>
-					</div>
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="AcaoCliente.html" class="btn btn-danger">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar 
+					</a>
+					<button type="submit" class="btn btn-success" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+					</button>
+					</span>		
 				</div>
-				<form action="" method="POST" role="form">							
-					<div class="row ">
-						<div class="form-group col-sm-5">
-							<label> Nome </label>
-							<input class="form-control" name="nome" type="text" placeholder="Nome" />
-						</div>
-						<div class="form-group col-sm-3">
-							<label> Telas </label>
-		                    <select id="telas" class="selectpicker show-tick form-control" multiple data-live-search="true">
-		                        <option>Lista PF</option>
-		                        <option>Lista PJ</option>
-		                        <option>Cadastro PF</option>
-		                        <option>Cadastro PJ</option>
-		                    </select>
-						</div>
-					
-						<div class="form-group col-sm-2">
-							<label>Início Vigência</label>
-							<input  class="form-control" name="inicioVigencia" type="date"/>
-						</div>
-						<div class="form-group col-sm-2">
-							<label>Fim Vigência</label>
-							<input  class="form-control" name="fimVigencia" type="date"/>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<span class="pull-right">	
-							<a href="AcaoCliente.html" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" ></span> Cancelar 
-							</a>
-							<button type="submit" class="btn btn-success" >
-								<span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
-							</button>
-							</span>		
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12"><hr></div>
-					</div>
-					<!-- Modal telas-->
-				</form>
-			</fieldset>
-		</div>
-	</body>
-</html>
-
-<script type="text/javascript">
-
-    function CadastroPerfilUsuarioController( $scope )
-    {
-        $scope.telas = [ 
-        	{id_tela : "1", nometela : "Lista PF",    inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
-        	{id_tela : "2", nometela : "Lista PJ",    inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
-        	{id_tela : "3", nometela : "Cadastro PF", inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" },
-        	{id_tela : "4", nometela : "Cadastro PJ", inicioVigencia : "01/01/2014", fimVigencia : "01/01/2016" }
-        ];
-
-        $scope.tela = null;
-
-        $scope.getTela = function(id_tela){
-            for(i=0;i<$scope.telas.length;i++){
-                if(id_tela == $scope.telas[i].id_tela){
-                  return $scope.tela =  $scope.telas[i];
-                }
-            }
-            $scope.pessoa = null;
-            return false;
-        }
-
-        $scope.getTelas = function(){
-          var array = [];
-          for(i=0;i<$scope.telas;i++)
-            array.push(i);
-          return array;
-        }
-
-        $scope.addTela = function(){
-          $scope.telas.push($scope.tela);
-          $scope.tela = null;      
-        };
-
-        $scope.delTela = function(index){
-          $scope.telas.splice(index,1);
-        };       
-    }
-  
-</script>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>
+		</form>
+	</fieldset>
+</div>
