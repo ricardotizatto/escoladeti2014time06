@@ -1,47 +1,48 @@
-﻿		<div class="container">
-			<label> &nbsp; </label>
-			<fieldset>
-				<div class="row">
-					<div class="form-group col-sm-12">
-						<legend> Cadastro de Estado </legend>
-					</div>
-				</div>
-				<form action="" method="POST" role="form">							
-					<div class="row ">
-						<div class="form-group col-sm-6">
-								<label> Nome </label>
-								<input class="form-control" name="nome" type="text" placeholder="Nome Estado" />
-						</div>
-						
-						<div class="form-group col-sm-2">
-								<label> Sigla </label>
-								<input class="form-control" name="nome" type="text" placeholder="Sigla" />
-						</div>
-					
-						<div class="form-group col-sm-4">
-							<label for="pais"> Pais </label>
-							<select id="bairro" class="selectpicker show-tick form-control" data-live-search="true" >								
-								<option>Brasil</option>
-								<option>Espanha</option>
-								<option>França</option>		
-							</select>
-						</div>
-					</div>	
-					<div class="row">
-						<div class="col-sm-12">
-							<span class="pull-right">	
-							<a href="AcaoCliente.html" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" ></span> Cancelar
-							</a>
-							<button type="submit" class="btn btn-success" >
-								<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
-							</button>
-							</span>		
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12"><hr></div>
-					</div>			
-				</form>
-			</fieldset>
+﻿<div class="container" ng-controller="CadastroEstadoController" >
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de Estado </legend>
+			</div>
 		</div>
+		<form action="" method="POST" role="form">							
+			<div class="row ">
+				<div class="form-group col-sm-6">
+						<label> Nome </label>
+						<input class="form-control" name="nome" type="text" placeholder="Nome Estado" ng-model="estado.nome" />
+				</div>
+				
+				<div class="form-group col-sm-2">
+						<label> Sigla </label>
+						<input class="form-control" name="nome" type="text" placeholder="Sigla" ng-model="estado.sigla" />
+				</div>
+			
+				<div class="input-group col-sm-4">
+					<label>  Pais </label>
+					<select id="estado" ng-model="estado.pais"  class="selectpicker show-tick form-control" data-live-search="true" /> 						
+						<option value="argentina" >Argentina</option>
+						<option value="brasil" >Brasil</option>
+						<option value="espanha" >Espanha</option>
+						<option value="franca" >França</option>		
+					</select>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#" class="btn btn-danger">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success" ng-click="salvarEstado()" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+					</button>
+					</span>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>			
+		</form>
+	</fieldset>
+</div>
