@@ -1,30 +1,44 @@
-function CadastroUsuarioController( $scope )
+function CadastroUsuarioController( $scope, bd )
 {
 
-    $scope.salvarUsuario = function(){
-      
-    };
+  $scope.usuario = bd.usuario || [];
+  bd.usuarios = bd.usuarios || [];
 
-    $scope.id_temEspecial = 0;
-    $scope.itensEspeciais = [];
-    $scope.itemEspecial = null; 
+  $scope.id_Usuario = 0;
+  $scope.usuarios = [];
+  $scope.usuario = {}; 
 
-    $scope.salvarItemEspecial = function(){
+  $scope.salvarUsuario = function(){
 
-      if(!$scope.itemEspecial.id_temEspecial){
-          $scope.id_temEspecial++;
-          $scope.itemEspecial.id_temEspecial = $scope.id_temEspecial;
-          $scope.itensEspeciais.push( $scope.itemEspecial );
-      }
-      $scope.itemEspecial = null;
-    };
+    if(!$scope.usuario.id_Usuario){
+        $scope.id_Usuario++;
+        $scope.usuario.id_Usuario = $scope.id_Usuario;
+        $scope.usuarios.push( $scope.usuario );
+        bd.usuarios.push($scope.usuario);
+    }
+    $scope.usuario = {};
+  };
 
-    $scope.editarItemEspecial = function( indice ){
-      $scope.itemEspecial = $scope.itensEspeciais[indice];
-    };
+  $scope.id_temEspecial = 0;
+  $scope.itensEspeciais = [];
+  $scope.itemEspecial = {}; 
 
-    $scope.delItemEspecial = function(index){
-      $scope.itensEspeciais.splice(index,1);
-    }; 
+  $scope.salvarItemEspecial = function(){
+
+    if(!$scope.itemEspecial.id_temEspecial){
+        $scope.id_temEspecial++;
+        $scope.itemEspecial.id_temEspecial = $scope.id_temEspecial;
+        $scope.itensEspeciais.push( $scope.itemEspecial );
+    }
+    $scope.itemEspecial = {};
+  };
+
+  $scope.editarItemEspecial = function( indice ){
+    $scope.itemEspecial = $scope.itensEspeciais[indice];
+  };
+
+  $scope.delItemEspecial = function(index){
+    $scope.itensEspeciais.splice(index,1);
+  }; 
 
 }

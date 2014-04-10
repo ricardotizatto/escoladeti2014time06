@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title> Escola de TI - Time 06 </title>
+		<link href="./Lib/css/estilo-geral.css" rel="stylesheet">
 		<link href="./Lib/css/submenudropdown.css" rel="stylesheet">
 		<link href="./Lib/css/bootstrap.css" rel="stylesheet">
 		<link href="./Lib/css/bootstrap-select.css" rel="stylesheet">
@@ -17,6 +18,10 @@
 		<script type="text/javascript" src="./Lib/js/PessoaFisicaController.js" ></script>
 		<script type="text/javascript" src="./Lib/js/TelaController.js" ></script>
 		<script type="text/javascript" src="./Lib/js/PerfilUsuarioController.js" ></script>
+		<script type="text/javascript" src="./Lib/js/CadastroUsuarioController.js" ></script>
+		<script type="text/javascript" src="./Lib/js/ListaUsuarioController.js" ></script>
+		<script type="text/javascript" src="./Lib/js/CadastroEstadoController.js" ></script>
+		<script type="text/javascript" src="./Lib/js/ListaEstadoController.js" ></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
@@ -104,6 +109,12 @@
 		  	</div><!-- /.navbar-collapse -->
 		</nav>
 			<div ng-view></div>
-		<footer>Rodape</footer>
+		<footer>
+			<div class="row"></div>
+				<div class="col-sm-12">
+					<p>® Unicesumar 2014 - Escola de T.I. - Time 06</p>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>
