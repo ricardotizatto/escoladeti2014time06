@@ -1,5 +1,6 @@
 package br.com.entity;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -8,8 +9,12 @@ import javax.persistence.OneToMany;
 class UnidadeFederativa extends Entidade{
     private String nome;
     private String sigla;
+    
     @ManyToOne
     private Pais pais;
+    
+    @OneToMany(mappedBy = "unidadeFederativa")
+    private List<Cidade> cidades;
     
 	public UnidadeFederativa(String nome, String sigla, Pais pais) {
 		this.nome = nome;
