@@ -13,14 +13,13 @@ public class Cidade extends Entidade {
     private Date fundacao;
     
     @ManyToOne
+    @NotNull
     private UnidadeFederativa unidadeFederativa;
     
     @OneToMany(mappedBy = "cidade")
-    @NotNull
     private List<Bairro> bairros;
 
     @OneToMany(mappedBy = "cidadeCede")
-    @NotNull
     private List<Distrito> distritos;
 
     public List<Distrito> getDistritos() {

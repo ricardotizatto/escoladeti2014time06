@@ -3,6 +3,7 @@ package br.com.entity;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Distrito extends Entidade{
@@ -10,6 +11,7 @@ public class Distrito extends Entidade{
     private Date fimVigencia;
     
     @ManyToOne
+    @NotNull
     private Cidade cidadeCede;
     
     public Date getInicioVigencia() {

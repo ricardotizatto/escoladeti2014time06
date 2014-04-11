@@ -17,7 +17,27 @@ class Logradouro extends Entidade{
     @OneToMany(mappedBy = "logradouro")
     @NotNull
     private List<Endereco> enderecos;
+    
+    @ManyToOne
+    @NotNull
+    private Bairro bairro;
 
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public Bairro getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(Bairro bairro) {
+        this.bairro = bairro;
+    }
+    
     public String getTipoDoEndereco() {
         return tipoDoEndereco;
     }

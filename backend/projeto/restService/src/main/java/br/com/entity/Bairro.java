@@ -11,6 +11,7 @@ public class Bairro extends Entidade {
     private String nome;
     
     @ManyToOne
+    @NotNull
     private Cidade cidade;
     
     @ManyToOne
@@ -19,7 +20,18 @@ public class Bairro extends Entidade {
     @OneToMany(mappedBy = "bairro")
     @NotNull
     private List<Endereco> enderecos;
+    
+    @OneToMany(mappedBy = "bairro")
+    private List<Logradouro> logradouros;
 
+    public List<Logradouro> getLogradouros() {
+        return logradouros;
+    }
+
+    public void setLogradouros(List<Logradouro> logradouros) {
+        this.logradouros = logradouros;
+    }
+    
     public List<Endereco> getEnderecos() {
         return enderecos;
     }

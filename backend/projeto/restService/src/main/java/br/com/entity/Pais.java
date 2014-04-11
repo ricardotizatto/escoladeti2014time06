@@ -10,6 +10,7 @@ class Pais extends Entidade{
     private String nome;
     private String sigla;
     private int codPais;
+    
     @OneToMany(mappedBy="pais")
     private List<UnidadeFederativa> estados;
     

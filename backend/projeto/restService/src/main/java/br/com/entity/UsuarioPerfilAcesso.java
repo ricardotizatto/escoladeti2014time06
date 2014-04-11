@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 class UsuarioPerfilAcesso extends Entidade {
@@ -12,6 +13,7 @@ class UsuarioPerfilAcesso extends Entidade {
 	private Date fimVigencia;
 	
 	@OneToOne(mappedBy="usuarioPerfilDeAcesso")
+        @NotNull
 	private Usuario usuario;
 	
 	@ManyToOne

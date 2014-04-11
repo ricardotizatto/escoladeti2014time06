@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 class UnidadeFederativa extends Entidade{
@@ -11,6 +12,7 @@ class UnidadeFederativa extends Entidade{
     private String sigla;
     
     @ManyToOne
+    @NotNull
     private Pais pais;
     
     @OneToMany(mappedBy = "unidadeFederativa")
