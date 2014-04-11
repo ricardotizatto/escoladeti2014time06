@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.7.0">
+<database name="novo_banco_de_dados">
+</database>
+
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="bairro">
+	<schema name="public"/>
+	<position x="32" y="30"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="nome">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="cidade_id">
+		<type name="integer"/>
+	</column>
+	<column name="faixadecep_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.bairro">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="cidade">
+	<schema name="public"/>
+	<position x="23" y="329"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="fundacao">
+		<type name="date"/>
+	</column>
+	<column name="nome">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="unidadefederativa_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.cidade">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="cidade_has_many_bairro" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="4" constr-indexes="1"
+	 src-table="public.cidade"
+	 dst-table="public.bairro"
+	 src-required="true" dst-required="false"/>
+
+<table name="distrito">
+	<schema name="public"/>
+	<position x="638" y="327"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="fimvigencia">
+		<type name="date"/>
+	</column>
+	<column name="iniciovigencia">
+		<type name="date"/>
+	</column>
+	<column name="cidade_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.distrito">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="cidade_has_many_distrito" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="4" constr-indexes="1"
+	 src-table="public.cidade"
+	 dst-table="public.distrito"
+	 src-required="true" dst-required="false"/>
+
+<table name="endereco">
+	<schema name="public"/>
+	<position x="1121" y="5"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="cep">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="complemento">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="numero">
+		<type name="integer"/>
+	</column>
+	<column name="principal">
+		<type name="integer"/>
+	</column>
+	<column name="bairro_id">
+		<type name="smallint"/>
+	</column>
+	<column name="logradouro_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.endereco">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="faixadecep">
+	<schema name="public"/>
+	<position x="917.429" y="391"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="fimcep">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="iniciocep">
+		<type name="character varying" length="20"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.faixadecep">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="endereco_has_many_faixadecep" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="3" constr-indexes="1"
+	 src-table="public.endereco"
+	 dst-table="public.faixadecep"
+	 src-required="false" dst-required="false"/>
+
+<table name="pessoa">
+	<schema name="public"/>
+	<position x="1977" y="383"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="nome">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="pessoafisica_id">
+		<type name="integer"/>
+	</column>
+	<column name="pessoajuridica_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.pessoa">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="pessoaendereco">
+	<schema name="public"/>
+	<position x="1425" y="392"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="fimvigencia">
+		<type name="date"/>
+	</column>
+	<column name="iniciovigencia">
+		<type name="date"/>
+	</column>
+	<column name="endereco_id">
+		<type name="integer"/>
+	</column>
+	<column name="pessoa_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.pessoaendereco">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="pessoa_has_one_pessoaendereco" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="5" constr-indexes="1,2"
+	 src-table="public.pessoaendereco"
+	 dst-table="public.pessoa"
+	 src-required="false" dst-required="false"/>
+
+<table name="pessoafisica">
+	<schema name="public"/>
+	<position x="1666" y="84"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="cpf">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="datanascimento">
+		<type name="date"/>
+	</column>
+	<column name="rg">
+		<type name="character varying"/>
+	</column>
+	<column name="sobrenome">
+		<type name="character varying" length="40"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.pessoafisica">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="pessoajuridica">
+	<schema name="public"/>
+	<position x="2214" y="83"/>
+	<column name="id">
+		<type name="reltime"/>
+	</column>
+	<column name="cnpj">
+		<type name="character varying" length="25"/>
+	</column>
+	<column name="datacricao">
+		<type name="date"/>
+	</column>
+	<column name="inscricaoestadual">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="razaosocial">
+		<type name="character varying" length="40"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.pessoajuridica">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="pessoa_has_one_pessoafisica" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="5" constr-indexes="1,2"
+	 src-table="public.pessoafisica"
+	 dst-table="public.pessoa"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="pessoa_has_one_pessoajuridica" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="5" constr-indexes="1,2"
+	 src-table="public.pessoajuridica"
+	 dst-table="public.pessoa"
+	 src-required="false" dst-required="true"/>
+
+<table name="telefone">
+	<schema name="public"/>
+	<position x="2047" y="686"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="ddd">
+		<type name="integer"/>
+	</column>
+	<column name="telefone">
+		<type name="integer"/>
+	</column>
+	<column name="tipo">
+		<type name="integer"/>
+	</column>
+	<column name="pessoa_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.telefone">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="pessoa_has_many_telefone" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="5" constr-indexes="1"
+	 src-table="public.pessoa"
+	 dst-table="public.telefone"
+	 src-required="true" dst-required="false"/>
+
+<table name="unidadefederativa">
+	<schema name="public"/>
+	<position x="72" y="609"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="nome">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="sigla">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="pais_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.unidadefederativa">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="unidadefederativa_has_many_cidade" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="4" constr-indexes="1"
+	 src-table="public.unidadefederativa"
+	 dst-table="public.cidade"
+	 src-required="true" dst-required="false"/>
+
+<table name="pais">
+	<schema name="public"/>
+	<position x="632" y="617"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="codpais">
+		<type name="integer"/>
+	</column>
+	<column name="nome">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="sigla">
+		<type name="character varying" length="10"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.pais">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="logradouro">
+	<schema name="public"/>
+	<position x="587.714" y="27"/>
+	<column name="id">
+		<type name="serial"/>
+	</column>
+	<column name="nome">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="tipoendereco">
+		<type name="integer"/>
+	</column>
+	<column name="faixadecep_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="chave_primaria" type="pk-constr" factor="10" table="public.logradouro">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="logradouro_has_many_endereco" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="7" constr-indexes="1"
+	 src-table="public.logradouro"
+	 dst-table="public.endereco"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="faixadecep_has_many_logradouro" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="4" constr-indexes="1"
+	 src-table="public.faixadecep"
+	 dst-table="public.logradouro"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="pais_has_many_unidadefederativa" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="4" constr-indexes="1"
+	 src-table="public.pais"
+	 dst-table="public.unidadefederativa"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="bairro_has_many_logradouro" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="5" constr-indexes="2"
+	 src-table="public.bairro"
+	 dst-table="public.logradouro"
+	 src-required="true" dst-required="false"/>
+
+<relationship name="pessoaendereco_has_one_endereco" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 col-indexes="8" constr-indexes="2,3"
+	 src-table="public.endereco"
+	 dst-table="public.pessoaendereco"
+	 src-required="false" dst-required="true"/>
+
+</dbmodel>
