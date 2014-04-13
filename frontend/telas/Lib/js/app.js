@@ -5,6 +5,10 @@ appCabecalho.config(['$routeProvider',
 	function ($routeProvider) {
 		
 		$routeProvider
+		.when('/login',{
+			templateUrl : '/Login.html',
+			controller : 'LoginController'
+		})
 		.when('/pessoafisica',{
 			templateUrl : 'partials/FormPF.html',
 			controller : 'PessoaFisicaController'
