@@ -1,11 +1,17 @@
 function CadastroEstadoController( $scope, bd ){
 
-  $scope.estado = bd.estado || [];
+  $scope.paises = [
+    { nome : "Argentina" },
+    { nome : "Brasil"    },
+    { nome : "Paraguai"  },
+    { nome : "Uruguai"   }
+  ]
+
+  $scope.estado = bd.estado || {};
   bd.estados = bd.estados || [];
 
   $scope.id_Estado = 0;
   $scope.estados = [];
-  $scope.estado = {}; 
 
   $scope.salvarEstado = function(){
 

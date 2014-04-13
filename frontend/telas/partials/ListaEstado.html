@@ -17,9 +17,9 @@
 						<label> &nbsp; </label>
 						<div>
 							<span class="pull-right">
-								<a href="#/cadastroestado" class="btn btn-primary" role="button">
-									<span class="glyphicon glyphicon-plus-sign" ></span> Novo
-								</a>
+								<button type='submit' class='btn btn-primary' value='novo' ng-click="novoEstado()" >
+				  					<span class='glyphicon glyphicon-plus-sign'></span> Novo
+								</button>
 							</span>
 						</div>
 					</div>
@@ -35,9 +35,9 @@
 					<tr ng-repeat="estado in estados | filter : busca" >
 						<td>{{estado.nome}}</td>
 						<td>{{estado.sigla}}</td>
-						<td>{{estado.pais}}</td>
+						<td>{{estado.pais.nome}}</td>
 						<td>
-							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng:click="editarEstado($index)" >
+							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarEstado($index)" >
 			  					<span class='glyphicon glyphicon-edit'></span>
 							</button>
 						</td>

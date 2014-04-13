@@ -10,21 +10,17 @@
 			<div class="row ">
 				<div class="form-group col-sm-6">
 						<label> Nome </label>
-						<input class="form-control" name="nome" type="text" placeholder="Nome Estado" ng-model="estado.nome" />
+						<input class="form-control" name="nome" type="text" ng-model="estado.nome" required />
 				</div>
 				
 				<div class="form-group col-sm-2">
 						<label> Sigla </label>
-						<input class="form-control" name="nome" type="text" placeholder="Sigla" ng-model="estado.sigla" />
+						<input class="form-control" name="nome" type="text" ng-model="estado.sigla" required />
 				</div>
 			
 				<div class="input-group col-sm-4">
 					<label>  Pais </label>
-					<select id="estado" ng-model="estado.pais"  class="selectpicker show-tick form-control" data-live-search="true" /> 						
-						<option value="argentina" >Argentina</option>
-						<option value="brasil" >Brasil</option>
-						<option value="espanha" >Espanha</option>
-						<option value="franca" >França</option>		
+					<select id="estado" ng-model="estado.pais"  class="selectpicker show-tick form-control" data-live-search="true" ng-options="pais.nome for pais in paises" required/> 				<option value="selecione" >selecione</option>
 					</select>
 				</div>
 			</div>	
