@@ -8,5 +8,10 @@ function ListaUsuarioController ($scope, bd) {
 
   $scope.delUsuario = function(index){
       $scope.usuarios.splice(index,1);
-  }; 
+  };
+
+  $scope.novoUsuario = function(){
+  	bd.usuario = {};
+  	window.location = "#/cadastrousuario"; 
+  } 
 }

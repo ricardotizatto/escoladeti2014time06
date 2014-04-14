@@ -1,12 +1,17 @@
-function CadastroUsuarioController( $scope, bd )
-{
+function CadastroUsuarioController( $scope, bd ){
+  
+  $scope.perfisDeAcesso = [
+    { nome : "Gerente"    },
+    { nome : "Vendedor"   },
+    { nome : "Caixa"      },
+    { nome : "Estagiario" }
+  ];
 
-  $scope.usuario = bd.usuario || [];
+  $scope.usuario = bd.usuario || {};
   bd.usuarios = bd.usuarios || [];
 
   $scope.id_Usuario = 0;
   $scope.usuarios = [];
-  $scope.usuario = {}; 
 
   $scope.salvarUsuario = function(){
 

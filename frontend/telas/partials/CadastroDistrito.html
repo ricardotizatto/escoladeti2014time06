@@ -1,87 +1,64 @@
-﻿		<div class="container">
+﻿<div class="container" ng-controller="CadastroDistritoController" >
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="-group col-sm-12">
+				<legend> Cadastro de Distrito </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form">							
 			<div class="row">
-				<div class="-group col-sm-12">
-					<legend> Cadastro de localidade</legend>
+				<div class="form-group col-sm-2 ">
+					<label> Código </label>
+					<input type="number" class="form-control" ng-model="distrito.codDistrito" />
+				</div>
+			
+				<div class="form-group col-sm-8">
+					<label> Nome </label>
+					<input class="form-control" name="nome" type="text" ng-model="distrito.nome" />
+				</div>
+				
+				<div class="form-group col-sm-2">
+					<label> Sigla </label>
+					<input class="form-control" name="nome" type="text" ng-model="distrito.sigla" />
+				</div>
+			</div>
+			
+			<div class="row ">
+				<div class="form-group col-sm-2">
+					<label>Fundação</label>
+					<input  class="form-control" name="fundacao" type="date" ng-model="distrito.fundacao" />
+				</div>
+			
+				<div class="form-group col-sm-2">
+					<label>Início da Vigencia</label>
+					<input  class="form-control" name="fundacao" type="date" ng-model="distrito.inicioVigencia" />
+				</div>
+				<div class="form-group col-sm-2">
+					<label>Fim da Vigencia</label>
+					<input  class="form-control" name="fundacao" type="date" ng-model="distrito.fimVigencia" />
+				</div>
+				<div class="input-group col-sm-6">
+					<label>  Cidades </label>
+					<select id="distrito" ng-model="distrito.cidade"  class="selectpicker show-tick form-control" data-live-search="true" ng-options="cidade.nome for cidade in cidades" required/>
+					</select>
 				</div>
 			</div>
 			<div class="row">
-				<div class="-group col-sm-12">
-					<ul class="nav nav-tabs">
-		  				<li><a href="#/cadastropais">Pais</a></li>
-		 				<li><a href="#/cadastroestado">Estado</a></li>
-		 				<li><a href="#/cadastrocidade">Cidade</a></li>
-		 				<li class="active"><a href="#/cadastrodistrito">Distrito</a></li>
-		 				<li><a href="#/cadastrobairro">Bairro</a></li>
-		 				<li><a href="#/cadastrocep">CEP</a></li>
-					</ul>
-				</div>	
-			</div>	
-			<label> &nbsp; </label>
-			<fieldset>
-				<div class="row">
-					<div class="-group col-sm-12">
-						<legend> Cadastro de Distrito </legend>
-					</div>
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarDistrito()" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+					</button>
+					</span>		
 				</div>
-				<form action="" method="POST" role="form">							
-					<div class="row">
-						<div class="form-group col-sm-2">
-							<label> Código </label>
-							<input type="number" class="form-control"/>
-						</div>
-					
-						<div class="form-group col-sm-8">
-							<label> Nome </label>
-							<input class="form-control" name="nome" type="text" placeholder="Nome" />
-						</div>
-						
-						<div class="form-group col-sm-2">
-							<label> Sigla </label>
-							<input class="form-control" name="nome" type="text" placeholder="Sigla" />
-						</div>
-					</div>
-					
-					<div class="row ">
-						<div class="form-group col-sm-2">
-							<label>Fundação</label>
-							<input  class="form-control" name="fundacao" type="date"/>
-						</div>
-					
-						<div class="form-group col-sm-2">
-							<label>Início da Vigencia</label>
-							<input  class="form-control" name="fundacao" type="date"/>
-						</div>
-						<div class="form-group col-sm-2">
-							<label>Fim da Vigencia</label>
-							<input  class="form-control" name="fundacao" type="date"/>
-						</div>
-						<div class="form-group col-sm-6">
-							<label for="cidade"> Cidade </label>
-							<select id="cidade" class="selectpicker show-tick form-control" data-live-search="true" >								
-								<option>Maringá</option>
-								<option>Astorga</option>
-								<option>Sarandi</option>		
-							</select>
-						</div>	
-					</div>
-							
-					<div class="row">
-						<div class="col-sm-12">
-							<span class="pull-right">	
-							<a href="AcaoCliente.html" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" ></span> Cancelar
-							</a>
-							<button type="submit" class="btn btn-success" >
-								<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
-							</button>
-							</span>		
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12"><hr></div>
-					</div>			
-				</form>
-			</fieldset>
-		</div>
-	</body>
-</html>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>			
+		</form>
+	</fieldset>
+</div>

@@ -10,13 +10,13 @@
 			</div>
 			<form action="" method="POST" role="form">		
 				<div class="row">
-					<div class="form-group col-sm-5 ">
+					<div class="form-group col-sm-6">
 						<label> Nome </label>
 						<input class="form-control" name="nome" type="text" ng-model="usuario.nome" placeholder="Nome Completo" />
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-sm-5">
+					<div class="form-group col-sm-6">
 						<label>Email</label>
 						<div class="input-group" >
 							<span class="input-group-addon" >
@@ -35,12 +35,9 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-sm-5">
-						<label>Perfil</label>
-						<select class="selectpicker show-tick form-control" name="perfil" ng-model="usuario.perfil" data-live-search="true">
-							<option value="vendedor" >Vendedor</option>
-							<option value="estagiario" >Estagiario</option>
-							<option value="outros" >Outros</option>
+					<div class="input-group col-sm-6">
+						<label> Prefil </label>
+						<select id="perfil" ng-model="usuario.perfil"  class="selectpicker show-tick form-control" data-live-search="true" ng-options="perfilDeAcesso.nome for perfilDeAcesso in perfisDeAcesso" required/>
 						</select>
 					</div>
 					<div class="form-group col-sm-3">
@@ -86,10 +83,10 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<span class="pull-right">	
-						<a href="#" class="btn btn-danger ">
+						<a href="#" class="btn btn-danger btn-padrao">
 							<span class="glyphicon glyphicon-remove" ></span> Cancelar 
 						</a>
-						<button type="submit" class="btn btn-success" ng-click="salvarUsuario()" >
+						<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarUsuario()" >
 							<span class="glyphicon glyphicon-ok"></span> Salvar </a>	
 						</button>
 						</span>		
@@ -130,8 +127,8 @@
 								</div>
 							</div>
 						    <div class="modal-footer">
-						        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span> Cancelar</button>
-						    	<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="salvarItemEspecial()"><span class="glyphicon glyphicon-ok" ></span> Salvar</button>
+						        <button type="button" class="btn btn-danger btn-padrao" data-dismiss="modal"><span class="glyphicon glyphicon-remove" ></span> Cancelar</button>
+						    	<button type="button" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarItemEspecial()"><span class="glyphicon glyphicon-ok" ></span> Salvar</button>
 						    </div>	
 				    	</div>
 				    </div>
