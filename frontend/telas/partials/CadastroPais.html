@@ -1,42 +1,42 @@
-﻿		<div class="container">
-			<label> &nbsp; </label>
-			<fieldset>
-				<div class="row">
-					<div class="form-group col-sm-12">
-						<legend> Cadastro de País </legend>
-					</div>
-				</div>
-				<form action="" method="POST" role="form">							
-					<div class="row ">
-						<div class="form-group col-sm-2">
-							<label> Código </label>
-							<input type="number" class="form-control" />
-						</div>
-						
-						<div class="form-group col-sm-8">
-							<label> Nome </label>
-							<input class="form-control" name="nome" type="text" placeholder="Nome" />
-						</div>
-						<div class="form-group col-sm-2">
-							<label> Sigla </label>
-							<input class="form-control" name="nome" type="text" placeholder="Sigla" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<span class="pull-right">	
-							<a href="AcaoCliente.html" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" ></span> Cancelar
-							</a>
-							<button type="submit" class="btn btn-success" >
-								<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
-							</button>
-							</span>		
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12"><hr></div>
-					</div>				
-				</form>
-			</fieldset>
+﻿<div class="container" ng-controller="CadastroPaisController" >
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de País </legend>
+			</div>
 		</div>
+		<form action="" method="POST" role="form">							
+			<div class="row ">
+				<div class="form-group col-sm-2">
+					<label> Código </label>
+					<input type="number" class="form-control" ng-model="pais.codPais"/>
+				</div>
+				
+				<div class="form-group col-sm-8">
+					<label> Nome </label>
+					<input class="form-control" name="nome" type="text" ng-model="pais.nome" />
+				</div>
+				<div class="form-group col-sm-2">
+					<label> Sigla </label>
+					<input class="form-control" name="nome" type="text" ng-model="pais.sigla" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#listapais" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarPais()" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+					</button>
+					</span>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>				
+		</form>
+	</fieldset>
+</div>
