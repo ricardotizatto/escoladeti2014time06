@@ -4,8 +4,8 @@ function listaTelaController ($scope, bd){
 
 	$scope.editarTela = function (indice) {
 		bd.tela = $scope.telas[indice];
+		bd.indice = indice;
 		window.location = '#/cadastrotela';
-		//$scope.telas.splice(indice,1);
 	};
 
 	$scope.novaTela = function () {
