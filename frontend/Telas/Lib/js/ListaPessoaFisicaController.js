@@ -8,10 +8,9 @@ function ListaPessoaFisicaController ($scope, bd) {
 
   $scope.delPessoaFisica = function(indice){
       $scope.pessoas.splice(indice,1);
- 
+  };
   $scope.novaPessoaFisica = function(){
   	bd.pessoa = {};
   	window.location = "#/pessoafisica"; 
-  }
-  }; 
+  };
 }
