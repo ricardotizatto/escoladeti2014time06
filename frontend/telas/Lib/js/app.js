@@ -27,7 +27,7 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/cadastrotela',{
 			templateUrl : 'partials/CadastroTela.html',
-			// controller : 'nomeDoController'
+			controller : 'telaController'
 		})
 		.when('/cadastropais',{
 			templateUrl : 'partials/CadastroPais.html',
@@ -91,11 +91,11 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/listaperfilusuario',{
 			templateUrl : 'partials/ListaPerfilUsuario.html',
-			// controller : 'nomeDoController'
+			controller : 'ListaPerfilUsuarioController'
 		})
 		.when('/listatela',{
 			templateUrl : 'partials/ListaTela.html',
-			// controller : 'nomeDoController'
+			controller : 'listaTelaController'
 		})
 		.otherwise({redirectTo: '/'
 		});

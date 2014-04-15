@@ -1,12 +1,4 @@
 ﻿<div class="container" ng-controller="telaController">
-	<div class="row">
-		<div class="form-group col-sm-12">
-			<ul class="nav nav-tabs">
-  				<li class="active"><a href="#/cadastrotela">Telas</a></li>
- 				<li><a href="#/cadastroperfilusuario">Perfil de usuário</a></li>
-			</ul>
-		</div>	
-	</div>	
 	<label> &nbsp; </label>
 	<fieldset>
 		<div class="row">
@@ -27,7 +19,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<span class="pull-right">	
-					<a href="AcaoCliente.html" class="btn btn-danger">
+					<a ng-click="cancelarTela()" class="btn btn-danger">
 						<span class="glyphicon glyphicon-remove" ></span> Cancelar 
 					</a>
 					<button type="submit" class="btn btn-success" >
