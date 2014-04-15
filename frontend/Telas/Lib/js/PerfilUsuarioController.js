@@ -1,13 +1,19 @@
 'use strict';
 
-function perfilUsuarioController($scope, $http) {
-	console.log('Controller funcionando');
+function perfilUsuarioController($scope, bd) {
 	
 	bd.perfilsDeUsuario = bd.perfilsDeUsuario || [];
-	$scope.telas = bd.telas;
+	$scope.perfilDeusuario = bd.perfilDeusuario || {};
+	$scope.telas = bd.telas || [];
 
 	$scope.addPerfilUsuario = function addPerfilUsuario() {
-		bd.perfilsDeUsuario.push($scope.perfilUsuario);
-		$scope.perfilUsuario = {};
+		if (angular.isUndefined(bd.indicePerfilUsuario)) {
+			bd.perfilsDeUsuario.push($scope.perfilDeusuario);
+		}
+		$scope.perfilDeusuario = {};
+	}
+
+	$scope.cancelarPerfilUsuario = function() {
+		window.location = '#/listaperfilusuario';
 	}
 }

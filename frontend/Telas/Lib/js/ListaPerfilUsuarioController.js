@@ -1,16 +1,21 @@
 'use strict';
 function listaPerfilUsuarioController ($scope, bd) {
 
-	$scope.perfilsUsuario = bd.perfilsDeUsuario;
+	$scope.perfilsDeUsuario = bd.perfilsDeUsuario;
 
-	$scope.editarPerfilUsuario = function editarPerfilUsuario() {
-		alert('Editado');
-		console.log('Controler Lista iniciado');
+	$scope.editarPerfilUsuario = function editarPerfilUsuario(indice) {
+		bd.perfilDeUsuario = bd.perfilsDeUsuario[indice];
+		bd.indicePerfilUsuario = indice;
+		window.location = '#/cadastroperfilusuario';
+	}
+
+	$scope.novoPerfilUsuario = function() {
+		bd.perfilUsuario = {};
+		window.location = '#/cadastroperfilusuario';
 	}
 	
-	$scope.excluirPerfilUsuario = function excluirPerfilUsuario() {
-		alert('Excluido');
-		console.log('Controler Lista iniciado');
+	$scope.excluirPerfilUsuario = function excluirPerfilUsuario(indice) {
+		bd.perfilsDeUsuario.splice(indice,1);
 	}
 
 }
