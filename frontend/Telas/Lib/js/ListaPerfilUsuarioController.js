@@ -10,7 +10,7 @@ function listaPerfilUsuarioController ($scope, bd) {
 	}
 
 	$scope.novoPerfilUsuario = function() {
-		bd.perfilUsuario = {};
+		bd.perfilDeUsuario = {};
 		window.location = '#/cadastroperfilusuario';
 	}
 	
