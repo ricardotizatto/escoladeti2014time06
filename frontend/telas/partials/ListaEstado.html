@@ -35,7 +35,7 @@
 					<tr ng-repeat="estado in estados | filter : busca" >
 						<td>{{estado.nome}}</td>
 						<td>{{estado.sigla}}</td>
-						<td>{{estado.pais.nome}}</td>
+						<td>{{estado.pais}}</td>
 						<td>
 							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarEstado($index)" >
 			  					<span class='glyphicon glyphicon-edit'></span>

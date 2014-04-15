@@ -45,12 +45,12 @@
 						<td>{{distrito.fimVigencia | date: 'dd-MM-yyyy' }}</td>
 						<td>{{distrito.cidade.nome}}</td>
 						<td>
-							<button type='submit' class='btn btn-warning btn-sm btn-padrao'  name='metodo' value='alterar' ng-click="editarDistrito($index)" >
+							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarDistrito($index)" >
 			  					<span class='glyphicon glyphicon-edit'></span>
 							</button>
 						</td>
 						<td>
-							<button type='submit' class='btn btn-danger btn-sm btn-padrao'  name='metodo' value='escluir' ng:click="delDistrito($index)">
+							<button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='escluir' ng:click="delDistrito($index)">
 			  					<span class='glyphicon glyphicon-remove-circle'></span>
 							</button>
 						</td>
