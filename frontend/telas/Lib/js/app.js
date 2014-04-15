@@ -91,7 +91,7 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/listaperfilusuario',{
 			templateUrl : 'partials/ListaPerfilUsuario.html',
-			controller : 'ListaPerfilUsuarioController'
+			controller : 'listaPerfilUsuarioController'
 		})
 		.when('/listatela',{
 			templateUrl : 'partials/ListaTela.html',

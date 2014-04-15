@@ -3,14 +3,14 @@
 function perfilUsuarioController($scope, bd) {
 	
 	bd.perfilsDeUsuario = bd.perfilsDeUsuario || [];
-	$scope.perfilDeusuario = bd.perfilDeusuario || {};
+	$scope.perfilDeUsuario = bd.perfilDeUsuario || {};
 	$scope.telas = bd.telas || [];
 
 	$scope.addPerfilUsuario = function addPerfilUsuario() {
 		if (angular.isUndefined(bd.indicePerfilUsuario)) {
-			bd.perfilsDeUsuario.push($scope.perfilDeusuario);
+			bd.perfilsDeUsuario.push($scope.perfilDeUsuario);
 		}
-		$scope.perfilDeusuario = {};
+		$scope.perfilDeUsuario = {};
 	}
 
 	$scope.cancelarPerfilUsuario = function() {
