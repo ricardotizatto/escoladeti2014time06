@@ -1,77 +1,45 @@
-﻿		<div class="container">
-			<div class="row">
-				<div class="form-group col-sm-12">
-					<legend> Cadastro de localidade</legend>
+﻿<div class="container" ng-controller="CadastroCepController" >
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de CEP </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form">							
+			<div class="row ">
+				<div class="form-group col-sm-4">
+					<label for="logradouro" >  Logradouro </label>
+					<select id="logradouro" class="form-control selectpicker show-tick" ng-model="cep.logradouro" ng-options="logradouro.nome as logradouro.nome for logradouro in logradouros"></select>
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="bairro" > Bairro </label>
+					<select id="bairro" class="form-control selectpicker show-tick" ng-model="cep.bairro" ng-options="bairro.nome as bairro.nome for bairro in bairros"></select>
+				</div>
+				<div class="form-group col-sm-2">
+					<label for="cep" > CEP inicial </label>
+					<input class="form-control mascaraCep" name="cepInicial" type="text" ng-model="cep.inicial" />  
+				</div>
+				<div class="form-group col-sm-2">
+					<label for="cep" > CEP final </label>
+					<input class="form-control mascaraCep" name="cepFinal" type="text" ng-model="cep.final" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-12">
-					<ul class="nav nav-tabs">
-		  				<li><a href="#/cadastropais">Pais</a></li>
-		 				<li><a href="#/cadastroestado">Estado</a></li>
-		 				<li><a href="#/cadastrocidade">Cidade</a></li>
-		 				<li><a href="#/cadastrodistrito">Distrito</a></li>
-		 				<li><a href="#/cadastrobairro">Bairro</a></li>
-		 				<li class="active"><a href="#/cadastrocep">CEP</a></li>
-					</ul>
-				</div>	
-			</div>	
-			<label> &nbsp; </label>
-			<fieldset>
-				<div class="row">
-					<div class="form-group col-sm-12">
-						<legend> Cadastro de CEP </legend>
-					</div>
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#/listacep" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarCep()" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+					</button>
+					</span>		
 				</div>
-				<form action="" method="POST" role="form">							
-					<div class="row ">
-					
-						<div class="form-group col-sm-4">
-							<label for="logradouro"> Logradouro </label>
-		                    <select id="logradouro" class="selectpicker show-tick form-control" data-live-search="true">		                        
-		                        <option>Av. Tiradentes</option>
-		                        <option>Av. São Paulo</option>
-		                        <option>Rua Londrina</option>
-		                    </select>
-						</div>
-						
-						<div class="form-group col-sm-4">
-							<label for="bairro"> Bairro </label>
-		                    <select id="bairro" class="selectpicker show-tick form-control" data-live-search="true">
-		                        
-		                        <option>Zona 02</option>
-		                        <option>Zona 03</option>
-		                        <option>Zona 04</option>
-		                    </select>
-						</div>
-						
-						<div class="form-group col-sm-2">
-							<label> CEP inicial </label>
-							<input class="form-control maskCep" name="cepInicial" type="text" placeholder="99999-999"/>  
-						</div>
-						<div class="form-group col-sm-2">
-							<label> CEP final </label>
-							<input class="form-control maskCep" name="cepInicial" type="text" placeholder="99999-999" />
-						</div>
-					</div>
-						
-					<div class="row">
-						<div class="col-sm-12">
-							<span class="pull-right">	
-							<a href="AcaoCliente.html" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove" ></span> Cancelar
-							</a>
-							<button type="submit" class="btn btn-success" >
-								<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
-							</button>
-							</span>		
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12"><hr></div>
-					</div>			
-				</form>
-			</fieldset>
-		</div>
-	</body>
-</html>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>			
+		</form>
+	</fieldset>
+</div>
