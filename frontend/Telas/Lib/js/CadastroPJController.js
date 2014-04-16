@@ -75,6 +75,7 @@ function CadastroPJController( $scope, bd ){
       $.mask.definitions['~']='[+-]';
       $(".mascaraCNPJ").mask("99.999.999/9999-99");
       $(".telefone").mask("(99) 9999-9999?9");
+      $(".mascaraCep").mask("99999-999");
   });
        
 }

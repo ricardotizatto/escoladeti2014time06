@@ -1,18 +1,18 @@
 function ListaPJController ($scope, bd) {
   
-  $scope.pessoasjuridicas = bd.pessoasjuridicas;
-
+  $scope.pessoasJuridicas = bd.pessoasJuridicas;
+  
   $scope.editarPessoaJuridica = function( indice ){
-    bd.pessoajuridica = $scope.pessoasjuridicas[indice];
+    bd.pessoaJuridica = $scope.pessoasJuridicas[indice];
     window.location = "#/pessoajuridica";  
   };
 
   $scope.delPessoaJuridica = function(index){
-      $scope.pessoasjuridicas.splice(index,1);
+      $scope.pessoasJuridicas.splice(index,1);
   };
 
   $scope.novaPessoaJuridica = function(){
-  	bd.pessoajuridica = {};
+  	bd.pessoaJuridica = {};
   	window.location = "#/pessoajuridica"; 
   }
 

@@ -40,7 +40,7 @@
 						<td>{{pessoaJuridica.inscMunicipal}}</td>
 						<td>{{pessoaJuridica.inscEstadual}}</td>
 						<td>{{pessoaJuridica.cnpj}}</td>
-						<td>{{pessoaJuridica.dataCriacao}}</td>
+						<td>{{pessoaJuridica.dataCriacao  | date: 'dd-MM-yyyy' }}</td>
 						<td>{{pessoaJuridica.email}}</td>
 						<td>
 							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarPessoaJuridica($index)" >
