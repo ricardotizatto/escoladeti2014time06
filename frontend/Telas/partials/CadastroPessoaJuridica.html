@@ -74,7 +74,7 @@
 			    </thead>
 			    <tbody>
 				    <tr ng-repeat="endereco in enderecos">
-				    	<td class="text-center"> {{endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
+				    	<td class="text-center"> {{"Principal: "+ endereco.principal + "  " + endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
 	        			<td>
 	        				<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarEndereco($index)" data-toggle="modal" data-target="#modalEndereco" >
 	          					<span class='glyphicon glyphicon-edit'></span>
@@ -184,20 +184,19 @@
 	      		<div class="modal-body">
 	        		<legend> <span class="glyphicon glyphicon-home"></span> Endereço </legend>
 					<div class="row">
-						<div class="form-group col-sm-6">
+						<div class="form-group col-sm-4">
 							<label>Principal</label>
-							<div>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-primary ">
-										<input ng-model="endereco.principal" name="principal" value="S" type="radio" /> <label>Sim</label>
-									</label>
-									<label class="btn btn-primary">
-										<input ng-model="endereco.principal" name="principal" value="N" type="radio" />  <label>Não</label>
-									</label>
-								</div>
+						    <div class="input-group">
+						      <span class="input-group-addon">
+						        <input ng-model="endereco.principal" name="principal" value="Sim" type="radio"><label>Sim</label>
+						      </span>
+						      <span class="input-group-addon">
+						        <input ng-model="endereco.principal" name="principal" value="Não" type="radio" ><label>Não</label>
+						      </span>
+
 							</div>
 						</div>
-						<div class="form-group col-sm-6">
+						<div class="form-group col-sm-8">
 							<label for="cep" >Cep</label>
 							<input  class="form-control mascaraCep" name="cep" type="text" ng-model="endereco.cep" />
 						</div>
@@ -224,23 +223,23 @@
 						</div>
 						<div class="form-group col-sm-3">
 							<label>Número</label>
-							<input  class="form-control" name="numero" type="text" ng-model="endereco.numero" placeholder="N°" />
+							<input  class="form-control" name="numero" type="text" ng-model="endereco.numero" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<label>Bairro</label>
-							<input  class="form-control" name="complemento" type="text" ng-model="endereco.bairro" placeholder="Bairro"/>
+							<input  class="form-control" name="complemento" type="text" ng-model="endereco.bairro" />
 						</div>
 						<div class="form-group col-sm-6">
 							<label>Complemento</label>
-							<input  class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" />
+							<input  class="form-control" name="complemento" type="text" ng-model="endereco.complemento" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<label>Cidade</label>
-							<input  class="form-control" name="cidade" type="text" ng-model="endereco.cidade" placeholder="Cidade" />
+							<input  class="form-control" name="cidade" type="text" ng-model="endereco.cidade" />
 						</div>
 						<div class="form-group col-sm-3">
 							<label> Estado </label>
