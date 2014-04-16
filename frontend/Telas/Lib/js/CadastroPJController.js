@@ -1,20 +1,19 @@
 function CadastroPJController( $scope, bd ){
 
-  $scope.pessoa = bd.pessoa || {};
-  bd.pessoas = bd.pessoas || [];
+  $scope.pessoaJuridica = bd.pessoaJuridica || {};
+  bd.pessoasJuridicas = bd.pessoasJuridicas || [];
 
-  $scope.idPessoa = 0;
-  $scope.pessoas = [];
+  $scope.idPessoaJuridica = 0;
+  $scope.pessoasJuridicas = [];
 
-  $scope.salvarPessoa = function(){
-
-    if(!$scope.pessoa.idPessoa){
-        $scope.idPessoa++;
-        $scope.pessoa.idPessoa = $scope.idPessoa;
-        $scope.pessoas.push( $scope.pessoa );
-        bd.pessoas.push( $scope.pessoa );
+  $scope.salvarPessoaJuridica = function(){
+    if(!$scope.pessoaJuridica.idPessoaJuridica){
+        $scope.idPessoaJuridica++;
+        $scope.pessoaJuridica.idPessoaJuridica = $scope.idPessoaJuridica;
+        $scope.pessoasJuridicas.push( $scope.pessoaJuridica );
+        bd.pessoasJuridicas.push( $scope.pessoaJuridica );
     }
-    $scope.pessoa = {};
+    $scope.pessoaJuridica = {};
   };
 
   $scope.idTelefone = 0;

@@ -1,4 +1,5 @@
 function ListaPJController ($scope, bd) {
+  
   $scope.pessoasjuridicas = bd.pessoasjuridicas;
 
   $scope.editarPessoaJuridica = function( indice ){
