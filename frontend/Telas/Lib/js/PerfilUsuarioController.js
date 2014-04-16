@@ -7,7 +7,7 @@ function perfilUsuarioController($scope, bd) {
 	$scope.telas = bd.telas || [];
 
 	$scope.addPerfilUsuario = function addPerfilUsuario() {
-		if (angular.isUndefined(bd.indicePerfilUsuario)) {
+		if (bd.indicePerfilUsuario == -1) {
 			bd.perfilsDeUsuario.push($scope.perfilDeUsuario);
 		}
 		$scope.perfilDeUsuario = {};

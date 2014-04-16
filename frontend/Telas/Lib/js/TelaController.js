@@ -6,7 +6,7 @@ function telaController ($scope, bd) {
 	$scope.tela = bd.tela || {};
 
 	$scope.addTela = function addTela() {
-		if (angular.isUndefined(bd.indiceTela)){
+		if (bd.indiceTela == -1){
 			bd.telas.push($scope.tela);
 		}
 		$scope.tela = {};
