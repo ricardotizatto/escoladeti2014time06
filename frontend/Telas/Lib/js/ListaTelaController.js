@@ -1,6 +1,7 @@
 function listaTelaController ($scope, bd){
 	
 	$scope.telas = bd.telas;
+	bd.indiceTela = -1;
 
 	$scope.editarTela = function (indice) {
 		bd.tela = $scope.telas[indice];

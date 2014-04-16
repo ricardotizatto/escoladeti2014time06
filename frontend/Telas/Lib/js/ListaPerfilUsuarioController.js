@@ -2,6 +2,7 @@
 function listaPerfilUsuarioController ($scope, bd) {
 
 	$scope.perfilsDeUsuario = bd.perfilsDeUsuario;
+	bd.indicePerfilUsuario = -1;
 
 	$scope.editarPerfilUsuario = function editarPerfilUsuario(indice) {
 		bd.perfilDeUsuario = bd.perfilsDeUsuario[indice];
