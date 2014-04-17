@@ -1,0 +1,81 @@
+<div ng-controller="QuestaoObjetivaController" ng-init="initEditarQuestaoObjetiva()">
+	<h2 class="text-center">Questão Objetiva</h2>
+	<br>
+	<form>
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label>Enunciado</label>
+				<textarea rows="4" class="form-control" placeholder="Texto da questão." ng-model="questaoAtual.enunciado"></textarea>
+			</div>
+			<div class="form-group col-md-6">
+				<label>Disciplinas</label>
+				<select multiple size="5" class="form-control"
+					title="Segure a tecla 'Ctrl' pressionada para selecionar múltiplas disciplinas" 
+					ng-model="questaoAtual.disciplinas"
+                                        ng-options="disciplina.nome for disciplina in disciplinas track by disciplina.id">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-2">
+				<label>Nível de dificuldade</label>
+				<input type="number" min="0" class="form-control" ng-model="questaoAtual.nivelDificuldade"></input>
+			</div>
+		</div>
+		
+		<hr>
+		<div class="text-center">
+			<h4>Alternativa</h4>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-8">
+				<textarea rows="3" class="form-control" placeholder="Texto da alternativa." ng-model="alternativaAtual.texto"></textarea>
+			</div>
+			<div class="col-md-3">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="alternativaAtual.correta"></input> Correta
+					</label>
+				</div>
+				<button class="btn btn-success form-control" ng-click="adicionarAlternativa()">
+					<i class="glyphicon glyphicon-plus"></i> Adicionar
+				</button>
+			</div>
+		</div>
+		
+		<div class="table-responsive" ng-show="questaoAtual.alternativas.length > 0">
+			<table class="table table-hover" id="tableList">
+				<thead>
+					<tr>
+						<th class="col-md-8 text-center">Texto</th>
+						<th class="col-md-2 text-center">Correta</th>
+						<th class="col-md-2 text-right"></th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="alternativa in questaoAtual.alternativas">
+					<tr>
+						<td><textarea rows="3" class="form-control" ng-model="alternativa.texto"></textarea></td>
+						<td class="text-center"><input type="checkbox" ng-model="alternativa.correta"></input></td>
+						<td class="text-right">
+							<button type="button" class="btn btn-link btn-danger" title="Excluir" ng:click="removerAlternativa($index)">
+								<span class="glyphicon glyphicon-trash" />
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<hr>
+		
+		<div class="row pull-right">
+			<div class="form-group col-lg-12 col-sm-12">
+				<button class="btn btn-success" ng-click="salvar()">
+					<i class="glyphicon glyphicon-ok"></i> Salvar
+				</button>
+				<a href="#/cadastros/questaoObjetiva/listar" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+			</div>
+		</div>
+	</form>
+</div>

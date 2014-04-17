@@ -1,0 +1,67 @@
+<div class="row" ng-controller="QuestaoObjetivaController" ng-init="init()">
+	<div class="table-responsive">
+		<table class="table table-hover" id="tableList">
+			<thead>
+				<tr>
+					<th colspan="4">
+						<div class="form-group col-lg-12 col-sm-12">
+							<button class="btn btn-success" ng-click="incluir()">Nova</button>
+						</div>
+					</th>
+				</tr>
+				<tr>
+					<th colspan="4">
+						<ul class="pagination">
+							<li class="{{page.pageNumber == 1 ? 'disabled' : ''}}">
+								<a ng-click="loadQuestoes(1)">
+									<span class="glyphicon glyphicon-fast-backward"/>
+								</a>
+							</li>
+							<li class="{{page.pageNumber == 1 ? 'disabled' : ''}}">
+								<a ng-click="loadQuestoes(page.pageNumber - 1)">
+									<span class="glyphicon glyphicon-step-backward"/>
+								</a>
+							</li>
+							
+							<li ng-repeat="numeroPagina in page.pagesAround" class="{{numeroPagina == page.pageNumber ? 'active' : ''}}">
+								<a ng-click="loadQuestoes(numeroPagina)">{{numeroPagina}}</a>
+							</li>
+							
+							<li class="{{page.pageNumber == page.pageCount ? 'disabled' : ''}}">
+								<a ng-click="loadQuestoes(page.pageNumber + 1)">
+									<span class="glyphicon glyphicon-step-forward"/>
+								</a>
+							</li>
+							<li class="{{page.pageNumber == page.pageCount ? 'disabled' : ''}}">
+								<a ng-click="loadQuestoes(page.pageCount)">
+									<span class="glyphicon glyphicon-fast-forward"/>
+								</a>
+							</li>
+						</ul>
+					</th>
+				</tr>
+				<tr>
+					<th class="col-md-4">Enunciado</th>
+					<th class="col-md-4 text-center">Disciplinas</th>
+					<th class="col-md-2 text-center">Dificuldade</th>
+					<th class="col-md-2 text-right"></th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="questao in page.list">
+				<tr>
+					<td>{{questao.enunciado}}</td>
+					<td><div ng-repeat="disciplina in questao.disciplinas">{{disciplina.nome}}</div></td>
+					<td class="text-center">{{questao.nivelDificuldade}}</td>
+					<td class="text-right">
+						<a href="#/cadastros/questaoObjetiva/editar/{{questao.id}}" class="btn btn-link btn-success" title="Editar">
+							<span class="glyphicon glyphicon-pencil" />
+						</a>
+						<button type="button" class="btn btn-link btn-danger" title="Excluir" ng:click="remover($index)">
+							<span class="glyphicon glyphicon-trash" />
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

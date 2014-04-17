@@ -1,0 +1,16 @@
+<div ng-controller="DisciplinaController" ng-init="initEditarDisciplina()">
+    <form>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="idCliente">Nome</label>
+                <input type="text" class="form-control" placeholder="Nome da disciplina" ng-model="disciplinaAtual.nome"/>
+            </div>
+            <div class="row pull-right">
+                <div class="form-group col-lg-12 col-sm-12">
+                    <button class="btn btn-success" ng-click="salvar()"><i class="glyphicon glyphicon-ok"></i> Salvar</button>
+                    <a href="#/cadastros/disciplina/listar" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
