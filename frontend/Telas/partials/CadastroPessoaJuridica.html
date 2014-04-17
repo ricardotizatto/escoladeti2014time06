@@ -1,0 +1,272 @@
+﻿<div class="container" ng-controller="CadastroPJController">
+	<label> &nbsp; </label>
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<fieldset>
+			<legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Pessoa Jurídica </legend>
+			</fieldset>
+		</div>
+	</div>	
+	<form action="" method="POST" role="form" >						
+	<div class="row ">
+		<div class="form-group col-sm-7">
+			<label> Razão Social </label>
+			<input class="form-control" name="razaoSocial" type="text" ng-model="pessoaJuridica.razaoSocial"/>
+		</div>
+		<div class="form-group col-sm-3">
+			<label  for="cnpj" > CNPJ </label>
+			<input class="form-control mascaraCNPJ" name="cnpj" type="text" ng-model="pessoaJuridica.cnpj" />
+		</div>
+		<div class="form-group col-sm-2">
+			<label> Data de Criação </label>
+			<input class="form-control" name="dataCriacao" type="date" ng-model="pessoaJuridica.dataCriacao" />
+		</div>					
+	</div>	
+	<div class="row ">
+		
+		<div class="form-group col-sm-3">
+			<label> Inscrição Municipal </label>
+			<input class="form-control" name="inscricaoEstadual" type="text" ng-model="pessoaJuridica.inscMunicipal" />
+		</div>
+		<div class="form-group col-sm-3">
+			<label> Inscrição Estadual </label>
+			<input class="form-control" name="dataCriacao" type="text" ng-model="pessoaJuridica.insEstadual" />
+		</div>
+		<div class="form-group col-sm-6">
+			<label>Email</label>
+			<div class="input-group" >
+				<span class="input-group-addon" >
+					<span class="glyphicon glyphicon-envelope"></span>
+				</span>
+				<input class="form-control" name="email" type="text" ng-model="pessoaJuridica.email" >
+			</div>
+		</div>
+	</div>	
+	<label>  &nbsp; </label>
+	<div class="row">
+		<div class="form-group col-sm-7">
+			<legend>
+			 	<span class="glyphicon glyphicon-home"></span> Endereço 
+		 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEndereco">
+					<span class="glyphicon glyphicon-plus" ></span>	
+				</button>
+				<label> &nbsp; </label>
+			</legend>
+		</div>
+		<div class="form-group col-sm-5">
+			<legend>
+			 	<span class="glyphicon glyphicon-phone-alt"></span> Telefone 
+			 		<button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTelefone">
+						<span class="glyphicon glyphicon-plus" ></span>	
+					</button>
+					<label> &nbsp; </label>
+			</legend>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-sm-7">
+	        <table class="table table-hover table-striped">
+				<thead>
+				    <tr>          
+				    	<th class="col-sm-10 text-center"> Endereço </th> 
+				        <th class="col-sm-2"> &nbsp; </th>        
+				    </tr>
+			    </thead>
+			    <tbody>
+				    <tr ng-repeat="endereco in enderecos">
+				    	<td class="text-center"> {{"Principal: "+ endereco.principal + "  " + endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
+	        			<td>
+	        				<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarEndereco($index)" data-toggle="modal" data-target="#modalEndereco" >
+	          					<span class='glyphicon glyphicon-edit'></span>
+	        				</button>
+	        				<button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='escluir' ng-click="delEndereco($index)">
+	          					<span class='glyphicon glyphicon-remove-circle'></span>
+	        				</button>
+	        			</td>
+				    </tr>        
+			    </tbody>      
+			</table>
+		</div>
+		<div class="form-group col-sm-5">
+		        <table class="table table-hover table-striped">
+					<thead>
+					    <tr>          
+					    	<th class="col-sm-9 text-center"> Telefones </th> 
+					    	<th class="col-sm-3"> &nbsp; </th>           
+					    </tr>
+				    </thead>
+				    <tbody>
+					    <tr ng-repeat="telefone in telefones">
+					    	<td class="text-center"> {{telefone.tipo + " - " + telefone.numero + " - " +telefone.ramal}} </td>
+		    				<td>
+		    					<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarTelefone($index)" data-toggle="modal" data-target="#modalTelefone" >
+		    	  					<span class='glyphicon glyphicon-edit'></span>
+		    					</button>
+		    					<button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='escluir' ng-click="delTelefone($index)">
+		    	  					<span class='glyphicon glyphicon-remove-circle'></span>
+		    					</button>
+		    				</td>
+					    </tr>        
+				    </tbody>      
+				</table>
+			</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-12">
+			<span class="pull-right">	
+			<a href="#/listapessoajuridica" class="btn btn-danger btn-padrao">
+				<span class="glyphicon glyphicon-remove" ></span> Cancelar 
+			</a>
+			<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarPessoaJuridica()" >
+				<span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+			</button>
+			</span>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12"><hr></div>
+	</div>
+	<!-- Modal telefone-->
+	<div class="modal fade" id="modalTelefone" tabindex="-1" role="dialog" aria-labelledby="modalTelefoneLabel" aria-hidden="true">
+		<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        		<h4 class="modal-title" id="modalTelefoneLabel">Cadastro de telefone</h4>
+	      		</div>
+	      		<div class="modal-body">
+				   	<div class="row">
+  						<div class="form-group col-sm-4 col-sm-offset-2">
+      						<label> Telefone</label>
+	      					<div class="input-group">
+	      						<span class="input-group-addon">
+	      							<span class="glyphicon glyphicon-phone-alt"></span>
+	      						</span>
+	      						<select class="form-control" name="tipoTelefone" ng-model="telefone.tipo" >
+	      							<option value="celular" >Celular</option>
+	      							<option value="comercial" >Comercial</option>
+	      							<option value="residencial" >Residencial</option>
+	      						</select>
+	      					</div>
+  						</div>
+	      				<div class="form-group col-sm-5">
+	      					<label>Número</label>
+	      					<div class="input-group">
+	      				  		<input class="form-control telefone" name="tel" type="text" ng-model="telefone.numero" />  
+	      					</div>
+	      				</div>
+  					</div>
+	      	      	<div class="row">
+	      	      		<div class="form-group col-sm-4 col-sm-offset-2">
+	      	      			<label>Ramal</label>
+	      					<div class="input-group">
+	      						<input class="form-control" name="numeroTelefone" type="number" ng-model="telefone.ramal" />  
+	      					</div>
+	      				</div>
+	      			</div>
+	      			<div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
+			    </div>
+		        <div class="modal-footer">
+			        <button type="button" class="btn btn-danger btn-padrao" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+			        <button type="button" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()" ><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+		        </div>
+	    	</div>
+	    </div>
+	</div>	
+	<!-- Modal endereço-->
+	<div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
+		<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        		<h4 class="modal-title" id="modalEnderecoLabel">Cadastro de Endereço</h4>
+	      		</div>
+	      		<div class="modal-body">
+	        		<legend> <span class="glyphicon glyphicon-home"></span> Endereço </legend>
+					<div class="row">
+						<div class="form-group col-sm-4">
+							<label>Principal</label>
+						    <div class="input-group">
+						      <span class="input-group-addon">
+						        <input ng-model="endereco.principal" name="principal" value="Sim" type="radio"><label>Sim</label>
+						      </span>
+						      <span class="input-group-addon">
+						        <input ng-model="endereco.principal" name="principal" value="Não" type="radio" ><label>Não</label>
+						      </span>
+
+							</div>
+						</div>
+						<div class="form-group col-sm-8">
+							<label for="cep" >Cep</label>
+							<input  class="form-control mascaraCep" name="cep" type="text" ng-model="endereco.cep" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<label>Tipo</label>
+							<select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="endereco.tipoEndereco" data-live-search="true">
+								<option value="se" selected>Selecione</option>
+								<option value="avenida" >Avenida</option>
+								<option value="rua" >Rua</option>
+								<option value="praca" >Praça</option>
+								<option value="estrada" >Estrada</option>
+								<option value="alameda">Alameda</option>
+								<option value="ladeira">Ladeira</option>
+								<option value="travessa">Travessa</option>
+								<option value="rodovia">Rodovia</option>
+								<option value="outros">Outros</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Logradouro</label>
+							<input  class="form-control" name="descEndereco" type="text" ng-model="endereco.logradouro" />
+						</div>
+						<div class="form-group col-sm-3">
+							<label>Número</label>
+							<input  class="form-control" name="numero" type="text" ng-model="endereco.numero" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Bairro</label>
+							<input  class="form-control" name="complemento" type="text" ng-model="endereco.bairro" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Complemento</label>
+							<input  class="form-control" name="complemento" type="text" ng-model="endereco.complemento" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Cidade</label>
+							<input  class="form-control" name="cidade" type="text" ng-model="endereco.cidade" />
+						</div>
+						<div class="form-group col-sm-3">
+							<label> Estado </label>
+		                    <select id="estado" ng-model="endereco.estado" class="selectpicker show-tick form-control" data-live-search="true">
+		                        <option value="se" selected>Selecione</option>
+								<option value="pr" >Paraná</option>
+								<option value="sp" >São Paulo</option>
+								<option value="rj" >Rio de Janeiro</option>
+		                    </select>
+						</div>
+						<div class="form-group col-sm-3">
+							<label> Pais </label>
+		                    <select id="pais" ng-model="endereco.pais" class="selectpicker show-tick form-control" data-live-search="true">
+		                        <option value="se" selected>Selecione</option>
+								<option value="brasil" >Brasil</option>
+								<option value="argentina" >Argentina</option>
+								<option value="paraguai" >Paraguai</option>
+		                    </select>
+						</div>
+					</div>
+	      		</div>
+		        <div class="modal-footer">
+			        <button type="button" class="btn btn-danger btn-padrao" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+			        <button type="button" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarEndereco()" ><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+		        </div>
+	    	</div>
+	    </div>
+	</div>					
+	</form>
+</div>

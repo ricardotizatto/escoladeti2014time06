@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="1" author="arthur">
+		<createTable tableName="USUARIO">
+			<column name="ID" type="${inteiro}">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_usuario" />
+			</column>
+			<column name="LOGIN" type="${descricaolonga}">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="SENHA" type="${descricaolonga}">
+				<constraints nullable="false" />
+			</column>
+			<column name="ATIVO" type="${logico}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="2" author="arthur">
+		<sql>${CREATE_HIBERNATE_SEQUENCE}</sql>
+	</changeSet>
+	<changeSet id="3" author="arthur">
+		<createTable tableName="QUESTAO">
+			<column name="ID" type="${inteiro}">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_questao"/>
+			</column>
+			<column name="ENUNCIADO" type="${descricaolonga}">
+				<constraints nullable="false" unique="true" uniqueConstraintName="uc_enun_questao"/>
+			</column>
+			<column name="NIVELDIFICULDADE" type="${inteiromenor}">
+				<constraints nullable="false"/>
+			</column>
+			<column name="TIPO" type="${descricaocurta}"/>
+		</createTable>
+	</changeSet>
+	<changeSet id="4" author="arthur">
+		<createTable tableName="DISCIPLINA">
+			<column name="ID" type="${inteiro}">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_disciplina"/>
+			</column>
+			<column name="NOME" type="${descricaolonga}">
+				<constraints nullable="false" unique="true" uniqueConstraintName="uc_nome_disc"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="5" author="arthur">
+		<createTable tableName="QUESTAODISCIPLINA">
+			<column name="QUESTAO_ID" type="${inteiro}">
+				<constraints nullable="false" foreignKeyName="fk_quest_disc" referencedColumnNames="ID" referencedTableName="QUESTAO"/>
+			</column>
+			<column name="DISCIPLINA_ID" type="${inteiro}">
+				<constraints nullable="false" foreignKeyName="fk_disc_quest" referencedColumnNames="ID" referencedTableName="DISCIPLINA"/>
+			</column>
+		</createTable>
+		<addPrimaryKey tableName="QUESTAODISCIPLINA" columnNames="QUESTAO_ID, DISCIPLINA_ID" constraintName="pk_questao_disciplina"/>
+	</changeSet>
+	<changeSet id="6" author="arthur">
+		<createTable tableName="QUESTAOOBJETIVA">
+			<column name="ID" type="${inteiro}">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_objetiva" foreignKeyName="fk_objetiva_questao" referencedColumnNames="ID" referencedTableName="QUESTAO"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="7" author="arthur">
+		<createTable tableName="ALTERNATIVA">
+			<column name="ID" type="${inteiro}">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_alternativa"/>
+			</column>
+			<column name="TEXTO" type="${descricaolonga}">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CORRETA" type="${logico}">
+				<constraints nullable="false" />
+			</column>
+			<column name="ORDEM" type="${inteiromenor}">
+				<constraints nullable="false"/>
+			</column>
+			<column name="QUESTAO_ID" type="${inteiro}">
+				<constraints nullable="false" foreignKeyName="fk_quest_alt" referencedColumnNames="ID" referencedTableName="QUESTAO"/>
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog> 

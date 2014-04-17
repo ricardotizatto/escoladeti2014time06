@@ -14,8 +14,8 @@ appCabecalho.config(['$routeProvider',
 			controller : 'PessoaFisicaController'
 		})
 		.when('/pessoajuridica',{
-			templateUrl : 'partials/FormPJ.html',
-			controller : 'PessoaJuridicaController'
+			templateUrl : 'partials/CadastroPessoaJuridica.html',
+			controller : 'CadastroPJController'
 		})
 		.when('/cadastrousuario',{
 			templateUrl : 'partials/CadastroUsuario.html',
@@ -70,8 +70,8 @@ appCabecalho.config(['$routeProvider',
 			// controller : 'nomeDoController'
 		})
 		.when('/listapessoajuridica',{
-			templateUrl : 'partials/ListaPJ.html',
-			// controller : 'nomeDoController'
+			templateUrl : 'partials/ListaPessoaJuridica.html',
+			controller : 'ListaPJController'
 		})
 		.when('/listacidade',{
 			templateUrl : 'partials/ListaCidade.html',
