@@ -23,11 +23,11 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/cadastroperfilusuario',{
 			templateUrl : 'partials/CadastroPerfilUsuario.html',
-			controller : 'perfilUsuarioController'
+			controller : 'cadastroPerfilUsuarioController'
 		})
 		.when('/cadastrotela',{
 			templateUrl : 'partials/CadastroTela.html',
-			controller : 'telaController'
+			controller : 'cadastroTelaController'
 		})
 		.when('/cadastropais',{
 			templateUrl : 'partials/CadastroPais.html',

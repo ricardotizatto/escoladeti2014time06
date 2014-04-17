@@ -1,6 +1,6 @@
 'use strict';
 
-function perfilUsuarioController($scope, bd) {
+function cadastroPerfilUsuarioController($scope, bd) {
 	
 	bd.perfilsDeUsuario = bd.perfilsDeUsuario || [];
 	$scope.perfilDeUsuario = bd.perfilDeUsuario || {};

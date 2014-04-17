@@ -1,6 +1,6 @@
 'use strict;'
 
-function telaController ($scope, bd) { 
+function cadastroTelaController ($scope, bd) { 
 
 	bd.telas = bd.telas || [];
 	$scope.tela = bd.tela || {};
