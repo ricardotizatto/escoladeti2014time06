@@ -6,4 +6,5 @@ import br.com.entity.Observacao;
 
 public interface ObservacaoRepository extends JpaRepository<Observacao, Long>{
 
+    Observacao findByObservacao(String observacao);
 }

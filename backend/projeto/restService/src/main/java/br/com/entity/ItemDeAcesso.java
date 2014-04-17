@@ -7,7 +7,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-class ItemDeAcesso extends Entidade {
+public class ItemDeAcesso extends Entidade {
 	private String nomeComponente;
 	
 	@OneToMany(mappedBy="itemDeAcesso")

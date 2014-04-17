@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-class PessoaFisica extends Entidade{
+public class PessoaFisica extends Entidade{
     @OneToOne(mappedBy = "pessoaFisica")
     @NotNull
     private Pessoa pessoa;

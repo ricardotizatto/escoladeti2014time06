@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-class UsuarioPerfilAcesso extends Entidade {
+public class UsuarioPerfilAcesso extends Entidade {
 	private Date inicioVigencia;
 	private Date fimVigencia;
 	

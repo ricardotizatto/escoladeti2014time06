@@ -6,7 +6,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity 
-class Pessoa extends Entidade {
+public class Pessoa extends Entidade {
     private String nome;
     private String email;
     

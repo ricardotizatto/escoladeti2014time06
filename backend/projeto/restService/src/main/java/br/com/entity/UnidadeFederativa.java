@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-class UnidadeFederativa extends Entidade{
+public class UnidadeFederativa extends Entidade{
     private String nome;
     private String sigla;
     

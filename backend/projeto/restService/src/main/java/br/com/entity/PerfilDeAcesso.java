@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-class PerfilDeAcesso extends Entidade {
+public class PerfilDeAcesso extends Entidade {
 	private String nome;
 	
 	@ManyToMany

@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-class Logradouro extends Entidade{
+public class Logradouro extends Entidade{
     private String tipoDoEndereco;
     private String nome;
     
