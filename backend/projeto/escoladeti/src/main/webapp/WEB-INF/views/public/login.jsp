@@ -3,8 +3,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-        <script type="text/javascript" src="./resources/js/jquery.min.js"></script>
-        <script type="text/javascript" src="./resources/js/bootstrap.min.js"></script>    
+        <script type="text/javascript" src="./resources/libs/jquery.js"></script>
+        <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>    
         <link rel="stylesheet" href="./resources/css/bootstrap.min.css" >
         <title>Escola de TI - 2014</title>
 	</head>

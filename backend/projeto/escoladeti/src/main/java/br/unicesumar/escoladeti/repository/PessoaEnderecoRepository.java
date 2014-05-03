@@ -7,9 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.unicesumar.escoladeti.entity.PessoaEndereco;
 
 public interface PessoaEnderecoRepository extends JpaRepository<PessoaEndereco, Long> {
-    
-    public PessoaEndereco findById();
-    
     public List<PessoaEndereco> findByNomeContainingOrderByNomeAsc(String nome);
     
 }

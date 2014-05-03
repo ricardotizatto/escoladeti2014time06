@@ -8,6 +8,5 @@ import br.unicesumar.escoladeti.entity.Bairro;
 
 
 public interface BairroRepository extends JpaRepository<Bairro, Long> {
-    public Bairro findById();
     public List<Bairro> findByNomeContainingOrderByNomeAsc(String nome);    
 }

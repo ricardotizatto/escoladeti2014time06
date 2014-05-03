@@ -1,8 +1,11 @@
 package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Entity;
+import static liquibase.util.MD5Util.computeMD5;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.junit.runner.Computer;
 
 @Entity
 public class Usuario extends Entidade {
@@ -13,23 +16,24 @@ public class Usuario extends Entidade {
 	private String senha;
 	private String login;
 	private String nome;
-	private String email;	
+	private String email;
+	private Boolean ativo;
+	
+	public Usuario() {
+	}
 
-	public Usuario(UsuarioPerfilAcesso usuarioPerfilDeAcesso, String senha,
-			String login, String nome, String email) {
-		this.usuarioPerfilDeAcesso = usuarioPerfilDeAcesso;
-		this.senha = senha;
+	public Usuario(String nome, String senha, String login, String email) {
 		this.login = login;
 		this.nome = nome;
 		this.email = email;
+		setSenha(senha);
 	}
 
 	public UsuarioPerfilAcesso getUsuarioPerfilDeAcesso() {
 		return usuarioPerfilDeAcesso;
 	}
 
-	public void setUsuarioPerfilDeAcesso(
-			UsuarioPerfilAcesso usuarioPerfilDeAcesso) {
+	public void setUsuarioPerfilDeAcesso(UsuarioPerfilAcesso usuarioPerfilDeAcesso) {
 		this.usuarioPerfilDeAcesso = usuarioPerfilDeAcesso;
 	}
 
@@ -38,7 +42,7 @@ public class Usuario extends Entidade {
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
+		this.senha = computeMD5(senha);
 	}
 
 	public String getLogin() {
@@ -63,6 +67,14 @@ public class Usuario extends Entidade {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

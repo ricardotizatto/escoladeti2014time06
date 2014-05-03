@@ -8,8 +8,6 @@ import br.unicesumar.escoladeti.entity.Pais;
 
 public interface PaisRepository extends JpaRepository<Pais, Long> {
     
-    public Pais findById();
-    
     public List<Pais> findByNomeContainingOrderByNomeAsc(String nome);
     
 }

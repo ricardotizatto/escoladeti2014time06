@@ -29,12 +29,13 @@
 
 	<tx:annotation-driven />
 
-<!-- 	<bean id="persistenceExceptionTranslationPostProcessor" -->
-<!-- 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" /> -->
+	<!-- <bean id="persistenceExceptionTranslationPostProcessor" -->
+	<!-- class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" 
+		/> -->
 
 	<!-- Spring Data -->
-	<!-- <jpa:repositories base-package="br.unicesumar.escoladeti.repository"
+	<jpa:repositories base-package="br.unicesumar.escoladeti.repository"
 		entity-manager-factory-ref="entityManagerFactory"
-		transaction-manager-ref="transactionManager" /> -->
+		transaction-manager-ref="transactionManager" />
 
 </beans>

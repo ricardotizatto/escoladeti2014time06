@@ -8,8 +8,7 @@ import br.unicesumar.escoladeti.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     
-    public Usuario findById();
-    
+    public Usuario findByLogin(String login);
     public List<Usuario> findByNomeContainingOrderByNomeAsc(String nome);
     
 }
