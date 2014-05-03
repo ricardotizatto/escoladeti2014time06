@@ -1,0 +1,43 @@
+﻿<div class="container" ng-controller="CadastroEstadoController" >
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de Estado </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form">							
+			<div class="row ">
+				<div class="form-group col-sm-6">
+						<label> Nome </label>
+						<input class="form-control" name="nome" type="text" ng-model="estado.nome"  />
+				</div>
+				
+				<div class="form-group col-sm-2">
+						<label> Sigla </label>
+						<input class="form-control" name="nome" type="text" ng-model="estado.sigla"  />
+				</div>
+			
+				<div class="form-group col-sm-4">
+					<label>  Pais </label>
+					<select class="form-control" ng-model="estado.pais" ng-options="pais.nome as pais.nome for pais in paises"></select>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#listaestado" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarEstado()" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+					</button>
+					</span>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>			
+		</form>
+	</fieldset>
+</div>

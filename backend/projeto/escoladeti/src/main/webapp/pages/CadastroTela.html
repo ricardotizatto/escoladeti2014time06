@@ -1,0 +1,36 @@
+﻿<div class="container" ng-controller="telaController">
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de Telas </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form" ng-submit="addTela()">							
+			<div class="row ">
+				<div class="form-group col-sm-6">
+					<input class="form-control" name="nome" type="text" placeholder="Nome" ng-model="tela.nome" required maxlength="60" />
+				</div>
+				<div class="form-group col-sm-6 ">
+					<input class="form-control" name="descricao" type="text" placeholder="Descrição" ng-model="tela.descricao"
+					maxlength="200" />
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a ng-click="cancelarTela()" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar 
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+					</button>
+					</span>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>
+		</form>
+	</fieldset>
+</div>

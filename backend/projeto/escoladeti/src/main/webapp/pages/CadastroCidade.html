@@ -1,0 +1,54 @@
+﻿<div class="container" ng-controller="CadastroCidadeController">
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de Cidade </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form">							
+			<div class="row ">
+				<div class="form-group col-sm-2">
+					<label> Código </label>
+					<input type="number" class="form-control" ng-model="cidade.codCidade"/>
+				</div>
+				<div class="form-group col-sm-2">
+					<label> Sigla </label>
+					<input class="form-control" name="nome" type="text" placeholder="Sigla" ng-model="cidade.sigla"/>
+				</div>
+				<div class="form-group col-sm-2">
+					<label>Fundação</label>
+					<input  class="form-control" name="fundacao" type="date" ng-model="cidade.fundacao"/>
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-9">
+						<label> Nome </label>
+						<input class="form-control" name="nome" type="text" placeholder="Nome" ng-model="cidade.nome"/>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="pais"> Estado </label>
+					<select id="estado" class="selectpicker show-tick form-control" data-live-search="true" ng-model="cidade.estado" ng-options="estado.nome as estado.nome for estado in estados">					
+					</select>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#/listacidade" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarCidade()">
+						<span class="glyphicon glyphicon-ok"  ></span> Salvar</a>	
+					</button>
+					</span>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>			
+		</form>
+	</fieldset>
+</div>

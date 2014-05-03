@@ -1,0 +1,51 @@
+﻿<div class="container" ng-controller="CadastroBairroController" >
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de Bairro </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form">	
+			<div class="row ">
+				<div class="form-group col-sm-2">
+					<label> Código </label>
+					<input type="number" class="form-control" ng-model="bairro.codBairro"/>
+				</div>
+				<div class="form-group col-sm-8">
+					<label> Nome </label>
+					<input class="form-control" type="text" ng-model="bairro.nome" />
+				</div>
+				<div class="form-group col-sm-2">
+					<label> Sigla </label>
+					<input class="form-control" type="text" ng-model="bairro.sigla" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label>  Cidade </label>
+					<select class="form-control" ng-model="bairro.cidade" ng-options="cidade.nome as cidade.nome for cidade in cidades"></select>
+				</div>
+				<div class="form-group col-sm-6">
+					<label>  Faixa de CEP </label>
+					<select class="form-control" ng-model="bairro.faixaCep" ng-options="faixaCep.faixaCep as faixaCep.faixaCep for faixaCep in faixasCeps"></select>
+				</div>
+			</div>		
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#/listabairro" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarBairro()" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+					</button>
+					</span>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>			
+		</form>
+	</fieldset>
+</div>

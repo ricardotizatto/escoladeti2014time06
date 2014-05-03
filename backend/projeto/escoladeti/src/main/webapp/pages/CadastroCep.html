@@ -1,0 +1,45 @@
+﻿<div class="container" ng-controller="CadastroCepController" >
+	<label> &nbsp; </label>
+	<fieldset>
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Cadastro de CEP </legend>
+			</div>
+		</div>
+		<form action="" method="POST" role="form">							
+			<div class="row ">
+				<div class="form-group col-sm-4">
+					<label for="logradouro" >  Logradouro </label>
+					<select id="logradouro" class="form-control selectpicker show-tick" ng-model="cep.logradouro" ng-options="logradouro.nome as logradouro.nome for logradouro in logradouros"></select>
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="bairro" > Bairro </label>
+					<select id="bairro" class="form-control selectpicker show-tick" ng-model="cep.bairro" ng-options="bairro.nome as bairro.nome for bairro in bairros"></select>
+				</div>
+				<div class="form-group col-sm-2">
+					<label for="cep" > CEP inicial </label>
+					<input class="form-control mascaraCep" name="cepInicial" type="text" ng-model="cep.inicial" />  
+				</div>
+				<div class="form-group col-sm-2">
+					<label for="cep" > CEP final </label>
+					<input class="form-control mascaraCep" name="cepFinal" type="text" ng-model="cep.final" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right">	
+					<a href="#/listacep" class="btn btn-danger btn-padrao">
+						<span class="glyphicon glyphicon-remove" ></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarCep()" >
+						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
+					</button>
+					</span>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12"><hr></div>
+			</div>			
+		</form>
+	</fieldset>
+</div>
