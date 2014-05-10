@@ -1,14 +1,32 @@
 package br.unicesumar.escoladeti.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Pais extends Entidade{
+	@Column(nullable=false)
+	@NotEmpty
     private String nome;
+	@Column(nullable = false)
+	@NotEmpty
     private String sigla;
-    private int codPais;
+	@Column(nullable = false)
+    private Integer codPais;
     
+    public Pais() {
+	
+    }
     
+	public Pais(Long id,String nome, String sigla, int codPais) {
+		this.id = id;
+		this.nome = nome;
+		this.sigla = sigla;
+		this.codPais = codPais;		
+	}
+
 	public Pais(String nome, String sigla, int codPais) {
 		this.nome = nome;
 		this.sigla = sigla;
@@ -32,7 +50,6 @@ public class Pais extends Entidade{
 	}
 	public void setCodPais(int codPais) {
 		this.codPais = codPais;
-	}
-    
+	}    
     
 }

@@ -1,25 +1,25 @@
-ï»¿<div class="container" ng-controller="CadastroPaisController" >
+<div class="container" ng-controller="paisController" ng-init="carregarPais()">
 	<label> &nbsp; </label>
 	<fieldset>
 		<div class="row">
 			<div class="form-group col-sm-12">
-				<legend> Cadastro de PaÃ­s </legend>
+				<legend> Cadastro de País </legend>
 			</div>
 		</div>
-		<form action="" method="POST" role="form">							
+		<form action="" method="POST" role="form" ng-submit="salvar()">							
 			<div class="row ">
 				<div class="form-group col-sm-2">
-					<label> CÃ³digo </label>
-					<input type="number" class="form-control" ng-model="pais.codPais"/>
+					<label> Código </label>
+					<input type="number" class="form-control" ng-model="pais.codPais" required/>
 				</div>
 				
 				<div class="form-group col-sm-8">
 					<label> Nome </label>
-					<input class="form-control" name="nome" type="text" ng-model="pais.nome" />
+					<input class="form-control" name="nome" type="text" ng-model="pais.nome" required />
 				</div>
 				<div class="form-group col-sm-2">
 					<label> Sigla </label>
-					<input class="form-control" name="nome" type="text" ng-model="pais.sigla" />
+					<input class="form-control" name="nome" type="text" ng-model="pais.sigla" required/>
 				</div>
 			</div>
 			<div class="row">
@@ -28,7 +28,7 @@
 					<a href="#listapais" class="btn btn-danger btn-padrao">
 						<span class="glyphicon glyphicon-remove" ></span> Cancelar
 					</a>
-					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarPais()" >
+					<button type="submit" class="btn btn-success btn-padrao" >
 						<span class="glyphicon glyphicon-ok" ></span> Salvar</a>	
 					</button>
 					</span>		

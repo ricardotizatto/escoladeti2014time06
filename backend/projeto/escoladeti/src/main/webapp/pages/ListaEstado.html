@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="ListaEstadoController">
+<div class="container" ng-controller="EstadoController" ng-init="getTodos()">
 	<label> &nbsp; </label>
 	<fieldset>
 		<legend> <span class="glyphicon glyphicon-list-alt"></span> Lista Estado</legend>
@@ -32,7 +32,7 @@
 						<th width="5%">Alterar</th>
 						<th width="5%">Excluir</th>
 					</tr>
-					<tr ng-repeat="estado in estados | filter : busca" >
+					<tr ng-repeat="estado in unidadesFederativas | filter : busca" >
 						<td>{{estado.nome}}</td>
 						<td>{{estado.sigla}}</td>
 						<td>{{estado.pais}}</td>

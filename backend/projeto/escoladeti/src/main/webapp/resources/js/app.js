@@ -29,13 +29,21 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : './pages/CadastroTela.html',
 			controller : 'cadastroTelaController'
 		})
+		.when('/cadastropais/:paisId',{
+			templateUrl : './pages/CadastroPais.html',
+			controller : 'paisController'
+		})
 		.when('/cadastropais',{
 			templateUrl : './pages/CadastroPais.html',
-			// controller : 'nomeDoController'
+			controller : 'paisController'
 		})
 		.when('/cadastroestado',{
 			templateUrl : './pages/CadastroEstado.html',
-			// controller : 'nomeDoController'
+			controller : 'EstadoController'
+		})
+		.when('/cadastroestado/:id',{
+			templateUrl : './pages/CadastroEstado.html',
+			controller : 'EstadoController'
 		})
 		.when('/cadastrocidade',{
 			templateUrl : './pages/CadastroCidade.html',
@@ -59,7 +67,7 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/listapais',{
 			templateUrl : './pages/ListaPais.html',
-			// controller : 'nomeDoController'
+			controller : 'paisController'
 		})
 		.when('/listaestado',{
 			templateUrl : './pages/ListaEstado.html',

@@ -8,5 +8,5 @@ import br.unicesumar.escoladeti.entity.UnidadeFederativa;
 
 public interface UnidadeFederativaRepository extends JpaRepository<UnidadeFederativa, Long> {
     public List<UnidadeFederativa> findByNomeContainingOrderByNomeAsc(String nome);
-    
+    public UnidadeFederativa findById(Long id);    
 }

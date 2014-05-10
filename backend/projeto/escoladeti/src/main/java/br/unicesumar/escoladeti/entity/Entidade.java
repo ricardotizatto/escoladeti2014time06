@@ -9,7 +9,11 @@ import javax.persistence.MappedSuperclass;
 public class Entidade {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private Long id;
+	protected Long id;
+	
+	public Entidade() {
+	
+	}
 
 	public Long getId() {
 		return id;
