@@ -87,7 +87,7 @@
 			    </ul>
 		    	<ul class="nav navbar-nav navbar-right">
 		    		<li class="dropdown">
-		    			<a class=" class="dropdown-toggle" data-toggle="dropdown" " href="">
+		    			<a class=dropdown-toggle" data-toggle="dropdown" href="">
 		    				<span class="glyphicon glyphicon-user"></span> escoladeti@unicesumar.br <b class="caret"></b>
 		    			</a>
 		    			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

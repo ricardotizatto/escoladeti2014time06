@@ -5,8 +5,6 @@ import static liquibase.util.MD5Util.computeMD5;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.junit.runner.Computer;
-
 @Entity
 public class Usuario extends Entidade {
 	
