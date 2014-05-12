@@ -37,7 +37,4 @@ public class CidadeService {
         
         return this.cidadeRepository.findById(id);
     }
-    
-    
-    
 }
