@@ -23,7 +23,7 @@ public class CidadeService {
         return this.cidadeRepository.save(cidade);
     }
     
-    public void delete(Cidade cidade){
+    public void deletar(Cidade cidade){
         
         this.cidadeRepository.delete(cidade);
     }
