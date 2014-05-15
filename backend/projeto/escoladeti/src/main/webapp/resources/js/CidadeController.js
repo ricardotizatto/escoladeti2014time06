@@ -1,7 +1,7 @@
-function CidadeController ($scope, $http, $routeParams){
+function cidadeController ($scope, $http, $routeParams){
     console.log('Carregando controller');
     
-    $scope.editar = function(id){
+    $scope.editar = function(cidade){
         window.location = "#/cadastrocidade/"+cidade.id;
     };
     
@@ -22,6 +22,7 @@ function CidadeController ($scope, $http, $routeParams){
     };
     
     $scope.salvar = function(){
+        console.log(angular.toJson($scope.cidade, true));
         $http.post("./rest/cidadeSource/cidade", $scope.cidade)
         .success(function(cidade, status){
             $scope.cidade = getNovaCidade();
@@ -38,7 +39,8 @@ function CidadeController ($scope, $http, $routeParams){
     };
     
     $scope.getTodos = function(){
-        $http.get("./rest/cidadeSource/cidade")
+
+       $http.get("./rest/cidadeSource/cidade")
         .success(function(cidades, status){
             $scope.cidades = cidades;       
         })
@@ -54,11 +56,25 @@ function CidadeController ($scope, $http, $routeParams){
 	  $http.get('./rest/cidadeSource/cidade/'+$routeParams.paisId)
 		 .success(function(cidade, status) {
 			$scope.cidade = cidade;
-		});
+		  console.log("carregando cidade"); 	});
     };
-
+    
+    $scope.carregarEstado = function(){
+       console.log("carregando estado"); 	  		
+       $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
+               .success(function(estado, status){
+//                   console.log(angular.toJson(estado, true));
+                    $scope.estados = estado;
+               })
+               .error(function(data, status){
+                   console.log('erro ao buscar estados')
+               });
+    };
+    
     function getNovaCidade() {
 	  console.log('nova cidade');
 	  return {};
     };
+    
+    
 }

@@ -1,26 +1,18 @@
-﻿<div class="container" ng-controller="CadastroCidadeController">
+﻿<div class="container" ng-controller="cidadeController" ng-init="carregarCidade();carregarEstado()">
 	<label> &nbsp; </label>
+        {{cidade}}
 	<fieldset>
 		<div class="row">
 			<div class="form-group col-sm-12">
-				<legend> Cadastro de Cidade </legend>
+				<legend> Cadastro de Cidade  </legend>
 			</div>
 		</div>
-		<form action="" method="POST" role="form">							
+		<form action="" method="POST" role="form" ng-submit="salvar()">							
 			<div class="row ">
-				<div class="form-group col-sm-2">
-					<label> Código </label>
-					<input type="number" class="form-control" ng-model="cidade.codCidade"/>
-				</div>
-				<div class="form-group col-sm-2">
-					<label> Sigla </label>
-					<input class="form-control" name="nome" type="text" placeholder="Sigla" ng-model="cidade.sigla"/>
-				</div>
 				<div class="form-group col-sm-2">
 					<label>Fundação</label>
 					<input  class="form-control" name="fundacao" type="date" ng-model="cidade.fundacao"/>
 				</div>
-				
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-9">
@@ -28,8 +20,8 @@
 						<input class="form-control" name="nome" type="text" placeholder="Nome" ng-model="cidade.nome"/>
 				</div>
 				<div class="form-group col-sm-3">
-					<label for="pais"> Estado </label>
-					<select id="estado" class="selectpicker show-tick form-control" data-live-search="true" ng-model="cidade.estado" ng-options="estado.nome as estado.nome for estado in estados">					
+					<label> Estado </label>
+					<select class="form-control" ng-model="cidade.estado" ng-options="estado.nome for estado in estados">					
 					</select>
 				</div>
 			</div>
@@ -40,8 +32,8 @@
 					<a href="#/listacidade" class="btn btn-danger btn-padrao">
 						<span class="glyphicon glyphicon-remove" ></span> Cancelar
 					</a>
-					<button type="submit" class="btn btn-success btn-padrao" ng-click="salvarCidade()">
-						<span class="glyphicon glyphicon-ok"  ></span> Salvar</a>	
+					<button type="submit" class="btn btn-success btn-padrao">
+						<span class="glyphicon glyphicon-ok"  ></span> Salvar	
 					</button>
 					</span>		
 				</div>

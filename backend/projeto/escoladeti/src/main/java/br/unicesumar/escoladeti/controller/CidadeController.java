@@ -22,7 +22,6 @@ public class CidadeController implements Serializable {
     
     @RequestMapping(value="/cidade", method = RequestMethod.POST)
     @ResponseBody
-    
     public Cidade salvar(@RequestBody Cidade cidade){
         return cidadeService.salvar(cidade);
     }
@@ -33,13 +32,13 @@ public class CidadeController implements Serializable {
         return cidadeService.getById(id);
     }
     
-    @RequestMapping(value="/pais", method = RequestMethod.GET)
+    @RequestMapping(value="/cidade", method = RequestMethod.GET)
     @ResponseBody
     public List<Cidade> getTodos(){
         return cidadeService.getTodos();
     }
     
-    @RequestMapping(value="/pais", method = RequestMethod.DELETE)
+    @RequestMapping(value="/cidade", method = RequestMethod.DELETE)
     @ResponseBody
     public String deletar(@RequestBody Cidade cidade){
         cidadeService.deletar(cidade);

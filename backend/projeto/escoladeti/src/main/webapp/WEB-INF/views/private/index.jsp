@@ -26,10 +26,11 @@
 		<script type="text/javascript" src="./resources/js/ListaPerfilUsuarioController.js"></script>
 		<script type="text/javascript" src="./resources/js/ListaTelaController.js"></script>
 		<script type="text/javascript" src="./resources/js/PaisController.js" ></script>
+                <script type="text/javascript" src="./resources/js/CidadeController.js" ></script>
 		<script type="text/javascript" src="./resources/js/CadastroEstadoController.js" ></script>
 		<script type="text/javascript" src="./resources/js/EstadoController.js" ></script>
-		<script type="text/javascript" src="./resources/js/CadastroCidadeController.js" ></script>
-		<script type="text/javascript" src="./resources/js/ListaCidadeController.js" ></script>
+		<!--<script type="text/javascript" src="./resources/js/CadastroCidadeController.js" ></script>-->
+		<!--<script type="text/javascript" src="./resources/js/ListaCidadeController.js" ></script>-->
 		<script type="text/javascript" src="./resources/js/CadastroDistritoController.js" ></script>
 		<script type="text/javascript" src="./resources/js/ListaDistritoController.js" ></script>
 		<script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>

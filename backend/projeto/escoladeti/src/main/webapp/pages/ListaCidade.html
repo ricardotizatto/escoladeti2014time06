@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="ListaCidadeController">
+﻿<div class="container" ng-controller="cidadeController" ng-init="getTodos()">
 	<label> &nbsp; </label>
 	<fieldset>
 		<legend> <span class="glyphicon glyphicon-list-alt"></span> Lista Cidade</legend>
@@ -17,7 +17,7 @@
 						<label> &nbsp; </label>
 						<div>
 							<span class="pull-right">
-								<button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novoCidade()" >
+								<button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novo()" >
 				  					<span class='glyphicon glyphicon-plus-sign'></span> Novo
 								</button>
 							</span>
@@ -26,27 +26,23 @@
 				</div>
 				<table width="100%" border="0" class="table table-striped table-hover" >
 					<tr>
-						<th width="10%">Código</th>
-						<th width="20%">Nome</th>
-						<th width="10%">Sigla</th>
-						<th width="15%">Fundação</th>
+						<th width="30%">Nome</th>
+						<th width="25%">Fundação</th>
 						<th width="20%">Estado</th>
 						<th width="5%">Alterar</th>
 						<th width="5%">Excluir</th>
 					</tr>
 					<tr ng-repeat="cidade in cidades | filter : busca">
-						<td>{{cidade.codCidade}}</td>
 						<td>{{cidade.nome}}</td>
-						<td>{{cidade.sigla}}</td>
 						<td>{{cidade.fundacao | date: 'dd-MM-yyyy'}}</td>
 						<td>{{cidade.estado}}</td>
 						<td>
-							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarCidade($index)">
+							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editar(cidade)">
 			  					<span class='glyphicon glyphicon-edit'></span>
 							</button>
 						</td>
 						<td>
-							<button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='alterar' ng:click="delCidade($index)">
+							<button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='deletar' ng-click="deletar(cidade)">
 			  					<span class='glyphicon glyphicon-remove-circle'></span>
 							</button>
 						</td>
