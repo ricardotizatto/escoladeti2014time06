@@ -45,8 +45,8 @@ public class Cidade extends Entidade {
 		this.unidadeFederativa = unidadeFederativa;
                 this.estado = estado;
 	}
-
-	@ManyToOne
+    
+    @ManyToOne
     @JoinColumn(name="id_unidadefederativa", nullable =false)
     private UnidadeFederativa unidadeFederativa;
     
