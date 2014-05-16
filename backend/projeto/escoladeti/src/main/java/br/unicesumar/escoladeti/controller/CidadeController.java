@@ -23,6 +23,7 @@ public class CidadeController implements Serializable {
     @RequestMapping(value="/cidade", method = RequestMethod.POST)
     @ResponseBody
     public Cidade salvar(@RequestBody Cidade cidade){
+        System.out.println(cidade.getFundacao());
         return cidadeService.salvar(cidade);
     }
     

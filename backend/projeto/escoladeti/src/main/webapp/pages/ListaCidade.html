@@ -35,7 +35,7 @@
 					<tr ng-repeat="cidade in cidades | filter : busca">
 						<td>{{cidade.nome}}</td>
 						<td>{{cidade.fundacao | date: 'dd-MM-yyyy'}}</td>
-						<td>{{cidade.estado}}</td>
+						<td>{{cidade.unidadeFederativa.nome}}</td>
 						<td>
 							<button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editar(cidade)">
 			  					<span class='glyphicon glyphicon-edit'></span>

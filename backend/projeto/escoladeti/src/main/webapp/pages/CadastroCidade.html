@@ -1,46 +1,46 @@
-﻿<div class="container" ng-controller="cidadeController" ng-init="carregarCidade();carregarEstado()">
-	<label> &nbsp; </label>
-        {{cidade}}
-	<fieldset>
-		<div class="row">
-			<div class="form-group col-sm-12">
-				<legend> Cadastro de Cidade  </legend>
-			</div>
-		</div>
-		<form action="" method="POST" role="form" ng-submit="salvar()">							
-			<div class="row ">
-				<div class="form-group col-sm-2">
-					<label>Fundação</label>
-					<input  class="form-control" name="fundacao" type="date" ng-model="cidade.fundacao"/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-9">
-						<label> Nome </label>
-						<input class="form-control" name="nome" type="text" placeholder="Nome" ng-model="cidade.nome"/>
-				</div>
-				<div class="form-group col-sm-3">
-					<label> Estado </label>
-					<select class="form-control" ng-model="cidade.estado" ng-options="estado.nome for estado in estados">					
-					</select>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-sm-12">
-					<span class="pull-right">	
-					<a href="#/listacidade" class="btn btn-danger btn-padrao">
-						<span class="glyphicon glyphicon-remove" ></span> Cancelar
-					</a>
-					<button type="submit" class="btn btn-success btn-padrao">
-						<span class="glyphicon glyphicon-ok"  ></span> Salvar	
-					</button>
-					</span>		
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12"><hr></div>
-			</div>			
-		</form>
-	</fieldset>
+﻿<div class="container" ng-controller="cidadeController" ng-init="carregaEstados()">
+    <label> &nbsp; </label>
+    {{cidade}}
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <legend> Cadastro de Cidade  </legend>
+            </div>
+        </div>
+        <form action="" method="POST" role="form" ng-submit="salvar()">							
+            <div class="row ">
+                <div class="form-group col-sm-2">
+                    <label>Fundação</label>
+                    <input class="form-control" name="fundacao" type="date" ng-model="cidade.fundacao"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-9">
+                    <label> Nome </label>
+                    <input class="form-control" name="nome" type="text" placeholder="Nome" ng-model="cidade.nome"/>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label> Estado </label>
+                    <select class="form-control" ng-model="cidade.unidadeFederativa" ng-options="uf.nome for uf in unidadeFederativa">					
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="pull-right">	
+                        <a href="#/listacidade" class="btn btn-danger btn-padrao">
+                            <span class="glyphicon glyphicon-remove" ></span> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success btn-padrao">
+                            <span class="glyphicon glyphicon-ok"  ></span> Salvar	
+                        </button>
+                    </span>		
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12"><hr></div>
+            </div>			
+        </form>
+    </fieldset>
 </div>
