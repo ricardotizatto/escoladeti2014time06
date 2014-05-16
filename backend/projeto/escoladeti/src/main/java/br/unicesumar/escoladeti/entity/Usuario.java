@@ -1,78 +1,95 @@
 package br.unicesumar.escoladeti.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import static liquibase.util.MD5Util.computeMD5;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario extends Entidade {
-	
-	@OneToOne
-	@JoinColumn(name="id_usuario_perfil_acesso")
-	private UsuarioPerfilAcesso usuarioPerfilDeAcesso;
-	private String senha;
-	private String login;
-	private String nome;
-	private String email;
-	private Boolean ativo;
-	
-	public Usuario() {
-	}
 
-	public Usuario(String nome, String senha, String login, String email) {
-		this.login = login;
-		this.nome = nome;
-		this.email = email;
-		setSenha(senha);
-	}
+    @OneToOne
+    @JoinColumn(name = "id_usuario_perfil_acesso")
+    private UsuarioPerfilAcesso usuarioPerfilDeAcesso;
 
-	public UsuarioPerfilAcesso getUsuarioPerfilDeAcesso() {
-		return usuarioPerfilDeAcesso;
-	}
+    @Column(nullable = false)
+    @NotEmpty
+    private String senha;
 
-	public void setUsuarioPerfilDeAcesso(UsuarioPerfilAcesso usuarioPerfilDeAcesso) {
-		this.usuarioPerfilDeAcesso = usuarioPerfilDeAcesso;
-	}
+    @Column(nullable = false)
+    @NotEmpty
+    private String login;
 
-	public String getSenha() {
-		return senha;
-	}
+    @Column(nullable = false)
+    @NotEmpty
+    private String nome;
 
-	public void setSenha(String senha) {
-		this.senha = computeMD5(senha);
-	}
+    @Column(nullable = false)
+    @NotEmpty
+    private String email;
 
-	public String getLogin() {
-		return login;
-	}
+    @Column(nullable = false)
+    @NotEmpty
+    private Boolean ativo;
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public Usuario() {
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Usuario(String nome, String senha, String login, String email) {
+        this.login = login;
+        this.nome = nome;
+        this.email = email;        
+        setSenha(senha);
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public UsuarioPerfilAcesso getUsuarioPerfilDeAcesso() {
+        return usuarioPerfilDeAcesso;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setUsuarioPerfilDeAcesso(UsuarioPerfilAcesso usuarioPerfilDeAcesso) {
+        this.usuarioPerfilDeAcesso = usuarioPerfilDeAcesso;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public Boolean getAtivo() {
-		return ativo;
-	}
+    public void setSenha(String senha) {
+        this.senha = computeMD5(senha);
+    }
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 
 }

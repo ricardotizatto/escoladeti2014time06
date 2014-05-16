@@ -19,11 +19,19 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/cadastrousuario',{
 			templateUrl : './pages/CadastroUsuario.html',
-			controller : 'CadastroUsuarioController'
+			controller : 'usuarioController'
 		})
-		.when('/cadastroperfilusuario',{
-			templateUrl : './pages/CadastroPerfilUsuario.html',
-			controller : 'cadastroPerfilUsuarioController'
+                .when('/cadastrousuario/:usuarioId',{
+			templateUrl : './pages/CadastroUsuario.html',
+			controller : 'usuarioController'
+		})
+		.when('/cadastroperfilacesso',{
+			templateUrl : './pages/CadastroPerfilAcesso.html',
+			controller : 'perfilAcessoController'
+		})
+                .when('/cadastroperfilacesso/:perfilAcessoId',{
+			templateUrl : './pages/CadastroPerfilAcesso.html',
+			controller : 'perfilAcessoController'
 		})
 		.when('/cadastrotela',{
 			templateUrl : './pages/CadastroTela.html',
@@ -95,11 +103,11 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/listausuario',{
 			templateUrl : './pages/ListaUsuario.html',
-			// controller : 'nomeDoController'
+                        controller : 'perfilUsuarioController'
 		})
-		.when('/listaperfilusuario',{
-			templateUrl : './pages/ListaPerfilUsuario.html',
-			controller : 'listaPerfilUsuarioController'
+		.when('/listaperfilacesso',{
+			templateUrl : './pages/ListaPerfilAcesso.html',
+			controller : 'perfilAcessoController'
 		})
 		.when('/listatela',{
 			templateUrl : './pages/ListaTela.html',
