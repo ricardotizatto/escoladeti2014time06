@@ -33,9 +33,13 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : './pages/CadastroPerfilAcesso.html',
 			controller : 'perfilAcessoController'
 		})
-		.when('/cadastrotela',{
-			templateUrl : './pages/CadastroTela.html',
-			controller : 'cadastroTelaController'
+		.when('/cadastroitemacesso',{
+			templateUrl : './pages/CadastroItemAcesso.html',
+			controller : 'itemAcessoController'
+		})
+                .when('/cadastroitemacesso/:itemAcessoId',{
+			templateUrl : './pages/CadastroItemAcesso.html',
+			controller : 'itemAcessoController'
 		})
 		.when('/cadastropais/:paisId',{
 			templateUrl : './pages/CadastroPais.html',
@@ -109,9 +113,9 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : './pages/ListaPerfilAcesso.html',
 			controller : 'perfilAcessoController'
 		})
-		.when('/listatela',{
-			templateUrl : './pages/ListaTela.html',
-			controller : 'listaTelaController'
+		.when('/listaitemacesso',{
+			templateUrl : './pages/ListaItemAcesso.html',
+			controller : 'itemAcessoController'
 		})
 		.otherwise({redirectTo: '/'
 		});
