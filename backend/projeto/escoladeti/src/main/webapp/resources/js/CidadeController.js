@@ -23,7 +23,7 @@ function cidadeController ($scope, $http, $routeParams){
     
     $scope.salvar = function(){
         console.log(angular.toJson($scope.cidade, true));
-        $http.post('./rest/cidadeSource/cidade', $scope.cidade)
+        $http.post("./rest/cidadeSource/cidade", $scope.cidade)
         .success(function(cidade, status){
             $scope.cidade = getNovaCidade();
             console.log("cidade salva = "+cidade);
@@ -49,16 +49,17 @@ function cidadeController ($scope, $http, $routeParams){
         });
     };
     
-//    $scope.carregarCidade = function() {
-//	  console.log("carregando cidade"); 	  		
-//	  if (!$routeParams.cidadeId) return;//se não tiver id não buscar
-//	  
-//	  $http.get('./rest/cidadeSource/cidade/'+$routeParams.paisId)
-//		 .success(function(cidade, status) {
-//			$scope.cidade = cidade;
-//		  console.log("carregando cidade"); 	});
-//    };
-//    
+    $scope.carregarCidade = function() {
+	  console.log("carregando cidade"); 	  		
+	  if (!$routeParams.cidadeId) return;//se não tiver id não buscar
+	  
+	  $http.get('./rest/cidadeSource/cidade/'+$routeParams.paisId)
+		 .success(function(cidade, status) {
+			$scope.cidade = cidade;
+		  console.log("carregando cidade"); 	
+              });
+    };
+    
 //    $scope.carregarEstado = function(){
 //       console.log("carregando estado"); 	  		
 //       $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
@@ -73,6 +74,7 @@ function cidadeController ($scope, $http, $routeParams){
     $scope.carregaEstados = function (){
         carregaEstados();
     };
+ 
     
     function carregaEstados(){
         $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
@@ -84,17 +86,17 @@ function cidadeController ($scope, $http, $routeParams){
                     console.log('Nao foi possivel carregar os estados' + data);
         });
     };
-    
-    function carregaCidade(){
-        $http.get('./rest/cidadeSource/cidade')
-                .success(function(cidade){
-                    console.log('Cidade carregada');
-                    $scope.cidade = cidade;
-        })
-                .error(function(data){
-                    console.log('Nao foi possivel carregar a cidade' + data);
-        });
-    };
+//    
+//     function carregaCidade (){
+//        $http.get('./rest/cidadeSource/cidade')
+//                .success(function(cidade){
+//                    console.log('Cidade carregada');
+//                    $scope.cidade = cidade;
+//        })
+//                .error(function(data){
+//                    console.log('Nao foi possivel carregar a cidade' + data);
+//        });
+//    };
     
     function getNovaCidade() {
 	  console.log('nova cidade');

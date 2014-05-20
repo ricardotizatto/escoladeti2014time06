@@ -20,11 +20,11 @@ public class CidadeController implements Serializable {
     @Autowired
     private CidadeService cidadeService;
     
-    @RequestMapping(value="/cidade", method = RequestMethod.POST)
+    @RequestMapping(value= "/cidade", method = RequestMethod.POST)
     @ResponseBody
     public Cidade salvar(@RequestBody Cidade cidade){
         System.out.println(cidade.getFundacao());
-        return cidadeService.salvar(cidade);
+        return this.cidadeService.salvar(cidade);
     }
     
     @RequestMapping(value="/cidade/{id}", method = RequestMethod.GET)
