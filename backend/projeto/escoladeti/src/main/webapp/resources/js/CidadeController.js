@@ -2,7 +2,7 @@ function cidadeController ($scope, $http, $routeParams){
     console.log('Carregando controller');
     
     $scope.editar = function(cidade){
-        window.location = "#/cadastrocidade/"+cidade.id;
+        window.location = '#/cadastrocidade/' + cidade.id;
     };
     
     $scope.deletar = function(cidade){
