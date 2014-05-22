@@ -65,6 +65,10 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : './pages/CadastroCidade.html',
 			controller : 'cidadeController'
 		})
+                .when('/cadastrocidade/:id',{
+			templateUrl : './pages/CadastroCidade.html',
+			controller : 'cidadeController'
+		})
 		.when('/cadastrodistrito',{
 			templateUrl : './pages/CadastroDistrito.html',
 			// controller : 'nomeDoController'
