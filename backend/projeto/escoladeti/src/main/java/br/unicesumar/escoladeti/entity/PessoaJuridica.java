@@ -1,36 +1,54 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
-
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class PessoaJuridica extends Entidade {
-	@Column(nullable=false, unique=true)
+@PrimaryKeyJoinColumn(name = "id")
+@DiscriminatorValue("J")
+public class PessoaJuridica extends Pessoa {
+    
+    @NotNull
+    @NotEmpty
+    @Column(unique = true)
     private String cnpj;
-	@Column(nullable=false, unique=true)
-    private String inscricaoEstadual;
-	@Column(nullable=false)
-    private String razaoSocial;
-    private Date dataCriacao;
-    
-    public PessoaJuridica(String cnpj, String inscricaoEstadual, String razaoSocial, Date dataCriacao) {
-		this.cnpj = cnpj;
-		this.inscricaoEstadual = inscricaoEstadual;
-		this.razaoSocial = razaoSocial;
-		this.dataCriacao = dataCriacao;
-	}
 
-	public Date getDataCriacao() {
-		return dataCriacao;
-	}
-    
+    @NotNull
+    @NotEmpty
+    @Column(unique = true)
+    private String inscricaoEstadual;
+
+    @NotNull
+    @NotEmpty
+    @Column
+    private String razaoSocial;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @NotNull
+    private Date dataCriacao;
+
+    public PessoaJuridica(String cnpj, String inscricaoEstadual, String razaoSocial, Date dataCriacao) {
+        this.cnpj = cnpj;
+        this.inscricaoEstadual = inscricaoEstadual;
+        this.razaoSocial = razaoSocial;
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
     public void setDataCriacao(Date dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
+        this.dataCriacao = dataCriacao;
+    }
 
     public String getCnpj() {
         return cnpj;

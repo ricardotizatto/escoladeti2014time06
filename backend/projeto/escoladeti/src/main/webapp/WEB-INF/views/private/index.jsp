@@ -64,7 +64,7 @@
                                 <a tabindex="-1">Usuário</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#/listausuario">Usuário</a></li>
-                                    <li><a href="#/listaperfilusuario">Perfil de acesso</a></li>
+                                    <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                                     <li><a href="#/listaitemacesso">Item de acesso</a></li>
                                 </ul>
                             </li>

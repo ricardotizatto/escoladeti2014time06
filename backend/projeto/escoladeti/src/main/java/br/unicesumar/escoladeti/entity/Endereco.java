@@ -1,33 +1,50 @@
 package br.unicesumar.escoladeti.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Endereco extends Entidade{
-	@Column(nullable=false)
+public class Endereco extends Entidade {
+
+    @NotNull
     private String cep;
-	@Column(nullable=false)
+
+    @NotNull
     private int numero;
+
     private String complemento;
+
+    @NotNull
     private boolean principal;
-    
+
     @Embedded
     private Logradouro logradouro;
-    
+
     @ManyToOne
-    @JoinColumn(name="id_barro")
+    @JoinColumn(name = "id_bairro")
     private Bairro bairro;
-    
+
+    @ManyToOne
+    @JoinColumn(name="id_pessoa")
+    private Pessoa pessoa;
+
+    public Endereco() {
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
     public String getCep() {
         return cep;
     }
-
 
     public void setCep(String cep) {
         this.cep = cep;

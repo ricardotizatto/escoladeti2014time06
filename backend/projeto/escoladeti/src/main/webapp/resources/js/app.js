@@ -10,8 +10,12 @@ appCabecalho.config(['$routeProvider',
 			controller : 'LoginController'
 		})
 		.when('/pessoafisica',{
-			templateUrl : './pages/FormPF.html',
-			controller : 'PessoaFisicaController'
+			templateUrl : './pages/CadastroPessoaFisica.html',
+			controller : 'pessoaFisicaController'
+		})
+                .when('/pessoafisica/:pessoaFisicaId',{
+			templateUrl : './pages/CadastroPessoaFisica.html',
+			controller : 'pessoaFisicaController'
 		})
 		.when('/pessoajuridica',{
 			templateUrl : './pages/CadastroPessoaJuridica.html',
@@ -87,7 +91,7 @@ appCabecalho.config(['$routeProvider',
 		})
 		.when('/listapessoafisica',{
 			templateUrl : './pages/ListaPF.html',
-			// controller : 'nomeDoController'
+                        controller : 'pessoaFisicaController'
 		})
 		.when('/listapessoajuridica',{
 			templateUrl : './pages/ListaPessoaJuridica.html',

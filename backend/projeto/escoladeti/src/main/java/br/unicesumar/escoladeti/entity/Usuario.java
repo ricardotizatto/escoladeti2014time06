@@ -5,14 +5,11 @@ import javax.persistence.Entity;
 import static liquibase.util.MD5Util.computeMD5;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario extends Entidade {
-
-    @OneToOne
-    @JoinColumn(name = "id_usuario_perfil_acesso")
-    private UsuarioPerfilAcesso usuarioPerfilDeAcesso;
 
     @Column(nullable = false)
     @NotEmpty
@@ -31,7 +28,6 @@ public class Usuario extends Entidade {
     private String email;
 
     @Column(nullable = false)
-    @NotEmpty
     private Boolean ativo;
 
     public Usuario() {
@@ -42,14 +38,6 @@ public class Usuario extends Entidade {
         this.nome = nome;
         this.email = email;        
         setSenha(senha);
-    }
-
-    public UsuarioPerfilAcesso getUsuarioPerfilDeAcesso() {
-        return usuarioPerfilDeAcesso;
-    }
-
-    public void setUsuarioPerfilDeAcesso(UsuarioPerfilAcesso usuarioPerfilDeAcesso) {
-        this.usuarioPerfilDeAcesso = usuarioPerfilDeAcesso;
     }
 
     public String getSenha() {

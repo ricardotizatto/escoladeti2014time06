@@ -1,28 +1,51 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
-
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class PessoaFisica extends Entidade{
-	@Column(unique=true, nullable=false)
+@PrimaryKeyJoinColumn(name = "id")
+@DiscriminatorValue(value = "F")
+public class PessoaFisica extends Pessoa {
+
+    @NotNull
+    @NotEmpty
     private String rg;
-	@Column(unique=true, nullable=false)
+
+    @NotEmpty
+    @NotNull
+    @Column(unique = true)
     private String cpf;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    @Column(nullable=false)
+
+    @NotNull
+    @NotEmpty
     private String sobreNome;
 
-    public PessoaFisica(String rg, String cpf, Date dataNascimento, String sobreNome) {
-		this.rg = rg;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.sobreNome = sobreNome;
-	}
+    public PessoaFisica() {
+    }
 
-	public String getRg() {
+    public PessoaFisica(String rg, String cpf, Date dataNascimento, String sobreNome) {
+        this.rg = rg;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.sobreNome = sobreNome;
+    }
+
+    public String getRg() {
         return rg;
     }
 
@@ -53,4 +76,5 @@ public class PessoaFisica extends Entidade{
     public void setSobreNome(String sobreNome) {
         this.sobreNome = sobreNome;
     }
+
 }

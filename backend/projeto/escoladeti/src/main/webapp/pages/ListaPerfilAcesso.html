@@ -31,15 +31,15 @@
                 <th width="5%">Excluir</th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="perfilDeAcesso in perfilsDeAcesso| filter : busca">
-                        <td>{{perfilDeAcesso.nome}}</td>
+                    <tr ng-repeat="perfilAcesso in perfilsAcesso| filter : busca">
+                        <td>{{perfilAcesso.nome}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning btn-sm" ng-click="editar(perfilDeAcesso)">
+                            <button type="button" class="btn btn-warning btn-sm" ng-click="editar(perfilAcesso)">
                                 <span class='glyphicon glyphicon-edit'></span>
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-sm" ng-click="deletar(perfilDeAcesso)">
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="deletar(perfilAcesso)">
                                 <span class='glyphicon glyphicon-remove-circle'></span>
                             </button>
                         </td>

@@ -1,5 +1,6 @@
-﻿<div class="container" ng-controller="perfilAcessoController" ng-init="carregarPerfil()">
+﻿<div class="container" ng-controller="perfilAcessoController" ng-init="carregarPerfil()" ng-init="getItensAcesso()">
     <label> &nbsp; </label>
+    {{perfilAcesso}}
     <fieldset>
         <div class="row">
             <div class="form-group col-sm-12">
@@ -9,11 +10,10 @@
         <form action="" method="POST" role="form" ng-submit="salvar()">							
             <div class="row ">
                 <div class="form-group col-sm-5">
-                    <input class="form-control" name="nome" type="text" ng-model="perfilDeAcesso.nome" required/>
+                    <input class="form-control" name="nome" type="text" ng-model="perfilAcesso.nome" required/>
                 </div>
                 <!--div class="form-group col-sm-3">
-                    <select class="selectpicker show-tick form-control" ng-model="perfilDeAcesso.tela" ng-options="t.nome for t in telas">
-                        <option value="">Selecione</option>
+                    <select class="selectpicker show-tick form-control" multiple ng-multiple="true" ng-model="perfilAcesso.itensAcesso" ng-options="t.nomeComponente for t in itensAcesso">
                     </select>
                 </div-->
             </div>

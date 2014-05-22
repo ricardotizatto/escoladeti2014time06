@@ -1,48 +1,72 @@
 package br.unicesumar.escoladeti.entity;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Telefone extends Entidade {
-    private int ddd;
-    private int telefone;
-    private int tipo;
+
+    @NotNull
+    private Integer ddd;
+
+    @NotNull
+    private Integer numero;
+
+    @NotNull
+    private Integer tipo;
     
-    @ManyToOne
-    @JoinColumn(name="id_telefone")
+    @JsonUnwrapped
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pessoa")
+    
     private Pessoa pessoa;
+    
+    public Telefone(){
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    @JsonUnwrapped
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    @JsonUnwrapped
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 
     public int getDdd() {
         return ddd;
     }
 
-    public void setDdd(int ddd) {
+    public void setDdd(Integer ddd) {
         this.ddd = ddd;
     }
 
-    public int getTelefone() {
-        return telefone;
+    public Integer getTelefone() {
+        return numero;
     }
 
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
+    public void setTelefone(Integer telefone) {
+        this.numero = telefone;
     }
 
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 }

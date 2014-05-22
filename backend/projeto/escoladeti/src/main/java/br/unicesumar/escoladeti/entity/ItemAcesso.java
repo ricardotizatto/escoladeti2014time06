@@ -1,20 +1,30 @@
 package br.unicesumar.escoladeti.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class ItemAcesso extends Entidade {
-	private String nomeComponente;
-	
-	public ItemAcesso(String nomeComponente) {
-		this.nomeComponente = nomeComponente;
-	}
+    
+    @NotNull
+    @NotEmpty
+    private String nomeComponente;
 
-	public String getNomeComponente() {
-		return nomeComponente;
-	}
+    public ItemAcesso() {
 
-	public void setNomeComponente(String nomeComponente) {
-		this.nomeComponente = nomeComponente;
-	}
+    }
+
+    public ItemAcesso(String nomeComponente) {
+        this.nomeComponente = nomeComponente;
+    }
+
+    public String getNomeComponente() {
+        return nomeComponente;
+    }
+
+    public void setNomeComponente(String nomeComponente) {
+        this.nomeComponente = nomeComponente;
+    }
 }
