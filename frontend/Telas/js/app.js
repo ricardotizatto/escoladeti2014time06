@@ -97,6 +97,10 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : 'partials/ListaTela.html',
 			controller : 'listaTelaController'
 		})
+		.when('/cadastroparticipante',{
+			templateUrl : 'partials/cadastroparticipante.html',
+			controller : 'CadastroParticipanteController'
+		})
 		.otherwise({redirectTo: '/'
 		});
 	}
