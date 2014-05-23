@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" ng-app="cabecalho">
+<html lang="pt-br" ng-app="cabecalho">
     <head>
         <meta charset="UTF-8">
         <title> Escola de TI - Time 06 </title>
@@ -33,6 +33,7 @@
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
+        <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
@@ -56,14 +57,14 @@
                             <li class="dropdown-submenu">
                                 <a tabindex="-1">Cliente</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#/listapessoafisica">Pessoa F√≠sica</a></li>
-                                    <li><a href="#/listapessoajuridica">Pessoa Jur√≠dica</a></li>
+                                    <li><a href="#/listapessoafisica">Pessoa FÌsica</a></li>
+                                    <li><a href="#/listapessoajuridica">Pessoa JurÌdica</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a tabindex="-1">Usu√°rio</a>
+                                <a tabindex="-1">Usu·rio</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#/listausuario">Usu√°rio</a></li>
+                                    <li><a href="#/listausuario">Usu·rio</a></li>
                                     <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                                     <li><a href="#/listaitemacesso">Item de acesso</a></li>
                                 </ul>
@@ -77,6 +78,12 @@
                                     <li><a href="#/listadistrito">Lista Distrito</a></li>
                                     <li><a href="#/listabairro">Lista Bairro</a></li>
                                     <li><a href="#/listacep">Lista CEP</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1">Eventos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#/cadastroparticipante">Cadastro de Participante</a></li>
                                 </ul>
                             </li>
                         </ul>	
