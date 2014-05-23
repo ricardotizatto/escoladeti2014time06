@@ -27,10 +27,10 @@ public class CidadeController implements Serializable {
         return this.cidadeService.salvar(cidade);
     }
     
-    @RequestMapping(value="/cidade/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/cidade/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Cidade getById(@PathVariable Long id){
-        return cidadeService.getById(id);
+        return this.cidadeService.getById(id);
     }
     
     @RequestMapping(value="/cidade", method = RequestMethod.GET)
