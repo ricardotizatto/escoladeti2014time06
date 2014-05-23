@@ -125,12 +125,19 @@ appCabecalho.config(['$routeProvider',
             templateUrl: './pages/ListaItemAcesso.html',
             controller: 'itemAcessoController'
         })
-
                 .when('/cadastroparticipante', {
             templateUrl: './pages/CadastroParticipante.html',
             controller: 'CadastroParticipanteController'
-
         })
+                .when('/ordemproducao', {
+            templateUrl: './pages/OrdemProducao.html',
+            controller: 'producaoController'
+        })
+                .when('/ordemproducaoparte', {
+            templateUrl: './pages/OrdemProducaoParte.html',
+            controller: 'producaoController'
+        })
+        
 
                 .otherwise({redirectTo: '/'
         });

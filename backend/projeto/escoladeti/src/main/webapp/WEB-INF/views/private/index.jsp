@@ -34,6 +34,7 @@
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
+        <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
@@ -89,6 +90,15 @@
                         </ul>	
                     </li>
                 </ul>
+                <ul class="nav navbar-nav">
+                    <!--dropdown listas-->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Prodção <b class="caret"></b></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a href="#/ordemproducao">Ordem de Produção</a></li>
+                        </ul>    
+                    </li>
+                </ul>        
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class=dropdown-toggle" data-toggle="dropdown" href="">
