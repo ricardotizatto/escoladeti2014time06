@@ -137,9 +137,11 @@ appCabecalho.config(['$routeProvider',
             templateUrl: './pages/OrdemProducaoParte.html',
             controller: 'producaoController'
         })
-        
-
-                .otherwise({redirectTo: '/'
+                .when('/principal', {
+            templateUrl: './pages/Principal.html',
+            controller: 'principalController'
+        })
+                .otherwise({redirectTo: '/principal'
         });
     }
 ]);

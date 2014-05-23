@@ -93,7 +93,7 @@
                 <ul class="nav navbar-nav">
                     <!--dropdown listas-->
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Prodção <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Produção <b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li><a href="#/ordemproducao">Ordem de Produção</a></li>
                         </ul>    
