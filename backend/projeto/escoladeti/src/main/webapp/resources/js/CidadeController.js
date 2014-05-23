@@ -40,7 +40,7 @@ function cidadeController ($scope, $http, $routeParams){
     
     $scope.getTodos = function(){
 
-       $http.get('./rest/cidadeSource/cidade')
+       $http.get("./rest/cidadeSource/cidade")
         .success(function(cidades, status){
             $scope.cidades = cidades;       
         })
@@ -50,10 +50,10 @@ function cidadeController ($scope, $http, $routeParams){
     };
     
     $scope.carregarCidade = function() {
-	  console.log("carregando cidade"); 	  		
+        console.log("carregando cidade"); 	  		
 	  if (!$routeParams.cidadeId) return;//se não tiver id não buscar
 	  
-	  $http.get('./rest/cidadeSource/cidade/'+$routeParams.paisId)
+	  $http.get('./rest/cidadeSource/cidade/'+$routeParams.cidadeId)
 		 .success(function(cidade, status) {
 			$scope.cidade = cidade;
 		  console.log("carregando cidade"); 	
