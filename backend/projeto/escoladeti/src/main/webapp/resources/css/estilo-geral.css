@@ -1,3 +1,8 @@
+*{
+    margin: 0px auto;
+    padding: 0px;
+    font-family:  arial, verdana, Serif, sans-serif, Georgia, "Times New Roman";
+}
 footer {
 	height: 50px;
 	color: #999;
@@ -41,7 +46,7 @@ input[readonly] {
 
 .estilo-status{
     font-size: 20px;
-    padding: 5px;
+    padding: 6px;
 }
 
 #amacap-titulo{
