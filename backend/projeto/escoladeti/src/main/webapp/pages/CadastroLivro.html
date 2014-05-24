@@ -1,0 +1,54 @@
+﻿<div class="container" ng-controller="livroController" ng-init="carregarLivro();carregaEstados()">
+    <label> &nbsp; </label>
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <legend> Cadastro de Livro  </legend>
+            </div>
+        </div>
+        <form action="" method="POST" role="form" ng-submit="salvar()">	
+            <div class="row">
+                <div class="form-group col-sm-7">
+                    <label> Nome </label>
+                    <input class="form-control" name="nome" type="text" ng-model="livro.nome"/>
+                </div>
+
+                <div class="form-group col-sm-5">
+                    <label> Autor </label>
+                    <input class="form-control" name="nome" type="text" ng-model="livro.autor"/>
+                </div>
+            </div>
+            
+            <div class="row ">
+                <div class="form-group col-sm-5">
+                    <label> Editora </label>
+                    <input class="form-control" name="nome" type="text" ng-model="livro.editora"/>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label> Disciplina </label>
+                    <input class="form-control" name="nome" type="text" ng-model="livro.disciplina"/>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>Ano Edição</label>
+                    <input class="form-control" name="fundacao" type="number" ng-model="livro.anoEdicao"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="pull-right">	
+                        <a href="#/listalivro" class="btn btn-danger btn-padrao">
+                            <span class="glyphicon glyphicon-remove" ></span> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success btn-padrao">
+                            <span class="glyphicon glyphicon-ok"  ></span> Salvar	
+                        </button>
+                    </span>		
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12"><hr></div>
+            </div>			
+        </form>
+    </fieldset>
+</div>

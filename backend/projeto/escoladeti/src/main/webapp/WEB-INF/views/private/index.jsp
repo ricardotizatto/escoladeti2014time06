@@ -35,6 +35,7 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
         <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
@@ -96,9 +97,10 @@
                         <a class="dropdown-toggle" data-toggle="dropdown">Produção <b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li><a href="#/ordemproducao">Ordem de Produção</a></li>
+                            <li><a href="#/listalivro">Livro</a></li>
                         </ul>    
                     </li>
-                </ul>        
+                </ul>      
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class=dropdown-toggle" data-toggle="dropdown" href="">
