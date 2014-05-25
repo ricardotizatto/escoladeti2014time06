@@ -1,4 +1,16 @@
 function pessoaFisicaController($scope, $http, $routeParams) {
+    $scope.novo = function() {
+        $scope.pessoa = getNovo();
+        window.location = '#/cadastropessoafisica';
+    };
+
+    $scope.carregarPessoa = function() {
+        if ($routeParams.pessoaFisicaId) {
+            console.log('Aqui');
+        }
+        $scope.pessoa = getNovo();
+        $scope.pessoa.telefones = [];
+    };
 
     $scope.salvar = function() {
         $http.post('./rest/pessoaFisicaSource/pessoaFisica', $scope.pessoa)
@@ -11,17 +23,25 @@ function pessoaFisicaController($scope, $http, $routeParams) {
                 });
     };
 
-    $scope.idTelefone = 0;
-    $scope.telefones = [];
-    $scope.telefone = null;
-
     $scope.salvarTelefone = function() {
-        $scope.pessoa.telefones.push($scope.telefone);
-        $scope.telefone = getNovoTelefone();
+        if (angular.isUndefined($scope.telefone) || !$scope.telefone.tipo) {
+            alert('Tipo nao pode ser nulo');
+            $scope.telefone.tipo.focus();
+        } else {
+            console.log($scope.telefone);
+            $scope.pessoa.telefones.push($scope.telefone);
+
+            console.log($scope.telefones);
+            $scope.telefone = getNovo();
+        }
+    };
+
+    $scope.cancelarTelefone = function() {
+
     };
 
     $scope.editarTelefone = function(indice) {
-        $scope.telefone = $scope.telefones[indice];
+        $scope.telefone = $scope.pessoa.telefones[indice];
     };
 
     $scope.delTelefone = function(index) {
@@ -29,36 +49,31 @@ function pessoaFisicaController($scope, $http, $routeParams) {
     };
 
     $scope.idEndereco = 0;
-    $scope.enderecos = [];
-    $scope.endereco = null;
 
     $scope.salvarEndereco = function() {
-
-        if (!$scope.endereco.idEndereco) {
+        console.log($scope.endereco);
+        if (!$scope.idEndereco) {
             $scope.idEndereco++;
             $scope.endereco.idEndereco = $scope.idEndereco;
-            $scope.enderecos.push($scope.endereco);
+            $scope.pessoa.enderecos.push($scope.endereco);
         }
         $scope.endereco = null;
     };
 
     $scope.editarEndereco = function(indice) {
-        $scope.endereco = $scope.enderecos[indice];
+        $scope.endereco = $scope.pessoa.enderecos[indice];
     };
 
     $scope.addEndereco = function() {
-        $scope.enderecos.push($scope.endereco);
+        $scope.pessoa.enderecos.push($scope.endereco);
         $scope.endereco = null;
     };
 
     $scope.delEndereco = function(index) {
-        $scope.enderecos.splice(index, 1);
+        $scope.pessoa.enderecos.splice(index, 1);
     };
 
-    function getNovaPessoaFisica() {
-        return {};
-    }
-    function getNovoTelefone(){
+    function getNovo() {
         return {};
     }
 }

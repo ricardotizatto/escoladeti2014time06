@@ -1,13 +1,13 @@
 package br.unicesumar.escoladeti.service;
 
+import br.unicesumar.escoladeti.entity.Usuario;
+import br.unicesumar.escoladeti.repository.UsuarioRepository;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import br.unicesumar.escoladeti.entity.Usuario;
-import br.unicesumar.escoladeti.repository.UsuarioRepository;
 
 @Service
 @Transactional
@@ -42,5 +42,22 @@ public class UsuarioService {
 	private void inicializarUsuarios() {
 		
 	}
-
+        
+        // Daqui pra baixo
+        
+        public Usuario salvar(Usuario usuario){
+            return this.usuarioRepository.save(usuario);
+        }
+        
+        public List<Usuario> getTodos(){
+            return this.usuarioRepository.findAll();
+        }
+        
+        public void deletar(Usuario usuario){
+            this.usuarioRepository.delete(usuario);
+        }
+        
+        public Usuario getById (Long id){
+            return this.usuarioRepository.findById(id);
+        }
 }

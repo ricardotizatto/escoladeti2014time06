@@ -1,15 +1,20 @@
 package br.unicesumar.escoladeti.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -27,10 +32,14 @@ public abstract class Pessoa extends Entidade {
     @Column
     private String email;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "pessoa",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @IndexColumn(name = "id")
     private List<Telefone> telefones;  
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "pessoa",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @IndexColumn(name = "id")
     private List<Endereco> enderecos;
     
     public Pessoa(){

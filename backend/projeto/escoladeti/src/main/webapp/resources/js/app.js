@@ -9,12 +9,12 @@ appCabecalho.config(['$routeProvider',
 			templateUrl : './pages/Login.html',
 			controller : 'LoginController'
 		})
-		.when('/pessoafisica',{
-			templateUrl : './pages/CadastroPessoaFisica.html',
+		.when('/cadastropessoafisica',{
+			templateUrl : './pages/FormPF.html',
 			controller : 'pessoaFisicaController'
 		})
-                .when('/pessoafisica/:pessoaFisicaId',{
-			templateUrl : './pages/CadastroPessoaFisica.html',
+                .when('/cadastropessoafisica/:pessoaFisicaId',{
+			templateUrl : './pages/FormPF.html',
 			controller : 'pessoaFisicaController'
 		})
 		.when('/pessoajuridica',{

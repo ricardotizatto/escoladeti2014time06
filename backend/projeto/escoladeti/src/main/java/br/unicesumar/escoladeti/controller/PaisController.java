@@ -30,6 +30,14 @@ public class PaisController implements Serializable{
 	public Pais salvar(@RequestBody Pais pais) {
 		return paisService.salvar(pais);
 	}
+        
+        @RequestMapping(value = "/pais", method = RequestMethod.PUT)
+	@ResponseBody
+	public Pais editar(@RequestBody Pais pais) {
+            Pais paisEditado = this.paisService.getById(pais.getId());
+            System.out.println("Pais "+ pais.getId());
+            return paisService.salvar(paisEditado);
+	}
 	
 	@RequestMapping(value="/pais/{id}", method = RequestMethod.GET)
 	@ResponseBody

@@ -12,24 +12,24 @@ import br.unicesumar.escoladeti.service.UsuarioService;
 
 @Controller
 public class LoginController {
-	
-	@Autowired
-	private UsuarioService usuarioService;
-	
-    @RequestMapping(value="/login", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
     @Transactional
     public ModelAndView login() {
-    	usuarioService.inicializarUsuarioAdmin();
+        usuarioService.inicializarUsuarioAdmin();
         return new ModelAndView("public/login");
     }
-    
-    @RequestMapping(value="/login-error")
+
+    @RequestMapping(value = "/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "public/login";
-    }    
+    }
 
-    @RequestMapping(value="/logout")
+    @RequestMapping(value = "/logout")
     public String logout() {
         return "redirect:/j_spring_security_logout";
     }
