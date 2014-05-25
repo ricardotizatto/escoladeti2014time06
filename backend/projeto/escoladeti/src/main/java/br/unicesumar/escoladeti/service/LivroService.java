@@ -13,22 +13,22 @@ public class LivroService {
     private LivroRepository livroRepository;
 
     public Livro salvar(Livro livro) {
-        return livroRepository.save(livro);
+        return this.livroRepository.save(livro);
     }
 
     public List<Livro> getTodos() {
-        return livroRepository.findAll();
+        return this.livroRepository.findAll();
     }
 
     public List<Livro> getByName(String nome) {
-        return livroRepository.findByNomeContainingOrderByNomeAsc(nome);
+        return this.livroRepository.findByNomeContainingOrderByNomeAsc(nome);
     }
 
     public void deletar(Livro livro) {
-        livroRepository.delete(livro);
+        this.livroRepository.delete(livro);
     }
 
     public Livro getById(Long id) {
-        return livroRepository.findById(id);
+        return this.livroRepository.findById(id);
     }
 }

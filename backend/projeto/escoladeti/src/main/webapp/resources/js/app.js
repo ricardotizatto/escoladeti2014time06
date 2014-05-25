@@ -141,6 +141,10 @@ appCabecalho.config(['$routeProvider',
                 templateUrl: './pages/CadastroLivro.html',
                 controller: 'livroController'
             })
+            .when('/cadastrolivro/:livroId', {
+                templateUrl: './pages/CadastroLivro.html',
+                controller: 'livroController'
+            })
             .when('/listalivro', {
                 templateUrl: './pages/ListaLivro.html',
                 controller: 'livroController'

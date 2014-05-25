@@ -22,31 +22,31 @@ public class LivroController implements Serializable{
     @ResponseBody
     @RequestMapping(value = "/livro", method = RequestMethod.POST)
     public Livro salvar(@RequestBody Livro livro) {
-        return livroService.salvar(livro);
+        return this.livroService.salvar(livro);
     }
 
     @RequestMapping(value = "/livro/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Livro getById(@PathVariable Long id) {
-        return livroService.getById(id);
+        return this.livroService.getById(id);
     }
 
     @RequestMapping(value = "/livro", method = RequestMethod.GET)
     @ResponseBody
     public List<Livro> getTodos() {
-        return livroService.getTodos();
+        return this.livroService.getTodos();
     }
     
     @RequestMapping(value = "/livro/{nome}", method = RequestMethod.GET)
     @ResponseBody
     public List<Livro> getByNome(String nome) {
-        return livroService.getByName(nome);
+        return this.livroService.getByName(nome);
     }
 
     @RequestMapping(value = "/livro", method = RequestMethod.DELETE)
     @ResponseBody
     public String deletar(@RequestBody Livro livro) {
-        livroService.deletar(livro);
+        this.livroService.deletar(livro);
         return "deleted";
     }
 }
