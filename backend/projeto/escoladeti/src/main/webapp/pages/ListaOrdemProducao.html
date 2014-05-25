@@ -1,0 +1,73 @@
+<div class="container" ng-controller="producaoController" ng-init="getTodos()">
+    <label> &nbsp; </label>
+    <fieldset>
+        <legend> <span class="glyphicon glyphicon-list-alt"></span> Lista de Ordens de Produção
+        </legend>
+        <div class="row">
+            <div class="form-group col-sm-5">
+                <label>Busca</label>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                    <input  class="form-control" name="busca" type="text" ng-model="busca"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-7">
+                <label> &nbsp; </label>
+                <div>
+                    <span class="pull-right">
+                        <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novaOrdemProducao()" >
+                            <span class='glyphicon glyphicon-plus-sign'></span> Novo
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table width="100%" border="0" class="table table-striped table-hover" >
+            <tr>
+                <th width="20%">Solicitação</th>
+                <th width="20%">Material</th>
+                <th width="20%">Tradução</th>
+                <th width="20%">Status</th>
+                <th width="5%">Alterar</th>
+                <th width="5%">Excluir</th>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td>Livro</td>
+                <td>Braille</td>
+                <td>Em Produção</td>
+                <td>
+                    <button type='button' class='btn btn-warning btn-sm' ng-click="editarOrdemProducao(ordemProducao)">
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                </td>
+                <td>
+                    <button type='submit' class='btn btn-danger btn-sm' ng-click="deletarOrdemProducao(ordemProducao)">
+                        <span class='glyphicon glyphicon-remove-circle'></span>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Livro 02</td>
+                <td>Braille</td>
+                <td>Em Produção</td>
+                <td>
+                    <button type='button' class='btn btn-warning btn-sm' ng-click="editarOrdemProducao(ordemProducao)">
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                </td>
+                <td>
+                    <button type='submit' class='btn btn-danger btn-sm' ng-click="deletarOrdemProducao(ordemProducao)">
+                        <span class='glyphicon glyphicon-remove-circle'></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <label> Total de Ordens de Produção: {{(ordensProducao| filter : busca).length}} / {{ordensProducao.length}}</label>
+    </fieldset>
+    <hr>
+</div>
+

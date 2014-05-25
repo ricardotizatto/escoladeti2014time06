@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/rest/livroSource")
 public class LivroController implements Serializable{
     
+    private static final long serialVersionUID = 1L;
+    
     @Autowired
     private LivroService livroService;
 
-    @ResponseBody
     @RequestMapping(value = "/livro", method = RequestMethod.POST)
+    @ResponseBody
     public Livro salvar(@RequestBody Livro livro) {
         return this.livroService.salvar(livro);
     }

@@ -1,7 +1,7 @@
 ﻿<div class="container" ng-controller="livroController" ng-init="carregarLivro()">
     <label> &nbsp; </label>
     <fieldset>
-        {{livro}}
+        {{livro.nome}}
         <div class="row">
             <div class="form-group col-sm-12">
                 <legend> Cadastro de Livro  </legend>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label>Ano Edição</label>
-                    <input class="form-control" name="fundacao" type="number" ng-model="livro.anoEdicao" maxlength="4" />
+                    <input class="form-control" name="fundacao" type="text" ng-model="livro.anoEdicao" maxlength="4" />
                 </div>
             </div>
 
