@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" ng-app="cabecalho">
+<html lang="pt-br" ng-app="cabecalho">
     <head>
         <meta charset="UTF-8">
         <title> Escola de TI - Time 06 </title>
@@ -33,6 +33,9 @@
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
+        <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
+        <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
@@ -56,14 +59,14 @@
                             <li class="dropdown-submenu">
                                 <a tabindex="-1">Cliente</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#/listapessoafisica">Pessoa FÃ­sica</a></li>
-                                    <li><a href="#/listapessoajuridica">Pessoa JurÃ­dica</a></li>
+                                    <li><a href="#/listapessoafisica">Pessoa Física</a></li>
+                                    <li><a href="#/listapessoajuridica">Pessoa Jurídica</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
-                                <a tabindex="-1">UsuÃ¡rio</a>
+                                <a tabindex="-1">Usuário</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#/listausuario">UsuÃ¡rio</a></li>
+                                    <li><a href="#/listausuario">Usuário</a></li>
                                     <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                                     <li><a href="#/listaitemacesso">Item de acesso</a></li>
                                 </ul>
@@ -79,9 +82,25 @@
                                     <li><a href="#/listacep">Lista CEP</a></li>
                                 </ul>
                             </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1">Eventos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#/cadastroparticipante">Cadastro de Participante</a></li>
+                                </ul>
+                            </li>
                         </ul>	
                     </li>
                 </ul>
+                <ul class="nav navbar-nav">
+                    <!--dropdown listas-->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Produção <b class="caret"></b></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
+                            <li><a href="#/listalivro">Livro</a></li>
+                        </ul>    
+                    </li>
+                </ul>      
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class=dropdown-toggle" data-toggle="dropdown" href="">

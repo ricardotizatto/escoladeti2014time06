@@ -1,0 +1,122 @@
+<div class="container" ng-controller="producaoController" ng-init="">
+    <label> &nbsp; </label>
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <legend>Parte do Arquivo</legend>
+            </div>
+        </div>
+        <form action="" method="POST" role="form">
+            <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>	
+            
+            <div class="row ">
+                <div class="form-group col-sm-2">
+                    <label> Parte </label>
+                    <span class="label label-success form-control pull-right estilo-status">Parte 01</span>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label> Reaponsável </label>
+                    <input class="form-control" type="text" />
+                </div>
+                <div class="form-group col-sm-2"> 
+                    <label> Inicio </label>
+                    <input class="form-control" name="inicio" type="number"/>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label> Fim </label>
+                    <input class="form-control" name="fim" type="number"/>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="status"> Status </label>
+                    <select id="status" class="selectpicker show-tick form-control" data-live-search="true" >
+                        <option>Aceito</option>
+                        <option>Rejeitado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-10">
+                    <label>Enviar Arquivo</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                                 <span class="glyphicon glyphicon-search " ></span> Procurar <input type="file" >
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <span class="pull-right">
+                        <label> &nbsp;</label>
+                        <span class="input-group">
+                            <span class="btn btn-primary btn-file">
+                                <span class="glyphicon glyphicon-download " ></span> Download
+                            </span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>	
+
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label> Revisão </label>
+                    <input class="form-control" type="text" />
+                </div>
+                <div class="col-sm-8">
+                    <label> Observação </label>
+                    <textarea class="form-control"></textarea>
+                    <div class="required-icon">
+                        <div class="text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>		
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="pull-right">	
+                        <a href="" class="btn btn-danger btn-padrao">
+                            <span class="glyphicon glyphicon-remove" ></span> Cancelar 
+                        </a>
+                        <button type="submit" class="btn btn-success btn-padrao" >
+                            <span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+                        </button>
+                    </span>		
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 "><hr></div>
+            </div>			
+        </form>
+    </fieldset>	
+</div>
+
+<script>
+        $(document)
+                .on('change', '.btn-file :file', function() {
+                        var input = $(this),
+                        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready( function() {
+                $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+                        var input = $(this).parents('.input-group').find(':text'),
+                                log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                        if( input.length ) {
+                                input.val(log);
+                        } else {
+                                if( log ) alert(log);
+                        }
+
+                });
+        });		
+</script>

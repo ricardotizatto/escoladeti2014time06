@@ -2,13 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 	<head>
-		<meta charset="UTF-8">
+        <meta charset="UTF-8">
         <script type="text/javascript" src="./resources/libs/jquery.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>    
         <link rel="stylesheet" href="./resources/css/bootstrap.min.css" >
-        <title>Escola de TI - 2014</title>
+        <link href="./resources/css/estilo-geral.css" rel="stylesheet">
+        <title>Escola de TI - 2014 - Time 6</title>
 	</head>
 	<body>
+            <nav class="navbar navbar-inverse" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" > <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
+                </div>
+            </nav>
 		<div class="container">
 			<div class="row text-center">
 	            <div class="form-group col-md-4 col-md-offset-4">
@@ -39,6 +46,11 @@
 					</div>
 				</c:if>
 			</form>
-		</div>	
+		</div>
+            <footer class="footer navbar-fixed-bottom">
+                <div class="container">
+                    <p>&nbsp; ® Unicesumar 2014 - Escola de T.I. - Time 06</p>
+                </div>
+            </footer>
 	</body>
 </html>

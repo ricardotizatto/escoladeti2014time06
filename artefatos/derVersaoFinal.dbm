@@ -13,7 +13,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="pais">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="16" y="26"/>
+	<position x="25" y="86"/>
 	<column name="nome">
 		<type name="character varying" length="50"/>
 	</column>
@@ -166,7 +166,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="serial"/>
 	</column>
 	<column name="cep">
-		<type name="character varying" length="10"/>
+		<type name="character varying" length="8"/>
 	</column>
 	<column name="numero">
 		<type name="integer"/>
@@ -319,7 +319,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="integer"/>
 	</column>
 	<column name="cnpj">
-		<type name="character varying" length="20"/>
+		<type name="character varying" length="14"/>
 	</column>
 	<column name="inscricaoestadual">
 		<type name="character varying" length="20"/>
@@ -359,7 +359,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="pessoafisica">
 	<schema name="public"/>
-	<position x="1812.5" y="242.5"/>
+	<position x="1813.75" y="242.5"/>
 	<column name="codpessoafisica" not-null="true">
 		<type name="serial"/>
 	</column>
@@ -370,7 +370,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="character varying" length="11"/>
 	</column>
 	<column name="cpf">
-		<type name="character varying" length="15"/>
+		<type name="character varying" length="11"/>
 	</column>
 	<column name="datanascimento">
 		<type name="date"/>
@@ -624,5 +624,202 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<position x="106.976" y="-24.0485"/>
 	</label>
 </relationship>
+
+<table name="ParteMaterial">
+	<schema name="public"/>
+	<position x="2115" y="15"/>
+	<column name="codParteMaterial">
+		<type name="integer"/>
+	</column>
+	<column name="responsavel">
+		<type name="integer"/>
+	</column>
+	<column name="paginaInicio" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="paginaFim" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="status">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="pessoaRevisao">
+		<type name="integer"/>
+	</column>
+	<column name="observacao">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="arquivo">
+		<type name="bytea"/>
+	</column>
+	<constraint name="PK_PARTEMATERIAL" type="pk-constr" factor="10" table="public.&quot;ParteMaterial&quot;">
+		<columns names="codParteMaterial" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="OrdemProducao">
+	<schema name="public"/>
+	<position x="2378.5" y="258.25"/>
+	<column name="status" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="partes">
+		<type name="public.&quot;ParteMaterial&quot;" dimension="1"/>
+	</column>
+	<column name="codItem">
+		<type name="integer"/>
+	</column>
+</table>
+
+<table name="Livro">
+	<schema name="public"/>
+	<position x="2571" y="28"/>
+	<column name="codLivro">
+		<type name="integer"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="disciplina">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="autor">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="editora">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="anoEdicao">
+		<type name="numeric" length="4"/>
+	</column>
+	<column name="codMaterial">
+		<type name="integer"/>
+	</column>
+	<constraint name="PK_LIVRO" type="pk-constr" factor="10" table="public.&quot;Livro&quot;">
+		<columns names="codLivro" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Item">
+	<schema name="public"/>
+	<position x="2696" y="229"/>
+	<column name="codItem">
+		<type name="integer"/>
+	</column>
+	<column name="pnld">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="livro">
+		<type name="public.&quot;Livro&quot;"/>
+	</column>
+	<column name="traducao">
+		<type name="character varying" length="30"/>
+	</column>
+	<constraint name="PK_ITEM" type="pk-constr" factor="10" table="public.&quot;Item&quot;">
+		<columns names="codItem" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Solicitacao">
+	<schema name="public"/>
+	<position x="2634" y="369"/>
+	<column name="codSolicitacao">
+		<type name="integer"/>
+	</column>
+	<column name="solicitante">
+		<type name="public.pessoa"/>
+	</column>
+	<column name="alunos">
+		<type name="public.pessoafisica" dimension="1"/>
+	</column>
+	<column name="escola">
+		<type name="public.pessoajuridica"/>
+	</column>
+	<column name="nre">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="pessoaResponsavel">
+		<type name="public.pessoafisica"/>
+	</column>
+	<column name="dataChegadaMaterial">
+		<type name="date"/>
+	</column>
+	<column name="codItem">
+		<type name="integer"/>
+	</column>
+	<constraint name="PK_SOLICITACAO" type="pk-constr" factor="10" table="public.&quot;Solicitacao&quot;">
+		<columns names="codSolicitacao" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="FK_PESSOAFISICA_RESPONSAVEL" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.pessoafisica" table="public.&quot;ParteMaterial&quot;">
+	<columns names="responsavel" ref-type="src-columns"/>
+	<columns names="codpessoafisica" ref-type="dst-columns"/>
+</constraint>
+<constraint name="FK_PESSOAFISICA_REVISAO" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.pessoafisica" table="public.&quot;ParteMaterial&quot;">
+	<columns names="pessoaRevisao" ref-type="src-columns"/>
+	<columns names="codpessoafisica" ref-type="dst-columns"/>
+</constraint>
+<constraint name="FK_ORDEMPROD_PARTEMATERIAL" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;ParteMaterial&quot;" table="public.&quot;OrdemProducao&quot;">
+	<columns names="partes" ref-type="src-columns"/>
+	<columns names="codParteMaterial" ref-type="dst-columns"/>
+</constraint>
+<constraint name="FK_ORDEMPROD_ITEM" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Item&quot;" table="public.&quot;OrdemProducao&quot;">
+	<columns names="codItem" ref-type="src-columns"/>
+	<columns names="codItem" ref-type="dst-columns"/>
+</constraint>
+<constraint name="FK_LIVRO_MATERIAL" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Item&quot;" table="public.&quot;Livro&quot;">
+	<columns names="codMaterial" ref-type="src-columns"/>
+	<columns names="codItem" ref-type="dst-columns"/>
+</constraint>
+<constraint name="FK_SOLICITACAO_ITEM" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Item&quot;" table="public.&quot;Solicitacao&quot;">
+	<columns names="codItem" ref-type="src-columns"/>
+	<columns names="codItem" ref-type="dst-columns"/>
+</constraint>
+<relationship name="pessoa_has_many_partes" type="relfk"
+	 src-table="public.&quot;ParteMaterial&quot;"
+	 dst-table="public.pessoafisica"
+	 src-required="true" dst-required="true">
+	<label ref-type="name-label">
+		<position x="64.1007" y="10.9515"/>
+	</label>
+</relationship>
+
+<relationship name="ordem_has_many_partes" type="relfk"
+	 src-table="public.&quot;OrdemProducao&quot;"
+	 dst-table="public.&quot;ParteMaterial&quot;"
+	 src-required="true" dst-required="true">
+	<label ref-type="name-label">
+		<position x="59.2258" y="-5.67352"/>
+	</label>
+</relationship>
+
+<relationship name="rel_Livro_Material" type="relfk"
+	 src-table="public.&quot;Livro&quot;"
+	 dst-table="public.&quot;Item&quot;"
+	 src-required="true" dst-required="true">
+	<label ref-type="src-label">
+		<position x="0" y="0"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="&quot;rel_Solicitacao_Item&quot;" type="relfk"
+	 src-table="public.&quot;Solicitacao&quot;"
+	 dst-table="public.&quot;Item&quot;"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="&quot;rel_OrdemProducao_Item&quot;" type="relfk"
+	 src-table="public.&quot;OrdemProducao&quot;"
+	 dst-table="public.&quot;Item&quot;"
+	 src-required="true" dst-required="true"/>
 
 </dbmodel>

@@ -1,3 +1,8 @@
+*{
+    margin: 0px auto;
+    padding: 0px;
+    font-family:  arial, verdana, Serif, sans-serif, Georgia, "Times New Roman";
+}
 footer {
 	height: 50px;
 	color: #999;
@@ -11,4 +16,60 @@ footer {
 
 .btn-padrao{
 	width: 106px;
+}
+
+/* inicio botao de envio de arquivos */
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+}
+input[readonly] {
+        background-color: white !important;
+        cursor: text !important;
+}
+
+/* fim botao de envio de arquivos */
+
+.estilo-status{
+    font-size: 20px;
+    padding: 6px;
+}
+
+#amacap-titulo{
+    text-align: center;
+    padding: 0px;
+    margin: 0px
+}
+
+.titulo-01{
+    font-size: 150px;
+}
+
+.titulo-02{
+    font-size: 26px;
+}
+.amacap-sub-titulo{
+    margin-top: 80px;
+    text-align: center;
+}
+.sub-titulo-01{
+    font-size: 30px;
+}
+
+.sub-titulo-02{
+    font-size: 80px;
 }

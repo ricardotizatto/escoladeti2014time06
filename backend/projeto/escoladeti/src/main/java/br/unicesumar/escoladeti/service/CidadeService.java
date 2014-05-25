@@ -8,10 +8,6 @@ import org.springframework.stereotype.Service;
 import br.unicesumar.escoladeti.repository.CidadeRepository;
 import br.unicesumar.escoladeti.entity.Cidade;
 
-/**
- *
- * @author Frank
- */
 @Service
 public class CidadeService {
     
