@@ -99,7 +99,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Produção <b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li><a href="#/ordemproducao">Ordem de Produção</a></li>
+                            <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
                             <li><a href="#/listalivro">Livro</a></li>
                         </ul>    
                     </li>

@@ -129,6 +129,10 @@ appCabecalho.config(['$routeProvider',
                 templateUrl: './pages/CadastroParticipante.html',
                 controller: 'eventoController'
             })
+            .when('/listaordemproducao', {
+                templateUrl: './pages/ListaOrdemProducao.html',
+                controller: 'producaoController'
+            })
             .when('/ordemproducao', {
                 templateUrl: './pages/OrdemProducao.html',
                 controller: 'producaoController'

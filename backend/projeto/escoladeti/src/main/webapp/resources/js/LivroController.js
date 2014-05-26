@@ -5,21 +5,21 @@ function livroController($scope, $http, $routeParams) {
         console.log(livro);
         window.location = '#/cadastrolivro/' + livro.id;
     };
-
+    
     $scope.deletar = function(livro) {
-        alert(livro.nome);
         $http({
             method: 'DELETE',
             data: livro,
-            url: './rest/livroSource/livro',
+            url: './rest/livro',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
-            .success(function(data) {
-                console.log("livro deletado");
-                 $scope.getTodos();
-            }).error(function(data) {
-            console.log("erro ao deletar livro ");
-        });
+                .success(function(data, status) {
+                    //$scope.getTodos();
+                    console.log('Livro deletado!')
+                })
+                .error(function(data, status) { 
+                    console.log('Livro não foi deletado');
+                });
     };
 
     $scope.salvar = function() {
@@ -38,9 +38,19 @@ function livroController($scope, $http, $routeParams) {
         $scope.livro = getNovoLivro();
         window.location = '#/cadastrolivro';
     };
+    
+    $scope.getById = function() {
+        $http.get("./rest/livroSource/livro/60")
+                .success(function(livro, status) {
+                    $scope.livro = livro;
+                    console.log('Sucesso ao buscar livro' + livro.nome);
+                })
+                .error(function(livro, status) {
+                    console.log('erro ao buscar livro' + livro.nome);
+                });
+    };
 
     $scope.getTodos = function() {
-
         $http.get("./rest/livroSource/livro")
             .success(function(livros, status) {
                 $scope.livros = livros;
@@ -54,7 +64,11 @@ function livroController($scope, $http, $routeParams) {
         if ($routeParams.livroId) {
             $http.get('./rest/livroSource/livro/' + $routeParams.livroId)
                 .success(function(livro) {
+                    console.log('Sucesso ao livro: ');
                     $scope.livro = livro;
+                })
+                .error(function(data, status) {
+                    console.log('erro ao buscar livro '); 
                 });
         }
     };
