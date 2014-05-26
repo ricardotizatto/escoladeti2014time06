@@ -8,22 +8,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EventoService {
-	@Autowired
-	private EventoRepository eventoRepository;
-	
-	public Evento salvar(Evento evento) {
-		return eventoRepository.save(evento);
-	}
-	
-	public List<Evento> getTodos(){
-		return eventoRepository.findAll();
-	}
-	
-	public void deletar(Evento evento) {
-		eventoRepository.delete(evento);
-	}
-	
-	public Evento getById(Long id) {
-		return eventoRepository.findById(id);
-	}
+
+    @Autowired
+    private EventoRepository eventoRepository;
+
+    public Evento salvar(Evento evento) {
+        return eventoRepository.save(evento);
+    }
+
+    public List<Evento> getTodos() {
+        return eventoRepository.findAll();
+    }
+
+    public void deletar(Evento evento) {
+        eventoRepository.delete(evento);
+    }
+
+    public Evento getById(Long id) {
+        return eventoRepository.findById(id);
+    }
+
+    public List<Evento> getByName(String titulo) {
+        return this.eventoRepository.findByTituloContainingOrderByTituloAsc(titulo);
+    }
 }
