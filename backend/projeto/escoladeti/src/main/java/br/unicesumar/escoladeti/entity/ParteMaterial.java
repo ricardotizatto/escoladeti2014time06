@@ -1,6 +1,5 @@
 package br.unicesumar.escoladeti.entity;
 
-import br.unicesumar.escoladeti.common.Material;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
