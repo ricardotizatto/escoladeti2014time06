@@ -131,15 +131,15 @@ appCabecalho.config(['$routeProvider',
             })
             .when('/listaordemproducao', {
                 templateUrl: './pages/ListaOrdemProducao.html',
-                controller: 'producaoController'
+                controller: 'OrdemProducaoController'
             })
             .when('/ordemproducao', {
                 templateUrl: './pages/OrdemProducao.html',
-                controller: 'producaoController'
+                controller: 'OrdemProducaoController'
             })
             .when('/ordemproducaoparte', {
                 templateUrl: './pages/OrdemProducaoParte.html',
-                controller: 'producaoController'
+                controller: 'OrdemProducaoController'
             })
             .when('/cadastrolivro', {
                 templateUrl: './pages/CadastroLivro.html',
