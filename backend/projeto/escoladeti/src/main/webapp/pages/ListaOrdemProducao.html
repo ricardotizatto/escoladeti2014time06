@@ -1,4 +1,4 @@
-<div class="container" ng-controller="producaoController" ng-init="getTodos()">
+<div class="container" ng-controller="OrdemProducaoController" ng-init="getTodos()">
     <label> &nbsp; </label>
     <fieldset>
         <legend> <span class="glyphicon glyphicon-list-alt"></span> Lista de Ordens de Produção
@@ -39,12 +39,12 @@
                 <td>Braille</td>
                 <td>Em Produção</td>
                 <td>
-                    <button type='button' class='btn btn-warning btn-sm' ng-click="editarOrdemProducao(ordemProducao)">
+                    <button type='button' class='btn btn-warning btn-sm' ng-click="editar(ordemProducao)">
                         <span class='glyphicon glyphicon-edit'></span>
                     </button>
                 </td>
                 <td>
-                    <button type='submit' class='btn btn-danger btn-sm' ng-click="deletarOrdemProducao(ordemProducao)">
+                    <button type='submit' class='btn btn-danger btn-sm' ng-click="deletar(ordemProducao)">
                         <span class='glyphicon glyphicon-remove-circle'></span>
                     </button>
                 </td>
@@ -55,18 +55,18 @@
                 <td>Braille</td>
                 <td>Em Produção</td>
                 <td>
-                    <button type='button' class='btn btn-warning btn-sm' ng-click="editarOrdemProducao(ordemProducao)">
+                    <button type='button' class='btn btn-warning btn-sm' ng-click="editar(ordemProducao)">
                         <span class='glyphicon glyphicon-edit'></span>
                     </button>
                 </td>
                 <td>
-                    <button type='submit' class='btn btn-danger btn-sm' ng-click="deletarOrdemProducao(ordemProducao)">
+                    <button type='submit' class='btn btn-danger btn-sm' ng-click="deletar(ordemProducao)">
                         <span class='glyphicon glyphicon-remove-circle'></span>
                     </button>
                 </td>
             </tr>
         </table>
-        <label> Total de Ordens de Produção: {{(ordensProducao| filter : busca).length}} / {{ordensProducao.length}}</label>
+        <label> Total de Ordens de Produção: {{(ordemProducao| filter : busca).length}} / {{ordemProducao.length}}</label>
     </fieldset>
     <hr>
 </div>
