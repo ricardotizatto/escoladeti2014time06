@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
 import static liquibase.util.MD5Util.computeMD5;
 import org.hibernate.annotations.IndexColumn;
@@ -33,10 +34,18 @@ public class Usuario extends Entidade {
 
     @NotNull
     private Boolean ativo;
-
-    @OneToOne(mappedBy = "usuario",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    
+    @OneToOne(mappedBy = "usuario")
     @JsonManagedReference
     private UsuarioPerfilAcesso usuarioPerfilAcesso;
+
+    public UsuarioPerfilAcesso getUsuarioPerfilAcesso() {
+        return usuarioPerfilAcesso;
+    }
+
+    public void setUsuarioPerfilAcesso(UsuarioPerfilAcesso usuarioPerfilAcesso) {
+        this.usuarioPerfilAcesso = usuarioPerfilAcesso;
+    }
 
     public Usuario() {
     }
@@ -46,14 +55,6 @@ public class Usuario extends Entidade {
         this.nome = nome;
         this.email = email;
         setSenha(senha);
-    }
-
-    public UsuarioPerfilAcesso getUsuarioPerfilAcesso() {
-        return usuarioPerfilAcesso;
-    }
-
-    public void setUsuarioPerfilAcesso(UsuarioPerfilAcesso usuarioPerfilAcesso) {
-        this.usuarioPerfilAcesso = usuarioPerfilAcesso;
     }
 
     public String getSenha() {
