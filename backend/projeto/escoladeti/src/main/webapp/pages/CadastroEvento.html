@@ -1,0 +1,61 @@
+﻿<div class="container" ng-controller="eventoController" ng-init="carregarEvento()">
+    <label> &nbsp; </label>
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <legend> Cadastro de Evento  </legend>
+            </div>
+        </div>
+        <form action="" method="POST" role="form" ng-submit="salvar()">	
+            <div class="row">
+                <div class="form-group col-sm-7">
+                    <label> Titulo </label>
+                    <input class="form-control" name="titulo" type="text" ng-model="evento.titulo"/>
+                </div>
+            </div>
+			<div class="row">
+                <div class="form-group col-sm-5">
+                    <label> Localização </label>
+                    <input class="form-control" name="local" type="text" ng-model="evento.local"/>
+                </div>          
+            </div>            
+			<div class="row">
+				<div class="form-group col-sm-5">
+                    <label> Data </label>
+                    <input type="date" class="form-control" ng-model="evento.data">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-sm-5">
+                    <label> Organização </label>
+                    <input class="form-control" name="organizacao" type="text" ng-model="evento.organizacao"/>
+                </div>
+			</div>
+			<div class="row ">                
+				<div class="col-sm-6">
+                    <label> Descrição do Evento</label>
+                    <textarea class="form-control" ng-model="evento.descricao"></textarea>
+                    <div class="required-icon">
+                        <div class="text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="pull-right">	
+                        <a href="#/listaevento" class="btn btn-danger btn-padrao">
+                            <span class="glyphicon glyphicon-remove" ></span> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success btn-padrao">
+                            <span class="glyphicon glyphicon-ok"  ></span> Salvar	
+                        </button>
+                    </span>		
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12"><hr></div>
+            </div>			
+        </form>
+    </fieldset>
+</div>

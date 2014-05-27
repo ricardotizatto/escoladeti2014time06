@@ -1,45 +1,18 @@
-﻿<div class="container" ng-controller="CadastroParticipanteController" ng-init="carregarEventos()">
+﻿<div class="container" ng-controller="eventoController" ng-init="getTodos()">
 	<label>&nbsp;</label>
 	<fieldset>
 			<form action="#" method="POST">
 				<div class="col-sm-7" style="height:400px; overflow:auto;">
 					<legend>Cursos Disponíveis</legend>
-					<div class="blogShort">
-	                     <h1>Title 1</h1>
-	                         <em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>
+					<div class="blogShort" ng-repeat="evento in eventos">
+	                     <h1>{{evento.titulo}}</h1>
+	                         <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
 	                     <article><p>
-	                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-	                         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+	                         {{evento.descricao}}
 	                         </p></article>
-	                    <a class="btn btn-blog pull-right marginBottom10" href="">READ MORE</a> 
+	                    <a class="btn btn-blog pull-right marginBottom10" href="#">ver detalhes</a> 
                  	</div>
-                 	<div class="blogShort">
-	                     <h1>Title 1</h1>
-	                         <em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>
-	                     <article><p>
-	                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-	                         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-	                         </p></article>
-	                    <a class="btn btn-blog pull-right marginBottom10" href="">READ MORE</a> 
-                 	</div>
-                 	<div class="blogShort">
-	                     <h1>Title 1</h1>
-	                         <em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>
-	                     <article><p>
-	                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-	                         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-	                         </p></article>
-	                    <a class="btn btn-blog pull-right marginBottom10" href="">READ MORE</a> 
-                 	</div>
-                 	<div class="blogShort">
-	                     <h1>Title 1</h1>
-	                         <em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>
-	                     <article><p>
-	                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-	                         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-	                         </p></article>
-	                    <a class="btn btn-blog pull-right marginBottom10" href="">READ MORE</a> 
-                 	</div>
+			      
 				</div>
 				<div class="col-sm-1"></div>
 				<div class="form-group col-sm-4">

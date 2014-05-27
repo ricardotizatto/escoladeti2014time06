@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,27 +26,29 @@ public class Evento extends Entidade {
     @JoinColumn(name = "id_tipoevento")
     private TipoEvento tipoEvento;
     private String local;
-    
-    @NotNull
+
+    /*@NotNull
     @NotEmpty
     @Column
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_participante")
-    private List<Participante> participante;
+    @JoinColumn(name = "id_participante")//@JoinColumn(name = "id_evento")*/
+   // private List<Participante> participante;
     private String organizacao;
-    
-    @NotNull
+    private String titulo;
+
+    //@Lob
+    private String descricao;
+
+    /*@NotNull
     @NotEmpty
     @Column
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_participante")
-    private List<Participante> participantesEntidade;
-    
+    private List<Participante> participantesEntidade;*/
+
     @ManyToOne
     @JoinColumn(name = "id_pagamento", nullable = true)
     private Pagamento pagamento;
-
-    
 
     public Date getData() {
         return data;
@@ -79,13 +82,13 @@ public class Evento extends Entidade {
         this.local = local;
     }
 
-    public List<Participante> getParticipante() {
+   /* public List<Participante> getParticipante() {
         return participante;
     }
 
     public void setParticipante(List<Participante> participante) {
         this.participante = participante;
-    }
+    }*/
 
     public String getOrganizacao() {
         return organizacao;
@@ -95,13 +98,13 @@ public class Evento extends Entidade {
         this.organizacao = organizacao;
     }
 
-    public List<Participante> getParticipantesEntidade() {
+   /* public List<Participante> getParticipantesEntidade() {
         return participantesEntidade;
     }
 
     public void setParticipantesEntidade(List<Participante> participantesEntidade) {
         this.participantesEntidade = participantesEntidade;
-    }
+    }*/
 
     public Pagamento getPagamento() {
         return pagamento;
@@ -109,5 +112,21 @@ public class Evento extends Entidade {
 
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
