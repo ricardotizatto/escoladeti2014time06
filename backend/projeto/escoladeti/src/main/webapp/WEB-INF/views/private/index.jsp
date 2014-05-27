@@ -36,6 +36,7 @@
         <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
         <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
+		<script type="text/javascript" src="./resources/js/EventoController.js" ></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
@@ -86,6 +87,8 @@
                                 <a tabindex="-1">Eventos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#/cadastroparticipante">Cadastro de Participante</a></li>
+									<li><a href="#/cadastroevento">Cadastro de Evento</a></li>
+									<li><a href="#/listaevento">Lista Eventos</a></li>
                                 </ul>
                             </li>
                         </ul>	

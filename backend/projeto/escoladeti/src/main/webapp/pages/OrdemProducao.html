@@ -1,4 +1,4 @@
-<div class="container" ng-controller="producaoController" ng-init="">
+<div class="container" ng-controller="OrdemProducaoController" ng-init="carregar()()">
     <label> &nbsp; </label>
     <fieldset>
         <div class="row">
@@ -22,13 +22,13 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label> Status </label>
-                    <span class="label label-success form-control pull-right estilo-status">Em Produção</span>
+                    <span class="label {{ getStatus(ordemProducaoParte.status) }} form-control pull-right estilo-status">Em Produção</span>
                 </div>
             </div>
             <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>
             <div class="row">
                 <div class="form-group col-sm-12">
-                    <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novo()" >
+                    <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="" >
                         <span class='glyphicon glyphicon-plus-sign'></span> Nova Parte
                     </button>
                     <button type='submit' class='btn btn-success btn-padrao' value='novo' ng-click="" >
@@ -60,7 +60,7 @@
                                 <button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editar()">
                                     <span class='glyphicon glyphicon-edit'></span>
                                 </button>
-                                <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='escluir' ng:click=""   >
+                                <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
                                     <span class='glyphicon glyphicon-remove-circle' alt="Exluir" ></span>
                                 </button>
                             </td>
@@ -75,8 +75,8 @@
                         <a href="" class="btn btn-danger btn-padrao">
                             <span class="glyphicon glyphicon-remove" ></span> Cancelar 
                         </a>
-                        <button type="submit" class="btn btn-success btn-padrao" >
-                            <span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+                        <button type="submit" class="btn btn-success btn-padrao" ng-click="salvar()">
+                            <span class="glyphicon glyphicon-ok" ></span> Salvar
                         </button>
                     </span>		
                 </div>

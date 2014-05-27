@@ -127,19 +127,19 @@ appCabecalho.config(['$routeProvider',
             })
             .when('/cadastroparticipante', {
                 templateUrl: './pages/CadastroParticipante.html',
-                controller: 'CadastroParticipanteController'
+                controller: 'eventoController'
             })
             .when('/listaordemproducao', {
                 templateUrl: './pages/ListaOrdemProducao.html',
-                controller: 'producaoController'
+                controller: 'OrdemProducaoController'
             })
             .when('/ordemproducao', {
                 templateUrl: './pages/OrdemProducao.html',
-                controller: 'producaoController'
+                controller: 'OrdemProducaoController'
             })
             .when('/ordemproducaoparte', {
                 templateUrl: './pages/OrdemProducaoParte.html',
-                controller: 'producaoController'
+                controller: 'OrdemProducaoController'
             })
             .when('/cadastrolivro', {
                 templateUrl: './pages/CadastroLivro.html',
@@ -153,6 +153,18 @@ appCabecalho.config(['$routeProvider',
                 templateUrl: './pages/ListaLivro.html',
                 controller: 'livroController'
             })
+            .when('/listaevento', {
+                templateUrl: './pages/ListaEvento.html',
+                controller: 'eventoController'
+            })
+            .when('/cadastroevento', {
+                templateUrl: './pages/CadastroEvento.html',
+                controller: 'eventoController'
+            })
+            .when('/cadastroevento/:eventoId', {
+                templateUrl: './pages/CadastroEvento.html',
+                controller: 'eventoController'
+            })		
             .when('/principal', {
                 templateUrl: './pages/Principal.html',
                 controller: 'principalController'
