@@ -8,9 +8,12 @@
 	                     <h1>{{evento.titulo}}</h1>
 	                         <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
 	                     <article><p>
-	                         {{evento.descricao}}
+	                         {{evento.descricao.substring(0,180)}}
 	                         </p></article>
-	                    <a class="btn btn-blog pull-right marginBottom10" href="#">ver detalhes</a> 
+	                    <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id,evento.titulo,evento.descricao,evento.local,evento.data)" data-toggle="modal" data-target="#modalDetalhes">
+                        + Detalhes
+                    </button><br>
+					<hr/>
                  	</div>
 			      
 				</div>
@@ -42,6 +45,39 @@
 					<button class="btn btn-danger">Limpar</button>
 					<button class="btn btn-success">Confirmar</button>
 				</div>
+				
+				<!-- Modal detalhamento-->
+					<div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="modalEnderecoLabel">Detalhes do Curso</h4>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="blogShort">
+											 <h1>{{tituloCurso}}</h1>
+												 <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
+											 <article><p>
+												 {{DetalhesCurso}}
+												 </p></article>
+												 
+												 <article><p>
+												 <b>Data:<b> {{dataCurso}}
+												 </p></article>
+												 <article><p>
+												 <b>Localização:<b> {{localCurso}}
+												 </p></article>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Fechar</button>
+								</div>
+							</div>
+						</div>
+					</div>	<!--fim modal-->
 			</form>
 	</fieldset>
 </div>

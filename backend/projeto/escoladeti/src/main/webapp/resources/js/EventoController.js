@@ -1,5 +1,10 @@
 function eventoController($scope, $http, $routeParams) {
     console.log('Carregando controller');
+	$scope.idCurso;
+	$scope.tituloCurso;
+	$scope.DetalhesCurso;
+	$scope.localCurso;
+	$scope.dataCurso;
 
     $scope.editar = function(evento) {
         console.log(evento);
@@ -59,8 +64,20 @@ function eventoController($scope, $http, $routeParams) {
         }
     };
 
+    $scope.carregarEventoDetalhes = function(indice,titulo,detalhes,local,data) {
+        
+            $scope.idCurso = indice;
+			$scope.tituloCurso = titulo;
+			$scope.DetalhesCurso = detalhes;
+			$scope.localCurso = local;
+			$scope.dataCurso = data;
+        
+    };	
+	
     function getNovoEvento() {
         console.log('novo evento');
         return {};
     };
+	
 }
+
