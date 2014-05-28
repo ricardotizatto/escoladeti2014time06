@@ -1,15 +1,36 @@
+'use strict';
+
 function pessoaFisicaController($scope, $http, $routeParams) {
     $scope.novo = function() {
         $scope.pessoa = getNovo();
-        window.location = '#/cadastropessoafisica';
+        window.location = '#/pessoafisica';
     };
 
+    $scope.init = function() {
+        $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
+                .success(function(unidadesFederativas, status) {
+                    $scope.estados = unidadesFederativas;
+                    console.log(unidadesFederativas);
+                });
+        $http.get('./rest/paisSource/pais')
+                .success(function(paises, status) {
+                    $scope.paises = paises;
+                })
+                .error(function(data, status) {
+                    console.log('erro ao buscar paises ' + data);
+                });
+        $http.get("./rest/cidadeSource/cidade")
+                .success(function(cidades, status) {
+                    $scope.cidades = cidades;
+                })
+                .error(function(data, status) {
+                    console.log('erro ao buscar cidades');
+                });
+    };
     $scope.carregarPessoa = function() {
         if ($routeParams.pessoaFisicaId) {
             console.log('Aqui');
         }
-        $scope.pessoa = getNovo();
-        $scope.pessoa.telefones = [];
     };
 
     $scope.salvar = function() {
@@ -24,20 +45,15 @@ function pessoaFisicaController($scope, $http, $routeParams) {
     };
 
     $scope.salvarTelefone = function() {
-        if (angular.isUndefined($scope.telefone) || !$scope.telefone.tipo) {
-            alert('Tipo nao pode ser nulo');
-            $scope.telefone.tipo.focus();
-        } else {
-            console.log($scope.telefone);
-            $scope.pessoa.telefones.push($scope.telefone);
+        console.log($scope.telefone);
+        $scope.pessoa.telefones.push($scope.telefone);
 
-            console.log($scope.telefones);
-            $scope.telefone = getNovo();
-        }
+        console.log($scope.telefones);
+        $scope.telefone = getNovo();
     };
 
     $scope.cancelarTelefone = function() {
-
+        $scope.telefone = getNovo();
     };
 
     $scope.editarTelefone = function(indice) {
@@ -73,7 +89,22 @@ function pessoaFisicaController($scope, $http, $routeParams) {
         $scope.pessoa.enderecos.splice(index, 1);
     };
 
+    $scope.cancelarEndereco = function() {
+        $scope.endereco = getNovo();
+    };
+
     function getNovo() {
         return {};
     }
+    ;
+
+    $scope.filtroCidades = function() {
+        var filtroCidades = [];
+        angular.forEach($scope.cidades, function(value, key) {
+            if (value.unidadeFederativa === $scope.estado) {
+                this.push(value);
+            }
+        }, filtroCidades);
+        return cidades;
+    };
 }

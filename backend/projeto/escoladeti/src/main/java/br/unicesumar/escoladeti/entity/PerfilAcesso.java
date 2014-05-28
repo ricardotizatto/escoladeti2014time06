@@ -1,5 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -21,8 +23,8 @@ public class PerfilAcesso extends Entidade {
 //     @JoinTable(name = "perficalacesso_itemacesso", joinColumns = @JoinColumn(name = "id_perfilacesso", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_itemacesso", referencedColumnName = "id"))
 //     private List<ItemAcesso> itemsAcesso;
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "perfilAcesso",cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @IndexColumn(name = "id")
+    @JsonIgnore
+    @JsonBackReference
     private List<UsuarioPerfilAcesso> usuarioPerfilsAcesso;
 
     public List<UsuarioPerfilAcesso> getUsuarioPerfilsAcesso() {

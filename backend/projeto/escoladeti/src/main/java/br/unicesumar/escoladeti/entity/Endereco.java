@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -24,13 +25,13 @@ public class Endereco extends Entidade {
 //    @Embedded
 //    private Logradouro logradouro;
 
-    @ManyToOne
-    @JoinColumn(name = "id_bairro")
-    @JsonBackReference
-    private Bairro bairro;
+//    @ManyToOne
+//    @JoinColumn(name = "id_bairro")
+//    @JsonBackReference
+//    private Bairro bairro;
 
     @ManyToOne
-    @JoinColumn(name="id_pessoa")
+    @JoinColumn(name="id_pessoa",referencedColumnName = "id")
     @JsonBackReference
     private Pessoa pessoa;
 
@@ -85,11 +86,11 @@ public class Endereco extends Entidade {
 //        this.logradouro = logradouro;
 //    }
 
-    public Bairro getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
-    }
+//    public Bairro getBairro() {
+//        return bairro;
+//    }
+//
+//    public void setBairro(Bairro bairro) {
+//        this.bairro = bairro;
+//    }
 }

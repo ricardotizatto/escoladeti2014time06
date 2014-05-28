@@ -9,7 +9,6 @@ import br.unicesumar.escoladeti.entity.PerfilAcesso;
 import br.unicesumar.escoladeti.entity.Usuario;
 import br.unicesumar.escoladeti.entity.UsuarioPerfilAcesso;
 import br.unicesumar.escoladeti.repository.UsuarioPerfilAcessoRepository;
-import br.unicesumar.escoladeti.service.UsuarioPerfilAcessoService;
 import br.unicesumar.escoladeti.service.UsuarioService;
 import java.io.Serializable;
 import java.util.List;
@@ -36,10 +35,7 @@ public class UsuarioController implements Serializable {
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     @ResponseBody
     public Usuario salvar(@RequestBody Usuario usuario) {
-        System.out.println(usuario.getUsuarioPerfilAcesso().getFimVigencia());
-//        UsuarioPerfilAcesso upa = usuario.getUsuarioPerfilAcesso();
-//        upa.setUsuario(usuario);
-//        upa.setPerfilAcesso(usuario.getUsuarioPerfilAcesso().getPerfilAcesso());
+        System.out.println(usuario.getNome());
         return this.usuarioService.salvar(usuario);
     }
 

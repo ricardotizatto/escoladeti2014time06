@@ -1,13 +1,12 @@
-<div class="container" ng-controller="pessoaFisicaController" >
-    <label> &nbsp;</label>
+<div class="container" ng-controller="pessoaFisicaController" ng-init="carregarPessoa();
+                init();">
     <div class="row">
-        {{$scope.pessoa}}
         <div class="form-group col-sm-12">
             <fieldset>
-                <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Pessoa Física </legend>
+                <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Cliente </legend>
         </div>
-    </div>	
-    <form action="" method="POST" role="form">						
+    </div>
+    <form action="" method="POST" role="form" ng-submit="salvar()" name="formPF">					
         <div class="row ">
             <div class="form-group col-sm-5">
                 <label> Nome </label>
@@ -85,7 +84,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="endereco in enderecos">
+                        <tr ng-repeat="endereco in pessoa.enderecos">
                             <td class="text-center"> {{endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
                             <td>
                                 <button type="button" class="btn btn-link btn-xs" title="Editar" ng-click="editarEndereco($index)" data-toggle="modal" data-target="#modalEndereco" ><i class="glyphicon glyphicon-pencil"></i> </button>
@@ -104,7 +103,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="telefone in telefones">
+                        <tr ng-repeat="telefone in pessoa.telefones">
                             <td class="text-center"> {{telefone.tipo + " - " + telefone.numero + " - " + telefone.ramal}} </td>
                             <td>
                                 <button type="button" class="btn btn-link btn-xs" title="Editar" ng-click="editarTelefone($index)" data-toggle="modal" data-target="#modalTelefone" ><i class="glyphicon glyphicon-pencil"></i> </button>
@@ -121,159 +120,162 @@
                     <a class="btn btn-danger">
                         <span class="glyphicon glyphicon-remove" ></span> Cancelar 
                     </a>
-                    <button type="submit" class="btn btn-success" ng-click="addPessoa()" >
-                        <span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+                    <button type="submit" class="btn btn-success" >
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar
                     </button>
                 </span>		
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12"><hr></div>
+        </div>		
+    </form>    
+    <!-- Modal contato-->
+    <div class="modal fade" id="modalTelefone" tabindex="-1" role="dialog" aria-labelledby="modalTelefoneLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTelefoneLabel">Cadastro de telefone</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-sm-offset-2">
+                            <label> Telefone</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-phone-alt"></span>
+                                </span>
+                                <select class="selectpicker show-tick form-control" name="tipoTelefone" ng-model="telefone.tipo" data-live-search="true">
+                                    <option value="celular" >Celular</option>
+                                    <option value="comercial" >Comercial</option>
+                                    <option value="residencial" >Residencial</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label>Número</label>
+                            <div class="input-group">
+                                <input class="form-control" name="tel" type="text" ng-model="telefone.numero" onKeyPress="MascaraTelefone(formPFTel.tel);" maxlength="15"  onBlur="ValidaTelefone(formPFTel.tel);"  placeholder="(44) 9999-9999" required>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-sm-offset-2">
+                            <label>Ramal</label>
+                            <div class="input-group">
+                                <input class="form-control" name="numeroTelefone" type="number" ng-model="telefone.ramal" placeholder="N° de ramal">  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cancelarTelefone()"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+                        <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="salvarTelefone()"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Modal contato-->
-        <div class="modal fade" id="modalTelefone" tabindex="-1" role="dialog" aria-labelledby="modalTelefoneLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="modalTelefoneLabel">Cadastro de telefone</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="form-group col-sm-4 col-sm-offset-2">
-                                <label> Telefone</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-phone-alt"></span>
-                                    </span>
-                                    <select class="selectpicker show-tick form-control" name="tipoTelefone" ng-model="telefone.tipo" data-live-search="true">
-                                        <option value="celular" >Celular</option>
-                                        <option value="comercial" >Comercial</option>
-                                        <option value="residencial" >Residencial</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-5">
-                                <label>Número</label>
-                                <div class="input-group">
-                                    <input class="form-control" name="tel" type="text" ng-model="telefone.numero" onKeyPress="MascaraTelefone(formPF.tel);" maxlength="15"  onBlur="ValidaTelefone(formPF.tel);"  placeholder="(44) 9999-9999">  
+    </div>
+
+    <!-- Modal endereço-->
+    <div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalEnderecoLabel">Cadastro de Endereço</h4>
+                </div>
+                <div class="modal-body">
+                    <label><span class="glyphicon glyphicon-home"></span> Endereço </label>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>Principal</label>
+                            <div>
+
+                                <div class="btn-group"><!--data-toggle="buttons" verificar uso-->
+                                    <label class="btn btn-primary ">
+                                        <input ng-model="endereco.principal" name="principal" value="S" type="radio" /> <label>Sim</label>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input ng-model="endereco.principal" name="principal" value="N" type="radio" />  <label>Não</label>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-sm-4 col-sm-offset-2">
-                                <label>Ramal</label>
-                                <div class="input-group">
-                                    <input class="form-control" name="numeroTelefone" type="number" ng-model="telefone.ramal" placeholder="N° de ramal">  
-                                </div>
-                            </div>
+                        <div class="form-group col-sm-6">
+                            <label>Cep</label>
+                            <input  class="form-control maskCep" name="cep" type="text" ng-model="endereco.cep" onKeyPress="MascaraCep(cep);"
+                                    maxlength="10" onBlur="ValidaCep(cep)" placeholder="99.999-999" />
                         </div>
-                        <div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="salvarTelefone()" ><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+                    <div class="row">
+                        <div class="form-group col-sm-3">
+                            <label>Tipo</label>
+                            <select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="endereco.tipoEndereco" data-live-search="true">
+                                <option value="se" selected="selected">Selecione</option>
+                                <option value="avenida" >Avenida</option>
+                                <option value="rua" >Rua</option>
+                                <option value="praca" >Praça</option>
+                                <option value="estrada" >Estrada</option>
+                                <option value="alameda">Alameda</option>
+                                <option value="ladeira">Ladeira</option>
+                                <option value="travessa">Travessa</option>
+                                <option value="rodovia">Rodovia</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Logradouro</label>
+                            <input  class="form-control" name="descEndereco" type="text" ng-model="endereco.logradouro" placeholder="Logradouro" />
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>Número</label>
+                            <input  class="form-control" name="numero" type="text" ng-model="endereco.numero" placeholder="N°" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>Bairro</label>
+                            <input  class="form-control" name="complemento" type="text" ng-model="endereco.bairro" placeholder="Bairro"/>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Complemento</label>
+                            <input  class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-3">
+                            <label> Pais </label>
+                            <select id="pais" ng-model="endereco.pais" class="selectpicker show-tick form-control" data-live-search="true" ng-model="paises" ng-options="p.nome for p in paises" data-filter="true">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label> Estado </label>
+                            <select id="estado" ng-model="endereco.estado" class="selectpicker show-tick form-control" data-live-search="true"
+                                    ng-options="t.nome for t in estados" data-filter="true">
+                            </select>
+                            {{endereco.estado}}
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Cidade</label>
+                            <select id="estado" ng-model="endereco.cidade" class="selectpicker show-tick form-control" data-live-search="true"
+                                    ng-options="t.nome for t in filtroCidades()" data-filter="true">
+                            </select>
+                            {{endereco.cidade}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cancelarEndereco()"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
+                            <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="salvarEndereco()"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>	
-        <!-- Modal endereço-->
-        <div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="modalEnderecoLabel">Cadastro de Endereço</h4>
-                    </div>
-                    <div class="modal-body">
-                        <legend> <span class="glyphicon glyphicon-home"></span> Endereço </legend>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label>Principal</label>
-                                <div>
-                                    <div class="btn-group"><!--data-toggle="buttons" verificar uso-->
-                                        <label class="btn btn-primary ">
-                                            <input ng-model="endereco.principal" name="principal" value="S" type="radio" ng-click="alert('qualquercoisaai');"/> <label>Sim</label>
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input ng-model="endereco.principal" name="principal" value="N" type="radio" />  <label>Não</label>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label>Cep</label>
-                                <input  class="form-control maskCep" name="cep" type="text" ng-model="endereco.cep" onKeyPress="MascaraCep(formPF.cep);"
-                                        maxlength="10" onBlur="ValidaCep(formPF.cep)" placeholder="99.999-999" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-3">
-                                <label>Tipo</label>
-                                <select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="endereco.tipoEndereco" data-live-search="true">
-                                    <option value="se" selected="selected">Selecione</option>
-                                    <option value="avenida" >Avenida</option>
-                                    <option value="rua" >Rua</option>
-                                    <option value="praca" >Praça</option>
-                                    <option value="estrada" >Estrada</option>
-                                    <option value="alameda">Alameda</option>
-                                    <option value="ladeira">Ladeira</option>
-                                    <option value="travessa">Travessa</option>
-                                    <option value="rodovia">Rodovia</option>
-                                    <option value="outros">Outros</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label>Logradouro</label>
-                                <input  class="form-control" name="descEndereco" type="text" ng-model="endereco.logradouro" placeholder="Logradouro" />
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label>Número</label>
-                                <input  class="form-control" name="numero" type="text" ng-model="endereco.numero" placeholder="N°" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label>Bairro</label>
-                                <input  class="form-control" name="complemento" type="text" ng-model="endereco.bairro" placeholder="Bairro"/>
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label>Complemento</label>
-                                <input  class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label>Cidade</label>
-                                <input  class="form-control" name="cidade" type="text" ng-model="endereco.cidade" placeholder="Cidade" />
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label> Estado </label>
-                                <select id="estado" ng-model="endereco.estado" class="selectpicker show-tick form-control" data-live-search="true">
-                                    <option value="se" selected>Selecione</option>
-                                    <option value="pr" >Paraná</option>
-                                    <option value="sp" >São Paulo</option>
-                                    <option value="rj" >Rio de Janeiro</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label> Pais </label>
-                                <select id="pais" ng-model="endereco.pais" class="selectpicker show-tick form-control" data-live-search="true">
-                                    <option value="se" selected>Selecione</option>
-                                    <option value="brasil" >Brasil</option>
-                                    <option value="argentina" >Argentina</option>
-                                    <option value="paraguai" >Paraguai</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="salvarEndereco()" ><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
-                    </div>
-                </div>
-            </div>
-        </div>			
-    </form>
-</fieldset>
+
+        </div>
+    </div>
+</div>
 </div>

@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -27,12 +28,14 @@ public class UsuarioPerfilAcesso extends Entidade {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
-    @JsonBackReference
+    @JsonIgnore
+    @JsonManagedReference
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "id_perfil_acesso")
-    @JsonBackReference
+    @JsonIgnore
+    @JsonManagedReference
     private PerfilAcesso perfilAcesso;
 
     public UsuarioPerfilAcesso() {

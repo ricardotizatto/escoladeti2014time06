@@ -1,6 +1,5 @@
 package br.unicesumar.escoladeti.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -12,14 +11,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.IndexColumn;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="tipo")
+@DiscriminatorColumn(name = "tipo")
 public abstract class Pessoa extends Entidade {
 
     @NotNull
@@ -31,18 +27,16 @@ public abstract class Pessoa extends Entidade {
     @NotEmpty
     @Column
     private String email;
-    
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "pessoa",cascade = CascadeType.ALL)
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoa")
     @JsonManagedReference
-    @IndexColumn(name = "id")
-    private List<Telefone> telefones;  
-    
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "pessoa",cascade = CascadeType.ALL)
+    private List<Telefone> telefones;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoa", cascade = CascadeType.ALL)
     @JsonManagedReference
-    @IndexColumn(name = "id")
     private List<Endereco> enderecos;
-    
-    public Pessoa(){
+
+    public Pessoa() {
     }
 
     public List<Telefone> getTelefones() {

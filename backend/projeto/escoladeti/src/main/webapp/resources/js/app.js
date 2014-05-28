@@ -165,10 +165,10 @@ appCabecalho.config(['$routeProvider',
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
             })		
-            .when('/principal', {
-                templateUrl: './pages/Principal.html',
-                controller: 'principalController'
-            })
+//            .when('/principal', {
+//                templateUrl: './pages/Principal.html',
+//                controller: 'principalController'
+//            })
             .otherwise({redirectTo: '/principal'
             });
     }

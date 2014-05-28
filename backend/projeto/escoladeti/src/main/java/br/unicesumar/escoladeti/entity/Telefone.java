@@ -22,7 +22,7 @@ public class Telefone extends Entidade {
     private Integer tipo;
     
     @ManyToOne
-    @JoinColumn(name = "id_pessoa")
+    @JoinColumn(name = "id_pessoa",referencedColumnName = "id")
     @JsonBackReference
     private Pessoa pessoa;
     

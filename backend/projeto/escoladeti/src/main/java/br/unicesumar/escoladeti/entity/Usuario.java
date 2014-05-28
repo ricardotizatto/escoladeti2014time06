@@ -1,16 +1,11 @@
 package br.unicesumar.escoladeti.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
 import static liquibase.util.MD5Util.computeMD5;
-import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -36,7 +31,7 @@ public class Usuario extends Entidade {
     private Boolean ativo;
     
     @OneToOne(mappedBy = "usuario")
-    @JsonManagedReference
+    @JsonBackReference
     private UsuarioPerfilAcesso usuarioPerfilAcesso;
 
     public UsuarioPerfilAcesso getUsuarioPerfilAcesso() {

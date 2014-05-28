@@ -13,7 +13,7 @@ function paisController($scope, $http, $routeParams) {
         $http({
             method: 'DELETE',
             data: pais,
-            url: './rest/paisSorce/pais',
+            url: './rest/paisSource/pais',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
                 .success(function(data, status) {
@@ -34,7 +34,7 @@ function paisController($scope, $http, $routeParams) {
         if (!$routeParams.paisId)
             return;//se não tiver id não buscar
 
-        $http.get('./rest/paisSorce/pais/' + $routeParams.paisId)
+        $http.get('./rest/paisSource/pais/' + $routeParams.paisId)
                 .success(function(pais, status) {
                     $scope.pais = pais;
                 });
@@ -46,7 +46,7 @@ function paisController($scope, $http, $routeParams) {
 
     $scope.salvar = function() {
         console.log($scope.pais)
-        $http.post('./rest/paisSorce/pais', $scope.pais)
+        $http.post('./rest/paisSource/pais', $scope.pais)
                 .success(function(pais, status) {
                     $scope.pais = getNovoPais();
                     console.log('pais editado = ' + pais);
@@ -57,7 +57,7 @@ function paisController($scope, $http, $routeParams) {
     };
 
     $scope.getTodos = function() {
-        $http.get('./rest/paisSorce/pais')
+        $http.get('./rest/paisSource/pais')
                 .success(function(paises, status) {
                     $scope.paises = paises;
                 })
