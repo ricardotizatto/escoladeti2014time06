@@ -1,10 +1,9 @@
 ﻿<div class="container" ng-controller="livroController" ng-init="carregarLivro()">
     <label> &nbsp; </label>
     <fieldset>
-        {{livro.nome}}
         <div class="row">
             <div class="form-group col-sm-12">
-                <legend> Cadastro de Livro  </legend>
+                <legend> <span class="glyphicon glyphicon-book"></span> Cadastro de Livro  </legend>
             </div>
         </div>
         <form action="" method="POST" role="form" ng-submit="salvar()">	

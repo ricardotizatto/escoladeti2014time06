@@ -137,8 +137,8 @@ appCabecalho.config(['$routeProvider',
                 templateUrl: './pages/OrdemProducao.html',
                 controller: 'OrdemProducaoController'
             })
-            .when('/ordemproducaoparte', {
-                templateUrl: './pages/OrdemProducaoParte.html',
+            .when('/ordemproducao/:ordemProducaoId', {
+                templateUrl: './pages/OrdemProducao.html',
                 controller: 'OrdemProducaoController'
             })
             .when('/cadastrolivro', {
@@ -164,6 +164,10 @@ appCabecalho.config(['$routeProvider',
             .when('/cadastroevento/:eventoId', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
+            })
+            .when('/cadastropartematerial', {
+                templateUrl: './pages/CadastroParteMaterial.html',
+                controller: 'ordemProducaoController'
             })
             .when('/cadastropartematerial/:parteMaterialId', {
                 templateUrl: './pages/CadastroParteMaterial.html',

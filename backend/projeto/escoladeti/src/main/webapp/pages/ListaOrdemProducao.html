@@ -21,7 +21,7 @@
 				<div>
 					<span class="pull-right">
 						<button type='submit' class='btn btn-primary btn-padrao'
-							value='novo' ng-click="novaOrdemProducao()">
+							value='novo' ng-click="novo()">
 							<span class='glyphicon glyphicon-plus-sign'></span> Novo
 						</button>
 					</span>
@@ -38,7 +38,10 @@
 				<th width="5%">Excluir</th>
 			</tr>
 			<tr ng-repeat="op in ordensProducao">
-				<!-- TODO : Implementar repeat para apresentar valor das colunas -->
+                                <td>{{op.solicitacao}}</td>
+                                <td>{{op.material}}</td>
+                                <td>{{op.traducao}}</td>
+                                <td>{{op.status}}</td>
 				<td>
 					<button type='button' class='btn btn-warning btn-sm'
 						ng-click="editar(ordemProducao)">

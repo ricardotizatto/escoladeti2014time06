@@ -4,7 +4,7 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     
     $scope.novo = function() {
         $scope.ordemProducao = getNovaOrdemProducao ();
-        window.location = '#/listaordemproducao';
+        window.location = '#/ordemproducao';
     };
     
     $scope.salvar = function() {
@@ -57,17 +57,33 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     };
     
     $scope.cancelar = function() {
-        window.location = '$/listaordemproducao';
+        window.location = '#/listaordemproducao';
     };
     
     function getNovaOrdemProducao() {
         return {};
     }
     
+    $scope.getStatusOrdemProducao = function(status) {
+        switch (status) {
+            case "Andamento":
+                return "label-primary";
+                break;
+            case "Finalizado":
+                return "label-success";
+                break;
+            case "Rejeitado":
+                return "label-danger";
+                break;
+            default:
+                return "label-primary";
+        }
+    };
+    
     //
     //Início das funções da ParteMaterial
     //
-     $scope.novaParteMaterial = function() {
+    $scope.novaParteMaterial = function() {
         $scope.parteMaterial = getNovaParteMaterial();
         window.location = '#/cadastropartematerial';
     };
@@ -121,10 +137,11 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     };
 
     $scope.cancelarParteMaterial = function() {
-        window.location = '#/listaparteMaterial';
+        window.location = '#/ordemproducao';
     };
 
     function getNovaParteMaterial() {
         return {};
     }
+    
 }
