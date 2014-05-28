@@ -35,6 +35,9 @@ public class PessoaJuridica extends Pessoa {
     @NotNull
     private Date dataCriacao;
 
+    public PessoaJuridica() {
+    }
+
     public PessoaJuridica(String cnpj, String inscricaoEstadual, String razaoSocial, Date dataCriacao) {
         this.cnpj = cnpj;
         this.inscricaoEstadual = inscricaoEstadual;

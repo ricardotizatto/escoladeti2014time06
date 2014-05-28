@@ -90,7 +90,7 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     };
 
     $scope.salvarParteMaterial = function() {
-        $http.post('./rest/parteMaterialSource/parteMaterial', $scope.parteMaterial)
+        $http.post('./rest/ordemProducaoSource/parteMaterial', $scope.parteMaterial)
                 .success(function(parteMaterial, status) {
                     $scope.parteMaterial = getNovaParteMaterial();
                     console.log('Parte do Material salva ' + parteMaterial);
@@ -101,7 +101,7 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     };
     $scope.carregarParteMaterial = function() {
         if ($routeParams.parteMaterialId) {
-            $http.get('./rest/parteMaterialSource/parteMaterial/' + $routeParams.parteMaterialId)
+            $http.get('./rest/ordemProducaoSource/parteMaterial/' + $routeParams.parteMaterialId)
                     .success(function(parteMaterial) {
                         $scope.parteMaterial = parteMaterial;
                     });
@@ -109,7 +109,7 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     };
 
     $scope.getTodasPartesMateriais = function() {
-        $http.get('./rest/parteMaterialSource/parteMaterial')
+        $http.get('./rest/ordemProducaoSource/parteMaterial')
                 .success(function(partesMateriais) {
                     $scope.partesMateriais = partesMateriais;
                     console.log('Partes materiaias carregadas');
@@ -125,7 +125,7 @@ function OrdemProducaoController ($scope, $http, $routeParams){
         $http({
             method: 'DELETE',
             data: parteMaterial,
-            url: './rest/parteMaterialSource/parteMaterial',
+            url: './rest/ordemProducaoSource/parteMaterial',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
                 .success(function(data) {
