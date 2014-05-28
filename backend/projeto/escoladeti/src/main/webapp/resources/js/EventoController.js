@@ -31,7 +31,8 @@ function eventoController($scope, $http, $routeParams) {
         console.log(angular.toJson($scope.evento, true));
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function(evento, status) {
-                    $scope.evento = getNovoEvento();
+                    //$scope.evento = getNovoEvento();
+					window.location = '#/listaevento';
                     console.log("evento salva = " + evento);
                 })
                 .error(function(data, status) {

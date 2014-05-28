@@ -47,6 +47,8 @@ input[readonly] {
 .estilo-status{
     font-size: 20px;
     padding: 6px;
+    color: #fff;
+    text-align: center;
 }
 
 #amacap-titulo{

@@ -1,9 +1,9 @@
-<div class="container" ng-controller="producaoController" ng-init="">
+<div class="container" ng-controller="OrdemProducaoController" ng-init="carregarParteMaterial()">
     <label> &nbsp; </label>
     <fieldset>
         <div class="row">
             <div class="form-group col-sm-12">
-                <legend>Parte do Arquivo</legend>
+                <legend> <span class="glyphicon glyphicon-file"></span> Cadastro de Parte do Material</legend>
             </div>
         </div>
         <form action="" method="POST" role="form">
@@ -12,7 +12,7 @@
             <div class="row ">
                 <div class="form-group col-sm-2">
                     <label> Parte </label>
-                    <span class="label {{ getStatus(ordemProducao.status) }} form-control pull-right estilo-status">Parte 01</span>
+                    <span class="label label-default form-control pull-right estilo-status">Parte 01</span>
                 </div>
                 <div class="form-group col-sm-4">
                     <label> Reaponsável </label>
@@ -80,10 +80,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <span class="pull-right">	
-                        <a href="" class="btn btn-danger btn-padrao">
+                        <a href="" class="btn btn-danger btn-padrao" ng-click="cancelarParteMaterial()" >
                             <span class="glyphicon glyphicon-remove" ></span> Cancelar 
                         </a>
-                        <button type="submit" class="btn btn-success btn-padrao" >
+                        <button type="submit" class="btn btn-success btn-padrao" ng-click="salvarParteMaterial()" >
                             <span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
                         </button>
                     </span>		

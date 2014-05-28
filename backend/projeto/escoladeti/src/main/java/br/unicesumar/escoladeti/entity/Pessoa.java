@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -13,12 +14,16 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo")
 public abstract class Pessoa extends Entidade {
 
-    @NotNull
+	private static final long serialVersionUID = 1L;
+
+	@NotNull
     @NotEmpty
     @Column
     private String nome;

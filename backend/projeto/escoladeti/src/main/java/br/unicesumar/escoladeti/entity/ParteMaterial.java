@@ -1,22 +1,42 @@
 package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import br.unicesumar.escoladeti.common.OrdemProducaoStatus;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class ParteMaterial extends Entidade {
     
-    @OneToOne
+	private static final long serialVersionUID = 1L;
+
+	@ManyToOne
+	@JoinColumn(name="id_responsavel")
     private PessoaFisica responsavel;
     
     private Long paginaInicio;
     
     private Long paginaFim;
     
-    private String status;
+    @NotEmpty
+    @Enumerated(EnumType.STRING)
+    private OrdemProducaoStatus status;
     
-    @OneToOne
-    private PessoaFisica revisao;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name="id_ordemproducao")
+    private OrdemProducao ordemProducao;
+    
+    @ManyToOne
+    @JoinColumn(name="id_responsavelrevisao")
+    private PessoaFisica responsavelRevisao;
     
     private String observacao;
     
@@ -49,20 +69,8 @@ public class ParteMaterial extends Entidade {
         this.paginaFim = paginaFim;
     }
 
-    public String getStatus() {
+    public OrdemProducaoStatus getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public PessoaFisica getRevisao() {
-        return revisao;
-    }
-
-    public void setRevisao(PessoaFisica revisao) {
-        this.revisao = revisao;
     }
 
     public String getObservacao() {

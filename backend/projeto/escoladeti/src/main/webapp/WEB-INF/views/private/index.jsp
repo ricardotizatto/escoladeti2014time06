@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br" ng-app="cabecalho">
     <head>
         <meta charset="UTF-8">
@@ -36,7 +36,8 @@
         <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
         <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
-		<script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
@@ -48,14 +49,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
+                <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> AMACAP </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <!--dropdown listas-->
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Listas <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Cadastros<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li class="dropdown-submenu">
                                 <a tabindex="-1">Cliente</a>
@@ -84,11 +85,17 @@
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
+                                <a tabindex="-1">Materiais</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#/listalivro">Livro</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
                                 <a tabindex="-1">Eventos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#/cadastroparticipante">Cadastro de Participante</a></li>
-									<li><a href="#/cadastroevento">Cadastro de Evento</a></li>
-									<li><a href="#/listaevento">Lista Eventos</a></li>
+                                    <li><a href="#/cadastroevento">Cadastro de Evento</a></li>
+                                    <li><a href="#/listaevento">Lista Eventos</a></li>
                                 </ul>
                             </li>
                         </ul>	
@@ -97,10 +104,9 @@
                 <ul class="nav navbar-nav">
                     <!--dropdown listas-->
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Produção <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Operações<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
-                            <li><a href="#/listalivro">Livro</a></li>
                         </ul>    
                     </li>
                 </ul>      
@@ -121,7 +127,7 @@
         <div ng-view></div>
         <footer class="footer navbar-fixed-bottom">
             <div class="container">
-                <p>&nbsp; Â® Unicesumar 2014 - Escola de T.I. - Time 06</p>
+                <p>Unicesumar 2014 - Escola de T.I. - Time 06</p>
             </div>
         </footer>
     </body>

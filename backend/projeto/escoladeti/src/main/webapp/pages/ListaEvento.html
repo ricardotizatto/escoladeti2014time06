@@ -35,7 +35,7 @@
             </tr>
             <tr ng-repeat="evento in eventos| filter : busca">
                 <td>{{evento.titulo}}</td>
-                 <td>{{evento.descricao}}</td>
+                 <td>{{evento.descricao.substring(0,180)}}</td>
                  <td>{{evento.data}}</td>
                 <td>{{evento.local}}</td>
                 <td>
