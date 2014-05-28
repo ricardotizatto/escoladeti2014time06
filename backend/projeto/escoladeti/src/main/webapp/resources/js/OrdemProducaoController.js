@@ -19,6 +19,7 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     };
     
     $scope.carregar = function() {
+        //$scope.ordemProducao = { solicitacao : 1, material : "Livro", traducao:"brille", state : "Andamento" }; para testes
         if ($routeParams.ordemProducaoId) {
             $http.get('./rest/ordemProducaoSource/ordemProducao/' + $routeParams.ordemProducaoId)
                     .success(function(ordemProducao) {

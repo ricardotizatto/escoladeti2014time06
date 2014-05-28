@@ -10,19 +10,19 @@
             <div class="row ">
                 <div class="form-group col-sm-3">
                     <label> Solicitação </label>
-                    <input class="form-control" type="text" />
+                    <input class="form-control" type="text" ng-model="ordemProducao.solicitacao" />
                 </div>
                 <div class="form-group col-sm-3"> 
                     <label> Material </label>
-                    <input class="form-control" name="material" type="text"/>
+                    <input class="form-control" name="material" type="text" ng-model="ordemProducao.material"/>
                 </div>
                 <div class="form-group col-sm-3">
                     <label> Tradução </label>
-                    <input class="form-control" name="traducao" type="text"/>
+                    <input class="form-control" name="traducao" type="text" ng-model="ordemProducao.traducao" />
                 </div>
                 <div class="form-group col-sm-3">
                     <label> Status </label>
-                    <input class="form-control {{ getStatusOrdemProducao(ordemProducao.state) }} estilo-status" type="text" ng-model="ordemProducao.state"/>  
+                    <input class="form-control {{ getStatusOrdemProducao(ordemProducao.state) }} estilo-status" type="text" ng-model="ordemProducao.state" ng-disabled="disabled"/>  
                 </div>
             </div>
             <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>
