@@ -76,7 +76,7 @@ function OrdemProducaoController ($scope, $http, $routeParams){
                 return "label-danger";
                 break;
             default:
-                return "label-primary";
+                return "";
         }
     };
     

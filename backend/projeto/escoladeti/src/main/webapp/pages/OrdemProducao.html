@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group col-sm-3">
                     <label> Status </label>
-                    <span class="label {{ getStatusOrdemProducao(ordemProducao.state) }} form-control pull-right estilo-status">Andamento</span>
+                    <input class="form-control {{ getStatusOrdemProducao(ordemProducao.state) }} estilo-status" type="text" ng-model="ordemProducao.state"/>  
                 </div>
             </div>
             <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>
