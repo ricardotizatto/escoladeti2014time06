@@ -1,14 +1,16 @@
 package br.unicesumar.escoladeti.entity;
 
-import br.unicesumar.escoladeti.common.Material;
+
+
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Livro extends Entidade implements Material  {
-
-    @NotNull
+public class Livro extends  Material  {
+	private static final long serialVersionUID = 1L;
+	@NotNull
     @NotEmpty
     private String nome;
     private String disciplina;
@@ -89,9 +91,9 @@ public class Livro extends Entidade implements Material  {
         this.anoEdicao = anoEdicao;
     }
 
-    @Override
-    public String getDados() {
-        StringBuilder dados = new StringBuilder();
+	@Override
+	public String getInfo() {
+    StringBuilder dados = new StringBuilder();
         
         dados.append("Nome: ");
         dados.append(getNome());
@@ -105,5 +107,5 @@ public class Livro extends Entidade implements Material  {
         dados.append(getAnoEdicao());        
         
         return dados.toString();
-    }
+	}
 }

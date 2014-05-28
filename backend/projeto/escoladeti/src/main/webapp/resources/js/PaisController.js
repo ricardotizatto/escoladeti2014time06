@@ -45,16 +45,16 @@ function paisController($scope, $http, $routeParams) {
     }
 
     $scope.salvar = function() {
+        console.log($scope.pais)
         $http.post('./rest/paisSorce/pais', $scope.pais)
                 .success(function(pais, status) {
                     $scope.pais = getNovoPais();
-                    console.log('pais salvo = ' + pais);
+                    console.log('pais editado = ' + pais);
                 })
                 .error(function(data, status) {
-                    console.log('erro ao salvar ' + data);
+                    console.log('pais nao salvo = ' + data);
                 });
-        ;
-    }
+    };
 
     $scope.getTodos = function() {
         $http.get('./rest/paisSorce/pais')

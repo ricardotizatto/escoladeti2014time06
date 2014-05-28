@@ -1,34 +1,51 @@
 package br.unicesumar.escoladeti.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import static liquibase.util.MD5Util.computeMD5;
-import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
+import static liquibase.util.MD5Util.computeMD5;
+import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario extends Entidade {
 
-    @Column(nullable = false)
-    @NotEmpty
-    private String senha;
-
-    @Column(nullable = false)
-    @NotEmpty
-    private String login;
-
-    @Column(nullable = false)
+    @NotNull
     @NotEmpty
     private String nome;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotEmpty
+    private String login;
+
+    @NotNull
+    @NotEmpty
+    private String senha;
+
+    @NotNull
     @NotEmpty
     private String email;
 
-    @Column(nullable = false)
+    @NotNull
     private Boolean ativo;
+    
+    @OneToOne(mappedBy = "usuario")
+    @JsonManagedReference
+    private UsuarioPerfilAcesso usuarioPerfilAcesso;
+
+    public UsuarioPerfilAcesso getUsuarioPerfilAcesso() {
+        return usuarioPerfilAcesso;
+    }
+
+    public void setUsuarioPerfilAcesso(UsuarioPerfilAcesso usuarioPerfilAcesso) {
+        this.usuarioPerfilAcesso = usuarioPerfilAcesso;
+    }
 
     public Usuario() {
     }
@@ -36,7 +53,7 @@ public class Usuario extends Entidade {
     public Usuario(String nome, String senha, String login, String email) {
         this.login = login;
         this.nome = nome;
-        this.email = email;        
+        this.email = email;
         setSenha(senha);
     }
 

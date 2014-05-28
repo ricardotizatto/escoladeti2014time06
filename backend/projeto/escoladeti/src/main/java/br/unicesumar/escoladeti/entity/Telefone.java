@@ -1,6 +1,8 @@
 package br.unicesumar.escoladeti.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -19,10 +21,9 @@ public class Telefone extends Entidade {
     @NotNull
     private Integer tipo;
     
-    @JsonUnwrapped
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_pessoa")
-    
+    @JsonBackReference
     private Pessoa pessoa;
     
     public Telefone(){
@@ -36,12 +37,10 @@ public class Telefone extends Entidade {
         this.numero = numero;
     }
 
-    @JsonUnwrapped
     public Pessoa getPessoa() {
         return pessoa;
     }
 
-    @JsonUnwrapped
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }

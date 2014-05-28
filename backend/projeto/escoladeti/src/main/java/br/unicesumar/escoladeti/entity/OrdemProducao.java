@@ -1,50 +1,55 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
+
+import br.unicesumar.escoladeti.common.OrdemProducaoStatus;
         
 @Entity
 public class OrdemProducao extends Entidade {
-    
-    @NotEmpty
+	private static final long serialVersionUID = 1L;
+	
+	@NotEmpty
+	@NotNull
+	@ManyToOne
+	private SolicitacaoItem solicitacaoItem;
+
+	@NotEmpty
     @NotNull
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrdemProducaoStatus status;
     
-    @OneToMany
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="ordemProducao")
     private List<ParteMaterial> partes;
 
-    public OrdemProducao(String status, List<ParteMaterial> partes) {
+    public OrdemProducao(OrdemProducaoStatus status) {
         this.status = status;
-        this.partes = partes;
     }
 
     public OrdemProducao() {
     }
 
-    public OrdemProducao(Long id,String status, List<ParteMaterial> partes) {
+    public OrdemProducao(Long id,OrdemProducaoStatus status) {
         this.id = id;
         this.status = status;
-        this.partes = partes;
     }
     
 
-    public String getStatus() {
+    public OrdemProducaoStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public List<ParteMaterial> getPartes() {
-        return partes;
-    }
-
-    public void setPartes(List<ParteMaterial> partes) {
-        this.partes = partes;
-    }
     
 }

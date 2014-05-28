@@ -20,9 +20,6 @@ public class ParteMaterialService {
         return parteMaterialRepository.findByResponsavel(nomeResponsavel);
     }
 
-    public ParteMaterial findByRevisao(String nomeRevisao) {
-        return parteMaterialRepository.findByRevisao(nomeRevisao);
-    }
     
     public void salvar(ParteMaterial parteMaterial) {
         parteMaterialRepository.save(parteMaterial);

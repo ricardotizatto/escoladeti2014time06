@@ -1,4 +1,4 @@
-function UsuarioController($scope, bd) {
+function usuarioController($scope, bd) {
 
     $scope.perfisDeAcesso = [
         {nome: "Gerente"},
