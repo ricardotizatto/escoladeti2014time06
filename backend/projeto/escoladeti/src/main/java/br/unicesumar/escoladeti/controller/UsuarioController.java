@@ -9,7 +9,6 @@ import br.unicesumar.escoladeti.entity.PerfilAcesso;
 import br.unicesumar.escoladeti.entity.Usuario;
 import br.unicesumar.escoladeti.entity.UsuarioPerfilAcesso;
 import br.unicesumar.escoladeti.repository.UsuarioPerfilAcessoRepository;
-import br.unicesumar.escoladeti.service.UsuarioPerfilAcessoService;
 import br.unicesumar.escoladeti.service.UsuarioService;
 import java.io.Serializable;
 import java.util.List;

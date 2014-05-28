@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br" ng-app="cabecalho">
     <head>
         <meta charset="UTF-8">
@@ -37,6 +37,7 @@
         <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
 		<script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+		<script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse" role="navigation">
@@ -55,7 +56,7 @@
                 <ul class="nav navbar-nav">
                     <!--dropdown listas-->
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Listas <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Cadastros<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li class="dropdown-submenu">
                                 <a tabindex="-1">Cliente</a>
@@ -84,6 +85,12 @@
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
+                                <a tabindex="-1">Materiais</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#/listalivro">Livro</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
                                 <a tabindex="-1">Eventos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#/cadastroparticipante">Cadastro de Participante</a></li>
@@ -97,10 +104,9 @@
                 <ul class="nav navbar-nav">
                     <!--dropdown listas-->
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Produção <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Operações<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
-                            <li><a href="#/listalivro">Livro</a></li>
                         </ul>    
                     </li>
                 </ul>      

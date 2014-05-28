@@ -28,9 +28,9 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     };
     
     $scope.getTodos = function() {
-        $http.get('./rest/ordemProducaoSource/ordemProducao')
-                .success(function(ordemProducao) {
-                  $scope.ordemProducao = ordemProducao;
+        $http.get('./rest/ordemProducaoSource/ordemproducao')
+                .success(function(ordensProducao) {
+                  $scope.ordensProducao = ordensProducao;
                   console.log('Ordens carregadas.');
                 });
     };
