@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ParteMaterialRepository  extends JpaRepository<ParteMaterial, Long> {    
     
-    ParteMaterial findByStatus(String status);    
-    ParteMaterial findByResponsavel(String nomeResponsavel);    
+    ParteMaterial findByStatus(String status);
+    
+    ParteMaterial findByResponsavel(String nomeResponsavel);
 }

@@ -63,4 +63,68 @@ function OrdemProducaoController ($scope, $http, $routeParams){
     function getNovaOrdemProducao() {
         return {};
     }
+    
+    //
+    //Início das funções da ParteMaterial
+    //
+     $scope.novaParteMaterial = function() {
+        $scope.parteMaterial = getNovaParteMaterial();
+        window.location = '#/cadastropartematerial';
+    };
+
+    $scope.salvarParteMaterial = function() {
+        $http.post('./rest/parteMaterialSource/parteMaterial', $scope.parteMaterial)
+                .success(function(parteMaterial, status) {
+                    $scope.parteMaterial = getNovaParteMaterial();
+                    console.log('Parte do Material salva ' + parteMaterial);
+                })
+                .error(function(data) {
+                    console.log('Parte do Material não foi salva ' + data);
+                });
+    };
+    $scope.carregarParteMaterial = function() {
+        if ($routeParams.parteMaterialId) {
+            $http.get('./rest/parteMaterialSource/parteMaterial/' + $routeParams.parteMaterialId)
+                    .success(function(parteMaterial) {
+                        $scope.parteMaterial = parteMaterial;
+                    });
+        }
+    };
+
+    $scope.getTodasPartesMateriais = function() {
+        $http.get('./rest/parteMaterialSource/parteMaterial')
+                .success(function(partesMateriais) {
+                    $scope.partesMateriais = partesMateriais;
+                    console.log('Partes materiaias carregadas');
+                });
+    };
+
+    $scope.editarParteMaterial = function(parteMaterial) {
+        console.log(parteMaterial);
+        window.location = '#/cadastropartematerial/' + parteMaterial.id;
+    };
+
+    $scope.deletarParteMaterial = function(parteMaterial) {
+        $http({
+            method: 'DELETE',
+            data: parteMaterial,
+            url: './rest/parteMaterialSource/parteMaterial',
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        })
+                .success(function(data) {
+                    console.log('Deletada!');
+                    $scope.getTodasPartesMateriais();
+                })
+                .error(function(data) {
+                    console.log('Não foi possíivel deletar ' + data);
+                });
+    };
+
+    $scope.cancelarParteMaterial = function() {
+        window.location = '#/listaparteMaterial';
+    };
+
+    function getNovaParteMaterial() {
+        return {};
+    }
 }

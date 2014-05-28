@@ -164,7 +164,11 @@ appCabecalho.config(['$routeProvider',
             .when('/cadastroevento/:eventoId', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
-            })		
+            })
+            .when('/cadastropartematerial/:parteMaterialId', {
+                templateUrl: './pages/CadastroParteMaterial.html',
+                controller: 'ordemProducaoController'
+            })	
             .when('/principal', {
                 templateUrl: './pages/Principal.html'
             //    controller: 'principalController'
