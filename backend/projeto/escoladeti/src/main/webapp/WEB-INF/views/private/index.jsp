@@ -34,13 +34,12 @@
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
-        <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
         <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
     </head>
     <body>
-        <nav class="navbar navbar-inverse" role="navigation">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -130,5 +129,16 @@
                 <p>Unicesumar 2014 - Escola de T.I. - Time 06</p>
             </div>
         </footer>
+        <style>
+    	body{
+    		padding-top: 70px;
+    		text-transform: uppercase;
+    		text-transform: uppercase;
+    	}
+    	
+    	input,button{
+    		text-transform: uppercase;
+    	}
+    </style>
     </body>
 </html>

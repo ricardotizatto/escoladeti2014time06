@@ -2,19 +2,26 @@ package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Pais extends Entidade {
-
-    @Column(nullable = false)
+	private static final long serialVersionUID = 1L;
+	
+	@NotNull
+    @Column
     @NotEmpty
     private String nome;
-    @Column(nullable = false)
+	
+	@NotNull
+    @Column
     @NotEmpty
     private String sigla;
-    @Column(nullable = false)
+    
+    @NotNull
+    @Column
     private Integer codPais;
 
     public Pais() {

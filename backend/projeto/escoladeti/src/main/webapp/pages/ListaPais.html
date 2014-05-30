@@ -1,4 +1,4 @@
-<div class="container" ng-controller=paisController ng-init="getTodos()">
+<div class="container" ng-controller=paisController ng-init="getTodos(1)">
     <label> &nbsp; </label>
     <fieldset>
         <legend> <span class="glyphicon glyphicon-list-alt"></span> Lista Pais
@@ -33,7 +33,7 @@
                 <th width="5%">Alterar</th>
                 <th width="5%">Excluir</th>
             </tr>
-            <tr ng-repeat="pais in paises| filter : busca">
+            <!-- >tr ng-repeat="pais in paises| filter : busca">
                 <td>{{pais.codPais}}</td>
                 <td>{{pais.nome}}</td>
                 <td>{{pais.sigla}}</td>
@@ -49,7 +49,41 @@
                         <span class='glyphicon glyphicon-remove-circle'></span>
                     </button>
                 </td>
+            </tr-->
+            <tbody ng-repeat="pais in paises.list">
+            	<tr>
+            		<td>{{pais.codigo}}</td>
+            		<td>{{pais.nome}}</td>
+            	</tr>
+            </tbody>
+            <tr>
+            	<th colspan="2">
+            		<ul class="pagination">
+            			<li class="{{paises.pageNumber == 1 ? 'disabled' : ''}}">
+            			<a ng-click="getTodos(1)"> <span class="glyphicon glyphicon-fast-backward"></span></a>
+            			</li>
+            			<li class="{{paises.pageNumber == 1 ? 'disabled' : ''}}">
+            				<a ng-click="getTodos(paises.pageNumber - 1)">
+            					<span class="glyphicon glyphicon-step-backward"></span>
+            				</a>
+            			</li>
+            			<li ng-repeat="numeroPagina in paises.pagesAround" class="{{numeroPagina == paises.pageNumber ? 'active' : ''}}">
+            				<a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+            			</li>
+            			<li class="{{paises.pageNumber == paises.pageCount ? 'disabled' : '' }}">
+            				<a ng-click="getTodos(paises.pageNumber + 1)">
+            					<span class="glyphicon glyphicon-step-forward"></span>
+            				</a>
+            			</li>
+            			<li class="{{paises.pageNumber == paises.pageCount ? 'disabled' : ''}}">
+							<a ng-click="getTodos(paises.pageCount)"> <span
+									class="glyphicon glyphicon-fast-forward" />
+							</a>
+						</li>
+            		</ul>
+            	</th>
             </tr>
+            
         </table>
         <label> Total de Paises: {{(paises| filter : busca).length}}
             / {{paises.length}}</label>

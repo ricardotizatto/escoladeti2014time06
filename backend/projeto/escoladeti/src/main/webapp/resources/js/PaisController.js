@@ -56,10 +56,11 @@ function paisController($scope, $http, $routeParams) {
                 });
     };
 
-    $scope.getTodos = function() {
-        $http.get('./rest/paisSource/pais')
-                .success(function(paises, status) {
-                    $scope.paises = paises;
+    $scope.getTodos = function(numeroPagina) {
+    	console.log(numeroPagina);
+        $http.get('./rest/paisSource/listar/pag/' + numeroPagina)
+                .success(function(listaPaises, status) {
+                    $scope.paises = listaPaises;
                 })
                 .error(function(data, status) {
                     console.log('erro ao buscar paises ' + data);

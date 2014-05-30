@@ -24,12 +24,12 @@ public class Solicitacao extends Entidade {
 
     private static final long serialVersionUID = 1L;
 
-    @NotEmpty
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "id_solicitante")
+    @JoinColumn(name = "id_solicitante", referencedColumnName = "id")
     private Pessoa solicitante;
 
+    @NotEmpty
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "solicitacao_alunos")
     private List<PessoaFisica> alunos;

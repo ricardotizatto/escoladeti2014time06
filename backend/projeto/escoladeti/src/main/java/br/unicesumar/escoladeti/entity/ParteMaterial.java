@@ -31,7 +31,7 @@ public class ParteMaterial extends Entidade {
     
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="id_ordemproducao")
+    @JoinColumn(name="id_ordemproducao",referencedColumnName="id")
     private OrdemProducao ordemProducao;
     
     @ManyToOne

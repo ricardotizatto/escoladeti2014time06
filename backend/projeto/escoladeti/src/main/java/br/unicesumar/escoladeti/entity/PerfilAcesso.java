@@ -14,8 +14,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class PerfilAcesso extends Entidade {
-
-    @Column(nullable = false)
+	private static final long serialVersionUID = 1L;
+	
+	@Column(nullable = false)
     @NotEmpty
     private String nome;
     
