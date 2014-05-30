@@ -82,3 +82,7 @@ function eventoController($scope, $http, $routeParams) {
 	
 }
 
+function Ctrl($scope) {
+    $scope.value = new Date(2010, 11, 28, 14, 57);
+  }
+
