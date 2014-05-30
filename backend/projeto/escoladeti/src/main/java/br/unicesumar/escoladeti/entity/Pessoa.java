@@ -1,6 +1,5 @@
 package br.unicesumar.escoladeti.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @DiscriminatorColumn(name = "tipo")
 public abstract class Pessoa extends Entidade {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@NotNull
+    @NotNull
     @NotEmpty
     @Column
     private String nome;

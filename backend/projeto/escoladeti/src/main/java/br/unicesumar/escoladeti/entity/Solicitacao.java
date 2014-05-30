@@ -12,50 +12,56 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Solicitacao extends Entidade{
-	private static final long serialVersionUID = 1L;
-	
-	@NotEmpty
-	@NotNull
-	@JoinColumn(name="id_solicitante")
-	private Pessoa solicitante;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="solicitacao_alunos")
-	private List<PessoaFisica> alunos;
-	
-	private String nre;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id_responsavel")
-	private PessoaFisica responsavel;
+public class Solicitacao extends Entidade {
 
-	@NotEmpty
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="id_solicitacao")
-	private List<SolicitacaoItem> itensSolicitacao;
-	
-	@NotNull
-	private Date dataChegada;
+    private static final long serialVersionUID = 1L;
 
-	public Solicitacao(PessoaFisica responsavel, Date dataChegada) {
-		this.responsavel = responsavel;
-		this.dataChegada = dataChegada;
-	}
-	
-	public void setNre(String nre) {
-		this.nre = nre;
-	}
-	
-	public String getNre() {
-		return nre;
-	}
-	
+    @NotEmpty
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_solicitante")
+    private Pessoa solicitante;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "solicitacao_alunos")
+    private List<PessoaFisica> alunos;
+
+    private String nre;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_responsavel")
+    private PessoaFisica responsavel;
+
+    @NotEmpty
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_solicitacao")
+    private List<SolicitacaoItem> itensSolicitacao;
+
+    @NotNull
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataChegada;
+
+    public Solicitacao() {
+    }
+
+    public Solicitacao(PessoaFisica responsavel, Date dataChegada) {
+        this.responsavel = responsavel;
+        this.dataChegada = dataChegada;
+    }
+
+    public void setNre(String nre) {
+        this.nre = nre;
+    }
+
+    public String getNre() {
+        return nre;
+    }
 }
