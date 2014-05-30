@@ -15,7 +15,9 @@ footer {
 }
 
 .btn-padrao{
-	width: 106px;
+    width: 106px;
+    height: 35px;
+    font-size: 11px;
 }
 
 /* inicio botao de envio de arquivos */
@@ -51,6 +53,10 @@ input[readonly] {
     text-align: center;
 }
 
+#image-amacap{
+    text-align: center;
+}
+
 #amacap-titulo{
     text-align: center;
     padding: 0px;
@@ -62,7 +68,7 @@ input[readonly] {
 }
 
 .titulo-02{
-    font-size: 26px;
+    font-size: 16px;
 }
 .amacap-sub-titulo{
     margin-top: 80px;
