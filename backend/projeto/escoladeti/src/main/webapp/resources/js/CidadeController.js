@@ -81,10 +81,17 @@ function cidadeController ($scope, $http, $routeParams){
                 .success(function(unidadeFederativa){
                     console.log('Estados carregados');
                     $scope.unidadeFederativa = unidadeFederativa;
+                    //$scope.cidade.unidadeFederativa = {"id":1,"nome":"parana","sigla":"pr","pais":{"id":1,"nome":"Brasil","sigla":"BR","codPais":1}};
+                    
+                    //console.log({a : 1} === {a : 1}); 
+                    //console.log(unidadeFederativa[0])
+                    //console.log($scope.cidade.unidadeFederativa);
+                    
         })
                 .error(function(data){
                     console.log('Nao foi possivel carregar os estados' + data);
         });
+        
     };
 //    
 //     function carregaCidade (){

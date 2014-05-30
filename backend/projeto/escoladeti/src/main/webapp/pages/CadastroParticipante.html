@@ -9,12 +9,13 @@
 			document.getElementById('data').value="";
 
 	}
+        
 </script>
 
 <div class="container" ng-controller="eventoController" ng-init="getTodos()">
 	<label>&nbsp;</label>
 	<fieldset>
-			<form action="#" method="POST">
+			<form action="#" method="POST" name="participante">
 				<div class="col-sm-7" style="height:400px; overflow:auto;">
 					<legend>Cursos Disponíveis</legend>
 					<div class="blogShort" ng-repeat="evento in eventos">
@@ -36,20 +37,17 @@
 					<legend>Dados Pessoais</legend>
 					<br>
 					<label>CPF</label>
-					<input class="form-control" name="cpf" id="cpf" type="text" />
+					<input class="form-control" name="cpf" type="text" ng-model="pessoa.cpf" onBlur="ValidarCPF(participante.cpf);" onKeyPress="MascaraCPF(participante.cpf);" maxlength="14" placeholder="Número do CPF" />
 					<label>RG</label>
-					<input class="form-control" name="rg" id="rg" type="text" />
+					<input class="form-control" name="rg" type="text" ng-model="pessoa.rg" onKeyPress="MascaraRG(participante.rg);" maxlength="12" placeholder="R.G." />
 					<label>Nome</label>
-					<input class="form-control" name="nome" id="nome" type="text" />
+					<input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome" />
 					<label>Email</label>
-					<input class="form-control" name="email" id="email" type="text" />
+					<input class="form-control" name="email" type="text" ng-model="pessoa.email" placeholder="Endereço de email">
 					<label>Telefone</label>
-					<input class="form-control" name="telefone" id="telefone" type="text" />
-					<input class="" type="radio" />
-					<label>Masculino</label>
-					<input class="" type="radio" />
-					<label>Feminino</label>
-					<input type="date" name="data" id="data" class="form-control">
+					<input class="form-control" name="tel" type="text" ng-model="telefone.numero" onKeyPress="MascaraTelefone(participante.tel);" maxlength="15"  onBlur="ValidaTelefone(participante.tel);"  placeholder="(44) 9999-9999" required>
+					<input name="sexo" value="M" type="radio" ng-model="pessoa.sexo" /> <label>Masculino</label>
+					<input name="sexo" value="F" type="radio" ng-model="pessoa.sexo" />  <label>Feminino</label>
 				</div>
 				<div align="middle">
 					<button class="btn btn-default">Cursos futuros</button>
