@@ -22,23 +22,23 @@ public class Pais extends Entidade {
     
     @NotNull
     @Column
-    private Integer codPais;
+    private Integer codigo;
 
     public Pais() {
 
     }
 
-    public Pais(Long id, String nome, String sigla, int codPais) {
+    public Pais(Long id, String nome, String sigla, Integer codigo) {
         this.id = id;
         this.nome = nome;
         this.sigla = sigla;
-        this.codPais = codPais;
+        this.codigo = codigo;
     }
 
-    public Pais(String nome, String sigla, int codPais) {
+    public Pais(String nome, String sigla, Integer codigo) {
         this.nome = nome;
         this.sigla = sigla;
-        this.codPais = codPais;
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -56,13 +56,14 @@ public class Pais extends Entidade {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
+    
+    public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+    
+    public Integer getCodigo() {
+		return codigo;
+	}
 
-    public int getCodPais() {
-        return codPais;
-    }
-
-    public void setCodPais(int codPais) {
-        this.codPais = codPais;
-    }
 
 }

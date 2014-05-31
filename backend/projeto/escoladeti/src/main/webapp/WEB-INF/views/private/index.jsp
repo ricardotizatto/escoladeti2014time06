@@ -1,5 +1,5 @@
  <!DOCTYPE html>
-<html lang="pt-br" ng-app="cabecalho">
+<html lang="pt-br" ng-app="app">
     <head>
         <meta charset="UTF-8">
         <title> Escola de TI - Time 06 </title>

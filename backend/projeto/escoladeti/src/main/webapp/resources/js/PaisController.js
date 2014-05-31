@@ -2,13 +2,6 @@ function paisController($scope, $http, $routeParams) {
     console.log('carregando controller');
 
     $scope.deletar = function(pais) {
-        /*  $http.delete('./rest/paisSorce/pais', pais)
-         .success(function(data, status) {
-         console.log('deletado');
-         })
-         .error(function(data, status) {
-         console.log('erro ao deletar '+data);
-         }); */
         console.log('deletando pais ' + JSON.stringify(pais));
         $http({
             method: 'DELETE',

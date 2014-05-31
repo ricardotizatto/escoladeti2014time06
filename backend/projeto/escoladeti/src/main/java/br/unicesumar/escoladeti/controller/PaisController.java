@@ -27,6 +27,7 @@ public class PaisController implements Serializable {
 	@ResponseBody
 	public Pais salvar(@RequestBody Pais pais) {
 		return paisService.salvar(pais);
+		
 	}
 
 	@RequestMapping(value = "/pais", method = RequestMethod.PUT)
