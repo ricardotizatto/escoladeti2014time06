@@ -13,7 +13,7 @@
             <nav class="navbar navbar-inverse" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" > <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
+                    <a class="navbar-brand" > <span class="glyphicon glyphicon-globe"></span>AMACAP</a>
                 </div>
             </nav>
 		<div class="container">
@@ -49,7 +49,7 @@
 		</div>
             <footer class="footer navbar-fixed-bottom">
                 <div class="container">
-                    <p>&nbsp; ® Unicesumar 2014 - Escola de T.I. - Time 06</p>
+                    <p>Unicesumar 2014 - Escola de T.I. - Time 06</p>
                 </div>
             </footer>
 	</body>

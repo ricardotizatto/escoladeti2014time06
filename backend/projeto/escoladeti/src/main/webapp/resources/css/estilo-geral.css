@@ -81,3 +81,13 @@ input[readonly] {
 .sub-titulo-02{
     font-size: 80px;
 }
+
+.contador{
+    margin-top: 30px;
+}
+
+.rodape-tabela{
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    margin: 0px;
+}
