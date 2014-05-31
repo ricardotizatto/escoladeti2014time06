@@ -73,8 +73,12 @@ function paisController($scope, $http, $routeParams) {
     }
     
     $scope.cancelar = function() {
-        window.location = '#/listapais';
+        $scope.pais = {};
     }
 
+    $scope.listar = function() {
+        $scope.pais = {};
+        window.location = '#/listapais';
+    }
 
 }
