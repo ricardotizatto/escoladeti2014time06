@@ -129,16 +129,5 @@
                 <p>Unicesumar 2014 - Escola de T.I. - Time 06</p>
             </div>
         </footer>
-        <style>
-    	body{
-    		padding-top: 70px;
-    		text-transform: uppercase;
-    		text-transform: uppercase;
-    	}
-    	
-    	input,button{
-    		text-transform: uppercase;
-    	}
-    </style>
     </body>
 </html>

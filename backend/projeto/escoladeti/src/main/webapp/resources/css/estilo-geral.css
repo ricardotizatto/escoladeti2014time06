@@ -2,7 +2,13 @@
     margin: 0px auto;
     padding: 0px;
     font-family:  arial, verdana, Serif, sans-serif, Georgia, "Times New Roman";
+    text-transform: uppercase;
 }
+
+body{
+    padding-top: 70px;
+}
+        
 footer {
 	height: 50px;
 	color: #999;
@@ -18,6 +24,10 @@ footer {
     width: 106px;
     height: 35px;
     font-size: 11px;
+}
+
+input,button{
+    text-transform: uppercase;
 }
 
 /* inicio botao de envio de arquivos */
