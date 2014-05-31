@@ -23,6 +23,11 @@ public class PaisService {
 		return new DataPage<>(paisRepository.findAll(pageRequestForAsc(pagina, "nome")));
 	}
 	
+	public DataPage<Pais> getPaisPorNome(String nomeParcial) {
+		return new DataPage<Pais>(paisRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+		
+	}
+	
 	public void deletar(Pais pais) {
 		paisRepository.delete(pais);
 	}

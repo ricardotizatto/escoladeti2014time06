@@ -124,10 +124,5 @@
             </div><!-- /.navbar-collapse -->
         </nav>
         <div ng-view></div>
-        <footer class="footer navbar-fixed-bottom">
-            <div class="container">
-                <p>Unicesumar 2014 - Escola de T.I. - Time 06</p>
-            </div>
-        </footer>
     </body>
 </html>

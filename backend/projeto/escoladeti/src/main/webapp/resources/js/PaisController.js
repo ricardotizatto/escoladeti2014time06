@@ -36,6 +36,16 @@ function paisController($scope, $http, $routeParams) {
     $scope.editar = function(pais) {
         window.location = '#/cadastropais/' + pais.id;
     }
+    
+    $scope.buscaPaisContendoNome = function () {
+    	console.log($scope.busca);
+    	$http.get('./rest/paisSource/pais?q=' + $scope.busca)
+    		.then(function (retorno){
+    			console.log(retorno.data.list);
+    			$scope.paises = retorno.data;
+    		});
+    }   
+    		
 
     $scope.salvar = function() {
         console.log($scope.pais)

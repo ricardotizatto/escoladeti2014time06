@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.unicesumar.escoladeti.entity.Pais;
@@ -48,6 +49,12 @@ public class PaisController implements Serializable {
 	@ResponseBody
 	public DataPage<Pais> getTodos() {
 		return paisService.getTodos(1);
+	}
+	
+	@RequestMapping(value = "/pais",params = {"q"}, method = RequestMethod.GET)
+	@ResponseBody
+	public DataPage<Pais> getPorNome(@RequestParam String q) {
+		return paisService.getPaisPorNome(q);
 	}
 
 	@RequestMapping(value = { "/listar/pag/{pagina}" }, method = RequestMethod.GET)
