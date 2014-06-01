@@ -157,6 +157,10 @@ appCabecalho.config(['$routeProvider',
                 templateUrl: './pages/ListaEvento.html',
                 controller: 'eventoController'
             })
+           .when('/listaparticipantes', {
+                templateUrl: './pages/ListaParticipantes.html',
+                controller: 'participanteController'
+            })
             .when('/cadastroevento', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
