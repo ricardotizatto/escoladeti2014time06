@@ -8,6 +8,11 @@
 body{
     padding-top: 70px;
 }
+
+.body-login{
+    padding-top: 0px;
+}
+
         
 footer {
 	height: 50px;
@@ -23,7 +28,9 @@ footer {
 .btn-padrao{
     width: 106px;
     height: 35px;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 9px 0px;
 }
 
 input,button{

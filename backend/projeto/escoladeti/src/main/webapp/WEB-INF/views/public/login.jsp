@@ -9,7 +9,7 @@
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
         <title>Escola de TI - 2014 - Time 6</title>
 	</head>
-	<body>
+	<body class="body-login" >
             <nav class="navbar navbar-inverse" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
