@@ -19,10 +19,9 @@ public class ParteMaterialService {
     public ParteMaterial findByResponsavel(String nomeResponsavel) {
         return parteMaterialRepository.findByResponsavel(nomeResponsavel);
     }
-
     
-    public void salvar(ParteMaterial parteMaterial) {
-        parteMaterialRepository.save(parteMaterial);
+    public ParteMaterial salvar(ParteMaterial parteMaterial) {
+        return parteMaterialRepository.save(parteMaterial);
     }
     
     public void remover(ParteMaterial parteMaterial) {
@@ -31,5 +30,9 @@ public class ParteMaterialService {
     
     public List<ParteMaterial> getTodos() {
         return parteMaterialRepository.findAll();
+    }
+    
+    public ParteMaterial getById(Long id) {
+        return parteMaterialRepository.findOne(id);
     }
 }

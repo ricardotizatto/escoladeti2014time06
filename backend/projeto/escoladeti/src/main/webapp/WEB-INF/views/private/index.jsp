@@ -1,5 +1,5 @@
  <!DOCTYPE html>
-<html lang="pt-br" ng-app="cabecalho">
+<html lang="pt-br" ng-app="app">
     <head>
         <meta charset="UTF-8">
         <title> Escola de TI - Time 06 </title>
@@ -34,13 +34,12 @@
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
-        <script type="text/javascript" src="./resources/js/ProducaoController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
-		<script type="text/javascript" src="./resources/js/EventoController.js" ></script>
-		<script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
     </head>
     <body>
-        <nav class="navbar navbar-inverse" role="navigation">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -49,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> Escola de TI - Time 06 </a>
+                <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> AMACAP </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -94,8 +93,8 @@
                                 <a tabindex="-1">Eventos</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#/cadastroparticipante">Cadastro de Participante</a></li>
-									<li><a href="#/cadastroevento">Cadastro de Evento</a></li>
-									<li><a href="#/listaevento">Lista Eventos</a></li>
+                                    <li><a href="#/cadastroevento">Cadastro de Evento</a></li>
+                                    <li><a href="#/listaevento">Lista Eventos</a></li>
                                 </ul>
                             </li>
                         </ul>	
@@ -125,10 +124,5 @@
             </div><!-- /.navbar-collapse -->
         </nav>
         <div ng-view></div>
-        <footer class="footer navbar-fixed-bottom">
-            <div class="container">
-                <p>&nbsp; ® Unicesumar 2014 - Escola de T.I. - Time 06</p>
-            </div>
-        </footer>
     </body>
 </html>

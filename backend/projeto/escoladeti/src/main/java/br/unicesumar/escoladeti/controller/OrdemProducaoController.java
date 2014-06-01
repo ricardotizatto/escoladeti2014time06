@@ -1,7 +1,9 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.OrdemProducao;
+import br.unicesumar.escoladeti.entity.ParteMaterial;
 import br.unicesumar.escoladeti.service.OrdemProducaoService;
+import br.unicesumar.escoladeti.service.ParteMaterialService;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class OrdemProducaoController implements Serializable{
     
     @Autowired
     private OrdemProducaoService ordemProducaoService;
+    
+    @Autowired
+    private ParteMaterialService parteMaterialService;
     
     @RequestMapping(value="/ordemproducao", method = RequestMethod.POST)
     @ResponseBody
@@ -42,5 +47,33 @@ public class OrdemProducaoController implements Serializable{
     @ResponseBody
     public void deletar(@RequestBody OrdemProducao ordemProducao){
         ordemProducaoService.deletar(ordemProducao);
+    }
+    
+    //
+    //ParteMaterial
+    //
+    @RequestMapping(value = "/parteMaterial", method = RequestMethod.POST)
+    @ResponseBody
+    public ParteMaterial salvarParteMaterial(@RequestBody ParteMaterial parteMaterial) {
+        return this.parteMaterialService.salvar(parteMaterial);
+    }
+
+    @RequestMapping(value = "/parteMaterial", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ParteMaterial> getTodasPartesMateriais() {
+        return this.parteMaterialService.getTodos();
+    }
+
+    @RequestMapping(value = "/parteMaterial/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ParteMaterial getParteMaterialById(@PathVariable Long id) {
+        return this.parteMaterialService.getById(id);
+    }
+
+    @RequestMapping(value = "/parteMaterial", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deletar(@RequestBody ParteMaterial parteMaterial) {
+        this.parteMaterialService.remover(parteMaterial);
+        return "Deleted";
     }
 }

@@ -35,10 +35,7 @@ public class UsuarioController implements Serializable {
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     @ResponseBody
     public Usuario salvar(@RequestBody Usuario usuario) {
-        System.out.println(usuario.getUsuarioPerfilAcesso().getFimVigencia());
-//        UsuarioPerfilAcesso upa = usuario.getUsuarioPerfilAcesso();
-//        upa.setUsuario(usuario);
-//        upa.setPerfilAcesso(usuario.getUsuarioPerfilAcesso().getPerfilAcesso());
+        System.out.println(usuario.getNome());
         return this.usuarioService.salvar(usuario);
     }
 

@@ -2,36 +2,43 @@ package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Pais extends Entidade {
-
-    @Column(nullable = false)
+	private static final long serialVersionUID = 1L;
+	
+	@NotNull
+    @Column
     @NotEmpty
     private String nome;
-    @Column(nullable = false)
+	
+	@NotNull
+    @Column
     @NotEmpty
     private String sigla;
-    @Column(nullable = false)
-    private Integer codPais;
+    
+    @NotNull
+    @Column
+    private Integer codigo;
 
     public Pais() {
 
     }
 
-    public Pais(Long id, String nome, String sigla, int codPais) {
+    public Pais(Long id, String nome, String sigla, Integer codigo) {
         this.id = id;
         this.nome = nome;
         this.sigla = sigla;
-        this.codPais = codPais;
+        this.codigo = codigo;
     }
 
-    public Pais(String nome, String sigla, int codPais) {
+    public Pais(String nome, String sigla, Integer codigo) {
         this.nome = nome;
         this.sigla = sigla;
-        this.codPais = codPais;
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -49,13 +56,14 @@ public class Pais extends Entidade {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
+    
+    public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+    
+    public Integer getCodigo() {
+		return codigo;
+	}
 
-    public int getCodPais() {
-        return codPais;
-    }
-
-    public void setCodPais(int codPais) {
-        this.codPais = codPais;
-    }
 
 }

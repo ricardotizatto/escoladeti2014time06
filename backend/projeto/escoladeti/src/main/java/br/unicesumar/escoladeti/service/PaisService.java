@@ -1,10 +1,11 @@
 package br.unicesumar.escoladeti.service;
 
-import java.util.List;
+import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.unicesumar.escoladeti.controller.DataPage;
 import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.repository.PaisRepository;
 
@@ -17,8 +18,14 @@ public class PaisService {
 		return paisRepository.save(pais);
 	}
 	
-	public List<Pais> getTodos(){
-		return paisRepository.findAll();
+	public DataPage<Pais> getTodos(Integer pagina){
+//		return paisRepository.findAll();
+		return new DataPage<>(paisRepository.findAll(pageRequestForAsc(pagina, "nome")));
+	}
+	
+	public DataPage<Pais> getPaisPorNome(String nomeParcial) {
+		return new DataPage<Pais>(paisRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+		
 	}
 	
 	public void deletar(Pais pais) {

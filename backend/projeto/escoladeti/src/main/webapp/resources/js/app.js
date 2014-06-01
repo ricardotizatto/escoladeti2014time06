@@ -1,7 +1,7 @@
 'use strict';
-var appCabecalho = angular.module('cabecalho', ['ngRoute']);
+var app = angular.module('app', ['ngRoute']);
 
-appCabecalho.config(['$routeProvider',
+app.config(['$routeProvider',
     function($routeProvider) {
 
         $routeProvider
@@ -137,8 +137,8 @@ appCabecalho.config(['$routeProvider',
                 templateUrl: './pages/OrdemProducao.html',
                 controller: 'OrdemProducaoController'
             })
-            .when('/ordemproducaoparte', {
-                templateUrl: './pages/OrdemProducaoParte.html',
+            .when('/ordemproducao/:ordemProducaoId', {
+                templateUrl: './pages/OrdemProducao.html',
                 controller: 'OrdemProducaoController'
             })
             .when('/cadastrolivro', {
@@ -168,7 +168,15 @@ appCabecalho.config(['$routeProvider',
             .when('/cadastroevento/:eventoId', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
-            })		
+            })
+            .when('/cadastropartematerial', {
+                templateUrl: './pages/CadastroParteMaterial.html',
+                controller: 'ordemProducaoController'
+            })
+            .when('/cadastropartematerial/:parteMaterialId', {
+                templateUrl: './pages/CadastroParteMaterial.html',
+                controller: 'ordemProducaoController'
+            })	
             .when('/principal', {
                 templateUrl: './pages/Principal.html'
             //    controller: 'principalController'
@@ -179,6 +187,20 @@ appCabecalho.config(['$routeProvider',
 ]);
 
 
-appCabecalho.factory('bd', function() {
-    return {name: 'banco de dados'};
-});
+app.directive('capitalize', function() {
+	   return {
+	     require: 'ngModel',
+	     link: function(scope, element, attrs, modelCtrl) {
+	        var capitalize = function(inputValue) {
+	           var capitalized = inputValue.toUpperCase();
+	           if(capitalized !== inputValue) {
+	              modelCtrl.$setViewValue(capitalized);
+	              modelCtrl.$render();
+	            }         
+	            return capitalized;
+	         }
+	         modelCtrl.$parsers.push(capitalize);
+	         capitalize(scope[attrs.ngModel]);  // capitalize initial value
+	     }
+	   };
+	});

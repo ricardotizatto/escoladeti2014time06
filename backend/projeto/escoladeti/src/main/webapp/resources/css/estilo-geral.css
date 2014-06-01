@@ -2,7 +2,18 @@
     margin: 0px auto;
     padding: 0px;
     font-family:  arial, verdana, Serif, sans-serif, Georgia, "Times New Roman";
+    text-transform: uppercase;
 }
+
+body{
+    padding-top: 70px;
+}
+
+.body-login{
+    padding-top: 0px;
+}
+
+        
 footer {
 	height: 50px;
 	color: #999;
@@ -15,7 +26,15 @@ footer {
 }
 
 .btn-padrao{
-	width: 106px;
+    width: 106px;
+    height: 35px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 9px 0px;
+}
+
+input,button{
+    text-transform: uppercase;
 }
 
 /* inicio botao de envio de arquivos */
@@ -47,6 +66,12 @@ input[readonly] {
 .estilo-status{
     font-size: 20px;
     padding: 6px;
+    color: #fff;
+    text-align: center;
+}
+
+#image-amacap{
+    text-align: center;
 }
 
 #amacap-titulo{
@@ -60,7 +85,7 @@ input[readonly] {
 }
 
 .titulo-02{
-    font-size: 26px;
+    font-size: 16px;
 }
 .amacap-sub-titulo{
     margin-top: 80px;
@@ -72,4 +97,14 @@ input[readonly] {
 
 .sub-titulo-02{
     font-size: 80px;
+}
+
+.contador{
+    margin-top: 30px;
+}
+
+.rodape-tabela{
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    margin: 0px;
 }
