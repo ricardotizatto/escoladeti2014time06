@@ -10,11 +10,11 @@ function livroController($scope, $http, $routeParams) {
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
         .success(function(data, status) {
-            $scope.getTodos();
+            $scope.getTodos(1);
             console.log('Livro deletado!')
         })
         .error(function(data, status) { 
-            console.log('Livro não foi deletado');
+            console.log('Livro não foi deletado' + data);
         });
     };
     
@@ -22,19 +22,17 @@ function livroController($scope, $http, $routeParams) {
         $scope.livro = getNovoLivro();
         window.location = '#/cadastrolivro';
     };
-    
+        
     $scope.carregarLivro = function() {
-        if ($routeParams.livroId) {
-            $http.get('./rest/livroSource/livro/' + $routeParams.livroId)
-                    .success(function(livro) {
-                        console.log('Sucesso ao livro: ');
-                        $scope.livro = livro;
-                    })
-                    .error(function(data, status) {
-                        console.log('erro ao buscar livro ');
-                    });
-        }
-    };
+        console.log('carregando livro com id: ' + $routeParams.livroId );
+        if (!$routeParams.livroId)
+            return;//se não tiver id não buscar
+
+        $http.get('./rest/livroSource/livro/' + $routeParams.livroId)
+            .success(function(livro, status) {
+                $scope.livro = livro;
+            });
+    }
 
     $scope.editar = function(livro) {
         console.log(livro);
@@ -62,15 +60,16 @@ function livroController($scope, $http, $routeParams) {
                 });
     };
     
-    $scope.getTodos = function() {
-        $http.get("./rest/livroSource/livro")
-            .success(function(livros, status) {
-                $scope.livros = livros;
+    $scope.getTodos = function(numeroPagina) {
+    	console.log(numeroPagina);
+        $http.get('./rest/livrosSource/listar/pag/' + numeroPagina)
+            .success(function(listaLivros, status) {
+                $scope.livros = listaLivros;
             })
             .error(function(data, status) {
-                console.log('erro ao buscar livros');
+                console.log('erro ao buscar livros ' + data);
             });
-    };
+    }
 
     function getNovoLivro() {
         console.log('novo livro');

@@ -1,5 +1,7 @@
 package br.unicesumar.escoladeti.service;
 
+import br.unicesumar.escoladeti.controller.DataPage;
+import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Livro;
 import br.unicesumar.escoladeti.repository.LivroRepository;
 import java.util.List;
@@ -16,12 +18,12 @@ public class LivroService {
         return this.livroRepository.save(livro);
     }
 
-    public List<Livro> getTodos() {
-        return this.livroRepository.findAll();
+    public DataPage<Livro> getTodos(Integer pagina){
+        return new DataPage<>(livroRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
 
-    public List<Livro> getByName(String nome) {
-        return this.livroRepository.findByNomeContainingOrderByNomeAsc(nome);
+    public DataPage<Livro> getLivroPorNome(String nomeParcial) {
+        return new DataPage<Livro>(livroRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
     }
 
     public void deletar(Livro livro) {
