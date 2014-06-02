@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -23,8 +24,15 @@ public class CidadeController implements Serializable {
     @RequestMapping(value= "/cidade", method = RequestMethod.POST)
     @ResponseBody
     public Cidade salvar(@RequestBody Cidade cidade){
-        System.out.println(cidade.getFundacao());
         return this.cidadeService.salvar(cidade);
+    }
+    
+    @RequestMapping(value = "/cidade", method = RequestMethod.PUT)
+    @ResponseBody
+    public Cidade editar(@RequestBody Cidade cidade){
+        Cidade cidadeEditada = this.cidadeService.getById(cidade.getId());
+        System.out.println("Cidade " + cidade.getId());
+        return cidadeService.salvar(cidadeEditada);
     }
     
     @RequestMapping(value = "/cidade/{id}", method = RequestMethod.GET)
@@ -35,11 +43,22 @@ public class CidadeController implements Serializable {
     
     @RequestMapping(value="/cidade", method = RequestMethod.GET)
     @ResponseBody
-    public List<Cidade> getTodos(){
-        return cidadeService.getTodos();
+    public DataPage<Cidade> getTodos(){
+        return cidadeService.getTodos(1);
     }
     
-    @RequestMapping(value="/cidade", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/cidade",params = {"q"}, method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Cidade> getPorNome(@RequestParam String q){
+        return cidadeService.getCidadePorNome(q);
+    }
+    
+    @RequestMapping(value = "/listar/pag/{pagina}", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Cidade> listarCidade(@PathVariable Integer pagina){
+        return cidadeService.getTodos(pagina);
+    }
+    @RequestMapping(value = "/cidade", method = RequestMethod.DELETE)
     @ResponseBody
     public String deletar(@RequestBody Cidade cidade){
         cidadeService.deletar(cidade);
