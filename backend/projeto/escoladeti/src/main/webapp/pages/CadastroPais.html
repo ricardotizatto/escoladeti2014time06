@@ -1,13 +1,13 @@
 <div class="container" ng-controller="paisController" ng-init="carregarPais()">
     <div class="row">
         <div class="form-group col-sm-12">
-            <legend> Cadastro de País </legend>
+            <legend> Cadastro de Paï¿½s </legend>
         </div>
     </div>
     <form action="" method="POST" role="form" ng-submit="salvar()">							
         <div class="row ">
             <div class="form-group col-sm-2">
-                <label> Código </label>
+                <label> Cï¿½digo </label>
                 <input type="number" title="CÃ³digo do PaÃ­s" class="form-control" 
                 	ng-model="pais.codigo" required="required"  pattern="^(\d{3})$" placeholder="999"
                 	maxlength="3" /> <!-- ExpressÃ£o para validar 3 digitos numericos -->
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <span class="pull-right">
-                    <a class="btn btn-primary btn-padrao" ng-click="listar()" >
+                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
                         <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
                     </a>  
                     <button type="submit" class="btn btn-success btn-padrao" >

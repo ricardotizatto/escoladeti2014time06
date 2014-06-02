@@ -1,54 +1,47 @@
 ﻿<div class="container" ng-controller="livroController" ng-init="carregarLivro()">
-    <label> &nbsp; </label>
-    <fieldset>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <legend> <span class="glyphicon glyphicon-book"></span> Cadastro de Livro</legend>
+        </div>
+    </div>
+    <form action="" method="POST" role="form" ng-submit="salvar()">	
         <div class="row">
-            <div class="form-group col-sm-12">
-                <legend> <span class="glyphicon glyphicon-book"></span> Cadastro de Livro  </legend>
+            <div class="form-group col-sm-7">
+                <label> Nome </label>
+                <input class="form-control" title="Nome do livro deve ser maiusculo"  name="nome" type="text" ng-model="livro.nome"  pattern="[A-Z]+" maxlength="40" required placeholder="nome do livro" />
+            </div>
+
+            <div class="form-group col-sm-5">
+                <label> Autor </label>
+                <input class="form-control" title="Nome do autor deve ser maisculo"  name="autor" type="text" ng-model="livro.autor"  pattern="[A-Z]+" maxlength="40" required placeholder="nome do autor" />
             </div>
         </div>
-        <form action="" method="POST" role="form" ng-submit="salvar()">	
-            <div class="row">
-                <div class="form-group col-sm-7">
-                    <label> Nome </label>
-                    <input class="form-control" name="nome" type="text" ng-model="livro.nome" placeholder="Nome"/>
-                </div>
-
-                <div class="form-group col-sm-5">
-                    <label> Autor </label>
-                    <input class="form-control" name="nome" type="text" ng-model="livro.autor" placeholder="Autor"/>
-                </div>
+        <div class="row ">
+            <div class="form-group col-sm-5">
+                <label> Editora </label>
+                <input class="form-control" title="Nome da editora deve ser maisculo"  name="editora" type="text" ng-model="livro.editora"  pattern="[A-Z]+" maxlength="40" required placeholder="nome da editora" />
             </div>
-            
-            <div class="row ">
-                <div class="form-group col-sm-5">
-                    <label> Editora </label>
-                    <input class="form-control" name="nome" type="text" ng-model="livro.editora" placeholder="Editora"/>
-                </div>
-                <div class="form-group col-sm-4">
-                    <label> Disciplina </label>
-                    <input class="form-control" name="nome" type="text" ng-model="livro.disciplina" placeholder="Disciplina"/>
-                </div>
-                <div class="form-group col-sm-3">
-                    <label>Ano Edição</label>
-                    <input class="form-control" name="fundacao" type="text" ng-model="livro.anoEdicao" maxlength="4" placeholder="aaaa" />
-                </div>
+            <div class="form-group col-sm-4">
+                <label> Disciplina </label>
+                <input class="form-control" title="Nome da disciplina deve ser maisculo"  name="disciplina" type="text" ng-model="livro.disciplina"  pattern="[A-Z]+" maxlength="40" required placeholder="nome da disciplina" />
             </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <span class="pull-right">	
-                        <a href="#/listalivro" class="btn btn-danger btn-padrao">
-                            <span class="glyphicon glyphicon-remove" ></span> Cancelar
-                        </a>
-                        <button type="submit" class="btn btn-success btn-padrao">
-                            <span class="glyphicon glyphicon-ok"  ></span> Salvar	
-                        </button>
-                    </span>		
-                </div>
+            <div class="form-group col-sm-3">
+                <label>Ano Edição</label>
+                <input class="form-control" title="Data de ver quatro digitos"  name="anoEdicao" type="text" ng-model="livro.anoEdicao"  pattern="[0-9]{4}" maxlength="4" required placeholder="Ano da Edição" />
             </div>
-            <div class="row">
-                <div class="col-sm-12"><hr></div>
-            </div>			
-        </form>
-    </fieldset>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="pull-right">
+                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                    </a>  
+                    <button type="submit" class="btn btn-success btn-padrao" >
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar
+                    </button>
+                </span>		
+            </div>
+        </div>
+        <div class="row"><div class="col-sm-12"><hr></div></div>			
+    </form>
 </div>
