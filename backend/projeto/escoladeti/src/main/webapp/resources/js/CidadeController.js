@@ -129,6 +129,9 @@ function cidadeController($scope, $http, $routeParams) {
         $scope.cidade = {};
         window.location = '#/listacidade';
     };
-
+    $scope.voltar = function(){
+        $scope.cidade = {};
+        window.location = '#/listacidade';
+    }
 
 }
