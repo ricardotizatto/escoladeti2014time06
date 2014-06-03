@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.exceptions.InconsistenciaException;
@@ -49,6 +51,19 @@ public class PaisController implements Serializable {
 	@ResponseBody
 	public DataPage<Pais> getTodos() {
 		return paisService.getTodos(1);
+	}
+	
+	@RequestMapping(value = "/except", method = RequestMethod.GET)
+	@ResponseBody
+	public Error exception2() throws InconsistenciaException {
+		
+		throw new InconsistenciaException("Martinho fez cagada");
+	}
+	
+	@ExceptionHandler(InconsistenciaException.class)
+	@ResponseStatus(value=HttpStatus.BAD_REQUEST, reason="Martinho fez cagada de novo")
+	public Error inconsistent() {
+		return new Error("cagada");
 	}
 	
 	@RequestMapping(value = "/pais",params = {"q"}, method = RequestMethod.GET)
