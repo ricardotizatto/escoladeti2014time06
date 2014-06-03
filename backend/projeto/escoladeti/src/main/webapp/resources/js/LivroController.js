@@ -30,6 +30,7 @@ function livroController($scope, $http, $routeParams) {
 
         $http.get('./rest/livroSource/livro/' + $routeParams.livroId)
             .success(function(livro, status) {
+                console.log(livro);
                 $scope.livro = livro;
             });
     }
