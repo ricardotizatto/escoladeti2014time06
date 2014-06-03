@@ -70,66 +70,34 @@ function cidadeController($scope, $http, $routeParams) {
                     $scope.cidades = retorno.data;
                 });
     };
-
-//    $scope.carregarEstado = function(){
-//       console.log("carregando estado"); 	  		
-//       $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
-//               .success(function(estado, status){
-////                   console.log(angular.toJson(estado, true));
-//                    $scope.estados = estado;
-//               })
-//               .error(function(data, status){
-//                   console.log('erro ao buscar estados')
-//               });
-//    };
+    
     $scope.carregaEstados = function() {
-        carregaEstados();
-    };
-
-
-    function carregaEstados() {
         $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
                 .success(function(unidadeFederativa) {
                     console.log('Estados carregados');
                     $scope.unidadeFederativa = unidadeFederativa;
-                    //$scope.cidade.unidadeFederativa = {"id":1,"nome":"parana","sigla":"pr","pais":{"id":1,"nome":"Brasil","sigla":"BR","codPais":1}};
-
-                    //console.log({a : 1} === {a : 1}); 
-                    //console.log(unidadeFederativa[0])
-                    //console.log($scope.cidade.unidadeFederativa);
-
                 })
                 .error(function(data) {
                     console.log('Nao foi possivel carregar os estados' + data);
                 });
 
-    }
-    ;
-//    
-//     function carregaCidade (){
-//        $http.get('./rest/cidadeSource/cidade')
-//                .success(function(cidade){
-//                    console.log('Cidade carregada');
-//                    $scope.cidade = cidade;
-//        })
-//                .error(function(data){
-//                    console.log('Nao foi possivel carregar a cidade' + data);
-//        });
-//    };
-
+    };
+    
     function getNovaCidade() {
         console.log('nova cidade');
         return {};
     };
-    
-    $scope.cancelar = function(){
+
+    $scope.cancelar = function() {
         $scope.cidade = {};
     };
-    $scope.listar = function(){
+    
+    $scope.listar = function() {
         $scope.cidade = {};
         window.location = '#/listacidade';
     };
-    $scope.voltar = function(){
+    
+    $scope.voltar = function() {
         $scope.cidade = {};
         window.location = '#/listacidade';
     }
