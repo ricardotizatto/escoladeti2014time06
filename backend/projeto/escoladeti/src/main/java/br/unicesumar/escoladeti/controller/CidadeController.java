@@ -41,7 +41,7 @@ public class CidadeController implements Serializable {
         return this.cidadeService.getById(id);
     }
     
-    @RequestMapping(value="/cidade", method = RequestMethod.GET)
+    @RequestMapping(value = "/cidade", method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Cidade> getTodos(){
         return cidadeService.getTodos(1);
@@ -53,7 +53,7 @@ public class CidadeController implements Serializable {
         return cidadeService.getCidadePorNome(q);
     }
     
-    @RequestMapping(value = "/listar/pag/{pagina}", method = RequestMethod.GET)
+    @RequestMapping(value = { "/listar/pag/{pagina}" }, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Cidade> listarCidade(@PathVariable Integer pagina){
         return cidadeService.getTodos(pagina);

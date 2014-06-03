@@ -1,10 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
-
-
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -25,32 +22,11 @@ public class Livro extends  Material  {
         this.nome = nome;
     }
     
-    public Livro(String nome, String disciplina ) {
+    public Livro( Long id, String nome ) {
+        this.id = id;
         this.nome = nome;
-        this.disciplina = disciplina;
     }
-    
-    public Livro(String nome, String disciplina, String autor ) {
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-    }
-    
-    public Livro(String nome, String disciplina, String autor, String editora) {
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-        this.editora = editora;
-    }
-    
-    public Livro(String nome, String disciplina, String autor, String editora, Long anoEdicao) {
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-        this.editora = editora;
-        this.anoEdicao = anoEdicao;
-    }
-  
+
     public String getNome() {
         return nome;
     }

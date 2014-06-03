@@ -1,7 +1,4 @@
 ﻿<div class="container" ng-controller="cidadeController" ng-init="carregaEstados();carregarCidade();">
-    <label> &nbsp; </label>
-    {{cidade}}
-    <fieldset>
         <div class="row">
             <div class="form-group col-sm-12">
                 <legend> Cadastro de Cidade  </legend>
@@ -11,13 +8,11 @@
             <div class="row ">
                 <div class="form-group col-sm-2">
                     <label>Fundação</label>
-                    <input class="form-control" name="fundacao" type="date" ng-model="cidade.fundacao"/>
+                    <input class="form-control" name="fundacao" type="date" ng-model="cidade.fundacao" title="Data de Fundação" required="required"/>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-sm-9">
+                <div class="form-group col-sm-7">
                     <label> Nome </label>
-                    <input class="form-control" name="nome" type="text" placeholder="Nome" ng-model="cidade.nome"/>
+                    <input class="form-control" name="nome" title="Nome da cidade deve ser maiusculo" pattern="[A-Z]+" maxlength="40" required="required" type="text" placeholder="MARINGA" ng-model="cidade.nome"/>
                 </div>
                 <div class="form-group col-sm-3">
                     <label> Estado </label>
@@ -29,21 +24,17 @@
             <div class="row">
                 <div class="col-sm-12">
                     <span class="pull-right">	
-                        <a href="#/listacidade" class="btn btn-danger btn-padrao">
-                            <span class="glyphicon glyphicon-remove" ></span> Cancelar
-                        </a>
+                        <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                            <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                        </a> 
                         <button type="submit" class="btn btn-success btn-padrao">
                             <span class="glyphicon glyphicon-ok"  ></span> Salvar	
                         </button>
                     </span>		
                 </div>
             </div>
-            {{cidade.fundacao | date: 'dd/MM/yyyy'}}<!-- formato que a data tem que apresenta, se input for type text a data é populada -->
-            <br>
-            {{cidade.unidadeFederativa.nome}}
             <div class="row">
                 <div class="col-sm-12"><hr></div>
             </div>			
         </form>
-    </fieldset>
 </div>
