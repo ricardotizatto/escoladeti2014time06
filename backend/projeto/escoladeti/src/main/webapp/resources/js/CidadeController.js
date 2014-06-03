@@ -14,7 +14,7 @@ function cidadeController($scope, $http, $routeParams) {
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
                 .success(function(data, status) {
-                    $scope.getTodos();
+                    $scope.getTodos(1);
                     console.log("cidade deletado");
                 }).error(function(data, status) {
             console.log("erro ao deletar cidade " + data);
@@ -63,7 +63,7 @@ function cidadeController($scope, $http, $routeParams) {
     };
 
     $scope.buscaCidadeContendoNome = function() {
-        conselo.log($scope.busca);
+        console.log($scope.busca);
         $http.get('./rest/cidadeSource/cidade?q=' + $scope.busca)
                 .then(function(retorno) {
                     console.log(retorno.data.list);
