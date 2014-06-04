@@ -26,6 +26,12 @@ function eventoController($scope, $http, $routeParams) {
             console.log("erro ao deletar evento ");
         });
     };
+    
+    $scope.listarParticipantes = function(evento) {
+        console.log(evento);
+        window.location = '#/listaparticipantes/' + evento.id;
+
+    };    
 
     $scope.salvar = function() {
         console.log(angular.toJson($scope.evento, true));

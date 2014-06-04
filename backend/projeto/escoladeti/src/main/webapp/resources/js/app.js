@@ -127,7 +127,7 @@ app.config(['$routeProvider',
             })
             .when('/cadastroparticipante', {
                 templateUrl: './pages/CadastroParticipante.html',
-                controller: 'eventoController'
+                controller: 'participanteController'
             })
             .when('/listaordemproducao', {
                 templateUrl: './pages/ListaOrdemProducao.html',
@@ -157,9 +157,17 @@ app.config(['$routeProvider',
                 templateUrl: './pages/ListaEvento.html',
                 controller: 'eventoController'
             })
+           .when('/listaparticipantes', {
+                templateUrl: './pages/ListaParticipantes.html',
+                controller: 'participanteController'
+            })
             .when('/cadastroevento', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
+            })
+            .when('/listaparticipantes/:idevento', {
+                templateUrl: './pages/ListaParticipantes.html',
+                controller: 'participanteController'
             })
             .when('/cadastroevento/:eventoId', {
                 templateUrl: './pages/CadastroEvento.html',
