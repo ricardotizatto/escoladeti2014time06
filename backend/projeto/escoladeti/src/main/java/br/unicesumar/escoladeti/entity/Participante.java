@@ -18,14 +18,18 @@ public class Participante extends Entidade{
     @Column
     private String cpf;
     private String rg;
-    private Long id_evento;
+    private Long idevento;
+    private String email;
+    private String telefone;
+    private String deficiente;
+    private String sexo;
 
-    public Long getId_evento() {
-        return id_evento;
+    public Long getIdevento() {
+        return idevento;
     }
 
-    public void setId_evento(Long id_evento) {
-        this.id_evento = id_evento;
+    public void setIdevento(Long idevento) {
+        this.idevento = idevento;
     }
     
     public String getNome() {
@@ -51,4 +55,38 @@ public class Participante extends Entidade{
     public void setRg(String rg) {
         this.rg = rg;
     } 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getDeficiente() {
+        return deficiente;
+    }
+
+    public void setDeficiente(String deficiente) {
+        this.deficiente = deficiente;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
 }

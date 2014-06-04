@@ -35,7 +35,7 @@ public class Evento extends Entidade {
    // private List<Participante> participante;
     
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_evento", referencedColumnName = "id")
+    @JoinColumn(name = "idevento", referencedColumnName = "id")
     private List<Participante> participante;
     
     private String organizacao;

@@ -30,6 +30,7 @@
                 <th width="20%">Descrição</th>
                 <th width="20%">Data</th>
                 <th width="20%">Local</th>
+                <th width="20%">Participantes</th>
                 <th width="5%">Alterar</th>
                 <th width="5%">Excluir</th>
             </tr>
@@ -38,6 +39,11 @@
                  <td>{{evento.descricao.substring(0,180)}}</td>
                  <td>{{evento.data}}</td>
                 <td>{{evento.local}}</td>
+                <td>
+                    <button type='button' class='btn btn-warning btn-sm' ng-click="listarParticipantes(evento)">
+                        Ver lista
+                    </button>
+                </td>
                 <td>
                     <button type='button' class='btn btn-warning btn-sm' ng-click="editar(evento)">
                         <span class='glyphicon glyphicon-edit'></span>

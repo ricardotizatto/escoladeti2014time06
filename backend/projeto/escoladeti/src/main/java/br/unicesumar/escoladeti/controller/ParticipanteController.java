@@ -28,14 +28,24 @@ public class ParticipanteController implements Serializable {
     @RequestMapping(value="/participante/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Participante getById(@PathVariable Long id){
+        System.out.println("buscando por id:");
         return participanteService.getById(id);
     }
     
     @RequestMapping(value="/participante", method = RequestMethod.GET)
     @ResponseBody
     public List<Participante> getTodos(){
+        System.out.println("buscando geral:");
         return participanteService.getTodos();
     }
+    
+    @RequestMapping(value="/listaparticipantes/{idevento}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Participante> getByIdevento(@PathVariable Long idevento){
+        System.out.println("buscando por id:" +idevento);
+        return participanteService.getByIdevento(idevento);
+    }
+        
     
     @RequestMapping(value="/participante", method = RequestMethod.DELETE)
     @ResponseBody

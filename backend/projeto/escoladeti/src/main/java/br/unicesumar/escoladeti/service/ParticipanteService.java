@@ -31,4 +31,8 @@ public class ParticipanteService {
     public List<Participante> getByName(String nome) {
         return this.participanteRepository.findByNomeContainingOrderByNomeAsc(nome);
     }
+    
+    public List<Participante> getByIdevento(Long idevento) {
+        return this.participanteRepository.findByIdevento(idevento);
+    }
 }

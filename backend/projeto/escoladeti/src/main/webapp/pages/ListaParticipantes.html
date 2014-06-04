@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="ParticipanteController" ng-init="getTodos()">
+﻿<div class="container" ng-controller="participanteController" ng-init="listarParticipantes()">
     <label> &nbsp; </label>
     <fieldset>
         <legend> <span class="glyphicon glyphicon-list-alt"></span> Lista Participantes
@@ -29,25 +29,18 @@
                 <th width="20%">Nome</th>
                 <th width="20%">CPF</th>
                 <th width="20%">RG</th>
-                <th width="20%">Evento</th>
-                <th width="5%">Alterar</th>
-                <th width="5%">Excluir</th>
+                <th width="20%">Email</th>
+                <th width="20%">Telefone</th>
+                <th width="20%">Sexo</th>
             </tr>
             <tr ng-repeat="participante in participantes| filter : busca">
                 <td>{{participante.nome}}</td>
                  <td>{{participante.cpf}}</td>
                  <td>{{participante.rg}}</td>
-                <td>{{participante.id_evento}}</td>
-                <td>
-                    <button type='button' class='btn btn-warning btn-sm' ng-click="editar(participante)">
-                        <span class='glyphicon glyphicon-edit'></span>
-                    </button>
-                </td>
-                <td>
-                    <button type='submit' class='btn btn-danger btn-sm' ng-click="deletar(participante)">
-                        <span class='glyphicon glyphicon-remove-circle'></span>
-                    </button>
-                </td>
+                <td>{{participante.email}}</td>
+                <td>{{participante.telefone}}</td>
+                <td>{{participante.sexo}}</td>
+                
             </tr>
         </table>
         <label> Total de Participantes: {{(participantes| filter : busca).length}} / {{participantes.length}}</label>
