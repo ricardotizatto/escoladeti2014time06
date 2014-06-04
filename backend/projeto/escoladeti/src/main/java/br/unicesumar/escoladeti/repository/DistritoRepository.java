@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
     public interface DistritoRepository extends JpaRepository<Distrito, Long> {
         public Distrito findById(Long id);
-        public Page<Distrito> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
+//        public Page<Distrito> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);;
         
 }
