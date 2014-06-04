@@ -50,7 +50,13 @@ function livroController($scope, $http, $routeParams) {
     }  
 
     $scope.salvar = function() {
-        console.log(angular.toJson($scope.livro, true));
+  
+        $scope.livro.nome = $scope.livro.nome.toUpperCase();
+        $scope.livro.autor = $scope.livro.autor.toUpperCase();
+        $scope.livro.editora = $scope.livro.editora.toUpperCase();
+        $scope.livro.disciplina = $scope.livro.disciplina.toUpperCase();
+
+        console.log($scope.livro);
         $http.post("./rest/livroSource/livro", $scope.livro)
                 .success(function(livro, status) {
                     $scope.livro = getNovoLivro();
@@ -81,4 +87,5 @@ function livroController($scope, $http, $routeParams) {
         $scope.livro = {};
         window.location = '#/listalivro';
     }
+    
 }

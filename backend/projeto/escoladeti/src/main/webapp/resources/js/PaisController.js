@@ -48,6 +48,10 @@ function paisController($scope, $http, $routeParams) {
     		
 
     $scope.salvar = function() {
+        
+        $scope.pais.nome = $scope.pais.nome.toUpperCase();
+        $scope.pais.sigla = $scope.pais.sigla.toUpperCase();
+        
         console.log($scope.pais)
         $http.post('./rest/paisSource/pais', $scope.pais)
                 .success(function(pais, status) {
