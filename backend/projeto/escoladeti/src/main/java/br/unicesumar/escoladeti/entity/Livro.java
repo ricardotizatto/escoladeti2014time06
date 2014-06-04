@@ -1,16 +1,13 @@
 package br.unicesumar.escoladeti.entity;
 
-
-
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Livro extends  Material  {
-	private static final long serialVersionUID = 1L;
-	@NotNull
+    private static final long serialVersionUID = 1L;
+    @NotNull
     @NotEmpty
     private String nome;
     private String disciplina;
@@ -25,32 +22,11 @@ public class Livro extends  Material  {
         this.nome = nome;
     }
     
-    public Livro(String nome, String disciplina ) {
+    public Livro( Long id, String nome ) {
+        this.id = id;
         this.nome = nome;
-        this.disciplina = disciplina;
     }
-    
-    public Livro(String nome, String disciplina, String autor ) {
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-    }
-    
-    public Livro(String nome, String disciplina, String autor, String editora) {
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-        this.editora = editora;
-    }
-    
-    public Livro(String nome, String disciplina, String autor, String editora, Long anoEdicao) {
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-        this.editora = editora;
-        this.anoEdicao = anoEdicao;
-    }
-  
+
     public String getNome() {
         return nome;
     }
@@ -91,9 +67,10 @@ public class Livro extends  Material  {
         this.anoEdicao = anoEdicao;
     }
 
-	@Override
-	public String getInfo() {
-    StringBuilder dados = new StringBuilder();
+    @Override
+    public String getInfo() {
+        
+        StringBuilder dados = new StringBuilder();
         
         dados.append("Nome: ");
         dados.append(getNome());
@@ -107,5 +84,6 @@ public class Livro extends  Material  {
         dados.append(getAnoEdicao());        
         
         return dados.toString();
-	}
+       
+    }
 }

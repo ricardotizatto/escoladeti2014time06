@@ -10,7 +10,7 @@ function paisController($scope, $http, $routeParams) {
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
                 .success(function(data, status) {
-                    $scope.getTodos();
+                    $scope.getTodos(1);
                     console.log('pais deletado');
                 }).error(function(data, status) {
             console.log('erro ao deletar pais ' + data);
@@ -74,12 +74,8 @@ function paisController($scope, $http, $routeParams) {
         console.log('novo pais');
         return {};
     }
-    
-    $scope.cancelar = function() {
-        $scope.pais = {};
-    }
 
-    $scope.listar = function() {
+    $scope.voltar = function() {
         $scope.pais = {};
         window.location = '#/listapais';
     }
