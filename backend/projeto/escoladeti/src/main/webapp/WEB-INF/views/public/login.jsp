@@ -13,7 +13,7 @@
     <body class="body-login" >
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="navbar-header">
-                <a class="navbar-brand" > <span class="glyphicon glyphicon-globe"></span>AMACAP</a>
+                <a class="navbar-brand" href="#"><img src="./resources/imagens/icone-amacap-cinza.png"/><span class="titulo-menu-amacap" >AMACAP</span> </a>
             </div>
         </nav>
         <div class="container">

@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> AMACAP </a>
+                <a class="navbar-brand" href="#"><img src="./resources/imagens/icone-amacap-cinza.png"/><span class="titulo-menu-amacap" >AMACAP</span> </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
