@@ -2,7 +2,8 @@
 <html lang="pt-br" ng-app="app">
     <head>
         <meta charset="UTF-8">
-        <title> Escola de TI - Time 06 </title>
+        <title> AMACAP </title>
+        <link rel="shortcut icon" type="image/png" href="./resources/imagens/icone-amacap.png" />
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-select.css" rel="stylesheet">
