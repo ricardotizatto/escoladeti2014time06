@@ -39,7 +39,7 @@ public class LivroController implements Serializable{
         return this.livroService.getTodos(1);
     }
 
-    @RequestMapping(value = "/livro", params = {"q"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/livro", params = {"q" }, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Livro> getPorNome(@RequestParam String q) {
         return livroService.getLivroPorNome(q);
@@ -53,8 +53,7 @@ public class LivroController implements Serializable{
 
     @RequestMapping(value = "/livro", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deletar(@RequestBody Livro livro) {
+    public void deletar(@RequestBody Livro livro) {
         this.livroService.deletar(livro);
-        return "deleted";
     }
 }

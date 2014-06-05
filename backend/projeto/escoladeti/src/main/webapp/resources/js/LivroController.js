@@ -11,7 +11,7 @@ function livroController($scope, $http, $routeParams) {
         })
         .success(function(data, status) {
             $scope.getTodos(1);
-            console.log('Livro deletado!')
+            console.log('Livro deletado!');
         })
         .error(function(data, status) { 
             console.log('Livro não foi deletado' + data);
@@ -69,7 +69,7 @@ function livroController($scope, $http, $routeParams) {
     
     $scope.getTodos = function(numeroPagina) {
     	console.log(numeroPagina);
-        $http.get('./rest/livrosSource/listar/pag/' + numeroPagina)
+        $http.get('./rest/livroSource/listar/pag/' + numeroPagina)
             .success(function(listaLivros, status) {
                 $scope.livros = listaLivros;
             })
