@@ -79,7 +79,7 @@ public class OrdemProducaoController implements Serializable{
     @RequestMapping(value = "/parteMaterial", method = RequestMethod.GET)
     @ResponseBody
     public List<ParteMaterial> getTodasPartesMateriais() {
-        return this.parteMaterialService.getTodas();
+        return this.parteMaterialService.getTodos();
     }
 
     @RequestMapping(value = "/parteMaterial/{id}", method = RequestMethod.GET)
