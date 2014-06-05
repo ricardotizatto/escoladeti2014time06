@@ -4,7 +4,7 @@ function paisController($scope, $http, $routeParams) {
     $scope.deletar = function(pais) {
         console.log('deletando pais ' + JSON.stringify(pais));
         
-        BootstrapDialog.confirm('Deseja realmente deletar o Pais: <b>' + pais.nome +'</b> ?', function(result) {
+        BootstrapDialog.confirm('Deseja realmente deletar o Pais: <b>' + pais.nome +'</b>?', function(result) {
             if (result) {
                 $http({
                     method: 'DELETE',
@@ -15,9 +15,11 @@ function paisController($scope, $http, $routeParams) {
                     .success(function(data, status) {
                         $scope.getTodos(1);
                         console.log('pais deletado');
+                        BootstrapDialog.alert('Pais <b>' + pais.nome + '</b> deletado com Sucesso!' );
                     })
                     .error(function(data, status) {
                         console.log('erro ao deletar pais ' + data);
+                        BootstrapDialog.alert('Ocorreu um erro ao deletar o Pais: <b>' + pais.nome + '</b>');
                     });
             } else {
                 $scope.getTodos(1);
@@ -64,13 +66,14 @@ function paisController($scope, $http, $routeParams) {
         
         console.log($scope.pais)
         $http.post('./rest/paisSource/pais', $scope.pais)
-                .success(function(pais, status) {
-                    $scope.pais = getNovoPais();
-                    console.log('pais editado = ' + pais);
-                })
-                .error(function(data, status) {
-                    console.log('pais nao salvo = ' + data);
-                });
+            .success(function(pais, status) {
+                $scope.pais = getNovoPais();
+                console.log('pais editado = ' + pais);
+            })
+            .error(function(data, status) {
+                console.log('pais nao salvo = ' + data);
+                BootstrapDialog.alert('Ocorreu um erro ao salvar o Pais: <b>' + pais.nome + '</b>');
+            });
     };
 
     $scope.getTodos = function(numeroPagina) {
@@ -81,6 +84,7 @@ function paisController($scope, $http, $routeParams) {
                 })
                 .error(function(data, status) {
                     console.log('erro ao buscar paises ' + data);
+                    BootstrapDialog.alert('Ocorreu um erro ao buscar os Paises');
                 });
     }
 

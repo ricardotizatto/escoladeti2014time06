@@ -3,18 +3,27 @@ function livroController($scope, $http, $routeParams) {
 
     $scope.deletar = function(livro) {
         console.log('deletando livro ' + JSON.stringify(livro));
-        $http({
-            method: 'DELETE',
-            data: livro,
-            url: './rest/livroSource/livro',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-        .success(function(data, status) {
+        
+        BootstrapDialog.confirm('Deseja realmente deletar o Livro: <b>' + livro.nome + '</b>?', function(result) {
+            if (result) {
+                $http({
+                    method: 'DELETE',
+                    data: livro,
+                    url: './rest/livroSource/livro',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
+                .success(function(data, status) {
+                    $scope.getTodos(1);
+                    console.log('Livro deletado!');
+                    BootstrapDialog.alert('Livro <b>' + livro.nome + '</b> deletado com Sucesso!' );
+                })
+                .error(function(data, status) { 
+                    console.log('Livro não foi deletado' + data);
+                    BootstrapDialog.alert('Ocorreu um erro ao deletar o Livro: <b>' + livro.nome + '</b>');
+                });
+            } else {
             $scope.getTodos(1);
-            console.log('Livro deletado!');
-        })
-        .error(function(data, status) { 
-            console.log('Livro não foi deletado' + data);
+            }    
         });
     };
     
@@ -60,13 +69,14 @@ function livroController($scope, $http, $routeParams) {
 
         console.log($scope.livro);
         $http.post("./rest/livroSource/livro", $scope.livro)
-                .success(function(livro, status) {
-                    $scope.livro = getNovoLivro();
-                    console.log("livro salva = " + livro);
-                })
-                .error(function(data, status) {
-                    console.log("erro ao salvar livro" + data);
-                });
+            .success(function(livro, status) {
+                $scope.livro = getNovoLivro();
+                console.log("livro salva = " + livro);
+            })
+            .error(function(data, status) {
+                console.log("erro ao salvar livro" + data);
+                BootstrapDialog.alert('Ocorreu um erro ao salvar o Livro: <b>' + livro.nome + '</b>');
+            });
     };
     
     $scope.getTodos = function(numeroPagina) {
@@ -81,6 +91,7 @@ function livroController($scope, $http, $routeParams) {
             })
             .error(function(data, status) {
                 console.log('erro ao buscar livros ' + data);
+                BootstrapDialog.alert('Ocorreu um erro ao buscar os Livros!');
             });
     }
 
