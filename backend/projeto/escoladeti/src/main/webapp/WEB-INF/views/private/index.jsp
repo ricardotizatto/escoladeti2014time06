@@ -7,10 +7,12 @@
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-select.css" rel="stylesheet">
+        <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
         <script type="text/javascript" src="./resources/libs/jquery.js"></script>
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
         <script src="./resources/libs/bootstrap-select.js"></script>
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>

@@ -3,19 +3,28 @@ function paisController($scope, $http, $routeParams) {
 
     $scope.deletar = function(pais) {
         console.log('deletando pais ' + JSON.stringify(pais));
-        $http({
-            method: 'DELETE',
-            data: pais,
-            url: './rest/paisSource/pais',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-        .success(function(data, status) {
-            $scope.getTodos(1);
-            console.log('pais deletado');
-        })
-        .error(function(data, status) {
-            console.log('erro ao deletar pais ' + data);
+        
+        BootstrapDialog.confirm('Deseja realmente deletar o Pais: <b>' + pais.nome +'</b> ?', function(result) {
+            if (result) {
+                $http({
+                    method: 'DELETE',
+                    data: pais,
+                    url: './rest/paisSource/pais',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
+                    .success(function(data, status) {
+                        $scope.getTodos(1);
+                        console.log('pais deletado');
+                    })
+                    .error(function(data, status) {
+                        console.log('erro ao deletar pais ' + data);
+                    });
+            } else {
+                $scope.getTodos(1);
+            }
         });
+        
+
     };
 
     $scope.novo = function() {
