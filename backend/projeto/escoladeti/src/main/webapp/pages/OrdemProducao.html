@@ -1,89 +1,83 @@
 <div class="container" ng-controller="OrdemProducaoController" ng-init="carregar()">
-    <label> &nbsp; </label>
-    <fieldset>
-        <div class="row">
-            <div class="form-group col-sm-12">
-                <legend> <span class="glyphicon glyphicon-file"></span> Solicitação de Ordem de produção </legend>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <legend> <span class="glyphicon glyphicon-file"></span> Ordem de produção </legend>
+        </div>
+    </div>
+    <form action="" method="POST" role="form" ng-submit="salvar()" >							
+        <div class="row ">
+            <div class="form-group col-sm-3">
+                <label> Solicitação </label>
+                <input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{6}" required placeholder="Número da Solicitação" />
+            </div>
+            <div class="form-group col-sm-3"> 
+                <label> Material </label>
+                <input class="form-control" name="material" type="text" ng-model="ordemProducao.material" pattern="[A-Za-z ]+" maxlength="40" required placeholder="Material"/>
+            </div>
+            <div class="form-group col-sm-3">
+                <label> Tradução </label>
+                <input class="form-control" name="traducao" type="text" ng-model="ordemProducao.traducao" pattern="[A-Za-z ]+" maxlength="40" required placeholder="Tradução" />
+            </div>
+            <div class="form-group col-sm-3">
+                <label> Status </label>
+                <input class="form-control {{ getStatusOrdemProducao(ordemProducao.state) }} estilo-status" type="text" ng-model="ordemProducao.state" pattern="[A-Za-z ]+" maxlength="40" required placeholder="Status da Ordem de Produção" />  
             </div>
         </div>
-        <form action="" method="POST" role="form">							
-            <div class="row ">
-                <div class="form-group col-sm-3">
-                    <label> Solicitação </label>
-                    <input class="form-control" type="text" ng-model="ordemProducao.solicitacao" />
-                </div>
-                <div class="form-group col-sm-3"> 
-                    <label> Material </label>
-                    <input class="form-control" name="material" type="text" ng-model="ordemProducao.material"/>
-                </div>
-                <div class="form-group col-sm-3">
-                    <label> Tradução </label>
-                    <input class="form-control" name="traducao" type="text" ng-model="ordemProducao.traducao" />
-                </div>
-                <div class="form-group col-sm-3">
-                    <label> Status </label>
-                    <input class="form-control {{ getStatusOrdemProducao(ordemProducao.state) }} estilo-status" type="text" ng-model="ordemProducao.state" ng-disabled="disabled"/>  
-                </div>
+        <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <button type='submit' class='btn btn-primary btn-padrao' ng-click="novaParteMaterial()" >
+                    <span class='glyphicon glyphicon-plus-sign'></span> Nova Parte
+                </button>
+                <button type='submit' class='btn btn-success btn-padrao' ng-click="" >
+                    <span class='glyphicon glyphicon-ok-circle'></span> Finalizar
+                </button>
             </div>
-            <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>
-            <div class="row">
-                <div class="form-group col-sm-12">
-                    <button type='submit' class='btn btn-primary btn-padrao' ng-click="novaParteMaterial()" >
-                        <span class='glyphicon glyphicon-plus-sign'></span> Nova Parte
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+
+                <table class="table table-striped table-hover" >
+                    <tr>
+                        <th class="col-md-2">Parte</th>
+                        <th class="col-md-3">Responsável</th>
+                        <th class="col-md-3">Revisor</th>
+                        <th class="col-md-2">Status</th>
+                        <th class="col-md-2">Ação</th>
+                    </tr>
+                    <tr>
+                        <td><a href="" ng-click="editar()" > Parte 1 </a> </td>
+                        <td>Nome do Responsável</td>
+                        <td>Nome do Revisor</td>
+                        <td>Aceito</td>
+                        <td>
+                            <button type='submit' class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
+                                <span class='glyphicon glyphicon-download'><input type="file"></span>
+                            </button>
+                            <button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial()">
+                                <span class='glyphicon glyphicon-edit'></span>
+                            </button>
+                            <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
+                                <span class='glyphicon glyphicon-remove-circle' alt="Exluir" />
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="pull-right">
+                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                    </a>  
+                    <button type="submit" class="btn btn-success btn-padrao">
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar
                     </button>
-                    <button type='submit' class='btn btn-success btn-padrao' ng-click="" >
-                        <span class='glyphicon glyphicon-ok-circle'></span> Finalizar
-                    </button>
-                </div>
+                </span>		
             </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-
-                    <table width="100%" border="0" class="table table-striped table-hover" >
-                        <tr>
-                            <th width="20%">Parte</th>
-                            <th width="25%">Responsável</th>
-                            <th width="20%">Revisor</th>
-                            <th width="20%">Status</th>
-                            <th width="15%">Ação</th>
-                        </tr>
-                        <tr>
-                            <td><a href="" ng-click="editar()" > Parte 1 </a> </td>
-                            <td>Nome do Responsável</td>
-                            <td>Nome do Revisor</td>
-                            <td>Aceito</td>
-                            <td>
-                                <button type='submit' class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
-                                    <span class='glyphicon glyphicon-download'><input type="file"></span>
-                                </button>
-                                <button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial()">
-                                    <span class='glyphicon glyphicon-edit'></span>
-                                </button>
-                                <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
-                                    <span class='glyphicon glyphicon-remove-circle' alt="Exluir" ></span>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <span class="pull-right">	
-                        <a href="" class="btn btn-danger btn-padrao" ng-click="cancelar()">
-                            <span class="glyphicon glyphicon-remove" ></span> Cancelar 
-                        </a>
-                        <button type="submit" class="btn btn-success btn-padrao" ng-click="salvar()">
-                            <span class="glyphicon glyphicon-ok" ></span> Salvar
-                        </button>
-                    </span>		
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 "><hr></div>
-            </div>			
-        </form>
-    </fieldset>
+        </div>
+        <div class="row"><div class="col-sm-12"><hr></div></div>		
+    </form>
 </div>

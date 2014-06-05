@@ -3,19 +3,58 @@ function paisController($scope, $http, $routeParams) {
 
     $scope.deletar = function(pais) {
         console.log('deletando pais ' + JSON.stringify(pais));
-        $http({
-            method: 'DELETE',
-            data: pais,
-            url: './rest/paisSource/pais',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-        .success(function(data, status) {
-            $scope.getTodos(1);
-            console.log('pais deletado');
-        })
-        .error(function(data, status) {
-            console.log('erro ao deletar pais ' + data);
+        
+        BootstrapDialog.confirm('Deseja realmente deletar o Pais: <b>' + pais.nome +'</b>?', function(result) {
+            if (result) {
+                $http({
+                    method: 'DELETE',
+                    data: pais,
+                    url: './rest/paisSource/pais',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
+                    .success(function(data, status) {
+                        $scope.getTodos(1);
+                        console.log('pais deletado');
+                        BootstrapDialog.show({
+                            title: 'Notifica&ccedil;&atilde;o',
+                            message: 'Pais <b>' + pais.nome + '</b> deletado com Sucesso!',
+                            type: BootstrapDialog.TYPE_SUCCESS,
+                            buttons: [{
+                                    id: 'btn-ok',
+                                    icon: 'glyphicon glyphicon-ok',
+                                    label: ' OK',
+                                    cssClass: 'btn-success btn-padrao',
+                                    autospin: false,
+                                    action: function(dialogRef) {
+                                        dialogRef.close();
+                                    }
+                                }]
+                        });
+                    })
+                    .error(function(data, status) {
+                        console.log('erro ao deletar pais ' + data);
+                        BootstrapDialog.show({
+                            title: 'Notifica&ccedil;&atilde;o',
+                            message: 'Ocorreu um erro ao deletar o Pais: <b>' + pais.nome + '</b>',
+                            type: BootstrapDialog.TYPE_DANGER,
+                            buttons: [{
+                                    id: 'btn-ok',
+                                    icon: 'glyphicon glyphicon-ok',
+                                    label: ' OK',
+                                    cssClass: 'btn-success btn-padrao',
+                                    autospin: false,
+                                    action: function(dialogRef) {
+                                        dialogRef.close();
+                                    }
+                                }]
+                        });
+                    });
+            } else {
+                $scope.getTodos(1);
+            }
         });
+        
+
     };
 
     $scope.novo = function() {
@@ -55,24 +94,54 @@ function paisController($scope, $http, $routeParams) {
         
         console.log($scope.pais)
         $http.post('./rest/paisSource/pais', $scope.pais)
-                .success(function(pais, status) {
-                    $scope.pais = getNovoPais();
-                    console.log('pais editado = ' + pais);
-                })
-                .error(function(data, status) {
-                    console.log('pais nao salvo = ' + data);
+            .success(function(pais, status) {
+                $scope.pais = getNovoPais();
+                console.log('pais editado = ' + pais);
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Pais <b>' + pais.nome + '</b> salvo com sucesso!',
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
                 });
+            })
+            .error(function(data, status) {
+                console.log('pais nao salvo = ' + data);
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Ocorreu um erro ao salvar o Pais: <b>' + pais.nome + '</b>',
+                    type: BootstrapDialog.TYPE_DANGER,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                });
+            });
     };
 
     $scope.getTodos = function(numeroPagina) {
     	console.log(numeroPagina);
         $http.get('./rest/paisSource/listar/pag/' + numeroPagina)
-                .success(function(listaPaises, status) {
-                    $scope.paises = listaPaises;
-                })
-                .error(function(data, status) {
-                    console.log('erro ao buscar paises ' + data);
-                });
+            .success(function(listaPaises, status) {
+                $scope.paises = listaPaises;
+            })
+            .error(function(data, status) {
+                console.log('erro ao buscar paises ' + data);
+            });
     }
 
     function getNovoPais() {

@@ -3,18 +3,55 @@ function livroController($scope, $http, $routeParams) {
 
     $scope.deletar = function(livro) {
         console.log('deletando livro ' + JSON.stringify(livro));
-        $http({
-            method: 'DELETE',
-            data: livro,
-            url: './rest/livroSource/livro',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-        .success(function(data, status) {
-            $scope.getTodos(1);
-            console.log('Livro deletado!');
-        })
-        .error(function(data, status) { 
-            console.log('Livro não foi deletado' + data);
+        
+        BootstrapDialog.confirm('Deseja realmente deletar o Livro: <b>' + livro.nome + '</b>?', function(result) {
+            if (result) {
+                $http({
+                    method: 'DELETE',
+                    data: livro,
+                    url: './rest/livroSource/livro',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
+                .success(function(data, status) {
+                    $scope.getTodos(1);
+                    console.log('Livro deletado!');
+                    BootstrapDialog.show({
+                        title: 'Notifica&ccedil;&atilde;o',
+                        message: 'Livro <b>' + livro.nome + '</b> deletado com Sucesso!',
+                        type: BootstrapDialog.TYPE_SUCCESS,
+                        buttons: [{
+                                id: 'btn-ok',
+                                icon: 'glyphicon glyphicon-ok',
+                                label: ' OK',
+                                cssClass: 'btn-success btn-padrao',
+                                autospin: false,
+                                action: function(dialogRef) {
+                                    dialogRef.close();
+                                }
+                            }]
+                    });
+                })
+                .error(function(data, status) { 
+                    console.log('Livro não foi deletado' + data);
+                    BootstrapDialog.show({
+                        title: 'Notifica&ccedil;&atilde;o',
+                        message: 'Ocorreu um erro ao deletar o Livro: <b>' + livro.nome + '</b>',
+                        type: BootstrapDialog.TYPE_DANGER,
+                        buttons: [{
+                                id: 'btn-ok',
+                                icon: 'glyphicon glyphicon-ok',
+                                label: ' OK',
+                                cssClass: 'btn-success btn-padrao',
+                                autospin: false,
+                                action: function(dialogRef) {
+                                    dialogRef.close();
+                                }
+                            }]
+                    });
+                });
+            } else {
+                $scope.getTodos(1);
+            }    
         });
     };
     
@@ -60,13 +97,43 @@ function livroController($scope, $http, $routeParams) {
 
         console.log($scope.livro);
         $http.post("./rest/livroSource/livro", $scope.livro)
-                .success(function(livro, status) {
-                    $scope.livro = getNovoLivro();
-                    console.log("livro salva = " + livro);
-                })
-                .error(function(data, status) {
-                    console.log("erro ao salvar livro" + data);
+            .success(function(livro, status) {
+                $scope.livro = getNovoLivro();
+                console.log("livro salva = " + livro);
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Livro <b>' + livro.nome + '</b> salvo com sucesso!',
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
                 });
+            })
+            .error(function(data, status) {
+                console.log("erro ao salvar livro" + data);
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Ocorreu um erro ao salvar o Livro: <b>' + livro.nome + '</b>',
+                    type: BootstrapDialog.TYPE_DANGER,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                });
+            });
     };
     
     $scope.getTodos = function(numeroPagina) {
