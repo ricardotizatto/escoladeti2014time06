@@ -71,7 +71,11 @@ app.config(['$routeProvider',
             })
             .when('/cadastrodistrito', {
                 templateUrl: './pages/CadastroDistrito.html',
-                // controller : 'nomeDoController'
+                controller : 'distritoController'
+            })
+            .when('/cadastrodistrito/:distritoId', {
+                templateUrl: './pages/CadastroDistrito.html',
+                controller : 'distritoController'
             })
             .when('/cadastrobairro', {
                 templateUrl: './pages/CadastroBairro.html',
@@ -83,7 +87,7 @@ app.config(['$routeProvider',
             })
             .when('/listadistrito', {
                 templateUrl: './pages/ListaDistrito.html',
-                // controller : 'nomeDoController'
+                controller : 'distritoController'
             })
             .when('/listapais', {
                 templateUrl: './pages/ListaPais.html',
@@ -103,7 +107,7 @@ app.config(['$routeProvider',
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',
-                // controller : 'nomeDoController'
+                controller : 'cidadeController'
             })
             .when('/listabairro', {
                 templateUrl: './pages/ListaBairro.html',
@@ -127,7 +131,7 @@ app.config(['$routeProvider',
             })
             .when('/cadastroparticipante', {
                 templateUrl: './pages/CadastroParticipante.html',
-                controller: 'eventoController'
+                controller: 'participanteController'
             })
             .when('/listaordemproducao', {
                 templateUrl: './pages/ListaOrdemProducao.html',
@@ -157,9 +161,17 @@ app.config(['$routeProvider',
                 templateUrl: './pages/ListaEvento.html',
                 controller: 'eventoController'
             })
+           .when('/listaparticipantes', {
+                templateUrl: './pages/ListaParticipantes.html',
+                controller: 'participanteController'
+            })
             .when('/cadastroevento', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
+            })
+            .when('/listaparticipantes/:idevento', {
+                templateUrl: './pages/ListaParticipantes.html',
+                controller: 'participanteController'
             })
             .when('/cadastroevento/:eventoId', {
                 templateUrl: './pages/CadastroEvento.html',
@@ -176,6 +188,10 @@ app.config(['$routeProvider',
             .when('/principal', {
                 templateUrl: './pages/Principal.html'
             //    controller: 'principalController'
+            })
+            .when('/cadastroparticipanteevento', {
+                templateUrl: './pages/cadastroparticipanteevento.html',
+                controller: 'CadastroParticipanteEventoController'
             })
             .otherwise({redirectTo: '/principal'
             });

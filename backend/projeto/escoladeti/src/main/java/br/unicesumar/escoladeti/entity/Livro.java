@@ -5,8 +5,10 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Livro extends  Material  {
+public class Livro extends Material {
+    
     private static final long serialVersionUID = 1L;
+    
     @NotNull
     @NotEmpty
     private String nome;
@@ -18,13 +20,25 @@ public class Livro extends  Material  {
     public Livro() {
     }
     
-    public Livro(String nome){
-        this.nome = nome;
-    }
-    
-    public Livro( Long id, String nome ) {
+    public Livro(Long id, String nome, String disciplina,
+            String autor, String editora, Long anoEdicao){
+        
         this.id = id;
         this.nome = nome;
+        this.disciplina = disciplina;
+        this.autor = autor;
+        this.editora = editora;
+        this.anoEdicao = anoEdicao;
+    }
+    
+    public Livro(String nome, String disciplina,
+            String autor, String editora, Long anoEdicao){
+        
+        this.nome = nome;
+        this.disciplina = disciplina;
+        this.autor = autor;
+        this.editora = editora;
+        this.anoEdicao = anoEdicao;
     }
 
     public String getNome() {
@@ -72,7 +86,9 @@ public class Livro extends  Material  {
         
         StringBuilder dados = new StringBuilder();
         
-        dados.append("Nome: ");
+        dados.append("ID: ");
+        dados.append(getId()); 
+        dados.append(" Nome: ");
         dados.append(getNome());
         dados.append(" Autor: ");
         dados.append(getAutor());

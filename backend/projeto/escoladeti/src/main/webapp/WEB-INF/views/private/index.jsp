@@ -2,14 +2,17 @@
 <html lang="pt-br" ng-app="app">
     <head>
         <meta charset="UTF-8">
-        <title> Escola de TI - Time 06 </title>
+        <title> AMACAP </title>
+        <link rel="shortcut icon" type="image/png" href="./resources/imagens/icone-amacap.png" />
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-select.css" rel="stylesheet">
+        <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
         <script type="text/javascript" src="./resources/libs/jquery.js"></script>
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
         <script src="./resources/libs/bootstrap-select.js"></script>
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
@@ -27,15 +30,14 @@
         <script type="text/javascript" src="./resources/js/CidadeController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroEstadoController.js" ></script>
         <script type="text/javascript" src="./resources/js/EstadoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CadastroDistritoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/ListaDistritoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/DistritoController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CadastroParticipanteEvento.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
     </head>
     <body>
@@ -48,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-globe"></span> AMACAP </a>
+                <a class="navbar-brand" href="#"><img src="./resources/imagens/icone-amacap-cinza.png"/><span class="titulo-menu-amacap" >AMACAP</span> </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -116,7 +118,7 @@
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li>
-                                <a href="#/login">Sair</a>
+                                <a href="./logout">Sair</a>
                             </li>
                         </ul>
                     </li>

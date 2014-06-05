@@ -2,3 +2,4 @@
 .settings
 jdbc.properties
 /backend/projeto/escoladeti/src/main/webapp/WEB-INF/spring/jdbc.properties
+target
