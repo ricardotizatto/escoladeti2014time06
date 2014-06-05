@@ -107,7 +107,7 @@ app.config(['$routeProvider',
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',
-                // controller : 'nomeDoController'
+                controller : 'cidadeController'
             })
             .when('/listabairro', {
                 templateUrl: './pages/ListaBairro.html',

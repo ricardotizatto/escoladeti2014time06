@@ -22,6 +22,8 @@ function cidadeController($scope, $http, $routeParams) {
     };
 
     $scope.salvar = function() {
+        $scope.cidade.nome = $scope.cidade.nome.toUpperCase();
+        
         console.log(angular.toJson($scope.cidade, true));
         $http.post("./rest/cidadeSource/cidade", $scope.cidade)
                 .success(function(cidade, status) {
