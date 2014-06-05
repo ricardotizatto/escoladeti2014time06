@@ -117,7 +117,7 @@
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li>
-                                <a href="#/login">Sair</a>
+                                <a href="./logout">Sair</a>
                             </li>
                         </ul>
                     </li>

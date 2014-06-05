@@ -1,10 +1,10 @@
 function participanteController($scope, $http, $routeParams) {
     console.log('Carregando controller');
-    $scope.idCurso;
+    /*$scope.idCurso;
     $scope.tituloCurso;
     $scope.DetalhesCurso;
     $scope.localCurso;
-    $scope.dataCurso;
+    $scope.dataCurso;*/
     
     $scope.editar = function(participante) {
         console.log(participante);
@@ -41,8 +41,8 @@ function participanteController($scope, $http, $routeParams) {
     };
 
     $scope.novo = function() {
-        $scope.participante = getNovoParticipante();
-        window.location = '#/cadastroparticipante';
+        $scope.participante = $scope.getNovoParticipante();
+        //window.location = '#/cadastroparticipante';
     };
 
     $scope.getTodos = function() {
@@ -65,7 +65,7 @@ function participanteController($scope, $http, $routeParams) {
         }
     };
 	
-    function getNovoParticipante() {
+    $scope.getNovoParticipante = function() {
         console.log('novo participante');
         return {};
     };
