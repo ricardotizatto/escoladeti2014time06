@@ -1,27 +1,30 @@
 <div class="container" ng-controller="paisController" ng-init="carregarPais()">
     <div class="row">
         <div class="form-group col-sm-12">
-            <legend> Cadastro de Pa�s </legend>
+            <legend> Cadastro de País </legend>
         </div>
     </div>
+    <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">
+    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    	{{info.message}}</div>
     <form action="" method="POST" role="form" ng-submit="salvar()">							
         <div class="row ">
             <div class="form-group col-sm-2">
-                <label> C�digo </label>
-                <input type="number" title="Código do País" class="form-control" 
+                <label> Código </label>
+                <input type="number" title="CÃ³digo do PaÃ­s" class="form-control" 
                 	ng-model="pais.codigo" required="required"  pattern="^(\d{3})$" placeholder="999"
-                	maxlength="3" /> <!-- Expressão para validar 3 digitos numericos -->
+                	maxlength="3" /> <!-- ExpressÃ£o para validar 3 digitos numericos -->
             </div>
             <div class="form-group col-sm-8">
                 <label> Nome </label>
                 <input class="form-control" title="Nome do pais deve ser maisculo"  name="nome" 
-                type="text" ng-model="pais.nome"  pattern="[A-Z]+" maxlength="40" required placeholder="BRASIL"
+                type="text" ng-model="pais.nome" onkeyup="toUpper(this)"  pattern="[A-Z]+" maxlength="40" required placeholder="BRASIL"
                  />
             </div>
             <div class="form-group col-sm-2">
                 <label> Sigla </label>
                 <input class="form-control" title="Sigla deve ser literal maiusculo"  
-                name="nome" type="text" ng-model="pais.sigla" required maxlength="3" pattern="[A-Z]{3}" placeholder="BRA"
+                name="nome" type="text" ng-model="pais.sigla" onkeyup="toUpper(this)" required maxlength="3" pattern="[A-Z]{3}" placeholder="BRA"
                  />
             </div>
         </div>

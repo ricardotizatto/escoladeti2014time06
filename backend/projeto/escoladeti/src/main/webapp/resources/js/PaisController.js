@@ -24,8 +24,11 @@ function paisController($scope, $http, $routeParams) {
 
     $scope.carregarPais = function() {
         console.log('carregando pais');
-        if (!$routeParams.paisId)
+        
+        if (!$routeParams.paisId){
+        	$scope.pais = getNovoPais();
             return;//se não tiver id não buscar
+        }
 
         $http.get('./rest/paisSource/pais/' + $routeParams.paisId)
                 .success(function(pais, status) {
@@ -53,9 +56,18 @@ function paisController($scope, $http, $routeParams) {
                 .success(function(pais, status) {
                     $scope.pais = getNovoPais();
                     console.log('pais editado = ' + pais);
+                    //delete $scope.info;
+                    $scope.info = {};
+                    $scope.info.message = 'Salvo com sucesso';
+                    $scope.info.status = 'success';                                       
                 })
                 .error(function(data, status) {
-                    console.log('pais nao salvo = ' + data);
+                    console.log('pais não salvo = ' + data);
+                    console.log(data);
+                    $scope.info = {};
+                    $scope.info.status = 'danger';
+                    console.log($scope.info);
+                    $scope.info.message = data.message;
                 });
     };
 
@@ -72,7 +84,11 @@ function paisController($scope, $http, $routeParams) {
 
     function getNovoPais() {
         console.log('novo pais');
-        return {};
+        return {
+        	codigo: null,
+        	nome: '',
+        	sigla: ''        	
+        };
     }
 
     $scope.voltar = function() {
