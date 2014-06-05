@@ -15,11 +15,39 @@ function paisController($scope, $http, $routeParams) {
                     .success(function(data, status) {
                         $scope.getTodos(1);
                         console.log('pais deletado');
-                        BootstrapDialog.alert('Pais <b>' + pais.nome + '</b> deletado com Sucesso!' );
+                        BootstrapDialog.show({
+                            title: 'Notifica&ccedil;&atilde;o',
+                            message: 'Pais <b>' + pais.nome + '</b> deletado com Sucesso!',
+                            type: BootstrapDialog.TYPE_SUCCESS,
+                            buttons: [{
+                                    id: 'btn-ok',
+                                    icon: 'glyphicon glyphicon-ok',
+                                    label: ' OK',
+                                    cssClass: 'btn-success btn-padrao',
+                                    autospin: false,
+                                    action: function(dialogRef) {
+                                        dialogRef.close();
+                                    }
+                                }]
+                        });
                     })
                     .error(function(data, status) {
                         console.log('erro ao deletar pais ' + data);
-                        BootstrapDialog.alert('Ocorreu um erro ao deletar o Pais: <b>' + pais.nome + '</b>');
+                        BootstrapDialog.show({
+                            title: 'Notifica&ccedil;&atilde;o',
+                            message: 'Ocorreu um erro ao deletar o Pais: <b>' + pais.nome + '</b>',
+                            type: BootstrapDialog.TYPE_DANGER,
+                            buttons: [{
+                                    id: 'btn-ok',
+                                    icon: 'glyphicon glyphicon-ok',
+                                    label: ' OK',
+                                    cssClass: 'btn-success btn-padrao',
+                                    autospin: false,
+                                    action: function(dialogRef) {
+                                        dialogRef.close();
+                                    }
+                                }]
+                        });
                     });
             } else {
                 $scope.getTodos(1);
@@ -69,23 +97,51 @@ function paisController($scope, $http, $routeParams) {
             .success(function(pais, status) {
                 $scope.pais = getNovoPais();
                 console.log('pais editado = ' + pais);
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Pais <b>' + pais.nome + '</b> salvo com sucesso!',
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                });
             })
             .error(function(data, status) {
                 console.log('pais nao salvo = ' + data);
-                BootstrapDialog.alert('Ocorreu um erro ao salvar o Pais: <b>' + pais.nome + '</b>');
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Ocorreu um erro ao salvar o Pais: <b>' + pais.nome + '</b>',
+                    type: BootstrapDialog.TYPE_DANGER,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                });
             });
     };
 
     $scope.getTodos = function(numeroPagina) {
     	console.log(numeroPagina);
         $http.get('./rest/paisSource/listar/pag/' + numeroPagina)
-                .success(function(listaPaises, status) {
-                    $scope.paises = listaPaises;
-                })
-                .error(function(data, status) {
-                    console.log('erro ao buscar paises ' + data);
-                    BootstrapDialog.alert('Ocorreu um erro ao buscar os Paises');
-                });
+            .success(function(listaPaises, status) {
+                $scope.paises = listaPaises;
+            })
+            .error(function(data, status) {
+                console.log('erro ao buscar paises ' + data);
+            });
     }
 
     function getNovoPais() {

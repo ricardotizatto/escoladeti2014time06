@@ -15,14 +15,42 @@ function livroController($scope, $http, $routeParams) {
                 .success(function(data, status) {
                     $scope.getTodos(1);
                     console.log('Livro deletado!');
-                    BootstrapDialog.alert('Livro <b>' + livro.nome + '</b> deletado com Sucesso!' );
+                    BootstrapDialog.show({
+                        title: 'Notifica&ccedil;&atilde;o',
+                        message: 'Livro <b>' + livro.nome + '</b> deletado com Sucesso!',
+                        type: BootstrapDialog.TYPE_SUCCESS,
+                        buttons: [{
+                                id: 'btn-ok',
+                                icon: 'glyphicon glyphicon-ok',
+                                label: ' OK',
+                                cssClass: 'btn-success btn-padrao',
+                                autospin: false,
+                                action: function(dialogRef) {
+                                    dialogRef.close();
+                                }
+                            }]
+                    });
                 })
                 .error(function(data, status) { 
                     console.log('Livro não foi deletado' + data);
-                    BootstrapDialog.alert('Ocorreu um erro ao deletar o Livro: <b>' + livro.nome + '</b>');
+                    BootstrapDialog.show({
+                        title: 'Notifica&ccedil;&atilde;o',
+                        message: 'Ocorreu um erro ao deletar o Livro: <b>' + livro.nome + '</b>',
+                        type: BootstrapDialog.TYPE_DANGER,
+                        buttons: [{
+                                id: 'btn-ok',
+                                icon: 'glyphicon glyphicon-ok',
+                                label: ' OK',
+                                cssClass: 'btn-success btn-padrao',
+                                autospin: false,
+                                action: function(dialogRef) {
+                                    dialogRef.close();
+                                }
+                            }]
+                    });
                 });
             } else {
-            $scope.getTodos(1);
+                $scope.getTodos(1);
             }    
         });
     };
@@ -72,10 +100,39 @@ function livroController($scope, $http, $routeParams) {
             .success(function(livro, status) {
                 $scope.livro = getNovoLivro();
                 console.log("livro salva = " + livro);
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Livro <b>' + livro.nome + '</b> salvo com sucesso!',
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                });
             })
             .error(function(data, status) {
                 console.log("erro ao salvar livro" + data);
-                BootstrapDialog.alert('Ocorreu um erro ao salvar o Livro: <b>' + livro.nome + '</b>');
+                BootstrapDialog.show({
+                    title: 'Notifica&ccedil;&atilde;o',
+                    message: 'Ocorreu um erro ao salvar o Livro: <b>' + livro.nome + '</b>',
+                    type: BootstrapDialog.TYPE_DANGER,
+                    buttons: [{
+                            id: 'btn-ok',
+                            icon: 'glyphicon glyphicon-ok',
+                            label: ' OK',
+                            cssClass: 'btn-success btn-padrao',
+                            autospin: false,
+                            action: function(dialogRef) {
+                                dialogRef.close();
+                            }
+                        }]
+                });
             });
     };
     
@@ -91,7 +148,6 @@ function livroController($scope, $http, $routeParams) {
             })
             .error(function(data, status) {
                 console.log('erro ao buscar livros ' + data);
-                BootstrapDialog.alert('Ocorreu um erro ao buscar os Livros!');
             });
     }
 
