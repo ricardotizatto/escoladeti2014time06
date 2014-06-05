@@ -1,10 +1,8 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.OrdemProducao;
-import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.entity.ParteMaterial;
 import br.unicesumar.escoladeti.service.OrdemProducaoService;
-import br.unicesumar.escoladeti.service.PaisService;
 import br.unicesumar.escoladeti.service.ParteMaterialService;
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -79,7 +76,7 @@ public class OrdemProducaoController implements Serializable{
     @RequestMapping(value = "/parteMaterial", method = RequestMethod.GET)
     @ResponseBody
     public List<ParteMaterial> getTodasPartesMateriais() {
-        return this.parteMaterialService.getTodas();
+        return this.parteMaterialService.getTodos();
     }
 
     @RequestMapping(value = "/parteMaterial/{id}", method = RequestMethod.GET)
