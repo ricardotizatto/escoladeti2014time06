@@ -9,10 +9,11 @@ function paisController($scope, $http, $routeParams) {
             url: './rest/paisSource/pais',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
-                .success(function(data, status) {
-                    $scope.getTodos(1);
-                    console.log('pais deletado');
-                }).error(function(data, status) {
+        .success(function(data, status) {
+            $scope.getTodos(1);
+            console.log('pais deletado');
+        })
+        .error(function(data, status) {
             console.log('erro ao deletar pais ' + data);
         });
     };

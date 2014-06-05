@@ -31,8 +31,10 @@ function livroController($scope, $http, $routeParams) {
         $http.get('./rest/livroSource/livro/' + $routeParams.livroId)
             .success(function(livro, status) {
                 console.log(livro);
+                delete livro.info;
                 $scope.livro = livro;
             });
+            
     }
 
     $scope.editar = function(livro) {
@@ -71,6 +73,10 @@ function livroController($scope, $http, $routeParams) {
     	console.log(numeroPagina);
         $http.get('./rest/livroSource/listar/pag/' + numeroPagina)
             .success(function(listaLivros, status) {
+                
+                listaLivros.list.forEach(function (livro) {
+                    delete livro.info;
+                });
                 $scope.livros = listaLivros;
             })
             .error(function(data, status) {
