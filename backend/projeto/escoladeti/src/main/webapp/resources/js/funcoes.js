@@ -6,3 +6,7 @@ $(window).on('load', function () {
 
     // $('.selectpicker').selectpicker('hide');
 });
+
+function toUpper(el) {
+	el.value = el.value.toUpperCase();
+}

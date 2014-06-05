@@ -8,6 +8,4 @@ import br.unicesumar.escoladeti.entity.ItemAcesso;
 
 public interface ItemDeAcessoUsuarioRepository extends JpaRepository<ItemAcesso, Long> {
     
-    public List<ItemAcesso> findByNomeContainingOrderByNomeAsc(String nome);
-    
 }

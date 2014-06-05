@@ -1,5 +1,6 @@
 function paisController($scope, $http, $routeParams) {
     console.log('carregando controller');
+    $scope.info = {};
 
     $scope.deletar = function(pais) {
         console.log('deletando pais ' + JSON.stringify(pais));
@@ -64,8 +65,11 @@ function paisController($scope, $http, $routeParams) {
 
     $scope.carregarPais = function() {
         console.log('carregando pais');
-        if (!$routeParams.paisId)
+        
+        if (!$routeParams.paisId){
+        	$scope.pais = getNovoPais();
             return;//se não tiver id não buscar
+        }
 
         $http.get('./rest/paisSource/pais/' + $routeParams.paisId)
                 .success(function(pais, status) {
@@ -79,7 +83,7 @@ function paisController($scope, $http, $routeParams) {
     
     $scope.buscaPaisContendoNome = function () {
     	console.log($scope.busca);
-    	$http.get('./rest/paisSource/pais?q=' + $scope.busca)
+    	$http.get('./rest/paisSource/pais?q=' + $scope.busca.toUpperCase())
     		.then(function (retorno){
     			console.log(retorno.data.list);
     			$scope.paises = retorno.data;
@@ -88,51 +92,22 @@ function paisController($scope, $http, $routeParams) {
     		
 
     $scope.salvar = function() {
-        
-        $scope.pais.nome = $scope.pais.nome.toUpperCase();
-        $scope.pais.sigla = $scope.pais.sigla.toUpperCase();
-        
-        console.log($scope.pais)
         $http.post('./rest/paisSource/pais', $scope.pais)
-            .success(function(pais, status) {
-                $scope.pais = getNovoPais();
-                console.log('pais editado = ' + pais);
-                BootstrapDialog.show({
-                    title: 'Notifica&ccedil;&atilde;o',
-                    message: 'Pais <b>' + pais.nome + '</b> salvo com sucesso!',
-                    type: BootstrapDialog.TYPE_SUCCESS,
-                    buttons: [{
-                            id: 'btn-ok',
-                            icon: 'glyphicon glyphicon-ok',
-                            label: ' OK',
-                            cssClass: 'btn-success btn-padrao',
-                            autospin: false,
-                            action: function(dialogRef) {
-                                dialogRef.close();
-                            }
-                        }]
+                .success(function(pais, status) {
+                    $scope.pais = getNovoPais();
+                    console.log('pais editado = ' + pais);
+                    $scope.info.message = 'Salvo com sucesso';
+                    $scope.info.status = 'success';                                       
+                })
+                .error(function(data, status) {
+                    console.log('pais não salvo = ' + data);
+                    $scope.info = {};
+                    $scope.info.status = 'danger';
+                    console.log($scope.info);
+                    $scope.info.message = data.message;
                 });
-            })
-            .error(function(data, status) {
-                console.log('pais nao salvo = ' + data);
-                BootstrapDialog.show({
-                    title: 'Notifica&ccedil;&atilde;o',
-                    message: 'Ocorreu um erro ao salvar o Pais: <b>' + pais.nome + '</b>',
-                    type: BootstrapDialog.TYPE_DANGER,
-                    buttons: [{
-                            id: 'btn-ok',
-                            icon: 'glyphicon glyphicon-ok',
-                            label: ' OK',
-                            cssClass: 'btn-success btn-padrao',
-                            autospin: false,
-                            action: function(dialogRef) {
-                                dialogRef.close();
-                            }
-                        }]
-                });
-            });
     };
-
+    
     $scope.getTodos = function(numeroPagina) {
     	console.log(numeroPagina);
         $http.get('./rest/paisSource/listar/pag/' + numeroPagina)
@@ -146,7 +121,11 @@ function paisController($scope, $http, $routeParams) {
 
     function getNovoPais() {
         console.log('novo pais');
-        return {};
+        return {
+        	codigo: null,
+        	nome: '',
+        	sigla: ''        	
+        };
     }
 
     $scope.voltar = function() {
