@@ -37,26 +37,27 @@
                             <legend>Dados Pessoais</legend>
                             <br>
                             <label>CPF</label>
-                            <input class="form-control" name="cpf" type="text"  onKeyPress="MascaraCPF(participante.cpf);" maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf"/>
+                            <input class="form-control" type="text" ng-change="ValidarCPF(participante.cpf)"  onKeyPress="MascaraCPF(participante.cpf);" maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" required>
                             <label>RG</label>
-                            <input class="form-control" name="rg" type="text"   onKeyPress="MascaraRG(participante.rg);" maxlength="12" placeholder="R.G." ng-model="participante.rg"/>
+                            <input class="form-control"  type="text" placeholder="R.G." ng-model="participante.rg" required>
                             <label>Nome</label>
-                            <input class="form-control" name="nome" type="text"  placeholder="Nome" ng-model="participante.nome"/>
+                                <input class="form-control" type="text"  placeholder="Nome" ng-model="participante.nome" required>
                             <label>Email</label>
-                            <input class="form-control" name="email" type="text"  placeholder="Endereço de email" ng-model="participante.email"/>
+                            <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email" required>
                             <label>Telefone</label>
-                            <input class="form-control" name="telefone" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone" required>
-                            <input name="sexo" value="M" type="radio" ng-model="participante.sexo" /> <label>Masculino</label>
-                            <input name="sexo" value="F" type="radio" ng-model="participante.sexo" />  <label>Feminino</label>
+                            <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone" required>
+                            <input name="sexo" value="M" type="radio" ng-model="participante.sexo" > <label>Masculino</label>
+                            <input name="sexo" value="F" type="radio" ng-model="participante.sexo" >  <label>Feminino</label>
                             <br>    
                             <label>Deficiente</label>
-                            <input name="deficiente" value="S" type="radio" ng-model="participante.deficiente" /> <label>Sim</label>
-                            <input name="deficiente" value="N" type="radio" ng-model="participante.deficiente" />  <label>Não</label>
+                            <input name="deficiente" value="S" type="radio" ng-model="participante.deficiente" > <label>Sim</label>
+                            <input name="deficiente" value="N" type="radio" ng-model="participante.deficiente" >  <label>Não</label>
                     </div>
                     <div align="right">
                         <button type="button"  class="btn btn-danger"  ng-click="novo()">Limpar</button>
                             <button class="btn btn-success">Confirmar</button>
                     </div>
+                  
 
                 <!-- Modal detalhamento-->
                         <div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
