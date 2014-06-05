@@ -28,8 +28,7 @@
         <script type="text/javascript" src="./resources/js/CidadeController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroEstadoController.js" ></script>
         <script type="text/javascript" src="./resources/js/EstadoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CadastroDistritoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/ListaDistritoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/DistritoController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>
