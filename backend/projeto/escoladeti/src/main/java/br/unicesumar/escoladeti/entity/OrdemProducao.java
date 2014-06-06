@@ -7,10 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -19,19 +17,19 @@ import br.unicesumar.escoladeti.common.OrdemProducaoStatus;
         
 @Entity
 public class OrdemProducao extends Entidade {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 	
-	@NotEmpty
-	@NotNull
-	@ManyToOne
-	private SolicitacaoItem solicitacaoItem;
-
-	@NotEmpty
+    @NotEmpty
+    @NotNull
+    @ManyToOne
+    private SolicitacaoItem solicitacaoItem;
+    
+    @NotEmpty
     @NotNull
     @Enumerated(EnumType.STRING)
     private OrdemProducaoStatus status;
     
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="ordemProducao")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="ordemProducao")
     private List<ParteMaterial> partes;
 
     public OrdemProducao(OrdemProducaoStatus status) {

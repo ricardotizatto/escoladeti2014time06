@@ -14,37 +14,37 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class ParteMaterial extends Entidade {
-    
-	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	@JoinColumn(name="id_responsavel")
+    private static final long serialVersionUID = 1L;
+
+    @ManyToOne
+    @JoinColumn(name = "id_responsavel")
     private PessoaFisica responsavel;
-    
+
     private Long paginaInicio;
-    
+
     private Long paginaFim;
-    
+
     @NotEmpty
     @Enumerated(EnumType.STRING)
     private OrdemProducaoStatus status;
-    
+
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="id_ordemproducao",referencedColumnName="id")
+    @JoinColumn(name = "id_ordemproducao", referencedColumnName = "id")
     private OrdemProducao ordemProducao;
-    
+
     @ManyToOne
-    @JoinColumn(name="id_responsavelrevisao")
+    @JoinColumn(name = "id_responsavelrevisao")
     private PessoaFisica responsavelRevisao;
-    
+
     private String observacao;
-    
+
     private byte[] arquivo;
 
     public ParteMaterial() {
     }
-    
+
     public PessoaFisica getResponsavel() {
         return responsavel;
     }

@@ -1,148 +1,120 @@
-'use strict';
+function OrdemProducaoController($scope, $http, $routeParams) {
+    console.log('carregando controller');
+    $scope.info = {};
 
-function OrdemProducaoController ($scope, $http, $routeParams){
-    
+    $scope.deletar = function(ordemProducao) {
+        console.log('deletando ordem de producao ' + JSON.stringify(ordemProducao));
+
+        BootstrapDialog.confirm('Deseja realmente deletar a Ordem de Produção: <b>' + ordemProducao.id + '</b>?', function(result) {
+            if (result) {
+                $http({
+                    method: 'DELETE',
+                    data: ordemProducao,
+                    url: './rest/ordemProducaoSource/ordemProducao',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
+                        .success(function(data, status) {
+                            $scope.getTodos(1);
+                            console.log('ordem de producao deletado');
+                            BootstrapDialog.show({
+                                title: 'Notifica&ccedil;&atilde;o',
+                                message: 'Ordem de Produção <b>' + ordemProducao.id + '</b> deletada com Sucesso!',
+                                type: BootstrapDialog.TYPE_SUCCESS,
+                                buttons: [{
+                                        id: 'btn-ok',
+                                        icon: 'glyphicon glyphicon-ok',
+                                        label: ' OK',
+                                        cssClass: 'btn-success btn-padrao',
+                                        autospin: false,
+                                        action: function(dialogRef) {
+                                            dialogRef.close();
+                                        }
+                                    }]
+                            });
+                        })
+                        .error(function(data, status) {
+                            console.log('erro ao deletar a ordem de produção ' + data);
+                            BootstrapDialog.show({
+                                title: 'Notifica&ccedil;&atilde;o',
+                                message: 'Ocorreu um erro ao deletar a Ordem de Produção: <b>' + ordemProducao.id + '</b>',
+                                type: BootstrapDialog.TYPE_DANGER,
+                                buttons: [{
+                                        id: 'btn-ok',
+                                        icon: 'glyphicon glyphicon-ok',
+                                        label: ' OK',
+                                        cssClass: 'btn-success btn-padrao',
+                                        autospin: false,
+                                        action: function(dialogRef) {
+                                            dialogRef.close();
+                                        }
+                                    }]
+                            });
+                        });
+            } else {
+                $scope.getTodos(1);
+            }
+        });
+    };
+
     $scope.novo = function() {
-        $scope.ordemProducao = getNovaOrdemProducao ();
+        $scope.ordemProducao = getNovaOrdemProducao();
         window.location = '#/ordemproducao';
+    };
+
+    $scope.carregarOrdemProducao = function() {
+        console.log('carregando ordem de produção');
+
+        if (!$routeParams.ordemProducaoId) {
+            $scope.ordemProducao = getNovaOrdemProducao();
+            return;//se não tiver id não buscar
+        }
+
+        $http.get('./rest/ordemProducaoSource/ordemProducao/' + $routeParams.ordemProducaoId)
+                .success(function(ordemProducao, status) {
+                    $scope.ordemProducao = ordemProducao;
+                });
+    };
+
+    $scope.editar = function(ordemProducao) {
+        window.location = '#/ordemproducao/' + ordemProducao.id;
     };
     
     $scope.salvar = function() {
-        $http.post('.rest/ordemProducaoSource/ordemProducao', $scope.ordemProducao)
+        $http.post('./rest/ordemProducaoSource/ordemProducao', $scope.ordemProducao)
                 .success(function(ordemProducao, status) {
                     $scope.ordemProducao = getNovaOrdemProducao();
-                    console.log('Ordem de Producao salva ' + ordemProducao);
+                    console.log('ordemProducao editado = ' + ordemProducao);
+                    $scope.info.message = 'Salvo com sucesso';
+                    $scope.info.status = 'success';
                 })
-                .error(function(data){
-                    console.log('Ordem de Producao nao foi salva' + data);
+                .error(function(data, status) {
+                    console.log('ordemProducao não salvo = ' + data);
+                    $scope.info = {};
+                    $scope.info.status = 'danger';
+                    console.log($scope.info);
+                    $scope.info.message = data.message;
                 });
     };
-    
-    $scope.carregar = function() {
-        //$scope.ordemProducao = { solicitacao : 1, material : "Livro", traducao:"brille", state : "Andamento" }; para testes
-        if ($routeParams.ordemProducaoId) {
-            $http.get('./rest/ordemProducaoSource/ordemProducao/' + $routeParams.ordemProducaoId)
-                    .success(function(ordemProducao) {
-                        $scope.ordemProducao = ordemProducao;
-            });
-        }
-    };
-    
-    $scope.getTodos = function() {
-        $http.get('./rest/ordemProducaoSource/ordemproducao')
-                .success(function(ordensProducao) {
-                  $scope.ordensProducao = ordensProducao;
-                  console.log('Ordens carregadas.');
+
+    $scope.getTodos = function(numeroPagina) {
+        console.log(numeroPagina);
+        $http.get('./rest/ordemProducaoSource/listar/pag/' + numeroPagina)
+                .success(function(listaOrdensProducao, status) {
+                    $scope.ordensProducao = listaOrdensProducao;
+                })
+                .error(function(data, status) {
+                    console.log('erro ao buscar ordensProducao ' + data);
                 });
     };
-    
-    $scope.editar = function(ordemProducao) {
-        console.log(ordemProducao);
-        window.location = '#/ordemproducao' + ordemProducao.id;
-    };
-    
-    $scope.deletar = function(ordemProducao) {
-        $http({
-            method: 'DELETE',
-            data: ordemProducao,
-            url: '.rest/ordemProducaoSource/ordemProducao',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-                .success(function(data) {
-                    console.log('Deletado !');
-                    $scope.getTodos();
-        })
-                .error(function(data) {
-                    console.log('Nao foi possivel deletar ' + data);
-        });
-    };
-    
-    $scope.cancelar = function() {
+
+    function getNovaOrdemProducao() {
+        console.log('nova ordem de produção');
+        return {};
+    }
+
+    $scope.voltar = function() {
+        $scope.ordemProducao = {};
         window.location = '#/listaordemproducao';
     };
-    
-    function getNovaOrdemProducao() {
-        return {};
-    }
-    
-    $scope.getStatusOrdemProducao = function(status) {
-        switch (status) {
-            case "Andamento":
-                return "label-primary";
-                break;
-            case "Finalizado":
-                return "label-success";
-                break;
-            case "Rejeitado":
-                return "label-danger";
-                break;
-            default:
-                return "";
-        }
-    };
-    
-    //
-    //Início das funções da ParteMaterial
-    //
-    $scope.novaParteMaterial = function() {
-        $scope.parteMaterial = getNovaParteMaterial();
-        window.location = '#/cadastropartematerial';
-    };
 
-    $scope.salvarParteMaterial = function() {
-        $http.post('./rest/ordemProducaoSource/parteMaterial', $scope.parteMaterial)
-                .success(function(parteMaterial, status) {
-                    $scope.parteMaterial = getNovaParteMaterial();
-                    console.log('Parte do Material salva ' + parteMaterial);
-                })
-                .error(function(data) {
-                    console.log('Parte do Material não foi salva ' + data);
-                });
-    };
-    $scope.carregarParteMaterial = function() {
-        if ($routeParams.parteMaterialId) {
-            $http.get('./rest/ordemProducaoSource/parteMaterial/' + $routeParams.parteMaterialId)
-                    .success(function(parteMaterial) {
-                        $scope.parteMaterial = parteMaterial;
-                    });
-        }
-    };
-
-    $scope.getTodasPartesMateriais = function() {
-        $http.get('./rest/ordemProducaoSource/parteMaterial')
-                .success(function(partesMateriais) {
-                    $scope.partesMateriais = partesMateriais;
-                    console.log('Partes materiaias carregadas');
-                });
-    };
-
-    $scope.editarParteMaterial = function(parteMaterial) {
-        console.log(parteMaterial);
-        window.location = '#/cadastropartematerial/' + parteMaterial.id;
-    };
-
-    $scope.deletarParteMaterial = function(parteMaterial) {
-        $http({
-            method: 'DELETE',
-            data: parteMaterial,
-            url: './rest/ordemProducaoSource/parteMaterial',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-                .success(function(data) {
-                    console.log('Deletada!');
-                    $scope.getTodasPartesMateriais();
-                })
-                .error(function(data) {
-                    console.log('Não foi possíivel deletar ' + data);
-                });
-    };
-
-    $scope.cancelarParteMaterial = function() {
-        window.location = '#/ordemproducao';
-    };
-
-    function getNovaParteMaterial() {
-        return {};
-    }
-    
 }

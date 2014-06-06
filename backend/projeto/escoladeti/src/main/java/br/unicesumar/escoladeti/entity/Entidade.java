@@ -9,8 +9,10 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Entidade implements Serializable {
-	private static final long serialVersionUID = -8559579530998613052L;
-	@Id
+    
+    private static final long serialVersionUID = -8559579530998613052L;
+    
+    @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     protected Long id;
 

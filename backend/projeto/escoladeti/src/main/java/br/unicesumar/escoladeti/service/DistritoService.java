@@ -22,9 +22,9 @@ public class DistritoService extends Entidade {
     public DataPage<Distrito> getTodos(Integer pagina){
         return new DataPage<>(distritoRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
-    public DataPage<Distrito> getDistritoPorNome(String nomeParcial){
-        return new DataPage<Distrito>(distritoRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
-    }
+//    public DataPage<Distrito> getDistritoPorNome(String nomeParcial){
+//        return new DataPage<Distrito>(distritoRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+//    }
     public void deletar(Distrito distrito){
         this.distritoRepository.delete(distrito);
     }

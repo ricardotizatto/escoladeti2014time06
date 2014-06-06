@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/rest/livroSource")
 public class LivroController implements Serializable{
     
-    private static final long serialVersionUID = 1L;
-    
     @Autowired
     private LivroService livroService;
 
@@ -39,7 +37,7 @@ public class LivroController implements Serializable{
         return this.livroService.getTodos(1);
     }
 
-    @RequestMapping(value = "/livro", params = {"q"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/livro", params = {"q" }, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Livro> getPorNome(@RequestParam String q) {
         return livroService.getLivroPorNome(q);
@@ -55,6 +53,6 @@ public class LivroController implements Serializable{
     @ResponseBody
     public String deletar(@RequestBody Livro livro) {
         this.livroService.deletar(livro);
-        return "deleted";
+        return "ok";
     }
 }

@@ -47,11 +47,11 @@ public class DistritoController implements Serializable {
         return distritoService.getTodos(1);
     }
     
-    @RequestMapping(value = "/distrito", params = {"q"}, method = RequestMethod.GET)
+    /*@RequestMapping(value = "/distrito", params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Distrito> getPorNome(@RequestParam String q){
         return distritoService.getDistritoPorNome(q);
-    }
+    }*/
     
     @RequestMapping(value = { "/listar/pag/{pagina}" }, method = RequestMethod.GET)
     @ResponseBody
