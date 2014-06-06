@@ -62,9 +62,14 @@ function livroController($scope, $http, $routeParams) {
         $http.get('./rest/livroSource/livro?q=' + $scope.busca.toUpperCase())
             .then(function(retorno) {
                 console.log(retorno.data.list);
+                
+                retorno.data.list.forEach(function(livro) {
+                    console.log(livro);
+                    delete livro.info;
+                });
                 $scope.livros = retorno.data;
             });
-    }  
+    } 
 
     $scope.salvar = function() {
   
