@@ -23,6 +23,15 @@ public class Participante extends Entidade{
     private String telefone;
     private String deficiente;
     private String sexo;
+    private String pagamento;
+
+    public String getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(String pagamento) {
+        this.pagamento = pagamento;
+    }
 
     public Long getIdevento() {
         return idevento;
