@@ -77,12 +77,12 @@
                             <li class="dropdown-submenu">
                                 <a tabindex="-1">Localidade</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#/listapais">Lista Pais</a></li>
-                                    <li><a href="#/listaestado">Lista Estado</a></li>
-                                    <li><a href="#/listacidade">Lista Cidade</a></li>
-                                    <li><a href="#/listadistrito">Lista Distrito</a></li>
-                                    <li><a href="#/listabairro">Lista Bairro</a></li>
-                                    <li><a href="#/listacep">Lista CEP</a></li>
+                                    <li><a href="#/listapais">Pais</a></li>
+                                    <li><a href="#/listaestado">Estado</a></li>
+                                    <li><a href="#/listacidade">Cidade</a></li>
+                                    <li><a href="#/listadistrito">Distrito</a></li>
+                                    <li><a href="#/listabairro">Bairro</a></li>
+                                    <li><a href="#/listacep">Faixa de CEP</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
@@ -94,8 +94,8 @@
                             <li class="dropdown-submenu">
                                 <a tabindex="-1">Eventos</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#/cadastroparticipante">Cadastro de Participante</a></li>
-                                    <li><a href="#/cadastroevento">Cadastro de Evento</a></li>
+                                    <li><a href="#/cadastroparticipante">Participante</a></li>
+                                    <!--<li><a href="#/cadastroevento">Evento</a></li>-->
                                     <li><a href="#/listaevento">Lista Eventos</a></li>
                                 </ul>
                             </li>
