@@ -4,26 +4,27 @@
             <legend> <span class="glyphicon glyphicon-book"></span> Cadastro de Livro</legend>
         </div>
     </div>
+    <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
     <form action="" method="POST" role="form" ng-submit="salvar()">	
         <div class="row">
             <div class="form-group col-sm-7">
                 <label> Nome </label>
-                <input class="form-control maiusculo" title="Nome do livro deve ser literal"  name="nome" type="text" ng-model="livro.nome"  pattern="[A-Za-z ]+" maxlength="40" required placeholder="nome do livro" />
+                <input class="form-control" title="Nome do livro deve ser literal"  name="nome" type="text" ng-model="livro.nome" onkeyup="toUpper(this)" pattern="[A-Z ]+" maxlength="40" required placeholder="nome do livro" />
             </div>
 
             <div class="form-group col-sm-5">
                 <label> Autor </label>
-                <input class="form-control" title="Nome do autor deve ser literal"  name="autor" type="text" ng-model="livro.autor" pattern="[A-Za-z ]+" required placeholder="nome do autor" />
+                <input class="form-control" title="Nome do autor deve ser literal"  name="autor" type="text" ng-model="livro.autor" onkeyup="toUpper(this)" pattern="[A-Z ]+" required placeholder="nome do autor" />
             </div>
         </div>
         <div class="row ">
             <div class="form-group col-sm-5">
                 <label> Editora </label>
-                <input class="form-control maiusculo" title="Nome da editora deve ser literal"  name="editora" type="text" ng-model="livro.editora"  pattern="[A-Za-z ]+" maxlength="40" required placeholder="nome da editora" />
+                <input class="form-control" title="Nome da editora deve ser literal"  name="editora" type="text" ng-model="livro.editora" onkeyup="toUpper(this)" pattern="[A-Z ]+" maxlength="40" required placeholder="nome da editora" />
             </div>
             <div class="form-group col-sm-4">
                 <label> Disciplina </label>
-                <input class="form-control maiusculo" title="Nome da disciplina deve ser literal"  name="disciplina" type="text" ng-model="livro.disciplina"  pattern="[A-Za-z ]+" maxlength="40" required placeholder="nome da disciplina" />
+                <input class="form-control" title="Nome da disciplina deve ser literal"  name="disciplina" type="text" ng-model="livro.disciplina" onkeyup="toUpper(this)" pattern="[A-Z ]+" maxlength="40" required placeholder="nome da disciplina" />
             </div>
             <div class="form-group col-sm-3">
                 <label>Ano Edição</label>

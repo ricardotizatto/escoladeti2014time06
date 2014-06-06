@@ -1,18 +1,17 @@
 <div class="container" ng-controller="livroController" ng-init="getTodos(1)">
     <div class="row">
         <div class="form-group col-sm-12">
-            <legend>
-                    <span class="glyphicon glyphicon-list-alt"></span> Livro
-            </legend>
+            <legend><span class="glyphicon glyphicon-list-alt"></span> Livro</legend>
         </div>
     </div>
+    <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
     <div class="row">
         <div class="form-group col-sm-5">
             <div class="input-group">
                 <span class="input-group-addon"> 
                     <span class="glyphicon glyphicon-search"></span>
                 </span> 
-                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change="buscaLivroContendoNome()"  placeholder="Busca por nome do livro"/>
+                <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaLivrosContendoNome()"  placeholder="Busca por nome do livro"/>
             </div>
         </div>
         <div class="form-group col-sm-7">
