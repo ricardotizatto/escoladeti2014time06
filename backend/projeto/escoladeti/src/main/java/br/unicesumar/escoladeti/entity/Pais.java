@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.validation.annotation.Validated;
 
 @Entity
+@Validated
 public class Pais extends Entidade {
 	private static final long serialVersionUID = 1L;
 	
@@ -57,7 +59,10 @@ public class Pais extends Entidade {
         this.sigla = sigla;
     }
     
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(Integer codigo) throws Exception {
+    	if (codigo < 1) {
+    		throw new Exception("Código do país deve ser maior que 1.");
+    	}
 		this.codigo = codigo;
 	}
     
