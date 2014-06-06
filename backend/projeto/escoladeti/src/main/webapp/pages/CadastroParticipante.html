@@ -13,11 +13,14 @@
 </script>
 
 <div class="container" ng-controller="participanteController" ng-init="carregarEventos();novo()">
-	<label>&nbsp;</label>
 	<fieldset>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <legend> Cursos Disponíveis </legend>
+                </div>
+            </div>
                 <form action="" method="POST" name="participante" ng-submit="salvar()">
-                    <div class="col-sm-7" style="height:400px; overflow:auto;">
-                        <legend>Cursos Disponíveis</legend>
+                    <div class="form-group col-sm-7">
                         <div class="blogShort" ng-repeat="evento in eventos">
                             <h1>{{evento.titulo}}</h1>
                                 <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
