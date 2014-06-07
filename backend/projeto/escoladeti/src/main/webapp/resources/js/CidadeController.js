@@ -7,31 +7,51 @@ function cidadeController($scope, $http, $routeParams) {
 
     $scope.deletar = function(cidade) {
         console.log('deletando cidade' + JSON.stringify(cidade));
-        $http({
-            method: 'DELETE',
-            data: cidade,
-            url: './rest/cidadeSource/cidade',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
+        
+        BootstrapDialog.confirm('Deseja realmente deletar a Cidade: <b>' + cidade.nome + '</b>?', function(result) {
+            if(result){
+                $http({
+                    method: 'DELETE',
+                    data: cidade,
+                    url: './rest/cidadeSource/cidade',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
                 .success(function(data, status) {
                     $scope.getTodos(1);
                     console.log("cidade deletado");
-                }).error(function(data, status) {
-            console.log("erro ao deletar cidade " + data);
+                    $scope.info = {};
+                    $scope.info.message = 'Cidade ' + cidade.nome + ' deletada com sucesso';
+                    $scope.info.status = 'success';
+                })
+                .error(function(data, status) {
+                    console.log("erro ao deletar cidade " + data);
+                    $scope.info = {};
+                    $scope.info.status = 'danger';
+                    $scope.info.mesage = 'Erro ao deletar a cidade: ' + cidade.nome + ' - '+data.message;
+                });
+            }else{
+                $scope.getTodos(1);
+            }
         });
     };
 
     $scope.salvar = function() {
         $scope.cidade.nome = $scope.cidade.nome.toUpperCase();
-        
-        console.log(angular.toJson($scope.cidade, true));
+//        console.log(angular.toJson($scope.cidade, true));
         $http.post("./rest/cidadeSource/cidade", $scope.cidade)
                 .success(function(cidade, status) {
                     $scope.cidade = getNovaCidade();
                     console.log("cidade salva = " + cidade);
+                    $scope.info = {};
+                    $scope.info.message = 'Cidade ' + cidade.nome + ' salvo com sucesso' ;
+                    $scope.info.status = 'success';
                 })
                 .error(function(data, status) {
                     console.log("erro ao salvar cidade" + data);
+                    $scope.info = {};
+                    $scope.info.status = 'danger';
+                    console.log($scope.info);
+                    $scope.info.message = 'Erro ao salvar a cidade ' + cidade.nome + ' - '+data.message;
                 });
     };
 
@@ -66,7 +86,7 @@ function cidadeController($scope, $http, $routeParams) {
 
     $scope.buscaCidadeContendoNome = function() {
         console.log($scope.busca);
-        $http.get('./rest/cidadeSource/cidade?q=' + $scope.busca)
+        $http.get('./rest/cidadeSource/cidade?q=' + $scope.busca.toUpperCase())
                 .then(function(retorno) {
                     console.log(retorno.data.list);
                     $scope.cidades = retorno.data;

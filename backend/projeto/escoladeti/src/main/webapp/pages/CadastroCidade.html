@@ -4,6 +4,7 @@
                 <legend> Cadastro de Cidade  </legend>
             </div>
         </div>
+        <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
         <form action="" method="POST" role="form" ng-submit="salvar()">							
             <div class="row ">
                 <div class="form-group col-sm-2">
@@ -12,11 +13,11 @@
                 </div>
                 <div class="form-group col-sm-7">
                     <label> Nome </label>
-                    <input class="form-control" name="nome" title="Nome da cidade deve ser maiusculo" pattern="[A-Za-z ]+" maxlength="40" required type="text" placeholder="MARINGA" ng-model="cidade.nome"/>
+                    <input class="form-control" name="nome" title="Nome da cidade deve ser maiusculo" maxlength="40" required type="text" placeholder="MARINGA" ng-model="cidade.nome"/>
                 </div>
                 <div class="form-group col-sm-3">
                     <label> Estado </label>
-                    <select class="form-control" ng-model="cidade.unidadeFederativa" ng-options="uf.nome for uf in unidadeFederativa">					
+                    <select class="form-control" ng-model="cidade.unidadeFederativa" ng-options="uf.nome for uf in unidadeFederativa track by uf.id" >
                     </select>
                 </div>
             </div>
