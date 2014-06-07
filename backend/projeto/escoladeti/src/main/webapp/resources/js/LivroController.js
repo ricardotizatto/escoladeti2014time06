@@ -92,7 +92,7 @@ function livroController($scope, $http, $routeParams) {
                 $scope.info = {};
                 $scope.info.status = 'danger';
                 console.log($scope.info);
-                $scope.info.message = 'Erro ao salvar o livro: ' + livro.nome + ' - '+ data.message;
+                $scope.info.message = data.message;
             });
     };
     
