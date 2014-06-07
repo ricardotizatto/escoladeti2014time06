@@ -61,7 +61,7 @@ public class Pais extends Entidade {
     
     public void setCodigo(Integer codigo) throws Exception {
     	if (codigo < 1) {
-    		throw new Exception("Código do país deve ser maior que 1.");
+    		throw new Exception("Código do país deve ser maior que 0.");
     	}
 		this.codigo = codigo;
 	}

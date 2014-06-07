@@ -103,7 +103,7 @@ function paisController($scope, $http, $routeParams) {
                     console.log('pais não salvo = ' + data);
                     $scope.info = {};
                     $scope.info.status = 'danger';
-                    console.log($scope.info);
+                    console.log(data.messageDeveloper);
                     $scope.info.message = data.message;
                 });
     };
