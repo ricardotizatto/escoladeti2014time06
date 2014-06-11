@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.unicesumar.escoladeti.common.OrdemProducaoStatus;
+import br.unicesumar.escoladeti.enums.OrdemProducaoStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 

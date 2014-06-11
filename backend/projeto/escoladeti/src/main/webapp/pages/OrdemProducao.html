@@ -1,14 +1,15 @@
-<div class="container" ng-controller="OrdemProducaoController" ng-init="carregar()">
+<div class="container" ng-controller="OrdemProducaoController" ng-init="carregarOrdemProducao()">
     <div class="row">
         <div class="form-group col-sm-12">
             <legend> <span class="glyphicon glyphicon-file"></span> Ordem de produção </legend>
         </div>
     </div>
+    {{ordemProducao}}
     <form action="" method="POST" role="form" ng-submit="salvar()" >							
         <div class="row ">
             <div class="form-group col-sm-3">
                 <label> Solicitação </label>
-                <input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{6}" required placeholder="Número da Solicitação" />
+                <input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{1,6}" required placeholder="Número da Solicitação" />
             </div>
             <div class="form-group col-sm-3"> 
                 <label> Material </label>
@@ -20,7 +21,7 @@
             </div>
             <div class="form-group col-sm-3">
                 <label> Status </label>
-                <input class="form-control {{ getStatusOrdemProducao(ordemProducao.state) }} estilo-status" type="text" ng-model="ordemProducao.state" pattern="[A-Za-z ]+" maxlength="40" required placeholder="Status da Ordem de Produção" />  
+                <input class="form-control " type="text" disabled ng-model="ordemProducao.state" pattern="[A-Za-z ]+" maxlength="40" required  />  
             </div>
         </div>
         <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
@@ -52,12 +53,12 @@
                         <td>Nome do Revisor</td>
                         <td>Aceito</td>
                         <td>
-                            <button type='submit' class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
+                            <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
                                 <span class='glyphicon glyphicon-download'><input type="file"></span>
-                            </button>
-                            <button type='submit' class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial()">
+                            </a>
+                            <a class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial()">
                                 <span class='glyphicon glyphicon-edit'></span>
-                            </button>
+                            </a>
                             <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
                                 <span class='glyphicon glyphicon-remove-circle' alt="Exluir" ></span>
                             </button>

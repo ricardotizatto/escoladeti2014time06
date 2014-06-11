@@ -15,7 +15,7 @@
 		<org.springsecurity-version>3.2.0.RELEASE</org.springsecurity-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jackson-version>1.9.13</jackson-version>
-	 <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+		<netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -35,7 +35,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -73,7 +73,7 @@
 			<artifactId>barbecue</artifactId>
 			<version>1.5-beta1</version>
 		</dependency>
-		
+
 		<!-- Jackson (JSON Mapper) -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>

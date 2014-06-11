@@ -1,25 +1,32 @@
 package br.unicesumar.escoladeti.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import br.unicesumar.escoladeti.enums.TipoTelefone;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Telefone extends Entidade {
 
-    @NotNull
+	private static final long serialVersionUID = 1L;
+
     private Integer ddd;
 
     @NotNull
     private Integer numero;
+    
+    
+    private Integer ramal;
 
     @NotNull
-    private Integer tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoTelefone tipo;
     
     @ManyToOne
     @JoinColumn(name = "id_pessoa",referencedColumnName = "id")
@@ -61,11 +68,11 @@ public class Telefone extends Entidade {
         this.numero = telefone;
     }
 
-    public Integer getTipo() {
+    public TipoTelefone getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(TipoTelefone tipo) {
         this.tipo = tipo;
     }
 }

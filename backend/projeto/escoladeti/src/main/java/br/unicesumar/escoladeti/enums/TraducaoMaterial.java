@@ -1,4 +1,4 @@
-package br.unicesumar.escoladeti.common;
+package br.unicesumar.escoladeti.enums;
 
 public enum TraducaoMaterial {
 	BRAILLE("Braille"),

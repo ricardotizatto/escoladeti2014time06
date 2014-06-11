@@ -1,12 +1,20 @@
 'use strict';
 
 function pessoaFisicaController($scope, $http, $routeParams) {
+	function getNovaPessoaFisica() {
+		return {
+			telefones: [],
+			enderecos: []
+		};
+	}
+	
     $scope.novo = function() {
-        $scope.pessoa = getNovo();
+        $scope.pessoa = getNovaPessoaFisica();
         window.location = '#/pessoafisica';
     };
 
     $scope.init = function() {
+    	console.log('init');
         $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
                 .success(function(unidadesFederativas, status) {
                     $scope.estados = unidadesFederativas;
@@ -27,20 +35,23 @@ function pessoaFisicaController($scope, $http, $routeParams) {
                     console.log('erro ao buscar cidades');
                 });
     };
+    
     $scope.carregarPessoa = function() {
+    	$scope.pessoa = getNovaPessoaFisica();
         if ($routeParams.pessoaFisicaId) {
             console.log('Aqui');
         }
     };
 
     $scope.salvar = function() {
+    	console.log('enviando pessoa fisica ', $scope.pessoa);
         $http.post('./rest/pessoaFisicaSource/pessoaFisica', $scope.pessoa)
                 .success(function(data, status) {
-                    console.log('Salvo com sucesso ' + data);
+                    console.log('Salvo com sucesso ' , data);
                     $scope.pessoa = getNovaPessoaFisica();
                 })
                 .error(function(data) {
-                    console.log('Nao foi possivel Salvar ' + data);
+                    console.log('Nao foi possivel Salvar ', data);
                 });
     };
 
@@ -96,15 +107,16 @@ function pessoaFisicaController($scope, $http, $routeParams) {
     function getNovo() {
         return {};
     }
-    ;
+    
 
     $scope.filtroCidades = function() {
-        var filtroCidades = [];
-        angular.forEach($scope.cidades, function(value, key) {
-            if (value.unidadeFederativa === $scope.estado) {
-                this.push(value);
-            }
-        }, filtroCidades);
-        return cidades;
+//    	console.log('filtro cidades');
+//        var filtroCidades = [];
+//        angular.forEach($scope.cidades, function(value, key) {
+//            if (value.unidadeFederativa === $scope.estado) {
+//                this.push(value);
+//            }
+//        }, filtroCidades);
+//        return cidades;
     };
 }
