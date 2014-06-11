@@ -57,15 +57,14 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     };
 
     $scope.novo = function() {
-        $scope.ordemProducao = getNovaOrdemProducao();
         window.location = '#/ordemproducao';
     };
 
     $scope.carregarOrdemProducao = function() {
-        console.log('carregando ordem de produção');
-
+    	
         if (!$routeParams.ordemProducaoId) {
             $scope.ordemProducao = getNovaOrdemProducao();
+            console.log('carregando ordem de produção ', $scope.ordemProducao);
             return;//se não tiver id não buscar
         }
 
@@ -99,17 +98,20 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     $scope.getTodos = function(numeroPagina) {
         console.log(numeroPagina);
         $http.get('./rest/ordemProducaoSource/listar/pag/' + numeroPagina)
-                .success(function(listaOrdensProducao, status) {
-                    $scope.ordensProducao = listaOrdensProducao;
+                .success(function(ordenProducaoPage, status) {
+                    $scope.ordensProducao = ordenProducaoPage.list;
                 })
                 .error(function(data, status) {
-                    console.log('erro ao buscar ordensProducao ' + data);
+                	alert(data.message);//TODO: Implementar tag no html para popular com a mensagem
+                    console.log('erro ao buscar ordensProducao ' + data.developerMessage );
                 });
     };
 
     function getNovaOrdemProducao() {
         console.log('nova ordem de produção');
-        return {};
+        return {
+        	state: "ANDAMENTO"
+        };
     }
 
     $scope.voltar = function() {

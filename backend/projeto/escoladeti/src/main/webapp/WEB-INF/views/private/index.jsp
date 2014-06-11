@@ -60,7 +60,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown">Cadastros<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li class="dropdown-submenu">
-                                <a tabindex="-1">Cliente</a>
+                                <a tabindex="-1">Pessoa</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#/listapessoafisica">Pessoa Física</a></li>
                                     <li><a href="#/listapessoajuridica">Pessoa Jurídica</a></li>

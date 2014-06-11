@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.unicesumar.escoladeti.common.TraducaoMaterial;
+import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 
 @Entity
 public class SolicitacaoItem extends Entidade{

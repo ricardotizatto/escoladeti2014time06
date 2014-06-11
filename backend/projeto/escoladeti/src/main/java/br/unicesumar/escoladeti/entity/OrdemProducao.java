@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.unicesumar.escoladeti.common.OrdemProducaoStatus;
+import br.unicesumar.escoladeti.enums.OrdemProducaoStatus;
         
 @Entity
 public class OrdemProducao extends Entidade {
@@ -49,5 +49,8 @@ public class OrdemProducao extends Entidade {
         return status;
     }
 
+    public SolicitacaoItem getSolicitacaoItem() {
+		return solicitacaoItem;
+	}
     
 }
