@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/rest/livroSource")
-public class LivroController implements Serializable{
-    
+public class LivroController implements Serializable {
+
     @Autowired
     private LivroService livroService;
 
     @RequestMapping(value = "/livro", method = RequestMethod.POST)
     @ResponseBody
-    public Livro salvar(@RequestBody Livro livro) {
-        return this.livroService.salvar(livro);
+    public Livro salvar(@RequestBody Livro livro) throws Exception {
+        if (!livro.equals(livroService.buscarLivroPorNomeAutorEditoraAnoEdicao(livro))) {
+            return this.livroService.salvar(livro);
+        }
+        throw new Exception("O Livro " + livro.getNome() + " já está cadastrado!");
     }
 
     @RequestMapping(value = "/livro/{id}", method = RequestMethod.GET)
@@ -37,7 +40,7 @@ public class LivroController implements Serializable{
         return this.livroService.getTodos(1);
     }
 
-    @RequestMapping(value = "/livro", params = {"q" }, method = RequestMethod.GET)
+    @RequestMapping(value = "/livro", params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Livro> getPorNome(@RequestParam String q) {
         return livroService.getLivroPorNome(q);

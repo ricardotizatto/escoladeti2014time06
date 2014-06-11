@@ -30,7 +30,11 @@ public class CidadeService {
     }
     
     public Cidade getById(Long id){
-        
         return this.cidadeRepository.findById(id);
     }
+    
+   /* public Cidade buscarCidadePorNomeFundacaoUnidadeFederativa(Cidade cidade) {
+        return this.cidadeRepository.findByNomeAndFundacaoAndUnidadeFederativa(
+                cidade.getNome(), cidade.getFundacao(), cidade.getUnidadeFederativa());
+    }*/
 }

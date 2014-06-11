@@ -4,7 +4,6 @@ import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Livro;
 import br.unicesumar.escoladeti.repository.LivroRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class LivroService {
     }
 
     public DataPage<Livro> getLivroPorNome(String nomeParcial) {
-        return new DataPage<Livro>(livroRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+        return new DataPage<>(livroRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
     }
 
     public void deletar(Livro livro) {
@@ -32,5 +31,10 @@ public class LivroService {
 
     public Livro getById(Long id) {
         return this.livroRepository.findById(id);
+    }
+
+    public Livro buscarLivroPorNomeAutorEditoraAnoEdicao(Livro livro) {
+        return this.livroRepository.findByNomeAndAutorAndEditoraAndAnoEdicao(
+                livro.getNome(), livro.getAutor(), livro.getEditora(), livro.getAnoEdicao());
     }
 }

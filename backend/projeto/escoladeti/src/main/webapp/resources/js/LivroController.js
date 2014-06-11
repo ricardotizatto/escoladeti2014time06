@@ -3,18 +3,31 @@ function livroController($scope, $http, $routeParams) {
 
     $scope.deletar = function(livro) {
         console.log('deletando livro ' + JSON.stringify(livro));
-        $http({
-            method: 'DELETE',
-            data: livro,
-            url: './rest/livroSource/livro',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-        .success(function(data, status) {
-            $scope.getTodos(1);
-            console.log('Livro deletado!');
-        })
-        .error(function(data, status) { 
-            console.log('Livro não foi deletado' + data);
+        
+        BootstrapDialog.confirm('Deseja realmente deletar o Livro: <b>' + livro.nome + '</b>?', function(result) {
+            if (result) {
+                $http({
+                    method: 'DELETE',
+                    data: livro,
+                    url: './rest/livroSource/livro',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
+                .success(function(data, status) {
+                    $scope.getTodos(1);
+                    console.log('Livro deletado!');
+                    $scope.info = {};
+                    $scope.info.message = 'Livro ' + livro.nome + ' deletado com sucesso';
+                    $scope.info.status = 'success'; 
+                })
+                .error(function(data, status) { 
+                    console.log('Livro não foi deletado' + data);
+                    $scope.info = {};
+                    $scope.info.status = 'danger';
+                    $scope.info.message = 'Erro ao deletar o livro: ' + livro.nome + ' - '+ data.message;
+                });
+            } else {
+                $scope.getTodos(1);
+            }    
         });
     };
     
@@ -25,8 +38,10 @@ function livroController($scope, $http, $routeParams) {
         
     $scope.carregarLivro = function() {
         console.log('carregando livro com id: ' + $routeParams.livroId );
-        if (!$routeParams.livroId)
+        if (!$routeParams.livroId){
+            $scope.livro = getNovoLivro();
             return;//se não tiver id não buscar
+        }    
 
         $http.get('./rest/livroSource/livro/' + $routeParams.livroId)
             .success(function(livro, status) {
@@ -44,12 +59,17 @@ function livroController($scope, $http, $routeParams) {
     
     $scope.buscaLivrosContendoNome = function() {
         console.log($scope.busca);
-        $http.get('./rest/livroSource/livro?q=' + $scope.busca)
+        $http.get('./rest/livroSource/livro?q=' + $scope.busca.toUpperCase())
             .then(function(retorno) {
                 console.log(retorno.data.list);
+                
+                retorno.data.list.forEach(function(livro) {
+                    console.log(livro);
+                    delete livro.info;
+                });
                 $scope.livros = retorno.data;
             });
-    }  
+    } 
 
     $scope.salvar = function() {
   
@@ -60,13 +80,20 @@ function livroController($scope, $http, $routeParams) {
 
         console.log($scope.livro);
         $http.post("./rest/livroSource/livro", $scope.livro)
-                .success(function(livro, status) {
-                    $scope.livro = getNovoLivro();
-                    console.log("livro salva = " + livro);
-                })
-                .error(function(data, status) {
-                    console.log("erro ao salvar livro" + data);
-                });
+            .success(function(livro, status) {
+                $scope.livro = getNovoLivro();
+                console.log("livro salva = " + livro);
+                $scope.info = {};
+                $scope.info.message = 'Livro ' + livro.nome + ' salvo com sucesso';
+                $scope.info.status = 'success'; 
+            })
+            .error(function(data, status) {
+                console.log("erro ao salvar livro" + data);
+                $scope.info = {};
+                $scope.info.status = 'danger';
+                console.log($scope.info);
+                $scope.info.message = data.message;
+            });
     };
     
     $scope.getTodos = function(numeroPagina) {

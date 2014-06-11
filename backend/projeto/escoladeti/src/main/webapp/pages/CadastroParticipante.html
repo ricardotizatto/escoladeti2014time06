@@ -1,23 +1,12 @@
-﻿<script>
-	function limpa() {
-
-                document.getElementById('cpf').value="";
-                document.getElementById('rg').value="";
-                document.getElementById('nome').value="";
-                document.getElementById('email').value="";
-                document.getElementById('telefone').value="";
-                document.getElementById('data').value="";
-
-	}
-        
-</script>
-
 <div class="container" ng-controller="participanteController" ng-init="carregarEventos();novo()">
-	<label>&nbsp;</label>
 	<fieldset>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <legend> Cursos Disponíveis </legend>
+                </div>
+            </div>
                 <form action="" method="POST" name="participante" ng-submit="salvar()">
-                    <div class="col-sm-7" style="height:400px; overflow:auto;">
-                        <legend>Cursos Disponíveis</legend>
+                    <div class="form-group col-sm-7">
                         <div class="blogShort" ng-repeat="evento in eventos">
                             <h1>{{evento.titulo}}</h1>
                                 <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
@@ -37,7 +26,7 @@
                             <legend>Dados Pessoais</legend>
                             <br>
                             <label>CPF</label>
-                            <input class="form-control" type="text" ng-change="ValidarCPF(participante.cpf)"  onKeyPress="MascaraCPF(participante.cpf);" maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" required>
+                            <input class="form-control" type="text" ng-change="participante.cpf"  maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" id="cpf" required>
                             <label>RG</label>
                             <input class="form-control"  type="text" placeholder="R.G." ng-model="participante.rg" required>
                             <label>Nome</label>
@@ -54,8 +43,8 @@
                             <input name="deficiente" value="N" type="radio" ng-model="participante.deficiente" >  <label>Não</label>
                     </div>
                     <div align="right">
-                        <button type="button"  class="btn btn-danger"  ng-click="novo()">Limpar</button>
-                            <button class="btn btn-success">Confirmar</button>
+                        <button type="button"  class="btn btn-danger btn-padrao"  ng-click="novo()"> <span class="glyphicon glyphicon-refresh" ></span> Limpar</button>
+                            <button class="btn btn-success btn-padrao"> <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
                     </div>
                   
 
@@ -94,3 +83,12 @@
                 </form>
 	</fieldset>
 </div>
+
+<script>
+    jQuery(function($) {
+    $.mask.definitions['~']='[+-]';
+
+   $("#cpf").mask("999.999.999-99");
+   
+});
+</script>

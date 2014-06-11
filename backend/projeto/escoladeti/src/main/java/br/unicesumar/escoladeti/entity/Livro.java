@@ -1,45 +1,18 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.Objects;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Livro extends Material {
     
     private static final long serialVersionUID = 1L;
-    
-    @NotNull
-    @NotEmpty
+
     private String nome;
     private String disciplina;
     private String autor;
     private String editora;
     private Long anoEdicao;
-
-    public Livro() {
-    }
-    
-    public Livro(Long id, String nome, String disciplina,
-            String autor, String editora, Long anoEdicao){
-        
-        this.id = id;
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-        this.editora = editora;
-        this.anoEdicao = anoEdicao;
-    }
-    
-    public Livro(String nome, String disciplina,
-            String autor, String editora, Long anoEdicao){
-        
-        this.nome = nome;
-        this.disciplina = disciplina;
-        this.autor = autor;
-        this.editora = editora;
-        this.anoEdicao = anoEdicao;
-    }
 
     public String getNome() {
         return nome;
@@ -102,4 +75,44 @@ public class Livro extends Material {
         return dados.toString();
        
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.nome);
+        hash = 83 * hash + Objects.hashCode(this.disciplina);
+        hash = 83 * hash + Objects.hashCode(this.autor);
+        hash = 83 * hash + Objects.hashCode(this.editora);
+        hash = 83 * hash + Objects.hashCode(this.anoEdicao);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Livro other = (Livro) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.disciplina, other.disciplina)) {
+            return false;
+        }
+        if (!Objects.equals(this.autor, other.autor)) {
+            return false;
+        }
+        if (!Objects.equals(this.editora, other.editora)) {
+            return false;
+        }
+        if (!Objects.equals(this.anoEdicao, other.anoEdicao)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

@@ -1,0 +1,58 @@
+package br.unicesumar.escoladeti.controller;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.transaction.TransactionSystemException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import br.unicesumar.escoladeti.common.InfoError;
+
+@ControllerAdvice
+public class ExceptionController {
+
+	@ExceptionHandler( Exception.class)
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public InfoError handleException(Exception e) {
+		return new InfoError(e.getMessage(), e.getLocalizedMessage() );
+	}	
+	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public InfoError handleValidationException(HttpMessageNotReadableException e) {
+		System.out.println(e.getClass());
+		return new InfoError(e.getMostSpecificCause().getMessage() , e.getLocalizedMessage() );
+	}
+	
+	@ExceptionHandler(TransactionSystemException.class)
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public InfoError handleConstraintViolationException(TransactionSystemException e) {
+		System.out.println(e.getClass());
+		StringBuilder builder = new StringBuilder();
+		
+		//Percorrer  as constantes violadas, armazenando qual campo, e a mensagem de validação
+		if (e.getCause() != null 
+				&& e.getCause().getCause() instanceof ConstraintViolationException) {
+			ConstraintViolationException except = (ConstraintViolationException) e.getCause().getCause();
+			for (ConstraintViolation<?> violation : except.getConstraintViolations()) {
+				builder.append(violation.getPropertyPath());
+				builder.append(" ");
+				builder.append(violation.getMessage());
+				builder.append("\n");
+			}
+			return new InfoError(builder.toString(), e.getMessage());
+		}
+		
+		return new InfoError("Erro ao salvar", e.getLocalizedMessage() );
+	}
+	
+
+}

@@ -25,7 +25,6 @@ public class PaisController implements Serializable {
 	@ResponseBody
 	public Pais salvar(@RequestBody Pais pais) {
 		return paisService.salvar(pais);
-		
 	}
 
 	@RequestMapping(value = "/pais", method = RequestMethod.PUT)
@@ -45,7 +44,7 @@ public class PaisController implements Serializable {
 	@RequestMapping(value = "/pais", method = RequestMethod.GET)
 	@ResponseBody
 	public DataPage<Pais> getTodos() {
-		return paisService.getTodos(1);
+		return paisService.getTodos(1);		
 	}
 	
 	@RequestMapping(value = "/pais",params = {"q"}, method = RequestMethod.GET)

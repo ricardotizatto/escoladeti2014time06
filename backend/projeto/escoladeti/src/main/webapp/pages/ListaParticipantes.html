@@ -1,7 +1,6 @@
 ﻿<div class="container" ng-controller="participanteController" ng-init="listarParticipantes()">
-    <label> &nbsp; </label>
     <fieldset>
-        <legend> <span class="glyphicon glyphicon-list-alt"></span> Lista Participantes
+        <legend> <span class="glyphicon glyphicon-list-alt"></span> Participantes
         </legend>
         <div class="row">
             <div class="form-group col-sm-5">
@@ -17,7 +16,7 @@
                 <label> &nbsp; </label>
                 <div>
                     <span class="pull-right">
-                        <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novo()" >
+                        <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="carregarParticipanteAlterar(null,participante.cpf,participante.deficiente,participante.email,participante.idevento,participante.nome,participante.rg,participante.sexo,participante.telefone,participante.pagamento)" data-toggle="modal" data-target="#modalParticipante">
                             <span class='glyphicon glyphicon-plus-sign'></span> Novo
                         </button>
                     </span>
@@ -32,18 +31,114 @@
                 <th width="20%">Email</th>
                 <th width="20%">Telefone</th>
                 <th width="20%">Sexo</th>
+                <th width="20%">Pagamento</th>
+                <th width="20%">Alterar</th>
             </tr>
             <tr ng-repeat="participante in participantes| filter : busca">
                 <td>{{participante.nome}}</td>
-                 <td>{{participante.cpf}}</td>
-                 <td>{{participante.rg}}</td>
+                <td>{{participante.cpf}}</td>
+                <td>{{participante.rg}}</td>
                 <td>{{participante.email}}</td>
                 <td>{{participante.telefone}}</td>
                 <td>{{participante.sexo}}</td>
-                
+                <td>{{participante.pagamento}}</td>
+                <td><button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarParticipanteAlterar(participante.id,participante.cpf,participante.deficiente,participante.email,participante.idevento,participante.nome,participante.rg,participante.sexo,participante.telefone,participante.pagamento)" data-toggle="modal" data-target="#modalParticipante">
+                        Alterar
+                    </button></td>
             </tr>
         </table>
-        <label> Total de Participantes: {{(participantes| filter : busca).length}} / {{participantes.length}}</label>
     </fieldset>
     <hr>
+
+    <!-- Modal detalhamento-->
+    <form action="" method="POST" name="participante" ng-submit="salvarAlteracao()">
+        <div class="modal fade" id="modalParticipante" tabindex="-1" role="dialog" aria-labelledby="modalParticipanteLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="modalEnderecoLabel">Dados do Participante</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="blogShort">
+                            <div class="form-group col-sm-12">
+                                
+                                <input class="form-control" type="hidden" ng-model="idModal" id="cpf" required>
+                                
+                                <div class="row">
+                                    <div class="form-group col-sm-4 ">
+                                        <label>CPF</label>
+                                        <input class="form-control" type="text" ng-change="cpfModal"  maxlength="14" placeholder="Número do CPF" ng-model="cpfModal" id="cpf" required>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>RG</label>
+                                        <input class="form-control"  type="text" placeholder="R.G." ng-model="rgModal" required>
+                                    </div>
+                                    <div>
+                                        <label> Pagamento </label>
+                                        <br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-usd"></span>
+                                            </span>
+                                            <select class="selectpicker show-tick form-control" name="pagamento" ng-model="pagamentoModal" data-live-search="true">
+                                                <option value="PAGO" >PAGO</option>
+                                                <option value="PENDENTE" >PENDENTE</option>
+                                                <option value="GRATIS" >GRATIS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Nome</label>
+                                        <input class="form-control" type="text"  placeholder="Nome" ng-model="nomeModal" required>
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label>Sexo</label>
+                                        <select class="selectpicker show-tick form-control" name="sexo" ng-model="sexoModal">
+                                            <option value="M" >Masculino</option>
+                                            <option value="F" >Feminino</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Email</label>
+                                        <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="emailModal" required>
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label>Telefone</label>
+                                        <input class="form-control" type="text" ng-model="telefoneModal" onKeyPress="MascaraTelefone(telefoneModal);" maxlength="15" placeholder="Telefone" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Deficiente</label>
+                                        <select class="selectpicker show-tick form-control" name="deficiente" ng-model="deficienteModal" data-live-search="true">
+                                            <option value="S" >Sim</option>
+                                            <option value="N" >Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Fechar</button>
+                        <button class="btn btn-success btn-padrao"> <span class="glyphicon glyphicon-ok" ></span> Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>	 
+    </form> <!--fim modal-->    
 </div>
