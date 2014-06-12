@@ -1,4 +1,4 @@
-function cidadeController($scope, $http, $routeParams) {
+function cidadeController($scope, $http, $routeParams, $filter) {
     console.log('Carregando controller');
 
     $scope.editar = function(cidade) {
@@ -36,8 +36,15 @@ function cidadeController($scope, $http, $routeParams) {
     };
 
     $scope.salvar = function() {
-        $scope.cidade.nome = $scope.cidade.nome.toUpperCase();
-//        console.log(angular.toJson($scope.cidade, true));
+        $scope.cidade.nome = $scope.cidade.nome.toUpperCase();        
+        var hoje = new Date();
+        
+        if($filter('date')($scope.cidade.fundacao, "yyyyMMdd") > $filter('date')(hoje, "yyyyMMdd")){
+            $scope.info = {};
+            $scope.info.message = 'Data fundação maior que hoje.';
+            $scope.info.status = 'warning';
+            return false;
+        }
         $http.post("./rest/cidadeSource/cidade", $scope.cidade)
                 .success(function(cidade, status) {
                     $scope.cidade = getNovaCidade();
@@ -47,7 +54,7 @@ function cidadeController($scope, $http, $routeParams) {
                     $scope.info.status = 'success';
                 })
                 .error(function(data, status) {
-                    console.log("erro ao salvar cidade" + data);
+                    console.log("erro ao salvar cidade" , data);
                     $scope.info = {};
                     $scope.info.status = 'danger';
                     console.log($scope.info);
