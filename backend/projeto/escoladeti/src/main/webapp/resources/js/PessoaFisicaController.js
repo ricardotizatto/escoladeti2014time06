@@ -9,7 +9,7 @@ function pessoaFisicaController($scope, $http, $routeParams) {
 	}
 	
     $scope.novo = function() {
-        $scope.pessoa = getNovaPessoaFisica();
+        $scope.pessoaFisica = getNovaPessoaFisica();
         window.location = '#/pessoafisica';
     };
 
@@ -37,18 +37,23 @@ function pessoaFisicaController($scope, $http, $routeParams) {
     };
     
     $scope.carregarPessoa = function() {
-    	$scope.pessoa = getNovaPessoaFisica();
+    	$scope.pessoaFisica = getNovaPessoaFisica();
         if ($routeParams.pessoaFisicaId) {
             console.log('Aqui');
         }
     };
+    
+    $scope.voltar = function() {
+        $scope.pessoaFisica = getNovo();
+        window.location = '#/listapessoafisica';
+    };
 
     $scope.salvar = function() {
-    	console.log('enviando pessoa fisica ', $scope.pessoa);
-        $http.post('./rest/pessoaFisicaSource/pessoaFisica', $scope.pessoa)
+    	console.log('enviando pessoa fisica ', $scope.pessoaFisica);
+        $http.post('./rest/pessoaFisicaSource/pessoaFisica', $scope.pessoaFisica)
                 .success(function(data, status) {
                     console.log('Salvo com sucesso ' , data);
-                    $scope.pessoa = getNovaPessoaFisica();
+                    $scope.pessoaFisica = getNovaPessoaFisica();
                 })
                 .error(function(data) {
                     console.log('Nao foi possivel Salvar ', data);
@@ -57,7 +62,7 @@ function pessoaFisicaController($scope, $http, $routeParams) {
 
     $scope.salvarTelefone = function() {
         console.log($scope.telefone);
-        $scope.pessoa.telefones.push($scope.telefone);
+        $scope.pessoaFisica.telefones.push($scope.telefone);
 
         console.log($scope.telefones);
         $scope.telefone = getNovo();
@@ -68,36 +73,34 @@ function pessoaFisicaController($scope, $http, $routeParams) {
     };
 
     $scope.editarTelefone = function(indice) {
-        $scope.telefone = $scope.pessoa.telefones[indice];
+        $scope.telefone = $scope.pessoaFisica.telefones[indice];
     };
 
     $scope.delTelefone = function(index) {
-        $scope.pessoa.telefones.splice(index, 1);
+        $scope.pessoaFisica.telefones.splice(index, 1);
     };
 
     $scope.idEndereco = 0;
 
     $scope.salvarEndereco = function() {
         console.log($scope.endereco);
-        if (!$scope.idEndereco) {
-            $scope.idEndereco++;
-            $scope.endereco.idEndereco = $scope.idEndereco;
-            $scope.pessoa.enderecos.push($scope.endereco);
-        }
-        $scope.endereco = null;
+        $scope.pessoaFisica.enderecos.push($scope.endereco);
+        
+        console.log($scope.enderecos);
+        $scope.endereco = getNovo();
     };
 
     $scope.editarEndereco = function(indice) {
-        $scope.endereco = $scope.pessoa.enderecos[indice];
+        $scope.endereco = $scope.pessoaFisica.enderecos[indice];
     };
 
     $scope.addEndereco = function() {
-        $scope.pessoa.enderecos.push($scope.endereco);
+        $scope.pessoaFisica.enderecos.push($scope.endereco);
         $scope.endereco = null;
     };
 
     $scope.delEndereco = function(index) {
-        $scope.pessoa.enderecos.splice(index, 1);
+        $scope.pessoaFisica.enderecos.splice(index, 1);
     };
 
     $scope.cancelarEndereco = function() {

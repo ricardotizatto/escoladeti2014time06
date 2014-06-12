@@ -35,6 +35,9 @@ input,button,a{
     text-transform: uppercase;
 }
 
+.btn-radio-amacapa{ height: 34px; }
+.btn-radio-amacapa:checked{ background-color: #3276b1; border-color: #285e8e;}
+
 /* inicio botao de envio de arquivos */
 .btn-file {
     position: relative;

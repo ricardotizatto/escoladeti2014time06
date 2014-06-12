@@ -1,55 +1,57 @@
-<div class="container" ng-controller="pessoaFisicaController" ng-init="carregarPessoa();
-                init();">
+<div class="container" ng-controller="pessoaFisicaController" ng-init="carregarPessoa();init();">
     <div class="row">
         <div class="form-group col-sm-12">
             <fieldset>
                 <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Cliente </legend>
         </div>
     </div>
+    <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
     <form action="" method="POST" role="form" ng-submit="salvar()" name="formPF">					
         <div class="row ">
             <div class="form-group col-sm-5">
                 <label> Nome </label>
-                <input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome" />
+                <input class="form-control" name="nome" type="text" ng-model="pessoaFisica.nome" placeholder="Nome" />
             </div>
             <div class="form-group col-sm-5">
                 <label> Sobrenome </label>
-                <input class="form-control" name="sobrenome" type="text" ng-model="pessoa.sobrenome" placeholder="Sobrenome" />
+                <input class="form-control" name="sobrenome" type="text" ng-model="pessoaFisica.sobrenome" placeholder="Sobrenome" />
             </div>
             <div class="form-group col-sm-2">
+                <span class="pull-right">
                 <label>Sexo</label>
                 <div>
-                    <div class="btn-group"><!--data-toggle="buttons" verificar uso-->
-                        <label class="btn btn-primary radio-inline">
-                            <input name="sexo" value="MASCULINO" type="radio" ng-model="pessoa.sexo" /> <label>M</label>
+                    <div class="btn-group" ><!--data-toggle="buttons" verificar uso-->
+                        <label class="btn btn-ss btn-primary btn-radio-amacapa">
+                            <input form-control ng-model="pessoaFisica.sexo" name="sexo" value="M" type="radio" /> M
                         </label>
-                        <label class="btn btn-primary radio-inline">
-                            <input name="sexo" value="FEMININO" type="radio" ng-model="pessoa.sexo" />  <label>F</label>
+                        <label class="btn btn-ss btn-primary btn-radio-amacapa">
+                            <input form-control ng-model="pessoaFisica.sexo" name="sexo" value="S" type="radio" /> F
                         </label>
                     </div>
                 </div>
+                </span>
             </div>
         </div>		
         <div class="row">			
-            <div class="form-group col-sm-2">
+            <div class="form-group col-sm-3">
                 <label> RG </label>
-                <input class="form-control" name="rg" type="text" ng-model="pessoa.rg" onKeyPress="MascaraRG(formPF.rg);" maxlength="12" placeholder="R.G." />
+                <input class="form-control" id="rg" name="rg" type="text" ng-model="pessoaFisica.rg"  maxlength="12" placeholder="Números do R.G." />
             </div>
-            <div class="form-group col-sm-2">
+            <div class="form-group col-sm-3">
                 <label> CPF </label>
-                <input class="form-control" name="cpf" type="text" ng-model="pessoa.cpf" onBlur="ValidarCPF(formPF.cpf);" onKeyPress="MascaraCPF(formPF.cpf);" maxlength="14" placeholder="Número do CPF" />
+                <input class="form-control" id="cpf" type="text" ng-model="pessoaFisica.cpf"  maxlength="14" placeholder="Número do CPF" />
             </div>	
             <div class="form-group col-sm-2">
                 <label>Nascimento </label>
-                <input class="form-control maskNascimento" name="dataNascimento" type="date" ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa" />
+                <input class="form-control maskNascimento" name="dataNascimento" type="date" ng-model="pessoaFisica.dataNascimento" placeholder="dd/mm/aaaa" />
             </div>
-            <div class="form-group col-sm-5">
+            <div class="form-group col-sm-4">
                 <label>Email</label>
                 <div class="input-group" >
                     <span class="input-group-addon" >
                         <span class="glyphicon glyphicon-envelope"></span>
                     </span>
-                    <input class="form-control" name="email" type="text" ng-model="pessoa.email" placeholder="Endereço de email">
+                    <input class="form-control" name="email" type="text" ng-model="pessoaFisica.email" placeholder="Endereço de email">
                 </div>
             </div>
         </div>
@@ -61,8 +63,22 @@
                     <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEndereco">
                         <span class="glyphicon glyphicon-plus" ></span>	
                     </button>
-                    <label> &nbsp; </label>
                 </legend>
+                <table class="table table-hover table-striped">
+                    <tr ng-repeat="endereco in pessoaFisica.enderecos">
+                        <td class="text-center"> {{endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
+                        <td>
+                            <span class="pull-right" >
+                            <button class='btn btn-warning btn-sm' ng-click="editarEndereco($index)" data-toggle="modal" data-target="#modalTelefone">
+                                <span class='glyphicon glyphicon-edit'></span>
+                            </button>
+                            <button class='btn btn-danger btn-sm' ng-click="delEndereco($index)" >
+                                <span class='glyphicon glyphicon-remove-circle'></span>
+                            </button>
+                            </span>    
+                        </td>
+                    </tr>             
+                </table>
             </div>
             <div class="form-group col-sm-5">
                 <legend>
@@ -70,44 +86,20 @@
                     <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTelefone">
                         <span class="glyphicon glyphicon-plus" ></span>	
                     </button>
-                    <label> &nbsp; </label>
                 </legend>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-sm-7">
                 <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>          
-                            <th class="col-sm-5 text-center"> Endereço </th> 
-                            <th class="col-sm-1"> &nbsp; </th>        
-                        </tr>
-                    </thead>
                     <tbody>
-                        <tr ng-repeat="endereco in pessoa.enderecos">
-                            <td class="text-center"> {{endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
-                            <td>
-                                <button type="button" class="btn btn-link btn-xs" title="Editar" ng-click="editarEndereco($index)" data-toggle="modal" data-target="#modalEndereco" ><i class="glyphicon glyphicon-pencil"></i> </button>
-                                <button type="button" class="btn btn-link btn-xs" title="Excluir" ng-click="delEndereco($index)"><i class="glyphicon glyphicon-trash"></i> </button>
-                            </td>
-                        </tr>        
-                    </tbody>      
-                </table>
-            </div>
-            <div class="form-group col-sm-5">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>          
-                            <th class="col-sm-5 text-center"> Telefones </th> 
-                            <th class="col-sm-1"> &nbsp; </th>           
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="telefone in pessoa.telefones">
+                        <tr ng-repeat="telefone in pessoaFisica.telefones">
                             <td class="text-center"> {{telefone.tipo + " - " + telefone.numero + " - " + telefone.ramal}} </td>
                             <td>
-                                <button type="button" class="btn btn-link btn-xs" title="Editar" ng-click="editarTelefone($index)" data-toggle="modal" data-target="#modalTelefone" ><i class="glyphicon glyphicon-pencil"></i> </button>
-                                <button type="button" class="btn btn-link btn-xs" title="Excluir" ng-click="delTelefone($index)"><i class="glyphicon glyphicon-trash"></i> </button>
+                                <span class="pull-right" >
+                                <button class='btn btn-warning btn-sm' ng-click="editarTelefone($index)" data-toggle="modal" data-target="#modalTelefone">
+                                    <span class='glyphicon glyphicon-edit'></span>
+                                </button>
+                                <button class='btn btn-danger btn-sm' ng-click="delTelefone($index)" >
+                                    <span class='glyphicon glyphicon-remove-circle'></span>
+                                </button>
+                                </span>    
                             </td>
                         </tr>        
                     </tbody>      
@@ -116,11 +108,11 @@
         </div>	
         <div class="row">
             <div class="col-sm-12">
-                <span class="pull-right">	
-                    <a class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove" ></span> Cancelar 
-                    </a>
-                    <button type="submit" class="btn btn-success" >
+                <span class="pull-right">
+                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                    </a>  
+                    <button type="submit" class="btn btn-success btn-padrao">
                         <span class="glyphicon glyphicon-ok" ></span> Salvar
                     </button>
                 </span>		
@@ -136,7 +128,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="modalTelefoneLabel">Cadastro de telefone</h4>
+                    <h4 class="modal-title" id="modalTelefoneLabel"><span class="glyphicon glyphicon-phone-alt"></span> Cadastro de telefone</h4>
                 </div>
                 <div class="modal-body">
 
@@ -157,7 +149,7 @@
                         <div class="form-group col-sm-5">
                             <label>Número</label>
                             <div class="input-group">
-                                <input class="form-control" name="tel" type="text" ng-model="telefone.numero" onKeyPress="MascaraTelefone(formPFTel.tel);" maxlength="15"  onBlur="ValidaTelefone(formPFTel.tel);"  placeholder="(44) 9999-9999" required>  
+                                <input class="form-control" id="telefone" type="text" ng-model="telefone.numero" maxlength="15" placeholder="(44) 9999-9999" required>  
                             </div>
                         </div>
                     </div>
@@ -169,10 +161,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row"><div class="col-sm-12 "> <hr></div></div> <!-- separador -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cancelarTelefone()"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
-                        <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="salvarTelefone()"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+                        <span class="pull-right">
+                            <a class="btn btn-danger btn-padrao" data-dismiss="modal" ng-click="cancelarTelefone()" >
+                                <i class="glyphicon glyphicon-remove" ></i> Cancelar
+                            </a>  
+                            <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()">
+                                <span class="glyphicon glyphicon-ok" ></span> Salvar
+                            </button>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -185,29 +182,26 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="modalEnderecoLabel">Cadastro de Endereço</h4>
+                    <h4 class="modal-title" id="modalEnderecoLabel"><span class="glyphicon glyphicon-home"></span> Cadastro de Endereço</h4>
                 </div>
                 <div class="modal-body">
-                    <label><span class="glyphicon glyphicon-home"></span> Endereço </label>
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label>Principal</label>
                             <div>
-
                                 <div class="btn-group"><!--data-toggle="buttons" verificar uso-->
-                                    <label class="btn btn-primary ">
-                                        <input ng-model="endereco.principal" name="principal" value="S" type="radio" /> <label>Sim</label>
+                                    <label class="btn btn-primary btn-radio-amacapa">
+                                        <input ng-model="endereco.principal" name="principal" value="S" type="radio" /> Sim
                                     </label>
-                                    <label class="btn btn-primary">
-                                        <input ng-model="endereco.principal" name="principal" value="N" type="radio" />  <label>Não</label>
+                                    <label class="btn btn-primary btn-radio-amacapa">
+                                        <input ng-model="endereco.principal" name="principal" value="N" type="radio" /> Não
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Cep</label>
-                            <input  class="form-control maskCep" name="cep" type="text" ng-model="endereco.cep" onKeyPress="MascaraCep(cep);"
-                                    maxlength="10" onBlur="ValidaCep(cep)" placeholder="99.999-999" />
+                            <input  class="form-control" id="cep" type="text" ng-model="endereco.cep" maxlength="10"  placeholder="99.999-999" />
                         </div>
                     </div>
                     <div class="row">
@@ -268,8 +262,14 @@
                     </div>
                     <div class="row">
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cancelarEndereco()"><span class="glyphicon glyphicon-remove" ></span>Cancelar</button>
-                            <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="salvarEndereco()"><span class="glyphicon glyphicon-ok" ></span>Salvar</button>
+                            <span class="pull-right">
+                                <a class="btn btn-danger btn-padrao" data-dismiss="modal" ng-click="cancelarEndereco()" >
+                                    <i class="glyphicon glyphicon-remove" ></i> Cancelar
+                                </a>  
+                                <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarEndereco()">
+                                    <span class="glyphicon glyphicon-ok" ></span> Salvar
+                                </button>
+                            </span>	
                         </div>
                     </div>
                 </div>
@@ -278,4 +278,15 @@
         </div>
     </div>
 </div>
-</div>
+
+<script type="text/javascript">
+jQuery(function($) {
+    $.mask.definitions['~']='[+-]';
+    $("#telefone").mask("(99) 9999-9999?9");
+    $("#ramal").mask("9999");
+    $("#cpf").mask("999.999.999-99");
+    $("#rg").mask("99.999.999-*");
+    $("#cep").mask("99.999-999");  
+    $("#cnpj").mask("99.999.999/9999-99");  
+   });
+</script>
