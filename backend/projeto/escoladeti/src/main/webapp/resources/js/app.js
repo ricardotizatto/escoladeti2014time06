@@ -98,7 +98,7 @@ app.config(['$routeProvider',
                 // controller : 'nomeDoController'
             })
             .when('/listapessoafisica', {
-                templateUrl: './pages/ListaPF.html',
+                templateUrl: './pages/ListaPessoaFisica.html',
                 controller: 'pessoaFisicaController'
             })
             .when('/listapessoajuridica', {
