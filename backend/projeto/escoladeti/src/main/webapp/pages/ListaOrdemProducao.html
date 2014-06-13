@@ -35,9 +35,9 @@
                         <th class="col-md-1">Ações</th>
                     </tr>
                     <tr ng-repeat="ordemProducao in ordensProducao">
-                            <td>{{ordemProducao.solicitacao}}</td>
-                            <td>{{ordemProducao.material}}</td>
-                            <td>{{ordemProducao.traducao}}</td>
+                            <td>{{ordemProducao.solicitacaoItem.solicitacao.id}}</td>
+                            <td>{{ordemProducao.solicitacaoItem}}</td>
+                            <td>{{ordemProducao.solicitacaoItem.traducaoMaterial}}</td>
                             <td>{{ordemProducao.status}}</td>
                         <td>
                             <button class='btn btn-warning btn-sm' ng-click="editar(ordemProducao)">

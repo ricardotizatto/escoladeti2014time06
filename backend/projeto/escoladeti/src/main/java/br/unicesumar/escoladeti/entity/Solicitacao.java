@@ -1,7 +1,9 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,7 +34,7 @@ public class Solicitacao extends Entidade {
     @NotEmpty
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "solicitacao_alunos")
-    private List<PessoaFisica> alunos;
+    private Set<PessoaFisica> alunos;
 
     private String nre;
 
@@ -41,9 +43,9 @@ public class Solicitacao extends Entidade {
     private PessoaFisica responsavel;
 
     @NotEmpty
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_solicitacao")
-    private List<SolicitacaoItem> itensSolicitacao;
+    private Set<SolicitacaoItem> itensSolicitacao;
 
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)

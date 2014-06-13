@@ -19,17 +19,15 @@ import br.unicesumar.escoladeti.enums.OrdemProducaoStatus;
 public class OrdemProducao extends Entidade {
     private static final long serialVersionUID = 1L;
 	
-    @NotEmpty
     @NotNull
     @ManyToOne
     private SolicitacaoItem solicitacaoItem;
     
-    @NotEmpty
     @NotNull
     @Enumerated(EnumType.STRING)
     private OrdemProducaoStatus status;
     
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="ordemProducao")
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="ordemProducao")
     private List<ParteMaterial> partes;
 
     public OrdemProducao(OrdemProducaoStatus status) {
@@ -44,13 +42,17 @@ public class OrdemProducao extends Entidade {
         this.status = status;
     }
     
-
+    
     public OrdemProducaoStatus getStatus() {
         return status;
     }
 
     public SolicitacaoItem getSolicitacaoItem() {
 		return solicitacaoItem;
+	}
+    
+    public List<ParteMaterial> getPartes() {
+		return partes;
 	}
     
 }

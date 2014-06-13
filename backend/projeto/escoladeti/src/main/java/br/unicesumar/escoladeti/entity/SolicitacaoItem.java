@@ -14,17 +14,20 @@ import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 @Entity
 public class SolicitacaoItem extends Entidade{
 	private static final long serialVersionUID = 1L;
-	private String pnld;
+	
+	private String pnld;//Não importa
 	
 	@NotNull
-	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	private TraducaoMaterial traducaoMaterial;
 	
 	@ManyToOne
-	@NotEmpty
-	@JoinColumn(name="id_material", nullable=false)
+	@JoinColumn(name="id_material")
 	private Material material;
+	
+	@ManyToOne
+	@JoinColumn(name="id_solicitacao")
+	private Solicitacao solicitacao;
 	
 	public SolicitacaoItem() {
 	}
@@ -37,6 +40,19 @@ public class SolicitacaoItem extends Entidade{
 	public void setPnld(String pnld) {
 		this.pnld = pnld;
 	}
+	
+	public Solicitacao getSolicitacao() {
+		return solicitacao;
+	}
+	
+	public TraducaoMaterial getTraducaoMaterial() {
+		return traducaoMaterial;
+	}
+	
+	public String getPnld() {
+		return pnld;
+	}
+	
 	
 	
 }

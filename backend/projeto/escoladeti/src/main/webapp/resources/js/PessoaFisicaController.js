@@ -1,6 +1,8 @@
 'use strict';
 
 function pessoaFisicaController($scope, $http, $routeParams) {
+	$scope.info = {};
+	
 	function getNovaPessoaFisica() {
 		return {
 			telefones: [],
@@ -52,11 +54,15 @@ function pessoaFisicaController($scope, $http, $routeParams) {
     	console.log('enviando pessoa fisica ', $scope.pessoaFisica);
         $http.post('./rest/pessoaFisicaSource/pessoaFisica', $scope.pessoaFisica)
                 .success(function(data, status) {
-                    console.log('Salvo com sucesso ' , data);
+                    //console.log('Salvo com sucesso ' , data);
+                	$scope.info.status = 'success';
+                	$scope.info.message  = 'Pessoa salva com sucesso.';
                     $scope.pessoaFisica = getNovaPessoaFisica();
                 })
                 .error(function(data) {
-                    console.log('Nao foi possivel Salvar ', data);
+                	$scope.info.status = 'danger';
+                	$scope.info.message = data.message;
+                    console.log('Nao foi possivel Salvar ', data.developerMessage);
                 });
     };
 
