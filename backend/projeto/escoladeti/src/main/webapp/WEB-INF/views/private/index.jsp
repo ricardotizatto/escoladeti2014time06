@@ -13,7 +13,7 @@
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
-        <script src="./resources/libs/bootstrap-select.js"></script>
+        <script type="text/javascript" src="./resources/libs/bootstrap-select.js"></script>
         <script type="text/javascript" src="./resources/libs/angular.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
@@ -21,8 +21,7 @@
         <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>		
         <script type="text/javascript" src="./resources/js/app.js"></script>
         <script type="text/javascript" src="./resources/js/PessoaFisicaController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CadastroPJController.js" ></script>
-        <script type="text/javascript" src="./resources/js/ListaPJController.js" ></script>
+        <script type="text/javascript" src="./resources/js/PessoaJuridicaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>

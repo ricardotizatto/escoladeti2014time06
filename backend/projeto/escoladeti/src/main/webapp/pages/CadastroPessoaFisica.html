@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
-    <form action="" method="POST" role="form" ng-submit="salvar()" name="formPF">					
+    <form action="" method="POST" role="form" ng-submit="salvar()">					
         <div class="row ">
             <div class="form-group col-sm-5">
                 <label> Nome </label>
@@ -69,7 +69,7 @@
                         <td class="text-center"> {{endereco.tipoEndereco + "  " + endereco.logradouro + " " + endereco.numero + " - " + endereco.cidade + " - " + endereco.estado}} </td>
                         <td>
                             <span class="pull-right" >
-                            <button class='btn btn-warning btn-sm' ng-click="editarEndereco($index)" data-toggle="modal" data-target="#modalTelefone">
+                            <button class='btn btn-warning btn-sm' ng-click="editarEndereco($index)" data-toggle="modal" data-target="#modalEndereco">
                                 <span class='glyphicon glyphicon-edit'></span>
                             </button>
                             <button class='btn btn-danger btn-sm' ng-click="delEndereco($index)" >

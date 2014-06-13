@@ -19,7 +19,11 @@ app.config(['$routeProvider',
             })
             .when('/pessoajuridica', {
                 templateUrl: './pages/CadastroPessoaJuridica.html',
-                controller: 'CadastroPJController'
+                controller: 'pessoaJuridicaController'
+            })
+            .when('/pessoajuridica/:pessoaJuridicaId', {
+                templateUrl: './pages/CadastroPessoaJuridica.html',
+                controller: 'pessoaJuridicaController'
             })
             .when('/cadastrousuario', {
                 templateUrl: './pages/CadastroUsuario.html',
@@ -103,7 +107,7 @@ app.config(['$routeProvider',
             })
             .when('/listapessoajuridica', {
                 templateUrl: './pages/ListaPessoaJuridica.html',
-                controller: 'ListaPJController'
+                controller: 'pessoaJuridicaController'
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',
