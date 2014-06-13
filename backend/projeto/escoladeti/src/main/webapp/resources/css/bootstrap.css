@@ -5735,6 +5735,13 @@ body.modal-open,
     padding-top: 30px;
     padding-bottom: 30px;
   }
+  .modal-dialog-pessoa{
+      right: auto;
+      left: 50%;
+      width: 800px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+  }
   .modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
