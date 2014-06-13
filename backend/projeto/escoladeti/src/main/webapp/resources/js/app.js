@@ -183,11 +183,11 @@ app.config(['$routeProvider',
             })
             .when('/cadastropartematerial', {
                 templateUrl: './pages/CadastroParteMaterial.html',
-                controller: 'ordemProducaoController'
+                controller: 'OrdemProducaoController'
             })
             .when('/cadastropartematerial/:parteMaterialId', {
                 templateUrl: './pages/CadastroParteMaterial.html',
-                controller: 'ordemProducaoController'
+                controller: 'OrdemProducaoController'
             })	
             .when('/principal', {
                 templateUrl: './pages/Principal.html'

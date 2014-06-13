@@ -1,4 +1,5 @@
 function cidadeController($scope, $http, $routeParams, $filter) {
+	$scope.info = {};
     console.log('Carregando controller');
 
     $scope.editar = function(cidade) {
@@ -25,9 +26,9 @@ function cidadeController($scope, $http, $routeParams, $filter) {
                 })
                 .error(function(data, status) {
                     console.log("erro ao deletar cidade " + data);
-                    $scope.info = {};
+                    
                     $scope.info.status = 'danger';
-                    $scope.info.mesage = 'Erro ao deletar a cidade: ' + cidade.nome + ' - '+data.message;
+                    $scope.info.mesage = data.message;
                 });
             }else{
                 $scope.getTodos(1);
@@ -58,7 +59,7 @@ function cidadeController($scope, $http, $routeParams, $filter) {
                     $scope.info = {};
                     $scope.info.status = 'danger';
                     console.log($scope.info);
-                    $scope.info.message = 'Erro ao salvar a cidade ' + cidade.nome + ' - '+data.message;
+                    $scope.info.message = data.message;
                 });
     };
 

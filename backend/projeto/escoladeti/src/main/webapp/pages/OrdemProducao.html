@@ -4,11 +4,10 @@
             <legend> <span class="glyphicon glyphicon-file"></span> Ordem de produção </legend>
         </div>
     </div>
-    {{ordemProducao}}
     <form action="" method="POST" role="form" ng-submit="salvar()" >							
         <div class="row ">
             <div class="form-group col-sm-3">
-                <label> Solicitação </label>
+                <label> Item da Solicitação </label>
                 <input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{1,6}" required placeholder="Número da Solicitação" />
             </div>
             <div class="form-group col-sm-3"> 
@@ -27,9 +26,9 @@
         <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
         <div class="row">
             <div class="form-group col-sm-12">
-                <button type='submit' class='btn btn-primary btn-padrao' ng-click="novaParteMaterial()" >
+                <a  class='btn btn-primary btn-padrao' ng-click="novaParteMaterial()" >
                     <span class='glyphicon glyphicon-plus-sign'></span> Nova Parte
-                </button>
+                </a>
                 <button type='submit' class='btn btn-success btn-padrao' ng-click="" >
                     <span class='glyphicon glyphicon-ok-circle'></span> Finalizar
                 </button>

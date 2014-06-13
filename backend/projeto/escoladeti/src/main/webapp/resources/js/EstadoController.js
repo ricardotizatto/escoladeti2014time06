@@ -1,5 +1,4 @@
 function EstadoController ($scope, $http, $routeParams) {
-  
 
   $scope.editar = function(id){
     window.location = "#/cadastroestado/"+id;  
@@ -9,13 +8,12 @@ function EstadoController ($scope, $http, $routeParams) {
       $scope.estados.splice(index,1);
   };
 
-  $scope.novo = function(){
+  $scope.novoEstado = function(){
   	window.location = "#/cadastroestado"; 
-  }
-  
+  };
 
   function errorHandler(dados, status){
-	  console.log("Erro "+data);	  
+	  console.log("Erro "+dados);	  
   }
   
   $scope.getTodos = function() {

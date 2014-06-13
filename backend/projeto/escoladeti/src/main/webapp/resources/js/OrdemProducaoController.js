@@ -118,5 +118,9 @@ function OrdemProducaoController($scope, $http, $routeParams) {
         $scope.ordemProducao = {};
         window.location = '#/listaordemproducao';
     };
+    
+    $scope.novaParteMaterial = function() {
+    	window.location = '#/cadastropartematerial';
+    }
 
 }
