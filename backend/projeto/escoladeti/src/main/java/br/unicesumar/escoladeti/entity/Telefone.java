@@ -19,7 +19,7 @@ public class Telefone extends Entidade {
     private Integer ddd;
 
     @NotNull
-    private Integer numero;
+    private String numero;
     
     
     private Integer ramal;
@@ -34,13 +34,14 @@ public class Telefone extends Entidade {
     private Pessoa pessoa;
     
     public Telefone(){
+    	setDdd(0);
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -60,11 +61,11 @@ public class Telefone extends Entidade {
         this.ddd = ddd;
     }
 
-    public Integer getTelefone() {
+    public String getTelefone() {
         return numero;
     }
 
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(String telefone) {
         this.numero = telefone;
     }
 
@@ -75,4 +76,12 @@ public class Telefone extends Entidade {
     public void setTipo(TipoTelefone tipo) {
         this.tipo = tipo;
     }
+    
+    public void setRamal(Integer ramal) {
+		this.ramal = ramal;
+	}
+    
+    public Integer getRamal() {
+		return ramal;
+	}
 }

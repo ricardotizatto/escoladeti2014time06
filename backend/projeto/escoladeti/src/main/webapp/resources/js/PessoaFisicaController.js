@@ -62,7 +62,7 @@ function pessoaFisicaController($scope, $http, $routeParams) {
                 .error(function(data) {
                 	$scope.info.status = 'danger';
                 	$scope.info.message = data.message;
-                    console.log('Nao foi possivel Salvar ', data.developerMessage);
+                    console.log('Nao foi possivel Salvar ', data);
                 });
     };
 
@@ -116,6 +116,16 @@ function pessoaFisicaController($scope, $http, $routeParams) {
     function getNovo() {
         return {};
     }
+    
+    $scope.getTodos = function (pag) {
+    	$http.get('./rest/pessoaFisicaSource/pessoaFisica')
+    		.success(function (data, status) {
+    			$scope.pessoasFisicas = data;
+    		})
+    		.error(function (data, status) {
+    			console.log(data);
+    		});
+    };
     
 
     $scope.filtroCidades = function() {

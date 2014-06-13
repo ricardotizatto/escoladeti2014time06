@@ -1,6 +1,9 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -32,30 +36,32 @@ public abstract class Pessoa extends Entidade {
     @Column
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoa")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa")
     @JsonManagedReference
-    private List<Telefone> telefones;
+    private Set<Telefone> telefones;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoa", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Endereco> enderecos;
+    private Set<Endereco> enderecos;
 
     public Pessoa() {
+    	telefones = new HashSet<Telefone>();
+    	enderecos = new HashSet<Endereco>();
     }
 
-    public List<Telefone> getTelefones() {
+    public Set<Telefone> getTelefones() {
         return telefones;
     }
 
-    public void setTelefones(List<Telefone> telefones) {
+    public void setTelefones(Set<Telefone> telefones) {
         this.telefones = telefones;
     }
 
-    public List<Endereco> getEnderecos() {
+    public Set<Endereco> getEnderecos() {
         return enderecos;
     }
 
-    public void setEnderecos(List<Endereco> enderecos) {
+    public void setEnderecos(Set<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
 

@@ -1,11 +1,11 @@
 <div class="container" ng-controller="pessoaFisicaController" ng-init="carregarPessoa();init();">
     <div class="row">
+     	<div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
         <div class="form-group col-sm-12">
             <fieldset>
                 <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Pessoa Física</legend>
         </div>
     </div>
-    <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
     <form action="" method="POST" role="form" ng-submit="salvar()">					
         <div class="row ">
             <div class="form-group col-sm-5">
