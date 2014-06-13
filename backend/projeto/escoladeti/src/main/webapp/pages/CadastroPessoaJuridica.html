@@ -219,19 +219,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-4">
                             <label for="pais"> Pais </label>
                             <select id="pais" ng-model="endereco.pais" class="selectpicker show-tick form-control" data-live-search="true" ng-model="paises" ng-options="p.nome for p in paises" data-filter="true">
                             </select>
                         </div>
-                        <div class="form-group col-sm-3">
+                        <div class="form-group col-sm-4">
                             <label> Estado </label>
                             <select id="estado" ng-model="endereco.estado" class="selectpicker show-tick form-control" data-live-search="true"
                                     ng-options="t.nome for t in estados" data-filter="true">
                             </select>
                             {{endereco.estado}}
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-4">
                             <label>Cidade</label>
                             <select id="estado" ng-model="endereco.cidade" class="selectpicker show-tick form-control" data-live-search="true"
                                     ng-options="t.nome for t in filtroCidades()" data-filter="true">
