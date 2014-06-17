@@ -61,7 +61,7 @@ app.config(['$routeProvider',
                 templateUrl: './pages/CadastroEstado.html',
                 controller: 'EstadoController'
             })
-            .when('/cadastroestado/:id', {
+            .when('/cadastroestado/:unidadeFederativaId', {
                 templateUrl: './pages/CadastroEstado.html',
                 controller: 'EstadoController'
             })

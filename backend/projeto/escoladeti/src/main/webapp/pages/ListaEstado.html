@@ -10,7 +10,7 @@
             <div class="input-group">
                 <span class="input-group-addon"> <span
                     class="glyphicon glyphicon-search"></span>
-                </span> <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaEstadoContendoNome()"  placeholder="Busca por nome do estado"/>
+                </span> <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaEstadosContendoNome()"  placeholder="Busca por nome do estado"/>
             </div>
         </div>
         <div class="form-group col-sm-7">
@@ -33,7 +33,7 @@
                     <th class="col-md-4">País</th>
                     <th class="col-md-1">Ações</th>
                 </tr>
-                <tr ng-repeat="unidadeFederativa in unidadesFederativas" >
+                <tr ng-repeat="unidadeFederativa in unidadesFederativas.list" >
                     <td>{{unidadeFederativa.nome}}</td>
                     <td>{{unidadeFederativa.sigla}}</td>
                     <td>{{unidadeFederativa.pais.nome}}</td>

@@ -11,4 +11,6 @@ public interface UnidadeFederativaRepository extends JpaRepository<UnidadeFedera
     public UnidadeFederativa findById(Long id);    
     
     public Page<UnidadeFederativa> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
+
+    public UnidadeFederativa findByNomeAndSigla(String nome, String sigla);
 }

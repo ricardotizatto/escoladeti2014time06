@@ -73,7 +73,7 @@ function EstadoController ($scope, $http, $routeParams) {
         $http.get('./rest/unidadeFederativaSource/unidadeFederativa?q=' + $scope.busca.toUpperCase())
             .then(function(retorno) {
                 console.log(retorno.data);
-                $scope.unidadeFederativas = retorno.data;
+                $scope.unidadesFederativas = retorno.data;
             });
     }
 
@@ -103,7 +103,7 @@ function EstadoController ($scope, $http, $routeParams) {
         $http.get('./rest/unidadeFederativaSource/listar/pag/' + numeroPagina)
             .success(function(listaUnidadesFederativas) {
                 console.log(listaUnidadesFederativas);
-                $scope.unidadesFederativas = listaUnidadesFederativas.list;
+                $scope.unidadesFederativas = listaUnidadesFederativas;
             })
             .error(function(data) {
                 console.log('erro ao buscar Estados ' + data.developerMessage);

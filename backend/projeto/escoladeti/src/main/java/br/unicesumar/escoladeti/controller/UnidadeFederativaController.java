@@ -22,15 +22,18 @@ public class UnidadeFederativaController implements Serializable{
 
     @RequestMapping(value="/unidadeFederativa", method= RequestMethod.POST)
     @ResponseBody
-    public UnidadeFederativa salvar(@RequestBody UnidadeFederativa unidadeFederativa) {
+    public UnidadeFederativa salvar(@RequestBody UnidadeFederativa unidadeFederativa) throws Exception {
+        if (!unidadeFederativa.equals(federativaService.buscarUnidadeFederativaPorNomeSiglaPais(unidadeFederativa))) {
             return this.federativaService.salvar(unidadeFederativa);
+        }
+        throw new Exception("O Estado " + unidadeFederativa.getNome() + " já está cadastrado!");
     }
 
     @RequestMapping(value="/unidadeFederativa", method= RequestMethod.DELETE)
     @ResponseBody
     public String deletar(@RequestBody UnidadeFederativa unidadeFederativa) {
-            federativaService.deletar(unidadeFederativa);
-            return "arquivo deletado";		
+        federativaService.deletar(unidadeFederativa);
+        return "arquivo deletado";		
     }
 
     @RequestMapping(value = "/unidadeFederativa", params = {"q"}, method = RequestMethod.GET)
@@ -48,6 +51,6 @@ public class UnidadeFederativaController implements Serializable{
     @RequestMapping(value= "/unidadeFederativa/{id}", method= RequestMethod.GET)
     @ResponseBody
     public UnidadeFederativa findById(@PathVariable Long id) {
-            return this.federativaService.getById(id);
+        return this.federativaService.getById(id);
     }
 }
