@@ -3,7 +3,7 @@ package br.unicesumar.escoladeti.controller;
 import br.unicesumar.escoladeti.entity.UnidadeFederativa;
 import br.unicesumar.escoladeti.service.UnidadeFederativaService;
 import java.io.Serializable;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +46,12 @@ public class UnidadeFederativaController implements Serializable{
     @ResponseBody
     public DataPage<UnidadeFederativa> listarUnidadesFederativas(@PathVariable Integer pagina) {
         return federativaService.getTodos(pagina);
+    }
+    
+    @RequestMapping(value = "/listaTodos", method = RequestMethod.GET)
+    @ResponseBody
+    public List<UnidadeFederativa> listaTodos() {
+        return federativaService.listaTodos();
     }
 
     @RequestMapping(value= "/unidadeFederativa/{id}", method= RequestMethod.GET)

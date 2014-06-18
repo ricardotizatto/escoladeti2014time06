@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="EstadoController" ng-init="carregarEstado();carregarPaises();" >
+<div class="container" ng-controller="EstadoController" ng-init="carregarEstado();carregarPaises();" >
     <div class="row">
         <div class="form-group col-sm-12">
             <legend> Cadastro de Estado </legend>
@@ -18,8 +18,8 @@
                 title="Sigla deve ser literal" required maxlength="2" pattern="[A-Z]{2}" placeholder="sigla do estado"/>
             </div>
             <div class="form-group col-sm-4">
-                <label>  Pais </label>
-                <select class="form-control" ng-model="unidadeFederativa.pais" 
+                <label for="id_select" >  Pais </label>
+                <select id="id_select" class="form-control selectpicker" data-live-search="true" ng-model="unidadeFederativa.pais" 
                     ng-options="pais.nome for pais in paises track by pais.id" placeholder="Pais"></select>
             </div>
         </div>	

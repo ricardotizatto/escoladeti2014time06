@@ -11,28 +11,32 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UnidadeFederativaService {
-	@Autowired
-	private UnidadeFederativaRepository federativaRepository;
-	
-	public UnidadeFederativa salvar(UnidadeFederativa unidadeFederativa) {
-		return this.federativaRepository.save(unidadeFederativa);
-	}
-        
-        public DataPage<UnidadeFederativa> getTodos(Integer pagina) {
-            return new DataPage<>(federativaRepository.findAll(pageRequestForAsc(pagina, "nome")));
-        }
+    @Autowired
+    private UnidadeFederativaRepository federativaRepository;
 
-        public DataPage<UnidadeFederativa> getUnidadesFederativasPorNome(String nomeParcial) {
-            return new DataPage<UnidadeFederativa>(federativaRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
-        }
-	
-	public void deletar(UnidadeFederativa federativa) {
-		this.federativaRepository.delete(federativa);
-	}
-	
-	public UnidadeFederativa getById(Long id) {
-		return this.federativaRepository.findById(id);
-	}
+    public UnidadeFederativa salvar(UnidadeFederativa unidadeFederativa) {
+            return this.federativaRepository.save(unidadeFederativa);
+    }
+    
+    public List<UnidadeFederativa> listaTodos() {
+        return this.federativaRepository.findAll();
+    }
+
+    public DataPage<UnidadeFederativa> getTodos(Integer pagina) {
+        return new DataPage<>(federativaRepository.findAll(pageRequestForAsc(pagina, "nome")));
+    }
+
+    public DataPage<UnidadeFederativa> getUnidadesFederativasPorNome(String nomeParcial) {
+        return new DataPage<UnidadeFederativa>(federativaRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+    }
+
+    public void deletar(UnidadeFederativa federativa) {
+            this.federativaRepository.delete(federativa);
+    }
+
+    public UnidadeFederativa getById(Long id) {
+            return this.federativaRepository.findById(id);
+    }
 
     public UnidadeFederativa buscarUnidadeFederativaPorNomeSiglaPais(UnidadeFederativa unidadeFederativa) {
         return this.federativaRepository.findByNomeAndSigla(

@@ -56,10 +56,6 @@ public class UnidadeFederativa extends Entidade{
             this.pais = pais;
     }
     
-    public Long getIdPaisDoEstado() {
-        return  this.pais.getId();
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;

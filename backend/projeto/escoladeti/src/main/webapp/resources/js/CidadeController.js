@@ -101,10 +101,10 @@ function cidadeController($scope, $http, $routeParams, $filter) {
     };
     
     $scope.carregaEstados = function() {
-        $http.get('./rest/unidadeFederativaSource/unidadeFederativa')
-                .success(function(unidadeFederativa) {
+        $http.get('./rest/unidadeFederativaSource/listaTodos')
+                .success(function(unidadesFederativas) {
                     console.log('Estados carregados');
-                    $scope.unidadeFederativa = unidadeFederativa;
+                    $scope.unidadesFederativas = unidadesFederativas;
                 })
                 .error(function(data) {
                     console.log('Nao foi possivel carregar os estados' + data);
