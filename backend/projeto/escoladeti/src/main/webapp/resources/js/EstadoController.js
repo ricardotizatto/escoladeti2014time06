@@ -120,5 +120,4 @@ function EstadoController ($scope, $http, $routeParams) {
         $scope.unidadeFederativa = {};
         window.location = '#/listaestado';
     }
->>>>>>> 8608afa7b4fe0daccbcde34cd2bc1bb9e8058a54
 }
