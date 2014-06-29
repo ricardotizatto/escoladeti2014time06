@@ -1,7 +1,9 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.entity.Pais;
+import br.unicesumar.escoladeti.service.PaisService;
 import java.io.Serializable;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import br.unicesumar.escoladeti.entity.Pais;
-import br.unicesumar.escoladeti.service.PaisService;
 
 @Controller
 @RequestMapping("/rest/paisSource")
@@ -41,11 +40,17 @@ public class PaisController implements Serializable {
 		return paisService.getById(id);
 	}
 
-	@RequestMapping(value = "/pais", method = RequestMethod.GET)
+	@RequestMapping(value = "/listarTodosPaises", method = RequestMethod.GET)
 	@ResponseBody
-	public DataPage<Pais> getTodos() {
-		return paisService.getTodos(1);		
+	public List<Pais> listarTodosPaises() {
+		return paisService.listarTodosPaises();
 	}
+        
+        @RequestMapping(value = "/pais", method = RequestMethod.GET)
+        @ResponseBody
+        public DataPage<Pais> getTodos() {
+            return paisService.getTodos(1);
+        }
 	
 	@RequestMapping(value = "/pais",params = {"q"}, method = RequestMethod.GET)
 	@ResponseBody

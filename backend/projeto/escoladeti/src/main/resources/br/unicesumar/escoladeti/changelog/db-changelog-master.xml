@@ -46,14 +46,5 @@
     <property name="logico" value="java.sql.Types.BOOLEAN" dbms="oracle"/>
     <property name="logico" value="java.sql.Types.BOOLEAN" dbms="postgresql"/>
 
-    <property name="CREATE_HIBERNATE_SEQUENCE" value="CREATE SEQUENCE hibernate_sequence INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START 1 CACHE 10 NO CYCLE" dbms="oracle"/>
-    <property name="CREATE_HIBERNATE_SEQUENCE" value="CREATE SEQUENCE hibernate_sequence INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START 1 CACHE 10 NO CYCLE" dbms="postgresql"/>
-
-    <property name="CREATE_PESQUISA_SEQUENCE" value="CREATE SEQUENCE pesquisa_sequence INCREMENT BY 1 MINVALUE 1 MAXVALUE 999999 START 1 CACHE 1 NO CYCLE" dbms="oracle"/>
-    <property name="CREATE_PESQUISA_SEQUENCE" value="CREATE SEQUENCE pesquisa_sequence INCREMENT BY 1 MINVALUE 1 MAXVALUE 999999 START 1 CACHE 1 NO CYCLE" dbms="postgresql"/>
-
-    <property name="CREATE_INSCRICAO_SEQUENCE" value="CREATE SEQUENCE inscricao_sequence INCREMENT BY 1 MINVALUE 1 MAXVALUE 999999 START 1 CACHE 1 NO CYCLE" dbms="oracle"/>
-    <property name="CREATE_INSCRICAO_SEQUENCE" value="CREATE SEQUENCE inscricao_sequence INCREMENT BY 1 MINVALUE 1 MAXVALUE 999999 START 1 CACHE 1 NO CYCLE" dbms="postgresql"/>
-
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-001.xml" />
 </databaseChangeLog> 

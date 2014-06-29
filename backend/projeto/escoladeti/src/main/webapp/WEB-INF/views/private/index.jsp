@@ -28,7 +28,6 @@
         <script type="text/javascript" src="./resources/js/ListaUsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/PaisController.js" ></script>
         <script type="text/javascript" src="./resources/js/CidadeController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CadastroEstadoController.js" ></script>
         <script type="text/javascript" src="./resources/js/EstadoController.js" ></script>
         <script type="text/javascript" src="./resources/js/DistritoController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
