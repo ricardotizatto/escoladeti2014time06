@@ -43,7 +43,7 @@
                 <td>{{participante.sexo}}</td>
                 <td>{{participante.pagamento}}</td>
                 <td><button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarParticipanteAlterar(participante.id,participante.cpf,participante.deficiente,participante.email,participante.idevento,participante.nome,participante.rg,participante.sexo,participante.telefone,participante.pagamento)" data-toggle="modal" data-target="#modalParticipante">
-                        Alterar
+                        <span class='glyphicon glyphicon-edit'></span>
                     </button></td>
             </tr>
         </table>
@@ -51,7 +51,7 @@
     <hr>
 
     <!-- Modal detalhamento-->
-    <form action="" method="POST" name="participante" ng-submit="salvarAlteracao()">
+    <form action=""  method="POST" name="participante" ng-submit="salvarAlteracao()">
         <div class="modal fade" id="modalParticipante" tabindex="-1" role="dialog" aria-labelledby="modalParticipanteLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -60,12 +60,12 @@
                         <h4 class="modal-title" id="modalEnderecoLabel">Dados do Participante</h4>
                     </div>
                     <div class="modal-body">
-
+                        <div class="alert alert-{{info.status}} alert-dismissable" data-dismiss="modal" ng-show="info">{{info.message}}</div>
                         <div class="blogShort">
                             <div class="form-group col-sm-12">
-                                
+
                                 <input class="form-control" type="hidden" ng-model="idModal" id="cpf" required>
-                                
+
                                 <div class="row">
                                     <div class="form-group col-sm-4 ">
                                         <label>CPF</label>
@@ -142,3 +142,4 @@
         </div>	 
     </form> <!--fim modal-->    
 </div>
+

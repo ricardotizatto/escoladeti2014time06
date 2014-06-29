@@ -1,5 +1,6 @@
 <div class="container" ng-controller="participanteController" ng-init="carregarEventos();novo()">
 	<fieldset>
+            <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
             <div class="row">
                 <div class="form-group col-sm-12">
                     <legend> Cursos Disponíveis </legend>
@@ -35,13 +36,28 @@
                             <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email" required>
                             <label>Telefone</label>
                             <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone" required>
-                            <input name="sexo" value="M" type="radio" ng-model="participante.sexo" > <label>Masculino</label>
-                            <input name="sexo" value="F" type="radio" ng-model="participante.sexo" >  <label>Feminino</label>
-                            <br>    
-                            <label>Deficiente</label>
-                            <input name="deficiente" value="S" type="radio" ng-model="participante.deficiente" > <label>Sim</label>
-                            <input name="deficiente" value="N" type="radio" ng-model="participante.deficiente" >  <label>Não</label>
+                            <div class="row">
+                                <div class="form-group col-sm-10">
+                                    <label>Possui necessidades especiais?</label>
+                                    <select class="selectpicker show-tick form-control" name="deficiente" ng-model="participante.deficiente" data-live-search="true" required>
+                                        <option value="S" >Sim</option>
+                                        <option value="N" >Não</option>
+                                    </select>
+                                </div> 
+                               <div class="form-group col-sm-4">
+                                        <label>Sexo</label>
+                                        <select class="selectpicker show-tick form-control" name="sexo" ng-model="participante.sexo" required>
+                                            <option value="M" >Masculino</option>
+                                            <option value="F" >Feminino</option>
+                                        </select>
+                                </div>
+
+                                
+                            </div>
                     </div>
+                            
+                            
+                            
                     <div align="right">
                         <button type="button"  class="btn btn-danger btn-padrao"  ng-click="novo()"> <span class="glyphicon glyphicon-refresh" ></span> Limpar</button>
                             <button class="btn btn-success btn-padrao"> <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>

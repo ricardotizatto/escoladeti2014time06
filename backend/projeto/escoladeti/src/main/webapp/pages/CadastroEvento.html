@@ -7,41 +7,67 @@
         </div>
         <form action="" method="POST" role="form" ng-submit="salvar()">	
             <div class="row">
+                <div class="col-sm-1"></div>
                 <div class="form-group col-sm-7">
                     <label> Titulo </label>
-                    <input class="form-control" name="titulo" type="text" ng-model="evento.titulo" placeholder="Titulo"/>
+                    <input class="form-control" name="titulo" type="text" ng-model="evento.titulo" placeholder="Titulo" />
                 </div>
-            </div>
-			<div class="row">
-                <div class="form-group col-sm-5">
-                    <label> Localização </label>
-                    <input class="form-control" name="local" type="text" ng-model="evento.local" placeholder="Localização"/>
-                </div>          
-            </div>            
-			<div class="row">
-				<div class="form-group col-sm-5">
-                    <label> Data </label>
-                    <input type="date" class="form-control" ng-model="evento.data">
+                <div class="form-group col-sm-2">
+                    <label> Tipo </label>
+                    <select class="form-control" ng-model="evento.tipoEvento">
+                        <option value="1">Curso</option>
+                        <option value="2">Palestra</option>
+                        <option value="3">Reunião</option>
+                    </select>
                 </div>
             </div>
             <div class="row ">
-                <div class="form-group col-sm-5">
-                    <label> Organização </label>
+                <div class="col-sm-1"></div>
+                <div class="form-group col-sm-9">
+                    <label> Realização </label>
                     <input class="form-control" name="organizacao" type="text" ng-model="evento.organizacao" placeholder="Organização"/>
                 </div>
-			</div>
-			<div class="row ">                
-				<div class="col-sm-6">
+            </div>
+            <div class="row ">           
+                <div class="col-sm-1"></div>
+                <div class="col-sm-9">
                     <label> Descrição do Evento</label>
-                    <textarea class="form-control" ng-model="evento.descricao" placeholder="No mundo atual, a revolução dos costumes maximiza as possibilidades por conta dos relacionamentos verticais entre as hierarquias..."></textarea>
+                    <textarea class="form-control" rows="5" cols="5" ng-model="evento.descricao" placeholder="No mundo atual, a revolução dos costumes maximiza as possibilidades por conta dos relacionamentos verticais entre as hierarquias..."></textarea>
                     <div class="required-icon">
                         <div class="text"></div>
                     </div>
                 </div>
             </div>
-
+            <br />
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-1"></div>
+                <div class="form-group col-sm-6">
+                    <label> Local </label>
+                    <input class="form-control" name="local" type="text" ng-model="evento.local" placeholder="Local do evento"/>
+                </div>   
+            </div>            
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <label> Data </label>
+                    <input type="date" class="form-control" ng-model="evento.data" placeholder="dd/mm/aaaa" />
+                </div>
+                <div class="col-sm-2">
+                    <label> Periodo </label>
+                    <select class="form-control" ng-model="evento.turno">
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>Valor</label>
+                    <input class="form-control" type="text" name="valor" placeholder="valor" ng-model="evento.valor" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-9">
                     <span class="pull-right">	
                         <a href="#/listaevento" class="btn btn-danger btn-padrao">
                             <span class="glyphicon glyphicon-remove" ></span> Cancelar

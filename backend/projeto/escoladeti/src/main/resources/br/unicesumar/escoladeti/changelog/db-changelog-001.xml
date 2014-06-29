@@ -4,604 +4,720 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet author="Jhonatan" id="1402682255054-1">
-        <createSequence sequenceName="hibernate_sequence"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-2">
-        <createTable tableName="bairro">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_cidade" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-3">
-        <createTable tableName="bairro_faixacep">
-            <column name="id_faixacep" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_bairro" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-4">
-        <createTable tableName="cidade">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fundacao" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_unidadefederativa" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-5">
-        <createTable tableName="distrito">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fimvigencia" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="iniciovigencia" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_distrito" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_cidade" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-6">
-        <createTable tableName="endereco">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="cep" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="complemento" type="${descricaolonga}"/>
-            <column name="numero" type="${inteiromenor}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="principal" type="${logico}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_pessoa" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-7">
-        <createTable tableName="evento">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="data" type="date"/>
-            <column name="descricao" type="${descricaolonga}"/>
-            <column name="local" type="${descricaolonga}"/>
-            <column name="organizacao" type="${descricaolonga}"/>
-            <column name="titulo" type="${descricaolonga}"/>
-            <column name="id_pagamento" type="${inteiro}"/>
-            <column name="id_tipoevento" type="${inteiro}"/>
-            <column name="id_turno" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-8">
-        <createTable tableName="faixacep">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fimcep" type="${descricaolonga}"/>
-            <column name="iniciocep" type="${descricaolonga}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-9">
-        <createTable tableName="itemacesso">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nomecomponente" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-10">
-        <createTable tableName="livro">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="anoedicao" type="${inteiro}"/>
-            <column name="autor" type="${descricaolonga}"/>
-            <column name="disciplina" type="${descricaolonga}"/>
-            <column name="editora" type="${descricaolonga}"/>
-            <column name="nome" type="${descricaolonga}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-11">
-        <createTable tableName="observacao">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="observacao" type="${descricaolonga}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-12">
-        <createTable tableName="ordemproducao">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="solicitacaoitem_id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-13">
-        <createTable tableName="pagamento">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-14">
-        <createTable tableName="pais">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="codigo" type="${inteiromenor}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sigla" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-15">
-        <createTable tableName="partematerial">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="arquivo" type="BYTEA"/>
-            <column name="observacao" type="${descricaolonga}"/>
-            <column name="paginafim" type="${inteiro}"/>
-            <column name="paginainicio" type="${inteiro}"/>
-            <column name="status" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_ordemproducao" type="${inteiro}"/>
-            <column name="id_responsavel" type="${inteiro}"/>
-            <column name="id_responsavelrevisao" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-16">
-        <createTable tableName="participante">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="cpf" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="deficiente" type="${descricaolonga}"/>
-            <column name="email" type="${descricaolonga}"/>
-            <column name="idevento" type="${inteiro}"/>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="pagamento" type="${descricaolonga}"/>
-            <column name="rg" type="${descricaolonga}"/>
-            <column name="sexo" type="${descricaolonga}"/>
-            <column name="telefone" type="${descricaolonga}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-17">
-        <createTable tableName="perfilacesso">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-18">
-        <createTable tableName="pessoa">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-19">
-        <createTable tableName="pessoaendereco">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fimvigencia" type="TIMESTAMP WITH TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="iniciovigencia" type="TIMESTAMP WITH TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="endereco_id" type="${inteiro}"/>
-            <column name="id_pessoa" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-20">
-        <createTable tableName="pessoafisica">
-            <column name="cpf" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="datanascimento" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rg" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sexo" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sobrenome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-21">
-        <createTable tableName="pessoajuridica">
-            <column name="cnpj" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="datacriacao" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="inscricaoestadual" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="razaosocial" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-22">
-        <createTable tableName="solicitacao">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="datachegada" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nre" type="${descricaolonga}"/>
-            <column name="id_responsavel" type="${inteiro}"/>
-            <column name="id_solicitante" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-23">
-        <createTable tableName="solicitacao_alunos">
-            <column name="solicitacao_id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="alunos_id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-24">
-        <createTable tableName="solicitacaoitem">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="pnld" type="${descricaolonga}"/>
-            <column name="traducaomaterial" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_material" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_solicitacao" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-25">
-        <createTable tableName="telefone">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ddd" type="${inteiromenor}"/>
-            <column name="tipo" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_pessoa" type="${inteiro}"/>
-            <column name="ramal" type="${inteiromenor}"/>
-            <column name="numero" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-26">
-        <createTable tableName="tipoevento">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-27">
-        <createTable tableName="turno">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-28">
-        <createTable tableName="unidadefederativa">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sigla" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_pais" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-29">
-        <createTable tableName="usuario">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ativo" type="${logico}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="login" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nome" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="senha" type="${descricaolonga}">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-30">
-        <createTable tableName="usuarioitemacesso">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fimvigencia" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="iniciovigencia" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="id_temacesso" type="${inteiro}"/>
-            <column name="id_usuario" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-31">
-        <createTable tableName="usuarioperfilacesso">
-            <column name="id" type="${inteiro}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fimvigencia" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="iniciovigencia" type="date">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_perfil_acesso" type="${inteiro}"/>
-            <column name="id_usuario" type="${inteiro}"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-32">
-        <addPrimaryKey columnNames="id" constraintName="bairro_pkey" tableName="bairro"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-33">
-        <addPrimaryKey columnNames="id" constraintName="cidade_pkey" tableName="cidade"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-34">
-        <addPrimaryKey columnNames="id" constraintName="distrito_pkey" tableName="distrito"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-35">
-        <addPrimaryKey columnNames="id" constraintName="endereco_pkey" tableName="endereco"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-36">
-        <addPrimaryKey columnNames="id" constraintName="evento_pkey" tableName="evento"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-37">
-        <addPrimaryKey columnNames="id" constraintName="faixacep_pkey" tableName="faixacep"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-38">
-        <addPrimaryKey columnNames="id" constraintName="itemacesso_pkey" tableName="itemacesso"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-39">
-        <addPrimaryKey columnNames="id" constraintName="livro_pkey" tableName="livro"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-40">
-        <addPrimaryKey columnNames="id" constraintName="observacao_pkey" tableName="observacao"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-41">
-        <addPrimaryKey columnNames="id" constraintName="ordemproducao_pkey" tableName="ordemproducao"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-42">
-        <addPrimaryKey columnNames="id" constraintName="pagamento_pkey" tableName="pagamento"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-43">
-        <addPrimaryKey columnNames="id" constraintName="pais_pkey" tableName="pais"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-44">
-        <addPrimaryKey columnNames="id" constraintName="partematerial_pkey" tableName="partematerial"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-45">
-        <addPrimaryKey columnNames="id" constraintName="participante_pkey" tableName="participante"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-46">
-        <addPrimaryKey columnNames="id" constraintName="perfilacesso_pkey" tableName="perfilacesso"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-47">
-        <addPrimaryKey columnNames="id" constraintName="pessoa_pkey" tableName="pessoa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-48">
-        <addPrimaryKey columnNames="id" constraintName="pessoaendereco_pkey" tableName="pessoaendereco"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-49">
-        <addPrimaryKey columnNames="id" constraintName="pessoafisica_pkey" tableName="pessoafisica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-50">
-        <addPrimaryKey columnNames="id" constraintName="pessoajuridica_pkey" tableName="pessoajuridica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-51">
-        <addPrimaryKey columnNames="id" constraintName="solicitacao_pkey" tableName="solicitacao"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-52">
-        <addPrimaryKey columnNames="id" constraintName="solicitacaoitem_pkey" tableName="solicitacaoitem"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-53">
-        <addPrimaryKey columnNames="id" constraintName="telefone_pkey" tableName="telefone"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-54">
-        <addPrimaryKey columnNames="id" constraintName="tipoevento_pkey" tableName="tipoevento"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-55">
-        <addPrimaryKey columnNames="id" constraintName="turno_pkey" tableName="turno"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-56">
-        <addPrimaryKey columnNames="id" constraintName="unidadefederativa_pkey" tableName="unidadefederativa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-57">
-        <addPrimaryKey columnNames="id" constraintName="usuario_pkey" tableName="usuario"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-58">
-        <addPrimaryKey columnNames="id" constraintName="usuarioitemacesso_pkey" tableName="usuarioitemacesso"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-59">
-        <addPrimaryKey columnNames="id" constraintName="usuarioperfilacesso_pkey" tableName="usuarioperfilacesso"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-60">
-        <addForeignKeyConstraint baseColumnNames="id" baseTableName="pessoajuridica" constraintName="fk_12u2ai1x9gwnrxbngiu1s2vlf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-61">
-        <addForeignKeyConstraint baseColumnNames="id_distrito" baseTableName="distrito" constraintName="fk_228tgwgvlvro9uskcm2a59oaf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-62">
-        <addForeignKeyConstraint baseColumnNames="idevento" baseTableName="participante" constraintName="fk_2fjc5r6enc9aq6a7p29fwwu52" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-63">
-        <addForeignKeyConstraint baseColumnNames="id_tipoevento" baseTableName="evento" constraintName="fk_2g14scf3exnwva8te8ken3lh8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tipoevento"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-64">
-        <addForeignKeyConstraint baseColumnNames="id_responsavel" baseTableName="partematerial" constraintName="fk_50svmn3of6b1ynejwnd2giv5r" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-65">
-        <addForeignKeyConstraint baseColumnNames="id_faixacep" baseTableName="bairro_faixacep" constraintName="fk_5qn0vp35wgf51c2e1jgp6yqus" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="faixacep"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-66">
-        <addForeignKeyConstraint baseColumnNames="id_pessoa" baseTableName="telefone" constraintName="fk_6luaqa9mq7tv5nghmcn1jioi0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-67">
-        <addForeignKeyConstraint baseColumnNames="solicitacaoitem_id" baseTableName="ordemproducao" constraintName="fk_6nop6ywm5r4nmuno9qcfb28dd" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacaoitem"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-68">
-        <addForeignKeyConstraint baseColumnNames="id_unidadefederativa" baseTableName="cidade" constraintName="fk_8a1ipvfv1kvgd7wpq02b1i5n9" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="unidadefederativa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-69">
-        <addForeignKeyConstraint baseColumnNames="id_cidade" baseTableName="bairro" constraintName="fk_ak48qtngj81g9sfxhbmecrcau" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-70">
-        <addForeignKeyConstraint baseColumnNames="id_responsavel" baseTableName="solicitacao" constraintName="fk_cew2u0d4vlt94j8yrktmin0yo" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-71">
-        <addForeignKeyConstraint baseColumnNames="id_pagamento" baseTableName="evento" constraintName="fk_d2apjqubvnhaeugs63i3fkdwk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pagamento"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-72">
-        <addForeignKeyConstraint baseColumnNames="id_responsavelrevisao" baseTableName="partematerial" constraintName="fk_d99lmo74rmixk45849pccdjq8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-73">
-        <addForeignKeyConstraint baseColumnNames="id_usuario" baseTableName="usuarioitemacesso" constraintName="fk_e9st1bs3kbelopbv93adjilq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-74">
-        <addForeignKeyConstraint baseColumnNames="id_perfil_acesso" baseTableName="usuarioperfilacesso" constraintName="fk_femy7nyxqlij7xjdkr32mju5w" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilacesso"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-75">
-        <addForeignKeyConstraint baseColumnNames="id_turno" baseTableName="evento" constraintName="fk_g1yixjefkh3xjjrge0ab33t75" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="turno"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-76">
-        <addForeignKeyConstraint baseColumnNames="id_pessoa" baseTableName="pessoaendereco" constraintName="fk_hefjlv0de2niktickknlrs1uc" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-77">
-        <addForeignKeyConstraint baseColumnNames="id_solicitante" baseTableName="solicitacao" constraintName="fk_iykxmb06bdcvyhy537e0wfm4s" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-78">
-        <addForeignKeyConstraint baseColumnNames="id_solicitacao" baseTableName="solicitacaoitem" constraintName="fk_jaaovgxhxy2jf2vp17srxuhh3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-79">
-        <addForeignKeyConstraint baseColumnNames="id_temacesso" baseTableName="usuarioitemacesso" constraintName="fk_jx82tg2d5arnqvqyidw05u76i" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemacesso"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-80">
-        <addForeignKeyConstraint baseColumnNames="id_cidade" baseTableName="distrito" constraintName="fk_k1bqlrexubf41a5ebnf4rcwfm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-81">
-        <addForeignKeyConstraint baseColumnNames="id_ordemproducao" baseTableName="partematerial" constraintName="fk_k2defsfhcqdvf2i5961wy75lt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ordemproducao"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-82">
-        <addForeignKeyConstraint baseColumnNames="id" baseTableName="pessoafisica" constraintName="fk_khllj98ham1jkopj1qxetfgud" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-83">
-        <addForeignKeyConstraint baseColumnNames="id_pessoa" baseTableName="endereco" constraintName="fk_lqjohmkeu43csocxp1b9op32k" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-84">
-        <addForeignKeyConstraint baseColumnNames="id_pais" baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-85">
-        <addForeignKeyConstraint baseColumnNames="solicitacao_id" baseTableName="solicitacao_alunos" constraintName="fk_pap9cabe1luaxos2myl3sufle" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-86">
-        <addForeignKeyConstraint baseColumnNames="id_bairro" baseTableName="bairro_faixacep" constraintName="fk_q6bxtm7dxap99m36x8dnng4i8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bairro"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-87">
-        <addForeignKeyConstraint baseColumnNames="alunos_id" baseTableName="solicitacao_alunos" constraintName="fk_qljj652c2tu4jdue4poy9lw4d" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-88">
-        <addForeignKeyConstraint baseColumnNames="id_usuario" baseTableName="usuarioperfilacesso" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-89">
-        <addForeignKeyConstraint baseColumnNames="endereco_id" baseTableName="pessoaendereco" constraintName="fk_rniq3f662vwastrnxk4mm8khm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-90">
-        <addUniqueConstraint columnNames="cnpj" constraintName="uk_2xclbh1scxkxx5e7vv48bqaq" deferrable="false" disabled="false" initiallyDeferred="false" tableName="pessoajuridica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-91">
-        <addUniqueConstraint columnNames="cpf" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" deferrable="false" disabled="false" initiallyDeferred="false" tableName="pessoafisica"/>
-    </changeSet>
-    <changeSet author="Jhonatan" id="1402682255054-92">
-        <addUniqueConstraint columnNames="inscricaoestadual" constraintName="uk_8ncbf29ly0ca3nepsptgevtgd" deferrable="false" disabled="false" initiallyDeferred="false" tableName="pessoajuridica"/>
-    </changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-1">
+		<createSequence sequenceName="hibernate_sequence" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-2">
+		<createTable tableName="bairro">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_cidade" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-3">
+		<createTable tableName="bairro_faixacep">
+			<column name="id_faixacep" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_bairro" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-4">
+		<createTable tableName="cidade">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fundacao" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_unidadefederativa" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-5">
+		<createTable tableName="distrito">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="iniciovigencia" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_distrito" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_cidade" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-6">
+		<createTable tableName="endereco">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="cep" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="complemento" type="VARCHAR(255)" />
+			<column name="numero" type="INT4">
+				<constraints nullable="false" />
+			</column>
+			<column name="principal" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_pessoa" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-7">
+		<createTable tableName="evento">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="data" type="date" />
+			<column name="descricao" type="VARCHAR(255)" />
+			<column name="local" type="VARCHAR(255)" />
+			<column name="organizacao" type="VARCHAR(255)" />
+			<column name="tipoevento" type="VARCHAR(255)" />
+			<column name="titulo" type="VARCHAR(255)" />
+			<column name="turno" type="VARCHAR(255)" />
+			<column name="valor" type="FLOAT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_pagamento" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-8">
+		<createTable tableName="faixacep">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimcep" type="VARCHAR(255)" />
+			<column name="iniciocep" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-9">
+		<createTable tableName="itemacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nomecomponente" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-10">
+		<createTable tableName="livro">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="anoedicao" type="INT8" />
+			<column name="autor" type="VARCHAR(255)" />
+			<column name="disciplina" type="VARCHAR(255)" />
+			<column name="editora" type="VARCHAR(255)" />
+			<column name="nome" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-11">
+		<createTable tableName="observacao">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="observacao" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-12">
+		<createTable tableName="ordemproducao">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="solicitacaoitem_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-13">
+		<createTable tableName="pagamento">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-14">
+		<createTable tableName="pais">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="codigo" type="INT4">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sigla" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-15">
+		<createTable tableName="partematerial">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="arquivo" type="BYTEA" />
+			<column name="observacao" type="VARCHAR(255)" />
+			<column name="paginafim" type="INT8" />
+			<column name="paginainicio" type="INT8" />
+			<column name="status" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_ordemproducao" type="INT8" />
+			<column name="id_responsavel" type="INT8" />
+			<column name="id_responsavelrevisao" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-16">
+		<createTable tableName="participante">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="cpf" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="deficiente" type="VARCHAR(255)" />
+			<column name="email" type="VARCHAR(255)" />
+			<column name="idevento" type="INT8" />
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="pagamento" type="VARCHAR(255)" />
+			<column name="rg" type="VARCHAR(255)" />
+			<column name="sexo" type="VARCHAR(255)" />
+			<column name="telefone" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-17">
+		<createTable tableName="perfilacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-18">
+		<createTable tableName="pessoa">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-19">
+		<createTable tableName="pessoaendereco">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="TIMESTAMPTZ">
+				<constraints nullable="false" />
+			</column>
+			<column name="iniciovigencia" type="TIMESTAMPTZ">
+				<constraints nullable="false" />
+			</column>
+			<column name="endereco_id" type="INT8" />
+			<column name="id_pessoa" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-20">
+		<createTable tableName="pessoafisica">
+			<column name="cpf" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="datanascimento" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="rg" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sexo" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sobrenome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-21">
+		<createTable tableName="pessoajuridica">
+			<column name="cnpj" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="datacriacao" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="inscricaoestadual" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="razaosocial" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-22">
+		<createTable tableName="solicitacao">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="datachegada" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="nre" type="VARCHAR(255)" />
+			<column name="id_responsavel" type="INT8" />
+			<column name="id_solicitante" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-23">
+		<createTable tableName="solicitacao_alunos">
+			<column name="solicitacao_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="alunos_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-24">
+		<createTable tableName="solicitacaoitem">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="pnld" type="VARCHAR(255)" />
+			<column name="traducaomaterial" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_material" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_solicitacao" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-25">
+		<createTable tableName="telefone">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="ddd" type="INT4" />
+			<column name="tipo" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_pessoa" type="INT8" />
+			<column name="ramal" type="INT4" />
+			<column name="numero" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-26">
+		<createTable tableName="tipoevento">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-27">
+		<createTable tableName="turno">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-28">
+		<createTable tableName="unidadefederativa">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sigla" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_pais" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-29">
+		<createTable tableName="usuario">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="ativo" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="login" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="senha" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-30">
+		<createTable tableName="usuarioitemacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="TIMESTAMPTZ" />
+			<column name="iniciovigencia" type="TIMESTAMPTZ" />
+			<column name="id_temacesso" type="INT8" />
+			<column name="id_usuario" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-31">
+		<createTable tableName="usuarioperfilacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="iniciovigencia" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_perfil_acesso" type="INT8" />
+			<column name="id_usuario" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-32">
+		<addPrimaryKey columnNames="id" constraintName="bairro_pkey"
+			tableName="bairro" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-33">
+		<addPrimaryKey columnNames="id" constraintName="cidade_pkey"
+			tableName="cidade" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-34">
+		<addPrimaryKey columnNames="id" constraintName="distrito_pkey"
+			tableName="distrito" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-35">
+		<addPrimaryKey columnNames="id" constraintName="endereco_pkey"
+			tableName="endereco" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-36">
+		<addPrimaryKey columnNames="id" constraintName="evento_pkey"
+			tableName="evento" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-37">
+		<addPrimaryKey columnNames="id" constraintName="faixacep_pkey"
+			tableName="faixacep" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-38">
+		<addPrimaryKey columnNames="id" constraintName="itemacesso_pkey"
+			tableName="itemacesso" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-39">
+		<addPrimaryKey columnNames="id" constraintName="livro_pkey"
+			tableName="livro" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-40">
+		<addPrimaryKey columnNames="id" constraintName="observacao_pkey"
+			tableName="observacao" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-41">
+		<addPrimaryKey columnNames="id" constraintName="ordemproducao_pkey"
+			tableName="ordemproducao" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-42">
+		<addPrimaryKey columnNames="id" constraintName="pagamento_pkey"
+			tableName="pagamento" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-43">
+		<addPrimaryKey columnNames="id" constraintName="pais_pkey"
+			tableName="pais" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-44">
+		<addPrimaryKey columnNames="id" constraintName="partematerial_pkey"
+			tableName="partematerial" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-45">
+		<addPrimaryKey columnNames="id" constraintName="participante_pkey"
+			tableName="participante" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-46">
+		<addPrimaryKey columnNames="id" constraintName="perfilacesso_pkey"
+			tableName="perfilacesso" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-47">
+		<addPrimaryKey columnNames="id" constraintName="pessoa_pkey"
+			tableName="pessoa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-48">
+		<addPrimaryKey columnNames="id" constraintName="pessoaendereco_pkey"
+			tableName="pessoaendereco" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-49">
+		<addPrimaryKey columnNames="id" constraintName="pessoafisica_pkey"
+			tableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-50">
+		<addPrimaryKey columnNames="id" constraintName="pessoajuridica_pkey"
+			tableName="pessoajuridica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-51">
+		<addPrimaryKey columnNames="id" constraintName="solicitacao_pkey"
+			tableName="solicitacao" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-52">
+		<addPrimaryKey columnNames="id" constraintName="solicitacaoitem_pkey"
+			tableName="solicitacaoitem" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-53">
+		<addPrimaryKey columnNames="id" constraintName="telefone_pkey"
+			tableName="telefone" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-54">
+		<addPrimaryKey columnNames="id" constraintName="tipoevento_pkey"
+			tableName="tipoevento" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-55">
+		<addPrimaryKey columnNames="id" constraintName="turno_pkey"
+			tableName="turno" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-56">
+		<addPrimaryKey columnNames="id" constraintName="unidadefederativa_pkey"
+			tableName="unidadefederativa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-57">
+		<addPrimaryKey columnNames="id" constraintName="usuario_pkey"
+			tableName="usuario" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-58">
+		<addPrimaryKey columnNames="id" constraintName="usuarioitemacesso_pkey"
+			tableName="usuarioitemacesso" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-59">
+		<addPrimaryKey columnNames="id" constraintName="usuarioperfilacesso_pkey"
+			tableName="usuarioperfilacesso" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-60">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="pessoajuridica" constraintName="fk_12u2ai1x9gwnrxbngiu1s2vlf"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-61">
+		<addForeignKeyConstraint baseColumnNames="id_distrito"
+			baseTableName="distrito" constraintName="fk_228tgwgvlvro9uskcm2a59oaf"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-62">
+		<addForeignKeyConstraint baseColumnNames="idevento"
+			baseTableName="participante" constraintName="fk_2fjc5r6enc9aq6a7p29fwwu52"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-63">
+		<addForeignKeyConstraint baseColumnNames="id_responsavel"
+			baseTableName="partematerial" constraintName="fk_50svmn3of6b1ynejwnd2giv5r"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-64">
+		<addForeignKeyConstraint baseColumnNames="id_faixacep"
+			baseTableName="bairro_faixacep" constraintName="fk_5qn0vp35wgf51c2e1jgp6yqus"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="faixacep" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-65">
+		<addForeignKeyConstraint baseColumnNames="id_pessoa"
+			baseTableName="telefone" constraintName="fk_6luaqa9mq7tv5nghmcn1jioi0"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-66">
+		<addForeignKeyConstraint baseColumnNames="solicitacaoitem_id"
+			baseTableName="ordemproducao" constraintName="fk_6nop6ywm5r4nmuno9qcfb28dd"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacaoitem" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-67">
+		<addForeignKeyConstraint baseColumnNames="id_unidadefederativa"
+			baseTableName="cidade" constraintName="fk_8a1ipvfv1kvgd7wpq02b1i5n9"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="unidadefederativa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-68">
+		<addForeignKeyConstraint baseColumnNames="id_cidade"
+			baseTableName="bairro" constraintName="fk_ak48qtngj81g9sfxhbmecrcau"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-69">
+		<addForeignKeyConstraint baseColumnNames="id_responsavel"
+			baseTableName="solicitacao" constraintName="fk_cew2u0d4vlt94j8yrktmin0yo"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-70">
+		<addForeignKeyConstraint baseColumnNames="id_pagamento"
+			baseTableName="evento" constraintName="fk_d2apjqubvnhaeugs63i3fkdwk"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pagamento" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-71">
+		<addForeignKeyConstraint baseColumnNames="id_responsavelrevisao"
+			baseTableName="partematerial" constraintName="fk_d99lmo74rmixk45849pccdjq8"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-72">
+		<addForeignKeyConstraint baseColumnNames="id_usuario"
+			baseTableName="usuarioitemacesso" constraintName="fk_e9st1bs3kbelopbv93adjilq"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-73">
+		<addForeignKeyConstraint baseColumnNames="id_perfil_acesso"
+			baseTableName="usuarioperfilacesso" constraintName="fk_femy7nyxqlij7xjdkr32mju5w"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilacesso" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-74">
+		<addForeignKeyConstraint baseColumnNames="id_pessoa"
+			baseTableName="pessoaendereco" constraintName="fk_hefjlv0de2niktickknlrs1uc"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-75">
+		<addForeignKeyConstraint baseColumnNames="id_solicitante"
+			baseTableName="solicitacao" constraintName="fk_iykxmb06bdcvyhy537e0wfm4s"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-76">
+		<addForeignKeyConstraint baseColumnNames="id_solicitacao"
+			baseTableName="solicitacaoitem" constraintName="fk_jaaovgxhxy2jf2vp17srxuhh3"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-77">
+		<addForeignKeyConstraint baseColumnNames="id_temacesso"
+			baseTableName="usuarioitemacesso" constraintName="fk_jx82tg2d5arnqvqyidw05u76i"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemacesso" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-78">
+		<addForeignKeyConstraint baseColumnNames="id_cidade"
+			baseTableName="distrito" constraintName="fk_k1bqlrexubf41a5ebnf4rcwfm"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-79">
+		<addForeignKeyConstraint baseColumnNames="id_ordemproducao"
+			baseTableName="partematerial" constraintName="fk_k2defsfhcqdvf2i5961wy75lt"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ordemproducao" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-80">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="pessoafisica" constraintName="fk_khllj98ham1jkopj1qxetfgud"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-81">
+		<addForeignKeyConstraint baseColumnNames="id_pessoa"
+			baseTableName="endereco" constraintName="fk_lqjohmkeu43csocxp1b9op32k"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-82">
+		<addForeignKeyConstraint baseColumnNames="id_pais"
+			baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-83">
+		<addForeignKeyConstraint baseColumnNames="solicitacao_id"
+			baseTableName="solicitacao_alunos" constraintName="fk_pap9cabe1luaxos2myl3sufle"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-84">
+		<addForeignKeyConstraint baseColumnNames="id_bairro"
+			baseTableName="bairro_faixacep" constraintName="fk_q6bxtm7dxap99m36x8dnng4i8"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bairro" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-85">
+		<addForeignKeyConstraint baseColumnNames="alunos_id"
+			baseTableName="solicitacao_alunos" constraintName="fk_qljj652c2tu4jdue4poy9lw4d"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-86">
+		<addForeignKeyConstraint baseColumnNames="id_usuario"
+			baseTableName="usuarioperfilacesso" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-87">
+		<addForeignKeyConstraint baseColumnNames="endereco_id"
+			baseTableName="pessoaendereco" constraintName="fk_rniq3f662vwastrnxk4mm8khm"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-88">
+		<addUniqueConstraint columnNames="cnpj"
+			constraintName="uk_2xclbh1scxkxx5e7vv48bqaq" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-89">
+		<addUniqueConstraint columnNames="cpf"
+			constraintName="uk_795p7d8b4isbwwye0rd3je0cw" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-90">
+		<addUniqueConstraint columnNames="inscricaoestadual"
+			constraintName="uk_8ncbf29ly0ca3nepsptgevtgd" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
+	</changeSet>
 </databaseChangeLog>
+   

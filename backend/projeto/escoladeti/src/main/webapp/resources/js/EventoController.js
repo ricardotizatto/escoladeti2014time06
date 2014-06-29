@@ -1,10 +1,13 @@
 function eventoController($scope, $http, $routeParams) {
     console.log('Carregando controller');
-	$scope.idCurso;
-	$scope.tituloCurso;
-	$scope.DetalhesCurso;
-	$scope.localCurso;
-	$scope.dataCurso;
+    $scope.idCurso;
+    $scope.tituloCurso;
+    $scope.DetalhesCurso;
+    $scope.localCurso;
+    $scope.dataCurso;
+    $scope.turno;
+    $scope.tipoEvento;
+    $scope.valor;
 
     $scope.editar = function(evento) {
         console.log(evento);
@@ -19,30 +22,30 @@ function eventoController($scope, $http, $routeParams) {
             url: './rest/eventoSource/evento',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
-            .success(function(data) {
-                console.log("evento deletado");
-                 $scope.getTodos();
-            }).error(function(data) {
+                .success(function(data) {
+                    console.log("evento deletado");
+                    $scope.getTodos();
+                }).error(function(data) {
             console.log("erro ao deletar evento ");
         });
     };
-    
+
     $scope.listarParticipantes = function(evento) {
         console.log(evento);
         window.location = '#/listaparticipantes/' + evento.id;
 
-    };    
+    };
 
     $scope.salvar = function() {
         console.log(angular.toJson($scope.evento, true));
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function(evento, status) {
                     //$scope.evento = getNovoEvento();
-					window.location = '#/listaevento';
+                    window.location = '#/listaevento';
                     console.log("evento salva = " + evento);
                 })
                 .error(function(data, status) {
-                    console.log("erro ao salvar evento" + data);
+                    console.log("erro ao salvar evento", data);
                 });
     };
 
@@ -54,41 +57,38 @@ function eventoController($scope, $http, $routeParams) {
     $scope.getTodos = function() {
 
         $http.get("./rest/eventoSource/evento")
-            .success(function(eventos, status) {
-                $scope.eventos = eventos;
-            })
-            .error(function(data, status) {
-                console.log('erro ao buscar eventos');
-            });
+                .success(function(eventos, status) {
+                    $scope.eventos = eventos;
+                })
+                .error(function(data, status) {
+                    console.log('erro ao buscar eventos');
+                });
     };
 
     $scope.carregarEvento = function() {
         if ($routeParams.eventoId) {
             $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
-                .success(function(evento) {
-                    $scope.evento = evento;
-                });
+                    .success(function(evento) {
+                        $scope.evento = evento;
+                    });
         }
     };
 
-    $scope.carregarEventoDetalhes = function(indice,titulo,detalhes,local,data) {
-        
-            $scope.idCurso = indice;
-			$scope.tituloCurso = titulo;
-			$scope.DetalhesCurso = detalhes;
-			$scope.localCurso = local;
-			$scope.dataCurso = data;
-        
-    };	
-	
+    $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data) {
+        $scope.idCurso = indice;
+        $scope.tituloCurso = titulo;
+        $scope.DetalhesCurso = detalhes;
+        $scope.localCurso = local;
+        $scope.dataCurso = data;
+    };
+
     function getNovoEvento() {
         console.log('novo evento');
         return {};
-    };
-	
+    }
+    ;
 }
 
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);
-  }
-
+}

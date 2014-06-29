@@ -8,7 +8,8 @@
         <div class="row ">
             <div class="form-group col-sm-3">
                 <label> Item da Solicitação </label>
-                <input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{1,6}" required placeholder="Número da Solicitação" />
+                <select ui-select2="opcoes" ng-model="testee"></select>
+                <!--<input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{1,6}" required placeholder="Número da Solicitação" />-->
             </div>
             <div class="form-group col-sm-3"> 
                 <label> Material </label>

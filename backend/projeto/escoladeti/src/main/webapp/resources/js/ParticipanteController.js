@@ -1,4 +1,4 @@
-function participanteController($scope, $http, $routeParams) {
+﻿function participanteController($scope, $http, $routeParams) {
     console.log('Carregando controller');
     $scope.idModal;
     $scope.cpfModal;
@@ -10,6 +10,14 @@ function participanteController($scope, $http, $routeParams) {
     $scope.sexoModal;
     $scope.telefoneModal;
     $scope.pagamentoModal;
+    $scope.idCurso;
+    $scope.tituloCurso;
+    $scope.DetalhesCurso;
+    $scope.localCurso;
+    $scope.dataCurso;
+    $scope.turno;
+    $scope.tipoEvento;
+    $scope.valor;
 
     $scope.editar = function(participante) {
         console.log(participante);
@@ -34,15 +42,30 @@ function participanteController($scope, $http, $routeParams) {
 
     $scope.salvar = function() {
         console.log(angular.toJson($scope.participante, true));
-        $http.post("./rest/participanteSource/participante", $scope.participante)
-                .success(function(participante, status) {
-            //$scope.participante = getNovoParticipante();
-            window.location = '#/cadastroparticipante';
-            console.log("participante salva = " + participante);
-        })
-                .error(function(data, status) {
-            console.log("erro ao salvar participante" + data);
-        });
+        if ($scope.validacampos() != "")
+        {
+            $scope.info = {};
+            $scope.info.status = 'danger';
+            $scope.info.message = 'Atenção: ' + $scope.validacampos();   
+            
+        }else{         
+            $scope.participante.pagamento = "PENDENTE";
+            $http.post("./rest/participanteSource/participante", $scope.participante)
+                    .success(function(participante, status) {
+                //$scope.participante = getNovoParticipante();
+                console.log("participante salva = " + participante);
+                $scope.info = {};
+                $scope.info.message = 'Participante ' + participante.nome + ' salvo com sucesso';
+                $scope.info.status = 'success';
+                $scope.novo();
+
+            })
+                    .error(function(data, status) {
+                        $scope.info = {};
+                        $scope.info.status = 'danger';
+                        $scope.info.message = 'Erro ao salvar participante: ' + $scope.nomeModal + ' - '+ data.message;
+            });
+        }   
     };
 
     $scope.salvarAlteracao = function() {
@@ -64,16 +87,23 @@ function participanteController($scope, $http, $routeParams) {
         $scope.participante.pagamento = $scope.pagamentoModal;
 
         console.log(angular.toJson($scope.participante, true));
-
-        $http.post("./rest/participanteSource/participante", $scope.participante)
-                .success(function(participante, status) {
-            //$scope.participante = getNovoParticipante();
-            $scope.listarParticipantes();
-            console.log("participante salva = " + participante);
-        })
-                .error(function(data, status) {
-            console.log("erro ao salvar participante" + data);
-        });
+  
+            $http.post("./rest/participanteSource/participante", $scope.participante)
+                    .success(function(participante, status) {
+                //$scope.participante = getNovoParticipante();
+                $scope.listarParticipantes();
+                console.log("participante salva = " + participante);
+                $scope.info = {};
+                $scope.info.message = 'Participante ' + $scope.nomeModal + ' alterado com sucesso';
+                $scope.info.status = 'success';
+                $scope.novo();
+            })
+                    .error(function(data, status) {
+                console.log("erro ao salvar participante" + data);
+                        $scope.info = {};
+                        $scope.info.status = 'danger';
+                        $scope.info.message = 'Erro ao alterar participante: ' + $scope.nomeModal + ' - '+ data.message;
+            });
     };
 
     $scope.novo = function() {
@@ -89,6 +119,26 @@ function participanteController($scope, $http, $routeParams) {
         $scope.pagamentoModal = {};
         $scope.participante = $scope.getNovoParticipante();
         //window.location = '#/cadastroparticipante';
+    };
+    
+    $scope.validacampos = function() {
+        
+       if(ValidarCPF($scope.participante.cpf) == false)
+           return "Por favor corrija o CPF digitado.";
+       
+       if(ValidaEmail($scope.participante.email) == false)
+           return "Por favor corrija o Email digitado.";
+       
+       if($scope.participante.idevento ==  undefined)
+           return "Selecione um dos nossos cursos.";
+
+       if( $scope.participante.nome  ==  undefined)
+           return "Digite seu nome para efetuarmos o cadastro.";
+       
+       if($scope.participante.telefone ==  undefined)
+           return "Por favor entre com um telefone.";
+       
+       return "";
     };
 
     $scope.getTodos = function() {
@@ -152,6 +202,14 @@ function participanteController($scope, $http, $routeParams) {
                 console.log('erro ao buscar eventos');
             });
         }
+    };
+    
+    $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data) {
+        $scope.idCurso = indice;
+        $scope.tituloCurso = titulo;
+        $scope.DetalhesCurso = detalhes;
+        $scope.localCurso = local;
+        $scope.dataCurso = data;
     };
 
 }
