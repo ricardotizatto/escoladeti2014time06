@@ -9,26 +9,34 @@
         <link href="./resources/css/bootstrap-select.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
+        <link href="./resources/css/estilo-geral.css" rel="stylesheet">
+        <link href="./resources/css/toastr.css" rel="stylesheet">
+        <link href="./resources/css/select2.css" rel="stylesheet">
         <script type="text/javascript" src="./resources/libs/jquery.js"></script>
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap-select.js"></script>
+        <script type="text/javascript" src="./resources/libs/select2.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
         <script type="text/javascript" src="./resources/libs/funcoes.js"></script>
+        <script type="text/javascript" src="./resources/libs/toastr.js"></script>        
+        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>
         <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>		
         <script type="text/javascript" src="./resources/js/app.js"></script>
+        <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/estado/service.js" ></script>
         <script type="text/javascript" src="./resources/js/PessoaFisicaController.js" ></script>
         <script type="text/javascript" src="./resources/js/PessoaJuridicaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaUsuarioController.js" ></script>
-        <script type="text/javascript" src="./resources/js/PaisController.js" ></script>
         <script type="text/javascript" src="./resources/js/CidadeController.js" ></script>
-        <script type="text/javascript" src="./resources/js/EstadoController.js" ></script>
         <script type="text/javascript" src="./resources/js/DistritoController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>

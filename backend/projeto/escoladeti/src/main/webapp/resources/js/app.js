@@ -1,5 +1,9 @@
 'use strict';
-var app = angular.module('app', ['ngRoute']);
+
+
+var app = angular.module('app', ['ngRoute', 'controllers', 'ui.select2']);
+angular.module('controllers', ['services']);
+angular.module('services', []);
 
 app.config(['$routeProvider',
     function($routeProvider) {
@@ -51,11 +55,11 @@ app.config(['$routeProvider',
             })
             .when('/cadastropais/:paisId', {
                 templateUrl: './pages/CadastroPais.html',
-                controller: 'paisController'
+                controller: 'PaisController'
             })
             .when('/cadastropais', {
                 templateUrl: './pages/CadastroPais.html',
-                controller: 'paisController'
+                controller: 'PaisController'
             })
             .when('/cadastroestado', {
                 templateUrl: './pages/CadastroEstado.html',
@@ -95,7 +99,7 @@ app.config(['$routeProvider',
             })
             .when('/listapais', {
                 templateUrl: './pages/ListaPais.html',
-                controller: 'paisController'
+                controller: 'PaisController'
             })
             .when('/listaestado', {
                 templateUrl: './pages/ListaEstado.html',

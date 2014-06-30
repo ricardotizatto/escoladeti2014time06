@@ -1,4 +1,6 @@
-function EstadoController ($scope, $http, $routeParams) {
+var controllers = angular.module('controllers');
+
+function EstadoController ($scope, $routeParams, paisService, estadoService) {
 
     console.log('Carregando controller');
     $scope.info = {};
@@ -8,25 +10,16 @@ function EstadoController ($scope, $http, $routeParams) {
 
         BootstrapDialog.confirm('Deseja realmente deletar o Estado: <b>' + unidadeFederativa.nome + '</b>?', function(result) {
             if (result) {
-                $http({
-                    method: 'DELETE',
-                    data: unidadeFederativa,
-                    url: './rest/unidadeFederativaSource/unidadeFederativa',
-                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
-                })
+            	estadoService.deletar(unidadeFederativa)
                     .success(function(data, status) {
                         $scope.getTodos(1);
                         console.log('Estado deletado!');
-                        $scope.info.message = 'Estado ' + unidadeFederativa.nome + ' deletado com sucesso';
-                        $scope.info.status = 'success';
+                        toastr.success('Estado '+unidadeFederativa.nome+' deletado.');
                     })
                     .error(function(data, status) {
-                        console.log('Estado não foi deletado' + data);
-                        $scope.info.status = 'danger';
-                        $scope.info.message = 'Erro ao deletar o unidadeFederativa: ' + unidadeFederativa.nome + ' - ' + data.message;
+                        console.log('Estado não foi deletado', data);
+                        toastl.error(data.message);
                     });
-            } else {
-                $scope.getTodos(1);
             }
         });
     };
@@ -43,26 +36,24 @@ function EstadoController ($scope, $http, $routeParams) {
             return;//se não tiver id não buscar
         }
 
-        $http.get('./rest/unidadeFederativaSource/unidadeFederativa/' + $routeParams.unidadeFederativaId)
+        estadoService.buscar( $routeParams.unidadeFederativaId)
             .success(function(unidadeFederativa, status) {
                 console.log(unidadeFederativa);
-                delete unidadeFederativa.info;
                 $scope.unidadeFederativa = unidadeFederativa;
             });
-
-    }
+    };
     
     $scope.carregarPaises = function() {
-        console.log('carregando pais');
-        $http.get('./rest/paisSource/listarTodosPaises')
+    	console.log('carregando pais');
+        paisService.buscarPorNome('')
             .success(function(listaPaises) {
                 console.log(listaPaises);
-                $scope.paises = listaPaises;
+                $scope.paises = listaPaises.list;
             })
             .error(function(data) {
                 console.log('erro ao buscar paises ' + data);
             });
-    }
+    };
 
     $scope.editar = function(unidadeFederativa) {
         console.log(unidadeFederativa);
@@ -71,12 +62,12 @@ function EstadoController ($scope, $http, $routeParams) {
 
     $scope.buscaEstadosContendoNome = function() {
         console.log($scope.busca);
-        $http.get('./rest/unidadeFederativaSource/unidadeFederativa?q=' + $scope.busca.toUpperCase())
+        estadoService.buscarPorNome($scope.busca)
             .then(function(retorno) {
                 console.log(retorno.data);
                 $scope.unidadesFederativas = retorno.data;
             });
-    }
+    };
 
     $scope.salvar = function() {
 
@@ -84,24 +75,21 @@ function EstadoController ($scope, $http, $routeParams) {
         $scope.unidadeFederativa.sigla = $scope.unidadeFederativa.sigla.toUpperCase();
 
         console.log($scope.unidadeFederativa);
-        $http.post("./rest/unidadeFederativaSource/unidadeFederativa", $scope.unidadeFederativa)
-            .success(function(unidadeFederativa) {
+        estadoService.salvar($scope.unidadeFederativa)
+            .success(function (unidadeFederativa) {
                 $scope.unidadeFederativa = getNovoEstado();
                 console.log("unidadeFederativa salva = " + unidadeFederativa);
-                $scope.info.message = 'Estado ' + unidadeFederativa.nome + ' salvo com sucesso';
-                $scope.info.status = 'success';
+                toastr.success('Estado '+unidadeFederativa.nome+' salvo com sucesso.');
             })
-            .error(function(data) {
+            .error(function (data) {
                 console.log("erro ao salvar unidadeFederativa" + data);
-                $scope.info.status = 'danger';
-                console.log($scope.info);
-                $scope.info.message = data.message;
+                toastr.warning(data.message);
             });
     };
 
     $scope.getTodos = function(numeroPagina) {
         console.log(numeroPagina);
-        $http.get('./rest/unidadeFederativaSource/listar/pag/' + numeroPagina)
+        estadoService.listar(numeroPagina)
             .success(function(listaUnidadesFederativas) {
                 console.log(listaUnidadesFederativas);
                 $scope.unidadesFederativas = listaUnidadesFederativas;
@@ -109,15 +97,24 @@ function EstadoController ($scope, $http, $routeParams) {
             .error(function(data) {
                 console.log('erro ao buscar Estados ' + data.developerMessage);
             });
-    }
+    };
 
     function getNovoEstado() {
         console.log('novo Estado');
-        return {};
+        return {
+        	nome: '',
+        	pais: null
+        };
     };
 
     $scope.voltar = function() {
         $scope.unidadeFederativa = {};
         window.location = '#/listaestado';
-    }
+    };
+    
+    $scope.select2Options = {
+            allowClear:true
+    };
 }
+
+controllers.controller('EstadoController', ['$scope', '$routeParams', 'paisService', 'estadoService', EstadoController]);
