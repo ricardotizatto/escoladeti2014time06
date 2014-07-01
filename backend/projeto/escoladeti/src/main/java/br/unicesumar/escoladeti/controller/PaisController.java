@@ -46,11 +46,11 @@ public class PaisController implements Serializable {
 		return paisService.listarTodosPaises();
 	}
         
-        @RequestMapping(value = "/pais", method = RequestMethod.GET)
-        @ResponseBody
-        public DataPage<Pais> getTodos() {
-            return paisService.getTodos(1);
-        }
+    @RequestMapping(value = "/pais", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Pais> getTodos() {
+        return paisService.getTodos(1);
+    }
 	
 	@RequestMapping(value = "/pais",params = {"q"}, method = RequestMethod.GET)
 	@ResponseBody
