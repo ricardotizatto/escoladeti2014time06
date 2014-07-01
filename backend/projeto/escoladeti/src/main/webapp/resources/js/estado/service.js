@@ -4,9 +4,9 @@ function EstadoService ($http) {
 	return {
 		salvar: function (estado) {
 			return $http.post("./rest/unidadeFederativaSource/unidadeFederativa", {
-				nome: estado.nome,
+				nome: estado.nome.toUpperCase(),
 				pais: estado.pais,
-				sigla: estado.sigla,
+				sigla: estado.sigla.toUpperCase(),
 				id : estado.id
 			});
 		},

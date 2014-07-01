@@ -19,7 +19,7 @@
             <div class="form-group col-sm-8">
                 <label> Nome </label>
                 <input class="form-control" title="Nome do pais deve ser maisculo"  name="nome" 
-                type="text" ng-model="pais.nome" onkeyup="toUpper(this)"  pattern="[A-Z]+" maxlength="40" required placeholder="BRASIL"/>
+                type="text" ng-model="pais.nome" onkeyup="toUpper(this)"  pattern="[\w\s]+" maxlength="40" required placeholder="BRASIL"/>
             </div>
             <div class="form-group col-sm-2">
                 <label> Sigla </label>
