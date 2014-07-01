@@ -1,6 +1,5 @@
-<div class="container" ng-controller="EstadoController" ng-init="carregarEstado();carregarPaises();" >
+<div class="container" ng-controller="EstadoController" ng-init="carregarEstado()" >
     <div class="row">
-    {{unidadeFederativa}}
         <div class="form-group col-sm-12">
             <legend> Cadastro de Estado </legend>
         </div>
@@ -10,7 +9,7 @@
             <div class="form-group col-sm-6">
                 <label> Nome </label>
                 <input class="form-control" name="nome" title="Nome do estado deve ser literal" type="text" onkeyup="toUpper(this)" 
-                ng-model="unidadeFederativa.nome" pattern="[A-Z]+" maxlength="40" required placeholder="Nome do Estado" />
+                ng-model="unidadeFederativa.nome" pattern="[\w\s]+" maxlength="40" required placeholder="Nome do Estado" />
             </div>
             <div class="form-group col-sm-2">
                 <label> Sigla </label>
@@ -18,9 +17,9 @@
                 title="Sigla deve ser literal" required maxlength="2" pattern="[A-Z]{2}" placeholder="sigla do estado"/>
             </div>
             <div class="form-group col-sm-4">
-                <label>  Pais </label>
-                <select ui-select2="select2Options" class="form-control"  ng-model="unidadeFederativa.pais" >
-                	<option ng-repeat="pais in paises" value="{{pais}}">{{pais.nome}}</option>
+                <label>  Pais </label>                
+                <select type="text" ui-select2="select2Options" style="width: 100%"  ng-model="unidadeFederativa.idPais" >
+                	<option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nome}}</option>
                 </select>
             </div>
         </div>	
@@ -38,10 +37,7 @@
         </div>
         <div class="row"><div class="col-sm-12"><hr></div></div>			
     </form>
+    
+    
+   
 </div>
-<select ui-select2 ng-model="select2" data-placeholder="Pick a number">
-    <option value=""></option>
-    <option value="one">First</option>
-    <option value="two">Second</option>
-    <option value="three">Third</option>
-</select>

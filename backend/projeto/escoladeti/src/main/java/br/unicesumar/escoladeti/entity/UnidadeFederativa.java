@@ -18,7 +18,7 @@ public class UnidadeFederativa extends Entidade{
     private String sigla;
     
     @ManyToOne
-    @JoinColumn(name="id_pais",nullable =false)
+    @JoinColumn(name="id_pais",referencedColumnName = "id")
     private Pais pais;
     
     public UnidadeFederativa() {

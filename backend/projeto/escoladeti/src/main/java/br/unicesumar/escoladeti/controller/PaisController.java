@@ -40,9 +40,9 @@ public class PaisController implements Serializable {
 		return paisService.getById(id);
 	}
 
-	@RequestMapping(value = "/listarTodosPaises", method = RequestMethod.GET)
+	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Pais> listarTodosPaises() {
+	public List<Pais> listarTodosPaises() {	
 		return paisService.listarTodosPaises();
 	}
         

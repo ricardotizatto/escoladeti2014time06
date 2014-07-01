@@ -1,7 +1,7 @@
 'use strict';
 
 
-var app = angular.module('app', ['ngRoute', 'controllers', 'ui.select2']);
+var app = angular.module('app', ['ngRoute', 'controllers', 'ui.select2', 'ui.bootstrap']);
 angular.module('controllers', ['services']);
 angular.module('services', []);
 

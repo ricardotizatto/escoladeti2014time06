@@ -1,9 +1,20 @@
 var controllers = angular.module('controllers');
 
 function EstadoController ($scope, $routeParams, paisService, estadoService) {
-
+	$scope.select2='one';
     console.log('Carregando controller');
     $scope.info = {};
+    
+    var buscarSelecionado = function () {
+    	
+    	var selecionados = $.grep($scope.paises, function (item) {
+    		return item.id == $scope.unidadeFederativa.idPais;
+    	});
+    	
+    	console.log(selecionados[0]);
+    	
+    	$scope.unidadeFederativa.pais = selecionados[0];
+    };
 
     $scope.deletar = function(unidadeFederativa) {
         console.log('deletando unidadeFederativa ' + JSON.stringify(unidadeFederativa));
@@ -39,21 +50,25 @@ function EstadoController ($scope, $routeParams, paisService, estadoService) {
         estadoService.buscar( $routeParams.unidadeFederativaId)
             .success(function(unidadeFederativa, status) {
                 console.log(unidadeFederativa);
+                console.log('pais', unidadeFederativa.pais);
                 $scope.unidadeFederativa = unidadeFederativa;
+                $scope.unidadeFederativa.idPais = unidadeFederativa.pais.id;
             });
     };
     
-    $scope.carregarPaises = function() {
+    var carregarPaises = function(nome) {
     	console.log('carregando pais');
-        paisService.buscarPorNome('')
+        paisService.buscarTodos()
             .success(function(listaPaises) {
                 console.log(listaPaises);
-                $scope.paises = listaPaises.list;
+                $scope.paises = listaPaises;
             })
             .error(function(data) {
                 console.log('erro ao buscar paises ' + data);
             });
     };
+    
+    carregarPaises('');
 
     $scope.editar = function(unidadeFederativa) {
         console.log(unidadeFederativa);
@@ -73,6 +88,7 @@ function EstadoController ($scope, $routeParams, paisService, estadoService) {
 
         $scope.unidadeFederativa.nome = $scope.unidadeFederativa.nome.toUpperCase();
         $scope.unidadeFederativa.sigla = $scope.unidadeFederativa.sigla.toUpperCase();
+        buscarSelecionado();
 
         console.log($scope.unidadeFederativa);
         estadoService.salvar($scope.unidadeFederativa)
@@ -113,8 +129,9 @@ function EstadoController ($scope, $routeParams, paisService, estadoService) {
     };
     
     $scope.select2Options = {
-            allowClear:true
-    };
+    	
+    };    
+    
 }
 
 controllers.controller('EstadoController', ['$scope', '$routeParams', 'paisService', 'estadoService', EstadoController]);

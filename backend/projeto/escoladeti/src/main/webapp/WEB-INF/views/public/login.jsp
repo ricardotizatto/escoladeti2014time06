@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title> AMACAP </title>
     <link rel="shortcut icon" type="image/png" href="./resources/imagens/icone-amacap.png" />
-    <script type="text/javascript" src="./resources/libs/jquery.js"></script>
+    <script type="text/javascript" src="./resources/libs/jquery.min.js"></script>
     <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>    
     <link rel="stylesheet" href="./resources/css/bootstrap.min.css" >
     <link href="./resources/css/estilo-geral.css" rel="stylesheet">

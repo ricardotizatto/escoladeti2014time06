@@ -4,28 +4,32 @@
         <meta charset="UTF-8">
         <title> AMACAP </title>
         <link rel="shortcut icon" type="image/png" href="./resources/imagens/icone-amacap.png" />
+
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.css" rel="stylesheet">
-        <link href="./resources/css/bootstrap-select.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
-        <link href="./resources/css/estilo-geral.css" rel="stylesheet">
-        <link href="./resources/css/toastr.css" rel="stylesheet">
+        <link href="./resources/css/toastr.css" rel="stylesheet">        
+        <link href="./resources/css/jquery-ui.css" rel="stylesheet">
         <link href="./resources/css/select2.css" rel="stylesheet">
-        <script type="text/javascript" src="./resources/libs/jquery.js"></script>
+        
+        <script type="text/javascript" src="./resources/libs/jquery.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/select2.js"></script>
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
-        <script type="text/javascript" src="./resources/libs/bootstrap-select.js"></script>
-        <script type="text/javascript" src="./resources/libs/select2.min.js"></script>
-        <script type="text/javascript" src="./resources/libs/angular.js"></script>
+        <script type="text/javascript" src="./resources/libs/funcoes.js"></script>
+        <script type="text/javascript" src="./resources/libs/toastr.js"></script>
+        <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>
+        
+        <script type="text/javascript" src="./resources/libs/angular.min.js"></script>        
+        <script type="text/javascript" src="./resources/libs/ui-bootstrap-tpls-0.11.0.min.js"></script>        
+        <script type="text/javascript" src="./resources/libs/angular-ui.js"></script>        
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
-        <script type="text/javascript" src="./resources/libs/funcoes.js"></script>
-        <script type="text/javascript" src="./resources/libs/toastr.js"></script>        
-        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>
-        <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>		
-        <script type="text/javascript" src="./resources/js/app.js"></script>
+        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>        
+
+        <script type="text/javascript" src="./resources/js/app.js"></script>        
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
