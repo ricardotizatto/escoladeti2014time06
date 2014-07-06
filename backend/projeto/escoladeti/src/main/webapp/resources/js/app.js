@@ -71,11 +71,11 @@ app.config(['$routeProvider',
             })
             .when('/cadastrocidade', {
                 templateUrl: './pages/CadastroCidade.html',
-                controller: 'cidadeController'
+                controller: 'CidadeController'
             })
             .when('/cadastrocidade/:cidadeId', {
                 templateUrl: './pages/CadastroCidade.html',
-                controller: 'cidadeController'
+                controller: 'CidadeController'
             })
             .when('/cadastrodistrito', {
                 templateUrl: './pages/CadastroDistrito.html',
@@ -115,7 +115,7 @@ app.config(['$routeProvider',
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',
-                controller : 'cidadeController'
+                controller : 'CidadeController'
             })
             .when('/listabairro', {
                 templateUrl: './pages/ListaBairro.html',

@@ -56,6 +56,7 @@ public class CidadeController implements Serializable {
     @RequestMapping(value = { "/listar/pag/{pagina}" }, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Cidade> listarCidade(@PathVariable Integer pagina){
+    	//throw new RuntimeException("Teste " + cidadeService.getTodos(pagina));
         return cidadeService.getTodos(pagina);
     }
     @RequestMapping(value = "/cidade", method = RequestMethod.DELETE)
@@ -63,5 +64,11 @@ public class CidadeController implements Serializable {
     public String deletar(@RequestBody Cidade cidade){
         cidadeService.deletar(cidade);
         return "deleted";
+    }
+    
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Cidade> listar(){
+    	return this.cidadeService.listarTodos();
     }
 }
