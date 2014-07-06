@@ -3,8 +3,12 @@ package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.Distrito;
 import br.unicesumar.escoladeti.service.DistritoService;
+
 import java.io.Serializable;
+import java.util.List;
+
 import static javax.management.Query.value;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,6 +68,12 @@ public class DistritoController implements Serializable {
     public String deletar(@RequestBody Distrito distrito){
         distritoService.deletar(distrito);
         return "deleted";
+    }
+    
+    @RequestMapping(value= "/listar", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Distrito> listar(){
+    	return this.distritoService.listarTodos();
     }
   
 }

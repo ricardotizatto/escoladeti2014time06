@@ -42,7 +42,7 @@
 				</tr>
 				<tr ng-repeat="cidade in cidades.list">
 					<td>{{cidade.nome}}</td>
-					<td>{{cidade.fundacao}}</td>
+					<td>{{cidade.fundacao | date: 'dd-MM-yyyy'}}</td>
 					<td>{{cidade.unidadeFederativa.nome}}</td>
 					<td>
 						<button class='btn btn-warning btn-sm' ng-click="editar(cidade)">

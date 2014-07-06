@@ -79,11 +79,11 @@ app.config(['$routeProvider',
             })
             .when('/cadastrodistrito', {
                 templateUrl: './pages/CadastroDistrito.html',
-                controller : 'distritoController'
+                controller : 'DistritoController'
             })
             .when('/cadastrodistrito/:distritoId', {
                 templateUrl: './pages/CadastroDistrito.html',
-                controller : 'distritoController'
+                controller : 'DistritoController'
             })
             .when('/cadastrobairro', {
                 templateUrl: './pages/CadastroBairro.html',
@@ -95,7 +95,7 @@ app.config(['$routeProvider',
             })
             .when('/listadistrito', {
                 templateUrl: './pages/ListaDistrito.html',
-                controller : 'distritoController'
+                controller : 'DistritoController'
             })
             .when('/listapais', {
                 templateUrl: './pages/ListaPais.html',
