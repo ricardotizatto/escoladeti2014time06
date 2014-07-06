@@ -45,7 +45,7 @@ public class UnidadeFederativaController implements Serializable{
         return federativaService.getTodos(pagina);
     }
     
-    @RequestMapping(value = "/listaTodos", method = RequestMethod.GET)
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
     @ResponseBody
     public List<UnidadeFederativa> listaTodos() {
         return federativaService.listaTodos();

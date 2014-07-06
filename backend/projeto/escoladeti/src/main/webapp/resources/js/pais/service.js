@@ -33,7 +33,6 @@ function PaisService($http) {
 		listar: function (nrPagina) {
 			return $http.get('./rest/paisSource/listar/pag/' + nrPagina);
 		},
-		
 		buscarTodos: function () {
 			return $http.get('./rest/paisSource/listar');
 		}

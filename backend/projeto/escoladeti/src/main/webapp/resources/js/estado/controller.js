@@ -56,7 +56,7 @@ function EstadoController ($scope, $routeParams, paisService, estadoService) {
             });
     };
     
-    var carregarPaises = function(nome) {
+    (function() {
     	console.log('carregando pais');
         paisService.buscarTodos()
             .success(function(listaPaises) {
@@ -66,9 +66,9 @@ function EstadoController ($scope, $routeParams, paisService, estadoService) {
             .error(function(data) {
                 console.log('erro ao buscar paises ' + data);
             });
-    };
+    }());
     
-    carregarPaises('');
+    //carregarPaises('');
 
     $scope.editar = function(unidadeFederativa) {
         console.log(unidadeFederativa);
