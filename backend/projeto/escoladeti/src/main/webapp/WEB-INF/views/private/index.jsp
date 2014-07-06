@@ -37,6 +37,8 @@
         <script type="text/javascript" src="./resources/js/estado/service.js" ></script>
         <script type="text/javascript" src="./resources/js/cidade/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/cidade/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/distrito/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>        
        
         <script type="text/javascript" src="./resources/js/PessoaFisicaController.js" ></script>
         <script type="text/javascript" src="./resources/js/PessoaJuridicaController.js" ></script>
@@ -44,7 +46,6 @@
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaUsuarioController.js" ></script>
-        <script type="text/javascript" src="./resources/js/DistritoController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>

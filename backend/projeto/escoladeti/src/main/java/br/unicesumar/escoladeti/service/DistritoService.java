@@ -1,12 +1,16 @@
 
 package br.unicesumar.escoladeti.service;
 
+import java.util.List;
+
 import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Distrito;
 import br.unicesumar.escoladeti.entity.Entidade;
 import br.unicesumar.escoladeti.repository.DistritoRepository;
+
 import javax.persistence.Column;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +36,7 @@ public class DistritoService extends Entidade {
     public Distrito getById(Long id){
         return this.distritoRepository.findById(id);
     }
+	public List<Distrito> listarTodos() {
+		return this.distritoRepository.findAll();
+	}
 }
