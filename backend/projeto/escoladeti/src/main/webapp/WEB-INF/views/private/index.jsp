@@ -8,11 +8,11 @@
 
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.css" rel="stylesheet">
-        <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">
-        <link href="./resources/css/estilo-geral.css" rel="stylesheet">
+        <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">        
         <link href="./resources/css/toastr.css" rel="stylesheet">        
         <link href="./resources/css/jquery-ui.css" rel="stylesheet">
         <link href="./resources/css/select2.css" rel="stylesheet">
+        <link href="./resources/css/estilo-geral.css" rel="stylesheet">
         
         <script type="text/javascript" src="./resources/libs/jquery.min.js"></script>
         <script type="text/javascript" src="./resources/libs/select2.js"></script>
