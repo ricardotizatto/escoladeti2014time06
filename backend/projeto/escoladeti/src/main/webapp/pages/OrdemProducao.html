@@ -8,12 +8,20 @@
         <div class="row ">
             <div class="form-group col-sm-3">
                 <label> Item da Solicitação </label>
-                <select ui-select2="opcoes" ng-model="testee"></select>
+                <select ui-select2 class="input-default" ng-model="testee">
+                	<option>1001</option>
+                	<option>302</option>
+                	<option>654</option>
+                </select>
                 <!--<input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{1,6}" required placeholder="Número da Solicitação" />-->
             </div>
             <div class="form-group col-sm-3"> 
                 <label> Material </label>
-                <input class="form-control" name="material" type="text" ng-model="ordemProducao.material" pattern="[A-Za-z ]+" maxlength="40" required placeholder="Material"/>
+                 <select ui-select2 class="input-default" ng-model="testee">
+                	<option>chapeuzinho vermelho</option>
+                	<option>matematica 2 ano</option>
+                	<option>3 poruinhos</option>
+                </select>
             </div>
             <div class="form-group col-sm-3">
                 <label> Tradução </label>

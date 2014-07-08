@@ -18,7 +18,7 @@
             </div>
             <div class="form-group col-sm-4">
                 <label>  Estado </label>                
-                <select type="text" ui-select2="select2Options" class="input-default" ng-model="cidade.idUnidadeFederativa" >
+                <select type="text" ui-select2 class="input-default" ng-model="cidade.idUnidadeFederativa" >
                     <option ng-repeat="uf in unidadesFederativas" value="{{uf.id}}">{{uf.nome}}</option>
                 </select>
             </div>
