@@ -3,8 +3,19 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     $scope.info = {};
     
     $scope.ordensProducao = [
-        {id : 101, material : "Gerenciamento de Projetos", traducao : "brille", status : 'andamento'},
-        {id : 102, material : "Matematica Discreta", traducao : "brille", status : 'rejeitado'}
+        {id : 101, material : "Gerenciamento de Projetos", traducao : "brille", status : 'andamento',
+            parteMaterial : [
+                {id : 01, parte : "Parte 01", responsavel : "Jose da Silva", inicio :  01, fim: 100, revisao : "Maria Pereira", observacao : "OBS 1", status : 'Andamento' },
+                {id : 02, parte : "Parte 02", responsavel : "Jose da Silva", inicio : 101, fim: 200, revisao : "Maria Pereira", observacao : "OBS 2", status : 'Andamento' },
+            ]        
+        },
+        {id : 102, material : "Matematica Discreta", traducao : "brille", status : 'rejeitado',
+            parteMaterial : [
+                {id : 01, parte : "Parte 01", responsavel : "Antonio Souza", inicio :  01, fim: 100, revisao : "Isabela Oliveira", observacao : "OBS 1", status : 'Andamento' },
+                {id : 02, parte : "Parte 02", responsavel : "Antonio Souza", inicio : 101, fim: 200, revisao : "Isabela Oliveira", observacao : "OBS 2", status : 'Andamento' },
+            ]  
+        
+        }
     ];
 
     $scope.deletar = function(ordemProducao) {
@@ -133,7 +144,35 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     };
     
     $scope.novaParteMaterial = function() {
+        $scope.parteMaterial = {};
     	window.location = '#/cadastropartematerial';
     }
+    
+    $scope.carregarParteMaterial = function() {
+    	console.log('parte link Material: '+ $routeParams.ordemProducaoId + ' - ' + $routeParams.parteMaterialId);
+       
+        for(var i=0; i<$scope.ordensProducao.length; i++){
+            if( $scope.ordensProducao[i].id == $routeParams.ordemProducaoId ){
+                for(var j=0; j<$scope.ordensProducao[i].parteMaterial.length; j++){
+                    if($scope.ordensProducao[i].parteMaterial[j].id == $routeParams.parteMaterialId ){
+                        $scope.parteMaterial = $scope.ordensProducao[i].parteMaterial[j];
+                    }    
+                }
+            }
+        } 
+        
+        console.log('Parte material: '+ $scope.parteMaterial.parte);
+        
+        /*
+        for(var i=0; i<$scope.ordemProducao[$routeParams.parteMaterialId].parteMaterial.length; i++)
+            if($scope.ordemProducao[i].parteMaterial.id == $routeParams.parteMaterialId )
+            $scope.parteMaterial = $scope.ordemProducao[i].parteMaterial;
+        */
+    };
+    
+    $scope.editarParteMaterial = function() {
+        console.log('link: '+ ordemProducao + '-' + parteMaterial);
+        window.location = '#/cadastropartematerial';
+    };
 
 }
