@@ -206,6 +206,10 @@ app.config(['$routeProvider',
     }
 ]);
 
+app.factory('bd', function(){	
+	return { name : 'banco de dados' };
+});
+
 
 app.directive('capitalize', function() {
 	   return {

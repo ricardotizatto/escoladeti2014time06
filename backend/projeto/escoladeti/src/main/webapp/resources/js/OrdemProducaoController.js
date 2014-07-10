@@ -1,6 +1,11 @@
 function OrdemProducaoController($scope, $http, $routeParams) {
     console.log('carregando controller');
     $scope.info = {};
+    
+    $scope.ordensProducao = [
+        {id : 101, material : "Gerenciamento de Projetos", traducao : "brille", status : 'andamento'},
+        {id : 102, material : "Matematica Discreta", traducao : "brille", status : 'rejeitado'}
+    ];
 
     $scope.deletar = function(ordemProducao) {
         console.log('deletando ordem de producao ' + JSON.stringify(ordemProducao));
@@ -67,11 +72,17 @@ function OrdemProducaoController($scope, $http, $routeParams) {
             console.log('carregando ordem de produção ', $scope.ordemProducao);
             return;//se não tiver id não buscar
         }
-
+        
+        for(var i=0;i<$scope.ordensProducao.length;i++)
+            if($scope.ordensProducao[i].id == $routeParams.ordemProducaoId )
+            $scope.ordemProducao = $scope.ordensProducao[i];
+        
+        /*
         $http.get('./rest/ordemProducaoSource/ordemProducao/' + $routeParams.ordemProducaoId)
                 .success(function(ordemProducao, status) {
                     $scope.ordemProducao = ordemProducao;
                 });
+        */
     };
 
     $scope.editar = function(ordemProducao) {
@@ -95,6 +106,7 @@ function OrdemProducaoController($scope, $http, $routeParams) {
                 });
     };
 
+    /*
     $scope.getTodos = function(numeroPagina) {
         console.log(numeroPagina);
         $http.get('./rest/ordemProducaoSource/listar/pag/' + numeroPagina)
@@ -106,6 +118,7 @@ function OrdemProducaoController($scope, $http, $routeParams) {
                     console.log('erro ao buscar ordensProducao ' + data.developerMessage );
                 });
     };
+    */
 
     function getNovaOrdemProducao() {
         console.log('nova ordem de produção');

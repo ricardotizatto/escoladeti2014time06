@@ -7,29 +7,20 @@
     <form action="" method="POST" role="form" ng-submit="salvar()" >							
         <div class="row ">
             <div class="form-group col-sm-3">
-                <label> Item da Solicitação </label>
-                <select ui-select2 class="input-default" ng-model="testee">
-                	<option>1001</option>
-                	<option>302</option>
-                	<option>654</option>
-                </select>
-                <!--<input class="form-control" type="text" ng-model="ordemProducao.solicitacao" pattern="[0-9]{1,6}" required placeholder="Número da Solicitação" />-->
+                <label> Solicitação </label>
+                <input class="form-control " type="text" disabled ng-model="ordemProducao.id" pattern="[A-Za-z ]+" maxlength="40" required  />  
             </div>
-            <div class="form-group col-sm-3"> 
+            <div class="form-group col-sm-3">
                 <label> Material </label>
-                 <select ui-select2 class="input-default" ng-model="testee">
-                	<option>chapeuzinho vermelho</option>
-                	<option>matematica 2 ano</option>
-                	<option>3 poruinhos</option>
-                </select>
+                <input class="form-control " type="text" disabled ng-model="ordemProducao.material" pattern="[A-Za-z ]+" maxlength="40" required  />  
             </div>
             <div class="form-group col-sm-3">
                 <label> Tradução </label>
-                <input class="form-control" name="traducao" type="text" ng-model="ordemProducao.traducao" pattern="[A-Za-z ]+" maxlength="40" required placeholder="Tradução" />
+                <input class="form-control " type="text" disabled ng-model="ordemProducao.traducao" pattern="[A-Za-z ]+" maxlength="40" required  />  
             </div>
             <div class="form-group col-sm-3">
                 <label> Status </label>
-                <input class="form-control " type="text" disabled ng-model="ordemProducao.state" pattern="[A-Za-z ]+" maxlength="40" required  />  
+                <input class="form-control " type="text" disabled ng-model="ordemProducao.status" pattern="[A-Za-z ]+" maxlength="40" required  />  
             </div>
         </div>
         <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
