@@ -189,7 +189,7 @@ app.config(['$routeProvider',
                 templateUrl: './pages/CadastroParteMaterial.html',
                 controller: 'OrdemProducaoController'
             })
-            .when('/cadastropartematerial/:parteMaterialId', {
+            .when('/cadastropartematerial/:ordemProducaoId/:parteMaterialId', {
                 templateUrl: './pages/CadastroParteMaterial.html',
                 controller: 'OrdemProducaoController'
             })	
@@ -205,10 +205,6 @@ app.config(['$routeProvider',
             });
     }
 ]);
-
-app.factory('bd', function(){	
-	return { name : 'banco de dados' };
-});
 
 
 app.directive('capitalize', function() {

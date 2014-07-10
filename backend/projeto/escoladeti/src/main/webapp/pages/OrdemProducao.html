@@ -34,38 +34,38 @@
                 </button>
             </div>
         </div>
-
+        
         <div class="row">
             <div class="col-sm-12 table-responsive">
-
-                <table class="table table-striped table-hover" >
-                    <tr>
-                        <th class="col-md-2">Parte</th>
-                        <th class="col-md-3">Responsável</th>
-                        <th class="col-md-3">Revisor</th>
-                        <th class="col-md-2">Status</th>
-                        <th class="col-md-2">Ação</th>
-                    </tr>
-                    <tr>
-                        <td><a href="" ng-click="editar()" > Parte 1 </a> </td>
-                        <td>Nome do Responsável</td>
-                        <td>Nome do Revisor</td>
-                        <td>Aceito</td>
-                        <td>
-                            <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
-                                <span class='glyphicon glyphicon-download'><input type="file"></span>
-                            </a>
-                            <a class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial()">
-                                <span class='glyphicon glyphicon-edit'></span>
-                            </a>
-                            <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
-                                <span class='glyphicon glyphicon-remove-circle' alt="Exluir" ></span>
-                            </button>
-                        </td>
-                    </tr>
+                <table class="table table-striped table-hover">
+                        <tr>
+                            <th class="col-md-2">Parte</th>
+                            <th class="col-md-3">Responsável</th>
+                            <th class="col-md-3">Revisor</th>
+                            <th class="col-md-2">Status</th>
+                            <th class="col-md-2">Ação</th>
+                        </tr>
+                        <tr ng-repeat="parteMaterial in ordemProducao.parteMaterial">
+                                <td>{{parteMaterial.parte}}</td>
+                                <td>{{parteMaterial.responsavel}}</td>
+                                <td>{{parteMaterial.revisao}}</td>
+                                <td>{{parteMaterial.status}}</td>
+                            <td>
+                                <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
+                                    <span class='glyphicon glyphicon-download'><input type="file"></span>
+                                </a>
+                                <a class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial()">
+                                    <span class='glyphicon glyphicon-edit'></span>
+                                </a>
+                                <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
+                                    <span class='glyphicon glyphicon-remove-circle' alt="Exluir" ></span>
+                                </button>
+                            </td>
+                        </tr>
                 </table>
             </div>
         </div>
+
         <div class="row">
             <div class="col-sm-12">
                 <span class="pull-right">
