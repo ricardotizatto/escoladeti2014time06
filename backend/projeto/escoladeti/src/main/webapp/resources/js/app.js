@@ -185,7 +185,7 @@ app.config(['$routeProvider',
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
             })
-            .when('/cadastropartematerial', {
+            .when('/cadastropartematerial/:ordemProducaoId', {
                 templateUrl: './pages/CadastroParteMaterial.html',
                 controller: 'OrdemProducaoController'
             })

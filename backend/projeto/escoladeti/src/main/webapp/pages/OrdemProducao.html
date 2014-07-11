@@ -26,7 +26,7 @@
         <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
         <div class="row">
             <div class="form-group col-sm-12">
-                <a  class='btn btn-primary btn-padrao' ng-click="novaParteMaterial()" >
+                <a  class='btn btn-primary btn-padrao' ng-click="novaParteMaterial(ordemProducao)" >
                     <span class='glyphicon glyphicon-plus-sign'></span> Nova Parte
                 </a>
                 <button type='submit' class='btn btn-success btn-padrao' ng-click="" >
@@ -54,7 +54,7 @@
                                 <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
                                     <span class='glyphicon glyphicon-download'><input type="file"></span>
                                 </a>
-                                <a class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial()">
+                                <a class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial(ordemProducao, parteMaterial )">
                                     <span class='glyphicon glyphicon-edit'></span>
                                 </a>
                                 <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
