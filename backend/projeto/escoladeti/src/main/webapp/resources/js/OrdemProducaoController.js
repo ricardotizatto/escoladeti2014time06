@@ -5,14 +5,14 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     $scope.ordensProducao = [
         {id: 101, material: "Gerenciamento de Projetos", traducao: "brille", status: 'andamento',
             parteMaterial: [
-                {id: 01, parte: "Parte 01", responsavel: "Jose da Silva", inicio: 01, fim: 100, revisao: "Maria Pereira", observacao: "OBS 1", status: 'Andamento'},
-                {id: 02, parte: "Parte 02", responsavel: "Jose da Silva", inicio: 101, fim: 200, revisao: "Maria Pereira", observacao: "OBS 2", status: 'Andamento'},
+                {id: 01, parte: 1, responsavel: "Jose da Silva", inicio: 01, fim: 100, revisao: "Maria Pereira", observacao: "OBS 1", status: 'Andamento'},
+                {id: 02, parte: 2, responsavel: "Jose da Silva", inicio: 101, fim: 200, revisao: "Maria Pereira", observacao: "OBS 2", status: 'Andamento'},
             ]
         },
         {id: 102, material: "Matematica Discreta", traducao: "brille", status: 'rejeitado',
             parteMaterial: [
-                {id: 01, parte: "Parte 01", responsavel: "Antonio Souza", inicio: 01, fim: 100, revisao: "Isabela Oliveira", observacao: "OBS 1", status: 'Andamento'},
-                {id: 02, parte: "Parte 02", responsavel: "Antonio Souza", inicio: 101, fim: 200, revisao: "Isabela Oliveira", observacao: "OBS 2", status: 'Andamento'},
+                {id: 01, parte: 1, responsavel: "Antonio Souza", inicio: 01, fim: 100, revisao: "Isabela Oliveira", observacao: "OBS 1", status: 'Andamento'},
+                {id: 02, parte: 2, responsavel: "Antonio Souza", inicio: 101, fim: 200, revisao: "Isabela Oliveira", observacao: "OBS 2", status: 'Andamento'},
             ]
 
         }
@@ -142,14 +142,30 @@ function OrdemProducaoController($scope, $http, $routeParams) {
         $scope.ordemProducao = {};
         window.location = '#/listaordemproducao';
     };
+    
+    $scope.cancelarParteMaterial = function() {
+        $scope.parteMaterial = {};
+        window.location = '#/ordemproducao/' + $routeParams.ordemProducaoId;
+    };
 
     $scope.novaParteMaterial = function(ordemProducao) {
         $scope.parteMaterial = {};
-        window.location = '#/cadastropartematerial/'+ ordemProducao.id;
+        window.location = '#/cadastropartematerial/'+ ordemProducao.id;        
     }
 
     $scope.carregarParteMaterial = function() {
         console.log('parte link Material: ' + $routeParams.ordemProducaoId + ' - ' + $routeParams.parteMaterialId);
+        
+        if(!$routeParams.parteMaterialId){
+            $scope.parteMaterial = {};
+            for (var i = 0; i < $scope.ordensProducao.length; i++) {
+                if ($scope.ordensProducao[i].id == $routeParams.ordemProducaoId) {
+                    console.log('parte material: ' + $scope.ordensProducao[i].parteMaterial.length);
+                    $scope.parteMaterial.parte = $scope.ordensProducao[i].parteMaterial.length +1;
+                    return;
+                }
+            }
+        }    
 
         for (var i = 0; i < $scope.ordensProducao.length; i++) {
             if ($scope.ordensProducao[i].id == $routeParams.ordemProducaoId) {
@@ -176,29 +192,22 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     };
 
     $scope.salvarParteMaterial = function() {
-        
-        for (var i = 0; i < $scope.ordensProducao.length; i++) {
+        for (var i=0; i<$scope.ordensProducao.length; i++) {
             if ($scope.ordensProducao[i].id == $routeParams.ordemProducaoId) {
-                $scope.ordensProducao[i].push({
-                    parteMaterial : $scope.parteMaterial
-                });
+                console.log('Ordem id: ' + $scope.ordensProducao[i].id);
+                for (var j=0; j<$scope.ordensProducao[i].parteMaterial.length; j++) {
+                    if ($scope.ordensProducao[i].parteMaterial[j].parte == $scope.parteMaterial.parte) {
+                        return;
+                    }else{
+                        $scope.ordensProducao[i].parteMaterial.push($scope.parteMaterial);
+                        $scope.parteMaterial = {};
+                        console.log($scope.ordensProducao);
+                        return;
+                    }
+                }
             }
         }
-        console.log($scope.ordensProducao);
-//        $scope.parteMaterial = {};
-    };
-//    $scope.addProduto = function() { 
-//			$scope.prodPedidos.push({
-//				produto : $scope.produto,
-//				qtde    : parseInt($scope.quantidade),
-//				preco   : $scope.preco,
-//				desconto: parseInt($scope.desconto)
-//			});		
-//
-//			$scope.produto 		= null;
-//			$scope.idProduto 	= "";
-//			$scope.quantidade 	= 1;
-//			$scope.desconto 	= 0;
-//		};
+        
 
+    };
 }
