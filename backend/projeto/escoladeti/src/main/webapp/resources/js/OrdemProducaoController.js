@@ -98,17 +98,17 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
     
     $scope.getTodos = function(numeroPagina){
         bd.ordensProducao = [
-            {id: 101, material: "Gerenciamento de Projetos", traducao: "brille", status: 'andamento',
+            {id: 101, material: "Gerenciamento de Projetos", traducao: "brille", status: 'ANDAMENTO',
                 parteMaterial: [
-                    {id: 1, parte: 1, responsavel: "Jose da Silva", inicio: 01, fim: 100, revisao: "Maria Pereira", observacao: "OBS 1", status: 'Andamento'},
-                    {id: 2, parte: 2, responsavel: "Jose da Silva", inicio: 101, fim: 200, revisao: "Maria Pereira", observacao: "OBS 2", status: 'Andamento'},
-                    {id: 3, parte: 3, responsavel: "Sebastiao da Costa", inicio: 201, fim: 300, revisao: "Jose da Silva", observacao: "OBS 3", status: 'Rejeitado'},
+                    {id: 1, parte: 1, responsavel: "Jose da Silva", inicio: 01, fim: 100, revisao: "Maria Pereira", observacao: "OBS 1", status: 'ANDAMENTO'},
+                    {id: 2, parte: 2, responsavel: "Jose da Silva", inicio: 101, fim: 200, revisao: "Maria Pereira", observacao: "OBS 2", status: 'ANDAMENTO'},
+                    {id: 3, parte: 3, responsavel: "Sebastiao da Costa", inicio: 201, fim: 300, revisao: "Jose da Silva", observacao: "OBS 3", status: 'REJEITADO'},
                 ]
             },
-            {id: 102, material: "Matematica Discreta", traducao: "brille", status: 'rejeitado',
+            {id: 102, material: "Matematica Discreta", traducao: "brille", status: 'ANDAMENTO',
                 parteMaterial: [
-                    {id: 1, parte: 1, responsavel: "Antonio Souza", inicio: 01, fim: 100, revisao: "Isabela Oliveira", observacao: "OBS 1", status: 'Andamento'},
-                    {id: 2, parte: 2, responsavel: "Antonio Souza", inicio: 101, fim: 200, revisao: "Isabela Oliveira", observacao: "OBS 2", status: 'Andamento'},
+                    {id: 1, parte: 1, responsavel: "Antonio Souza", inicio: 01, fim: 100, revisao: "Isabela Oliveira", observacao: "OBS 1", status: 'FINALIZADO'},
+                    {id: 2, parte: 2, responsavel: "Antonio Souza", inicio: 101, fim: 200, revisao: "Isabela Oliveira", observacao: "OBS 2", status: 'FINALIZADO'},
                 ]
 
             }
@@ -162,6 +162,7 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
                 if (bd.ordensProducao[i].id == $routeParams.ordemProducaoId) {
                     console.log('parte material: ' + bd.ordensProducao[i].parteMaterial.length);
                     $scope.parteMaterial.parte = bd.ordensProducao[i].parteMaterial.length +1;
+                    $scope.parteMaterial.status = 'ANDAMENTO';
                     return;
                 }
             }
@@ -202,6 +203,7 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
                         return;
                     }else{
                         bd.ordensProducao[i].parteMaterial.push($scope.parteMaterial);
+                        toastr.success('Parte : '+ $scope.parteMaterial.parte +" salva!");
                         $scope.parteMaterial = {};
                         console.log(bd.ordensProducao);
                         return;
@@ -215,16 +217,37 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
     
     $scope.deletarParteMaterial = function(ordemProducao, parteMaterial) {
         console.log('link deletar parte material: ' + ordemProducao.id + ' ' + parteMaterial.id);
+
         var index = parteMaterial.id - 1;
-        
+
         for (var i=0; i<bd.ordensProducao.length; i++) {
             if (bd.ordensProducao[i].id == ordemProducao.id) {
                 for (var j=0; j<bd.ordensProducao[i].parteMaterial.length; j++) {
                     if (bd.ordensProducao[i].parteMaterial[j].id == parteMaterial.id) {
                         bd.ordensProducao[i].parteMaterial.splice(index,1);
+                        toastr.success('Parte : '+ parteMaterial.id +" Deletada com sucesso!");
+                        carregarParteMaterial(); 
                     }
                 }
             }
-        }
+        }                 
+    };
+    
+    $scope.finalizarOrdemProducao = function(ordemProducao){
+        console.log('Finalizar Ordem Produção: ' + ordemProducao.id);
+        for (var i=0; i<bd.ordensProducao.length; i++) {
+            if (bd.ordensProducao[i].id == ordemProducao.id) {
+                for (var j = 0; j < bd.ordensProducao[i].parteMaterial.length; j++) {
+                    if (bd.ordensProducao[i].parteMaterial[j].status != "FINALIZADO") {
+                        toastr.success('A Ordem de Producao: '+ bd.ordensProducao[i].id +" nao pode ser finalizada, porque existe parte(s) que ainda nao foram finalizada(s)!");
+                        carregarParteMaterial();
+                    }else{
+                        bd.ordensProducao[i].status = 'FINALIZADO';
+                        toastr.success('Ordem de Producao: '+ bd.ordensProducao[i].id +" Finalizada!");
+                        carregarParteMaterial();
+                    }
+                }
+            }
+        }  
     };
 }
