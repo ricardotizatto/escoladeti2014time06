@@ -1,22 +1,6 @@
-function OrdemProducaoController($scope, $http, $routeParams) {
+function OrdemProducaoController($scope, $http, $routeParams, bd) {
     console.log('carregando controller');
     $scope.info = {};
-
-    $scope.ordensProducao = [
-        {id: 101, material: "Gerenciamento de Projetos", traducao: "brille", status: 'andamento',
-            parteMaterial: [
-                {id: 01, parte: 1, responsavel: "Jose da Silva", inicio: 01, fim: 100, revisao: "Maria Pereira", observacao: "OBS 1", status: 'Andamento'},
-                {id: 02, parte: 2, responsavel: "Jose da Silva", inicio: 101, fim: 200, revisao: "Maria Pereira", observacao: "OBS 2", status: 'Andamento'},
-            ]
-        },
-        {id: 102, material: "Matematica Discreta", traducao: "brille", status: 'rejeitado',
-            parteMaterial: [
-                {id: 01, parte: 1, responsavel: "Antonio Souza", inicio: 01, fim: 100, revisao: "Isabela Oliveira", observacao: "OBS 1", status: 'Andamento'},
-                {id: 02, parte: 2, responsavel: "Antonio Souza", inicio: 101, fim: 200, revisao: "Isabela Oliveira", observacao: "OBS 2", status: 'Andamento'},
-            ]
-
-        }
-    ];
 
     $scope.deletar = function(ordemProducao) {
         console.log('deletando ordem de producao ' + JSON.stringify(ordemProducao));
@@ -30,7 +14,7 @@ function OrdemProducaoController($scope, $http, $routeParams) {
                     headers: {'Content-Type': 'application/json; charset=UTF-8'}
                 })
                         .success(function(data, status) {
-                            $scope.getTodos(1);
+                            bd.getTodos(1);
                             console.log('ordem de producao deletado');
                             BootstrapDialog.show({
                                 title: 'Notifica&ccedil;&atilde;o',
@@ -67,7 +51,7 @@ function OrdemProducaoController($scope, $http, $routeParams) {
                             });
                         });
             } else {
-                $scope.getTodos(1);
+                bd.getTodos(1);
             }
         });
     };
@@ -80,20 +64,15 @@ function OrdemProducaoController($scope, $http, $routeParams) {
 
         if (!$routeParams.ordemProducaoId) {
             $scope.ordemProducao = getNovaOrdemProducao();
-            console.log('carregando ordem de produção ', $scope.ordemProducao);
+            console.log('carregando ordem de produção ', bd.ordemProducao);
             return;//se não tiver id não buscar
         }
 
-        for (var i = 0; i < $scope.ordensProducao.length; i++)
-            if ($scope.ordensProducao[i].id == $routeParams.ordemProducaoId)
-                $scope.ordemProducao = $scope.ordensProducao[i];
-
-        /*
-         $http.get('./rest/ordemProducaoSource/ordemProducao/' + $routeParams.ordemProducaoId)
-         .success(function(ordemProducao, status) {
-         $scope.ordemProducao = ordemProducao;
-         });
-         */
+        for (var i=0; i<bd.ordensProducao.length; i++){
+            if (bd.ordensProducao[i].id == $routeParams.ordemProducaoId)
+                $scope.ordemProducao = bd.ordensProducao[i];
+                console.log('carregando ordem de producao ', $scope.ordemProducao);
+        }    
     };
 
     $scope.editar = function(ordemProducao) {
@@ -101,28 +80,49 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     };
 
     $scope.salvar = function() {
-        $http.post('./rest/ordemProducaoSource/ordemProducao', $scope.ordemProducao)
+        $http.post('./rest/ordemProducaoSource/ordemProducao', bd.ordemProducao)
                 .success(function(ordemProducao, status) {
-                    $scope.ordemProducao = getNovaOrdemProducao();
+                    bd.ordemProducao = getNovaOrdemProducao();
                     console.log('ordemProducao editado = ' + ordemProducao);
-                    $scope.info.message = 'Salvo com sucesso';
-                    $scope.info.status = 'success';
+                    bd.info.message = 'Salvo com sucesso';
+                    bd.info.status = 'success';
                 })
                 .error(function(data, status) {
                     console.log('ordemProducao não salvo = ' + data);
-                    $scope.info = {};
-                    $scope.info.status = 'danger';
-                    console.log($scope.info);
-                    $scope.info.message = data.message;
+                    bd.info = {};
+                    bd.info.status = 'danger';
+                    console.log(bd.info);
+                    bd.info.message = data.message;
                 });
     };
+    
+    $scope.getTodos = function(numeroPagina){
+        bd.ordensProducao = [
+            {id: 101, material: "Gerenciamento de Projetos", traducao: "brille", status: 'andamento',
+                parteMaterial: [
+                    {id: 1, parte: 1, responsavel: "Jose da Silva", inicio: 01, fim: 100, revisao: "Maria Pereira", observacao: "OBS 1", status: 'Andamento'},
+                    {id: 2, parte: 2, responsavel: "Jose da Silva", inicio: 101, fim: 200, revisao: "Maria Pereira", observacao: "OBS 2", status: 'Andamento'},
+                    {id: 3, parte: 3, responsavel: "Sebastiao da Costa", inicio: 201, fim: 300, revisao: "Jose da Silva", observacao: "OBS 3", status: 'Rejeitado'},
+                ]
+            },
+            {id: 102, material: "Matematica Discreta", traducao: "brille", status: 'rejeitado',
+                parteMaterial: [
+                    {id: 1, parte: 1, responsavel: "Antonio Souza", inicio: 01, fim: 100, revisao: "Isabela Oliveira", observacao: "OBS 1", status: 'Andamento'},
+                    {id: 2, parte: 2, responsavel: "Antonio Souza", inicio: 101, fim: 200, revisao: "Isabela Oliveira", observacao: "OBS 2", status: 'Andamento'},
+                ]
+
+            }
+        ];
+        
+        $scope.ordensProducao = bd.ordensProducao;
+    }
 
     /*
      $scope.getTodos = function(numeroPagina) {
      console.log(numeroPagina);
      $http.get('./rest/ordemProducaoSource/listar/pag/' + numeroPagina)
      .success(function(ordenProducaoPage, status) {
-     $scope.ordensProducao = ordenProducaoPage.list;
+     bd.ordensProducao = ordenProducaoPage.list;
      })
      .error(function(data, status) {
      alert(data.message);//TODO: Implementar tag no html para popular com a mensagem
@@ -139,17 +139,17 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     }
 
     $scope.voltar = function() {
-        $scope.ordemProducao = {};
+        bd.ordemProducao = {};
         window.location = '#/listaordemproducao';
     };
     
     $scope.cancelarParteMaterial = function() {
-        $scope.parteMaterial = {};
+        bd.parteMaterial = {};
         window.location = '#/ordemproducao/' + $routeParams.ordemProducaoId;
     };
 
     $scope.novaParteMaterial = function(ordemProducao) {
-        $scope.parteMaterial = {};
+        bd.parteMaterial = {};
         window.location = '#/cadastropartematerial/'+ ordemProducao.id;        
     }
 
@@ -158,20 +158,20 @@ function OrdemProducaoController($scope, $http, $routeParams) {
         
         if(!$routeParams.parteMaterialId){
             $scope.parteMaterial = {};
-            for (var i = 0; i < $scope.ordensProducao.length; i++) {
-                if ($scope.ordensProducao[i].id == $routeParams.ordemProducaoId) {
-                    console.log('parte material: ' + $scope.ordensProducao[i].parteMaterial.length);
-                    $scope.parteMaterial.parte = $scope.ordensProducao[i].parteMaterial.length +1;
+            for (var i = 0; i < bd.ordensProducao.length; i++) {
+                if (bd.ordensProducao[i].id == $routeParams.ordemProducaoId) {
+                    console.log('parte material: ' + bd.ordensProducao[i].parteMaterial.length);
+                    $scope.parteMaterial.parte = bd.ordensProducao[i].parteMaterial.length +1;
                     return;
                 }
             }
         }    
 
-        for (var i = 0; i < $scope.ordensProducao.length; i++) {
-            if ($scope.ordensProducao[i].id == $routeParams.ordemProducaoId) {
-                for (var j = 0; j < $scope.ordensProducao[i].parteMaterial.length; j++) {
-                    if ($scope.ordensProducao[i].parteMaterial[j].id == $routeParams.parteMaterialId) {
-                        $scope.parteMaterial = $scope.ordensProducao[i].parteMaterial[j];
+        for (var i=0; i<bd.ordensProducao.length; i++) {
+            if (bd.ordensProducao[i].id == $routeParams.ordemProducaoId) {
+                for (var j=0; j<bd.ordensProducao[i].parteMaterial.length; j++) {
+                    if (bd.ordensProducao[i].parteMaterial[j].id == $routeParams.parteMaterialId) {
+                        $scope.parteMaterial = bd.ordensProducao[i].parteMaterial[j];
                     }
                 }
             }
@@ -180,9 +180,9 @@ function OrdemProducaoController($scope, $http, $routeParams) {
         console.log('Parte material: ' + $scope.parteMaterial.parte);
 
         /*
-         for(var i=0; i<$scope.ordemProducao[$routeParams.parteMaterialId].parteMaterial.length; i++)
-         if($scope.ordemProducao[i].parteMaterial.id == $routeParams.parteMaterialId )
-         $scope.parteMaterial = $scope.ordemProducao[i].parteMaterial;
+         for(var i=0; i<bd.ordemProducao[$routeParams.parteMaterialId].parteMaterial.length; i++)
+         if(bd.ordemProducao[i].parteMaterial.id == $routeParams.parteMaterialId )
+         bd.parteMaterial = bd.ordemProducao[i].parteMaterial;
          */
     };
 
@@ -192,16 +192,18 @@ function OrdemProducaoController($scope, $http, $routeParams) {
     };
 
     $scope.salvarParteMaterial = function() {
-        for (var i=0; i<$scope.ordensProducao.length; i++) {
-            if ($scope.ordensProducao[i].id == $routeParams.ordemProducaoId) {
-                console.log('Ordem id: ' + $scope.ordensProducao[i].id);
-                for (var j=0; j<$scope.ordensProducao[i].parteMaterial.length; j++) {
-                    if ($scope.ordensProducao[i].parteMaterial[j].parte == $scope.parteMaterial.parte) {
+        $scope.parteMaterial.id = $scope.parteMaterial.parte;
+        
+        for (var i=0; i<bd.ordensProducao.length; i++) {
+            if (bd.ordensProducao[i].id == $routeParams.ordemProducaoId) {
+                console.log('Ordem id: ' + bd.ordensProducao[i].id);
+                for (var j=0; j<bd.ordensProducao[i].parteMaterial.length; j++) {
+                    if (bd.ordensProducao[i].parteMaterial[j].parte == $scope.parteMaterial.parte) {
                         return;
                     }else{
-                        $scope.ordensProducao[i].parteMaterial.push($scope.parteMaterial);
+                        bd.ordensProducao[i].parteMaterial.push($scope.parteMaterial);
                         $scope.parteMaterial = {};
-                        console.log($scope.ordensProducao);
+                        console.log(bd.ordensProducao);
                         return;
                     }
                 }
@@ -209,5 +211,20 @@ function OrdemProducaoController($scope, $http, $routeParams) {
         }
         
 
+    };
+    
+    $scope.deletarParteMaterial = function(ordemProducao, parteMaterial) {
+        console.log('link deletar parte material: ' + ordemProducao.id + ' ' + parteMaterial.id);
+        var index = parteMaterial.id - 1;
+        
+        for (var i=0; i<bd.ordensProducao.length; i++) {
+            if (bd.ordensProducao[i].id == ordemProducao.id) {
+                for (var j=0; j<bd.ordensProducao[i].parteMaterial.length; j++) {
+                    if (bd.ordensProducao[i].parteMaterial[j].id == parteMaterial.id) {
+                        bd.ordensProducao[i].parteMaterial.splice(index,1);
+                    }
+                }
+            }
+        }
     };
 }

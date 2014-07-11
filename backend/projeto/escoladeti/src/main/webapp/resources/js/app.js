@@ -224,3 +224,8 @@ app.directive('capitalize', function() {
 	     }
 	   };
 	});
+
+
+app.factory('bd', function(){	
+    return { name : 'banco de dados' };
+});

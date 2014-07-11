@@ -54,12 +54,12 @@
                                 <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
                                     <span class='glyphicon glyphicon-download'><input type="file"></span>
                                 </a>
-                                <a class='btn btn-warning btn-sm'  name='metodo' value='alterar' ng-click="editarParteMaterial(ordemProducao, parteMaterial )">
+                                <a class='btn btn-warning btn-sm' ng-click="editarParteMaterial(ordemProducao, parteMaterial )">
                                     <span class='glyphicon glyphicon-edit'></span>
                                 </a>
-                                <button type='submit' class='btn btn-danger btn-sm'  name='metodo' value='excluir' ng-click="deletar()">
-                                    <span class='glyphicon glyphicon-remove-circle' alt="Exluir" ></span>
-                                </button>
+                                <a class='btn btn-danger btn-sm'  ng-click="deletarParteMaterial(ordemProducao, parteMaterial)">
+                                    <span class='glyphicon glyphicon-remove-circle'></span>
+                                </a>
                             </td>
                         </tr>
                 </table>
