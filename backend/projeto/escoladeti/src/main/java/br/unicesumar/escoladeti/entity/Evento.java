@@ -15,10 +15,12 @@ public class Evento extends Entidade {
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
-    private String turno;
+    private String inicio;
+    private String fim;
     private String tipoEvento;
     private String local;
-    
+    private String ministrante;
+
    // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idevento", referencedColumnName = "id")
@@ -74,12 +76,12 @@ public class Evento extends Entidade {
         this.descricao = descricao;
     }
 
-    public String getTurno() {
-        return turno;
+    public String getInicio() {
+        return inicio;
     }
 
-    public void setTurno(String turno) {
-        this.turno = turno;
+    public void setInicio(String inicio) {
+        this.inicio = inicio;
     }
 
     public String getTipoEvento() {
@@ -105,4 +107,21 @@ public class Evento extends Entidade {
     public void setValor(double valor) {
         this.valor = valor;
     }
+    
+    public String getFim() {
+        return fim;
+    }
+
+    public void setFim(String fim) {
+        this.fim = fim;
+    }
+    
+    public String getMinistrante() {
+        return ministrante;
+    }
+
+    public void setMinistrante(String ministrante) {
+        this.ministrante = ministrante;
+    }
+    
 }

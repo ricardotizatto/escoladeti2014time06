@@ -15,7 +15,11 @@
     $scope.DetalhesCurso;
     $scope.localCurso;
     $scope.dataCurso;
-    $scope.turno;
+    $scope.inicioCurso;
+    $scope.fimCurso;
+    $scope.ministranteCurso;
+    $scope.inicio;
+    $scope.fim;
     $scope.tipoEvento;
     $scope.valor;
 
@@ -204,12 +208,15 @@
         }
     };
     
-    $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data) {
+    $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data, inicio, fim, ministrante) {
         $scope.idCurso = indice;
         $scope.tituloCurso = titulo;
         $scope.DetalhesCurso = detalhes;
         $scope.localCurso = local;
         $scope.dataCurso = data;
+        $scope.inicioCurso = inicio;
+        $scope.fimCurso = fim;
+        $scope.ministranteCurso = ministrante;
     };
 
 }

@@ -87,12 +87,14 @@
 				<constraints nullable="false" />
 			</column>
 			<column name="data" type="date" />
-			<column name="descricao" type="VARCHAR(255)" />
+			<column name="descricao" type="Text" />
 			<column name="local" type="VARCHAR(255)" />
 			<column name="organizacao" type="VARCHAR(255)" />
 			<column name="tipoevento" type="VARCHAR(255)" />
 			<column name="titulo" type="VARCHAR(255)" />
-			<column name="turno" type="VARCHAR(255)" />
+			<column name="inicio" type="VARCHAR(255)" />
+            <column name="fim" type="VARCHAR(255)" />
+            <column name="ministrante" type="VARCHAR(255)" />
 			<column name="valor" type="FLOAT8">
 				<constraints nullable="false" />
 			</column>
