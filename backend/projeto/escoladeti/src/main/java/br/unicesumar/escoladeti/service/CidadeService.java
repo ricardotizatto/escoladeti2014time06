@@ -1,16 +1,17 @@
 package br.unicesumar.escoladeti.service;
 
-import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
-import br.unicesumar.escoladeti.controller.ExceptionController;
-import br.unicesumar.escoladeti.entity.Cidade;
-import br.unicesumar.escoladeti.repository.CidadeRepository;
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import br.unicesumar.escoladeti.controller.DataPage;
+import br.unicesumar.escoladeti.entity.Cidade;
+import br.unicesumar.escoladeti.repository.CidadeRepository;
 
 @Service
 public class CidadeService {
@@ -42,6 +43,10 @@ public class CidadeService {
     public Cidade getById(Long id){
         return this.cidadeRepository.findById(id);
     }
+	public List<Cidade> listarTodos() {
+		return this.cidadeRepository.findAll();
+		
+	}
     
    /* public Cidade buscarCidadePorNomeFundacaoUnidadeFederativa(Cidade cidade) {
         return this.cidadeRepository.findByNomeAndFundacaoAndUnidadeFederativa(

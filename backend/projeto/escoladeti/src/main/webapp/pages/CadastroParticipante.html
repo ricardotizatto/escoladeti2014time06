@@ -15,7 +15,7 @@
                                 {{evento.descricao.substring(0,180)}}
                                 </p></article>
                                 <input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}">
-                                <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id,evento.titulo,evento.descricao,evento.local,evento.data)" data-toggle="modal" data-target="#modalDetalhes">
+                                <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id,evento.titulo,evento.descricao,evento.local,evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
                                    + Detalhes
                                </button><br>
                                        <hr/>
@@ -47,8 +47,8 @@
                                <div class="form-group col-sm-4">
                                         <label>Sexo</label>
                                         <select class="selectpicker show-tick form-control" name="sexo" ng-model="participante.sexo" required>
-                                            <option value="M" >Masculino</option>
-                                            <option value="F" >Feminino</option>
+                                            <option value="M" >M</option>
+                                            <option value="F" >F</option>
                                         </select>
                                 </div>
 
@@ -80,12 +80,19 @@
                                                                          <article><p>
                                                                                  {{DetalhesCurso}}
                                                                                  </p></article>
+                                                                                 
+                                                                                 <article><p>
+                                                                                 <b>Ministrante: </b> {{ministranteCurso}}
+                                                                                 </p></article>
 
                                                                                  <article><p>
-                                                                                 <b>Data:<b> {{dataCurso}}
+                                                                                 <b>Data:</b> {{dataCurso}}
                                                                                  </p></article>
                                                                                  <article><p>
-                                                                                 <b>Localização:<b> {{localCurso}}
+                                                                                 <b>Horário : </b> {{inicioCurso}} às {{fimCurso}}
+                                                                                 </p></article>
+                                                                                 <article><p>
+                                                                                 <b>Local:</b> {{localCurso}}
                                                                                  </p></article>
                                                                 </div>
                                                         </div>

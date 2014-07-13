@@ -1,4 +1,4 @@
-<div class="container" ng-controller="OrdemProducaoController" ng-init="getTodos(1)">
+<div class="container" ng-controller="OrdemProducaoController" ng-init="getTodos()">
     <div class="row">
         <div class="form-group col-sm-12">
             <legend><span class="glyphicon glyphicon-list-alt"></span> Lista de Ordens de Produção </legend>
@@ -35,9 +35,9 @@
                         <th class="col-md-1">Ações</th>
                     </tr>
                     <tr ng-repeat="ordemProducao in ordensProducao">
-                            <td>{{ordemProducao.solicitacaoItem.solicitacao.id}}</td>
-                            <td>{{ordemProducao.solicitacaoItem}}</td>
-                            <td>{{ordemProducao.solicitacaoItem.traducaoMaterial}}</td>
+                            <td>{{ordemProducao.id}}</td>
+                            <td>{{ordemProducao.material}}</td>
+                            <td>{{ordemProducao.traducao}}</td>
                             <td>{{ordemProducao.status}}</td>
                         <td>
                             <button class='btn btn-warning btn-sm' ng-click="editar(ordemProducao)">
@@ -79,3 +79,4 @@
         </div>
     </div>
 </div>
+

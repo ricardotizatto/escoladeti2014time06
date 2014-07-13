@@ -2,16 +2,17 @@
 <html lang="pt-br" ng-app="app">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title> AMACAP </title>
         <link rel="shortcut icon" type="image/png" href="./resources/imagens/icone-amacap.png" />
 
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.css" rel="stylesheet">
-        <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">
-        <link href="./resources/css/estilo-geral.css" rel="stylesheet">
+        <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">        
         <link href="./resources/css/toastr.css" rel="stylesheet">        
         <link href="./resources/css/jquery-ui.css" rel="stylesheet">
         <link href="./resources/css/select2.css" rel="stylesheet">
+        <link href="./resources/css/estilo-geral.css" rel="stylesheet">
         
         <script type="text/javascript" src="./resources/libs/jquery.min.js"></script>
         <script type="text/javascript" src="./resources/libs/select2.js"></script>
@@ -34,14 +35,17 @@
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/cidade/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/cidade/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/distrito/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>        
+       
         <script type="text/javascript" src="./resources/js/PessoaFisicaController.js" ></script>
         <script type="text/javascript" src="./resources/js/PessoaJuridicaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaUsuarioController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CidadeController.js" ></script>
-        <script type="text/javascript" src="./resources/js/DistritoController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroCepController.js" ></script>

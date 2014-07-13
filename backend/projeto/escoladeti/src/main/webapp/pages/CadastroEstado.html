@@ -18,7 +18,7 @@
             </div>
             <div class="form-group col-sm-4">
                 <label>  Pais </label>                
-                <select type="text" ui-select2="select2Options" style="width: 100%"  ng-model="unidadeFederativa.idPais" >
+                <select type="text" ui-select2="select2Options" class="input-default" ng-model="unidadeFederativa.idPais" >
                 	<option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nome}}</option>
                 </select>
             </div>

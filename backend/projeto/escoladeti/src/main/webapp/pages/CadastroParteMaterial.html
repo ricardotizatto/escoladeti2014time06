@@ -10,27 +10,28 @@
             <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>	
             
             <div class="row ">
-                <div class="form-group col-sm-2">
+                <div class="form-group col-sm-1">
                     <label> Parte </label>
-                    <span class="label label-default form-control pull-right estilo-status">Parte 01</span>
+                    <input class="form-control" type="text" ng-model="parteMaterial.parte" disabled />
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-5">
                     <label> Responsável </label>
-                    <input class="form-control" type="text" />
+                    <input class="form-control" type="text" ng-model="parteMaterial.responsavel" />
                 </div>
                 <div class="form-group col-sm-2"> 
                     <label> Inicio </label>
-                    <input class="form-control" name="inicio" type="number"/>
+                    <input class="form-control" name="inicio" type="number" ng-model="parteMaterial.inicio" />
                 </div>
                 <div class="form-group col-sm-2">
                     <label> Fim </label>
-                    <input class="form-control" name="fim" type="number"/>
+                    <input class="form-control" name="fim" type="number" ng-model="parteMaterial.fim" />
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="status"> Status </label>
-                    <select id="status" class="selectpicker show-tick form-control" data-live-search="true" >
-                        <option>Aceito</option>
-                        <option>Rejeitado</option>
+                    <select id="status" class="selectpicker show-tick form-control" data-live-search="true" ng-model="parteMaterial.status" >
+                        <option>ANDAMENTO</option>
+                        <option>FINALIZADO</option>
+                        <option>REJEITADO</option>
                     </select>
                 </div>
             </div>
@@ -64,11 +65,11 @@
             <div class="row">
                 <div class="form-group col-sm-4">
                     <label> Revisão </label>
-                    <input class="form-control" type="text" />
+                    <input class="form-control" type="text" ng-model="parteMaterial.revisao" />
                 </div>
                 <div class="col-sm-8">
                     <label> Observação </label>
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" ng-model="parteMaterial.observacao" ></textarea>
                     <div class="required-icon">
                         <div class="text"></div>
                     </div>
@@ -95,7 +96,7 @@
         </form>
     </fieldset>	
 </div>
-
+{{parteMaterial}}
 <script>
         $(document)
                 .on('change', '.btn-file :file', function() {

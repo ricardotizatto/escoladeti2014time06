@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -10,8 +11,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Distrito extends Entidade {
+	
+	@Column(length = 100)
+	@NotNull
+	@NotEmpty
+	private String nome;
 
     @Column(nullable = false)
     @NotNull
@@ -23,28 +31,24 @@ public class Distrito extends Entidade {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fimVigencia;
 
-    @OneToOne
-    @JoinColumn(name = "id_distrito", nullable = false)
-    private Cidade distrito;
-
     @ManyToOne
     @JoinColumn(name = "id_cidade", nullable = false)
-    private Cidade municipio;
+    private Cidade cidade;
     
     public Distrito(){
     }
-    public Distrito(Date inicioVigencia, Date fimVigencia, Cidade distrito, Cidade municipio){
+    public Distrito(Date inicioVigencia, Date fimVigencia, Cidade cidade, String nome){
         this.inicioVigencia = inicioVigencia;
         this.fimVigencia = fimVigencia;
-        this.distrito = distrito;
-        this.municipio = municipio;
+        this.cidade = cidade;
+        this.nome = nome;
     }
-    public Distrito(Long id, Date inicioVigencia, Date fimVigencia, Cidade distrito, Cidade municipio){
+    public Distrito(Long id, Date inicioVigencia, Date fimVigencia, Cidade cidade, String nome){
         this.id = id;
         this.inicioVigencia = inicioVigencia;
         this.fimVigencia = fimVigencia;
-        this.distrito = distrito;
-        this.municipio = municipio;
+        this.cidade = cidade;
+        this.nome = nome;
     }
     
     public Date getInicioVigencia() {
@@ -62,12 +66,17 @@ public class Distrito extends Entidade {
     public void setFimVigencia(Date fimVigencia) {
         this.fimVigencia = fimVigencia;
     }
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Cidade getCidade() {
+		return cidade;
+	}
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
 
-    public Cidade getCidadeSede() {
-        return municipio;
-    }
-
-    public void setCidadeSede(Cidade municipio) {
-        this.municipio = municipio;
-    }
 }

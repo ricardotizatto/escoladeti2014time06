@@ -1,46 +1,49 @@
-﻿<div class="container" ng-controller="distritoController" ng-init="carregarDistrito();carregarCidade();">
-    <div class="row">
-        <div class="-group col-sm-12">
-            <legend> Cadastro de Distrito </legend>
-        </div>
-    </div>
-    <form action="" method="POST" role="form" ng-submit="salvar()">							
-        <div class="row">
-            <div class="form-group col-sm-8">
-                <label> Nome </label>
-                <input class="form-control" name="nome" type="text" ng-model="distrito.nome" />
-            </div>
-        </div>
+<div class="container" ng-controller="DistritoController"
+	ng-init="carregarDistrito()">
+	<div class="row">
+		<div class="-group col-sm-12">
+			<legend> Cadastro de Distrito </legend>
+		</div>
+	</div>
+	<form action="" method="POST" role="form" ng-submit="salvar()">
+		<div class="row">
+			<div class="form-group col-sm-8">
+				<label> Nome </label> <input class="form-control" name="nome"
+					type="text" ng-model="distrito.nome" maxlength="50"/>
+			</div>
+		</div>
 
-        <div class="row ">
-            <div class="form-group col-sm-2">
-                <label>Início da Vigencia</label>
-                <input  class="form-control" name="fundacao" type="date" ng-model="distrito.inicioVigencia" />
-            </div>
-            <div class="form-group col-sm-2">
-                <label>Fim da Vigencia</label>
-                <input  class="form-control" name="fundacao" type="date" ng-model="distrito.fimVigencia" />
-            </div>
-            <div class="form-group col-sm-6">
-                <label>  Cidade </label>
-                <select class="form-control" ng-model="distrito.municipio" ng-options="cidade.nome for cidade in cidades.list"></select>
-            </div>
-        </div>
-        {{cidades}}
-        <div class="row">
-            <div class="col-sm-12">
-                <span class="pull-right">	
-                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
-                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
-                    </a>
-                    <button type="submit" class="btn btn-success btn-padrao">
-                        <span class="glyphicon glyphicon-ok" ></span> Salvar	
-                    </button>
-                </span>		
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12"><hr></div>
-        </div>			
-    </form>
+		<div class="row ">
+			<div class="form-group col-sm-2">
+				<label>In�cio da Vigencia</label> <input class="form-control"
+					name="fundacao" type="date" ng-model="distrito.inicioVigencia" />
+			</div>
+			<div class="form-group col-sm-2">
+				<label>Fim da Vigencia</label> <input class="form-control"
+					name="fundacao" type="date" ng-model="distrito.fimVigencia" />
+			</div>
+			<div class="form-group col-sm-6">
+				<label> Cidade </label> <select type="text" ui-select2="select2Options" style="width: 100%"  ng-model="distrito.idCidade" >
+                    <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
+                </select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<span class="pull-right"> <a
+					class="btn btn-primary btn-padrao" ng-click="voltar()"> <i
+						class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
+				</a>
+					<button type="submit" class="btn btn-success btn-padrao">
+						<span class="glyphicon glyphicon-ok"></span> Salvar
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<hr>
+			</div>
+		</div>
+	</form>
 </div>

@@ -71,19 +71,19 @@ app.config(['$routeProvider',
             })
             .when('/cadastrocidade', {
                 templateUrl: './pages/CadastroCidade.html',
-                controller: 'cidadeController'
+                controller: 'CidadeController'
             })
             .when('/cadastrocidade/:cidadeId', {
                 templateUrl: './pages/CadastroCidade.html',
-                controller: 'cidadeController'
+                controller: 'CidadeController'
             })
             .when('/cadastrodistrito', {
                 templateUrl: './pages/CadastroDistrito.html',
-                controller : 'distritoController'
+                controller : 'DistritoController'
             })
             .when('/cadastrodistrito/:distritoId', {
                 templateUrl: './pages/CadastroDistrito.html',
-                controller : 'distritoController'
+                controller : 'DistritoController'
             })
             .when('/cadastrobairro', {
                 templateUrl: './pages/CadastroBairro.html',
@@ -95,7 +95,7 @@ app.config(['$routeProvider',
             })
             .when('/listadistrito', {
                 templateUrl: './pages/ListaDistrito.html',
-                controller : 'distritoController'
+                controller : 'DistritoController'
             })
             .when('/listapais', {
                 templateUrl: './pages/ListaPais.html',
@@ -115,7 +115,7 @@ app.config(['$routeProvider',
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',
-                controller : 'cidadeController'
+                controller : 'CidadeController'
             })
             .when('/listabairro', {
                 templateUrl: './pages/ListaBairro.html',
@@ -185,11 +185,11 @@ app.config(['$routeProvider',
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
             })
-            .when('/cadastropartematerial', {
+            .when('/cadastropartematerial/:ordemProducaoId', {
                 templateUrl: './pages/CadastroParteMaterial.html',
                 controller: 'OrdemProducaoController'
             })
-            .when('/cadastropartematerial/:parteMaterialId', {
+            .when('/cadastropartematerial/:ordemProducaoId/:parteMaterialId', {
                 templateUrl: './pages/CadastroParteMaterial.html',
                 controller: 'OrdemProducaoController'
             })	
@@ -224,3 +224,8 @@ app.directive('capitalize', function() {
 	     }
 	   };
 	});
+
+
+app.factory('bd', function(){	
+    return { name : 'banco de dados' };
+});

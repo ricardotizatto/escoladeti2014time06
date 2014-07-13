@@ -1,11 +1,13 @@
-function eventoController($scope, $http, $routeParams) {
+﻿function eventoController($scope, $http, $routeParams) {
     console.log('Carregando controller');
     $scope.idCurso;
     $scope.tituloCurso;
     $scope.DetalhesCurso;
     $scope.localCurso;
     $scope.dataCurso;
-    $scope.turno;
+    $scope.inicio;
+    $scope.fim;
+    $scope.ministrante;
     $scope.tipoEvento;
     $scope.valor;
 
@@ -38,16 +40,24 @@ function eventoController($scope, $http, $routeParams) {
 
     $scope.salvar = function() {
         console.log(angular.toJson($scope.evento, true));
-        $http.post("./rest/eventoSource/evento", $scope.evento)
-                .success(function(evento, status) {
-                    //$scope.evento = getNovoEvento();
-                    window.location = '#/listaevento';
-                    console.log("evento salva = " + evento);
-                })
-                .error(function(data, status) {
-                    console.log("erro ao salvar evento", data);
-                });
-    };
+        
+            if ($scope.evento.inicio > $scope.evento.fim){
+                $scope.info = {};
+                $scope.info.status = 'danger';
+                $scope.info.message = 'A hora de inicio não pode ser maior que a hora do encerramento do evento';   
+            }
+            else{
+                    $http.post("./rest/eventoSource/evento", $scope.evento)
+                            .success(function(evento, status) {
+                                //$scope.evento = getNovoEvento();
+                                window.location = '#/listaevento';
+                                console.log("evento salva = " + evento);
+                            })
+                            .error(function(data, status) {
+                                console.log("erro ao salvar evento", data);
+                            });
+                }
+        };
 
     $scope.novo = function() {
         $scope.evento = getNovoEvento();
