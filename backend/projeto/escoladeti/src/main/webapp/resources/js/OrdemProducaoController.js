@@ -242,7 +242,7 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
             if (bd.ordensProducao[i].id == ordemProducao.id) {
                 for (var j = 0; j < bd.ordensProducao[i].parteMaterial.length; j++) {
                     if (bd.ordensProducao[i].parteMaterial[j].status != "FINALIZADO") {
-                        toastr.warning('A Ordem de Producao: '+ bd.ordensProducao[i].id +" nao pode ser finalizada, porque existe parte(s) que ainda nao foram finalizada(s)!");
+                        toastr.error('A Ordem de Producao: '+ bd.ordensProducao[i].id +" nao pode ser finalizada, porque existe parte(s) que ainda nao foram finalizada(s)!");
                         carregarParteMaterial();
                     }else{
                         bd.ordensProducao[i].status = 'FINALIZADO';
