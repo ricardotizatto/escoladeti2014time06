@@ -27,10 +27,10 @@
         <div class="row">
             <div class="form-group col-sm-12">
                 <a  class='btn btn-primary btn-padrao' ng-click="novaParteMaterial(ordemProducao)" >
-                    <span class='glyphicon glyphicon-plus-sign'></span> Nova Parte
+                    <span class='glyphicon glyphicon-plus-sign' title="Nova parte"></span> Nova Parte
                 </a>
                 <a  class='btn btn-success btn-padrao' ng-click="finalizarOrdemProducao(ordemProducao)" >
-                    <span class='glyphicon glyphicon-ok-circle'></span> Finalizar
+                    <span class='glyphicon glyphicon-ok-circle' title="Finalizar"></span> Finalizar
                 </a>
             </div>
         </div>
@@ -51,13 +51,13 @@
                                 <td>{{parteMaterial.revisao}}</td>
                                 <td>{{parteMaterial.status}}</td>
                             <td>
-                                <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="">
+                                <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="" title="Download">
                                     <span class='glyphicon glyphicon-download'><input type="file"></span>
                                 </a>
-                                <a class='btn btn-warning btn-sm' ng-click="editarParteMaterial(ordemProducao, parteMaterial )">
-                                    <span class='glyphicon glyphicon-edit'></span>
+                                <a class='btn btn-warning btn-sm' ng-click="editarParteMaterial(ordemProducao, parteMaterial )" title="Editar">
+                                    <span class='glyphicon glyphicon-edit' ></span>
                                 </a>
-                                <a class='btn btn-danger btn-sm'  ng-click="deletarParteMaterial(ordemProducao, parteMaterial)">
+                                <a class='btn btn-danger btn-sm'  ng-click="deletarParteMaterial(ordemProducao, parteMaterial)" title="Excluir">
                                     <span class='glyphicon glyphicon-remove-circle'></span>
                                 </a>
                             </td>

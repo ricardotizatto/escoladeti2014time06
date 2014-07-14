@@ -151,7 +151,7 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
     $scope.novaParteMaterial = function(ordemProducao) {
         bd.parteMaterial = {};
         window.location = '#/cadastropartematerial/'+ ordemProducao.id;        
-    }
+    };
 
     $scope.carregarParteMaterial = function() {
         console.log('parte link Material: ' + $routeParams.ordemProducaoId + ' - ' + $routeParams.parteMaterialId);
@@ -161,7 +161,9 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
             for (var i = 0; i < bd.ordensProducao.length; i++) {
                 if (bd.ordensProducao[i].id == $routeParams.ordemProducaoId) {
                     console.log('parte material: ' + bd.ordensProducao[i].parteMaterial.length);
-                    $scope.parteMaterial.parte = bd.ordensProducao[i].parteMaterial.length +1;
+                    console.log('parte do material mais um:' + ( bd.ordensProducao[i].parteMaterial.length + 1) );
+                    $scope.parteMaterial.parte = (bd.ordensProducao[i].parteMaterial.length + 1);
+                    console.log('parMaterial.parte:' + $scope.parteMaterial.parte);
                     $scope.parteMaterial.status = 'ANDAMENTO';
                     return;
                 }
@@ -199,6 +201,7 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
             if (bd.ordensProducao[i].id == $routeParams.ordemProducaoId) {
                 console.log('Ordem id: ' + bd.ordensProducao[i].id);
                 for (var j=0; j<bd.ordensProducao[i].parteMaterial.length; j++) {
+                    console.log('for de J:' + bd.ordensProducao[i].parteMaterial.length);
                     if (bd.ordensProducao[i].parteMaterial[j].parte == $scope.parteMaterial.parte) {
                         return;
                     }else{
@@ -239,7 +242,7 @@ function OrdemProducaoController($scope, $http, $routeParams, bd) {
             if (bd.ordensProducao[i].id == ordemProducao.id) {
                 for (var j = 0; j < bd.ordensProducao[i].parteMaterial.length; j++) {
                     if (bd.ordensProducao[i].parteMaterial[j].status != "FINALIZADO") {
-                        toastr.success('A Ordem de Producao: '+ bd.ordensProducao[i].id +" nao pode ser finalizada, porque existe parte(s) que ainda nao foram finalizada(s)!");
+                        toastr.warning('A Ordem de Producao: '+ bd.ordensProducao[i].id +" nao pode ser finalizada, porque existe parte(s) que ainda nao foram finalizada(s)!");
                         carregarParteMaterial();
                     }else{
                         bd.ordensProducao[i].status = 'FINALIZADO';
