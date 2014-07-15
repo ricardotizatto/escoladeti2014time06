@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.controller;
 import br.unicesumar.escoladeti.entity.Livro;
 import br.unicesumar.escoladeti.service.LivroService;
 import java.io.Serializable;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +40,14 @@ public class LivroController implements Serializable {
     public DataPage<Livro> getTodos() {
         return this.livroService.getTodos(1);
     }
-
+    
+    @RequestMapping(value = "/livros", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Livro> getTodosList() {
+        return this.livroService.getTodos();
+    }
+    
+    
     @RequestMapping(value = "/livro", params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Livro> getPorNome(@RequestParam String q) {

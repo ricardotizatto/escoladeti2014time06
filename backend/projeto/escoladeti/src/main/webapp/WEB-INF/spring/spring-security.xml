@@ -12,6 +12,7 @@
         <security:intercept-url pattern="/pages/**" access="isAuthenticated()" />
         <security:intercept-url pattern="/public/**" access="permitAll" />
         <security:intercept-url pattern="/cadastroparticipanteevento" access="permitAll" />
+        <security:intercept-url pattern="/consultalivro" access="permitAll" />
         <security:intercept-url pattern="/login" access="isAnonymous()" />
         <security:intercept-url pattern="/login-error" access="isAnonymous()" />
         <security:intercept-url pattern="/**" access="isAuthenticated()" />

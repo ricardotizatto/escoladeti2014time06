@@ -91,6 +91,7 @@
                     $("#eventosDisponiveis").append("</div>");
                 });
             });
+            
             $("#limpar").click(function(){
                 $("#participante").trigger("reset");
             });
