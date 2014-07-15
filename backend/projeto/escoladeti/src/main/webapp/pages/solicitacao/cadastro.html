@@ -1,0 +1,145 @@
+<div class="container">
+	<div class="row">
+        <div class="form-group col-sm-12">
+            <legend> Solicitação </legend>
+        </div>
+    </div>
+    <form action="" method="POST" role="form" ng-submit="salvar()">
+    	<div class="row">
+	    	<div class="col-md-2 form-group">
+	    		<label>Número</label>
+	    		<input type="number"  class="form-control" disabled="disabled" ng-model="solicitacao.id">
+	    	</div>	    	
+	    	<div class="col-md-6 form-group">
+	    		<label>Aluno</label>
+	    		<select ui-select2 class="input-default" ng-model="solicitacao.idAluno">
+	    	    	<option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
+	    	    </select>
+	    	</div>    	    
+	    	<div class="col-md-2 form-group">
+	    		<label>Série</label>
+	    		<input type="text"  class="form-control" ng-model="solicitacao.serie">
+	    	</div>  
+	    	<div class="col-md-2 form-group">
+	    		<label>Ensino</label>
+	    		<select class="form-control" ng-model="solicitacao.ensino">
+	    			<option value="MEDIO">Medio</option>
+	    			<option value="FUNDAMENTAL">Fundamental</option>
+	    			<option VALUE="SUPERIOR">Superior</option>
+	    		</select>
+	    	</div>   		    	
+    	</div>
+    	<div class="row">
+    		<div class="col-md-6 form-group">
+	    		<label>Responsável</label>
+	    		<select ui-select2 class="input-default" ng-model="solicitacao.idResponsavel">
+	    	    	<option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
+	    	    </select>
+	    	</div> 			    										
+	    	   	    
+	    	<div class="col-md-3 form-group">
+	    		<label>Data de chegada</label>
+	    		<input type="date"  class="form-control" ng-model="solicitacao.dataChegada">
+	    	</div>
+	    	<div class="col-md-3 form-group">
+	    		<label>NRE</label>
+	    		<select ui-select2 class="input-default" ng-model="solicitacao.idNre">
+	    	    	<option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>
+	    	    </select>
+	    	</div>          		    	
+    	</div>
+    	<div class="row">
+	    	<div class="col-md-3 form-group">
+	    		<label>Endereço</label>
+	    		<input type="text"  class="form-control" ng-model="solicitacao.serie">
+	    	</div>
+	    	<div class="col-md-3 form-group">
+	    		<label>CEP</label>
+	    		<input type="text"  class="form-control">	    	
+	    	</div>
+	    	<div class="col-md-3 form-group">
+	    		<label>Número</label>
+	    		<input type="number"  class="form-control">
+	    	</div>        				    										
+	    	<div class="col-md-3 form-group">
+	    		<label>Município</label>
+	    		<select ui-select2 class="input-default" ng-model="solicitacao.idMunicipio">
+	    	    	<option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>
+	    	    </select>
+	    	</div>    	   
+
+    	</div>
+    	<div class="row form-group">
+    		<div class="col-md-3 col-md-offset-9">
+    			<a class="btn btn-primary form-control"  data-toggle="modal" data-target="#modalTelefone">Adicionar Material</a>
+    		</div>    		
+    	</div>
+    	<div class="row">
+    		<div class="">
+    			<table class="table table-striped">
+    				<thead>
+    					<th>Livro</th>
+    					<th>Tipo</th>    					
+    					<th>Tradução</th>
+    				</thead>
+    				<tbody>
+    					<tr ng-repeat="item in solicitacao.itensMateriais">
+    						<td>{{item}}</td>
+    					</tr>
+    				</tbody>
+    			</table>
+    		</div>
+    	</div>
+    	<div class="row">
+            <div class="col-sm-12">
+                <span class="pull-right">
+                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                    </a>  
+                    <button type="submit" class="btn btn-success btn-padrao" >
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar
+                    </button>
+                </span>		
+            </div>
+        </div>
+        <div class="row"><div class="col-sm-12"><hr></div></div>	
+    </form>
+    <div class="row">
+	    <div class="modal fade" id="modalTelefone" tabindex="-1" role="dialog" aria-labelledby="modalTelefoneLabel" aria-hidden="true">
+	    	<div class="modal-content">
+	    		<div class="modal-header">
+	    			<h4>Material</h4>
+	    		</div>
+	    		<div class="modal-body">
+	    			<div class="row">
+	    				<div class="col-md-4">
+	    					<label>Material</label>
+	    					<select ui-select2 class="input-default" ng-model="itemCorrente.idMaterial">
+				    	    	<option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>
+				    	    </select>
+	    				</div>
+	    				<div class="col-md-4">
+	    					<label>Tradução</label>
+	    					<select ng-model="itemCorrente.traducao" class="form-control">
+	    						<option value="BRAILLE">BRAILLE</option>
+	    						<option value="MECDAISY">MECDAISY</option>
+	    						<option value="DOSVOX">DOSVOX</option>
+	    						<option value="OUTRO">OUTRO</option>
+	    					</select>
+	    				</div>	
+	    				<div class="col-md-4" ng-show="itemCorrente.traducao == 'OUTRO' ">
+	    					<label>Especificar</label>
+	    					<input type="text" class="form-control" ng-model="itemCorrente.outro">
+	    				</div>		
+	    			</div>
+	    		</div>
+	    		<div class="modal-footer">
+	    			<div class="row">
+	    				<a class="btn btn-danger btn-padrao">Cancelar</a>
+	    				<a class="btn btn-success btn-padrao" ng-click="adicionarMaterial()">Salvar</a>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+    </div>
+</div>

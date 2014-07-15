@@ -721,5 +721,78 @@
 			constraintName="uk_8ncbf29ly0ca3nepsptgevtgd" deferrable="false"
 			disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
 	</changeSet>
+	<changeSet id="esti001" author="Jhonatan">
+		<dropTable tableName="solicitacao_alunos"/>
+		
+		<addColumn tableName="solicitacao">
+			<column name="id_aluno" type="INT8" >
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+		
+		<addColumn tableName="solicitacao">
+			<column name="numero" type="INT4" >
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+		
+		<addColumn tableName="solicitacao">
+			<column name="id_municipio" type="INT8">
+			</column>
+		</addColumn>
+		
+		<addColumn tableName="solicitacao">
+			<column name="id_cidadenre" type="INT8">
+			</column>
+		</addColumn>
+		
+		<addColumn tableName="solicitacao">
+			<column name="id_endereco" type="INT8"></column>
+		</addColumn>
+		
+		<addColumn tableName="solicitacao">
+			<column name="cep" type="VARCHAR(11)"></column>
+		</addColumn>
+		
+		<addColumn tableName="solicitacao">
+			<column name="serie" type="VARCHAR(20)"></column>
+		</addColumn>
+						
+		<addColumn tableName="solicitacao">
+			<column name="ensino" type="VARCHAR(20)"></column>
+		</addColumn>				
+		
+		
+		<addForeignKeyConstraint constraintName="fk_solicitacaoaluno" 
+			referencedTableName="pessoafisica" baseColumnNames="id_aluno" baseTableName="solicitacao" 
+			referencedColumnNames="id"/>
+		
+		<addForeignKeyConstraint constraintName="fk_solicitacaoendereco" 
+			referencedTableName="endereco" baseColumnNames="id_endereco" baseTableName="solicitacao" 
+			referencedColumnNames="id"/>
+			
+		<addForeignKeyConstraint constraintName="fk_solicitacaocidnre" 
+			referencedTableName="cidade" baseColumnNames="id_cidadenre" baseTableName="solicitacao" 
+			referencedColumnNames="id"/>
+			
+		<addForeignKeyConstraint constraintName="fk_solicitacaocid" 
+			referencedTableName="cidade" baseColumnNames="id_municipio" baseTableName="solicitacao" 
+			referencedColumnNames="id"/>
+			
+		<dropColumn tableName="solicitacao" columnName="id_solicitante"/>
+	</changeSet>
+	
+	<changeSet id="esti004" author="Jhonatan">
+		<addColumn tableName="solicitacaoitem">
+			<column name="outro" type="VARCHAR(255)">
+			
+			</column>
+		</addColumn>
+		
+		<dropColumn tableName="solicitacao" columnName="nre"/>
+	</changeSet>
+	
+	
+
 </databaseChangeLog>
    
