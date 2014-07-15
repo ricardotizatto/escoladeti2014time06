@@ -201,6 +201,10 @@ app.config(['$routeProvider',
                 templateUrl: './pages/cadastroparticipanteevento.html',
                 controller: 'CadastroParticipanteEventoController'
             })
+            .when('/consultalivro', {
+                templateUrl: './pages/consultalivro.html',
+                controller: 'ConsultaLivroController'
+            })
             .otherwise({redirectTo: '/principal'
             });
     }
