@@ -4,6 +4,7 @@ import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Livro;
 import br.unicesumar.escoladeti.repository.LivroRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,10 @@ public class LivroService {
 
     public DataPage<Livro> getTodos(Integer pagina){
         return new DataPage<>(livroRepository.findAll(pageRequestForAsc(pagina, "nome")));
+    }
+    
+    public List<Livro> getTodos(){
+        return this.livroRepository.findAll();
     }
 
     public DataPage<Livro> getLivroPorNome(String nomeParcial) {
