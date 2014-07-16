@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 
@@ -29,6 +30,7 @@ public class SolicitacaoItem extends Entidade{
 
 	@ManyToOne
 	@JoinColumn(name="id_solicitacao")
+	@JsonIgnore
 	private Solicitacao solicitacao;
 	
 	public SolicitacaoItem() {

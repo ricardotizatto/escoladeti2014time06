@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -28,39 +30,39 @@ public class Solicitacao extends Entidade {
 
     private static final long serialVersionUID = 1L;
     
-    @NotNull
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private Long numero;
-    
+    @NotNull(message="Aluno é obrigatorio")
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="id_aluno")
     private PessoaFisica aluno;
-
+    
+    private String escola;
     
     @ManyToOne
-    @JoinColumn(name="id_cidadenre", referencedColumnName = "id", updatable= false, insertable = false)
+    @JoinColumn(name="id_cidadenre")
     private Cidade nre;
     
     @ManyToOne
-    @JoinColumn(name="id_municipio", referencedColumnName = "id",updatable= false, insertable= false)
+    @JoinColumn(name="id_municipio")
     private Cidade municipio;
     
     private String cep;    
     
-    @OneToOne()
-    @JoinColumn(name="id_endereco", insertable= true, updatable =true)
-    private Endereco endereco;
+    private String endereco;
+    
+    @Min(value=0, message="Informe um endereço válido")
+    @Max(value=9999, message="Informe um endereço válido")
+    private Integer numeroEndereco;
     
     private String serie;
     
     private String ensino;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "id_responsavel")
     private PessoaFisica responsavel;
 
-    @NotEmpty
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @NotEmpty(message="Devem ser inseridos materiais que serão produzidos")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval= true)
     @JoinColumn(name = "id_solicitacao", insertable=true, updatable=true)
     private Set<SolicitacaoItem> itensSolicitacao;
 
@@ -84,13 +86,6 @@ public class Solicitacao extends Entidade {
         return nre;
     }
 
-	public Long getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Long numero) {
-		this.numero = numero;
-	}
 
 	public PessoaFisica getAluno() {
 		return aluno;
@@ -116,20 +111,29 @@ public class Solicitacao extends Entidade {
 		this.cep = cep;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
+	
 	public String getSerie() {
 		return serie;
 	}
 
 	public void setSerie(String serie) {
 		this.serie = serie;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public Integer getNumeroEndereco() {
+		return numeroEndereco;
+	}
+
+	public void setNumeroEndereco(Integer numeroEndereco) {
+		this.numeroEndereco = numeroEndereco;
 	}
 
 	public String getEnsino() {
@@ -164,9 +168,13 @@ public class Solicitacao extends Entidade {
 		this.dataChegada = dataChegada;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+    
+	public String getEscola() {
+		return escola;
 	}
-    
-    
+	
+	
+	public void setEscola(String escola) {
+		this.escola = escola;
+	}
 }

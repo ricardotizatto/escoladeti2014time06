@@ -4,7 +4,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 
 @Entity
-public class Livro extends Material {
+public class Livro extends Entidade {
     
     private static final long serialVersionUID = 1L;
 
@@ -54,27 +54,6 @@ public class Livro extends Material {
         this.anoEdicao = anoEdicao;
     }
 
-    @Override
-    public String getInfo() {
-        
-        StringBuilder dados = new StringBuilder();
-        
-        dados.append("ID: ");
-        dados.append(getId()); 
-        dados.append(" Nome: ");
-        dados.append(getNome());
-        dados.append(" Autor: ");
-        dados.append(getAutor());
-        dados.append(" Disciplina: ");
-        dados.append(getDisciplina());
-        dados.append(" Editora: ");
-        dados.append(getEditora());
-        dados.append(" Edição: ");
-        dados.append(getAnoEdicao());        
-        
-        return dados.toString();
-       
-    }
 
     @Override
     public int hashCode() {

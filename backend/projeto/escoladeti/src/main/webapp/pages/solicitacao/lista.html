@@ -28,24 +28,21 @@
         <div class="col-sm-12 table-responsive">
             <table class="table table-striped table-hover">
                     <tr>
-                        <th class="col-md-4">Número</th>
-                        <th class="col-md-2">Aluno</th>
-                        <th class="col-md-2">Escola</th>
-                        <th class="col-md-2">Data Chegada</th>
+                        <th class="col-md-1">Número</th>
+                        <th class="col-md-3">Aluno</th>
+                        <th class="col-md-3">Escola</th>
+                        <th class="col-md-3">Data Chegada</th>
                         <th class="col-md-2">Ações</th>
                     </tr>
                     
                     <tr ng-repeat="solicitacao in solicitacoes.list">
-                            <td>{{solicitacao.nome}}</td>
-                             <td>{{solicitacao.autor}}</td>
-                             <td>{{solicitacao.editora}}</td>
-                            <td>{{solicitacao.disciplina}}</td>
+                            <td>{{solicitacao.id}}</td>
+                            <td>{{solicitacao.aluno.nome}}</td>
+                            <td>{{solicitacao.escola}}</td>
+                            <td>{{solicitacao.dataChegada | date:'dd/MM/yyyy'}}</td>
                             <td>
                                 <button class='btn btn-warning btn-sm' ng-click="editar(solicitacao)">
                                         <span class='glyphicon glyphicon-edit'></span>
-                                </button>
-                                <button class='btn btn-danger btn-sm' ng-click="deletar(solicitacao)">
-                                        <span class='glyphicon glyphicon-remove-circle'></span>
                                 </button>
                             </td>
                     </tr>

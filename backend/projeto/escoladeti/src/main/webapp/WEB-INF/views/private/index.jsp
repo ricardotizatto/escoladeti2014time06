@@ -124,8 +124,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Operações<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a href="#/listasolicitacoes">Solicitação</a></li>
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
-                        </ul>    
+                        </ul>                             
                     </li>
                 </ul>      
                 <ul class="nav navbar-nav navbar-right">

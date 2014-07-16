@@ -792,7 +792,25 @@
 		<dropColumn tableName="solicitacao" columnName="nre"/>
 	</changeSet>
 	
+	<changeSet id="esti005" author="Jhonatan">
+		<addColumn tableName="solicitacao">
+			<column name="escola" type="varchar(255)"></column>
+		</addColumn>
+	</changeSet>
 	
+	<changeSet id="esti006" author="Jhonatan">
+		<addColumn tableName="solicitacao">
+			<column name="numeroendereco" type="int4"></column>
+			<column name="endereco" type="varchar(255)"></column>			
+		</addColumn>
+		
+		<dropColumn tableName="solicitacao" columnName="id_endereco"/>
+	</changeSet>
+	
+	<changeSet id="est007" author="jhonatan">
+		<dropColumn tableName="solicitacao" columnName="numero"/>
+	</changeSet>
+		
 
 </databaseChangeLog>
    

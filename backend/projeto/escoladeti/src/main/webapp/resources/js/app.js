@@ -201,7 +201,6 @@ app.config(['$routeProvider',
                 templateUrl: './pages/cadastroparticipanteevento.html',
                 controller: 'CadastroParticipanteEventoController'
             })
-<<<<<<< HEAD
             .when('/listasolicitacoes', {
                 templateUrl: './pages/solicitacao/lista.html',
                 controller: 'SolicitacaoController'
@@ -209,11 +208,14 @@ app.config(['$routeProvider',
             .when('/cadastrosolicitacao', {
                 templateUrl: './pages/solicitacao/cadastro.html',
                 controller: 'SolicitacaoController'
-=======
+            })
+             .when('/cadastrosolicitacao/:idSolicitacao', {
+                templateUrl: './pages/solicitacao/cadastro.html',
+                controller: 'SolicitacaoController'
+            })
             .when('/consultalivro', {
                 templateUrl: './pages/consultalivro.html',
                 controller: 'ConsultaLivroController'
->>>>>>> bc139f2b292da3855e1cf2deba436949402baf80
             })
             .otherwise({redirectTo: '/principal'
             });
