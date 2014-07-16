@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.repository;
 
 import br.unicesumar.escoladeti.entity.Cidade;
 import br.unicesumar.escoladeti.entity.UnidadeFederativa;
+
 import java.util.Date;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface CidadeRepository extends JpaRepository<Cidade, Long> {
             String nome, Date fundacao, UnidadeFederativa unidadeFederativa);
     */
     public Page<Cidade> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
+
+	public List<Cidade> findByUnidadeFederativaId(Long estadoId);
 }

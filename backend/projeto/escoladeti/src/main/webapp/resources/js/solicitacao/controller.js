@@ -179,6 +179,8 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
 	};
+        
+        $("#cep").mask("99999-999");
 	
 	$scope.getStatusItem = function (status) {
 		console.log(item);

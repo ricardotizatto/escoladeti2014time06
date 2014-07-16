@@ -5,16 +5,20 @@
  */
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.service.PessoaFisicaService;
+
 import java.io.Serializable;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -35,19 +39,37 @@ public class PessoaFisicaController implements Serializable {
     public PessoaFisica salvar(@RequestBody PessoaFisica pf) {
         return this.pessoaFisicaService.salvar(pf);
     }
-
-    @RequestMapping(value = "/pessoaFisica", method = RequestMethod.GET)
+    
+    @RequestMapping(value = "/pessoaFisica", method = RequestMethod.PUT)
     @ResponseBody
-    public List<PessoaFisica> getTodos() {
-        return this.pessoaFisicaService.getTodos();
+    public PessoaFisica editar(@RequestBody PessoaFisica pf) {
+        return this.pessoaFisicaService.salvar(pf);
     }
+	@RequestMapping(value = "/pessoaFisica",params = {"q"}, method = RequestMethod.GET)
+	@ResponseBody
+	public DataPage<PessoaFisica> getPorNome(@RequestParam String q) {
+		return pessoaFisicaService.getPessoaFisicaPorNome(q);
+	}
+
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<PessoaFisica> getTodos() {
+        return this.pessoaFisicaService.getTodos(1);
+    }
+	@RequestMapping(value = { "/listar/pag/{pagina}" }, method = RequestMethod.GET)
+	@ResponseBody
+	public DataPage<PessoaFisica> listarPais(@PathVariable Integer pagina) {
+		return pessoaFisicaService.getTodos(pagina);
+	}
     
     @RequestMapping(value = "/pessoaFisica/{idPessoaFisica}",method = RequestMethod.GET)
     @ResponseBody
-    public PessoaFisica getById(@PathVariable Long id){
-        return this.pessoaFisicaService.findById(id);
+    public PessoaFisica getById(@PathVariable Long idPessoaFisica){
+    	new RuntimeException("Erro: "+ idPessoaFisica );
+        return this.pessoaFisicaService.findOne(idPessoaFisica);
     }
     
+  
     @RequestMapping(value = "/pessoaFisica",method = RequestMethod.DELETE)
     @ResponseBody
     public String deletar(@RequestBody PessoaFisica pf){

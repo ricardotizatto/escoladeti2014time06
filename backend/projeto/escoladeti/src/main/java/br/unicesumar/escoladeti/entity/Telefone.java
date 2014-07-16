@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,20 +17,25 @@ public class Telefone extends Entidade {
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(length = 2)
+	@NotNull
     private Integer ddd;
 
     @NotNull
+    @Column(length = 10)
     private String numero;
     
-    
+    @Column(length = 10)
     private Integer ramal;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     private TipoTelefone tipo;
     
+//    @JoinColumn(name = "id_pessoa",referencedColumnName = "id")
+    
     @ManyToOne
-    @JoinColumn(name = "id_pessoa",referencedColumnName = "id")
+    @JoinColumn(name="pessoaid",referencedColumnName = "id")
     @JsonBackReference
     private Pessoa pessoa;
     

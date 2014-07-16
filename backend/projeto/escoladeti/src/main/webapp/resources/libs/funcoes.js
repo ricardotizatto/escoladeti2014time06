@@ -9,4 +9,7 @@ $(window).on('load', function () {
 
 function toUpper(el) {
 	el.value = el.value.toUpperCase();
-}
+};
+
+
+

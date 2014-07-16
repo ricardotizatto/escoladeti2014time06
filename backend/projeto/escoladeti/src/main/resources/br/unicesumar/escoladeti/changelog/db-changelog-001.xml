@@ -12,10 +12,12 @@
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
 			</column>
-			<column name="nome" type="VARCHAR(255)">
+
+			<column name="nome" type="VARCHAR(50)">
 				<constraints nullable="false" />
 			</column>
-			<column name="id_cidade" type="INT8" />
+
+			<column name="cidadeid" type="INT8" />
 		</createTable>
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-3">
@@ -39,7 +41,8 @@
 			<column name="nome" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
-			<column name="id_unidadefederativa" type="INT8">
+
+			<column name="unidadefederativaid" type="INT8">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
@@ -55,15 +58,18 @@
 			<column name="iniciovigencia" type="date">
 				<constraints nullable="false" />
 			</column>
-			<column name="id_distrito" type="INT8">
+
+			<column name="distritoid" type="INT8">
 				<constraints nullable="false" />
 			</column>
-			<column name="id_cidade" type="INT8">
+
+			<column name="cidadeid" type="INT8">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-6">
+
+	<changeSet author="Walber (generated)" id="7404066940885-7">
 		<createTable tableName="endereco">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
@@ -71,14 +77,24 @@
 			<column name="cep" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
+			<column name="logradouro" type="VARCHAR(255)" />
+			<column name="bairro" type="VARCHAR(255)" />
 			<column name="complemento" type="VARCHAR(255)" />
 			<column name="numero" type="INT4">
 				<constraints nullable="false" />
 			</column>
-			<column name="principal" type="BOOL">
+
+			<column name="principal" type="VARCHAR(1)">
 				<constraints nullable="false" />
 			</column>
-			<column name="id_pessoa" type="INT8" />
+
+			<column name="tipoendereco" type="VARCHAR(30)"/>	
+			<column name="pessoaid" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="cidadeid" type="INT8">
+				<constraints nullable="false" />
+			</column>
 		</createTable>
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-7">
@@ -93,8 +109,8 @@
 			<column name="tipoevento" type="VARCHAR(255)" />
 			<column name="titulo" type="VARCHAR(255)" />
 			<column name="inicio" type="VARCHAR(255)" />
-            <column name="fim" type="VARCHAR(255)" />
-            <column name="ministrante" type="VARCHAR(255)" />
+			<column name="fim" type="VARCHAR(255)" />
+			<column name="ministrante" type="VARCHAR(255)" />
 			<column name="valor" type="FLOAT8">
 				<constraints nullable="false" />
 			</column>
@@ -236,7 +252,8 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-19">
+	<!--changeSet author="Jhonatan (generated)" id="1404066940885-19">
+	< changeSet author="Jhonatan (generated)" id="1404066940885-19">
 		<createTable tableName="pessoaendereco">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
@@ -248,9 +265,9 @@
 				<constraints nullable="false" />
 			</column>
 			<column name="endereco_id" type="INT8" />
-			<column name="id_pessoa" type="INT8" />
+			<column name="pessoaid" type="INT8" />
 		</createTable>
-	</changeSet>
+	</changeSet-->
 	<changeSet author="Jhonatan (generated)" id="1404066940885-20">
 		<createTable tableName="pessoafisica">
 			<column name="cpf" type="VARCHAR(255)">
@@ -273,7 +290,8 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-21">
+
+	<changeSet author="Jhonatan (generated)" id="7404066940885-21">
 		<createTable tableName="pessoajuridica">
 			<column name="cnpj" type="VARCHAR(255)">
 				<constraints nullable="false" />
@@ -284,6 +302,9 @@
 			<column name="inscricaoestadual" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
+			<column name="inscricaomunicipal" type="VARCHAR(255)">
+				<constraints nullable="false" />		
+			</column>	
 			<column name="razaosocial" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
@@ -292,7 +313,7 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-22">
+	<changeSet author="Jhonatan (generated)" id="7404066940885-27">
 		<createTable tableName="solicitacao">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
@@ -301,6 +322,7 @@
 				<constraints nullable="false" />
 			</column>
 			<column name="nre" type="VARCHAR(255)" />
+			<column name="id_endereco" type="INT8"></column>			
 			<column name="id_responsavel" type="INT8" />
 			<column name="id_solicitante" type="INT8">
 				<constraints nullable="false" />
@@ -341,7 +363,8 @@
 			<column name="tipo" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
-			<column name="id_pessoa" type="INT8" />
+
+			<column name="pessoaid" type="INT8" />
 			<column name="ramal" type="INT4" />
 			<column name="numero" type="VARCHAR(255)">
 				<constraints nullable="false" />
@@ -373,7 +396,8 @@
 			<column name="sigla" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
-			<column name="id_pais" type="INT8">
+
+			<column name="paisid" type="INT8">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
@@ -490,10 +514,10 @@
 		<addPrimaryKey columnNames="id" constraintName="pessoa_pkey"
 			tableName="pessoa" />
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-48">
+	<!-- >changeSet author="Jhonatan (generated)" id="1404066940885-48">
 		<addPrimaryKey columnNames="id" constraintName="pessoaendereco_pkey"
 			tableName="pessoaendereco" />
-	</changeSet>
+	</changeSet-->
 	<changeSet author="Jhonatan (generated)" id="1404066940885-49">
 		<addPrimaryKey columnNames="id" constraintName="pessoafisica_pkey"
 			tableName="pessoafisica" />
@@ -545,7 +569,8 @@
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-61">
-		<addForeignKeyConstraint baseColumnNames="id_distrito"
+
+		<addForeignKeyConstraint baseColumnNames="distritoid"
 			baseTableName="distrito" constraintName="fk_228tgwgvlvro9uskcm2a59oaf"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
@@ -569,7 +594,8 @@
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="faixacep" />
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-65">
-		<addForeignKeyConstraint baseColumnNames="id_pessoa"
+
+		<addForeignKeyConstraint baseColumnNames="pessoaid"
 			baseTableName="telefone" constraintName="fk_6luaqa9mq7tv5nghmcn1jioi0"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
@@ -581,13 +607,15 @@
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacaoitem" />
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-67">
-		<addForeignKeyConstraint baseColumnNames="id_unidadefederativa"
+
+		<addForeignKeyConstraint baseColumnNames="unidadefederativaid"
 			baseTableName="cidade" constraintName="fk_8a1ipvfv1kvgd7wpq02b1i5n9"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="unidadefederativa" />
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-68">
-		<addForeignKeyConstraint baseColumnNames="id_cidade"
+
+		<addForeignKeyConstraint baseColumnNames="cidadeid"
 			baseTableName="bairro" constraintName="fk_ak48qtngj81g9sfxhbmecrcau"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
@@ -622,12 +650,13 @@
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilacesso" />
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-74">
-		<addForeignKeyConstraint baseColumnNames="id_pessoa"
+	<!--  >changeSet author="Jhonatan (generated)" id="1404066940885-74">
+
+		<addForeignKeyConstraint baseColumnNames="pessoaid"
 			baseTableName="pessoaendereco" constraintName="fk_hefjlv0de2niktickknlrs1uc"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
-	</changeSet>
+	</changeSet-->
 	<changeSet author="Jhonatan (generated)" id="1404066940885-75">
 		<addForeignKeyConstraint baseColumnNames="id_solicitante"
 			baseTableName="solicitacao" constraintName="fk_iykxmb06bdcvyhy537e0wfm4s"
@@ -647,8 +676,15 @@
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemacesso" />
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-78">
-		<addForeignKeyConstraint baseColumnNames="id_cidade"
+
+		<addForeignKeyConstraint baseColumnNames="cidadeid"
 			baseTableName="distrito" constraintName="fk_k1bqlrexubf41a5ebnf4rcwfm"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Walber (generated)" id="1404066940885-91">
+		<addForeignKeyConstraint baseColumnNames="cidadeid"
+			baseTableName="endereco" constraintName="fk_endereco_cidade"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
 	</changeSet>
@@ -665,13 +701,15 @@
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-81">
-		<addForeignKeyConstraint baseColumnNames="id_pessoa"
+
+		<addForeignKeyConstraint baseColumnNames="pessoaid"
 			baseTableName="endereco" constraintName="fk_lqjohmkeu43csocxp1b9op32k"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-82">
-		<addForeignKeyConstraint baseColumnNames="id_pais"
+
+		<addForeignKeyConstraint baseColumnNames="paisid"
 			baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais" />
@@ -700,12 +738,12 @@
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-87">
+	<!--  changeSet author="Jhonatan (generated)" id="1404066940885-87">
 		<addForeignKeyConstraint baseColumnNames="endereco_id"
 			baseTableName="pessoaendereco" constraintName="fk_rniq3f662vwastrnxk4mm8khm"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
-	</changeSet>
+	</changeSet-->
 	<changeSet author="Jhonatan (generated)" id="1404066940885-88">
 		<addUniqueConstraint columnNames="cnpj"
 			constraintName="uk_2xclbh1scxkxx5e7vv48bqaq" deferrable="false"
@@ -746,9 +784,9 @@
 			</column>
 		</addColumn>
 		
-		<addColumn tableName="solicitacao">
+		<!--  >addColumn tableName="solicitacao">
 			<column name="id_endereco" type="INT8"></column>
-		</addColumn>
+		</addColumn-->
 		
 		<addColumn tableName="solicitacao">
 			<column name="cep" type="VARCHAR(11)"></column>

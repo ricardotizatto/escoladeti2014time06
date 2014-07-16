@@ -1,26 +1,42 @@
 package br.unicesumar.escoladeti.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import javax.persistence.Embedded;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import br.unicesumar.escoladeti.enums.TipoEndereco;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Endereco extends Entidade {
 
+	@Column(length = 10)
     @NotNull
+    @NotEmpty
     private String cep;
 
-    @NotNull
+	@Column(length = 10)
+	@NotNull
     private int numero;
+	
+	@NotNull
+	private String logradouro;
 
+	@NotNull
+	private String bairro;
+	
+	@Column(length = 100)
     private String complemento;
 
     @NotNull
-    private boolean principal;
+    private char principal;
 
 //    @Embedded
 //    private Logradouro logradouro;
@@ -30,12 +46,54 @@ public class Endereco extends Entidade {
 //    @JsonBackReference
 //    private Bairro bairro;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipoendereco")
+    private TipoEndereco tipoEndereco;    
+
     @ManyToOne
-    @JoinColumn(name="id_pessoa",referencedColumnName = "id")
+    @JoinColumn(name="pessoaid",referencedColumnName = "id")
     @JsonBackReference
     private Pessoa pessoa;
+    
+    @ManyToOne
+    @JoinColumn(name="cidadeid",nullable = false)
+    private Cidade cidade;
 
-    public Endereco() {
+    
+    public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public TipoEndereco getTipoEndereco() {
+		return tipoEndereco;
+	}
+
+	public void setTipoEndereco(TipoEndereco tipoEndereco) {
+		this.tipoEndereco = tipoEndereco;
+	}
+	
+	public Endereco() {
     }
 
     public Pessoa getPessoa() {
@@ -70,11 +128,11 @@ public class Endereco extends Entidade {
         this.complemento = complemento;
     }
 
-    public boolean isPrincipal() {
+    public char getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(boolean principal) {
+    public void setPrincipal(char principal) {
         this.principal = principal;
     }
 

@@ -27,6 +27,11 @@ public class PessoaJuridica extends Pessoa {
 
     @NotNull
     @NotEmpty
+    @Column(unique = true)
+    private String inscricaoMunicipal;
+
+    @NotNull
+    @NotEmpty
     @Column
     private String razaoSocial;
 
@@ -45,7 +50,15 @@ public class PessoaJuridica extends Pessoa {
         this.dataCriacao = dataCriacao;
     }
 
-    public Date getDataCriacao() {
+    public String getInscricaoMunicipal() {
+		return inscricaoMunicipal;
+	}
+
+	public void setInscricaoMunicipal(String inscricaoMunicipal) {
+		this.inscricaoMunicipal = inscricaoMunicipal;
+	}
+
+	public Date getDataCriacao() {
         return dataCriacao;
     }
 
