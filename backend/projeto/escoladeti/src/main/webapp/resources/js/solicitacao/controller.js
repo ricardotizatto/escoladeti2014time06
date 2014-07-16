@@ -180,8 +180,9 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 		$scope.itemCorrente = new ItemCorrente();
 	};
 	
-	$scope.getStatusItem = function (item) {
-		switch (item.status) {
+	$scope.getStatusItem = function (status) {
+		console.log(item);
+		switch (status) {
 			case 'ABERTO':
 				return 'warning';
 			case 'ANDAMENTO':
