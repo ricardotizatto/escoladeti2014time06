@@ -32,7 +32,7 @@ public class Distrito extends Entidade {
     private Date fimVigencia;
 
     @ManyToOne
-    @JoinColumn(name = "id_cidade", nullable = false)
+    @JoinColumn(name = "cidadeId", nullable = false)
     private Cidade cidade;
     
     public Distrito(){

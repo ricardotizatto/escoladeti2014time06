@@ -130,7 +130,7 @@ function EstadoController ($scope, $routeParams, paisService, estadoService) {
     
     $scope.select2Options = {
     	
-    };    
+    };
     
 }
 

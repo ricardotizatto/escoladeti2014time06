@@ -1,8 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,19 +26,19 @@ public abstract class Pessoa extends Entidade {
 
     @NotNull
     @NotEmpty
-    @Column
+    @Column(length = 50)
     private String nome;
 
     @NotNull
     @NotEmpty
-    @Column
+    @Column(length = 100)
     private String email;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval=true)
     @JsonManagedReference
     private Set<Telefone> telefones;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval=true)
     @JsonManagedReference
     private Set<Endereco> enderecos;
 

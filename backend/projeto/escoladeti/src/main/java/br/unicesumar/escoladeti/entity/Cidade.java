@@ -23,7 +23,7 @@ public class Cidade extends Entidade {
     private Date fundacao;
 
     @ManyToOne
-    @JoinColumn(name = "id_unidadefederativa", nullable = false)
+    @JoinColumn(name = "unidadefederativaId", nullable = false)
     private UnidadeFederativa unidadeFederativa;
 
     public Cidade() {

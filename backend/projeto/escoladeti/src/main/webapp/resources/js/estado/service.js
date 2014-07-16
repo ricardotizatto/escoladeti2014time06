@@ -29,6 +29,9 @@ function EstadoService($http) {
         },
         buscarTodos: function () {
 			return $http.get('./rest/unidadeFederativaSource/listar');
+		},
+		buscaEstadosPorPais: function(paisId){
+			return $http.get('./rest/unidadeFederativaSource/listarPorPais/' + paisId);
 		}
 
     };

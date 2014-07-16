@@ -1,9 +1,12 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.entity.UnidadeFederativa;
 import br.unicesumar.escoladeti.service.UnidadeFederativaService;
+
 import java.io.Serializable;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,5 +58,10 @@ public class UnidadeFederativaController implements Serializable{
     @ResponseBody
     public UnidadeFederativa findById(@PathVariable Long id) {
         return this.federativaService.getById(id);
+    }
+    @RequestMapping(value="/listarPorPais/{idPais}",method = RequestMethod.GET)
+    @ResponseBody
+    public List<UnidadeFederativa> listaPorPais(@PathVariable Long idPais){
+    	return this.federativaService.buscarUnidadeFederativaPorIdDoPais(idPais);
     }
 }

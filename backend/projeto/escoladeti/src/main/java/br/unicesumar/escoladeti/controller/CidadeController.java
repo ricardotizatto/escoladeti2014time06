@@ -71,4 +71,10 @@ public class CidadeController implements Serializable {
     public List<Cidade> listar(){
     	return this.cidadeService.listarTodos();
     }
+    
+    @RequestMapping(value = "/listarPorEstado/{estadoId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Cidade> listarPorEstado(@PathVariable Long estadoId){
+    	return this.cidadeService.listarPorEstado(estadoId);
+    }
 }

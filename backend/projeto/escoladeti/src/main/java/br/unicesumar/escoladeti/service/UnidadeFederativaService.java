@@ -2,8 +2,10 @@ package br.unicesumar.escoladeti.service;
 
 import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
+import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.entity.UnidadeFederativa;
 import br.unicesumar.escoladeti.repository.UnidadeFederativaRepository;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,9 @@ public class UnidadeFederativaService {
         return this.federativaRepository.findByNomeAndSigla(
                 unidadeFederativa.getNome(), unidadeFederativa.getSigla());//, unidadeFederativa.getIdPaisDoEstado());
     }
+
+	public List<UnidadeFederativa> buscarUnidadeFederativaPorIdDoPais(Long idPais) {
+		return this.federativaRepository.findByPaisId(idPais);
+	}
 
 }
