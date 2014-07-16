@@ -5,10 +5,6 @@
  */
 package br.unicesumar.escoladeti.controller;
 
-import br.unicesumar.escoladeti.entity.Pais;
-import br.unicesumar.escoladeti.entity.PessoaFisica;
-import br.unicesumar.escoladeti.service.PessoaFisicaService;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import br.unicesumar.escoladeti.entity.PessoaFisica;
+import br.unicesumar.escoladeti.service.PessoaFisicaService;
 
 /**
  *
@@ -75,5 +74,11 @@ public class PessoaFisicaController implements Serializable {
     public String deletar(@RequestBody PessoaFisica pf){
         this.pessoaFisicaService.deletar(pf);
         return "Deleted";
+    }
+    
+    @RequestMapping(value = "/pessoaFisica/lista",method = RequestMethod.GET)
+    @ResponseBody
+    public List<PessoaFisica> listar(){
+        return pessoaFisicaService.listarTodos();
     }
 }

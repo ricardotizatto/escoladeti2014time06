@@ -54,5 +54,9 @@ public class PessoaFisicaService {
 	public DataPage<PessoaFisica> getPessoaFisicaPorNome(String nomeParcial) {
 		return new DataPage<PessoaFisica>(pessoaFisicaRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
 	}
+	
+	public List<PessoaFisica> listarTodos() {
+		return pessoaFisicaRepository.findAll();
+	}
     
 }

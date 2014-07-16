@@ -125,7 +125,7 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 	
 	$http({
 		method: 'GET',
-		url: './rest/pessoaFisicaSource/pessoaFisica'			
+		url: './rest/pessoaFisicaSource/pessoaFisica/lista'			
 	}).success(function (data) {
 		$scope.pessoas = data;
 	});
