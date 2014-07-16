@@ -25,11 +25,12 @@ public class PessoaFisica extends Pessoa {
 
 	@NotNull
     @NotEmpty
+    @Column(length = 15)
     private String rg;
 
     @NotEmpty
     @NotNull
-    @Column(unique = true)
+    @Column(unique = true, length = 11)
     private String cpf;
 
     @NotNull
@@ -38,13 +39,14 @@ public class PessoaFisica extends Pessoa {
 
     @NotNull
     @NotEmpty
+    @Column(length = 50)
     private String sobrenome;
     
     @NotNull
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    public PessoaFisica() {
+	public PessoaFisica() {
     }
 
     public PessoaFisica(String rg, String cpf, Date dataNascimento, String sobrenome) {

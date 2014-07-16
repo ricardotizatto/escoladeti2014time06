@@ -41,11 +41,14 @@ public class CidadeService {
     }
     
     public Cidade getById(Long id){
-        return this.cidadeRepository.findById(id);
+        return this.cidadeRepository.findOne(id);
     }
 	public List<Cidade> listarTodos() {
 		return this.cidadeRepository.findAll();
 		
+	}
+	public List<Cidade> listarPorEstado(Long estadoId) {
+		return this.cidadeRepository.findByUnidadeFederativaId(estadoId);
 	}
     
    /* public Cidade buscarCidadePorNomeFundacaoUnidadeFederativa(Cidade cidade) {

@@ -19,7 +19,7 @@
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
-        <script type="text/javascript" src="./resources/libs/funcoes.js"></script>
+        <script type="text/javascript" src="./resources/libs/funcoes.js"></script>		
         <script type="text/javascript" src="./resources/libs/toastr.js"></script>
         <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>
         
@@ -38,10 +38,12 @@
         <script type="text/javascript" src="./resources/js/cidade/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/cidade/service.js" ></script>
         <script type="text/javascript" src="./resources/js/distrito/controller.js" ></script>
-        <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>        
-       
-        <script type="text/javascript" src="./resources/js/PessoaFisicaController.js" ></script>
-        <script type="text/javascript" src="./resources/js/PessoaJuridicaController.js" ></script>
+        <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/pessoaFisica/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/pessoaFisica/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/pessoaJuridica/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/pessoaJuridica/service.js" ></script>
+      
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>
