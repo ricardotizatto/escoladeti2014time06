@@ -67,14 +67,6 @@ public class Telefone extends Entidade {
         this.ddd = ddd;
     }
 
-    public String getTelefone() {
-        return numero;
-    }
-
-    public void setTelefone(String telefone) {
-        this.numero = telefone;
-    }
-
     public TipoTelefone getTipo() {
         return tipo;
     }
