@@ -7,8 +7,8 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
-		this.idMaterial = 0;
 		this.livro = {};	
+		this.status = 'ABERTO';
 	};
 	
 	var Solicitacao = function () {
@@ -35,18 +35,8 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 			return;
 		}
 		
-		for (var i in solicitacao.itensSolicitacao) {
-			itens.push({
-				traducaoMaterial: solicitacao.itensSolicitacao[i].traducaoMaterial,
-				livro:  solicitacao.itensSolicitacao[i].livro,
-				outro:  solicitacao.itensSolicitacao[i].outro
-			});
-		}
-		
-		$http({
-			method : 'POST',
-			url: './rest/solicitacaoResouce/solicitacao',
-			data: {
+			
+		var dados = {
 				id: solicitacao.id,
 				aluno: buscarItem(solicitacao.idAluno, $scope.pessoas),
 				responsavel: buscarItem(solicitacao.idResponsavel, $scope.pessoas),
@@ -60,7 +50,26 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 				escola: solicitacao.escola,
 				dataChegada: solicitacao.dataChegada,
 				itensSolicitacao: itens				
-			}
+			};
+		
+		for (var i in solicitacao.itensSolicitacao) {
+			console.log('enviando livro');
+			itens.push({
+				id: solicitacao.itensSolicitacao[i].id,
+				traducaoMaterial: solicitacao.itensSolicitacao[i].traducaoMaterial,
+				livro:  solicitacao.itensSolicitacao[i].livro,
+				outro:  solicitacao.itensSolicitacao[i].outro,
+				status: solicitacao.itensSolicitacao[i].status,
+			});
+		}
+		
+		console.log('dados envio',dados);
+		
+		
+		$http({
+			method : 'POST',
+			url: './rest/solicitacaoResouce/solicitacao',
+			data: dados, 
 		}).success(function (data) {
 			toastr.success('Solicitacao salva com sucesso.');
 			toastr.success('Numero da Solicitacao: '+data.id);
@@ -108,7 +117,10 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 		method: 'GET',
 		url: './rest/solicitacaoResouce/solicitacao/pag/1'		
 	}).success(function (data) {
+		console.log('ok', data);
 		$scope.solicitacoes = data;
+	}).error(function (err) {
+		console.log('err',err);
 	});
 	
 	$http({
@@ -143,7 +155,7 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 		var selecionados = $.grep($scope.livros, function (item) {
     		return item.id == idLivro;
     	});
-		return selecionados[0];
+		return angular.copy(selecionados[0]);
 	}
 	
 	function buscarItem(id, list) {
@@ -151,8 +163,7 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 			return item.id = id;
 		});
 		
-		console.log('item encontrado ', id, selecionados[0]);
-		return selecionados[0];
+		return angular.copy(selecionados[0]);
 	}
 	
 	$scope.novo = function () {
@@ -167,6 +178,17 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 	$scope.adicionarMaterial = function () {
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
+	};
+	
+	$scope.getStatusItem = function (item) {
+		switch (item.status) {
+			case 'ABERTO':
+				return 'warning';
+			case 'ANDAMENTO':
+				return 'primary';
+			case 'CANCELADO':
+				return 'danger';
+		}
 	};
 	
 }

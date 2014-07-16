@@ -810,7 +810,12 @@
 	<changeSet id="est007" author="jhonatan">
 		<dropColumn tableName="solicitacao" columnName="numero"/>
 	</changeSet>
-		
+	
+	<changeSet id="est008" author="jhonatan">
+		<addColumn tableName="solicitacaoitem">
+			<column name="status" type="varchar(20)"></column>
+		</addColumn>
+	</changeSet>	
 
 </databaseChangeLog>
    

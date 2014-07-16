@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.entity.Solicitacao;
+import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.repository.SolicitacaoRepository;
 
 @Controller
@@ -30,6 +31,10 @@ public class SolicitacaoController implements Serializable{
 	@RequestMapping(value = "/solicitacao", method = RequestMethod.POST)	
 	@ResponseBody
 	public Solicitacao salvar(@RequestBody Solicitacao solicitacao) {
+		for(SolicitacaoItem item : solicitacao.getItensSolicitacao()) {
+			item.setSolicitacao(solicitacao);
+		}
+		
 		return repository.save(solicitacao);
 	}
     

@@ -1,28 +1,20 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
-import javax.annotation.Generated;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -62,18 +54,20 @@ public class Solicitacao extends Entidade {
     private PessoaFisica responsavel;
 
     @NotEmpty(message="Devem ser inseridos materiais que serão produzidos")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval= true)
-    @JoinColumn(name = "id_solicitacao", insertable=true, updatable=true)
-    private Set<SolicitacaoItem> itensSolicitacao;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER, mappedBy="solicitacao")
+//    @JoinColumn(name = "id_solicitacao", insertable=true, updatable=true)
+    private List<SolicitacaoItem> itensSolicitacao;
 
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataChegada;
 
     public Solicitacao() {
+    	this.itensSolicitacao = new ArrayList<SolicitacaoItem>();
     }
 
     public Solicitacao(PessoaFisica responsavel, Date dataChegada) {
+    	this();
         this.responsavel = responsavel;
         this.dataChegada = dataChegada;
     }
@@ -152,11 +146,11 @@ public class Solicitacao extends Entidade {
 		this.responsavel = responsavel;
 	}
 
-	public Set<SolicitacaoItem> getItensSolicitacao() {
+	public List<SolicitacaoItem> getItensSolicitacao() {
 		return itensSolicitacao;
 	}
 
-	public void setItensSolicitacao(Set<SolicitacaoItem> itensSolicitacao) {
+	public void setItensSolicitacao(List<SolicitacaoItem> itensSolicitacao) {
 		this.itensSolicitacao = itensSolicitacao;
 	}
 

@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.unicesumar.escoladeti.enums.StatusItem;
 import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 
 @Entity
@@ -32,6 +33,9 @@ public class SolicitacaoItem extends Entidade{
 	@JoinColumn(name="id_solicitacao")
 	@JsonIgnore
 	private Solicitacao solicitacao;
+	
+	@Enumerated(EnumType.STRING)
+	private StatusItem status;
 	
 	public SolicitacaoItem() {
 	}
@@ -67,5 +71,12 @@ public class SolicitacaoItem extends Entidade{
 	public void setOutro(String outro) {
 		this.outro = outro;
 	}
+
+	public void setStatus(StatusItem status) {
+		this.status = status;
+	}
 	
+	public StatusItem getStatus() {
+		return status;
+	}
 }
