@@ -1,9 +1,9 @@
 'use strict';
 
 
-var app = angular.module('app', ['ngRoute', 'controllers', 'ui.select2', 'ui.bootstrap']);
 angular.module('controllers', ['services']);
 angular.module('services', []);
+var app = angular.module('app', ['ngRoute', 'controllers', 'ui.select2', 'ui.bootstrap']);
 
 app.config(['$routeProvider',
     function($routeProvider) {
@@ -200,6 +200,18 @@ app.config(['$routeProvider',
             .when('/cadastroparticipanteevento', {
                 templateUrl: './pages/cadastroparticipanteevento.html',
                 controller: 'CadastroParticipanteEventoController'
+            })
+            .when('/listasolicitacoes', {
+                templateUrl: './pages/solicitacao/lista.html',
+                controller: 'SolicitacaoController'
+            })
+            .when('/cadastrosolicitacao', {
+                templateUrl: './pages/solicitacao/cadastro.html',
+                controller: 'SolicitacaoController'
+            })
+             .when('/cadastrosolicitacao/:idSolicitacao', {
+                templateUrl: './pages/solicitacao/cadastro.html',
+                controller: 'SolicitacaoController'
             })
             .when('/consultalivro', {
                 templateUrl: './pages/consultalivro.html',

@@ -17,9 +17,9 @@ public class PaisService {
 		return paisRepository.save(pais);
 	}
         
-        public List<Pais> listarTodosPaises() {
-		return paisRepository.findAll();
-        }
+    public List<Pais> listarTodosPaises() {
+	return paisRepository.findAll();
+    }
 	
 	public DataPage<Pais> getTodos(Integer pagina){
 		return new DataPage<>(paisRepository.findAll(pageRequestForAsc(pagina, "nome")));

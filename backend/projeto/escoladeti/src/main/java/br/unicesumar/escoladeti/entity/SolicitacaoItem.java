@@ -9,13 +9,16 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 
 @Entity
 public class SolicitacaoItem extends Entidade{
 	private static final long serialVersionUID = 1L;
 	
-	private String pnld;//Não importa
+	private String outro;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -23,22 +26,14 @@ public class SolicitacaoItem extends Entidade{
 	
 	@ManyToOne
 	@JoinColumn(name="id_material")
-	private Material material;
-	
+	private Livro livro;	
+
 	@ManyToOne
 	@JoinColumn(name="id_solicitacao")
+	@JsonIgnore
 	private Solicitacao solicitacao;
 	
 	public SolicitacaoItem() {
-	}
-	
-	public SolicitacaoItem(String pnld, TraducaoMaterial traducaoMaterial) {
-		this.pnld = pnld;
-		this.traducaoMaterial = traducaoMaterial;
-	}
-	
-	public void setPnld(String pnld) {
-		this.pnld = pnld;
 	}
 	
 	public Solicitacao getSolicitacao() {
@@ -49,10 +44,28 @@ public class SolicitacaoItem extends Entidade{
 		return traducaoMaterial;
 	}
 	
-	public String getPnld() {
-		return pnld;
+	public void setTraducaoMaterial(TraducaoMaterial traducaoMaterial) {
+		this.traducaoMaterial = traducaoMaterial;
+	}
+
+	public void setSolicitacao(Solicitacao solicitacao) {
+		this.solicitacao = solicitacao;
 	}
 	
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
+	}
 	
+	public String getOutro() {
+		return outro;
+	}
+	
+	public void setOutro(String outro) {
+		this.outro = outro;
+	}
 	
 }

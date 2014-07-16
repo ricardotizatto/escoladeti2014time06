@@ -8,6 +8,7 @@
 
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.css" rel="stylesheet">
+		
         <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">        
         <link href="./resources/css/toastr.css" rel="stylesheet">        
         <link href="./resources/css/jquery-ui.css" rel="stylesheet">
@@ -30,7 +31,7 @@
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>        
 
-        <script type="text/javascript" src="./resources/js/app.js"></script>        
+        <script type="text/javascript" src="./resources/js/app.js"></script>        	
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
@@ -38,7 +39,8 @@
         <script type="text/javascript" src="./resources/js/cidade/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/cidade/service.js" ></script>
         <script type="text/javascript" src="./resources/js/distrito/controller.js" ></script>
-        <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>        
+        <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/solicitacao/controller.js" ></script>        
        
         <script type="text/javascript" src="./resources/js/PessoaFisicaController.js" ></script>
         <script type="text/javascript" src="./resources/js/PessoaJuridicaController.js" ></script>
@@ -122,8 +124,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Operações<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a href="#/listasolicitacoes">Solicitação</a></li>
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
-                        </ul>    
+                        </ul>                             
                     </li>
                 </ul>      
                 <ul class="nav navbar-nav navbar-right">
