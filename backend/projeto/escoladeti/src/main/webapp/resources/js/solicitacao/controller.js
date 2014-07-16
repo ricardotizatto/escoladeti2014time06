@@ -30,6 +30,11 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 		var solicitacao = $scope.solicitacao;
 		var itens = [];
 		
+		if (solicitacao.itensSolicitacao.length <=0 ) {
+			toastr.warning('Obrigatorio iserir ao menos um material');
+			return;
+		}
+		
 		for (var i in solicitacao.itensSolicitacao) {
 			itens.push({
 				traducaoMaterial: solicitacao.itensSolicitacao[i].traducaoMaterial,
