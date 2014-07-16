@@ -27,26 +27,26 @@
                             <legend>Dados Pessoais</legend>
                             <br>
                             <label>CPF</label>
-                            <input class="form-control" type="text" ng-change="participante.cpf"  maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" id="cpf" required>
+                            <input class="form-control" type="text" ng-change="participante.cpf"  maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" id="cpf">
                             <label>RG</label>
-                            <input class="form-control"  type="text" placeholder="R.G." ng-model="participante.rg" required>
+                            <input class="form-control"  type="text" placeholder="R.G." ng-model="participante.rg"  >
                             <label>Nome</label>
-                                <input class="form-control" type="text"  placeholder="Nome" ng-model="participante.nome" required>
+                                <input class="form-control" type="text"  placeholder="Nome" ng-model="participante.nome"  >
                             <label>Email</label>
-                            <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email" required>
+                            <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email"  >
                             <label>Telefone</label>
-                            <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone" required>
+                            <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone"  >
                             <div class="row">
                                 <div class="form-group col-sm-10">
                                     <label>Possui necessidades especiais?</label>
-                                    <select class="selectpicker show-tick form-control" name="deficiente" ng-model="participante.deficiente" data-live-search="true" required>
+                                    <select class="selectpicker show-tick form-control" name="deficiente" ng-model="participante.deficiente" data-live-search="true"  >
                                         <option value="S" >Sim</option>
                                         <option value="N" >Não</option>
                                     </select>
                                 </div> 
                                <div class="form-group col-sm-4">
                                         <label>Sexo</label>
-                                        <select class="selectpicker show-tick form-control" name="sexo" ng-model="participante.sexo" required>
+                                        <select class="selectpicker show-tick form-control" name="sexo" ng-model="participante.sexo"  >
                                             <option value="M" >M</option>
                                             <option value="F" >F</option>
                                         </select>

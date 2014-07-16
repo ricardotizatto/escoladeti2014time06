@@ -15,15 +15,11 @@ function livroController($scope, $http, $routeParams) {
                 .success(function(data, status) {
                     $scope.getTodos(1);
                     console.log('Livro deletado!');
-                    $scope.info = {};
-                    $scope.info.message = 'Livro ' + livro.nome + ' deletado com sucesso';
-                    $scope.info.status = 'success'; 
+                    toastr.success('Livro ' + livro.nome + ' deletado com sucesso'); 
                 })
                 .error(function(data, status) { 
                     console.log('Livro não foi deletado' + data);
-                    $scope.info = {};
-                    $scope.info.status = 'danger';
-                    $scope.info.message = 'Erro ao deletar o livro: ' + livro.nome + ' - '+ data.message;
+                    toastr.error('Erro ao deletar o livro: ' + livro.nome + ' - '+ data.message);
                 });
             } else {
                 $scope.getTodos(1);
@@ -83,16 +79,11 @@ function livroController($scope, $http, $routeParams) {
             .success(function(livro, status) {
                 $scope.livro = getNovoLivro();
                 console.log("livro salva = " + livro);
-                $scope.info = {};
-                $scope.info.message = 'Livro ' + livro.nome + ' salvo com sucesso';
-                $scope.info.status = 'success'; 
+                toastr.success('Livro ' + livro.nome + ' salvo com sucesso');
             })
             .error(function(data, status) {
                 console.log("erro ao salvar livro" + data);
-                $scope.info = {};
-                $scope.info.status = 'danger';
-                console.log($scope.info);
-                $scope.info.message = data.message;
+                toastr.error(data.message);
             });
     };
     

@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="eventoController" ng-init="carregarEvento()">
+﻿<div class="container" ng-controller="eventoController" ng-init="novo()">
     <fieldset>
         <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
         <div class="row">
@@ -26,11 +26,11 @@
                 <div class="col-sm-1"></div>
                 <div class="form-group col-sm-7">
                     <label> Realização </label>
-                    <input class="form-control" name="organizacao" type="text" ng-model="evento.organizacao" placeholder="Organiza��o"/>
+                    <input class="form-control" name="organizacao" type="text" ng-model="evento.organizacao" placeholder="Organização responsavel" />
                 </div>
                 <div class="col-sm-2">
                     <label>Valor</label>
-                    <input class="form-control" type="text" name="valor" placeholder="valor" ng-model="evento.valor" />
+                    <input class="form-control" type="text" name="valor" placeholder="R$00.00" ng-model="evento.valor" />
                 </div>
             </div>
             <div class="row ">
@@ -44,7 +44,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-9">
                     <label> Descrição do Evento</label>
-                    <textarea class="form-control" rows="5" cols="5" ng-model="evento.descricao" placeholder="No mundo atual, a revolu��o dos costumes maximiza as possibilidades por conta dos relacionamentos verticais entre as hierarquias..."></textarea>
+                    <textarea class="form-control" rows="5" cols="5" ng-model="evento.descricao" placeholder="No mundo atual, a revolução dos costumes maximiza as possibilidades por conta dos relacionamentos verticais entre as hierarquias..."></textarea>
                     <div class="required-icon">
                         <div class="text"></div>
                     </div>

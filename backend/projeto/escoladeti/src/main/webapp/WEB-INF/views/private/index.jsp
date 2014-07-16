@@ -39,6 +39,7 @@
         <script type="text/javascript" src="./resources/js/cidade/service.js" ></script>
         <script type="text/javascript" src="./resources/js/distrito/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/solicitacao/controller.js" ></script>        
         <script type="text/javascript" src="./resources/js/pessoaFisica/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaFisica/service.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/controller.js" ></script>
@@ -124,8 +125,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Operações<b class="caret"></b></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a href="#/listasolicitacoes">Solicitação</a></li>
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
                         </ul>    
+                            
                     </li>
                 </ul>      
                 <ul class="nav navbar-nav navbar-right">
