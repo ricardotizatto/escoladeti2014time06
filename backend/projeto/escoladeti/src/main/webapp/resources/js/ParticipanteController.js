@@ -18,6 +18,8 @@
     $scope.inicioCurso;
     $scope.fimCurso;
     $scope.ministranteCurso;
+    $scope.deficiente;
+    $scope.sexo;
     $scope.inicio;
     $scope.fim;
     $scope.tipoEvento;
@@ -46,21 +48,43 @@
 
     $scope.salvar = function() {
         console.log(angular.toJson($scope.participante, true));
-        if ($scope.validacampos() != "")
+        
+        
+        if($scope.participante.cpf === undefined)
+            return toastr.warning('Preencha o campo CPF');
+        
+        if($scope.participante.rg === undefined)
+            return toastr.warning('Preencha o campo RG');
+        
+        if($scope.participante.nome === undefined)
+            return toastr.warning('Preencha o campo Nome');
+        
+        if($scope.participante.email === undefined)
+            return toastr.warning('Preencha o campo Email');
+        
+        if($scope.participante.telefone === undefined)
+            return toastr.warning('Preencha o campo Telefone');
+          
+        //alert($scope.participante.deficiente);      
+        if($scope.participante.deficiente === undefined)
+            return toastr.warning('Preencha o campo Possui necessidades especiais');
+        
+        if($scope.participante.sexo === undefined)
+            return toastr.warning('Preencha o campo Sexo');
+        
+        
+        if ($scope.validacampos() !== "")
         {
-            $scope.info = {};
-            $scope.info.status = 'danger';
-            $scope.info.message = 'Atenção: ' + $scope.validacampos();   
+            toastr.warning("Atenção: " + $scope.validacampos());
             
         }else{         
             $scope.participante.pagamento = "PENDENTE";
             $http.post("./rest/participanteSource/participante", $scope.participante)
                     .success(function(participante, status) {
                 //$scope.participante = getNovoParticipante();
-                console.log("participante salva = " + participante);
-                $scope.info = {};
-                $scope.info.message = 'Participante ' + participante.nome + ' salvo com sucesso';
-                $scope.info.status = 'success';
+                console.log("participante salva = " + participante.nome);
+                toastr.success("Participante cadastrado com sucesso!");
+                setTimeout(function(){window.location="#/listaevento"}, 5000);
                 $scope.novo();
 
             })
@@ -79,7 +103,7 @@
         $scope.participante.cpf = $scope.cpfModal;
         $scope.participante.deficiente = $scope.deficienteModal;
         $scope.participante.email = $scope.emailModal;
-        if ($scope.ideventoModal == null) {
+        if ($scope.ideventoModal === null) {
             $scope.participante.idevento = $routeParams.idevento;
         } else {
             $scope.participante.idevento = $scope.ideventoModal;
@@ -121,25 +145,28 @@
         $scope.sexoModal = {};
         $scope.telefoneModal = {};
         $scope.pagamentoModal = {};
+        $scope.deficiente = {};
+        $scope.sexo = {};
         $scope.participante = $scope.getNovoParticipante();
         //window.location = '#/cadastroparticipante';
+        console.log("novo");
     };
     
     $scope.validacampos = function() {
         
-       if(ValidarCPF($scope.participante.cpf) == false)
-           return "Por favor corrija o CPF digitado.";
+       if(ValidarCPF($scope.participante.cpf) === false)
+           return ("Por favor corrija o CPF digitado.");
        
-       if(ValidaEmail($scope.participante.email) == false)
+       if(ValidaEmail($scope.participante.email) === false)
            return "Por favor corrija o Email digitado.";
        
-       if($scope.participante.idevento ==  undefined)
+       if($scope.participante.idevento ===  undefined)
            return "Selecione um dos nossos cursos.";
 
-       if( $scope.participante.nome  ==  undefined)
+       if( $scope.participante.nome  ===  undefined)
            return "Digite seu nome para efetuarmos o cadastro.";
        
-       if($scope.participante.telefone ==  undefined)
+       if($scope.participante.telefone ===  undefined)
            return "Por favor entre com um telefone.";
        
        return "";
@@ -174,6 +201,7 @@
         $http.get("./rest/eventoSource/evento")
                 .success(function(eventos, status) {
             $scope.eventos = eventos;
+            console.log("eventos carregados");
         })
                 .error(function(data, status) {
             console.log('erro ao buscar eventos');
