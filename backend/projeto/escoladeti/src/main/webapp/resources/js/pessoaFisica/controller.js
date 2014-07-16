@@ -176,10 +176,11 @@ function PessoaFisicaController($scope, $routeParams, pessoaFisicaService, paisS
 
     $scope.salvarTelefone = function() {
         if ($scope.indiceTelefone >= 0){
-            $scope.pessoaFisica.telefones.splice($scope.indiceTelefone, 1);
+        	var indice = $scope.indiceTelefone;
+            $scope.pessoaFisica.telefones.splice(indice, 1);
         }
         $scope.pessoaFisica.telefones.push($scope.telefone);
-        console.log($scope.telefones);
+        console.log($scope.pessoaFisica.telefones);
         toastr.success("Telefone adicionado " + $scope.telefone.numero + " !");
         $scope.telefone = getNovoTelefone();
         $scope.indiceTelefone = {};
@@ -187,7 +188,8 @@ function PessoaFisicaController($scope, $routeParams, pessoaFisicaService, paisS
 
     $scope.editarTelefone = function(indice) {
     	$scope.indiceTelefone = indice;
-        $scope.telefone = angular.copy($scope.pessoaFisica.telefones[indice]);
+        $scope.telefone = $scope.pessoaFisica.telefones[indice];
+        console.log($scope.telefone);
     };
 
     $scope.delTelefone = function(index) {
@@ -267,6 +269,7 @@ function PessoaFisicaController($scope, $routeParams, pessoaFisicaService, paisS
     
     function getNovoTelefone(){
     	return {
+    		numero : $scope.c,
     		tipo : 'RESIDENCIAL'
     	};
     }
