@@ -58,8 +58,8 @@
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
         
-        <link href=./resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="./resources/vendor/css/jquery.sidr.light.css">
+        <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
+        <link  href="./resources/vendor/css/jquery.sidr.light.css">
         <link rel="stylesheet" href="./resources/vendor/css/custom-icons.css">
         <link rel="stylesheet" href="./resources/vendor/css/style.css">
         <link rel="stylesheet" href="./resources/vendor/css/responsive.css">     
@@ -133,7 +133,7 @@
 				<ul>
 					<li>
 						<a href="#">
-							<i class="icon-custom-form"></i>
+							<i class="fa fa-location-arrow"></i>
 							<span class="title">Localidade</span>
 						</a>
 						<ul class="sub-menu">
@@ -147,7 +147,7 @@
 					</li>
 					<li>
 						<a href="#">
-							<i class="icon-custom-form"></i>
+							<i class="fa fa-user"></i>
 							<span class="title">Usuários</span>
 						</a>
 						<ul class="sub-menu">
@@ -158,7 +158,7 @@
 					</li>
 					<li>
 						<a href="#">
-							<i class="icon-custom-form"></i>
+							<i class="fa fa-male"></i>
 							<span class="title">Pessoas</span>
 						</a>
 						<ul class="sub-menu">
@@ -168,7 +168,7 @@
 					</li>
 					<li>
 						<a href="#">
-							<i class="icon-custom-portlets"></i>
+							<i class="fa fa-star-half-o"></i>
 							<span class="title">EVENTOS</span>
 						</a>
 						<ul class="sub-menu">
@@ -179,7 +179,7 @@
 					</li>
 					<li>
 						<a href="#">
-							<i class="icon-custom-portlets"></i>
+							<i class="fa fa-cog"></i>
 							<span class="title">PRODUÇÃO</span>
 						</a>
 						<ul class="sub-menu">
