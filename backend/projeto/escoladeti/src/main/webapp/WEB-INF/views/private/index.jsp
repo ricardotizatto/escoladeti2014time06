@@ -58,14 +58,19 @@
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
         
+        <link href=./resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="./resources/vendor/css/jquery.sidr.light.css">
         <link rel="stylesheet" href="./resources/vendor/css/custom-icons.css">
-        <link rel="stylesheet" href="./resources/vendor/css/custom-icon-set.css">        
-        <link rel="stylesheet" href="./resources/vendor/css/responsive.css">
         <link rel="stylesheet" href="./resources/vendor/css/style.css">
+        <link rel="stylesheet" href="./resources/vendor/css/responsive.css">     
+        <link rel="stylesheet" href="./resources/vendor/css/custom-icon-set.css">        
         
-        <script type="text/javascript" src="./resources/vendor/js/core.js"></script>
+           
+        
+        <script type="text/javascript" src="./resources/vendor/js/breakpoints.js"></script>
+        <script type="text/javascript" src="./resources/vendor/js/core.js"></script>        
         <script type="text/javascript" src="./resources	/vendor/js/jquery.sidr.min.js"></script>
+        
     </head>
     <body>
 		<div class="header navbar navbar-inverse "> 
@@ -73,33 +78,88 @@
   			<div class="navbar-inner">
 				<div class="header-seperation"> 
 					<ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper" style="display:none">
+						<li class="dropdown">
+							<a id="main-menu-toggle"
+								href="#main-menu" class="">
+								<div class="iconset top-menu-toggle-white"></div>
+							</a>
+						</li>
 					</ul>
-					<img src="./resources/imagens/icone-amacap-cinza.png" class="logo"/>
+					 
+					<a href="./">
+						<img class="logo" src="./resources/imagens/icone-amacap-cinza.png" class="logo"/>
+					</a>	 
 		
 					<ul class="nav pull-right notifcation-center">	
-        				<li class="dropdown" id="header_task_bar"> 
-        					<a href="index.html" class="dropdown-toggle active" data-toggle=""> 
+        				<li class="dropdown" > 
+        					<a href="./" class="dropdown-toggle active" data-toggle=""> 
         						<div class="iconset top-home"></div> 
         					</a> 
         				</li>
         			</ul>
-				</div>			
+        			
+				</div>
+				
+				<div class="header-quick-nav" > 
+			      <!-- BEGIN TOP NAVIGATION MENU -->
+				  <div class="pull-left"> 
+			      	<ul class="nav quick-section">
+			          <li class="quicklinks"> 
+			          	<a href="javascript:;" class="" id="layout-condensed-toggle" >
+			            	<div class="iconset top-menu-toggle-dark"></div>
+			            </a> 
+			          </li>
+			        </ul>
+			     </div>
+			     <div class="pull-right">
+			     	<div class="chat-toggler">
+			     		<a href="#">
+			     			<div class="user-details username">
+			     				ADMIN
+			     			</div>
+			     		</a>
+			     	</div>
+			     </div>			
+			   </div>
 			</div>
 		</div>    	
 		<div class="page-container row">
-			<div class="page-sidebar">
+			<div class="page-sidebar" id="main-menu">
 				<ul>
 					<li>
-						<a>
+						<a href="#">
 							<i class="icon-custom-form"></i>
-							<span class="title"> Cadastros</span>
+							<span class="title">Cadastros</span>
 						</a>
+						<ul class="sub-menu">
+							 <li><a href="#/listapais">Pais</a></li>
+                             <li><a href="#/listaestado">Estado</a></li>
+                             <li><a href="#/listacidade">Cidade</a></li>
+                             <li><a href="#/listadistrito">Distrito</a></li>
+                             <li><a href="#/listabairro">Bairro</a></li>
+                             <li><a href="#/listacep">Faixa de CEP</a></li>
+						</ul>
 					</li>
 					<li>
-						<a>
+						<a href="#">
 							<i class="icon-custom-portlets"></i>
-							<span class="title">Operações</span>
+							<span class="title">EVENTOS</span>
 						</a>
+						<ul class="sub-menu">
+							 <li><a href="#/cadastroparticipante">Participante</a></li>
+                             <!--<li><a href="#/cadastroevento">Evento</a></li>-->
+                             <li><a href="#/listaevento">Eventos</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-custom-portlets"></i>
+							<span class="title">PRODUÇÃO</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#/listasolicitacoes">Solicitação</a></li>
+                            <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
+						</ul>
 					</li>
 				</ul>
 			</div>
