@@ -115,7 +115,12 @@
 			     	<div class="chat-toggler">
 			     		<a href="#">
 			     			<div class="user-details username">
-			     				ADMIN
+			     				<a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">	
+			     					ADMIN
+			     				</a>
+			     				<ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
+			     					<li><a href="./logout"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Sair</a></li>
+			     				</ul>
 			     			</div>
 			     		</a>
 			     	</div>
