@@ -57,94 +57,121 @@
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
+        
+        <link href=./resources/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="./resources/vendor/css/jquery.sidr.light.css">
+        <link rel="stylesheet" href="./resources/vendor/css/custom-icons.css">
+        <link rel="stylesheet" href="./resources/vendor/css/style.css">
+        <link rel="stylesheet" href="./resources/vendor/css/responsive.css">     
+        <link rel="stylesheet" href="./resources/vendor/css/custom-icon-set.css">        
+        
+           
+        
+        <script type="text/javascript" src="./resources/vendor/js/breakpoints.js"></script>
+        <script type="text/javascript" src="./resources/vendor/js/core.js"></script>        
+        <script type="text/javascript" src="./resources	/vendor/js/jquery.sidr.min.js"></script>
+        
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><img src="./resources/imagens/icone-amacap-cinza.png"/><span class="titulo-menu-amacap" >AMACAP</span> </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <!--dropdown listas-->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Cadastros<b class="caret"></b></a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1">Pessoa</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#/listapessoafisica">Pessoa Física</a></li>
-                                    <li><a href="#/listapessoajuridica">Pessoa Jurídica</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1">Usuário</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#/listausuario">Usuário</a></li>
-                                    <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
-                                    <li><a href="#/listaitemacesso">Item de acesso</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1">Localidade</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#/listapais">Pais</a></li>
-                                    <li><a href="#/listaestado">Estado</a></li>
-                                    <li><a href="#/listacidade">Cidade</a></li>
-                                    <li><a href="#/listadistrito">Distrito</a></li>
-                                    <li><a href="#/listabairro">Bairro</a></li>
-                                    <li><a href="#/listacep">Faixa de CEP</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1">Materiais</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#/listalivro">Livro</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1">Eventos</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#/cadastroparticipante">Participante</a></li>
-                                    <!--<li><a href="#/cadastroevento">Evento</a></li>-->
-                                    <li><a href="#/listaevento">Lista Eventos</a></li>
-                                </ul>
-                            </li>
-                        </ul>	
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <!--dropdown listas-->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Operações<b class="caret"></b></a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li><a href="#/listasolicitacoes">Solicitação</a></li>
+		<div class="header navbar navbar-inverse "> 
+  <!-- BEGIN TOP NAVIGATION BAR -->
+  			<div class="navbar-inner">
+				<div class="header-seperation"> 
+					<ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper" style="display:none">
+						<li class="dropdown">
+							<a id="main-menu-toggle"
+								href="#main-menu" class="">
+								<div class="iconset top-menu-toggle-white"></div>
+							</a>
+						</li>
+					</ul>
+					 
+					<a href="./">
+						<img class="logo" src="./resources/imagens/icone-amacap-cinza.png" class="logo"/>
+					</a>	 
+		
+					<ul class="nav pull-right notifcation-center">	
+        				<li class="dropdown" > 
+        					<a href="./" class="dropdown-toggle active" data-toggle=""> 
+        						<div class="iconset top-home"></div> 
+        					</a> 
+        				</li>
+        			</ul>
+        			
+				</div>
+				
+				<div class="header-quick-nav" > 
+			      <!-- BEGIN TOP NAVIGATION MENU -->
+				  <div class="pull-left"> 
+			      	<ul class="nav quick-section">
+			          <li class="quicklinks"> 
+			          	<a href="javascript:;" class="" id="layout-condensed-toggle" >
+			            	<div class="iconset top-menu-toggle-dark"></div>
+			            </a> 
+			          </li>
+			        </ul>
+			     </div>
+			     <div class="pull-right">
+			     	<div class="chat-toggler">
+			     		<a href="#">
+			     			<div class="user-details username">
+			     				ADMIN
+			     			</div>
+			     		</a>
+			     	</div>
+			     </div>			
+			   </div>
+			</div>
+		</div>    	
+		<div class="page-container row">
+			<div class="page-sidebar" id="main-menu">
+				<ul>
+					<li>
+						<a href="#">
+							<i class="icon-custom-form"></i>
+							<span class="title">Cadastros</span>
+						</a>
+						<ul class="sub-menu">
+							 <li><a href="#/listapais">Pais</a></li>
+                             <li><a href="#/listaestado">Estado</a></li>
+                             <li><a href="#/listacidade">Cidade</a></li>
+                             <li><a href="#/listadistrito">Distrito</a></li>
+                             <li><a href="#/listabairro">Bairro</a></li>
+                             <li><a href="#/listacep">Faixa de CEP</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-custom-portlets"></i>
+							<span class="title">EVENTOS</span>
+						</a>
+						<ul class="sub-menu">
+							 <li><a href="#/cadastroparticipante">Participante</a></li>
+                             <!--<li><a href="#/cadastroevento">Evento</a></li>-->
+                             <li><a href="#/listaevento">Eventos</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-custom-portlets"></i>
+							<span class="title">PRODUÇÃO</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#/listasolicitacoes">Solicitação</a></li>
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
-                        </ul>    
-                            
-                    </li>
-                </ul>      
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class=dropdown-toggle" data-toggle="dropdown" href="">
-                            <span class="glyphicon glyphicon-user"></span> escoladeti@unicesumar.br <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li>
-                                <a href="./logout">Sair</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-        <div ng-view></div>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="page-content">
+	        	<div class="clearfix"></div>
+	        	<div class="content">
+	        		<div ng-view></div>
+	        	</div>
+	        </div>
+		</div>
+        
+        
     </body>
 </html>
