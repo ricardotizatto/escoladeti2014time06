@@ -134,7 +134,7 @@
 					<li>
 						<a href="#">
 							<i class="icon-custom-form"></i>
-							<span class="title">Cadastros</span>
+							<span class="title">Localidade</span>
 						</a>
 						<ul class="sub-menu">
 							 <li><a href="#/listapais">Pais</a></li>
@@ -143,6 +143,27 @@
                              <li><a href="#/listadistrito">Distrito</a></li>
                              <li><a href="#/listabairro">Bairro</a></li>
                              <li><a href="#/listacep">Faixa de CEP</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-custom-form"></i>
+							<span class="title">Usuários</span>
+						</a>
+						<ul class="sub-menu">
+							  <li><a href="#/listausuario">Usuário</a></li>
+                              <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
+                              <li><a href="#/listaitemacesso">Item de acesso</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-custom-form"></i>
+							<span class="title">Pessoas</span>
+						</a>
+						<ul class="sub-menu">
+ 							<li><a href="#/listapessoafisica">Pessoa Física</a></li>
+                        	<li><a href="#/listapessoajuridica">Pessoa Jurídica</a></li>
 						</ul>
 					</li>
 					<li>
