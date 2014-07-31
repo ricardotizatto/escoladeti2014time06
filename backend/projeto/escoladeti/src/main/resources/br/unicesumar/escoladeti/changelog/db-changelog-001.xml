@@ -853,7 +853,60 @@
 		<addColumn tableName="solicitacaoitem">
 			<column name="status" type="varchar(20)"></column>
 		</addColumn>
-	</changeSet>	
+	</changeSet>
+        
+        <changeSet id="est009" author="Lorhan">
+            
+            <createTable tableName="menu">
+                <column name="id" type="INT8" >
+                    <constraints nullable="false" primaryKey="true"
+                    primaryKeyName="menu_pkey"/>
+                </column>
+                <column name="nome" type="VARCHAR(120)">
+                    <constraints nullable="false"/>
+                </column>
+             </createTable>
+             
+             <createTable tableName="submenu">
+                 <column name="id" type="INT8">
+                     <constraints nullable="false" primaryKey="true"
+                     primaryKeyName="submenu_pkey"/>
+                 </column>
+                 <column name="id_menu" type="INT8">
+                     <constraints nullable="false" foreignKeyName="fk_menu" referencedColumnNames="id" 
+                     referencedTableName="menu"/>
+                 </column>
+                 <column name="nome" type="VARCHAR(120)">
+                     <constraints nullable="false"/>
+                 </column>
+             </createTable>
+             
+             <createTable tableName="perfilitemacesso">
+                 <column name="id_perfilacesso" type="INT8">
+                     <constraints nullable="false" foreignKeyName="fk_perfilacesso" referencedColumnNames="id"
+                     referencedTableName="perfilacesso" primaryKey="true" primaryKeyName="perfilitemacesso_pkey"/>
+                 </column>
+                 <column name="id_itemacesso" type="INT8">
+                     <constraints nullable="false" foreignKeyName="fk_itemacesso" referencedColumnNames="id"
+                     referencedTableName="itemacesso" primaryKey="true" primaryKeyName="itemacessoperfil_pkey"/>
+                 </column>
+             </createTable>
+             
+             <addColumn tableName="itemacesso">
+                 <column name="id_submenu" type="INT8">
+                     <constraints nullable="false" foreignKeyName="fk_submenu" referencedColumnNames="id"
+                     referencedTableName="submenu"/>
+                 </column>
+             </addColumn>
+            
+            
+                
+        </changeSet>
+        
+        <changeSet id="est010" author="Lorhan">
+            <dropTable tableName="usuarioitemacesso"></dropTable>
+        </changeSet>
+            	
 
 </databaseChangeLog>
    

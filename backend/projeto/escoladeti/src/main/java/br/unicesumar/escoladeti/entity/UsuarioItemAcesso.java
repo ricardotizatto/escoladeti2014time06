@@ -9,8 +9,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-@Entity
-public class UsuarioItemAcesso extends Entidade {
+
+public class UsuarioItemAcesso  {
 	private Date inicioVigencia;
 	private Date fimVigencia;
 
