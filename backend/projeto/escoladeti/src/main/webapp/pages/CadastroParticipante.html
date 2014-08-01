@@ -1,117 +1,117 @@
 <div class="container" ng-controller="participanteController" ng-init="carregarEventos();novo()">
-	<fieldset>
-            <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
-            <div class="row">
-                <div class="form-group col-sm-12">
-                    <legend> Cursos Disponíveis </legend>
+    <fieldset>
+        <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <legend> Cursos Disponíveis </legend>
+            </div>
+        </div>
+        <form action="" method="POST" name="participante" ng-submit="salvar()">
+            <div class="form-group col-sm-7">
+                <div class="blogShort" ng-repeat="evento in eventos">
+                    <h1>{{evento.titulo}}</h1>
+                    <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
+                    <article><p>
+                            {{evento.descricao.substring(0,180)}}
+                        </p></article>
+                    <input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}">
+                    <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id,evento.titulo,evento.descricao,evento.local,evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
+                        <b>+ Detalhes</b>
+                    </button><br>
+                    <hr/>
+                </div>
+
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="form-group col-sm-4">
+                <legend>Dados Pessoais</legend>
+                <br>
+                <label>CPF</label>
+                <input class="form-control" type="text" ng-change="participante.cpf"  maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" id="cpf">
+                <label>RG</label>
+                <input class="form-control"  type="text" placeholder="R.G." ng-model="participante.rg"  >
+                <label>Nome</label>
+                <input class="form-control" type="text"  placeholder="Nome" ng-model="participante.nome"  >
+                <label>Email</label>
+                <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email"  >
+                <label>Telefone</label>
+                <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone"  >
+                <div class="row">
+                    <div class="form-group col-sm-10">
+                        <label>Possui necessidades especiais?</label>
+                        <select class="selectpicker show-tick form-control" name="deficiente" ng-model="participante.deficiente" data-live-search="true"  >
+                            <option value="S" >Sim</option>
+                            <option value="N" >Não</option>
+                        </select>
+                    </div> 
+                    <div class="form-group col-sm-4">
+                        <label>Sexo</label>
+                        <select class="selectpicker show-tick form-control" name="sexo" ng-model="participante.sexo"  >
+                            <option value="M" >M</option>
+                            <option value="F" >F</option>
+                        </select>
+                    </div>
+
+
                 </div>
             </div>
-                <form action="" method="POST" name="participante" ng-submit="salvar()">
-                    <div class="form-group col-sm-7">
-                        <div class="blogShort" ng-repeat="evento in eventos">
-                            <h1>{{evento.titulo}}</h1>
-                                <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
-                            <article><p>
-                                {{evento.descricao.substring(0,180)}}
-                                </p></article>
-                                <input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}">
-                                <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id,evento.titulo,evento.descricao,evento.local,evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
-                                   + Detalhes
-                               </button><br>
-                                       <hr/>
+
+
+
+            <div align="right">
+                <button type="button"  class="btn btn-danger btn-padrao"  ng-click="novo()"> <span class="glyphicon glyphicon-refresh" ></span> Limpar</button>
+                <button class="btn btn-success btn-padrao"> <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
+            </div>
+
+
+            <!-- Modal detalhamento-->
+            <div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="modalEnderecoLabel">Detalhes do Curso</h4>
                         </div>
-
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="form-group col-sm-4">
-                            <legend>Dados Pessoais</legend>
-                            <br>
-                            <label>CPF</label>
-                            <input class="form-control" type="text" ng-change="participante.cpf"  maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" id="cpf">
-                            <label>RG</label>
-                            <input class="form-control"  type="text" placeholder="R.G." ng-model="participante.rg"  >
-                            <label>Nome</label>
-                                <input class="form-control" type="text"  placeholder="Nome" ng-model="participante.nome"  >
-                            <label>Email</label>
-                            <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email"  >
-                            <label>Telefone</label>
-                            <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone"  >
+                        <div class="modal-body">
                             <div class="row">
-                                <div class="form-group col-sm-10">
-                                    <label>Possui necessidades especiais?</label>
-                                    <select class="selectpicker show-tick form-control" name="deficiente" ng-model="participante.deficiente" data-live-search="true"  >
-                                        <option value="S" >Sim</option>
-                                        <option value="N" >Não</option>
-                                    </select>
-                                </div> 
-                               <div class="form-group col-sm-4">
-                                        <label>Sexo</label>
-                                        <select class="selectpicker show-tick form-control" name="sexo" ng-model="participante.sexo"  >
-                                            <option value="M" >M</option>
-                                            <option value="F" >F</option>
-                                        </select>
-                                </div>
+                                <div class="blogShort">
+                                    <h1>{{tituloCurso}}</h1>
+                                    <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
+                                    <article><p>
+                                            {{DetalhesCurso}}
+                                        </p></article>
 
-                                
+                                    <article><p>
+                                            <b>Ministrante: </b> {{ministranteCurso}}
+                                        </p></article>
+
+                                    <article><p>
+                                            <b>Data:</b> {{dataCurso}}
+                                        </p></article>
+                                    <article><p>
+                                            <b>Horário : </b> {{inicioCurso}} às {{fimCurso}}
+                                        </p></article>
+                                    <article><p>
+                                            <b>Local:</b> {{localCurso}}
+                                        </p></article>
+                                </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Fechar</button>
+                        </div>
                     </div>
-                            
-                            
-                            
-                    <div align="right">
-                        <button type="button"  class="btn btn-danger btn-padrao"  ng-click="novo()"> <span class="glyphicon glyphicon-refresh" ></span> Limpar</button>
-                            <button class="btn btn-success btn-padrao"> <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
-                    </div>
-                  
-
-                <!-- Modal detalhamento-->
-                        <div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                        <div class="modal-content">
-                                                <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                        <h4 class="modal-title" id="modalEnderecoLabel">Detalhes do Curso</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                        <div class="row">
-                                                                <div class="blogShort">
-                                                                         <h1>{{tituloCurso}}</h1>
-                                                                                 <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
-                                                                         <article><p>
-                                                                                 {{DetalhesCurso}}
-                                                                                 </p></article>
-                                                                                 
-                                                                                 <article><p>
-                                                                                 <b>Ministrante: </b> {{ministranteCurso}}
-                                                                                 </p></article>
-
-                                                                                 <article><p>
-                                                                                 <b>Data:</b> {{dataCurso}}
-                                                                                 </p></article>
-                                                                                 <article><p>
-                                                                                 <b>Horário : </b> {{inicioCurso}} às {{fimCurso}}
-                                                                                 </p></article>
-                                                                                 <article><p>
-                                                                                 <b>Local:</b> {{localCurso}}
-                                                                                 </p></article>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Fechar</button>
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>	<!--fim modal-->
-                </form>
-	</fieldset>
+                </div>
+            </div>	<!--fim modal-->
+        </form>
+    </fieldset>
 </div>
 
 <script>
-    jQuery(function($) {
-    $.mask.definitions['~']='[+-]';
+                    jQuery(function($) {
+                        $.mask.definitions['~'] = '[+-]';
 
-   $("#cpf").mask("999.999.999-99");
-   
-});
+                        $("#cpf").mask("999.999.999-99");
+
+                    });
 </script>

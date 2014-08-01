@@ -27,7 +27,7 @@
 
     $scope.editar = function(participante) {
         console.log(participante);
-        window.location = '#/cadastroparticipante/' + participante.id;
+        window.location = '#/cadastroparticipanteevento/' + participante.id;
     };
 
     $scope.deletar = function(participante) {
@@ -148,9 +148,27 @@
         $scope.deficiente = {};
         $scope.sexo = {};
         $scope.participante = $scope.getNovoParticipante();
-        //window.location = '#/cadastroparticipante';
+        //window.location = '#/cadastroparticipanteevento';
         console.log("novo");
     };
+    
+    $scope.novoParticipante = function(){
+        $scope.idModal = {};
+        $scope.cpfModal = {};
+        $scope.deficienteModal = {};
+        $scope.emailModal = {};
+        $scope.ideventoModal = {};
+        $scope.nomeModal = {};
+        $scope.rgModal = {};
+        $scope.sexoModal = {};
+        $scope.telefoneModal = {};
+        $scope.pagamentoModal = {};
+        $scope.deficiente = {};
+        $scope.sexo = {};
+        $scope.participante = $scope.getNovoParticipante();
+        window.location = '#/cadastroparticipanteevento';
+        console.log("novo");
+    }
     
     $scope.validacampos = function() {
         
@@ -184,13 +202,16 @@
     };
 
     $scope.carregarParticipante = function() {
-        if ($routeParams.participanteId) {
-            $http.get('./rest/participanteSource/participante/' + $routeParams.participanteId)
+        console.log('carregar participante',$routeParams.idParticipante)
+        if ($routeParams.idParticipante) {
+            $http.get('./rest/participanteSource/participante/' + $routeParams.idParticipante)
                     .success(function(participante) {
                 $scope.participante = participante;
             });
         }
     };
+
+    
 
     $scope.getNovoParticipante = function() {
         console.log('novo participante');
@@ -200,7 +221,7 @@
     $scope.carregarEventos = function() {
         $http.get("./rest/eventoSource/evento")
                 .success(function(eventos, status) {
-            $scope.eventos = eventos;
+            $scope.eventos = eventos.list;
             console.log("eventos carregados");
         })
                 .error(function(data, status) {
@@ -208,20 +229,20 @@
         });
     };
 
-    $scope.carregarParticipanteAlterar = function(idModal, cpfModal, deficienteModal, emailModal, ideventoModal, nomeModal, rgModal, sexoModal, telefoneModal, pagamentoModal) {
-
-        $scope.idModal = idModal;
-        $scope.cpfModal = cpfModal;
-        $scope.deficienteModal = deficienteModal;
-        $scope.emailModal = emailModal;
-        $scope.ideventoModal = ideventoModal;
-        $scope.nomeModal = nomeModal;
-        $scope.rgModal = rgModal;
-        $scope.sexoModal = sexoModal;
-        $scope.telefoneModal = telefoneModal;
-        $scope.pagamentoModal = pagamentoModal;
-
-    };
+//    $scope.carregarParticipanteAlterar = function(idModal, cpfModal, deficienteModal, emailModal, ideventoModal, nomeModal, rgModal, sexoModal, telefoneModal, pagamentoModal) {
+//
+//        $scope.idModal = idModal;
+//        $scope.cpfModal = cpfModal;
+//        $scope.deficienteModal = deficienteModal;
+//        $scope.emailModal = emailModal;
+//        $scope.ideventoModal = ideventoModal;
+//        $scope.nomeModal = nomeModal;
+//        $scope.rgModal = rgModal;
+//        $scope.sexoModal = sexoModal;
+//        $scope.telefoneModal = telefoneModal;
+//        $scope.pagamentoModal = pagamentoModal;
+//
+//    };
 
     $scope.listarParticipantes = function() {
 
@@ -246,6 +267,11 @@
         $scope.fimCurso = fim;
         $scope.ministranteCurso = ministrante;
     };
+    
+    $scope.voltar = function() {
+        $scope.participante = {};
+        //window.location = '#/listarparticipantes';
+    }
 
 }
 

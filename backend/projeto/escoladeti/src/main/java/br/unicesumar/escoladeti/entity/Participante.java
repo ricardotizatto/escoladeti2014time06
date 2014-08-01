@@ -7,18 +7,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Participante extends Entidade{  
-    @NotNull
-    @NotEmpty
-    @Column
-    private String nome;
-
     
-    @NotNull
-    @NotEmpty
-    @Column
+    private String nome;    
     private String cpf;
     private String rg;
-    private Long idevento;
+    private Long idEvento;
     private String email;
     private String telefone;
     private String deficiente;
@@ -33,12 +26,12 @@ public class Participante extends Entidade{
         this.pagamento = pagamento;
     }
 
-    public Long getIdevento() {
-        return idevento;
+    public Long getIdEvento() {
+        return idEvento;
     }
 
-    public void setIdevento(Long idevento) {
-        this.idevento = idevento;
+    public void setIdEvento(Long idEvento) {
+        this.idEvento = idEvento;
     }
     
     public String getNome() {
@@ -96,6 +89,4 @@ public class Participante extends Entidade{
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    
-    
 }
