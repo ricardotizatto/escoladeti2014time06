@@ -217,6 +217,10 @@ app.config(['$routeProvider',
                 templateUrl: './pages/consultalivro.html',
                 controller: 'ConsultaLivroController'
             })
+            .when('/acompanhamento', {
+                templateUrl: './pages/acompanhamentoSolicitacao/acompanhamento.html',
+                controller: ''
+            })
             .otherwise({redirectTo: '/principal'
             });
     }
