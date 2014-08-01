@@ -219,7 +219,7 @@ app.config(['$routeProvider',
             })
             .when('/acompanhamento', {
                 templateUrl: './pages/acompanhamentoSolicitacao/acompanhamento.html',
-                controller: ''
+                controller: 'acompanhamentoSolicitacaoController'
             })
             .otherwise({redirectTo: '/principal'
             });

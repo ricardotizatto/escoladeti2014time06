@@ -184,7 +184,9 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#/listasolicitacoes">Solicitação</a></li>
+                                                        <li><a href="#/acompanhamento">Acompanhamento de Solicitação</a></li>
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
+                            
 						</ul>
 					</li>
 				</ul>
