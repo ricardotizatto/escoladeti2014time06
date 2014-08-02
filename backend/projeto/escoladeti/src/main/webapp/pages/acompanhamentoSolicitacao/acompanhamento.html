@@ -5,104 +5,118 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-sm-4">
-            <div class="input-group">
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-search"></span>
-                </span> 
-                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Busca por número da solicitacao"/>
-            </div>
+        <div class="form-group col-sm-8">    
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span> 
+                        <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Número da solicitacao"/>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span> 
+                        <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Número da ordem"/>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span> 
+                        <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Material"/>
+                    </div>
+                </div>
+            </div>    
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span> 
+                        <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Tradução"/>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span> 
+                        <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Nome do revisor"/>
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span> 
+                        <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Data de chegada"/>
+                    </div>
+                </div>
+            </div> <!-- final busca -->
         </div>
-        <div class="form-group col-sm-4">
-            <div class="input-group">
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-search"></span>
-                </span> 
-                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Busca por número da ordem"/>
-            </div>
-        </div>
-        <div class="form-group col-sm-4">
-            <div class="input-group">
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-search"></span>
-                </span> 
-                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Busca por nome do material"/>
-            </div>
+        <div class="col-sm-4"> 
+            <a href="" ><img src="./resources/imagens/btn-aguardando.png" alt="botão Aguardando"/></a>
+            <a href="" ><img src="./resources/imagens/btn-producao.png" alt="botão procução"/></a>
+            <a href="" ><img src="./resources/imagens/btn-produzido.png" alt="botão produzido"/></a>
+            <a href="" ><img src="./resources/imagens/btn-finalizado.png" alt="botão finalizado"/></a>
+            <a href="" ><img src="./resources/imagens/btn-cancelado.png" alt="botão cancelado"/></a>
         </div>
     </div>    
-    <div class="row">
-        <div class="form-group col-sm-4">
-            <div class="input-group">
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-search"></span>
-                </span> 
-                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Busca por tradução"/>
-            </div>
-        </div>
-        <div class="form-group col-sm-4">
-            <div class="input-group">
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-search"></span>
-                </span> 
-                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Busca por nome do revisor"/>
-            </div>
-        </div>
-        <div class="form-group col-sm-4">
-            <div class="input-group">
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-search"></span>
-                </span> 
-                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change=""  placeholder="Busca por data de chegada"/>
-            </div>
-        </div>
-    </div> <!-- final busca -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class=" form-group col-md-2 col-md-offset-1">
-                <ul class="cbp_tmtimeline">
-                    <li>
-                        <div class="cbp_tmicon warning "> <i class="fa fa-spinner"></i> Aguardando </div>
-                    </li>
-                </ul>
-            </div>
-            <div class=" form-group col-md-2">
-                <ul class="cbp_tmtimeline">
-                    <li>
-                        <div class="cbp_tmicon success"> <i class="fa fa-cogs"></i> Produzindo </div>
-                    </li>
-                </ul>
-            </div>
-            <div class=" form-group col-md-2">
-                <ul class="cbp_tmtimeline">
-                    <li>
-                        <div class="cbp_tmicon info "> <i class="fa fa-file-text-o"></i> Produzido </div>
-                    </li>
-                </ul>
-            </div>
-            <div class=" form-group col-md-2">
-                <ul class="cbp_tmtimeline">
-                    <li>
-                        <div class="cbp_tmicon primary "> <i class="fa fa-check-circle-o"></i> Finalizado </div>
-                    </li>
-                </ul>
-            </div>
-            <div class=" form-group col-md-2">
-                <ul class="cbp_tmtimeline">
-                    <li>
-                        <div class="cbp_tmicon danger "> <i class="fa fa-times"></i> Cancelado </div>
-                    </li>
-                </ul>
-            </div>
-        </div>    
-    </div>    
-    <br><br>
     <div class="row">
         <div class="col-md-10 col-vlg-7">
             <ul class="cbp_tmtimeline">
                 <li>
                     <time class="cbp_tmtime" datetime="2013-04-10 18:30">
-                        <span class="date">today</span>
-                        <span class="time">10:05 <span class="semi-bold">am</span></span>
+                        <span class="date">chegada</span>
+                        <span class="time">01/08/2014</span>
+                    </time>
+                    <div class="cbp_tmicon warning animated bounceIn"> <i class="fa fa-spinner"></i> </div>
+                    <div class="cbp_tmlabel">
+                        <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-responsive table-fixed-layout">
+                                        <thead>
+                                        <th class="col-md-3">Solicitação</th>
+                                        <th class="col-md-3">Material</th>
+                                        <th class="col-md-3">Tradução</th>
+                                        </thead>
+                                        <tbody>
+                                        <td>001</td>
+                                        <td>Três Porquinhos</td>
+                                        <td>Brille</td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h4 class="inline m-b-5"><span class="text-success semi-bold">Winicius Wanderlei</span> </h4>
+                                </div>
+                                <div class="col-sm-5">
+                                    <span class="pull-right">
+                                        <button type="submit" class="btn btn-danger btn-small">
+                                            <i class="glyphicon glyphicon-remove" ></i> Cancelar
+                                        </button>  
+                                        <button type="submit" class="btn btn-success btn-small">
+                                            <i class="fa fa-cogs"></i></span> Produzir
+                                        </button>
+                                    </span>     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+                <li>
+                    <time class="cbp_tmtime" datetime="2013-04-10 18:30">
+                        <span class="date">chegada</span>
+                        <span class="time">02/08/2014</span>
                     </time>
                     <div class="cbp_tmicon success animated bounceIn"> <i class="fa fa-cogs"></i> </div>
                     <div class="cbp_tmlabel">
@@ -122,30 +136,35 @@
                                 </div>
                               </div>
                             -->
-                            <table class="table table-responsive table-fixed-layout">
-                                <thead>
-                                <th class="col-md-3">Solicitação</th>
-                                <th class="col-md-3">Ordem</th>
-                                <th class="col-md-3">Material</th>
-                                <th class="col-md-3">Tradução</th>
-                                </thead>
-                                <tbody>
-                                <td>001</td>
-                                <td>006</td>
-                                <td>Chapeuzinho Vermei</td>
-                                <td>Brille</td>
-                                </tbody>
-                            </table>
-
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12">    
+                                    <table class="table table-responsive table-fixed-layout">
+                                        <thead>
+                                        <th class="col-md-3">Solicitação</th>
+                                        <th class="col-md-3">Ordem</th>
+                                        <th class="col-md-3">Material</th>
+                                        <th class="col-md-3">Tradução</th>
+                                        </thead>
+                                        <tbody>
+                                        <td>002</td>
+                                        <td>003</td>
+                                        <td>Chapeuzinho Vermei</td>
+                                        <td>Brille</td>
+                                        </tbody>
+                                    </table>
+                                </div>    
+                            </div>    
+                            <div class="row">
+                                <div class="col-sm-7">
                                     <h4 class="inline m-b-5"><span class="text-success semi-bold">Martinho Omura Massao</span> </h4>
+                                </div>    
+                                <div class="col-sm-5">    
                                     <span class="pull-right">
                                         <button type="submit" class="btn btn-danger btn-small">
                                             <i class="glyphicon glyphicon-remove" ></i> Cancelar
                                         </button>  
-                                        <button type="submit" class="btn btn-success btn-small">
-                                            <span class="glyphicon glyphicon-edit" ></span> Expandir
+                                        <button type="submit" class="btn btn-primary btn-small">
+                                            <i class="fa fa-arrows-alt" ></i> Expandir
                                         </button>
                                     </span>		
                                 </div>
@@ -156,22 +175,107 @@
                 </li>
                 <li>
                     <time class="cbp_tmtime" datetime="2013-04-10 18:30">
-                        <span class="date">today</span>
-                        <span class="time">11:20 <span class="semi-bold">am</span></span>
+                        <span class="date">chegada</span>
+                        <span class="time">03/08/2014</span>
                     </time>
-                    <div class="cbp_tmicon warning animated bounceIn"> <i class="fa fa-spinner"></i> </div>
+                    <div class="cbp_tmicon info animated bounceIn"><i class="fa fa-file-text-o"></i> </div>
+                    <div class="cbp_tmlabel">
+                        <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-responsive table-fixed-layout">
+                                        <thead>
+                                        <th class="col-md-3">Solicitação</th>
+                                        <th class="col-md-3">Ordem</th>
+                                        <th class="col-md-3">Material</th>
+                                        <th class="col-md-3">Tradução</th>
+                                        </thead>
+                                        <tbody>
+                                        <td>003</td>
+                                        <td>002</td>
+                                        <td>cinderela</td>
+                                        <td>Brille</td>
+                                        </tbody>
+                                    </table>
+                                </div>    
+                            </div>    
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h4 class="inline m-b-5"><span class="text-success semi-bold">Alisson Molinari</span> </h4>
+                                </div>    
+                                <div class="col-sm-3">    
+                                    <span class="pull-right"> 
+                                        <button type="submit" class="btn btn-primary btn-small">
+                                            <i class="fa fa-arrows-alt" ></i> Expandir
+                                        </button>
+                                    </span>     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+                <li>
+                    <time class="cbp_tmtime" datetime="2013-04-10 18:30">
+                        <span class="date">chegada</span>
+                        <span class="time">04/08/2014</span>
+                    </time>
+                    <div class="cbp_tmicon primary animated bounceIn"> <i class="fa fa-check-circle-o"></i> </div>
+                    <div class="cbp_tmlabel">
+                        <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-responsive table-fixed-layout">
+                                        <thead>
+                                        <th class="col-md-3">Solicitação</th>
+                                        <th class="col-md-3">Ordem</th>
+                                        <th class="col-md-3">Material</th>
+                                        <th class="col-md-3">Tradução</th>
+                                        </thead>
+                                        <tbody>
+                                        <td>004</td>
+                                        <td>004</td>
+                                        <td>pocahontas</td>
+                                        <td>Brille</td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4 class="inline m-b-5"><span class="text-success semi-bold">Jhonatan Catabriga</span> </h4>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h4 class="inline m-b-5"><span class="text-info semi-bold">Envio: 10/09/2014</span> </h4>
+                                </div> 
+                                <div class="col-sm-3">
+                                    <span class="pull-right">  
+                                        <button type="submit" class="btn btn-primary btn-small">
+                                            <i class="fa fa-arrows-alt" ></i> Expandir
+                                        </button>
+                                    </span>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+                <li>
+                    <time class="cbp_tmtime" datetime="2013-04-10 18:30">
+                        <span class="date">chegada</span>
+                        <span class="time">05/08/2014</span>
+                    </time>
+                    <div class="cbp_tmicon danger animated bounceIn"> <i class="fa fa-times"></i> </div>
                     <div class="cbp_tmlabel">
                         <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
                             <table class="table table-responsive table-fixed-layout">
                                 <thead>
                                 <th class="col-md-3">Solicitação</th>
-                                <th class="col-md-3">Ordem</th>
                                 <th class="col-md-3">Material</th>
                                 <th class="col-md-3">Tradução</th>
                                 </thead>
                                 <tbody>
-                                <td>002</td>
-                                <td>004</td>
+                                <td>005</td>
                                 <td>Três Porquinhos</td>
                                 <td>Brille</td>
                                 </tbody>
@@ -179,15 +283,7 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="inline m-b-5"><span class="text-success semi-bold">Winicius Wanderlei</span> </h4>
-                                    <span class="pull-right">
-                                        <button type="submit" class="btn btn-danger btn-small">
-                                            <i class="glyphicon glyphicon-remove" ></i> Cancelar
-                                        </button>  
-                                        <button type="submit" class="btn btn-success btn-small">
-                                            <span class="glyphicon glyphicon-edit" ></span> Expandir
-                                        </button>
-                                    </span>     
+                                    <h4 class="inline m-b-5"><span class="text-success semi-bold">Winicius Wanderlei</span> </h4>    
                                 </div>
                             </div>
                         </div>
