@@ -2092,7 +2092,7 @@ input[type="tel"],
 input[type="color"] {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   -webkit-appearance: none !important;   
-	color: #282323 
+  color: #282323 ;
   outline: 0;
   height: 16px;
   padding: 6px 11px !important;
@@ -2103,17 +2103,17 @@ input[type="color"] {
   background-color:#fff;
   min-height: 37px;
   filter: none !important;
-	  -webkit-box-shadow: none !important;
-	     -moz-box-shadow: none !important;
-	          box-shadow: none !important;
-	  -webkit-border-radius: 0px;
-	     -moz-border-radius: 0px;
-	          border-radius: 0px;   
-			  -webkit-border-radius: 2px;
--moz-border-radius: 2px;
-border-radius: 2px;
-border: 1px solid #e5e9ec;
-transition: background 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;   
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #e5e9ec;
+  transition: background 0.2s linear 0s, box-shadow 0.2s linear 0s;
 }
 input.no-boarder {
   border: none;
@@ -5873,7 +5873,7 @@ border-bottom-left-radius: 2px;
 .input-append .add-on, .input-prepend .add-on{
 	position:absolute;
 	background-color:#D1DADE;
-	color:##5E5E5E;
+	color:#5E5E5E;
 	text-shadow:none;
 	border:#D1DADE;
 	border-radius: 0 2px 2px 0;
