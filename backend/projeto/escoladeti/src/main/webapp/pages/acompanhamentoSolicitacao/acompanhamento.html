@@ -1,4 +1,4 @@
-<div class="container" ng-controller="acomapnhamentoSolicitacaoController">
+<div class="container" ng-controller="acompanhamentoSolicitacaoController" ng-init="getTodos()">
     <div class="row">
         <div class="form-group col-sm-12">
             <legend><span class="glyphicon glyphicon-list-alt"></span> Acompanhamento de Solicitações</legend>
@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="form-group col-sm-8">    
-            <div class="row">
+            <div class="row"> 
                 <div class="form-group col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"> 
@@ -59,17 +59,76 @@
                 </div>
             </div> <!-- final busca -->
         </div>
-        <div class="col-sm-4"> 
-            <a href="" ><img src="./resources/imagens/btn-aguardando.png" alt="botão Aguardando"/></a>
-            <a href="" ><img src="./resources/imagens/btn-producao.png" alt="botão procução"/></a>
-            <a href="" ><img src="./resources/imagens/btn-produzido.png" alt="botão produzido"/></a>
-            <a href="" ><img src="./resources/imagens/btn-finalizado.png" alt="botão finalizado"/></a>
-            <a href="" ><img src="./resources/imagens/btn-cancelado.png" alt="botão cancelado"/></a>
+        <div class="col-sm-4">
+            <div class="titulo-botoes-soliciatacao" >
+                <h4>Status de Solicitação</h4>
+                <a href="" ><img src="./resources/imagens/btn-aguardando.png" alt="botão Aguardando"/></a>
+                <a href="" ><img src="./resources/imagens/btn-producao.png" alt="botão procução"/></a>
+                <a href="" ><img src="./resources/imagens/btn-produzido.png" alt="botão produzido"/></a>
+                <a href="" ><img src="./resources/imagens/btn-finalizado.png" alt="botão finalizado"/></a>
+                <a href="" ><img src="./resources/imagens/btn-cancelado.png" alt="botão cancelado"/></a>
+            </div>
         </div>
-    </div>    
+    </div>  
+    <div class="row" > 
+        <div class="col-md-12" >
+            <div ng-show="mostrar">
+            <h3>Admin Area</h3>
+            <!-- admin stuff here -->
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-10 col-vlg-7">
             <ul class="cbp_tmtimeline">
+                <li ng-repeat="solicitacao in solicitacoes"><!-- repete solicitacoes -->
+                    <time class="cbp_tmtime" datetime="2013-04-10 18:30">
+                        <span class="date">chegada</span>
+                        <span class="time">{{solicitacao.dataChegada}}</span>
+                    </time>
+                    <div class="cbp_tmicon {{getStatus(solicitacao.status)}} animated bounceIn"> <i class="{{getIcone(solicitacao.status)}}"></i> </div>
+                    <div class="cbp_tmlabel">
+                        <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-responsive table-fixed-layout">
+                                        <thead>
+                                        <th class="col-md-3">Solicitação</th>
+                                        <th class="col-md-3">Ordem</th>
+                                        <th class="col-md-3">Material</th>
+                                        <th class="col-md-3">Tradução</th>
+                                        </thead>
+                                        <tbody>
+                                        <td>{{solicitacao.id}}</td>
+                                        <td>{{solicitacao.ordem}}</td>
+                                        <td>{{solicitacao.material}}</td>
+                                        <td>{{solicitacao.traducao}}</td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h4 class="inline m-b-5"><span class="text-success semi-bold">{{solicitacao.responsavel}}</span> </h4>
+                                </div>
+                                <div class="col-sm-5">
+                                    <span class="pull-right">
+                                        <button type="submit" class="btn btn-danger btn-small" ng-show="mostrar">
+                                            <i class="glyphicon glyphicon-remove" ></i> Cancelar
+                                        </button>  
+                                        <button type="submit" class="btn btn-success btn-small" ng-show="false" >
+                                            <i class="fa fa-cogs"></i></span> Produzir
+                                        </button>
+                                        <button type="submit" class="btn btn-primary btn-small" ng-show="mostrar">
+                                            <i class="fa fa-arrows-alt" ></i> Expandir
+                                        </button>
+                                    </span>     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </li><!-- repete solicitacoes -->
                 <li>
                     <time class="cbp_tmtime" datetime="2013-04-10 18:30">
                         <span class="date">chegada</span>
