@@ -41,7 +41,7 @@ public class SolicitacaoController implements Serializable{
 		return solicitacaoService.listar();
 	}
 	
-	@RequestMapping( method = RequestMethod.GET )
+	@RequestMapping( value= {"/{id}"}, method = RequestMethod.GET )
 	@ResponseBody
 	public Solicitacao getSolicitacao(@PathVariable Long id) {
 		return solicitacaoService.buscar(id);
