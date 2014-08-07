@@ -219,11 +219,11 @@ app.config(['$routeProvider',
             })
             .when('/acompanhamento', {
                 templateUrl: './pages/acompanhamentoSolicitacao/acompanhamento.html',
+                 controller: 'acompanhamentoSolicitacaoController'
+            })
             .when('/cadastroparticipanteevento', {
                 templateUrl: './pages/CadastroParticipanteEvento.html',
-                controller: 'acompanhamentoSolicitacaoController'
                 controller: 'participanteController'
-            })
             })
             .when('/cadastroparticipanteevento/:idParticipante', {
                 templateUrl: './pages/CadastroParticipanteEvento.html',
