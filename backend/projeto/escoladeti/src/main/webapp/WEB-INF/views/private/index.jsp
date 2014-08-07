@@ -44,6 +44,7 @@
         <script type="text/javascript" src="./resources/js/pessoaFisica/service.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
       
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
@@ -184,7 +185,9 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#/listasolicitacoes">Solicitação</a></li>
+                                                        <li><a href="#/acompanhamento">Acompanhamento de Solicitação</a></li>
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
+                            
 						</ul>
 					</li>
 				</ul>
