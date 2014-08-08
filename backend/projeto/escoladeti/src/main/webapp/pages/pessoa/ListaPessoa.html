@@ -13,11 +13,23 @@
                 <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaPessoaContendoNome()"  placeholder="Busca por nome da Pessoa"/>
             </div>
         </div>
-        <div class="form-group col-sm-7">
+        <div class="form-group col-sm-4">
+            <div>
+                <button class='btn btn-info btn-padrao' ng-click="filtroPessoaJuridica()">
+                    <i class="fa fa-male"></i> Jurídica
+                </button>
+                <button class='btn btn-success btn-padrao' ng-click="filtroPessoaFisica()">
+                    <i class="fa fa-male"></i> Física
+                </button>
+                <button class='btn btn-warning btn-padrao' ng-click="filtroAluno()">
+                    <i class="fa fa-male"></i> Aluno
+                </button>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
             <div>
                 <span class="pull-right">
-                    <button type='submit' class='btn btn-primary btn-padrao'
-                        value='novo' ng-click="novo()">
+                    <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novo()">
                         <span class='glyphicon glyphicon-plus-sign'></span> Novo
                     </button>
                 </span>
@@ -28,26 +40,26 @@
         <div class="col-sm-12 table-responsive">
             <table class="table table-striped table-hover">
                 <tr>
-                    <th class="col-md-2">Nome/Razão</th>
-                    <th class="col-md-2">CPF/CNPJ</th>
-                    <th class="col-md-1">Aniversário/Criação</th>
+                    <th class="col-md-4">Nome / Razão</th>
+                    <th class="col-md-2">CPF / CNPJ</th>
+                    <th class="col-md-2">Nasc. / Criação</th>
                     <th class="col-md-2">Email</th>
-                    <th class="col-md-1">Ações</th>
+                    <th class="col-md-2"><span class="pull-right">Ações</span></th>
                 </tr>
-                <tr ng-repeat="pessoa in pessoas.list | filter: busca" >
-                    <td>{{pessoa.razao}}</td>
-                    <td>{{pessoa.inscricaoMunicipal}}</td>
-                    <td>{{pessoa.inscricaoEstadual}}</td>
-                    <td>{{pessoa.cnpj}}</td>
-                    <td>{{pessoa.dataCriacao  | date: 'dd-MM-yyyy' }}</td>
+                <tr ng-repeat="pessoa in pessoas | filter: busca" >
+                    <td>{{pessoa.nome}}</td>
+                    <td>{{pessoa.cpfCnpj}}</td>
+                    <td>{{pessoa.data  | date: 'dd-MM-yyyy' }}</td>
                     <td>{{pessoa.email}}</td>
                     <td>
+                        <span class="pull-right">
                         <button class='btn btn-warning btn-sm' ng-click="editar(pessoa)">
                             <span class='glyphicon glyphicon-edit'></span>
                         </button>
                         <button class='btn btn-danger btn-sm' ng-click="deletar(pessoa)">
                             <span class='glyphicon glyphicon-remove-circle'></span>
                         </button>
+                        </span>
                     </td>
                 </tr>
             </table>

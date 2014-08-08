@@ -18,62 +18,25 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>  
+    
     <form action="" method="POST" role="form" ng-submit="salvar()">
-        <!-- Inicio Pessoa Jurídica -->
-        <div class="pessoaJuridica" ng-show=" tipoPessoa == 'J' " >
-            <div class="row ">
-                <div class="form-group col-sm-4">
-                    <label> Nome </label> 
-                    <input class="form-control" name="nome" type="text" ng-model="pessoaJuridica.nome" placeholder="Nome" maxlength="50" title="Nome" required />
-                </div>
-                <div class="form-group col-sm-5">
-                    <label> Razão Social </label> 
-                    <input class="form-control" name="razaoSocial" type="text" ng-model="pessoaJuridica.razaoSocial" required placeholder="Razao Social" maxlength="50" title="Razão Social"/>
-                </div>
-                <div class="form-group col-sm-3">
-                    <label for="cnpj"> CNPJ </label> 
-                    <input class="form-control mascaraCNPJ" id="cnpj" type="text" pattern="^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" title="11.222.333/9999-22" ng-blur="validaCnpj(pessoaJuridica.cnpj)"
-                            ng-model="pessoaJuridica.cnpj" required placeholder="11.111.222\0001-99"/>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="form-group col-sm-2">
-                    <label> Data de Criação </label> 
-                    <input class="form-control" name="dataCriacao" type="date" ng-model="pessoaJuridica.dataCriacao" required title="11/01/2000"/>
-                </div>
-                <div class="form-group col-sm-2">
-                    <label> Inscrição Municipal </label> 
-                    <input class="form-control" name="inscricaoEstadual" type="text" maxlength="15" pattern="^[0-9]*$" title="Apenas numeros"
-                                ng-model="pessoaJuridica.inscricaoMunicipal" required placeholder="888999"/>
-                </div>
-                <div class="form-group col-sm-2">
-                    <label> Inscrição Estadual </label> 
-                    <input class="form-control" name="dataCriacao" type="text" maxlength="12" pattern="^[0-9]*$" title="Apenas numeros"
-                                ng-model="pessoaJuridica.inscricaoEstadual" placeholder="88889999"/>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label>Email</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"> <span
-                                class="glyphicon glyphicon-envelope"></span>
-                        </span> 
-                        <input class="form-control" name="email" type="text" maxlength="100" ng-model="pessoaJuridica.email" required placeholder="email@email.com">
-                    </div>
-                </div>
-            </div>
-        </div>    
-        <!-- Fim Pessoa Jurídica -->
         <!-- Inicio Pessoa Fisica -->
         <div class="pessoaFisica" ng-show=" !tipoPessoa ? true : tipoPessoa == 'F' ">
             <div class="row ">
-                <div class="form-group col-sm-5">
-                    <label> Nome </label> 
-                    <input class="form-control" name="nome" type="text" ng-model="pessoaFisica.nome" placeholder="Nome" required maxlength="50" title="Nome"/>
+                <div class="form-group col-sm-2">
+                    <label> Papel </label>
+                    <select type="text" ui-select2 class="input-default" ng-model="pessoa.papel" >
+                        <option ng-repeat="papel in papeis" value="{{papel.id}}">{{papel.nome}}</option>
+                    </select>
                 </div>
-                <div class="form-group col-sm-5">
+                <div class="form-group col-sm-4">
+                    <label> Nome </label> 
+                    <input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome" required maxlength="50" title="Nome"/>
+                </div>
+                <div class="form-group col-sm-4">
                     <label> Sobrenome </label> 
-                    <input class="form-control" name="sobrenome" type="text" ng-model="pessoaFisica.sobrenome" placeholder="Sobrenome" required maxlength="50" title="Sobrenome"/>
+                    <input class="form-control" name="sobrenome" type="text" ng-model="pessoa.sobrenome" placeholder="Sobrenome" required maxlength="50" title="Sobrenome"/>
                 </div>
                 <div class="form-group col-sm-2">
                     <span class="pull-right"> <label>Sexo</label>
@@ -81,9 +44,9 @@
                             <div class="btn-group">
                                 <!--data-toggle="buttons" verificar uso-->
                                 <label class="btn btn-ss btn-primary btn-radio-amacapa">
-                                    <input form-control ng-model="sexo" value="M" type="radio" required /> M
+                                    <input form-control ng-model="pessoa.sexo" value="M" type="radio" required /> M
                                 </label> <label class="btn btn-ss btn-primary btn-radio-amacapa">
-                                    <input form-control ng-model="sexo" value="F" type="radio" required /> F
+                                    <input form-control ng-model="pessoa.sexo" value="F" type="radio" required /> F
                                 </label>
                             </div>
                         </div>
@@ -92,33 +55,74 @@
             </div>
             <div class="row">
                 <div class="form-group col-sm-3">
-                    <label> RG </label> <input class="form-control" pattern="^[0-9]*"
-                                               type="text" ng-model="pessoaFisica.rg" maxlength="12"
-                                               placeholder="Números do R.G." required tittle="5551234" />
+                    <label> RG </label> 
+                    <input class="form-control" pattern="^[0-9]*" type="text" id="rg" ng-model="pessoa.rg" maxlength="12" placeholder="Números do R.G." required tittle="5551234" />
                 </div>
                 <div class="form-group col-sm-3">
-                    <label> CPF </label> <input class="form-control" type="text" id="cpf" name="cpf"
-                                                ng-model="pessoaFisica.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="999.999.999-99" ng-blur="validaCpf(pessoaFisica.cpf)"
-                                                maxlength="14" placeholder="Número do CPF" required />
+                    <label> CPF </label> 
+                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="999.999.999-99" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" required />
                 </div>
                 <div class="form-group col-sm-2">
-                    <label>Nascimento </label> <input
-                        class="form-control maskNascimento" name="dataNascimento"
-                        type="date" ng-model="pessoaFisica.dataNascimento"
-                        placeholder="dd/mm/aaaa" required />
+                    <label>Nascimento </label> 
+                    <input class="form-control maskNascimento" name="dataNascimento" type="date" ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa" required />
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>Email</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span> 
+                        <input class="form-control" name="email" type="text" maxlength="100" ng-model="pessoa.email" placeholder="Endereço de email" required>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <!-- Fim Pessoa Fisica -->
+        <!-- Inicio Pessoa Jurídica -->
+        <div class="pessoaJuridica" ng-show=" tipoPessoa == 'J' " >
+            <div class="row ">
+                <div class="form-group col-sm-4">
+                    <label> Nome </label> 
+                    <input class="form-control" name="nome" type="text" ng-model="pessoaJuridica.nome" placeholder="Nome Fantasia" maxlength="50" title="Nome" required />
+                </div>
+                <div class="form-group col-sm-5">
+                    <label> Razão Social </label> 
+                    <input class="form-control" name="razaoSocial" type="text" ng-model="pessoaJuridica.razaoSocial" required placeholder="Razao Social" maxlength="50" title="Razão Social"/>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="cnpj"> CNPJ </label> 
+                    <input class="form-control mascaraCNPJ" id="cnpj" type="text" pattern="^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" title="11.222.333/9999-22" ng-blur="validaCnpj(pessoaJuridica.cnpj)"
+                            ng-model="pessoaJuridica.cnpj" required placeholder="Número do CNPJ"/>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-sm-3">
+                    <label> Inscrição Municipal </label> 
+                    <input class="form-control" name="inscricaoEstadual" type="text" maxlength="15" pattern="^[0-9]*$" title="Apenas numeros"
+                                ng-model="pessoaJuridica.inscricaoMunicipal" required placeholder="Número Inscrição Municipal"/>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label> Inscrição Estadual </label> 
+                    <input class="form-control" name="dataCriacao" type="text" maxlength="12" pattern="^[0-9]*$" title="Apenas numeros"
+                                ng-model="pessoaJuridica.inscricaoEstadual" placeholder="Número Inscrição Estadual"/>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label> Data de Criação </label> 
+                    <input class="form-control" name="dataCriacao" type="date" ng-model="pessoaJuridica.dataCriacao" required title="11/01/2000"/>
                 </div>
                 <div class="form-group col-sm-4">
                     <label>Email</label>
                     <div class="input-group">
                         <span class="input-group-addon"> <span
                                 class="glyphicon glyphicon-envelope"></span>
-                        </span> <input class="form-control" name="email" type="text" maxlength="100"
-                                       ng-model="pessoaFisica.email" placeholder="Endereço de email" required>
+                        </span> 
+                        <input class="form-control" name="email" type="text" maxlength="100" ng-model="pessoaJuridica.email" required placeholder="Endereço de email">
                     </div>
                 </div>
             </div>
         </div>    
-        <!-- Fim Pessoa Fisica -->
+        <!-- Fim Pessoa Jurídica -->
+        
         <label> &nbsp; </label>
         <div class="row">
             <div class="form-group col-sm-7">

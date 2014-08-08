@@ -4,7 +4,7 @@ var controllers = angular.module('controllers');
 function PessoaController($scope, $routeParams, pessoaService, paisService, estadoService, cidadeService) {
     $scope.select2='one';
     console.log('Carregando controller');
-
+    
     $scope.modificarPais = function(paisId){
     	$scope.unidadeFederativa = {};
     	$scope.cidade = {};
@@ -15,6 +15,14 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     		$scope.unidadesFederativas = data;
     	});
     };
+    
+    $scope.validaCpf = function(cpf) {
+        if (!ValidarCPF(cpf)) {
+            toastr.warning("CPF inválido.");
+            $scope.pessoaFisica.cpf = $scope.pessoaFisica.c;
+        }
+    };
+    
     $scope.validaCnpj = function(cnpj){
     	if(!ValidarCNPJ(cnpj)){
     		toastr.warning("CNPJ inválido.");
@@ -47,15 +55,15 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     $scope.deletar = function(pessoa) {
         console.log('deletando pessoa ' + JSON.stringify(pessoa));
         
-        BootstrapDialog.confirm('Deseja realmente deletar o Pessoa Juridica: <b>' + pessoa.nome +'</b>?', function(result) {
+        BootstrapDialog.confirm('Deseja realmente deletar a Pessoa: <b>' + pessoa.nome +'</b>?', function(result) {
             if (result) {
             	pessoaJuridicaService.deletar(pessoa)
-               		.success(function (data, status) {
+               		.success(function (data) {
                         $scope.getTodos(1);
-                        console.log('Pessoa Juridica deletada');
+                        console.log('Pessoa deletada');
                         toastr.success(pessoa.nome+" deletado com sucesso.");                       
                     })
-                    .error(function (data, status) {
+                    .error(function (data) {
                         console.log('erro ao deletar pessoa ' + data);
                         console.log(data.messageDeveloper);
                         toastr.error(data.message);
@@ -67,20 +75,23 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     
     $scope.novo = function() {
         console.log('Nova Pessoa');
-        //$scope.pessoa = getNovaPessoaFisica();
         window.location = '#/pessoa';
     };    
 	
     $scope.carregarPessoa = function() {
-    	console.log('carregando pessoa juridica');
+    	console.log('carregando pessoa');
         
-        if (!$routeParams.pessoaJuridicaId){
-        	$scope.pessoaJuridica = getNovaPessoaJuridica();
+        if (!$routeParams.pessoaId){
+            $scope.pessoa = $scope.getNovaPessoaFisica();
+            $scope.tipoPessoa = 'F';
+            $scope.papeis = [
+                {id: '01', nome:'ALUNO'}
+            ];
             return;//se não tiver id não buscar
         }
         
         pessoaJuridicaService.buscar($routeParams.pessoaJuridicaId)
-                .success(function(p, status) {
+                .success(function(p) {
                     $scope.pessoaJuridica = p;
                 });
     };
@@ -110,26 +121,47 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
         carregaPaises();
     };
     
-    $scope.buscaPessoaJuridicaContendoNome = function () {
+    $scope.buscaPessoaContendoNome = function () {
     	console.log($scope.busca);    	
     	pessoaJuridicaService.buscarPorNome($scope.busca)
-    		.then(function (retorno){
-    			console.log(retorno.data.list);
-    			$scope.pessoasJuridicas = retorno.data;
-    		});
+            .then(function (retorno){
+                console.log(retorno.data.list);
+                $scope.pessoas = retorno.data;
+            });
+    }; 
+
+    $scope.filtroPessoaJuridica = function() {
+        console.log("filtro pessoa juridica");
+        $scope.pessoas = [
+            {nome: 'Unicesumar', cpfCnpj: '11111111111', data: '01/01/1980', email: 'unicesumar@email.com'}
+        ];
+    };
+    
+    $scope.filtroPessoaFisica = function() {
+        console.log("filtro pessoa fisica");
+        $scope.pessoas = [
+            {nome: 'Winicius', cpfCnpj: '988888888-99', data: '01/01/1995', email: 'contato@email.com'}
+        ];
+    };
+    
+    $scope.filtroAluno = function() {
+        console.log("aluno");
+        $scope.pessoas = [
+            { nome : 'Martinho', cpfCnpj : '999999999-99', data : '16/03/1990', email : 'contato@email.com' }
+        ];
     };
 
     $scope.salvar = function() {
     	pessoaJuridicaService.salvar($scope.pessoaJuridica)
-                .success(function(pf, status) {
-                    $scope.pessoaJuridica = getNovaPessoaJuridica();
-                    toastr.success('Pessoa Juridica '+pf.nome+' salvo com sucesso.');
-                })
-                .error(function(data, status) {
-                    console.log('Pessoa juridica não salva ', data);
-                    toastr.warning(data.message);
-                    console.log(data.messageDeveloper);
-                });
+            .success(function(pf) {
+                $scope.pessoaJuridica = getNovaPessoaJuridica();
+                toastr.success('Pessoa Juridica '+pf.nome+' salvo com sucesso.');
+            })
+            .error(function(data) {
+                console.log('Pessoa juridica não salva ', data);
+                toastr.warning(data.message);
+                console.log(data.messageDeveloper);
+            });
     };
     
     $scope.getTodos = function(numeroPagina) {
@@ -164,6 +196,7 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     $scope.getNovaPessoaFisica = function() {
         return {
             id: null,
+            papel: 'ALUNO',
             nome: null,
             sobrenome: null,
             sexo: 'M',
@@ -274,7 +307,6 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     	$scope.cidades = [];
     	$scope.unidadesFederativas = [];
     	$scope.pais = {};
-        $scope.principal = "S";
     };
     
     function getNovoEndereco() {
@@ -295,6 +327,8 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
         $("#telefone").mask("(99) 9999-9999?9");
         $("#ramal").mask("9?");
         $("#cep").mask("99.999-999");
+        $("#cpf").mask("999.999.999-99");
+        $("#rg").mask("9.999.999-*");
         $("#cnpj").mask("99.999.999/9999-99");
     });
 }
