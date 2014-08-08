@@ -1,4 +1,4 @@
-<div class="container" ng-controller="usuarioController" >
+<div class="container" ng-controller="UsuarioController" ng-init="carregarUsuario()">
     <fieldset>
         <div class="row">
             <div class="form-group col-sm-12">
@@ -7,12 +7,15 @@
                 </legend>
             </div>
         </div>
-        
         <form action="" method="POST" role="form">		
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label> Nome </label>
                     <input class="form-control" name="nome" type="text" ng-model="usuario.nome" placeholder="Nome Completo" />
+                </div>
+                <div class="form-group col-sm-6">
+                    <label> Login </label>
+                    <input class="form-control" name="login" type="text" ng-model="usuario.login" placeholder="Login " />
                 </div>
             </div>
             <div class="row">
@@ -33,7 +36,7 @@
                     <label>Confirmar senha</label>
                     <input  class="form-control" name="senha" type="password" placeholder="Confirmar senha"/>
                 </div>
-            </div>
+            </div><!--
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label>  Perfil de Acesso </label>
@@ -78,14 +81,14 @@
                         </tbody>      
                     </table>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col-sm-12">
                     <span class="pull-right">	
                         <a href="#/listausuario" class="btn btn-danger btn-padrao">
                             <span class="glyphicon glyphicon-remove" ></span> Cancelar 
                         </a>
-                        <button type="submit" class="btn btn-success btn-padrao" ng-click="salvarUsuario()" >
+                        <button type="submit" class="btn btn-success btn-padrao" ng-click="salvar()" >
                             <span class="glyphicon glyphicon-ok"></span> Salvar </a>	
                         </button>
                     </span>		
@@ -94,7 +97,7 @@
             <div class="row">
                 <div class="col-sm-12"><hr></div>
             </div>
-            <!-- Modal Itens Especiais-->
+            <!-- Modal Itens Especiais
             <div class="modal fade" id="modalItensEspeciais" tabindex="-1" role="dialog" aria-labelledby="modalItensEspeciaisLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -131,7 +134,8 @@
                         </div>	
                     </div>
                 </div>
-            </div>						
+            </div>	
+            -->
         </form>
     </fieldset>
 </div>

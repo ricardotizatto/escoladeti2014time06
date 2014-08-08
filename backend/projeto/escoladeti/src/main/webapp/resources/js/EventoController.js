@@ -1,4 +1,4 @@
-﻿function eventoController($scope, $http, $routeParams) {
+function eventoController($scope, $http, $routeParams) {
     console.log('Carregando controller');
     $scope.idCurso;
     $scope.tituloCurso;
