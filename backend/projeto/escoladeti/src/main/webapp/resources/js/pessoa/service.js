@@ -1,6 +1,6 @@
 services = angular.module("services");
 
-function PessoaJuridicaService($http) {	
+function PessoaService($http) {	
 	console.log('carregando service pessoa juridica');
 	return {
 		
@@ -54,5 +54,5 @@ function PessoaJuridicaService($http) {
 	};
 }
 
-services.factory('pessoaJuridicaService', ['$http', PessoaJuridicaService]);
+services.factory('pessoaService', ['$http', PessoaService]);
 

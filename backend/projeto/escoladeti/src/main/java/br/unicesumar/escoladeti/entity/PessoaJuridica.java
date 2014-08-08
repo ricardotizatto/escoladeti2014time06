@@ -14,30 +14,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 @PrimaryKeyJoinColumn(name = "id")
 @DiscriminatorValue("J")
 public class PessoaJuridica extends Pessoa {
-    
-    @NotNull
-    @NotEmpty
-    @Column(unique = true)
+
     private String cnpj;
-
-    @NotNull
-    @NotEmpty
-    @Column(unique = true)
     private String inscricaoEstadual;
-
-    @NotNull
-    @NotEmpty
-    @Column(unique = true)
     private String inscricaoMunicipal;
-
-    @NotNull
-    @NotEmpty
-    @Column
     private String razaoSocial;
-
-    @Column
     @Temporal(TemporalType.DATE)
-    @NotNull
     private Date dataCriacao;
 
     public PessoaJuridica() {
@@ -51,14 +33,14 @@ public class PessoaJuridica extends Pessoa {
     }
 
     public String getInscricaoMunicipal() {
-		return inscricaoMunicipal;
-	}
+        return inscricaoMunicipal;
+    }
 
-	public void setInscricaoMunicipal(String inscricaoMunicipal) {
-		this.inscricaoMunicipal = inscricaoMunicipal;
-	}
+    public void setInscricaoMunicipal(String inscricaoMunicipal) {
+        this.inscricaoMunicipal = inscricaoMunicipal;
+    }
 
-	public Date getDataCriacao() {
+    public Date getDataCriacao() {
         return dataCriacao;
     }
 
@@ -89,5 +71,4 @@ public class PessoaJuridica extends Pessoa {
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
     }
-
 }

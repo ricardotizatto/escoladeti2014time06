@@ -21,13 +21,17 @@ app.config(['$routeProvider',
                 templateUrl: './pages/CadastroPessoaFisica.html',
                 controller: 'PessoaFisicaController'
             })
-            .when('/pessoajuridica', {
-                templateUrl: './pages/CadastroPessoaJuridica.html',
-                controller: 'PessoaJuridicaController'
+            .when('/pessoa', {
+                templateUrl: './pages/pessoa/CadastroPessoa.html',
+                controller: 'PessoaController'
             })
-            .when('/pessoajuridica/:pessoaJuridicaId', {
-                templateUrl: './pages/CadastroPessoaJuridica.html',
-                controller: 'PessoaJuridicaController'
+            .when('/pessoa/:pessoaId', {
+                templateUrl: './pages/pessoa/CadastroPessoa.html',
+                controller: 'PessoaController'
+            })
+            .when('/listapessoa', {
+                templateUrl: './pages/pessoa/ListaPessoa.html',
+                controller: 'PessoaController'
             })
             .when('/cadastrousuario', {
                 templateUrl: './pages/CadastroUsuario.html',
@@ -108,10 +112,6 @@ app.config(['$routeProvider',
             .when('/listapessoafisica', {
                 templateUrl: './pages/ListaPessoaFisica.html',
                 controller: 'PessoaFisicaController'
-            })
-            .when('/listapessoajuridica', {
-                templateUrl: './pages/ListaPessoaJuridica.html',
-                controller: 'PessoaJuridicaController'
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',

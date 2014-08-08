@@ -8,13 +8,9 @@ package br.unicesumar.escoladeti.service;
 
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.controller.DataPage;
-import br.unicesumar.escoladeti.entity.Cidade;
-import br.unicesumar.escoladeti.entity.Pais;
-import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

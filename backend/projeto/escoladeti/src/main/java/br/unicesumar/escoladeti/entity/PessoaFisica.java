@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.enums.Papel;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,32 +22,22 @@ import br.unicesumar.escoladeti.enums.Sexo;
 @DiscriminatorValue(value = "F")
 public class PessoaFisica extends Pessoa {
 
-	private static final long serialVersionUID = 1L;
-
-	@NotNull
-    @NotEmpty
-    @Column(length = 15)
+    private static final long serialVersionUID = 1L;
+    
     private String rg;
-
-    @NotEmpty
-    @NotNull
-    @Column(unique = true, length = 11)
+    
     private String cpf;
-
-    @NotNull
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-
-    @NotNull
-    @NotEmpty
-    @Column(length = 50)
+    
     private String sobrenome;
     
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
+    
+    private Papel papel;
 
-	public PessoaFisica() {
+    public PessoaFisica() {
     }
 
     public PessoaFisica(String rg, String cpf, Date dataNascimento, String sobrenome) {
@@ -89,10 +80,18 @@ public class PessoaFisica extends Pessoa {
     }
 
     public Sexo getSexo() {
-		return sexo;
-	}
-    
+        return sexo;
+    }
+
     public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
-	}
+        this.sexo = sexo;
+    }
+
+    public Papel getPapel() {
+        return papel;
+    }
+    
+    public void setPapel(Papel papel) {
+        this.papel = papel;
+    }
 }
