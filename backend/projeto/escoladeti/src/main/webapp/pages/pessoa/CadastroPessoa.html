@@ -10,10 +10,10 @@
             <div>
                 <div class="btn-group">
                     <label class="btn btn-primary btn-radio-amacapa"> 
-                        <input ng-model="tipoPessoa" ng-click="mostraTipoPessoa()" value="J" type="radio" required /> Jurídica
+                        <input ng-model="tipoPessoa" value="J" type="radio" /> Jurídica
                     </label> 
                     <label class="btn btn-primary btn-radio-amacapa"> 
-                        <input ng-model="tipoPessoa" ng-click="mostraTipoPessoa()" value="F" type="radio" required /> Física
+                        <input ng-model="tipoPessoa" value="F" type="radio" /> Física
                     </label>
                 </div>
             </div>
@@ -21,7 +21,7 @@
     </div>    
     <form action="" method="POST" role="form" ng-submit="salvar()">
         <!-- Inicio Pessoa Jurídica -->
-        <div class="pessoaJuridica" ng-show="{{mostraPessoaJuridica}}" >
+        <div class="pessoaJuridica" ng-show=" tipoPessoa == 'J' " >
             <div class="row ">
                 <div class="form-group col-sm-4">
                     <label> Nome </label> 
@@ -65,7 +65,7 @@
         </div>    
         <!-- Fim Pessoa Jurídica -->
         <!-- Inicio Pessoa Fisica -->
-        <div class="pessoaFisica" ng-show="{{mostraPessoaFisica}}" >
+        <div class="pessoaFisica" ng-show=" !tipoPessoa ? true : tipoPessoa == 'F' ">
             <div class="row ">
                 <div class="form-group col-sm-5">
                     <label> Nome </label> 
@@ -81,11 +81,9 @@
                             <div class="btn-group">
                                 <!--data-toggle="buttons" verificar uso-->
                                 <label class="btn btn-ss btn-primary btn-radio-amacapa">
-                                    <input form-control ng-model="pessoaFisica.sexo" name="sexo"
-                                           value="MASCULINO" type="radio" required /> M
+                                    <input form-control ng-model="sexo" value="M" type="radio" required /> M
                                 </label> <label class="btn btn-ss btn-primary btn-radio-amacapa">
-                                    <input form-control ng-model="pessoaFisica.sexo" name="sexo"
-                                           value="FEMININO" type="radio" required /> F
+                                    <input form-control ng-model="sexo" value="F" type="radio" required /> F
                                 </label>
                             </div>
                         </div>
@@ -234,7 +232,7 @@
                         <div class="modal-footer">
                             <span class="pull-right">
                             <button class="btn btn-danger btn-padrao" data-dismiss="modal">
-                                        <span class="glyphicon glyphicon-remove"></span> Cancelar
+                                        <span class="glyphicon glyphicon-remove"></span> Sair
                                 </button>
                                 <button type="submit" class="btn btn-success btn-padrao">
                                         <span class="glyphicon glyphicon-ok"></span> Salvar
@@ -298,10 +296,10 @@
                                     <div class="btn-group">
                                         <!--data-toggle="buttons" verificar uso-->
                                         <label class="btn btn-primary btn-radio-amacapa"> 
-                                            <input ng-model="endereco.principal" name="principal" value="S" type="radio" required /> Sim
+                                            <input ng-model="principal" value="S" type="radio" required /> Sim
                                         </label> 
                                         <label class="btn btn-primary btn-radio-amacapa"> 
-                                            <input ng-model="endereco.principal" name="principal" value="N" type="radio" required /> Não
+                                            <input ng-model="principal" value="N" type="radio" required /> Não
                                         </label>
                                     </div>
                                     </div>
@@ -346,7 +344,7 @@
                                 <div class="modal-footer">
                                     <span class="pull-right">
                                         <button class="btn btn-danger btn-padrao" ng-click="novoEndereco()" data-dismiss="modal">
-                                            <span class="glyphicon glyphicon-remove"></span> Cancelar
+                                            <span class="glyphicon glyphicon-remove"></span> Sair
                                         </button>
                                         <button type="submit" class="btn btn-success btn-padrao">
                                             <span class="glyphicon glyphicon-ok"></span> Salvar

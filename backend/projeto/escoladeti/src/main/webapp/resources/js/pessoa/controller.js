@@ -5,7 +5,6 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     $scope.select2='one';
     console.log('Carregando controller');
 
-    
     $scope.modificarPais = function(paisId){
     	$scope.unidadeFederativa = {};
     	$scope.cidade = {};
@@ -32,7 +31,7 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     	.success(function(data,status){
     		$scope.cidades = data;
     	});
-    }
+    };
     
     var buscarSelecionado = function () {
     	
@@ -68,7 +67,7 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     
     $scope.novo = function() {
         console.log('Nova Pessoa');
-        $scope.pessoaJuridica = getNovaPessoaJuridica();
+        //$scope.pessoa = getNovaPessoaFisica();
         window.location = '#/pessoa';
     };    
 	
@@ -109,30 +108,6 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
         $scope.unidadeFederativa = {};
         $scope.cidade = {};
         carregaPaises();
-//        $scope.mostraPessoaJuridica = true;
-//        $scope.mostraPessoaFisica = false;
-        $scope.mostraTipoPessoa();
-    };
-    
-    
-    $scope.mostraTipoPessoa = function() {
-        console.log('mostraTipoPessoa: ' + $scope.tipoPessoa);
-        if(!$scope.tipoPessoa){
-            console.log('mostrando pf por default');
-            $scope.mostraPessoaJuridica = false;
-            $scope.mostraPessoaFisica = true;
-        }else{
-            if($scope.tipoPessoa == "F"){
-                console.log('mostrando pf selecionado');
-                $scope.mostraPessoaJuridica = false;
-                $scope.mostraPessoaFisica = true;
-            }else{
-                console.log('mostrando pj selecionado');
-                $scope.mostraPessoaJuridica = true;
-                $scope.mostraPessoaFisica = false;
-            }
-        }
-
     };
     
     $scope.buscaPessoaJuridicaContendoNome = function () {
@@ -171,27 +146,42 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
         */
     };
     
-	function getNovaPessoaJuridica() {
-		return {
-			id : null,
-			nome : null,
-			razaoSocial : null,
-			dataCriacao : null,
-			inscricaoMunicipal : null,
-			cnpj : null,
-			inscricaoEstadual : null,
-			email : null,
-			telefones : [],
-			enderecos : []
-		};
-	}
+    $scope.getNovaPessoaJuridica = function(){
+        return {
+            id: null,
+            nome: null,
+            razaoSocial: null,
+            dataCriacao: null,
+            inscricaoMunicipal: null,
+            cnpj: null,
+            inscricaoEstadual: null,
+            email: null,
+            telefones: [],
+            enderecos: []
+        };
+    };
+    
+    $scope.getNovaPessoaFisica = function() {
+        return {
+            id: null,
+            nome: null,
+            sobrenome: null,
+            sexo: 'M',
+            rg: null,
+            cpf: null,
+            dataNascimento: null,
+            email: null,
+            telefones: [],
+            enderecos: []
+        };
+    };
 	
     $scope.select2Options = {
         	
     };
     
     $scope.voltar = function() {
-        $scope.pessoaJuridica = getNovaPessoaJuridica();
+        //$scope.pessoaJuridica = getNovaPessoaJuridica();
         window.location = '#/listapessoa';
     };
 
@@ -199,7 +189,7 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     
     $scope.novoTelefone = function(){
     	$scope.telefone = getNovoTelefone();
-    }
+    };
 
     $scope.salvarTelefone = function() {
         if ($scope.indiceTelefone >= 0){
@@ -284,11 +274,13 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     	$scope.cidades = [];
     	$scope.unidadesFederativas = [];
     	$scope.pais = {};
-    }
+        $scope.principal = "S";
+    };
     
     function getNovoEndereco() {
     	return {
-    		tipoEndereco : 'RUA'
+    		tipoEndereco : 'RUA',
+                principal : 'S'
     	};
     }
     
