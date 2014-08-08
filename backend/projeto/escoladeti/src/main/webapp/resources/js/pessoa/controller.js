@@ -109,25 +109,31 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
         $scope.unidadeFederativa = {};
         $scope.cidade = {};
         carregaPaises();
+//        $scope.mostraPessoaJuridica = true;
+//        $scope.mostraPessoaFisica = false;
         $scope.mostraTipoPessoa();
     };
+    
     
     $scope.mostraTipoPessoa = function() {
         console.log('mostraTipoPessoa: ' + $scope.tipoPessoa);
         if(!$scope.tipoPessoa){
-            $scope.mostraPessoaJuridica = true;
-            $scope.mostraPessoaFisica = false;
+            console.log('mostrando pf por default');
+            $scope.mostraPessoaJuridica = false;
+            $scope.mostraPessoaFisica = true;
         }else{
             if($scope.tipoPessoa == "F"){
+                console.log('mostrando pf selecionado');
                 $scope.mostraPessoaJuridica = false;
                 $scope.mostraPessoaFisica = true;
             }else{
+                console.log('mostrando pj selecionado');
                 $scope.mostraPessoaJuridica = true;
                 $scope.mostraPessoaFisica = false;
             }
         }
 
-    }
+    };
     
     $scope.buscaPessoaJuridicaContendoNome = function () {
     	console.log($scope.busca);    	

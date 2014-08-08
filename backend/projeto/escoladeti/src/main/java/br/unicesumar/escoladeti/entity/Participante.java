@@ -11,7 +11,7 @@ public class Participante extends Entidade{
     private String nome;    
     private String cpf;
     private String rg;
-    private Long idEvento;
+    private Long idevento;
     private String email;
     private String telefone;
     private String deficiente;
@@ -26,12 +26,12 @@ public class Participante extends Entidade{
         this.pagamento = pagamento;
     }
 
-    public Long getIdEvento() {
-        return idEvento;
+    public Long getIdevento() {
+        return idevento;
     }
 
-    public void setIdEvento(Long idEvento) {
-        this.idEvento = idEvento;
+    public void setIdevento(Long idevento) {
+        this.idevento = idevento;
     }
     
     public String getNome() {
