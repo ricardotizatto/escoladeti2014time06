@@ -6,6 +6,13 @@ function UsuarioController($scope, $http, $routeParams) {
     $scope.email;
     $scope.ativo;
 
+    var tamanho = 0;
+    var temMaiuscula = 0;
+    var temMinuscula = 0;
+    var temNumero = 0;
+    var temSimbolo = 0;
+    var resultado = 0;
+
     $scope.perfisDeAcesso = [
         {nome: "Gerente"},
         {nome: "Vendedor"},
@@ -15,8 +22,13 @@ function UsuarioController($scope, $http, $routeParams) {
 
 
     $scope.novo = function() {
-        $scope.evento = getNovoUsuario();
-        window.location = '#/cadastrousuario';
+        if ($routeParams.usuarioId) {
+            $scope.carregarUsuario();
+        }else{
+            $scope.usuario = getNovoUsuario();    
+            console.log(angular.toJson($scope.usuario, true));
+            window.location = '#/cadastrousuario';
+        }      
     };
 
     $scope.editar = function(usuario) {
@@ -27,28 +39,47 @@ function UsuarioController($scope, $http, $routeParams) {
     $scope.getTodos = function() {
         $http.get("./rest/usuarioSource/usuario")
                 .success(function(usuarios, status) {
-            $scope.usuarios = usuarios;
-        })
+                    $scope.usuarios = usuarios;
+                })
                 .error(function(data, status) {
-            console.log('erro ao buscar usuarios');
-        });
+                    console.log('erro ao buscar usuarios');
+                });
     };
 
     $scope.salvar = function() {
         console.log(angular.toJson($scope.usuario, true));
         $scope.usuario.ativo = true;
-        $http.post("./rest/usuarioSource/usuario", $scope.usuario)
-                .success(function(usuario, status) {
-            toastr.success("Usuario cadastrado com sucesso!");
-            setTimeout(function() {
-                window.location = "#/listausuario";
-            }, 5000);
-            console.log("usuario salvo = " + usuario);
-        })
-                .error(function(data, status) {
-            console.log("erro ao salvar usuario", data);
-            toastr.warning("Erro ao salvar usuario!");
-        });
+
+        if ($scope.usuario.nome === undefined)
+            return toastr.warning('Preencha o campo nome');
+
+        if ($scope.usuario.login === undefined)
+            return toastr.warning('Preencha o campo login');
+
+        if ($scope.usuario.senha === undefined)
+            return toastr.warning('Preencha o campo senha');
+
+        if ($scope.usuario.email === undefined) {
+            return toastr.warning('Preencha o campo email');
+        }
+
+        if (!$scope.usuario.senha === $scope.confirmaSenha) {
+            toastr.warning('As senhas tem que ser iguais');
+            console.log('senha ' + $scope.usuario.senha + ' confirmarSenha ' + $scope.confirmaSenha);
+        } else {
+            $http.post("./rest/usuarioSource/usuario", $scope.usuario)
+                    .success(function(usuario, status) {
+                        toastr.success("Usuario cadastrado com sucesso!");
+                        setTimeout(function() {
+                            window.location = "#/listausuario";
+                        }, 5000);
+                        console.log("usuario salvo = " + usuario);
+                    })
+                    .error(function(data, status) {
+                        console.log("erro ao salvar usuario", data);
+                        toastr.warning("Erro ao salvar usuario!");
+                    });
+        }
     };
 
     $scope.deletar = function(usuario) {
@@ -59,10 +90,10 @@ function UsuarioController($scope, $http, $routeParams) {
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
                 .success(function(data) {
-            console.log("usuario deletado");
-            toastr.success("Usuario apagado com sucesso!");
-            $scope.getTodos();
-        }).error(function(data) {
+                    console.log("usuario deletado");
+                    toastr.success("Usuario apagado com sucesso!");
+                    $scope.getTodos();
+                }).error(function(data) {
             console.log("erro ao deletar usuario ");
             toastr.warning("Erro ao apagar usuario!");
         });
@@ -72,8 +103,65 @@ function UsuarioController($scope, $http, $routeParams) {
         if ($routeParams.usuarioId) {
             $http.get('./rest/usuarioSource/usuario/' + $routeParams.usuarioId)
                     .success(function(usuario) {
-                $scope.usuario = usuario;
-            });
+                        $scope.usuario = usuario;
+                    });
+        }
+    };
+
+    $scope.pontuarSenha = function() {
+        var senha = $scope.usuario.senha;
+        if (senha.length > 0) {
+            if (senha.length >= 8 && senha.length <= 10) {
+                tamanho = 6 * senha.length;
+            } else {
+                if (senha.length > 10) {
+                    tamanho = 6 * 10;
+                } else {
+                    tamanho = 0;
+                }
+            }
+
+            if (senha.charCodeAt(senha.length - 1) > 64 && senha.charCodeAt(senha.length - 1) < 91) {
+                temMaiuscula = 20;
+            }
+
+            if (senha.charCodeAt(senha.length - 1) > 96 && senha.charCodeAt(senha.length - 1) < 123) {
+                temMinuscula = 10;
+            }
+
+            if (senha.charCodeAt(senha.length - 1) > 47 && senha.charCodeAt(senha.length - 1) < 58) {
+                temNumero = 15;
+            }
+
+            if (senha.charCodeAt(senha.length - 1) > 31 && senha.charCodeAt(senha.length - 1) < 48) {
+                temSimbolo = 30;
+            }
+
+            if (senha.charCodeAt(senha.length - 1) > 57 && senha.charCodeAt(senha.length - 1) < 65) {
+                temSimbolo = 30;
+            }
+
+            if ((senha.charCodeAt(senha.length - 1) > 91 && senha.charCodeAt(senha.length - 1) < 97) || senha.charCodeAt(senha.length - 1) > 122) {
+                temSimbolo = 30;
+            }
+
+            resultado = tamanho + temMaiuscula + temMinuscula + temNumero + temSimbolo;
+
+        } else {
+            console.log('aqui');
+            resultado = 0;
+        }
+
+        if (resultado < 40) {
+            $scope.myStyle = {'background-color': '#ff0000'};
+        } else {
+            if (resultado >= 40 && resultado < 80) {
+                $scope.myStyle = {'background-color': '#ffff00'};
+            } else {
+                if (resultado >= 80) {
+                    $scope.myStyle = {'background-color': '#66ff00'};
+                }
+            }
         }
     };
 
