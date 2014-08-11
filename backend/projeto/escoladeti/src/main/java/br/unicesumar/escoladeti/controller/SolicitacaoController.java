@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacao;
 import br.unicesumar.escoladeti.entity.Solicitacao;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.service.SolicitacaoService;
@@ -26,14 +27,9 @@ public class SolicitacaoController implements Serializable{
     
 	@RequestMapping( method = RequestMethod.POST)	
 	@ResponseBody
-	public Solicitacao salvar(@RequestBody Solicitacao solicitacao) {
-		for(SolicitacaoItem item : solicitacao.getItensSolicitacao()) {
-			item.setSolicitacao(solicitacao);
-		}
-		
-		return solicitacaoService.salvar(solicitacao);
+	public Solicitacao salvar(@RequestBody ComandoSalvarSolicitacao comando) {		
+		return solicitacaoService.salvar(comando);
 	}
-    
     
 	@RequestMapping(method = RequestMethod.GET)	
 	@ResponseBody
@@ -47,7 +43,7 @@ public class SolicitacaoController implements Serializable{
 		return solicitacaoService.buscar(id);
 	}
 	
-	@RequestMapping(value = { "/pagina/{pagina}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/paginar/{pagina}" }, method = RequestMethod.GET)
 	@ResponseBody
 	public DataPage<Solicitacao> paginar(@PathVariable Integer pagina) {
 		return solicitacaoService.paginar(pagina);

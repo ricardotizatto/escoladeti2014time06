@@ -58,7 +58,7 @@ public class ComandoSalvarSolicitacao {
     private Long responsavel;
 
     @NotEmpty(message = "É obrigatório ter ao menos um item na solicitação")
-    private List<SolicitacaoItem> itensSolicitacao;
+    private List<ComandoSalvarSolicitacaoItem> itensSolicitacao;
 
     @NotNull(message = "Data de Chegada é obrigatório")
     private Date dataChegada;
@@ -143,11 +143,11 @@ public class ComandoSalvarSolicitacao {
 		this.responsavel = responsavel;
 	}
 
-	public List<SolicitacaoItem> getItensSolicitacao() {
+	public List<ComandoSalvarSolicitacaoItem> getItensSolicitacao() {
 		return itensSolicitacao;
 	}
 
-	public void setItensSolicitacao(List<SolicitacaoItem> itensSolicitacao) {
+	public void setItensSolicitacao(List<ComandoSalvarSolicitacaoItem> itensSolicitacao) {
 		this.itensSolicitacao = itensSolicitacao;
 	}
 
@@ -157,8 +157,6 @@ public class ComandoSalvarSolicitacao {
 
 	public void setDataChegada(Date dataChegada) {
 		this.dataChegada = dataChegada;
-	}
-
-    
+	}    
     
 }

@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
 import br.unicesumar.escoladeti.enums.StatusItem;
 import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 
@@ -78,5 +79,56 @@ public class SolicitacaoItem extends Entidade{
 	
 	public StatusItem getStatus() {
 		return status;
+	}
+	
+	public static class SolicitacaoItemBuilder {
+		private Long livro;
+		private String status;
+		private String traducaoMaterial;
+		private String outro;
+		
+		public SolicitacaoItem.SolicitacaoItemBuilder livro(Long livro) {
+			this.livro = livro;
+			return this;
+		}
+		
+		public SolicitacaoItem.SolicitacaoItemBuilder status(String status) {
+			this.status = status;
+			return this;
+		}
+		
+		public SolicitacaoItem.SolicitacaoItemBuilder traducaoMaterial(String traducaoMaterial) {
+			this.traducaoMaterial = traducaoMaterial;
+			return this;
+		}
+		
+		public SolicitacaoItem.SolicitacaoItemBuilder outro(String outro) {
+			this.outro = outro;
+			return this;
+		}
+		
+		public SolicitacaoItem build() {
+			SolicitacaoItem solicitacaoItem = new SolicitacaoItem();
+			solicitacaoItem.setLivro(Livro.of(this.livro));
+			solicitacaoItem.setTraducaoMaterial(TraducaoMaterial.of(this.traducaoMaterial));
+			solicitacaoItem.setOutro(this.outro);
+			
+			if(solicitacaoItem.getTraducaoMaterial().equals(TraducaoMaterial.OUTRO)
+					&& (solicitacaoItem.getOutro() == null || solicitacaoItem.getOutro().isEmpty() ) ) {
+				throw new RuntimeException("Para tradução do material do tipo 'OUTRO'"
+						+ " é obrigatório informar o campo 'OUTRO' ");
+			}
+			
+			return solicitacaoItem;
+		}
+
+		public SolicitacaoItemBuilder status(StatusItem status) {
+			this.status = status.name();
+			return this;
+		}
+	}
+
+	public static SolicitacaoItemBuilder builder() {
+		return new SolicitacaoItemBuilder();
 	}
 }
