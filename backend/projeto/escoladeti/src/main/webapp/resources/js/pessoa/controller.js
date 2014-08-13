@@ -16,6 +16,16 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     	});
     };
     
+    $scope.getRequired = function(papel) {
+        switch (papel) {
+            case "ALUNO":
+               return false;
+               break;
+            default:
+               return true;
+        }  
+    };
+    
     $scope.validaCpf = function(cpf) {
         if (!ValidarCPF(cpf)) {
             toastr.warning("CPF inválido.");
@@ -85,7 +95,7 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
             $scope.pessoa = $scope.getNovaPessoaFisica();
             $scope.tipoPessoa = 'F';
             $scope.papeis = [
-                {id: '01', nome:'ALUNO'}
+                { nome:'ALUNO'}
             ];
             return;//se não tiver id não buscar
         }
@@ -196,7 +206,7 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     $scope.getNovaPessoaFisica = function() {
         return {
             id: null,
-            papel: 'ALUNO',
+            papel: '',
             nome: null,
             sobrenome: null,
             sexo: 'M',
