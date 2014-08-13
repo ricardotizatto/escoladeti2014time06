@@ -270,8 +270,8 @@ public class Solicitacao extends Entidade {
 	    	checkNotNull(this.aluno, "Aluno é obrigatório");
 	    	checkNotNull(this.dataChegada, "Data chegada é obrigatório");
 	    	checkNotNull(this.escola, "Escola é obrigatorio");
-	    	checkNotNull(this.cep, "CEP é obrigatorio");
-	    	checkNotNull(this.itensSolicitacao, "Intens da solicitação são obrigatórios");
+	    	checkNotNull(this.cep, "CEP é obrigatório");
+	    	checkNotNull(this.itensSolicitacao, "Itens das solicitação são obrigatórios");
 	    	checkArgument(this.itensSolicitacao.size() > 0);
 	    	checkNotNull(this.numeroEndereco, "Número de endereço é obrigatório");
 	    	checkNotNull(this.responsavel, "Responsável é obrigatório");

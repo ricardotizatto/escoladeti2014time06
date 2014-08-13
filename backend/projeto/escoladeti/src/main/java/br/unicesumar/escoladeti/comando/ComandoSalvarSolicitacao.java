@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.ws.BindingType;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Ignore;
@@ -23,16 +24,16 @@ import br.unicesumar.escoladeti.entity.Cidade;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 
-@Validated
 public class ComandoSalvarSolicitacao {
 	   
-    @NotNull(message = "Aluno é obrigatório")
+    @NotNull(message = "Aluno é obrigatório" )
     @Min(value = 0, message = "aluno é obrigatório")
     private Long aluno;
     
     @NotBlank(message = "Escola é obrigatório")
     private String escola;
     
+    @Min(value = 0, message = "Nre inválido")
     private Long nre;
 
     @NotNull(message = "Municipio é obrigatório")
@@ -40,6 +41,7 @@ public class ComandoSalvarSolicitacao {
     private Long municipio;
     
     @NotBlank(message = "CEP é obrigatório")
+    @Length(min=0,  max=7, message = "Tamanho inválido para o cep")
     private String cep;    
     
     @NotBlank(message = "Endereço é obrigatório")

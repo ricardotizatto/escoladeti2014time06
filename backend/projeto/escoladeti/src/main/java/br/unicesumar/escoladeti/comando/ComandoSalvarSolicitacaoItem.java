@@ -4,7 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-
+import org.springframework.validation.annotation.Validated;
 
 public class ComandoSalvarSolicitacaoItem {
 	@NotBlank(message = "Tradução do material é obrigatório")

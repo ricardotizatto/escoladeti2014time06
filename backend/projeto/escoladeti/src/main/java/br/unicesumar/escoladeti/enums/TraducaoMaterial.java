@@ -6,7 +6,7 @@ public enum TraducaoMaterial {
 	DOSVOX,
 	OUTRO;
 
-	public static TraducaoMaterial of(String traducaoMaterial) throws RuntimeException {
+	public static TraducaoMaterial of(String traducaoMaterial) {
 		try {
 			return of(traducaoMaterial);
 		} catch (Exception e) {

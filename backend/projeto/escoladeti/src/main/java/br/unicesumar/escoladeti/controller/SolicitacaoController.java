@@ -3,8 +3,11 @@ package br.unicesumar.escoladeti.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +30,7 @@ public class SolicitacaoController implements Serializable{
     
 	@RequestMapping( method = RequestMethod.POST)	
 	@ResponseBody
-	public Solicitacao salvar(@RequestBody ComandoSalvarSolicitacao comando) {		
+	public Solicitacao salvar(@Valid @RequestBody ComandoSalvarSolicitacao comando) {		
 		return solicitacaoService.salvar(comando);
 	}
     
