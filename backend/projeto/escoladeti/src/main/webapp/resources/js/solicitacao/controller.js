@@ -14,7 +14,9 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	$scope.enviarSolicitacao = function () {
 		$log.debug('enviando solicitacao');
 		console.log($scope.solicitacao);
-		$scope.solicitacao.$save();
+		$scope.solicitacao.$save(function () {
+			
+		});
 	};
 	
 	$scope.editar = function(solicitacao) {

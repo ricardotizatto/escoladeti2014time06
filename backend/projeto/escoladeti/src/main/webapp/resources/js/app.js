@@ -265,6 +265,10 @@ function  AuthInterceptor($q, $window) {
             if (data.message) {
                 toastr.warning(data.message);
             }
+            
+            if (data.messageDeveloper) {
+            	console.log(data.messageDeveloper);
+            }
 
             return $q.reject(rejection);
         }

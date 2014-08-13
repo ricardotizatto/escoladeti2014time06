@@ -1,5 +1,5 @@
-function SolicitacaoFactory($resourse) {
-	return $resourse("./rest/solicitacoes/:id/:acao/:pagina", {id: '@id'},{
+function SolicitacaoFactory($resource) {
+	return $resource("./rest/solicitacoes/:id/:acao/:pagina", {id: '@id'},{
 		
 		update: {method: 'PUT'},
 		paginar: {
