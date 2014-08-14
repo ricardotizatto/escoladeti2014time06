@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="Walber e Leivid (generated)" id="2404066940885-7">
+        <createTable tableName="cep">
+            <column name="id" type="INT8">
+                <constraints nullable="false" />
+            </column>
+            <column name="cep" type="VARCHAR(10)" />
+            <column name="uf" type="VARCHAR(2)" />
+            <column name="cidade" type="VARCHAR(255)" />
+            <column name="bairro" type="VARCHAR(100)" />
+            <column name="tipo" type="VARCHAR(100)" />
+            <column name="logradouro" type="VARCHAR(255)" />
+        </createTable>
+    </changeSet>
+    <changeSet author="Walber e Leivid (generated)" id="7404066940885-32">
+        <addPrimaryKey columnNames="id" constraintName="cep_pkey"
+                               tableName="cep" />
+    </changeSet>
+</databaseChangeLog>
+   

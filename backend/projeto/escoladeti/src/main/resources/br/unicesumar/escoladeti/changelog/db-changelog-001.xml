@@ -30,12 +30,9 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-4">
+	<changeSet author="Jhonatan (generated)" id="1404066940887-4">
 		<createTable tableName="cidade">
 			<column name="id" type="INT8">
-				<constraints nullable="false" />
-			</column>
-			<column name="fundacao" type="date">
 				<constraints nullable="false" />
 			</column>
 			<column name="nome" type="VARCHAR(255)">

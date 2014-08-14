@@ -1,15 +1,26 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class Cep extends Entidade {
+    
     private String cidade;
     private String logradouro;
     private String bairro;
     private String cep;
-    private String tp_logradouro;
+    private String tipo;
+    private String uf;
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 
     public String getCidade() {
         return cidade;
@@ -43,12 +54,12 @@ public class Cep extends Entidade {
         this.cep = cep;
     }
 
-    public String getTp_logradouro() {
-        return tp_logradouro;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTp_logradouro(String tp_logradouro) {
-        this.tp_logradouro = tp_logradouro;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override
@@ -58,7 +69,7 @@ public class Cep extends Entidade {
         hash = 43 * hash + Objects.hashCode(this.logradouro);
         hash = 43 * hash + Objects.hashCode(this.bairro);
         hash = 43 * hash + Objects.hashCode(this.cep);
-        hash = 43 * hash + Objects.hashCode(this.tp_logradouro);
+        hash = 43 * hash + Objects.hashCode(this.tipo);
         return hash;
     }
 
