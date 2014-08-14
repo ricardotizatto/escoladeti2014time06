@@ -2,12 +2,14 @@ package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
 import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -44,7 +46,11 @@ public class Cidade extends Entidade {
     
     
 
-    public String getNome() {
+    public Cidade(Long id) {
+    	this.id = id;
+    }
+
+	public String getNome() {
         return nome;
     }
 
@@ -89,4 +95,8 @@ public class Cidade extends Entidade {
         
         return true;
     }*/
+
+	public static Cidade of(Long id) {
+		return new Cidade(id);
+	}
 }

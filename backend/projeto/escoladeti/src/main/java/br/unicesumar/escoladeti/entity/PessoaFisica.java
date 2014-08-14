@@ -3,7 +3,6 @@ package br.unicesumar.escoladeti.entity;
 import br.unicesumar.escoladeti.enums.Papel;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,9 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import br.unicesumar.escoladeti.enums.Sexo;
 
@@ -23,18 +19,18 @@ import br.unicesumar.escoladeti.enums.Sexo;
 public class PessoaFisica extends Pessoa {
 
     private static final long serialVersionUID = 1L;
-    
+
     private String rg;
-    
+
     private String cpf;
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    
+
     private String sobrenome;
-    
+
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
-    
+
     private Papel papel;
 
     public PessoaFisica() {
@@ -45,6 +41,10 @@ public class PessoaFisica extends Pessoa {
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.sobrenome = sobrenome;
+    }
+
+    public PessoaFisica(Long id) {
+        this.id = id;
     }
 
     public String getRg() {
@@ -90,8 +90,13 @@ public class PessoaFisica extends Pessoa {
     public Papel getPapel() {
         return papel;
     }
-    
+
     public void setPapel(Papel papel) {
         this.papel = papel;
     }
+
+    public static PessoaFisica of(Long id) {
+        return new PessoaFisica(id);
+    }
+    
 }
