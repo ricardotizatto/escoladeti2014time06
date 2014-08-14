@@ -81,7 +81,7 @@ public class ComandoSalvarTelefone {
             this.ddd = ddd;
             return this;
         }
-
+        
         public Telefone build() {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.numero));
             Preconditions.checkNotNull(this.tipo);
