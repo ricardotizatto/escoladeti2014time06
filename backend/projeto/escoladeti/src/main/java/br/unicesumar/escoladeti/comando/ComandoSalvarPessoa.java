@@ -5,15 +5,8 @@ import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.enums.Papel;
 import br.unicesumar.escoladeti.enums.Sexo;
-import br.unicesumar.escoladeti.enums.TipoTelefone;
 import br.unicesumar.escoladeti.util.string.StringUtils;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import org.parboiled.common.Preconditions;
 
 public class ComandoSalvarPessoa {
@@ -278,7 +271,7 @@ public class ComandoSalvarPessoa {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial));
             Preconditions.checkNotNull(this.dataCriacao);
 
-            if (tipo.equals(TipoPessoa.fisica) ) {
+            if (tipo.equals("F") ) {
                 PessoaFisica pessoa = new PessoaFisica();
                 pessoa.setNome(this.nome);
                 pessoa.setEmail(this.email);

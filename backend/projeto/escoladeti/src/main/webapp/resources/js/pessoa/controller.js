@@ -1,7 +1,6 @@
-'use strict';
 var controllers = angular.module('controllers');
 
-function PessoaController($scope, $routeParams, pessoaService, paisService, estadoService, cidadeService) {
+function PessoaController($scope, $location, $log, $routeParams, pessoaService, paisService, estadoService, cidadeService) {
     $scope.select2='one';
     console.log('Carregando controller');
     
@@ -16,9 +15,9 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     	});
     };
     
-    $scope.getRequired = function(papel) {
-        switch (papel) {
-            case "ALUNO":
+    $scope.getRequired = function(aluno) {
+        switch (aluno) {
+            case "S":
                return false;
                break;
             default:
@@ -206,6 +205,7 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     $scope.getNovaPessoaFisica = function() {
         return {
             id: null,
+            aluno: 'N',
             papel: '',
             nome: null,
             sobrenome: null,
@@ -343,4 +343,16 @@ function PessoaController($scope, $routeParams, pessoaService, paisService, esta
     });
 }
 
-controllers.controller('PessoaController', ['$scope', '$routeParams', 'pessoaService', 'paisService', 'estadoService', 'cidadeService', PessoaController ]);
+controllers.controller('PessoaController',  
+		[
+		 '$scope',
+		 '$location',
+		 '$log',
+		 '$routeParams',
+		 '$http',
+		 'PessoaFactory',
+                 'paisService', 
+                 'estadoService', 
+                 'cidadeService',
+		 PessoaController
+		 ]);

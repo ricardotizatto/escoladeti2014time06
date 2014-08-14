@@ -27,15 +27,15 @@ app.config(['$routeProvider',
                 controller: 'PessoaFisicaController'
             })
             .when('/pessoa', {
-                templateUrl: './pages/pessoa/CadastroPessoa.html',
+                templateUrl: './pages/pessoa/cadastro.html',
                 controller: 'PessoaController'
             })
             .when('/pessoa/:pessoaId', {
-                templateUrl: './pages/pessoa/CadastroPessoa.html',
+                templateUrl: './pages/pessoa/cadastro.html',
                 controller: 'PessoaController'
             })
             .when('/listapessoa', {
-                templateUrl: './pages/pessoa/ListaPessoa.html',
+                templateUrl: './pages/pessoa/lista.html',
                 controller: 'PessoaController'
             })
             .when('/cadastrousuario', {

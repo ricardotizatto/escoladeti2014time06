@@ -6,29 +6,35 @@
     </div>
     <div class="row">
         <div class="form-group col-sm-12">
-            <label>Tipo Pessoa</label>
+            <label>Pessoa</label>
             <div>
                 <div class="btn-group">
-                    <label class="btn btn-primary btn-radio-amacapa"> 
+                    <label class="btn btn-warning btn-radio-amacapa"> 
                         <input ng-model="tipoPessoa" value="J" type="radio" /> Jurídica
                     </label> 
-                    <label class="btn btn-primary btn-radio-amacapa"> 
+                    <label class="btn btn-warning btn-radio-amacapa"> 
                         <input ng-model="tipoPessoa" value="F" type="radio" /> Física
                     </label>
                 </div>
             </div>
         </div>
     </div>  
-    
+    <hr>
     <form action="" method="POST" role="form" ng-submit="salvar()">
         <!-- Inicio Pessoa Fisica -->
         <div class="pessoaFisica" ng-show=" !tipoPessoa ? true : tipoPessoa == 'F' ">
             <div class="row ">
                 <div class="form-group col-sm-2">
-                    <label> Papel </label>
-                    <select type="text" ui-select2 class="input-default" ng-model="pessoa.papel" >
-                        <option ng-repeat="papel in papeis" value="{{papel.nome}}">{{papel.nome}}</option>
-                    </select>
+                    <label>Aluno</label>
+                    <div>
+                        <div class="btn-group">
+                            <label class="btn btn-primary btn-radio-amacapa">
+                                <input ng-model="pessoa.aluno" value="S" type="radio" /> SIM
+                            </label> <label class="btn btn-primary btn-radio-amacapa">
+                                <input ng-model="pessoa.aluno" value="N" type="radio" /> NÃO
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label> Nome </label> 
@@ -56,11 +62,11 @@
             <div class="row">
                 <div class="form-group col-sm-3">
                     <label> RG </label> 
-                    <input class="form-control" type="text" id="rg" ng-model="pessoa.rg" pattern="^[0-9]*" title="9.999.999-9" maxlength="12" placeholder="Números do R.G." ng-required="getRequired(pessoa.papel)" />
+                    <input class="form-control" type="text" id="rg" ng-model="pessoa.rg" title="9.999.999-9" maxlength="12" placeholder="Números do R.G." ng-required="getRequired(pessoa.aluno)" />
                 </div>
                 <div class="form-group col-sm-3">
                     <label> CPF </label> 
-                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="999.999.999-99" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" ng-required="getRequired(pessoa.papel)" />
+                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="999.999.999-99" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" ng-required="getRequired(pessoa.aluno)" />
                 </div>
                 <div class="form-group col-sm-2">
                     <label>Nascimento </label> 

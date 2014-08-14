@@ -46,7 +46,7 @@
                     <th class="col-md-2">Email</th>
                     <th class="col-md-2"><span class="pull-right">Ações</span></th>
                 </tr>
-                <tr ng-repeat="pessoa in pessoas | filter: busca" >
+                <tr ng-repeat="pessoa in pagina.list" >
                     <td>{{pessoa.nome}}</td>
                     <td>{{pessoa.cpfCnpj}}</td>
                     <td>{{pessoa.data  | date: 'dd-MM-yyyy' }}</td>
@@ -68,24 +68,24 @@
     <div class="row ">
         <div class="col-sm-12">
             <ul class="pagination">
-                <li class="{{pessoas.pageNumber == 1 ? 'disabled' : ''}}">
+                <li class="{{pagina.pageNumber == 1 ? 'disabled' : ''}}">
                     <a ng-click="getTodos(1)"> <span class="glyphicon glyphicon-fast-backward"></span></a>
                 </li>
-                <li class="{{pessoas.pageNumber == 1 ? 'disabled' : ''}}">
-                    <a ng-click="getTodos(pessoas.pageNumber - 1)"> 
+                <li class="{{pagina.pageNumber == 1 ? 'disabled' : ''}}">
+                    <a ng-click="getTodos(pagina.pageNumber - 1)"> 
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </a>
                 </li>
-                <li ng-repeat="numeroPagina in pessoas.pagesAround" class="{{numeroPagina == pessoas.pageNumber ? 'active' : ''}}">
+                <li ng-repeat="numeroPagina in pagina.pagesAround" class="{{numeroPagina == pagina.pageNumber ? 'active' : ''}}">
                     <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
-                <li class="{{pessoas.pageNumber == pessoas.pageCount ? 'disabled' : '' }}">
-                    <a ng-click="getTodos(pessoas.pageNumber + 1)"> 
+                <li class="{{pagina.pageNumber == pagina.pageCount ? 'disabled' : '' }}">
+                    <a ng-click="getTodos(pagina.pageNumber + 1)"> 
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </a>
                 </li>
-                <li class="{{pessoas.pageNumber == pessoas.pageCount ? 'disabled' : ''}}">
-                    <a ng-click="getTodos(pessoas.pageCount)"> 
+                <li class="{{pagina.pageNumber == pagina.pageCount ? 'disabled' : ''}}">
+                    <a ng-click="getTodos(pagina.pageCount)"> 
                         <span class="glyphicon glyphicon-fast-forward" /></span>
                     </a>
                 </li>
