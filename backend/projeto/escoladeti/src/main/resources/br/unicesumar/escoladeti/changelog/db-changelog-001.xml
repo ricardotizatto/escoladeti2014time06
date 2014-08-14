@@ -577,7 +577,7 @@
 	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-62">
 		<addForeignKeyConstraint baseColumnNames="idevento"
-			baseTableName="participante" constraintName="fk_2fjc5r6enc9aq6a7p29fwwu52"
+			baseTableName="participante" constraintName="fk_2fjc5r6enc9aq6a7p29fwwu53"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento" />
 	</changeSet>
@@ -853,7 +853,13 @@
 		<addColumn tableName="solicitacaoitem">
 			<column name="status" type="varchar(20)"></column>
 		</addColumn>
-	</changeSet>	
-
+	</changeSet>
+        
+<!--        <changeSet id="est009" author="Alisson Molinari">
+            <addForeignKeyConstraint baseTableName="participante" baseColumnNames="idevento" 
+                                     constraintName="FK_PARTICIPANTE_EVENTO" referencedTableName="evento" 
+                                     referencedColumnNames="id">
+            </addForeignKeyConstraint>
+        </changeSet>-->
 </databaseChangeLog>
    
