@@ -16,7 +16,7 @@
                 <label> &nbsp; </label>
                 <div>
                     <span class="pull-right">
-                        <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="carregarParticipanteAlterar(null,participante.cpf,participante.deficiente,participante.email,participante.idevento,participante.nome,participante.rg,participante.sexo,participante.telefone,participante.pagamento)" data-toggle="modal" data-target="#modalParticipante">
+                        <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novoParticipante()">
                             <span class='glyphicon glyphicon-plus-sign'></span> Novo
                         </button>
                     </span>
@@ -42,7 +42,7 @@
                 <td>{{participante.telefone}}</td>
                 <td>{{participante.sexo}}</td>
                 <td>{{participante.pagamento}}</td>
-                <td><button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarParticipanteAlterar(participante.id,participante.cpf,participante.deficiente,participante.email,participante.idevento,participante.nome,participante.rg,participante.sexo,participante.telefone,participante.pagamento)" data-toggle="modal" data-target="#modalParticipante">
+                <td><button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="editar(participante)">
                         <span class='glyphicon glyphicon-edit'></span>
                     </button></td>
             </tr>
@@ -77,16 +77,14 @@
                                     </div>
                                     <div>
                                         <label> Pagamento </label>
-                                        <br>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-usd"></span>
-                                            </span>
-                                            <select class="selectpicker show-tick form-control" name="pagamento" ng-model="pagamentoModal" data-live-search="true">
-                                                <option value="PAGO" >PAGO</option>
-                                                <option value="PENDENTE" >PENDENTE</option>
-                                                <option value="GRATIS" >GRATIS</option>
-                                            </select>
+                                                <select class="selectpicker show-tick form-control" name="pagamento" ng-model="pagamentoModal" data-live-search="true">
+                                                    <option value="PAGO" >PAGO</option>
+                                                    <option value="PENDENTE" >PENDENTE</option>
+                                                    <option value="GRATIS" >GRATIS</option>
+                                                </select>
                                         </div>
                                     </div>
                                 </div>

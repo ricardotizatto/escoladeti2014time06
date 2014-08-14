@@ -3,7 +3,12 @@
 
 angular.module('controllers', ['services']);
 angular.module('services', []);
-var app = angular.module('app', ['ngRoute', 'controllers', 'ui.select2', 'ui.bootstrap']);
+var app = angular.module('app', 
+		['ngRoute',
+		 'ngResource',
+		 'controllers',
+		 'ui.select2',
+		 'ui.bootstrap']);
 
 app.config(['$routeProvider',
     function($routeProvider) {
@@ -217,6 +222,18 @@ app.config(['$routeProvider',
                 templateUrl: './pages/consultalivro.html',
                 controller: 'ConsultaLivroController'
             })
+            .when('/acompanhamento', {
+                templateUrl: './pages/acompanhamentoSolicitacao/acompanhamento.html',
+                 controller: 'acompanhamentoSolicitacaoController'
+            })
+            .when('/cadastroparticipanteevento', {
+                templateUrl: './pages/CadastroParticipanteEvento.html',
+                controller: 'participanteController'
+            })
+            .when('/cadastroparticipanteevento/:idParticipante', {
+                templateUrl: './pages/CadastroParticipanteEvento.html',
+                controller: 'participanteController'
+            })
             .otherwise({redirectTo: '/principal'
             });
     }
@@ -241,7 +258,35 @@ app.directive('capitalize', function() {
 	   };
 	});
 
+app.config([
+             '$httpProvider',
+             function ($httpProvider) {
+                 $httpProvider.interceptors.push('AuthInterceptor');
+             }
+         ]);
 
-app.factory('bd', function(){	
-    return { name : 'banco de dados' };
-});
+app.factory('AuthInterceptor', ['$q',
+                                AuthInterceptor
+                                ]);
+function  AuthInterceptor($q, $window) {
+    return {
+
+        responseError: function (rejection) {
+            var data = rejection.data;
+
+            if (data.message) {
+                toastr.warning(data.message);
+            }
+            
+            if (data.messageDeveloper) {
+            	console.log(data.messageDeveloper);
+            }
+
+            return $q.reject(rejection);
+        }
+
+    };
+}
+
+
+

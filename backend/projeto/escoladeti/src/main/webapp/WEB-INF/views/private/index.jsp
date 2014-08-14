@@ -24,6 +24,7 @@
         <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>
         
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>        
+        <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>        
         <script type="text/javascript" src="./resources/libs/ui-bootstrap-tpls-0.11.0.min.js"></script>        
         <script type="text/javascript" src="./resources/libs/angular-ui.js"></script>        
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
@@ -39,11 +40,13 @@
         <script type="text/javascript" src="./resources/js/cidade/service.js" ></script>
         <script type="text/javascript" src="./resources/js/distrito/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>
-        <script type="text/javascript" src="./resources/js/solicitacao/controller.js" ></script>        
+        <script type="text/javascript" src="./resources/js/solicitacao/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/solicitacao/service.js" ></script>           
         <script type="text/javascript" src="./resources/js/pessoaFisica/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaFisica/service.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
       
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
@@ -185,7 +188,9 @@
 						</a>
 						<ul class="sub-menu">
 							<li><a href="#/listasolicitacoes">Solicitação</a></li>
+                                                        <li><a href="#/acompanhamento">Acompanhamento de Solicitação</a></li>
                             <li><a href="#/listaordemproducao">Ordem de Produção</a></li>
+                            
 						</ul>
 					</li>
 				</ul>

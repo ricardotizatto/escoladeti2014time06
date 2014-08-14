@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Objects;
+
 import javax.persistence.Entity;
 
 @Entity
@@ -13,8 +14,15 @@ public class Livro extends Entidade {
     private String autor;
     private String editora;
     private Long anoEdicao;
+    
+    public Livro() {
+	}
 
-    public String getNome() {
+    public Livro(Long id) {
+    	this.id = id;
+	}
+
+	public String getNome() {
         return nome;
     }
 
@@ -92,6 +100,10 @@ public class Livro extends Entidade {
         }
         return true;
     }
+
+	public static Livro of(Long id) {
+		return new Livro(id);
+	}
     
     
 }

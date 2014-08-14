@@ -2,20 +2,11 @@ package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Participante extends Entidade{  
-    @NotNull
-    @NotEmpty
-    @Column
-    private String nome;
-
     
-    @NotNull
-    @NotEmpty
-    @Column
+    private String nome;    
     private String cpf;
     private String rg;
     private Long idevento;
@@ -96,6 +87,4 @@ public class Participante extends Entidade{
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    
-    
 }
