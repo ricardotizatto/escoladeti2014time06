@@ -15,7 +15,7 @@
 			</div>
 			<div class="col-md-5 form-group">
 				<label>Aluno</label> <select ui-select2 class="input-default"
-					ng-model="solicitacao.idAluno" required="required">
+					ng-model="solicitacao.aluno" >
 					<option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
 				</select>
 			</div>
@@ -49,20 +49,20 @@
 			</div>
 			<div class="col-md-3 form-group">
 				<label>Responsável</label> <select ui-select2 class="input-default"
-					ng-model="solicitacao.idResponsavel" required="required">
+					ng-model="solicitacao.responsavel" >
 					<option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
 				</select>
 			</div>
 
 			<div class="col-md-3 form-group">
 				<label>Data de chegada</label> <input type="date"
-					class="form-control" ng-model="solicitacao.dataChegada" required="required">
+					class="form-control" ng-model="solicitacao.dataChegada" >
 			</div>
 			<div class="col-md-3 form-group">
 				<label>NRE</label> <select ui-select2 class="input-default"
-					ng-model="solicitacao.idNre">
+					ng-model="solicitacao.nre">
 					<option ng-repeat="c in cidades" value="{{c.id}}"
-					required="required">{{c.nome}}</option>
+					>{{c.nome}}</option>
 				</select>
 			</div>
 		</div>
@@ -83,7 +83,7 @@
 				</div>
 				<div class="col-md-3 form-group">
 					<label>Município</label> <select ui-select2 class="input-default"
-						ng-model="solicitacao.idMunicipio">
+						ng-model="solicitacao.municipio">
 						<option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>
 					</select>
 				</div>
@@ -150,7 +150,7 @@
 							<div class="row">
 								<div class="col-md-4">
 									<label>Livro</label> <select ui-select2 class="input-default"
-										ng-model="itemCorrente.idLivro" require="true">
+										ng-model="itemCorrente.livro" require="true">
 										<option ng-repeat="l in livros" value="{{l.id}}">{{l.nome}}</option>
 									</select>
 								</div>
