@@ -27,7 +27,7 @@
                 <div class="form-group col-sm-2">
                     <label> Papel </label>
                     <select type="text" ui-select2 class="input-default" ng-model="pessoa.papel" >
-                        <option ng-repeat="papel in papeis" value="{{papel.id}}">{{papel.nome}}</option>
+                        <option ng-repeat="papel in papeis" value="{{papel.nome}}">{{papel.nome}}</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-4">
@@ -43,10 +43,10 @@
                         <div>
                             <div class="btn-group">
                                 <!--data-toggle="buttons" verificar uso-->
-                                <label class="btn btn-ss btn-primary btn-radio-amacapa">
-                                    <input form-control ng-model="pessoa.sexo" value="M" type="radio" required /> M
-                                </label> <label class="btn btn-ss btn-primary btn-radio-amacapa">
-                                    <input form-control ng-model="pessoa.sexo" value="F" type="radio" required /> F
+                                <label class="btn btn-primary btn-radio-amacapa">
+                                    <input ng-model="pessoa.sexo" value="M" type="radio" /> M
+                                </label> <label class="btn btn-primary btn-radio-amacapa">
+                                    <input ng-model="pessoa.sexo" value="F" type="radio" /> F
                                 </label>
                             </div>
                         </div>
@@ -56,11 +56,11 @@
             <div class="row">
                 <div class="form-group col-sm-3">
                     <label> RG </label> 
-                    <input class="form-control" pattern="^[0-9]*" type="text" id="rg" ng-model="pessoa.rg" maxlength="12" placeholder="Números do R.G." required tittle="5551234" />
+                    <input class="form-control" type="text" id="rg" ng-model="pessoa.rg" pattern="^[0-9]*" title="9.999.999-9" maxlength="12" placeholder="Números do R.G." ng-required="getRequired(pessoa.papel)" />
                 </div>
                 <div class="form-group col-sm-3">
                     <label> CPF </label> 
-                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="999.999.999-99" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" required />
+                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="999.999.999-99" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" ng-required="getRequired(pessoa.papel)" />
                 </div>
                 <div class="form-group col-sm-2">
                     <label>Nascimento </label> 
