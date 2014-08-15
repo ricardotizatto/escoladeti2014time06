@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.repository;
 
+import br.unicesumar.escoladeti.entity.Usuario;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.unicesumar.escoladeti.entity.UsuarioPerfilAcesso;
 
 public interface UsuarioPerfilAcessoRepository extends JpaRepository<UsuarioPerfilAcesso, Long> {
-    
+
     public UsuarioPerfilAcesso findById(Long id);
-    
+    public List<UsuarioPerfilAcesso> findByUsuarioContainingOrderByIdAsc(Usuario usuario);
 }
