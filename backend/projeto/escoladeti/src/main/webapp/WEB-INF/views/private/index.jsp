@@ -46,6 +46,7 @@
         <script type="text/javascript" src="./resources/js/pessoaFisica/service.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/buscacep/service.js" ></script>
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
       
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
