@@ -47,6 +47,7 @@ public class SolicitacaoService {
 				.dataChegada(comando.getDataChegada())
 				.endereco(comando.getEndereco())
 				.escola(comando.getEscola())
+				.ensino(comando.getEnsino())
 				.municipio(comando.getMunicipio())
 				.nre(comando.getNre())
 				.numeroEndereco(comando.getNumeroEndereco())
@@ -72,6 +73,46 @@ public class SolicitacaoService {
 				.build();
 		
 		return solicitacaoRepository.save(solicitacao);
+	}
+	
+	public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) {
+		SolicitacaoBuilder solicitacaoBuilder = Solicitacao
+				.builder()
+				.id(id)
+				.aluno(comando.getAluno())
+				.cep(comando.getCep())
+				.dataChegada(comando.getDataChegada())
+				.endereco(comando.getEndereco())
+				.ensino(comando.getEnsino())
+
+				.escola(comando.getEscola())
+				.municipio(comando.getMunicipio())
+				.nre(comando.getNre())
+				.numeroEndereco(comando.getNumeroEndereco())
+				.responsavel(comando.getResponsavel())
+				.serie(comando.getSerie());
+		
+		
+		List<SolicitacaoItem> itens = new ArrayList<SolicitacaoItem>();
+		
+		for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
+			SolicitacaoItem solicitacaoItem = SolicitacaoItem
+					.builder()
+					.livro(comandoItem.getLivro())
+					.outro(comandoItem.getOutro())
+					.traducaoMaterial(comandoItem.getTraducaoMaterial())
+					.status(StatusItem.ABERTO)
+					.build();
+			itens.add(solicitacaoItem);
+		}
+		
+		Solicitacao solicitacao = solicitacaoBuilder
+				.itensSolicitacao(itens)
+				.build();
+		
+		return solicitacaoRepository.save(solicitacao);
+		
+		
 	}
 
 	public List<Solicitacao> listar() {

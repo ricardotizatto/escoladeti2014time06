@@ -20,14 +20,18 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Ignore;
 import org.springframework.validation.annotation.Validated;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.unicesumar.escoladeti.entity.Cidade;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarSolicitacao {
 	   
     @NotNull(message = "Aluno é obrigatório" )
-    @Min(value = 0, message = "aluno é obrigatório")
+    @Min(value = 0, message = "Aluno é obrigatório")
+    @Max(value = 100)
     private Long aluno;
     
     @NotBlank(message = "Escola é obrigatório")
@@ -41,7 +45,7 @@ public class ComandoSalvarSolicitacao {
     private Long municipio;
     
     @NotBlank(message = "CEP é obrigatório")
-    @Length(min=0,  max=7, message = "Tamanho inválido para o cep")
+    @Length(min=0,  max=9, message = "Tamanho inválido para o cep")
     private String cep;    
     
     @NotBlank(message = "Endereço é obrigatório")

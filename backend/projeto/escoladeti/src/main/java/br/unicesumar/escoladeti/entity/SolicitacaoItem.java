@@ -112,6 +112,7 @@ public class SolicitacaoItem extends Entidade{
 			solicitacaoItem.setLivro(Livro.of(this.livro));
 			solicitacaoItem.setTraducaoMaterial(TraducaoMaterial.of(this.traducaoMaterial));
 			solicitacaoItem.setOutro(this.outro);
+			solicitacaoItem.setStatus(StatusItem.of(this.status));
 			
 			if(solicitacaoItem.getTraducaoMaterial().equals(TraducaoMaterial.OUTRO)
 					&& (solicitacaoItem.getOutro() == null || solicitacaoItem.getOutro().isEmpty() ) ) {

@@ -8,7 +8,7 @@ public enum TraducaoMaterial {
 
 	public static TraducaoMaterial of(String traducaoMaterial) {
 		try {
-			return of(traducaoMaterial);
+			return valueOf(traducaoMaterial);
 		} catch (Exception e) {
 			throw new RuntimeException("Tradução do material inválido");
 		}
