@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.validation.annotation.Validated;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarSolicitacaoItem {
 	@NotBlank(message = "Tradução do material é obrigatório")
 	private String traducaoMaterial;
@@ -15,6 +18,8 @@ public class ComandoSalvarSolicitacaoItem {
 	private Long livro;
 	
 	private String outro;
+	
+	private String status;
 	
 	public String getTraducaoMaterial() {
 		return traducaoMaterial;
@@ -33,6 +38,12 @@ public class ComandoSalvarSolicitacaoItem {
 	}
 	public void setOutro(String outro) {
 		this.outro = outro;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

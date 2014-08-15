@@ -192,6 +192,16 @@
                             
 						</ul>
 					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-folder"></i>
+							<span class="title">Materiais</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#/listalivro">Livro</a></li>
+						</ul>
+					</li>
+					
 				</ul>
 			</div>
 		
