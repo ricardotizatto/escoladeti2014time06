@@ -1,19 +1,27 @@
 package br.unicesumar.escoladeti.comando;
 
+import br.unicesumar.escoladeti.entity.Solicitacao;
 import br.unicesumar.escoladeti.entity.Telefone;
 import br.unicesumar.escoladeti.enums.TipoTelefone;
 import br.unicesumar.escoladeti.util.number.NumberUtils;
 import br.unicesumar.escoladeti.util.string.StringUtils;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 import org.parboiled.common.Preconditions;
 
 public class ComandoSalvarTelefone {
 
+    @NotBlank(message = "Numero é obrigatório")
     private String numero;
 
     private Integer ramal;
 
+    @NotNull(message = "Tipo de Telefone é obrigatório")
     private TipoTelefone tipo;
 
+    @NotNull(message = "Número do ddd é obrigatório")
+    @Min(value = 0, message = "Número do ddd é inválido")
     private Integer ddd;
 
     public ComandoSalvarTelefone(TelefoneBuilder builder) {
@@ -52,6 +60,10 @@ public class ComandoSalvarTelefone {
         this.ddd = ddd;
     }
 
+    public static TelefoneBuilder builder() {
+        return new TelefoneBuilder();
+    }
+
     public static class TelefoneBuilder {
 
         private String numero;
@@ -81,7 +93,7 @@ public class ComandoSalvarTelefone {
             this.ddd = ddd;
             return this;
         }
-        
+
         public Telefone build() {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.numero));
             Preconditions.checkNotNull(this.tipo);

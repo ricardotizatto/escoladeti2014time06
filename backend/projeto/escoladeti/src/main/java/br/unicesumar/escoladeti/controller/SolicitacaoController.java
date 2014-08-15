@@ -1,4 +1,5 @@
 package br.unicesumar.escoladeti.controller;
+package br.unicesumar.escoladeti.controller;
 
 import java.io.Serializable;
 import java.util.List;

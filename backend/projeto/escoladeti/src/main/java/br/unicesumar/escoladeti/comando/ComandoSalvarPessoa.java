@@ -7,36 +7,52 @@ import br.unicesumar.escoladeti.enums.Papel;
 import br.unicesumar.escoladeti.enums.Sexo;
 import br.unicesumar.escoladeti.util.string.StringUtils;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 import org.parboiled.common.Preconditions;
 
 public class ComandoSalvarPessoa {
 
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
 
+    @NotBlank(message = "Email é obrigatório")
     private String email;
 
+    @NotBlank(message = "Tipo inválido")
     private String tipo;
 
+    @NotBlank(message = "Rg é obrigatório")
     private String rg;
 
+    @NotBlank(message = "Cpf é obrigatório")
     private String cpf;
 
+    @NotNull(message = "Data de Nascimento é obrigatório")
     private Date dataNascimento;
 
+    @NotBlank(message = "Sobrenome é obrigatório")
     private String sobrenome;
 
+    @NotNull(message = "Sexo é obrigatório")
     private Sexo sexo;
 
+    @NotNull(message = "Papel é obrigatório")
     private Papel papel;
 
+    @NotBlank(message = "Cnpj é obrigatório")
     private String cnpj;
 
+    @NotBlank(message = "Inscrição Estadual é obrigatório")
     private String inscricaoEstadual;
 
+    @NotBlank(message = "Incrição Municipal é obrigatório")
     private String inscricaoMunicipal;
 
+    @NotBlank(message = "Razão Social é obrigatório")
     private String razaoSocial;
 
+    @NotNull(message = "Data de Criação é obrigatório")
     private Date dataCriacao;
 
     public ComandoSalvarPessoa() {
@@ -154,146 +170,5 @@ public class ComandoSalvarPessoa {
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
-
-    public static class PessoaBuilder {
-
-        private String nome;
-
-        private String email;
-
-        private String tipo;
-
-        private String rg;
-
-        private String cpf;
-
-        private Date dataNascimento;
-
-        private String sobrenome;
-
-        private Sexo sexo;
-
-        private Papel papel;
-
-        private String cnpj;
-
-        private String inscricaoEstadual;
-
-        private String inscricaoMunicipal;
-
-        private String razaoSocial;
-
-        private Date dataCriacao;
-
-        public PessoaBuilder nome(String nome) {
-            this.nome = nome;
-            return this;
-        }
-
-        public PessoaBuilder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public PessoaBuilder tipo(String tipo) {
-            this.tipo = tipo;
-            return this;
-        }
-
-        public PessoaBuilder rg(String rg) {
-            this.rg = rg;
-            return this;
-        }
-
-        public PessoaBuilder cpf(String cpf) {
-            this.cpf = cpf;
-            return this;
-        }
-
-        public PessoaBuilder dataNascimento(Date dataNascimento) {
-            this.dataNascimento = dataNascimento;
-            return this;
-        }
-
-        public PessoaBuilder sobrenome(String sobrenome) {
-            this.sobrenome = sobrenome;
-            return this;
-        }
-
-        public PessoaBuilder sexo(Sexo sexo) {
-            this.sexo = sexo;
-            return this;
-        }
-
-        public PessoaBuilder papel(Papel papel) {
-            this.papel = papel;
-            return this;
-        }
-
-        public PessoaBuilder cnpj(String cnpj) {
-            this.cnpj = cnpj;
-            return this;
-        }
-
-        public PessoaBuilder inscricaoEstadual(String inscricaoEstadual) {
-            this.inscricaoEstadual = inscricaoEstadual;
-            return this;
-        }
-
-        public PessoaBuilder inscricaoMunicipal(String inscricaoMunicipal) {
-            this.inscricaoMunicipal = inscricaoMunicipal;
-            return this;
-        }
-
-        public PessoaBuilder razaoSocial(String razaoSocial) {
-            this.razaoSocial = razaoSocial;
-            return this;
-        }
-
-        public PessoaBuilder dataCriacao(Date dataCriacao) {
-            this.dataCriacao = dataCriacao;
-            return this;
-        }
-
-        public Pessoa build() {
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf));
-            Preconditions.checkNotNull(this.dataNascimento);
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome));
-            Preconditions.checkNotNull(this.sexo);
-            Preconditions.checkNotNull(this.papel);
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.cnpj));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoEstadual));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial));
-            Preconditions.checkNotNull(this.dataCriacao);
-
-            if (tipo.equals("F") ) {
-                PessoaFisica pessoa = new PessoaFisica();
-                pessoa.setNome(this.nome);
-                pessoa.setEmail(this.email);
-                pessoa.setRg(this.rg);
-                pessoa.setCpf(this.cpf);
-                pessoa.setDataNascimento(this.dataNascimento);
-                pessoa.setSobrenome(this.sobrenome);
-                pessoa.setSexo(this.sexo);
-                pessoa.setPapel(this.papel);
-                return pessoa;
-            } else {
-                PessoaJuridica pessoa = new PessoaJuridica();
-                pessoa.setNome(this.nome);
-                pessoa.setEmail(this.email);
-                pessoa.setCnpj(this.cnpj);
-                pessoa.setInscricaoEstadual(this.inscricaoEstadual);
-                pessoa.setInscricaoMunicipal(this.inscricaoMunicipal);
-                pessoa.setRazaoSocial(this.razaoSocial);
-                pessoa.setDataCriacao(this.dataCriacao);
-                return pessoa;
-            }
-
-        }
-    }
+    
 }

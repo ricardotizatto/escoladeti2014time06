@@ -26,7 +26,7 @@ import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 
 public class ComandoSalvarSolicitacao {
 	   
-    @NotNull(message = "Aluno é obrigatório" )
+    @NotNull(message = "Aluno é obrigatório")
     @Min(value = 0, message = "aluno é obrigatório")
     private Long aluno;
     
