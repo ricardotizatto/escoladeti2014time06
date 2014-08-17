@@ -7,12 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
 import br.unicesumar.escoladeti.enums.StatusItem;
 import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 
@@ -112,6 +108,7 @@ public class SolicitacaoItem extends Entidade{
 			solicitacaoItem.setLivro(Livro.of(this.livro));
 			solicitacaoItem.setTraducaoMaterial(TraducaoMaterial.of(this.traducaoMaterial));
 			solicitacaoItem.setOutro(this.outro);
+                        
 			solicitacaoItem.setStatus(StatusItem.of(this.status));
 			
 			if(solicitacaoItem.getTraducaoMaterial().equals(TraducaoMaterial.OUTRO)

@@ -1,8 +1,8 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.enums.Papel;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,9 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import br.unicesumar.escoladeti.enums.Sexo;
 
@@ -21,32 +18,22 @@ import br.unicesumar.escoladeti.enums.Sexo;
 @DiscriminatorValue(value = "F")
 public class PessoaFisica extends Pessoa {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@NotNull
-    @NotEmpty
-    @Column(length = 15)
     private String rg;
 
-    @NotEmpty
-    @NotNull
-    @Column(unique = true, length = 11)
     private String cpf;
-
-    @NotNull
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
-    @NotNull
-    @NotEmpty
-    @Column(length = 50)
     private String sobrenome;
-    
-    @NotNull
+
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-	public PessoaFisica() {
+    private Papel papel;
+
+    public PessoaFisica() {
     }
 
     public PessoaFisica(String rg, String cpf, Date dataNascimento, String sobrenome) {
@@ -57,10 +44,10 @@ public class PessoaFisica extends Pessoa {
     }
 
     public PessoaFisica(Long id) {
-    	this.id = id;
-	}
+        this.id = id;
+    }
 
-	public String getRg() {
+    public String getRg() {
         return rg;
     }
 
@@ -93,14 +80,22 @@ public class PessoaFisica extends Pessoa {
     }
 
     public Sexo getSexo() {
-		return sexo;
-	}
-    
-    public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
-	}
+        return sexo;
+    }
 
-	public static PessoaFisica of(Long id) {
-		return new PessoaFisica(id);
-	}
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public Papel getPapel() {
+        return papel;
+    }
+
+    public void setPapel(Papel papel) {
+        this.papel = papel;
+    }
+
+    public static PessoaFisica of(Long id) {
+        return new PessoaFisica(id);
+    }
 }

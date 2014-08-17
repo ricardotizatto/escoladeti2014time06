@@ -1,10 +1,8 @@
-'use strict';
 var controllers = angular.module('controllers');
 
-function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, paisService, estadoService, cidadeService) {
-	$scope.select2='one';
+function PessoaController($scope, $location, $log, $routeParams, pessoaService, paisService, estadoService, cidadeService) {
+    $scope.select2='one';
     console.log('Carregando controller');
-    $scope.info = {};
     
     $scope.modificarPais = function(paisId){
     	$scope.unidadeFederativa = {};
@@ -16,6 +14,24 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
     		$scope.unidadesFederativas = data;
     	});
     };
+    
+    $scope.getRequired = function(aluno) {
+        switch (aluno) {
+            case "S":
+               return false;
+               break;
+            default:
+               return true;
+        }  
+    };
+    
+    $scope.validaCpf = function(cpf) {
+        if (!ValidarCPF(cpf)) {
+            toastr.warning("CPF inválido.");
+            $scope.pessoaFisica.cpf = $scope.pessoaFisica.c;
+        }
+    };
+    
     $scope.validaCnpj = function(cnpj){
     	if(!ValidarCNPJ(cnpj)){
     		toastr.warning("CNPJ inválido.");
@@ -32,7 +48,7 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
     	.success(function(data,status){
     		$scope.cidades = data;
     	});
-    }
+    };
     
     var buscarSelecionado = function () {
     	
@@ -48,15 +64,15 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
     $scope.deletar = function(pessoa) {
         console.log('deletando pessoa ' + JSON.stringify(pessoa));
         
-        BootstrapDialog.confirm('Deseja realmente deletar o Pessoa Juridica: <b>' + pessoa.nome +'</b>?', function(result) {
+        BootstrapDialog.confirm('Deseja realmente deletar a Pessoa: <b>' + pessoa.nome +'</b>?', function(result) {
             if (result) {
             	pessoaJuridicaService.deletar(pessoa)
-               		.success(function (data, status) {
+               		.success(function (data) {
                         $scope.getTodos(1);
-                        console.log('Pessoa Juridica deletada');
+                        console.log('Pessoa deletada');
                         toastr.success(pessoa.nome+" deletado com sucesso.");                       
                     })
-                    .error(function (data, status) {
+                    .error(function (data) {
                         console.log('erro ao deletar pessoa ' + data);
                         console.log(data.messageDeveloper);
                         toastr.error(data.message);
@@ -67,20 +83,24 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
     };
     
     $scope.novo = function() {
-        $scope.pessoaJuridica = getNovaPessoaJuridica();
-        window.location = '#/pessoajuridica';
+        console.log('Nova Pessoa');
+        window.location = '#/pessoa';
     };    
 	
     $scope.carregarPessoa = function() {
-    	console.log('carregando pessoa juridica');
+    	console.log('carregando pessoa');
         
-        if (!$routeParams.pessoaJuridicaId){
-        	$scope.pessoaJuridica = getNovaPessoaJuridica();
+        if (!$routeParams.pessoaId){
+            $scope.pessoa = $scope.getNovaPessoaFisica();
+            $scope.tipoPessoa = 'F';
+            $scope.papeis = [
+                { nome:'ALUNO'}
+            ];
             return;//se não tiver id não buscar
         }
         
         pessoaJuridicaService.buscar($routeParams.pessoaJuridicaId)
-                .success(function(p, status) {
+                .success(function(p) {
                     $scope.pessoaJuridica = p;
                 });
     };
@@ -98,7 +118,7 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
     };
     
     $scope.editar = function(p) {
-        window.location = '#/pessoajuridica/' + p.id;
+        window.location = '#/pessoa/' + p.id;
     };
     
     $scope.init = function(){
@@ -108,31 +128,53 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
         $scope.unidadeFederativa = {};
         $scope.cidade = {};
         carregaPaises();
-    }
+    };
     
-    $scope.buscaPessoaJuridicaContendoNome = function () {
+    $scope.buscaPessoaContendoNome = function () {
     	console.log($scope.busca);    	
     	pessoaJuridicaService.buscarPorNome($scope.busca)
-    		.then(function (retorno){
-    			console.log(retorno.data.list);
-    			$scope.pessoasJuridicas = retorno.data;
-    		});
+            .then(function (retorno){
+                console.log(retorno.data.list);
+                $scope.pessoas = retorno.data;
+            });
+    }; 
+
+    $scope.filtroPessoaJuridica = function() {
+        console.log("filtro pessoa juridica");
+        $scope.pessoas = [
+            {nome: 'Unicesumar', cpfCnpj: '11111111111', data: '01/01/1980', email: 'unicesumar@email.com'}
+        ];
+    };
+    
+    $scope.filtroPessoaFisica = function() {
+        console.log("filtro pessoa fisica");
+        $scope.pessoas = [
+            {nome: 'Winicius', cpfCnpj: '988888888-99', data: '01/01/1995', email: 'contato@email.com'}
+        ];
+    };
+    
+    $scope.filtroAluno = function() {
+        console.log("aluno");
+        $scope.pessoas = [
+            { nome : 'Martinho', cpfCnpj : '999999999-99', data : '16/03/1990', email : 'contato@email.com' }
+        ];
     };
 
     $scope.salvar = function() {
     	pessoaJuridicaService.salvar($scope.pessoaJuridica)
-                .success(function(pf, status) {
-                    $scope.pessoaJuridica = getNovaPessoaJuridica();
-                    toastr.success('Pessoa Juridica '+pf.nome+' salvo com sucesso.');
-                })
-                .error(function(data, status) {
-                    console.log('Pessoa juridica não salva ', data);
-                    toastr.warning(data.message);
-                    console.log(data.messageDeveloper);
-                });
+            .success(function(pf) {
+                $scope.pessoaJuridica = getNovaPessoaJuridica();
+                toastr.success('Pessoa Juridica '+pf.nome+' salvo com sucesso.');
+            })
+            .error(function(data) {
+                console.log('Pessoa juridica não salva ', data);
+                toastr.warning(data.message);
+                console.log(data.messageDeveloper);
+            });
     };
     
     $scope.getTodos = function(numeroPagina) {
+        /*
     	console.log(numeroPagina);
     	$scope.pessoasJuridicas = [];
     	pessoaJuridicaService.listar(numeroPagina)
@@ -142,37 +184,55 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
             .error(function(data, status) {
                 console.log('erro ao buscar paises ' + data);
             });
+        */
     };
     
-	function getNovaPessoaJuridica() {
-		return {
-			id : null,
-			nome : null,
-			razaoSocial : null,
-			dataCriacao : null,
-			inscricaoMunicipal : null,
-			cnpj : null,
-			inscricaoEstadual : null,
-			email : null,
-			telefones : [],
-			enderecos : []
-		};
-	}
+    $scope.getNovaPessoaJuridica = function(){
+        return {
+            id: null,
+            nome: null,
+            razaoSocial: null,
+            dataCriacao: null,
+            inscricaoMunicipal: null,
+            cnpj: null,
+            inscricaoEstadual: null,
+            email: null,
+            telefones: [],
+            enderecos: []
+        };
+    };
+    
+    $scope.getNovaPessoaFisica = function() {
+        return {
+            id: null,
+            aluno: 'N',
+            papel: '',
+            nome: null,
+            sobrenome: null,
+            sexo: 'M',
+            rg: null,
+            cpf: null,
+            dataNascimento: null,
+            email: null,
+            telefones: [],
+            enderecos: []
+        };
+    };
 	
     $scope.select2Options = {
         	
     };
     
     $scope.voltar = function() {
-        $scope.pessoaJuridica = getNovaPessoaJuridica();
-        window.location = '#/listapessoajuridica';
+        //$scope.pessoaJuridica = getNovaPessoaJuridica();
+        window.location = '#/listapessoa';
     };
 
 //Novo telefone
     
     $scope.novoTelefone = function(){
     	$scope.telefone = getNovoTelefone();
-    }
+    };
 
     $scope.salvarTelefone = function() {
         if ($scope.indiceTelefone >= 0){
@@ -257,11 +317,12 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
     	$scope.cidades = [];
     	$scope.unidadesFederativas = [];
     	$scope.pais = {};
-    }
+    };
     
     function getNovoEndereco() {
     	return {
-    		tipoEndereco : 'RUA'
+    		tipoEndereco : 'RUA',
+                principal : 'S'
     	};
     }
     
@@ -270,6 +331,28 @@ function PessoaJuridicaController($scope, $routeParams, pessoaJuridicaService, p
     		tipo : 'RESIDENCIAL'
     	};
     }
+    
+    jQuery(function($) {
+        $.mask.definitions['~'] = '[+-]';
+        $("#telefone").mask("(99) 9999-9999?9");
+        $("#ramal").mask("9?");
+        $("#cep").mask("99.999-999");
+        $("#cpf").mask("999.999.999-99");
+        $("#rg").mask("9.999.999-*");
+        $("#cnpj").mask("99.999.999/9999-99");
+    });
 }
 
-controllers.controller('PessoaJuridicaController', ['$scope', '$routeParams', 'pessoaJuridicaService', 'paisService', 'estadoService', 'cidadeService', PessoaJuridicaController ]);
+controllers.controller('PessoaController',  
+		[
+		 '$scope',
+		 '$location',
+		 '$log',
+		 '$routeParams',
+		 '$http',
+		 'PessoaFactory',
+                 'paisService', 
+                 'estadoService', 
+                 'cidadeService',
+		 PessoaController
+		 ]);
