@@ -1,6 +1,7 @@
-'use strict';
-
 function itemAcessoController($scope, $http, $routeParams) {
+
+    $scope.itemAcesso = [];
+    $scope.subMenus = [];
 
     $scope.novo = function() {
         $scope.itemAcesso = getNovoItemAcesso();
@@ -11,9 +12,11 @@ function itemAcessoController($scope, $http, $routeParams) {
         $http.post('./rest/itemAcessoSource/itemAcesso', $scope.itemAcesso)
                 .success(function(itemAcesso, status) {
                     $scope.itemAcesso = getNovoItemAcesso();
+                    toastr.success("Item de Acesso salvo com sucesso!");
                     console.log('Item de Acesso salva ' + itemAcesso);
                 })
                 .error(function(data) {
+                    toastr.warning("Erro ao salvar o item de acesso!");
                     console.log('Tela nao foi salva ' + data);
                 });
     };
@@ -32,6 +35,17 @@ function itemAcessoController($scope, $http, $routeParams) {
                     $scope.itensAcesso = itensAcesso;
                     console.log('Telas carregadas');
                 });
+    };
+
+    $scope.getSubMenus = function() {
+        $http.get('./rest/itemAcessoSource/subMenu/')
+                .success(function(subMenus) {
+                    $scope.subMenus = subMenus;
+                });
+    };
+
+    $scope.getMenus = function() {
+
     };
 
     $scope.editar = function(itemAcesso) {

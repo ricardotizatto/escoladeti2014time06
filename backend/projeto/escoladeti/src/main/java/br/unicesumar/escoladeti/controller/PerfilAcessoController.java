@@ -1,9 +1,7 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.PerfilAcesso;
-import br.unicesumar.escoladeti.entity.Usuario;
 import br.unicesumar.escoladeti.service.PerfilAcessoService;
-import br.unicesumar.escoladeti.service.UsuarioPerfilAcessoService;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

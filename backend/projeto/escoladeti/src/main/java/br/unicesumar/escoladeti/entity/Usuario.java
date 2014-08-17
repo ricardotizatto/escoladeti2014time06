@@ -1,7 +1,5 @@
 package br.unicesumar.escoladeti.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -30,16 +28,15 @@ public class Usuario extends Entidade {
     @NotNull
     private Boolean ativo;
     
-    @OneToOne(mappedBy = "usuario")
-    @JsonBackReference
-    private UsuarioPerfilAcesso usuarioPerfilAcesso;
+    @OneToOne
+    private PerfilAcessoUsuario perfilAcessoUsuario;
 
-    public UsuarioPerfilAcesso getUsuarioPerfilAcesso() {
-        return usuarioPerfilAcesso;
+    public PerfilAcessoUsuario getPerfilAcessoUsuario() {
+        return perfilAcessoUsuario;
     }
 
-    public void setUsuarioPerfilAcesso(UsuarioPerfilAcesso usuarioPerfilAcesso) {
-        this.usuarioPerfilAcesso = usuarioPerfilAcesso;
+    public void setPerfilAcessoUsuario(PerfilAcessoUsuario perfilAcessoUsuario) {
+        this.perfilAcessoUsuario = perfilAcessoUsuario;
     }
 
     public Usuario() {

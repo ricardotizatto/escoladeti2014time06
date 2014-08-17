@@ -5,15 +5,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class ItemAcesso extends Entidade {
-   
+public class SubMenu extends Entidade{
+
     private String nome;
     
     @OneToOne
-    @JoinColumn(name = "id_submenu")
-    private SubMenu subMenu;
-
-    public ItemAcesso() {
+    @JoinColumn(name = "id_menu")
+    private Menu menu;
+    
+    public SubMenu() {
     }
 
     public String getNome() {
@@ -24,12 +24,12 @@ public class ItemAcesso extends Entidade {
         this.nome = nome;
     }
 
-    public SubMenu getSubMenu() {
-        return subMenu;
+    public Menu getMenu() {
+        return menu;
     }
 
-    public void setSubMenu(SubMenu subMenu) {
-        this.subMenu = subMenu;
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
     
 }
