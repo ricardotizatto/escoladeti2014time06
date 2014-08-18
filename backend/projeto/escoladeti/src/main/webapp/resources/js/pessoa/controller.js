@@ -3,6 +3,7 @@ var controllers = angular.module('controllers');
 function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) {
     $scope.select2='one';
     console.log('Carregando controller');
+    $scope.pagina = [];
     
     $scope.modificarPais = function(paisId){
     	$scope.unidadeFederativa = {};
@@ -116,11 +117,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
                 console.log('erro ao buscar paises ' + data);
             });
     };
-    
-    Pessoa.paginar({pagina: 1}, function(pagina) {
-        console.log('pagina: ' + pagina);
-        $scope.pagina = pagina;
-    });
+
     
     $scope.editar = function(p) {
         window.location = '#/pessoa/' + p.id;
@@ -135,6 +132,11 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         carregaPaises();
     };
     
+    $scope.initLista = function() {
+        $scope.tipo = 'FISICA';
+        $scope.filtroPessoaFisica();
+    };
+    
     $scope.buscaPessoaContendoNome = function () {
     	console.log($scope.busca);    	
     	pessoaJuridicaService.buscarPorNome($scope.busca)
@@ -146,22 +148,27 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     $scope.filtroPessoaJuridica = function() {
         console.log("filtro pessoa juridica");
-        $scope.pessoas = [
-            {nome: 'Unicesumar', cpfCnpj: '11111111111', data: '01/01/1980', email: 'unicesumar@email.com'}
+        $scope.pagina.list = [
+            {nome: 'Unicesumar', cpf: '11111111111', dataNascimento: '01/01/1980', email: 'unicesumar@email.com'}
         ];
     };
     
     $scope.filtroPessoaFisica = function() {
         console.log("filtro pessoa fisica");
-        $scope.pessoas = [
-            {nome: 'Winicius', cpfCnpj: '988888888-99', data: '01/01/1995', email: 'contato@email.com'}
-        ];
+        /*
+        $scope.pagina.list = [
+            {nome: 'Winicius', cpf: '988888888-99', dataNascimento: '01/01/1995', email: 'contato@email.com'}
+        ];*/
+        Pessoa.paginar({pagina: 1}, {tipoPessoa: 'F' }, function(pagina, tipoPessoa) {
+            console.log('pagina: ' + pagina + ' tipo ' + tipoPessoa);
+            $scope.pagina = pagina;
+        });
     };
     
     $scope.filtroAluno = function() {
         console.log("aluno");
-        $scope.pessoas = [
-            { nome : 'Martinho', cpfCnpj : '999999999-99', data : '16/03/1990', email : 'contato@email.com' }
+        $scope.pagina.list = [
+            { nome : 'Martinho', cpf : '999999999-99', dataNascimento: '16/03/1990', email : 'contato@email.com' }
         ];
     };
 
