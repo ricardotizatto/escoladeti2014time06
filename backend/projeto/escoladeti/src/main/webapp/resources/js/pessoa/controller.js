@@ -1,6 +1,6 @@
 var controllers = angular.module('controllers');
 
-function PessoaController($scope, $location, $log, $routeParams, pessoaService, paisService, estadoService, cidadeService) {
+function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) {
     $scope.select2='one';
     console.log('Carregando controller');
     
@@ -117,6 +117,11 @@ function PessoaController($scope, $location, $log, $routeParams, pessoaService, 
             });
     };
     
+    Pessoa.paginar({pagina: 1}, function(pagina) {
+        console.log('pagina: ' + pagina);
+        $scope.pagina = pagina;
+    });
+    
     $scope.editar = function(p) {
         window.location = '#/pessoa/' + p.id;
     };
@@ -171,20 +176,6 @@ function PessoaController($scope, $location, $log, $routeParams, pessoaService, 
                 toastr.warning(data.message);
                 console.log(data.messageDeveloper);
             });
-    };
-    
-    $scope.getTodos = function(numeroPagina) {
-        /*
-    	console.log(numeroPagina);
-    	$scope.pessoasJuridicas = [];
-    	pessoaJuridicaService.listar(numeroPagina)
-            .success(function(listaPessoasJuridicas, status) {
-                $scope.pessoasJuridicas = listaPessoasJuridicas;
-            })
-            .error(function(data, status) {
-                console.log('erro ao buscar paises ' + data);
-            });
-        */
     };
     
     $scope.getNovaPessoaJuridica = function(){
@@ -351,8 +342,5 @@ controllers.controller('PessoaController',
 		 '$routeParams',
 		 '$http',
 		 'PessoaFactory',
-                 'paisService', 
-                 'estadoService', 
-                 'cidadeService',
 		 PessoaController
 		 ]);

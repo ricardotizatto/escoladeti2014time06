@@ -1,4 +1,4 @@
-<div class="container" ng-controller="PessoaController" ng-init="getTodos(1)">
+<div class="container" ng-controller="PessoaController">
     <div class="row">
         <div class="form-group col-sm-12">
             <legend><span class="glyphicon glyphicon-list-alt"></span> Pessoa </legend>
@@ -47,9 +47,9 @@
                     <th class="col-md-2"><span class="pull-right">Ações</span></th>
                 </tr>
                 <tr ng-repeat="pessoa in pagina.list" >
-                    <td>{{pessoa.nome}}</td>
-                    <td>{{pessoa.cpfCnpj}}</td>
-                    <td>{{pessoa.data  | date: 'dd-MM-yyyy' }}</td>
+                    <td>{{pessoa.nome + ' ' + pessoa.sobrenome}}</td>
+                    <td>{{pessoa.cpf}}</td>
+                    <td>{{pessoa.dataNascimento | date: 'dd-MM-yyyy' }}</td>
                     <td>{{pessoa.email}}</td>
                     <td>
                         <span class="pull-right">

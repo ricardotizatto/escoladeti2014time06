@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.service;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
 import br.unicesumar.escoladeti.controller.DataPage;
+import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
@@ -22,10 +23,8 @@ public class PessoaService {
 //        pessoaRepository.delete(id);
     }
 
-    public DataPage<Pessoa> paginar(Integer pagina, String tipo) {
-        
-//        return new DataPage<>(pessoaRepository.findAll(pageRequestForAsc(pagina, "id")));
-        return null;
+    public DataPage<PessoaFisica> paginar(Integer pagina) {
+            return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "id")));
     }
 
     public Pessoa buscar(Long id) {

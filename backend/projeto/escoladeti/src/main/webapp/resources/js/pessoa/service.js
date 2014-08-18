@@ -1,5 +1,5 @@
 function PessoaFactory($resource) {
-	return $resource("./rest/pessoa/:id/:acao/:pagina", {id: '@id'},{
+	return $resource("./rest/pessoas/:id/:acao/:pagina", {id: '@id'},{
 		
 		update: {method: 'PUT'},
 		paginar: {
