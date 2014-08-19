@@ -1,15 +1,10 @@
 package br.unicesumar.escoladeti.comando;
 
-import br.unicesumar.escoladeti.entity.Pessoa;
-import br.unicesumar.escoladeti.entity.PessoaFisica;
-import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.enums.Papel;
 import br.unicesumar.escoladeti.enums.Sexo;
-import br.unicesumar.escoladeti.util.string.StringUtils;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
-import org.parboiled.common.Preconditions;
 
 public class ComandoSalvarPessoa {
 
@@ -37,8 +32,8 @@ public class ComandoSalvarPessoa {
     @NotNull(message = "Sexo é obrigatório")
     private Sexo sexo;
 
-    @NotNull(message = "Papel é obrigatório")
-    private Papel papel;
+    @NotNull(message = "Aluno é obrigatório")
+    private boolean aluno;
 
     @NotBlank(message = "Cnpj é obrigatório")
     private String cnpj;
@@ -123,12 +118,12 @@ public class ComandoSalvarPessoa {
         this.sexo = sexo;
     }
 
-    public Papel getPapel() {
-        return papel;
+    public boolean getAluno() {
+        return aluno;
     }
 
-    public void setPapel(Papel papel) {
-        this.papel = papel;
+    public void setPapel(boolean aluno) {
+        this.aluno = aluno;
     }
 
     public String getCnpj() {

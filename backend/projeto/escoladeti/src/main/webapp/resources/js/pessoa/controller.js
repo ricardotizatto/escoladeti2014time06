@@ -175,9 +175,16 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     
     $scope.filtroAluno = function() {
         console.log("aluno");
-        $scope.pagina.list = [
-            { nome : 'Martinho', cpf : '999999999-99', dataNascimento: '16/03/1990', email : 'contato@email.com' }
-        ];
+        $scope.pagina = [];
+        Pessoa.paginarAluno({pagina: 1}, function(pagina) {
+            for (i = 0; i < pagina.list.length; i++) {
+                $scope.pagina[i] = {};
+                $scope.pagina[i].nome = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
+                $scope.pagina[i].doc = pagina.list[i].cpf;
+                $scope.pagina[i].data = pagina.list[i].dataNascimento;
+                $scope.pagina[i].email = pagina.list[i].email;
+            }
+        });
     };
 
     $scope.salvar = function() {

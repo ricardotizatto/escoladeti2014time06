@@ -1,6 +1,5 @@
 package br.unicesumar.escoladeti.entity;
 
-import br.unicesumar.escoladeti.enums.Papel;
 import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
@@ -31,7 +30,7 @@ public class PessoaFisica extends Pessoa {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    private Papel papel;
+    private boolean aluno = false;
 
     public PessoaFisica() {
     }
@@ -87,12 +86,12 @@ public class PessoaFisica extends Pessoa {
         this.sexo = sexo;
     }
 
-    public Papel getPapel() {
-        return papel;
+    public boolean getAluno() {
+        return aluno;
     }
 
-    public void setPapel(Papel papel) {
-        this.papel = papel;
+    public void setAluno(boolean aluno) {
+        this.aluno = aluno;
     }
 
     public static PessoaFisica of(Long id) {

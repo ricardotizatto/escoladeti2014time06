@@ -855,6 +855,12 @@
 		</addColumn>
 	</changeSet>
         
+        <changeSet id="est009" author="martinho">
+            <addColumn tableName="pessoafisica">
+                <column name="aluno" type="boolean"></column>
+            </addColumn>
+        </changeSet>
+        
 <!--        <changeSet id="est009" author="Alisson Molinari">
             <addForeignKeyConstraint baseTableName="participante" baseColumnNames="idevento" 
                                      constraintName="FK_PARTICIPANTE_EVENTO" referencedTableName="evento" 

@@ -27,6 +27,10 @@ public class PessoaService {
         return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
     
+    public DataPage<PessoaFisica> paginarAluno(Integer pagina) {
+        return new DataPage<>(pessoaFisicaRepository.findByAlunoTrue(pageRequestForAsc(pagina, "nome")));
+    }
+    
     public DataPage<PessoaJuridica> paginarJuridica(Integer pagina) {
         return new DataPage<>(pessoaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
@@ -47,7 +51,7 @@ public class PessoaService {
                     .dataNascimento(comando.getDataNascimento())
                     .sobrenome(comando.getSobrenome())
                     .sexo(comando.getSexo())
-                    .papel(comando.getPapel())
+                    .aluno(comando.getAluno())
                     .buildPessoaFisica();
             
             pessoaFisicaRepository.save(pessoaFisica);

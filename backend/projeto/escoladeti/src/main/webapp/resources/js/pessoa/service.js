@@ -8,6 +8,12 @@ function PessoaFactory($resource) {
 				acao: 'paginarFisica'
 			}
 		},
+                paginarAluno: {
+                    method: 'GET',
+                    params: {
+                        acao: 'paginarAluno'
+                    }
+                },
                 paginarJuridica: {
                         method: 'GET',
                         params: {

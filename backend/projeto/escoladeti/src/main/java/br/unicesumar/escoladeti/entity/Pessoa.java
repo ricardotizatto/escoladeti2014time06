@@ -1,6 +1,5 @@
 package br.unicesumar.escoladeti.entity;
 
-import br.unicesumar.escoladeti.enums.Papel;
 import br.unicesumar.escoladeti.enums.Sexo;
 import br.unicesumar.escoladeti.util.string.StringUtils;
 import java.util.Set;
@@ -98,7 +97,7 @@ public abstract class Pessoa extends Entidade {
 
         private Sexo sexo;
 
-        private Papel papel;
+        private boolean aluno;
 
         private String cnpj;
 
@@ -150,8 +149,8 @@ public abstract class Pessoa extends Entidade {
             return this;
         }
 
-        public PessoaBuilder papel(Papel papel) {
-            this.papel = papel;
+        public PessoaBuilder aluno(boolean aluno) {
+            this.aluno = aluno;
             return this;
         }
 
@@ -185,8 +184,8 @@ public abstract class Pessoa extends Entidade {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.email));
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo));
 
-            Preconditions.checkNotNull(this.papel);
-            if (!this.papel.equals(Papel.ALUNO)) {
+            Preconditions.checkNotNull(this.aluno);
+            if (!this.aluno) {
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg));
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf));
             }
@@ -203,7 +202,7 @@ public abstract class Pessoa extends Entidade {
             pessoa.setDataNascimento(this.dataNascimento);
             pessoa.setSobrenome(this.sobrenome);
             pessoa.setSexo(this.sexo);
-            pessoa.setPapel(this.papel);
+            pessoa.setAluno(this.aluno);
             return pessoa;
         }
 

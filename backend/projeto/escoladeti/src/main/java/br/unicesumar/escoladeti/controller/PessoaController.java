@@ -44,6 +44,12 @@ public class PessoaController implements Serializable{
             return pessoaService.paginarFisica(pagina);
 	}
         
+        @RequestMapping(value = {"/paginarAluno/{pagina}"}, method = RequestMethod.GET)
+        @ResponseBody
+        public DataPage<PessoaFisica> paginarAluno(@PathVariable Integer pagina) {
+            return pessoaService.paginarAluno(pagina);
+        }
+        
         @RequestMapping(value = {"/paginarJuridica/{pagina}"}, method = RequestMethod.GET)
         @ResponseBody
         public DataPage<PessoaJuridica> paginarJuridica(@PathVariable Integer pagina) {
