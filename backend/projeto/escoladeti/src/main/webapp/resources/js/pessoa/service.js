@@ -1,13 +1,20 @@
 function PessoaFactory($resource) {
-	return $resource("./rest/pessoas/:id/:acao/:pagina/:tipoPessoa/", {id: '@id'},{
+	return $resource("./rest/pessoas/:id/:acao/:pagina", {id: '@id'},{
 		
 		update: {method: 'PUT'},
-		paginar: {
+		paginarFisica: {
 			method: 'GET',
 			params: {
-				acao: 'paginar'
+				acao: 'paginarFisica'
 			}
-		}
+		},
+                paginarJuridica: {
+                        method: 'GET',
+                        params: {
+                                acao: 'paginarJuridica'
+                         }
+                }
+                
 	});
 }
 

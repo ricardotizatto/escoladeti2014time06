@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.controller;
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
+import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.service.PessoaService;
 import java.io.Serializable;
 import java.util.List;
@@ -28,18 +29,24 @@ public class PessoaController implements Serializable{
 	@RequestMapping( method = RequestMethod.POST)	
 	@ResponseBody
 	public Pessoa salvar(@Valid @RequestBody ComandoSalvarPessoa comando) {		
-		return pessoaService.salvar(comando);
+            return pessoaService.salvar(comando);
 	}
     
 	@RequestMapping( value= {"/{id}"}, method = RequestMethod.GET )
 	@ResponseBody
 	public Pessoa getPessoa(@PathVariable Long id) {
-		return pessoaService.buscar(id);
+            return pessoaService.buscar(id);
 	}
 	
-	@RequestMapping(value = { "/paginar/{pagina}{tipoPessoa}" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/paginarFisica/{pagina}"}, method = RequestMethod.GET)
 	@ResponseBody
-	public DataPage<PessoaFisica> paginar(@PathVariable Integer pagina) {
-		return pessoaService.paginar(pagina);
+	public DataPage<PessoaFisica> paginarFisica(@PathVariable Integer pagina) {
+            return pessoaService.paginarFisica(pagina);
 	}
+        
+        @RequestMapping(value = {"/paginarJuridica/{pagina}"}, method = RequestMethod.GET)
+        @ResponseBody
+        public DataPage<PessoaJuridica> paginarJuridica(@PathVariable Integer pagina) {
+            return pessoaService.paginarJuridica(pagina);
+        }
 }

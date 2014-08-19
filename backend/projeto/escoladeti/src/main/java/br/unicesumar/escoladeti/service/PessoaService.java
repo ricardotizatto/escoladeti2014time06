@@ -23,8 +23,12 @@ public class PessoaService {
 //        pessoaRepository.delete(id);
     }
 
-    public DataPage<PessoaFisica> paginar(Integer pagina) {
-            return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "id")));
+    public DataPage<PessoaFisica> paginarFisica(Integer pagina) {
+        return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
+    }
+    
+    public DataPage<PessoaJuridica> paginarJuridica(Integer pagina) {
+        return new DataPage<>(pessoaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
 
     public Pessoa buscar(Long id) {
@@ -67,5 +71,4 @@ public class PessoaService {
         }
         throw new RuntimeException("Tipo de pessoa inválido");
     }
-
 }

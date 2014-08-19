@@ -3,7 +3,6 @@ var controllers = angular.module('controllers');
 function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) {
     $scope.select2='one';
     console.log('Carregando controller');
-    $scope.pagina = [];
     
     $scope.modificarPais = function(paisId){
     	$scope.unidadeFederativa = {};
@@ -148,20 +147,29 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     $scope.filtroPessoaJuridica = function() {
         console.log("filtro pessoa juridica");
-        $scope.pagina.list = [
-            {nome: 'Unicesumar', cpf: '11111111111', dataNascimento: '01/01/1980', email: 'unicesumar@email.com'}
-        ];
+        $scope.pagina = [];
+        Pessoa.paginarJuridica({pagina: 1}, function(pagina) {
+            for (i = 0; i < pagina.list.length; i++) {
+                $scope.pagina[i] = {};
+                $scope.pagina[i].nome  = pagina.list[i].nome;
+                $scope.pagina[i].doc   = pagina.list[i].cnpj;
+                $scope.pagina[i].data  = pagina.list[i].dataCriacao;
+                $scope.pagina[i].email = pagina.list[i].email;
+            }
+        });
     };
     
     $scope.filtroPessoaFisica = function() {
         console.log("filtro pessoa fisica");
-        /*
-        $scope.pagina.list = [
-            {nome: 'Winicius', cpf: '988888888-99', dataNascimento: '01/01/1995', email: 'contato@email.com'}
-        ];*/
-        Pessoa.paginar({pagina: 1}, {tipoPessoa: 'F' }, function(pagina, tipoPessoa) {
-            console.log('pagina: ' + pagina + ' tipo ' + tipoPessoa);
-            $scope.pagina = pagina;
+        $scope.pagina = [];
+        Pessoa.paginarFisica({pagina: 1}, function(pagina) {
+            for(i=0; i<pagina.list.length; i++){
+                $scope.pagina[i] = {};
+                $scope.pagina[i].nome  = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
+                $scope.pagina[i].doc   = pagina.list[i].cpf;
+                $scope.pagina[i].data  = pagina.list[i].dataNascimento;
+                $scope.pagina[i].email = pagina.list[i].email;
+            }
         });
     };
     

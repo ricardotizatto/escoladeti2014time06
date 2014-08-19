@@ -48,10 +48,10 @@
                     <th class="col-md-2">Email</th>
                     <th class="col-md-2"><span class="pull-right">Ações</span></th>
                 </tr>
-                <tr ng-repeat="pessoa in pagina.list" >
-                    <td>{{pessoa.nome + ' ' + pessoa.sobrenome}}</td>
-                    <td>{{pessoa.cpf}}</td>
-                    <td>{{pessoa.dataNascimento | date: 'dd-MM-yyyy' }}</td>
+                <tr ng-repeat="pessoa in pagina" >
+                    <td>{{pessoa.nome}}</td>
+                    <td>{{pessoa.doc}}</td>
+                    <td>{{pessoa.data | date: 'dd-MM-yyyy' }}</td>
                     <td>{{pessoa.email}}</td>
                     <td>
                         <span class="pull-right">
