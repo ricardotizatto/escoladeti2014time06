@@ -27,6 +27,10 @@ public class PessoaService {
         return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
     
+    public DataPage<PessoaFisica> buscarFisica(Integer pagina, String busca) {
+        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingOrderByNomeAsc(busca, pageRequestForAsc(pagina, "nome")));
+    }
+    
     public DataPage<PessoaFisica> paginarAluno(Integer pagina) {
         return new DataPage<>(pessoaFisicaRepository.findByAlunoTrue(pageRequestForAsc(pagina, "nome")));
     }

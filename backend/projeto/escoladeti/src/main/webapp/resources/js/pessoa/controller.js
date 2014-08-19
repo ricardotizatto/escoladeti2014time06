@@ -132,17 +132,26 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     };
     
     $scope.initLista = function() {
-        $scope.tipo = 'FISICA';
+        $scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica();
     };
     
-    $scope.buscaPessoaContendoNome = function () {
-    	console.log($scope.busca);    	
-    	pessoaJuridicaService.buscarPorNome($scope.busca)
-            .then(function (retorno){
-                console.log(retorno.data.list);
-                $scope.pessoas = retorno.data;
+    $scope.buscaPessoaContendoNome = function (tipoPessoa) {  
+        $scope.busca = $scope.busca.toUpperCase();
+        if(tipoPessoa === 'F'){
+            $scope.pagina = [];
+            Pessoa.buscarFisica({pagina: 1, busca: $scope.busca}, function(pagina) {
+                for (i = 0; i < pagina.list.length; i++) {
+                    $scope.pagina[i] = {};
+                    $scope.pagina[i].nome = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
+                    $scope.pagina[i].doc = pagina.list[i].cpf;
+                    $scope.pagina[i].data = pagina.list[i].dataNascimento;
+                    $scope.pagina[i].email = pagina.list[i].email;
+                }
             });
+        }else{
+            $scope.pagina = [];
+        }
     }; 
 
     $scope.filtroPessoaJuridica = function() {

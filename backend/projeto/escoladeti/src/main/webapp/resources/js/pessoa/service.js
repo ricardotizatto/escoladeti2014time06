@@ -1,5 +1,5 @@
 function PessoaFactory($resource) {
-	return $resource("./rest/pessoas/:id/:acao/:pagina", {id: '@id'},{
+	return $resource("./rest/pessoas/:id/:acao/:pagina/:busca", {id: '@id'},{
 		
 		update: {method: 'PUT'},
 		paginarFisica: {
@@ -19,6 +19,12 @@ function PessoaFactory($resource) {
                         params: {
                                 acao: 'paginarJuridica'
                          }
+                },
+                buscarFisica: {
+                    method: 'GET',
+                    params: {
+                        acao: 'buscarFisica'
+                    }
                 }
                 
 	});
