@@ -1,126 +1,82 @@
 var controllers = angular.module('controllers');
 
-function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
-	var $this = this;
-	
+function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao) {
 	
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
 		this.livro = {};	
 		this.status = 'ABERTO';
-	};
-	
-	var Solicitacao = function () {
-		this.id = 0;
-		this.ensino = 'FUNDAMENTAL';
-		this.serie = '1-SERIE';
-		this.cep = '';
-		this.numeroEndereco = 0;
-		this.escola = '';
-		this.endereco = '';
-		this.itensSolicitacao = [];
 	};	
 	
-	$log.debug('carregando solicitacao');
+	$scope.itemCorrente = new ItemCorrente();
 	
-	$scope.itemCorrente = new ItemCorrente();	
+	$scope.select2Options = {
+		allowClear: true,
+		placeholder: 'selecione'
+	},
 	
 	$scope.enviarSolicitacao = function () {
-		var solicitacao = $scope.solicitacao;
-		var itens = [];
+		$log.debug('enviando solicitacao');
 		
-		if (solicitacao.itensSolicitacao.length <=0 ) {
-			toastr.warning('Obrigatorio iserir ao menos um material');
-			return;
-		}
-		
-			
-		var dados = {
-				id: solicitacao.id,
-				aluno: buscarItem(solicitacao.idAluno, $scope.pessoas),
-				responsavel: buscarItem(solicitacao.idResponsavel, $scope.pessoas),
-				nre: buscarItem(solicitacao.idNre, $scope.cidades),
-				municipio: buscarItem(solicitacao.idMunicipio, $scope.cidades),
-				cep: solicitacao.cep,
-				endereco: solicitacao.endereco,
-				numeroEndereco: solicitacao.numeroEndereco,
-				serie: solicitacao.serie,
-				ensino: solicitacao.ensino,
-				escola: solicitacao.escola,
-				dataChegada: solicitacao.dataChegada,
-				itensSolicitacao: itens				
-			};
-		
-		for (var i in solicitacao.itensSolicitacao) {
-			console.log('enviando livro');
-			itens.push({
-				id: solicitacao.itensSolicitacao[i].id,
-				traducaoMaterial: solicitacao.itensSolicitacao[i].traducaoMaterial,
-				livro:  solicitacao.itensSolicitacao[i].livro,
-				outro:  solicitacao.itensSolicitacao[i].outro,
-				status: solicitacao.itensSolicitacao[i].status,
+		if ($scope.solicitacao.id) {
+			$scope.solicitacao.$update(function () {
+				toastr.success('salvo com sucesso');
+				$scope.solicitacao = new Solicitacao({
+					ensino: 'FUNDAMENTAL',
+					serie: '1-SERIE',
+					itensSolicitacao : []
+				});			
 			});
-		}
-		
-		console.log('dados envio',dados);
-		
-		
-		$http({
-			method : 'POST',
-			url: './rest/solicitacaoResouce/solicitacao',
-			data: dados, 
-		}).success(function (data) {
-			toastr.success('Solicitacao salva com sucesso.');
-			toastr.success('Numero da Solicitacao: '+data.id);
-			$scope.solicitacao = new Solicitacao();
-		}).error(function (data) {
-			toastr.warning(data.message);
+			
+			return;
+		} 
+				
+		$scope.solicitacao.$save(function () {
+			toastr.success('salvo com sucesso');
+			$scope.solicitacao = new Solicitacao({
+				ensino: 'FUNDAMENTAL',
+				serie: '1-SERIE',
+				itensSolicitacao : []
+			});			
 		});
 	};
 	
 	$scope.editar = function(solicitacao) {
 		$location.path('/cadastrosolicitacao/'+ solicitacao.id);
 	};
-	    
 	
 	$scope.carregarSolicitacao = function () {
-		console.log('carregarSolicitacao');
+		$log.debug('carrgegando solicitacao x');
+		
 		if (!$routeParams.idSolicitacao) {
 			
-			console.log('carregarSolicitacao, new');
-			$scope.solicitacao = new Solicitacao();
+			$scope.solicitacao = new Solicitacao({
+				ensino: 'FUNDAMENTAL',
+				serie: '1-SERIE',
+				itensSolicitacao : []
+			});
+			
+			$log.debug('criando solicitacao', $scope.solicitacao);
 			return;
 		}
 		
-		console.log('carregarSolicitacao', $routeParams.idSolicitacao);
-		
-		$http({
-			url: './rest/solicitacaoResouce/solicitacao/'+$routeParams.idSolicitacao,
-			method: 'GET'
-		}).success(function (data) {
-			console.log(data);
-			$scope.solicitacao = data;
-			$scope.solicitacao.idAluno = data.aluno ? data.aluno.id : null;
-			$scope.solicitacao.idNre = data.nre ? data.nre.id : null;
-			$scope.solicitacao.idMunicipio = data.municipio ? data.municipio.id : null;
-			$scope.solicitacao.idResponsavel = data.responsavel ? data.responsavel.id : null;
+		$log.debug('buscando solicitacao', Solicitacao);
+		Solicitacao.get({id: $routeParams.idSolicitacao}, function(solicitacao) {
+			$scope.solicitacao = solicitacao;
+			$scope.solicitacao.aluno = solicitacao.aluno ? solicitacao.aluno.id : null;
+			$scope.solicitacao.nre = solicitacao.nre ? solicitacao.nre.id : null;
+			$scope.solicitacao.municipio = solicitacao.municipio ? solicitacao.municipio.id : null;
+			$scope.solicitacao.responsavel = solicitacao.responsavel ? solicitacao.responsavel.id : null;
 			
-			for (var i in $scope.solicitacao.itensSolicitacao) {
-				$scope.solicitacao.itensSolicitacao[i].idLivro =
-					$scope.solicitacao.itensSolicitacao[i].livro.id;
-			}
+			solicitacao.itensSolicitacao.forEach(function (item) {
+				item.livro = item.livro.id; 
+			});
 		});
 	};
 	
-	$http({
-		method: 'GET',
-		url: './rest/solicitacaoResouce/solicitacao/pag/1'		
-	}).success(function (data) {
-		console.log('ok', data);
-		$scope.solicitacoes = data;
-	}).error(function (err) {
-		console.log('err',err);
+	Solicitacao.paginar({pagina: 1}, function (pagina) {
+		$scope.pagina = pagina;
 	});
 	
 	$http({
@@ -146,23 +102,16 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 	
 	
 	$scope.getDescricaoMaterial = function (item) {		
-		item.livro = buscarLivro(item.idLivro);		
-		if (item.livro)
-			return item.livro.nome;
+		var livro = buscarLivro(item.livro);
+		
+		if (livro)
+			return livro.nome;
 	};
 	
 	function buscarLivro(idLivro) {
 		var selecionados = $.grep($scope.livros, function (item) {
     		return item.id == idLivro;
     	});
-		return angular.copy(selecionados[0]);
-	}
-	
-	function buscarItem(id, list) {
-		var selecionados = $.grep(list, function (item) {
-			return item.id = id;
-		});
-		
 		return angular.copy(selecionados[0]);
 	}
 	
@@ -176,6 +125,7 @@ function SolicitacaoController($scope, $location, $log, $http, $routeParams) {
 	};
 	
 	$scope.adicionarMaterial = function () {
+		console.log($scope.itemCorrente)
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
 	};
@@ -201,7 +151,8 @@ controllers.controller('SolicitacaoController',
 		 '$scope',
 		 '$location',
 		 '$log',
-		 '$http',
 		 '$routeParams',
+		 '$http',
+		 'SolicitacaoFactory',
 		 SolicitacaoController
 		 ]);

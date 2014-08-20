@@ -56,7 +56,11 @@ public class PessoaFisica extends Pessoa {
         this.sobrenome = sobrenome;
     }
 
-    public String getRg() {
+    public PessoaFisica(Long id) {
+    	this.id = id;
+	}
+
+	public String getRg() {
         return rg;
     }
 
@@ -94,5 +98,9 @@ public class PessoaFisica extends Pessoa {
     
     public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+
+	public static PessoaFisica of(Long id) {
+		return new PessoaFisica(id);
 	}
 }
