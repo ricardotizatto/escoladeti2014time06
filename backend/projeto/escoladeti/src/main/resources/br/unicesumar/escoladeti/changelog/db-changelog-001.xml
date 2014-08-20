@@ -252,8 +252,7 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<!--changeSet author="Jhonatan (generated)" id="1404066940885-19">
-	< changeSet author="Jhonatan (generated)" id="1404066940885-19">
+	<changeSet author="Jhonatan (generated)" id="1404066940885-19">
 		<createTable tableName="pessoaendereco">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
@@ -267,7 +266,7 @@
 			<column name="endereco_id" type="INT8" />
 			<column name="pessoaid" type="INT8" />
 		</createTable>
-	</changeSet-->
+	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-20">
 		<createTable tableName="pessoafisica">
 			<column name="cpf" type="VARCHAR(255)">
@@ -435,7 +434,7 @@
 			<column name="id_usuario" type="INT8" />
 		</createTable>
 	</changeSet>
-<!--	<changeSet author="Jhonatan (generated)" id="1404066940885-31">
+	<changeSet author="Jhonatan (generated)" id="1404066940885-31">
 		<createTable tableName="usuarioperfilacesso">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
@@ -449,7 +448,7 @@
 			<column name="id_perfil_acesso" type="INT8" />
 			<column name="id_usuario" type="INT8" />
 		</createTable>
-	</changeSet>-->
+	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-32">
 		<addPrimaryKey columnNames="id" constraintName="bairro_pkey"
 			tableName="bairro" />
@@ -514,10 +513,10 @@
 		<addPrimaryKey columnNames="id" constraintName="pessoa_pkey"
 			tableName="pessoa" />
 	</changeSet>
-	<!-- >changeSet author="Jhonatan (generated)" id="1404066940885-48">
+	<changeSet author="Jhonatan (generated)" id="1404066940885-48">
 		<addPrimaryKey columnNames="id" constraintName="pessoaendereco_pkey"
 			tableName="pessoaendereco" />
-	</changeSet-->
+	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-49">
 		<addPrimaryKey columnNames="id" constraintName="pessoafisica_pkey"
 			tableName="pessoafisica" />
@@ -558,10 +557,10 @@
 		<addPrimaryKey columnNames="id" constraintName="usuarioitemacesso_pkey"
 			tableName="usuarioitemacesso" />
 	</changeSet>
-<!--	<changeSet author="Jhonatan (generated)" id="1404066940885-59">
+	<changeSet author="Jhonatan (generated)" id="1404066940885-59">
 		<addPrimaryKey columnNames="id" constraintName="usuarioperfilacesso_pkey"
 			tableName="usuarioperfilacesso" />
-	</changeSet>-->
+	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-60">
 		<addForeignKeyConstraint baseColumnNames="id"
 			baseTableName="pessoajuridica" constraintName="fk_12u2ai1x9gwnrxbngiu1s2vlf"
@@ -644,19 +643,19 @@
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
 	</changeSet>
-<!--	<changeSet author="Jhonatan (generated)" id="1404066940885-73">
+	<changeSet author="Jhonatan (generated)" id="1404066940885-73">
 		<addForeignKeyConstraint baseColumnNames="id_perfil_acesso"
 			baseTableName="usuarioperfilacesso" constraintName="fk_femy7nyxqlij7xjdkr32mju5w"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilacesso" />
-	</changeSet>-->
-	<!--  >changeSet author="Jhonatan (generated)" id="1404066940885-74">
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-74">
 
 		<addForeignKeyConstraint baseColumnNames="pessoaid"
 			baseTableName="pessoaendereco" constraintName="fk_hefjlv0de2niktickknlrs1uc"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
-	</changeSet-->
+	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-75">
 		<addForeignKeyConstraint baseColumnNames="id_solicitante"
 			baseTableName="solicitacao" constraintName="fk_iykxmb06bdcvyhy537e0wfm4s"
@@ -732,18 +731,18 @@
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
 	</changeSet>
-<!--	<changeSet author="Jhonatan (generated)" id="1404066940885-86">
+	<changeSet author="Jhonatan (generated)" id="1404066940885-86">
 		<addForeignKeyConstraint baseColumnNames="id_usuario"
 			baseTableName="usuarioperfilacesso" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
-	</changeSet>-->
-	<!--  changeSet author="Jhonatan (generated)" id="1404066940885-87">
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-87">
 		<addForeignKeyConstraint baseColumnNames="endereco_id"
 			baseTableName="pessoaendereco" constraintName="fk_rniq3f662vwastrnxk4mm8khm"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
-	</changeSet-->
+	</changeSet>
 	<changeSet author="Jhonatan (generated)" id="1404066940885-88">
 		<addUniqueConstraint columnNames="cnpj"
 			constraintName="uk_2xclbh1scxkxx5e7vv48bqaq" deferrable="false"
@@ -784,9 +783,9 @@
 			</column>
 		</addColumn>
 		
-		<!--  >addColumn tableName="solicitacao">
+		<addColumn tableName="solicitacao">
 			<column name="id_endereco" type="INT8"></column>
-		</addColumn-->
+		</addColumn>
 		
 		<addColumn tableName="solicitacao">
 			<column name="cep" type="VARCHAR(11)"></column>
