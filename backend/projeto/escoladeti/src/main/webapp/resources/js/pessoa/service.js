@@ -26,6 +26,12 @@ function PessoaFactory($resource) {
                         acao: 'buscarFisica'
                     }
                 },
+                buscarAluno: {
+                    method: 'GET',
+                    params: {
+                        acao: 'buscarAluno'
+                    }
+                },
                 buscarJuridica: {
                     method: 'GET',
                     params: {

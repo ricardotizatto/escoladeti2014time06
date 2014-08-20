@@ -142,7 +142,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pagina = [];
             if($scope.busca !== ""){
                 Pessoa.buscarFisica({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.construirPaginaFisica(pagina, pagina.list.length);
+                    $scope.construirPaginaFisica(pagina);
                 });
             }else{
                 $scope.filtroPessoaFisica();
@@ -152,11 +152,21 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pagina = [];
             if ($scope.busca !== "") {
                 Pessoa.buscarJuridica({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.construirPaginaJuridica(pagina, pagina.list.length);
+                    $scope.construirPaginaJuridica(pagina);
                 });
             } else {
                 $scope.filtroPessoaJuridica();
             }  
+        }
+        if (tipoPessoa === 'A') {
+            $scope.pagina = [];
+            if ($scope.busca !== "") {
+                Pessoa.buscarAluno({pagina: 1, busca: $scope.busca}, function(pagina) {
+                    $scope.construirPaginaFisica(pagina);
+                });
+            } else {
+                $scope.filtroAluno();
+            } 
         }
     };
 
@@ -164,7 +174,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log("filtro pessoa juridica");
         $scope.pagina = [];
         Pessoa.paginarJuridica({pagina: 1}, function(pagina) {
-            $scope.construirPaginaJuridica(pagina, pagina.list.length);
+            $scope.construirPaginaJuridica(pagina);
         });
     };
 
@@ -172,7 +182,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log("filtro pessoa fisica");
         $scope.pagina = [];
         Pessoa.paginarFisica({pagina: 1}, function(pagina) {
-            $scope.construirPaginaFisica(pagina, pagina.list.length);
+            $scope.construirPaginaFisica(pagina);
         });
     };
 
@@ -180,12 +190,12 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log("aluno");
         $scope.pagina = [];
         Pessoa.paginarAluno({pagina: 1}, function(pagina) {
-            $scope.construirPaginaFisica(pagina, pagina.list.length);
+            $scope.construirPaginaFisica(pagina);
         });
     };
     
-    $scope.construirPaginaFisica = function(pagina, tamanho) {
-        for (i=0; i<tamanho; i++) {
+    $scope.construirPaginaFisica = function(pagina) {
+        for (i=0; i<pagina.list.length; i++) {
             $scope.pagina[i] = {};
             $scope.pagina[i].nome  = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
             $scope.pagina[i].doc   = pagina.list[i].cpf;
@@ -194,8 +204,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         }
     };
     
-    $scope.construirPaginaJuridica = function(pagina, tamanho) {
-        for (i = 0; i < tamanho; i++) {
+    $scope.construirPaginaJuridica = function(pagina) {
+        for (i = 0; i<pagina.list.length; i++) {
             $scope.pagina[i] = {};
             $scope.pagina[i].nome  = pagina.list[i].nome;
             $scope.pagina[i].doc   = pagina.list[i].cnpj;
