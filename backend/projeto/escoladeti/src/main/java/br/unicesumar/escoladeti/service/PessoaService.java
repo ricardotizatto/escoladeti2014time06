@@ -38,6 +38,9 @@ public class PessoaService {
     public DataPage<PessoaJuridica> paginarJuridica(Integer pagina) {
         return new DataPage<>(pessoaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
+    public DataPage<PessoaJuridica> buscarJuridica(Integer pagina, String busca) {
+        return new DataPage<>(pessoaJuridicaRepository.findByNomeContainingOrderByNomeAsc(busca, pageRequestForAsc(pagina, "nome")));
+    }
 
     public Pessoa buscar(Long id) {
 //        return pessoaRepository.findOne(id);
