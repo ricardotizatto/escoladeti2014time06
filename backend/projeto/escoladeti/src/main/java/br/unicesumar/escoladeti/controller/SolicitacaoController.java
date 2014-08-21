@@ -33,6 +33,13 @@ public class SolicitacaoController implements Serializable{
 	public Solicitacao salvar(@Valid @RequestBody ComandoSalvarSolicitacao comando) {		
 		return solicitacaoService.salvar(comando);
 	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)	
+	@ResponseBody
+	public Solicitacao atualizar(@Valid @RequestBody ComandoSalvarSolicitacao comando,
+		@PathVariable("id") Long id) {		
+		return solicitacaoService.atualizar(id, comando);
+	}
     
 	@RequestMapping(method = RequestMethod.GET)	
 	@ResponseBody

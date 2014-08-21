@@ -205,10 +205,17 @@ public class Solicitacao extends Entidade {
 	    private List<SolicitacaoItem> itensSolicitacao;
 
 	    private Date dataChegada;
+
+		private Long id;
 	    
 	    private SolicitacaoBuilder() {
 	    	
 	    }
+	    
+	    public Solicitacao.SolicitacaoBuilder ensino(String ensino) {
+			this.ensino = ensino;
+			return this;
+		}
 	    
 	    public SolicitacaoBuilder nre(Long nre) {
 			this.nre = nre;
@@ -272,10 +279,10 @@ public class Solicitacao extends Entidade {
 	    	checkNotNull(this.escola, "Escola é obrigatorio");
 	    	checkNotNull(this.cep, "CEP é obrigatório");
 	    	checkNotNull(this.itensSolicitacao, "Itens das solicitação são obrigatórios");
-	    	checkArgument(this.itensSolicitacao.size() > 0);
+	    	checkArgument(this.itensSolicitacao.size() > 0, "É obrigatório ter itens");
 	    	checkNotNull(this.numeroEndereco, "Número de endereço é obrigatório");
 	    	checkNotNull(this.responsavel, "Responsável é obrigatório");
-			
+	    	
 	    	Solicitacao solicitacao = new Solicitacao();
 	    	solicitacao.setAluno(PessoaFisica.of(this.aluno));
 	    	solicitacao.setCep(this.cep);
@@ -285,6 +292,11 @@ public class Solicitacao extends Entidade {
 	    	solicitacao.setEscola(this.escola);
 	    	solicitacao.setItensSolicitacao(this.itensSolicitacao);
 	    	solicitacao.setMunicipio(Cidade.of(this.municipio));
+	    	
+	    	if (id != null) {
+	    		solicitacao.setId(id);
+	    	}
+	    	
 	    	solicitacao.setNre(Cidade.of(this.nre));
 	    	solicitacao.setNumeroEndereco(this.numeroEndereco);
 	    	solicitacao.setResponsavel(PessoaFisica.of(this.responsavel));
@@ -300,6 +312,11 @@ public class Solicitacao extends Entidade {
 		public SolicitacaoBuilder adicionarItens(
 				List<ComandoSalvarSolicitacaoItem> itensSolicitacao) {
 			return null;
+		}
+
+		public SolicitacaoBuilder id(Long id) {
+			this.id = id;
+			return this;
 		}
 	    
 	}

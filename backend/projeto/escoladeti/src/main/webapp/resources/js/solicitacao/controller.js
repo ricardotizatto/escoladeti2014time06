@@ -9,13 +9,36 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		this.status = 'ABERTO';
 	};	
 	
-	$scope.itemCorrente = new ItemCorrente();	
+	$scope.itemCorrente = new ItemCorrente();
+	
+	$scope.select2Options = {
+		allowClear: true,
+		placeholder: 'selecione'
+	},
 	
 	$scope.enviarSolicitacao = function () {
 		$log.debug('enviando solicitacao');
-		console.log($scope.solicitacao);
-		$scope.solicitacao.$save(function () {
+		
+		if ($scope.solicitacao.id) {
+			$scope.solicitacao.$update(function () {
+				toastr.success('salvo com sucesso');
+				$scope.solicitacao = new Solicitacao({
+					ensino: 'FUNDAMENTAL',
+					serie: '1-SERIE',
+					itensSolicitacao : []
+				});			
+			});
 			
+			return;
+		} 
+				
+		$scope.solicitacao.$save(function () {
+			toastr.success('salvo com sucesso');
+			$scope.solicitacao = new Solicitacao({
+				ensino: 'FUNDAMENTAL',
+				serie: '1-SERIE',
+				itensSolicitacao : []
+			});			
 		});
 	};
 	
@@ -45,6 +68,10 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 			$scope.solicitacao.nre = solicitacao.nre ? solicitacao.nre.id : null;
 			$scope.solicitacao.municipio = solicitacao.municipio ? solicitacao.municipio.id : null;
 			$scope.solicitacao.responsavel = solicitacao.responsavel ? solicitacao.responsavel.id : null;
+			
+			solicitacao.itensSolicitacao.forEach(function (item) {
+				item.livro = item.livro.id; 
+			});
 		});
 	};
 	
@@ -75,9 +102,10 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
 	
 	$scope.getDescricaoMaterial = function (item) {		
-		item.livro = buscarLivro(item.idLivro);		
-		if (item.livro)
-			return item.livro.nome;
+		var livro = buscarLivro(item.livro);
+		
+		if (livro)
+			return livro.nome;
 	};
 	
 	function buscarLivro(idLivro) {
@@ -97,6 +125,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	};
 	
 	$scope.adicionarMaterial = function () {
+		console.log($scope.itemCorrente)
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
 	};
