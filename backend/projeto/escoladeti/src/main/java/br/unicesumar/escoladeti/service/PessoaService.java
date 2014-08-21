@@ -86,4 +86,48 @@ public class PessoaService {
         }
         throw new RuntimeException("Tipo de pessoa inválido");
     }
+
+//    public Pessoa atualizar(ComandoSalvarPessoa comando, Long id) {
+//        
+//    }
+    
+    public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id){
+        if (comando.getTipo().equals("F")) {
+            PessoaFisica pessoaFisica = Pessoa.builder()
+                    .nome(comando.getNome())
+                    .email(comando.getEmail())
+                    .tipo(comando.getTipo())
+                    .rg(comando.getRg())
+                    .cpf(comando.getCpf())
+                    .dataNascimento(comando.getDataNascimento())
+                    .sobrenome(comando.getSobrenome())
+                    .sexo(comando.getSexo())
+                    .aluno(comando.getAluno())
+                    .buildPessoaFisica();
+            
+            if(id != null){
+                pessoaFisica.setId(id);
+            }
+            
+            pessoaFisicaRepository.save(pessoaFisica);
+            
+            return pessoaFisica;
+
+        } else if (comando.getTipo().equals("J")) {
+            PessoaJuridica pessoaJuridica = Pessoa.builder()
+                    .nome(comando.getNome())
+                    .email(comando.getEmail())
+                    .cnpj(comando.getCnpj())
+                    .inscricaoEstadual(comando.getInscricaoEstadual())
+                    .inscricaoMunicipal(comando.getInscricaoMunicipal())
+                    .razaoSocial(comando.getRazaoSocial())
+                    .dataCriacao(comando.getDataCriacao())
+                    .buildPessoaJuridica();
+            
+            pessoaJuridicaRepository.save(pessoaJuridica);
+            
+            return pessoaJuridica;
+        }
+        throw new RuntimeException("Tipo de pessoa inválido");
+    }
 }

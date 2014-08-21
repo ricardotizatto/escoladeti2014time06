@@ -180,7 +180,7 @@ public abstract class Pessoa extends Entidade {
         }
 
         public PessoaFisica buildPessoaFisica() {
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome));
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.email));
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo));
 
