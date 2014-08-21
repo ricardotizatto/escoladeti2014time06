@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.service;
 
+import br.unicesumar.escoladeti.entity.BuscaCep;
 import br.unicesumar.escoladeti.entity.Cep;
 import br.unicesumar.escoladeti.entity.CepUnico;
 import br.unicesumar.escoladeti.repository.CepRepository;
@@ -16,35 +17,34 @@ public class CepService {
     @Autowired
     private CepUnicoRepository cepUnicoRepository;
 
-    public Cep findByCepContainingOrderByCepAsc(String cep) {
+    public BuscaCep findByCepContainingOrderByCepAsc(String cep) {
 
         try {
-            Cep retornoCep = this.cepRepository.findByCepContainingOrderByCepAsc(cep);
+            BuscaCep retornoCep = this.cepRepository.findByCepOrderByCepAsc(cep);
+            
 
             if (retornoCep.getId() > 0) {
                 return retornoCep;
             }
+
         } catch (Exception e) {
             try {
-                CepUnico retornoCepUnico = this.cepUnicoRepository.findByCepContainingOrderByCepAsc(cep);
+                CepUnico retornoCepUnico = this.cepUnicoRepository.findByCepOrderByCepAsc(cep);
 
                 if (retornoCepUnico.getId() > 0) {
                     Cep CepAux = new Cep();
                     CepAux.setCidade(retornoCepUnico.getCidade());
                     CepAux.setUf(retornoCepUnico.getUf());
                     CepAux.setCep(retornoCepUnico.getCep());
-                    return CepAux;
+                    //return CepAux;
+                    return null;
                 }
 
             } catch (Exception f) {
-                return new Cep();
+                return new BuscaCep();
             }
 
         }
-        return new Cep();
-    }
-
-    public List<Cep> getTodos() {
-        return cepRepository.findAll();
+        return new BuscaCep();
     }
 }

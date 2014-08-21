@@ -12,7 +12,7 @@ public class CepUnicoService {
     private CepUnicoRepository cepUnicoRepository;
     
     public CepUnico findByCepContainingOrderByCepAsc(String cep) {
-        return this.cepUnicoRepository.findByCepContainingOrderByCepAsc(cep);
+        return this.cepUnicoRepository.findByCepOrderByCepAsc(cep);
     }
 
     public List<CepUnico> getTodos() {
