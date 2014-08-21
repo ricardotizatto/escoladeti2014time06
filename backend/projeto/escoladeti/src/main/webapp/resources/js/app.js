@@ -18,14 +18,6 @@ app.config(['$routeProvider',
                 templateUrl: './pages/Login.html',
                 controller: 'LoginController'
             })
-            .when('/pessoafisica', {
-                templateUrl: './pages/CadastroPessoaFisica.html',
-                controller: 'PessoaFisicaController'
-            })
-            .when('/pessoafisica/:pessoaFisicaId', {
-                templateUrl: './pages/CadastroPessoaFisica.html',
-                controller: 'PessoaFisicaController'
-            })
             .when('/pessoa', {
                 templateUrl: './pages/pessoa/cadastro.html',
                 controller: 'PessoaController'
@@ -113,10 +105,6 @@ app.config(['$routeProvider',
             .when('/listaestado', {
                 templateUrl: './pages/ListaEstado.html',
                 // controller : 'nomeDoController'
-            })
-            .when('/listapessoafisica', {
-                templateUrl: './pages/ListaPessoaFisica.html',
-                controller: 'PessoaFisicaController'
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',

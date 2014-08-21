@@ -42,8 +42,6 @@
         <script type="text/javascript" src="./resources/js/distrito/service.js" ></script>
         <script type="text/javascript" src="./resources/js/solicitacao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/solicitacao/service.js" ></script>           
-        <script type="text/javascript" src="./resources/js/pessoaFisica/controller.js" ></script>
-        <script type="text/javascript" src="./resources/js/pessoaFisica/service.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/service.js" ></script>
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>

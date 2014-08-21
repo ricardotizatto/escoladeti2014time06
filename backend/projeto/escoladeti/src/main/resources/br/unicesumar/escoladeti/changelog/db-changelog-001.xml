@@ -855,11 +855,11 @@
 		</addColumn>
 	</changeSet>
         
-        <changeSet id="est009" author="martinho">
+        <changeSet id="mart001" author="martinho">
             <addColumn tableName="pessoafisica">
                 <column name="aluno" type="boolean"></column>
             </addColumn>
-        </changeSet>
+        </changeSet>    
         
 <!--        <changeSet id="est009" author="Alisson Molinari">
             <addForeignKeyConstraint baseTableName="participante" baseColumnNames="idevento" 

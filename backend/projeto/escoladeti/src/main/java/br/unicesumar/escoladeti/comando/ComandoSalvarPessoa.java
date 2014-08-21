@@ -1,56 +1,25 @@
 package br.unicesumar.escoladeti.comando;
 
-import br.unicesumar.escoladeti.enums.Papel;
 import br.unicesumar.escoladeti.enums.Sexo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
-import javax.validation.constraints.NotNull;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.hibernate.validator.constraints.NotBlank;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarPessoa {
 
-//    @NotBlank(message = "Nome é obrigatório")
     private String nome;
-
-//    @NotBlank(message = "Email é obrigatório")
     private String email;
-
-//    @NotBlank(message = "Tipo inválido")
     private String tipo;
-
-//    @NotBlank(message = "Rg é obrigatório")
     private String rg;
-
-//    @NotBlank(message = "Cpf é obrigatório")
     private String cpf;
-
-//    @NotNull(message = "Data de Nascimento é obrigatório")
     private Date dataNascimento;
-
-//    @NotBlank(message = "Sobrenome é obrigatório")
     private String sobrenome;
-
-//    @NotNull(message = "Sexo é obrigatório")
     private Sexo sexo;
-
-//    @NotNull(message = "Aluno é obrigatório")
     private boolean aluno;
-
-//    @NotBlank(message = "Cnpj é obrigatório")
     private String cnpj;
-
-//    @NotBlank(message = "Inscrição Estadual é obrigatório")
     private String inscricaoEstadual;
-
-//    @NotBlank(message = "Incrição Municipal é obrigatório")
     private String inscricaoMunicipal;
-
-//    @NotBlank(message = "Razão Social é obrigatório")
     private String razaoSocial;
-
-//    @NotNull(message = "Data de Criação é obrigatório")
     private Date dataCriacao;
 
     public ComandoSalvarPessoa() {
@@ -125,7 +94,7 @@ public class ComandoSalvarPessoa {
         return aluno;
     }
 
-    public void setPapel(boolean aluno) {
+    public void setAluno(boolean aluno) {
         this.aluno = aluno;
     }
 

@@ -3,6 +3,15 @@ var controllers = angular.module('controllers');
 function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) {
     $scope.select2 = 'one';
     console.log('Carregando controller');
+    
+    $scope.initCadastro = function() {
+        $scope.carregarPessoa();
+    };
+
+    $scope.initLista = function() {
+        $scope.tipoPessoa = 'F';
+        $scope.filtroPessoaFisica();
+    }
 //
 //    $scope.modificarPais = function(paisId) {
 //        $scope.unidadeFederativa = {};
@@ -86,56 +95,58 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log('Nova Pessoa');
         window.location = '#/pessoa';
     };
-
+    
     $scope.carregarPessoa = function() {
         console.log('carregando pessoa');
-        
+
         if (!$routeParams.pessoaId) {
-            $scope.pessoa = new Pessoa ({
-                tipo: 'J'
+            $scope.pessoa = new Pessoa({
+                tipo: 'F',
+                aluno: 'false',
+                sexo: 'MASCULINO'
             });
-            $scope.tipoPessoa = 'F';
-            $scope.papeis = [
-                {nome: 'ALUNO'}
-            ];
-            return;//se não tiver id não buscar
+            $log.debug('criando pessoa: ', $scope.pessoa);
+            return;
         }
+        
+        $log.debug('buscando pessoa: ', Pessoa);
+        Pessoa.get({id: $routeParams.pessoaId}, function(pessoa) {
+            $scope.pessoa = pessoa;
+            $scope.pessoa.tipo = 'F';
+            /*
+            $scope.pessoa.id    = pessoa.id;
+            $scope.pessoa.nome  = pessoa.nome ? pessoa.nome : null;
+            $scope.pessoa.email = pessoa.email ? pessoa.email : null;
+            $scope.pessoa.tipo  = pessoa.tipo ? pessoa.tipo : null;
+            
+            $scope.pessoa.cpf   = pessoa.cpf ? pessoa.cpf : null;
+            $scope.pessoa.rg    = pessoa.rg ? pessoa.rg : null;
+            $scope.pessoa.datanascimento = pessoa.datanascimento ? pessoa.datanascimento : null;
+            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
+            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
+            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
+            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
+            */
 
-        pessoaJuridicaService.buscar($routeParams.pessoaJuridicaId)
-                .success(function(p) {
-                    $scope.pessoaJuridica = p;
-                });
+        });
     };
 
-    var carregaPaises = function() {
-        console.log('carregando pais');
-        paisService.buscarTodos()
-                .success(function(listaPaises) {
-                    console.log(listaPaises);
-                    $scope.paises = listaPaises;
-                })
-                .error(function(data) {
-                    console.log('erro ao buscar paises ' + data);
-                });
-    };
+
+//    var carregaPaises = function() {
+//        console.log('carregando pais');
+//        paisService.buscarTodos()
+//                .success(function(listaPaises) {
+//                    console.log(listaPaises);
+//                    $scope.paises = listaPaises;
+//                })
+//                .error(function(data) {
+//                    console.log('erro ao buscar paises ' + data);
+//                });
+//    };
 
 
     $scope.editar = function(p) {
         window.location = '#/pessoa/' + p.id;
-    };
-
-//    $scope.init = function() {
-//        $scope.endereco = {};
-//        $scope.enderecos = [];
-//        $scope.pais = {};
-//        $scope.unidadeFederativa = {};
-//        $scope.cidade = {};
-//        carregaPaises();
-//    };
-
-    $scope.initLista = function() {
-        $scope.tipoPessoa = 'F';
-        $scope.filtroPessoaFisica();
     };
 
     $scope.buscaPessoaContendoNome = function(tipoPessoa) {
@@ -199,9 +210,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     $scope.construirPaginaFisica = function(pagina) {
         for (i = 0; i < pagina.list.length; i++) {
             $scope.pagina[i] = {};
-            $scope.pagina[i].nome = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
-            $scope.pagina[i].doc = pagina.list[i].cpf;
-            $scope.pagina[i].data = pagina.list[i].dataNascimento;
+            $scope.pagina[i].id    = pagina.list[i].id;
+            $scope.pagina[i].nome  = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
+            $scope.pagina[i].doc   = pagina.list[i].cpf;
+            $scope.pagina[i].data  = pagina.list[i].dataNascimento;
             $scope.pagina[i].email = pagina.list[i].email;
         }
     };
@@ -209,14 +221,24 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     $scope.construirPaginaJuridica = function(pagina) {
         for (i = 0; i < pagina.list.length; i++) {
             $scope.pagina[i] = {};
-            $scope.pagina[i].nome = pagina.list[i].nome;
-            $scope.pagina[i].doc = pagina.list[i].cnpj;
-            $scope.pagina[i].data = pagina.list[i].dataCriacao;
+            $scope.pagina[i].id    = pagina.list[i].id;
+            $scope.pagina[i].nome  = pagina.list[i].nome;
+            $scope.pagina[i].doc   = pagina.list[i].cnpj;
+            $scope.pagina[i].data  = pagina.list[i].dataCriacao;
             $scope.pagina[i].email = pagina.list[i].email;
         }
     };
 
     $scope.salvar = function() {
+ 
+        $scope.pessoa.nome = $scope.pessoa.nome.toUpperCase();
+        $scope.pessoa.email = $scope.pessoa.email.toUpperCase();
+        if($scope.pessoa.tipo === 'J'){
+            $scope.pessoa.razaoSocial = $scope.pessoa.razaoSocial.toUpperCase();
+        }else{
+            $scope.pessoa.sobrenome = $scope.pessoa.sobrenome.toUpperCase();
+        }
+        
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function() {
                 toastr.success('salvo com sucesso');
@@ -228,9 +250,15 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
         $scope.pessoa.$save(function() {
             toastr.success('salvo com sucesso');
-            $scope.pessoa = new Pessoa({
-                tipo: 'J'
-            });
+            if( $scope.tipoPessoa === 'J'){
+                $scope.pessoa = new Pessoa({
+                    tipo: 'J'
+                });
+            }else{
+                $scope.pessoa = new Pessoa({
+                    tipo: 'F'
+                });
+            }
         });
     };
 

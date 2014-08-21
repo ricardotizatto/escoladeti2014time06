@@ -181,16 +181,16 @@ public abstract class Pessoa extends Entidade {
 
         public PessoaFisica buildPessoaFisica() {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo));
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
 
             Preconditions.checkNotNull(this.aluno);
             if (!this.aluno) {
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg));
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf));
+                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg),"RG é obrigatório");
+                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf),"CPF é obrigatório");
             }
             Preconditions.checkNotNull(this.dataNascimento);
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome));
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome),"Sobrenome é obrigatório");
             Preconditions.checkNotNull(this.sexo);
 
             PessoaFisica pessoa = new PessoaFisica();
@@ -207,12 +207,12 @@ public abstract class Pessoa extends Entidade {
         }
 
         public PessoaJuridica buildPessoaJuridica() {
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.cnpj));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoEstadual));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal));
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial));
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.cnpj),"CNPJ é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoEstadual),"Inscrição Estadual é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal),"Inscrição Municipal é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial),"Razão Social é obrigatório");
             Preconditions.checkNotNull(this.dataCriacao);
 
             PessoaJuridica pessoa = new PessoaJuridica();

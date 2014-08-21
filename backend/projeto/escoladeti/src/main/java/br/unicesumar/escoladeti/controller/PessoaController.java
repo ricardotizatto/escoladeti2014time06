@@ -6,7 +6,6 @@ import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.service.PessoaService;
 import java.io.Serializable;
-import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +28,13 @@ public class PessoaController implements Serializable {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public Pessoa salvar(@Valid @RequestBody ComandoSalvarPessoa comando) {
-        return pessoaService.salvar(comando);
+        return pessoaService.persistirPessoa(comando, null);
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT)
     @ResponseBody
     public Pessoa atualizar(@Valid @RequestBody ComandoSalvarPessoa comando, @PathVariable("id")Long id) {
-        return pessoaService.atualizar(comando, id);
+        return pessoaService.persistirPessoa(comando, id);
     }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)

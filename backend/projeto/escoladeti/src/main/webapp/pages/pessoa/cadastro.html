@@ -1,4 +1,4 @@
-<div class="container" ng-controller="PessoaController" ng-init="carregarPessoa();init();">
+<div class="container" ng-controller="PessoaController" ng-init="initCadastro()">
     <div class="row">
         <div class="form-group col-sm-12">
             <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Pessoa </legend>
@@ -10,10 +10,10 @@
             <div>
                 <div class="btn-group">
                     <label class="btn btn-primary btn-radio-amacapa"> 
-                        <input ng-model="tipoPessoa" value="J" type="radio" /> Jurídica
+                        <input ng-model="pessoa.tipo" value="J" type="radio" /> Jurídica
                     </label> 
                     <label class="btn btn-primary btn-radio-amacapa"> 
-                        <input ng-model="tipoPessoa" value="F" type="radio" /> Física
+                        <input ng-model="pessoa.tipo" value="F" type="radio" /> Física
                     </label>
                 </div>
             </div>
@@ -22,7 +22,7 @@
     <hr>
     <form action="" method="POST" role="form" ng-submit="salvar()">
         <!-- Inicio Pessoa Fisica -->
-        <div class="pessoaFisica" ng-show=" !tipoPessoa ? true : tipoPessoa == 'F' ">
+        <div class="pessoaFisica" ng-show=" pessoa.tipo === 'F' ">
             <div class="row ">
                 <div class="form-group col-sm-2">
                     <label>Aluno</label>
@@ -52,7 +52,7 @@
                                 <label class="btn btn-primary btn-radio-amacapa">
                                     <input ng-model="pessoa.sexo" value="MASCULINO" type="radio" /> M
                                 </label> <label class="btn btn-primary btn-radio-amacapa">
-                                    <input ng-model="pessoa.sexo" value="F" type="radio" /> F
+                                    <input ng-model="pessoa.sexo" value="FEMININO" type="radio" /> F
                                 </label>
                             </div>
                         </div>
@@ -78,14 +78,14 @@
                         <span class="input-group-addon"> 
                             <span class="glyphicon glyphicon-envelope"></span>
                         </span> 
-                        <input class="form-control" name="email" type="text" maxlength="100" ng-model="pessoa.email" placeholder="Endereço de email" >
+                        <input class="form-control" name="email" type="email" maxlength="100" ng-model="pessoa.email" placeholder="Endereço de email" >
                     </div>
                 </div>
             </div>
         </div>    
         <!-- Fim Pessoa Fisica -->
         <!-- Inicio Pessoa Jurídica -->
-        <div class="pessoa" ng-show=" tipoPessoa == 'J' " >
+        <div class="pessoaJuridica" ng-show=" pessoa.tipo === 'J' " >
             <div class="row ">
                 <div class="form-group col-sm-4">
                     <label> Nome </label> 
@@ -122,7 +122,7 @@
                         <span class="input-group-addon"> <span
                                 class="glyphicon glyphicon-envelope"></span>
                         </span> 
-                        <input class="form-control" name="email" type="text" maxlength="100" ng-model="pessoa.email"  placeholder="Endereço de email">
+                        <input class="form-control" name="email" type="email" maxlength="100" ng-model="pessoa.email"  placeholder="Endereço de email">
                     </div>
                 </div>
             </div>
