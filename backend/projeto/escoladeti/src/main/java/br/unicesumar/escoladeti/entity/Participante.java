@@ -4,17 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Participante extends Entidade{  
-    
-    private String nome;    
-    private String cpf;
-    private String rg;
+public class Participante extends Entidade {
+
+    private String nome;
     private Long idevento;
     private String email;
     private String telefone;
     private String deficiente;
-    private String sexo;
     private String pagamento;
+    private String necessidades;
 
     public String getPagamento() {
         return pagamento;
@@ -31,7 +29,15 @@ public class Participante extends Entidade{
     public void setIdevento(Long idevento) {
         this.idevento = idevento;
     }
-    
+
+    public String getNecessidades() {
+        return necessidades;
+    }
+
+    public void setNecessidades(String necessidades) {
+        this.necessidades = necessidades;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -39,22 +45,6 @@ public class Participante extends Entidade{
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    } 
 
     public String getEmail() {
         return email;
@@ -78,13 +68,5 @@ public class Participante extends Entidade{
 
     public void setDeficiente(String deficiente) {
         this.deficiente = deficiente;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 }
