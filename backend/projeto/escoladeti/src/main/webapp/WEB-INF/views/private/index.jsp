@@ -51,6 +51,7 @@
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>
+        <script type="text/javascript" src="./resources/js/PerfilAcessoUsuarioController.js"></script>
         <script type="text/javascript" src="./resources/js/ListaUsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>

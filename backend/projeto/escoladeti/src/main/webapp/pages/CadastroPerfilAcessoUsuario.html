@@ -1,0 +1,22 @@
+<div class="container" ng-controller="PerfilAcessoUsuarioController" ng-init="carregarUsuario();">
+    <legend> <span class="glyphicon glyphicon-list-alt"></span> Perfil de Acesso do Usuário</legend>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <label>Usuario</label>
+            <label>{{usuario.nome}}</label>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>Perfil de Acesso</label>
+            <select ng-model="meuPerfilDeAcesso" ng-options="perfilDeAcesso.nome for perfilDeAcesso in perfilAcesso"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <input class="form-control" name="inicioVigencia" type="date" ng-model="inicioVigencia" />
+        </div>
+        <div class="form-group col-sm-4">
+            <input class="form-control" name="fimVigencia" type="date" ng-model="fimVigencia" />
+        </div>
+    </div>
+</div>
+

@@ -36,11 +36,15 @@ app.config(['$routeProvider',
             })
             .when('/cadastrousuario', {
                 templateUrl: './pages/CadastroUsuario.html',
-                controller: 'usuarioController'
+                controller: 'UsuarioController'
             })
             .when('/cadastrousuario/:usuarioId', {
                 templateUrl: './pages/CadastroUsuario.html',
-                controller: 'usuarioController'
+                controller: 'UsuarioController'
+            })
+            .when('/cadastroperfilacessousuario/:usuarioId', {
+                templateUrl: './pages/CadastroPerfilAcessoUsuario.html',
+                controller: 'PerfilAcessoUsuarioController'
             })
             .when('/cadastroperfilacesso', {
                 templateUrl: './pages/CadastroPerfilAcesso.html',
@@ -132,7 +136,7 @@ app.config(['$routeProvider',
             })
             .when('/listausuario', {
                 templateUrl: './pages/ListaUsuario.html',
-                controller: 'perfilUsuarioController'
+                controller: 'UsuarioController'
             })
             .when('/listaperfilacesso', {
                 templateUrl: './pages/ListaPerfilAcesso.html',

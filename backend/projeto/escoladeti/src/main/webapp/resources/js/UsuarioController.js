@@ -6,11 +6,6 @@ function UsuarioController($scope, $http, $routeParams) {
     $scope.email;
     $scope.ativo;
 
-    $scope.perfisAcesso = [];
-    $scope.meuPerfilDeAcesso = {};
-
-    $scope.perfilDeAcessoUsuario = {};
-
     var tamanho = 0;
     var temMaiuscula = 0;
     var temMinuscula = 0;
@@ -60,12 +55,10 @@ function UsuarioController($scope, $http, $routeParams) {
         } else {
             $http.post("./rest/usuarioSource/usuario", $scope.usuario)
                     .success(function(usuario, status) {
-                $scope.salvarPerfilDeAcesso();
-
                 toastr.success("Usuario cadastrado com sucesso!");
                 setTimeout(function() {
-                    window.location = "#/listausuario";
-                }, 5000);
+                    window.location = "#/cadastroperfilacessousuario/"+usuario.id;
+                }, 500);
                 console.log("usuario salvo = " + usuario);
             })
                     .error(function(data, status) {
@@ -106,26 +99,6 @@ function UsuarioController($scope, $http, $routeParams) {
             console.log(angular.toJson($scope.perfisAcesso, true));
         }).error(function(data, status) {
             console.log('Erro ao carregar perfils ! ' + data);
-        });
-    };
-
-    $scope.salvarPerfilDeAcesso = function() {
-        //fazer refatoração do front e do backend
-        //fazer as alterações para padronizar os arquivos de acordo com o novo tipo do projeto
-        $scope.perfilDeAcessoUsuario = {
-            usuario: $scope.usuario,
-            perfilAcesso: $scope.meuPerfilDeAcesso,
-            inicioVigencia: $scope.inicioVigencia,
-            fimVigencia: $scope.fimVigencia
-        };
-        
-        $http.post("./rest/usuarioPerfilAcessoSource/usuarioPerfilAcesso", $scope.perfilDeAcessoUsuario)
-                .success(function(usuarioPerfilDeAcesso, status) {
-            console.log('usuario enviado ao back usuario perfil de acesso');
-            console.log($scope.perfilDeAcessoUsuario.inicioVigencia + status);
-        }).error(function(data, status) {
-            console.log($scope.perfilDeAcessoUsuario.fimVigencia + status);
-            console.log('Erro ao salvar perfil De acesso ! ' + data);
         });
     };
 
