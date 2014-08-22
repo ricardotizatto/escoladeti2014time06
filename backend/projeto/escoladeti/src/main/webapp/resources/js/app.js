@@ -22,7 +22,7 @@ app.config(['$routeProvider',
                 templateUrl: './pages/pessoa/cadastro.html',
                 controller: 'PessoaController'
             })
-            .when('/pessoa/:pessoaId', {
+            .when('/pessoa/:pessoaId/:pessoaTipo', {
                 templateUrl: './pages/pessoa/cadastro.html',
                 controller: 'PessoaController'
             })

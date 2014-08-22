@@ -84,6 +84,7 @@ public class PessoaService {
             PessoaJuridica pessoaJuridica = Pessoa.builder()
                     .nome(comando.getNome())
                     .email(comando.getEmail())
+                    .tipo(comando.getTipo())
                     .cnpj(comando.getCnpj())
                     .inscricaoEstadual(comando.getInscricaoEstadual())
                     .inscricaoMunicipal(comando.getInscricaoMunicipal())

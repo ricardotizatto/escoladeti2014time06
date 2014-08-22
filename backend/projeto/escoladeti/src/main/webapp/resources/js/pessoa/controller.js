@@ -11,7 +11,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     $scope.initLista = function() {
         $scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica();
-    }
+    };
 //
 //    $scope.modificarPais = function(paisId) {
 //        $scope.unidadeFederativa = {};
@@ -23,16 +23,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 //                    $scope.unidadesFederativas = data;
 //                });
 //    };
-
-    $scope.getRequired = function(aluno) {
-        switch (aluno) {
-            case "S":
-                return false;
-                break;
-            default:
-                return true;
-        }
-    };
 
     $scope.validaCpf = function(cpf) {
         if (!ValidarCPF(cpf)) {
@@ -100,19 +90,17 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log('carregando pessoa:');
 
         if (!$routeParams.pessoaId) {
-            $scope.pessoa = new Pessoa({
-                tipo: 'F',
-                aluno: 'false',
-                sexo: 'MASCULINO',
-                telefones: []
-            });
-            $log.debug('criando pessoa: ', $scope.pessoa);
+            $scope.novaPessoa("F"); 
+            $log.debug('criando pessoa');
             return;
         }
         
-        $log.debug('buscando pessoa: ', Pessoa);
-        Pessoa.get({id: $routeParams.pessoaId, tipo: "F"}, function(pessoa) {
+        $log.debug('buscando pessoa');
+        Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function(pessoa) {
+            
             $scope.pessoa = pessoa;
+            $log.debug('aluno: '+ $scope.pessoa.aluno + ' - ' + pessoa.aluno);
+            
             /*
             $scope.pessoa.id    = pessoa.id;
             $scope.pessoa.nome  = pessoa.nome ? pessoa.nome : null;
@@ -145,7 +133,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
 
     $scope.editar = function(p) {
-        window.location = '#/pessoa/' + p.id;
+        window.location = '#/pessoa/' + p.id + '/' + p.tipo;
     };
 
     $scope.buscaPessoaContendoNome = function(tipoPessoa) {
@@ -211,7 +199,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pagina[i] = {};
             $scope.pagina[i].id    = pagina.list[i].id;
             $scope.pagina[i].tipo  = pagina.list[i].tipo;
-            console.log('aluno eee:' + pagina.list[i].aluno);
             $scope.pagina[i].aluno = pagina.list[i].aluno;
             $scope.pagina[i].nome  = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
             $scope.pagina[i].doc   = pagina.list[i].cpf;
@@ -231,12 +218,26 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pagina[i].email = pagina.list[i].email;
         }
     };
+    
+    $scope.novaPessoa = function(tipo){
+        if ($scope.tipo === "J") {
+            $scope.pessoa = new Pessoa({
+                tipo: "J"
+            });
+        } else {
+            $scope.pessoa = new Pessoa({
+                tipo:  "F",
+                aluno: "false",
+                sexo:  "MASCULINO"
+            });
+        }
+    };
 
     $scope.salvar = function() {
  
         $scope.pessoa.nome = $scope.pessoa.nome.toUpperCase();
         $scope.pessoa.email = $scope.pessoa.email.toUpperCase();
-        if($scope.pessoa.tipo === 'J'){
+        if($scope.pessoa.tipo === "J"){
             $scope.pessoa.razaoSocial = $scope.pessoa.razaoSocial.toUpperCase();
         }else{
             $scope.pessoa.sobrenome = $scope.pessoa.sobrenome.toUpperCase();
@@ -245,63 +246,21 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function() {
                 toastr.success('salvo com sucesso');
-                $scope.pessoa = {};
+                $scope.novaPessoa($scope.pessoa.tipo); 
             });
-
             return;
         }
-
+        toastr.success('tipo pessoa: '+ $scope.pessoa.tipo);
         $scope.pessoa.$save(function() {
-            toastr.success('salvo com sucesso');
-            if( $scope.tipoPessoa === 'J'){
-                $scope.pessoa = new Pessoa({
-                    tipo: 'J'
-                });
-            }else{
-                $scope.pessoa = new Pessoa({
-                    tipo: 'F'
-                });
-            }
+            toastr.success('salvo com sucesso');           
+            $scope.novaPessoa($scope.pessoa.tipo);
         });
-    };
-
-    $scope.getNovaPessoaJuridica = function() {
-        return {
-            id: null,
-            nome: null,
-            razaoSocial: null,
-            dataCriacao: null,
-            inscricaoMunicipal: null,
-            cnpj: null,
-            inscricaoEstadual: null,
-            email: null,
-            telefones: [],
-            enderecos: []
-        };
-    };
-
-    $scope.getNovaPessoaFisica = function() {
-        return {
-            id: null,
-            aluno: 'N',
-            papel: '',
-            nome: null,
-            sobrenome: null,
-            sexo: 'M',
-            rg: null,
-            cpf: null,
-            dataNascimento: null,
-            email: null,
-            telefones: [],
-            enderecos: []
-        };
     };
 
     $scope.select2Options = {
     };
 
     $scope.voltar = function() {
-        //$scope.pessoaJuridica = getNovaPessoaJuridica();
         window.location = '#/listapessoa';
     };
 
