@@ -36,5 +36,22 @@
             select t1.id, t1.cep, t4.id as paisid, t3.id as ufid, t2.id as cidadeid from cepunico t1 join cidade t2 on t1.cidade = t2.nome join unidadefederativa t3 on t2.unidadefederativaid = t3.id join pais t4 on t3.paisid = t4.id
         </createView>
     </changeSet>
+    
+    <changeSet author="Walber e Leivid (generated)" id="createIndexCepUnico20140821">
+        <createIndex 
+                indexName="CepUnicoIndex"
+                schemaName="public"
+                tableName="cepunico">
+            <column name="cep" type="varchar(10)"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Walber e Leivid (generated)" id="createIndexCep20140821">
+        <createIndex 
+                indexName="CepIndex"
+                schemaName="public"
+                tableName="cep">
+            <column name="cep" type="varchar(10)"/>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>
    
