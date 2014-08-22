@@ -37,10 +37,10 @@ public class PessoaController implements Serializable {
         return pessoaService.persistirPessoa(comando, id);
     }
 
-    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/{id}/{tipo}"}, method = RequestMethod.GET)
     @ResponseBody
-    public Pessoa getPessoa(@PathVariable Long id) {
-        return pessoaService.buscar(id);
+    public Pessoa getPessoa(@PathVariable Long id, @PathVariable String tipo) {
+        return pessoaService.buscar(id, tipo);
     }
 
     @RequestMapping(value = {"/paginarFisica/{pagina}"}, method = RequestMethod.GET)

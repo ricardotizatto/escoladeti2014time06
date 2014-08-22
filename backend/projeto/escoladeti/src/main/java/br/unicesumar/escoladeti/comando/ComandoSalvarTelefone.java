@@ -1,6 +1,5 @@
 package br.unicesumar.escoladeti.comando;
 
-import br.unicesumar.escoladeti.entity.Solicitacao;
 import br.unicesumar.escoladeti.entity.Telefone;
 import br.unicesumar.escoladeti.enums.TipoTelefone;
 import br.unicesumar.escoladeti.util.number.NumberUtils;

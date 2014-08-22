@@ -1,14 +1,11 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")

@@ -1,8 +1,10 @@
 package br.unicesumar.escoladeti.comando;
 
+import br.unicesumar.escoladeti.entity.Telefone;
 import br.unicesumar.escoladeti.enums.Sexo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarPessoa {
@@ -21,7 +23,15 @@ public class ComandoSalvarPessoa {
     private String inscricaoMunicipal;
     private String razaoSocial;
     private Date dataCriacao;
+    private Set<Telefone> telefones;
 
+    public Set<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
+    }
     public ComandoSalvarPessoa() {
 
     }

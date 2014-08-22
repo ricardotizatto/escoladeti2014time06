@@ -97,22 +97,22 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     };
     
     $scope.carregarPessoa = function() {
-        console.log('carregando pessoa');
+        console.log('carregando pessoa:');
 
         if (!$routeParams.pessoaId) {
             $scope.pessoa = new Pessoa({
                 tipo: 'F',
                 aluno: 'false',
-                sexo: 'MASCULINO'
+                sexo: 'MASCULINO',
+                telefones: []
             });
             $log.debug('criando pessoa: ', $scope.pessoa);
             return;
         }
         
         $log.debug('buscando pessoa: ', Pessoa);
-        Pessoa.get({id: $routeParams.pessoaId}, function(pessoa) {
+        Pessoa.get({id: $routeParams.pessoaId, tipo: "F"}, function(pessoa) {
             $scope.pessoa = pessoa;
-            $scope.pessoa.tipo = 'F';
             /*
             $scope.pessoa.id    = pessoa.id;
             $scope.pessoa.nome  = pessoa.nome ? pessoa.nome : null;
@@ -127,7 +127,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
             $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
             */
-
         });
     };
 
@@ -211,6 +210,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         for (i = 0; i < pagina.list.length; i++) {
             $scope.pagina[i] = {};
             $scope.pagina[i].id    = pagina.list[i].id;
+            $scope.pagina[i].tipo  = pagina.list[i].tipo;
+            console.log('aluno eee:' + pagina.list[i].aluno);
+            $scope.pagina[i].aluno = pagina.list[i].aluno;
             $scope.pagina[i].nome  = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
             $scope.pagina[i].doc   = pagina.list[i].cpf;
             $scope.pagina[i].data  = pagina.list[i].dataNascimento;
@@ -222,6 +224,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         for (i = 0; i < pagina.list.length; i++) {
             $scope.pagina[i] = {};
             $scope.pagina[i].id    = pagina.list[i].id;
+            $scope.pagina[i].tipo  = pagina.list[i].tipo;
             $scope.pagina[i].nome  = pagina.list[i].nome;
             $scope.pagina[i].doc   = pagina.list[i].cnpj;
             $scope.pagina[i].data  = pagina.list[i].dataCriacao;
@@ -310,9 +313,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     $scope.salvarTelefone = function() {
         if ($scope.indiceTelefone >= 0) {
-            $scope.pessoaJuridica.telefones.splice($scope.indiceTelefone, 1);
+            $scope.pessoa.telefones.splice($scope.indiceTelefone, 1);
         }
-        $scope.pessoaJuridica.telefones.push($scope.telefone);
+        $scope.pessoa.telefones.push($scope.telefone);
         console.log($scope.telefones);
         toastr.success("Telefone adicionado " + $scope.telefone.numero + " !");
         $scope.telefone = getNovoTelefone();
@@ -412,7 +415,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         $("#ramal").mask("9?");
         $("#cep").mask("99.999-999");
         $("#cpf").mask("999.999.999-99");
-        $("#rg").mask("9.999.999-*");
+        //$("#rg").mask("9.999.999-*");
         $("#cnpj").mask("99.999.999/9999-99");
     });
 }
