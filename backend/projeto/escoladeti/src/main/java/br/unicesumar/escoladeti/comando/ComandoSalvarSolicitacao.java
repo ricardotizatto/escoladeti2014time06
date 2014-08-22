@@ -1,36 +1,21 @@
 package br.unicesumar.escoladeti.comando;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.xml.ws.BindingType;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.junit.Ignore;
-import org.springframework.validation.annotation.Validated;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import br.unicesumar.escoladeti.entity.Cidade;
-import br.unicesumar.escoladeti.entity.PessoaFisica;
-import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarSolicitacao {
 	   
     @NotNull(message = "Aluno é obrigatório" )
-    @Min(value = 0, message = "Aluno é obrigatório")
+    @Min(value = 0, message = "aluno é obrigatório")
     @Max(value = 100)
     private Long aluno;
     

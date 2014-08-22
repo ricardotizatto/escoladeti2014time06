@@ -46,6 +46,7 @@
         <script type="text/javascript" src="./resources/js/pessoaFisica/service.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoaJuridica/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/buscacep/service.js"></script>
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
       
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
@@ -58,6 +59,7 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/CepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
         
