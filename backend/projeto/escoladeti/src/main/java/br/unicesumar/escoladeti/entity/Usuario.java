@@ -1,43 +1,16 @@
 package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 import static liquibase.util.MD5Util.computeMD5;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario extends Entidade {
 
-    @NotNull
-    @NotEmpty
     private String nome;
-
-    @NotNull
-    @NotEmpty
     private String login;
-
-    @NotNull
-    @NotEmpty
     private String senha;
-
-    @NotNull
-    @NotEmpty
     private String email;
-
-    @NotNull
     private Boolean ativo;
-    
-    @OneToOne
-    private PerfilAcessoUsuario perfilAcessoUsuario;
-
-    public PerfilAcessoUsuario getPerfilAcessoUsuario() {
-        return perfilAcessoUsuario;
-    }
-
-    public void setPerfilAcessoUsuario(PerfilAcessoUsuario perfilAcessoUsuario) {
-        this.perfilAcessoUsuario = perfilAcessoUsuario;
-    }
 
     public Usuario() {
     }
@@ -88,5 +61,4 @@ public class Usuario extends Entidade {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-
 }

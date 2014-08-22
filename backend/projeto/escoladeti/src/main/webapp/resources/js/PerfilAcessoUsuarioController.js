@@ -9,13 +9,17 @@ function PerfilAcessoUsuarioController($scope, $http, $routeParams) {
     };
 
     $scope.salvar = function() {
-        $scope.perfilAcessoUsuario = [{
-                inicioVigencia: $scope.inicioVigencia,
-                fimVigencia: $scope.fimVigencia,
-                perfilAcesso: $scope.perfilAcesso,
-                usuario: $scope.usuario
+        //$scope.usuario.perfilAcesso = $scope.meuPerfilDeAcesso;
+        $scope.perfilAcessoUsuario = {
+            inicioVigencia: $scope.inicioVigencia,
+            fimVigencia: $scope.fimVigencia,
+            perfilAcesso: $scope.meuPerfilDeAcesso,
+            usuario: $scope.usuario
 
-            }];
+        };
+        
+        console.log(angular.toJson($scope.perfilAcessoUsuario, true) + ' aqui');
+        
         $http.post("./rest/perfilAcessoUsuarioSource/perfilAcessoUsuario", $scope.perfilAcessoUsuario)
                 .success(function(perfilAcessoUsuario, status) {
             toastr.success("Usuario cadastrado com sucesso!");
@@ -25,6 +29,7 @@ function PerfilAcessoUsuarioController($scope, $http, $routeParams) {
             console.log("usuario salvo = " + usuario);
         })
                 .error(function(data, status) {
+            console.log(angular.toJson($scope.meuPerfilAcesso, true) + ' aqui');
             console.log("erro ao salvar usuario", data);
             toastr.warning("Erro ao salvar usuario!");
         });

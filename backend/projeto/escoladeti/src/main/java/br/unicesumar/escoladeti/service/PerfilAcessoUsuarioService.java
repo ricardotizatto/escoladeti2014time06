@@ -2,12 +2,13 @@ package br.unicesumar.escoladeti.service;
 
 import br.unicesumar.escoladeti.entity.PerfilAcessoUsuario;
 import br.unicesumar.escoladeti.repository.PerfilAcessoUsuarioRepository;
+import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PerfilAcessoUsuarioService {
+public class PerfilAcessoUsuarioService implements Serializable {
 
     @Autowired
     private PerfilAcessoUsuarioRepository perfilAcessoUsuarioRepository;
