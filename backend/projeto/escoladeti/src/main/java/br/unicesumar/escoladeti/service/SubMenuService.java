@@ -8,16 +8,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SubMenuService {
-    
+
     @Autowired
     private SubMenuRepository subMenuRepository;
-    
+
     public SubMenu salvar(SubMenu subMenu) {
         return subMenuRepository.save(subMenu);
     }
 
     public List<SubMenu> getTodos() {
         return subMenuRepository.findAll();
+    }
+
+    public List<SubMenu> getTodosPorMenu(Long id) {
+        return subMenuRepository.findByMenuContainingOrderByNomeAsc(id);
     }
 
     public void deletar(SubMenu subMenu) {

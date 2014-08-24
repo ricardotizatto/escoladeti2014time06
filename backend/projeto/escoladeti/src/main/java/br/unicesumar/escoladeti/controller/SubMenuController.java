@@ -38,6 +38,13 @@ public class SubMenuController implements Serializable {
         return subMenuService.getTodos();
     }
     
+    @RequestMapping(value="/menu", method = RequestMethod.POST)
+    @ResponseBody
+    public List<SubMenu> getTodosPorMenu(Long id){
+        return subMenuService.getTodosPorMenu(id);
+    }
+    
+    
     @RequestMapping(value="/subMenu", method = RequestMethod.DELETE)
     @ResponseBody
     public String deletar(@RequestBody SubMenu subMenu){

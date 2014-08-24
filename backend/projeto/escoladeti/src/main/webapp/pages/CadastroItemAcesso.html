@@ -8,10 +8,16 @@
         <form action="" method="POST" role="form" ng-submit="salvar()" >							
             <div class="row ">
                 <div class="form-group col-sm-6">
-                   <label>Nome</label>
+                    <label>Nome</label>
                     <input class="form-control" name="nome" type="text" placeholder="Nome componente" ng-model="itemAcesso.nome" required maxlength="60" />
                 </div>
-            </div>	
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <label>Menu</label>
+                    <select ng-model="meuMenu" ng-options="menu.nome for menu in menus track by menu.id" ng-change="getSubMenus()"></select>
+                </div>
+            </div>
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label>Sub Menu</label>
