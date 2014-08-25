@@ -36,6 +36,12 @@ public class PessoaController implements Serializable {
     public Pessoa atualizar(@Valid @RequestBody ComandoSalvarPessoa comando, @PathVariable("id")Long id) {
         return pessoaService.persistirPessoa(comando, id);
     }
+    
+    @RequestMapping(value = {"/{id}/{tipo}"}, method = RequestMethod.DELETE )
+    @ResponseBody
+    public void deletar(@PathVariable Long id, @PathVariable String tipo) {
+        pessoaService.deletarPessoa(id, tipo);
+    }
 
     @RequestMapping(value = {"/{id}/{tipo}"}, method = RequestMethod.GET)
     @ResponseBody

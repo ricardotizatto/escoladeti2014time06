@@ -60,27 +60,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 //        $scope.pais = selecionados[0];
 //    };
 
-    $scope.deletar = function(pessoa) {
-        console.log('deletando pessoa ' + JSON.stringify(pessoa));
-
-        BootstrapDialog.confirm('Deseja realmente deletar a Pessoa: <b>' + pessoa.nome + '</b>?', function(result) {
-            if (result) {
-                pessoaJuridicaService.deletar(pessoa)
-                        .success(function(data) {
-                            $scope.getTodos(1);
-                            console.log('Pessoa deletada');
-                            toastr.success(pessoa.nome + " deletado com sucesso.");
-                        })
-                        .error(function(data) {
-                            console.log('erro ao deletar pessoa ' + data);
-                            console.log(data.messageDeveloper);
-                            toastr.error(data.message);
-                        });
-            }
-        });
-
-    };
-
     $scope.novo = function() {
         console.log('Nova Pessoa');
         window.location = '#/pessoa';
@@ -99,22 +78,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function(pessoa) {
             
             $scope.pessoa = pessoa;
-            $log.debug('aluno: '+ $scope.pessoa.aluno + ' - ' + pessoa.aluno);
-            
-            /*
-            $scope.pessoa.id    = pessoa.id;
-            $scope.pessoa.nome  = pessoa.nome ? pessoa.nome : null;
-            $scope.pessoa.email = pessoa.email ? pessoa.email : null;
-            $scope.pessoa.tipo  = pessoa.tipo ? pessoa.tipo : null;
-            
-            $scope.pessoa.cpf   = pessoa.cpf ? pessoa.cpf : null;
-            $scope.pessoa.rg    = pessoa.rg ? pessoa.rg : null;
-            $scope.pessoa.datanascimento = pessoa.datanascimento ? pessoa.datanascimento : null;
-            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
-            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
-            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
-            $scope.pessoa.aluno = pessoa.aluno ? pessoa.aluno : null;
-            */
+            if(pessoa.tipo !== 'J'){
+               $scope.pessoa.aluno = String(pessoa.aluno); 
+            }
         });
     };
 
@@ -245,15 +211,35 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function() {
-                toastr.success('salvo com sucesso');
+                toastr.success($scope.pessoa.nome + ' atualizado com sucesso');
                 $scope.novaPessoa($scope.pessoa.tipo); 
             });
             return;
         }
-        toastr.success('tipo pessoa: '+ $scope.pessoa.tipo);
         $scope.pessoa.$save(function() {
-            toastr.success('salvo com sucesso');           
+            toastr.success($scope.pessoa.nome + ' salvo com sucesso');           
             $scope.novaPessoa($scope.pessoa.tipo);
+        });
+    };
+    
+    $scope.deletar = function(pessoa) {
+
+        BootstrapDialog.confirm('Deseja realmente deletar a Pessoa: <b>' + pessoa.nome + '</b>?', function(result) {
+            if (result) {
+                Pessoa.delete({id: pessoa.id, tipo: pessoa.tipo}, function() {
+                    toastr.success(pessoa.nome + ' deletada com sucesso');
+                    if ($scope.tipoPessoa === 'J') {
+                        $scope.filtroPessoaJuridica();
+                    } else {
+                        if ($scope.tipoPessoa === 'A') {
+                            $scope.filtroAluno();
+                        } else {
+                            $scope.filtroPessoaFisica();
+                        }
+                    }
+                });
+            }
+            return;
         });
     };
 

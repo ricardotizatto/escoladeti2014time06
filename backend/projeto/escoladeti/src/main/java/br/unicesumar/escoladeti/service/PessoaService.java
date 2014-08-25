@@ -102,4 +102,14 @@ public class PessoaService {
         }
         throw new RuntimeException("Tipo de pessoa inválido");
     }
+    
+    public void deletarPessoa(Long id, String tipo) {
+        if (tipo.equals("J")) {
+            pessoaJuridicaRepository.delete(id);
+        } else if (tipo.equals("F")) {
+            pessoaFisicaRepository.delete(id);
+        } else {
+            throw new RuntimeException("Tipo de pessoa inválido");
+        }
+    }
 }

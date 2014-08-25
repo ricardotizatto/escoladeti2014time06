@@ -27,29 +27,29 @@ public abstract class Pessoa extends Entidade {
     private String email;
     private String tipo;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Telefone> telefones;
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonManagedReference
+    //private Set<Telefone> telefones;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Endereco> enderecos;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<Endereco> enderecos;
 
-    public Set<Telefone> getTelefones() {
-        return telefones;
-    }
+//    public Set<Telefone> getTelefones() {
+//        return telefones;
+//    }
+//
+//    public void setTelefones(Set<Telefone> telefones) {
+//        this.telefones = telefones;
+//    }
 
-    public void setTelefones(Set<Telefone> telefones) {
-        this.telefones = telefones;
-    }
-
-    public Set<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(Set<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
+//    public Set<Endereco> getEnderecos() {
+//        return enderecos;
+//    }
+//
+//    public void setEnderecos(Set<Endereco> enderecos) {
+//        this.enderecos = enderecos;
+//    }
 
     public String getNome() {
         return nome;
@@ -211,7 +211,7 @@ public abstract class Pessoa extends Entidade {
             pessoa.setSobrenome(this.sobrenome);
             pessoa.setSexo(this.sexo);
             pessoa.setAluno(this.aluno);
-            pessoa.setTelefones(this.telefones);
+            //pessoa.setTelefones(this.telefones);
             return pessoa;
         }
 
