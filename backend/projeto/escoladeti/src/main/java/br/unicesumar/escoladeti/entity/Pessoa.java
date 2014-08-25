@@ -1,9 +1,11 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
 import br.unicesumar.escoladeti.enums.Sexo;
 import br.unicesumar.escoladeti.util.string.StringUtils;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -11,9 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.util.Date;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.parboiled.common.Preconditions;
 
 @Entity
@@ -27,21 +27,25 @@ public abstract class Pessoa extends Entidade {
     private String email;
     private String tipo;
 
-    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonManagedReference
-    //private Set<Telefone> telefones;
+    @NotEmpty(message = "deve ser cadastrado ao menos um telefone")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "pessoa")
+    private Set<Telefone> telefones;
 
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JsonManagedReference
 //    private Set<Endereco> enderecos;
+    
+    public Pessoa() {
+        this.telefones = new HashSet<Telefone>();
+    }
 
-//    public Set<Telefone> getTelefones() {
-//        return telefones;
-//    }
-//
-//    public void setTelefones(Set<Telefone> telefones) {
-//        this.telefones = telefones;
-//    }
+    public Set<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 
 //    public Set<Endereco> getEnderecos() {
 //        return enderecos;
@@ -185,7 +189,7 @@ public abstract class Pessoa extends Entidade {
             this.telefones = telefones;
             return this;
         }
-
+        
         public PessoaFisica buildPessoaFisica() {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
@@ -211,7 +215,10 @@ public abstract class Pessoa extends Entidade {
             pessoa.setSobrenome(this.sobrenome);
             pessoa.setSexo(this.sexo);
             pessoa.setAluno(this.aluno);
-            //pessoa.setTelefones(this.telefones);
+            pessoa.setTelefones(this.telefones);
+            for (Telefone telefone : pessoa.getTelefones() ) {
+                telefone.setPessoa(pessoa);
+            }
             return pessoa;
         }
 
@@ -235,7 +242,17 @@ public abstract class Pessoa extends Entidade {
             pessoa.setInscricaoMunicipal(this.inscricaoMunicipal);
             pessoa.setRazaoSocial(this.razaoSocial);
             pessoa.setDataCriacao(this.dataCriacao);
-            return pessoa;
+            pessoa.setTelefones(this.telefones);
+            for (Telefone telefone : pessoa.getTelefones()) {
+                telefone.setPessoa(pessoa);
+            }
+            return pessoa;   
+            	
+        }
+        
+        public PessoaBuilder adicionarTelefones(
+                Set<ComandoSalvarTelefone> telefone) {
+            return null;
         }
     }
 }

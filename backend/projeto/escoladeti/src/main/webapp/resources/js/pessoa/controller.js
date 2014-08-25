@@ -188,13 +188,15 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     $scope.novaPessoa = function(tipo){
         if ($scope.tipo === "J") {
             $scope.pessoa = new Pessoa({
-                tipo: "J"
+                tipo: "J",
+                telefones: []
             });
         } else {
             $scope.pessoa = new Pessoa({
                 tipo:  "F",
                 aluno: "false",
-                sexo:  "MASCULINO"
+                sexo:  "MASCULINO",
+                telefones: []
             });
         }
     };
@@ -269,12 +271,12 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     $scope.editarTelefone = function(indice) {
         $scope.indiceTelefone = indice;
-        $scope.telefone = angular.copy($scope.pessoaJuridica.telefones[indice]);
+        $scope.telefone = angular.copy($scope.pessoa.telefones[indice]);
     };
 
     $scope.delTelefone = function(index) {
-        toastr.warning("Telefone removido  " + $scope.pessoaJuridica.telefones[index].numero + "!");
-        $scope.pessoaJuridica.telefones.splice(index, 1);
+        toastr.warning("Telefone removido  " + $scope.pessoa.telefones[index].numero + "!");
+        $scope.pessoa.telefones.splice(index, 1);
     };
 
 
@@ -350,13 +352,14 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     function getNovoTelefone() {
         return {
-            tipo: 'RESIDENCIAL'
+            tipo: 'CELULAR'
         };
     }
 
     jQuery(function($) {
         $.mask.definitions['~'] = '[+-]';
-        $("#telefone").mask("(99) 9999-9999?9");
+        $("#numeroDdd").mask("99");
+        $("#telefone").mask("9999-9999?9");
         $("#ramal").mask("9?");
         $("#cep").mask("99.999-999");
         $("#cpf").mask("999.999.999-99");
