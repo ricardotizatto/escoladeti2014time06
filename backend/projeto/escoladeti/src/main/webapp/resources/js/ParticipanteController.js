@@ -123,17 +123,13 @@
 
     $scope.novo = function() {
         $scope.idModal = {};
-        $scope.cpfModal = {};
         $scope.deficienteModal = {};
         $scope.emailModal = {};
         $scope.ideventoModal = {};
         $scope.nomeModal = {};
-        $scope.rgModal = {};
-        $scope.sexoModal = {};
         $scope.telefoneModal = {};
         $scope.pagamentoModal = {};
         $scope.deficiente = {};
-        $scope.sexo = {};
         $scope.participante = $scope.getNovoParticipante();
         //window.location = '#/cadastroparticipanteevento';
         console.log("novo");
@@ -141,26 +137,19 @@
     
     $scope.novoParticipante = function(){
         $scope.idModal = {};
-        $scope.cpfModal = {};
         $scope.deficienteModal = {};
         $scope.emailModal = {};
         $scope.ideventoModal = {};
         $scope.nomeModal = {};
-        $scope.rgModal = {};
-        $scope.sexoModal = {};
         $scope.telefoneModal = {};
         $scope.pagamentoModal = {};
         $scope.deficiente = {};
-        $scope.sexo = {};
         $scope.participante = $scope.getNovoParticipante();
         window.location = '#/cadastroparticipanteevento';
         console.log("novo");
     }
     
     $scope.validacampos = function() {
-        
-       if(ValidarCPF($scope.participante.cpf) === false)
-           return ("Por favor corrija o CPF digitado.");
        
        if(ValidaEmail($scope.participante.email) === false)
            return "Por favor corrija o Email digitado.";

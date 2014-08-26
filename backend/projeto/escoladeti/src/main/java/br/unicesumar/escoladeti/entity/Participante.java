@@ -1,6 +1,5 @@
 package br.unicesumar.escoladeti.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -12,8 +11,8 @@ public class Participante extends Entidade {
     private String telefone;
     private String deficiente;
     private String pagamento;
-    private String necessidades;
-
+    private String necessidade;
+    
     public String getPagamento() {
         return pagamento;
     }
@@ -30,12 +29,12 @@ public class Participante extends Entidade {
         this.idevento = idevento;
     }
 
-    public String getNecessidades() {
-        return necessidades;
+    public String getNecessidade() {
+        return necessidade;
     }
 
-    public void setNecessidades(String necessidades) {
-        this.necessidades = necessidades;
+    public void setNecessidade(String necessidade) {
+        this.necessidade = necessidade;
     }
 
     public String getNome() {

@@ -7,7 +7,7 @@
                 <legend> Cursos Disponíveis </legend>
             </div>
         </div>
-        <form action="" method="POST" name="participante" ng-submit="salvar()">
+        <form action="" method="POST" ng-submit="salvar()">
             <div class="form-group col-sm-7">
                 <div class="blogShort" ng-repeat="evento in eventos">
                     <h1>{{evento.titulo}}</h1>
@@ -45,13 +45,11 @@
                                     ng-model="participante.deficiente" name="participante" value="N"
                                     type="radio" required /> Não
                             </label>
-
-
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12" ng-show="participante.deficiente == 'S'">
+                    <div class="col-sm-12" ng-show="participante.deficiente === 'S'">
                         <label>Quais </label>
                         <input class="form-control" type="text"  placeholder="QUAIS" ng-model="participante.necessidade"  >
                     </div>
@@ -62,9 +60,8 @@
 
             <div align="right">
                 <button type="button"  class="btn btn-danger btn-padrao"  ng-click="novo()"> <span class="glyphicon glyphicon-refresh" ></span> Limpar</button>
-                <button class="btn btn-success btn-padrao"> <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
+                <button class="btn btn-success btn-padrao" > <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
             </div>
-
 
             <!-- Modal detalhamento-->
             <div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
@@ -108,12 +105,3 @@
         </form>
     </fieldset>
 </div>
-
-<script>
-    jQuery(function($) {
-        $.mask.definitions['~'] = '[+-]';
-
-        $("#cpf").mask("999.999.999-99");
-
-    });
-</script>
