@@ -1,5 +1,4 @@
-﻿package br.unicesumar.escoladeti.comando;
-
+package br.unicesumar.escoladeti.comando;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
