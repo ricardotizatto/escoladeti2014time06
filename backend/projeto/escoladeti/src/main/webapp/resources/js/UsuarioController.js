@@ -50,12 +50,12 @@ function UsuarioController($scope, $http, $routeParams) {
         }
 
         if (!$scope.usuario.senha === $scope.confirmaSenha) {
-            toastr.warning('As senhas tem que ser iguais');
+            toastr.warning('As senhas devem ser iguais!');
             console.log('senha ' + $scope.usuario.senha + ' confirmarSenha ' + $scope.confirmaSenha);
         } else {
             $http.post("./rest/usuarioSource/usuario", $scope.usuario)
                     .success(function(usuario, status) {
-                toastr.success("Usuario cadastrado com sucesso!");
+                toastr.success("Usuário cadastrado com sucesso!");
                 setTimeout(function() {
                     window.location = "#/cadastroperfilacessousuario/"+usuario.id;
                 }, 500);
@@ -63,7 +63,7 @@ function UsuarioController($scope, $http, $routeParams) {
             })
                     .error(function(data, status) {
                 console.log("erro ao salvar usuario", data);
-                toastr.warning("Erro ao salvar usuario!");
+                toastr.warning("Erro ao salvar usuário!");
             });
         }
     };
@@ -76,11 +76,11 @@ function UsuarioController($scope, $http, $routeParams) {
         })
                 .success(function(data) {
             console.log("usuario deletado");
-            toastr.success("Usuario apagado com sucesso!");
+            toastr.success("Usuario deletado com sucesso!");
             $scope.getTodos();
         }).error(function(data) {
             console.log("erro ao deletar usuario ");
-            toastr.warning("Erro ao apagar usuario!");
+            toastr.warning("Erro ao deletar usuário!");
         });
     };
     $scope.carregarUsuario = function() {
@@ -98,7 +98,7 @@ function UsuarioController($scope, $http, $routeParams) {
             $scope.perfisAcesso = perfils;
             console.log(angular.toJson($scope.perfisAcesso, true));
         }).error(function(data, status) {
-            console.log('Erro ao carregar perfils ! ' + data);
+            console.log('Erro ao carregar perfis de acesso! ' + data);
         });
     };
 
