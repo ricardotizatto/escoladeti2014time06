@@ -14,8 +14,10 @@
 					disabled="disabled" ng-model="solicitacao.id">
 			</div>
 			<div class="col-md-5 form-group">
-				<label>Aluno</label> <select ui-select2 class="input-default"
-					ng-model="solicitacao.idAluno" required="required">
+				<label>Aluno </label> 
+				<select ui-select2="select2Options" class="input-default"
+					ng-model="solicitacao.aluno" >
+					<option value=""></option>
 					<option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
 				</select>
 			</div>
@@ -48,21 +50,23 @@
 					ng-model="solicitacao.escola" />
 			</div>
 			<div class="col-md-3 form-group">
-				<label>Responsável</label> <select ui-select2 class="input-default"
-					ng-model="solicitacao.idResponsavel" required="required">
+				<label>Responsável</label> <select ui-select2="select2Options" class="input-default"
+					ng-model="solicitacao.responsavel" >
+					<option value=""></option>
 					<option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
 				</select>
 			</div>
 
 			<div class="col-md-3 form-group">
 				<label>Data de chegada</label> <input type="date"
-					class="form-control" ng-model="solicitacao.dataChegada" required="required">
+					class="form-control" ng-model="solicitacao.dataChegada" >
 			</div>
 			<div class="col-md-3 form-group">
-				<label>NRE</label> <select ui-select2 class="input-default"
-					ng-model="solicitacao.idNre">
+				<label>NRE</label> <select ui-select2="select2Options" class="input-default"
+					ng-model="solicitacao.nre">
+					<option value=""></option>
 					<option ng-repeat="c in cidades" value="{{c.id}}"
-					required="required">{{c.nome}}</option>
+					>{{c.nome}}</option>
 				</select>
 			</div>
 		</div>
@@ -82,8 +86,9 @@
 						ng-model="solicitacao.numeroEndereco">
 				</div>
 				<div class="col-md-3 form-group">
-					<label>Município</label> <select ui-select2 class="input-default"
-						ng-model="solicitacao.idMunicipio">
+					<label>Município</label> <select ui-select2="select2Options" class="input-default"
+						ng-model="solicitacao.municipio">
+						<option value=""></option>
 						<option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>
 					</select>
 				</div>
@@ -110,7 +115,7 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="item in solicitacao.itensSolicitacao">
-								<td><a href="#/cadastrolivro/{{item.idLivro}}">{{getDescricaoMaterial(item)}}</a></td>
+								<td><a href="#/cadastrolivro/{{item.livro}}">{{getDescricaoMaterial(item)}}</a></td>
 								<td>{{item.traducaoMaterial}}{{item.traducaoMaterial == 'OUTRO' ? '-'+item.outro : ''}}</td>
 								<td><span class="label label-warning getStatusItem(item.status)" >{{item.status}}</span>
 							</tr>
@@ -149,8 +154,9 @@
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-4">
-									<label>Livro</label> <select ui-select2 class="input-default"
-										ng-model="itemCorrente.idLivro" require="true">
+									<label>Livro</label> 
+									<select ui-select2="select2Options" class="input-default"
+										ng-model="itemCorrente.livro" require="true">
 										<option ng-repeat="l in livros" value="{{l.id}}">{{l.nome}}</option>
 									</select>
 								</div>

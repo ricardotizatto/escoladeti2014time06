@@ -117,7 +117,7 @@ function paisController($scope, $http, $routeParams) {
                 .error(function(data, status) {
                     console.log('erro ao buscar paises ' + data);
                 });
-    }
+    };
 
     function getNovoPais() {
         console.log('novo pais');
