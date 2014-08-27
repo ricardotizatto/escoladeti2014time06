@@ -10,7 +10,7 @@ import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 
 public interface PessoaJuridicaRepository extends JpaRepository<PessoaJuridica, Long> {
-    public List<PessoaJuridica> findByNomeContainingOrderByNomeAsc(String nome);
+    //public List<PessoaJuridica> findByNomeContainingOrderByNomeAsc(String nome);
     
     public Page<PessoaJuridica> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
     

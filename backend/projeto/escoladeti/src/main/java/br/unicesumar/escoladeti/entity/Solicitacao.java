@@ -206,7 +206,7 @@ public class Solicitacao extends Entidade {
 
 	    private Date dataChegada;
 
-		private Long id;
+	    private Long id;
 	    
 	    private SolicitacaoBuilder() {
 	    	

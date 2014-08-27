@@ -4,18 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
+
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarSolicitacao {
 	   
     @NotNull(message = "Aluno é obrigatório" )
-    @Min(value = 0, message = "Aluno é obrigatório")
+    @Min(value = 0, message = "aluno é obrigatório")
     @Max(value = 100)
     private Long aluno;
     
