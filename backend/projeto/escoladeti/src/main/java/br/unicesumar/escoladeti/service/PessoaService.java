@@ -82,6 +82,7 @@ public class PessoaService {
 
         } else if (comando.getTipo().equals("J")) {
             PessoaJuridica pessoaJuridica = Pessoa.builder()
+                    .telefones(comando.getTelefones())
                     .nome(comando.getNome())
                     .email(comando.getEmail())
                     .tipo(comando.getTipo())
