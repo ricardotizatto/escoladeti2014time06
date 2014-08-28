@@ -18,6 +18,7 @@ public class PerfilAcessoUsuario extends Entidade {
     @Temporal(TemporalType.DATE)
     private Date fimVigencia;
     
+    @ManyToOne
     @JoinColumn(name = "id_perfilacesso", referencedColumnName = "id")
     private PerfilAcesso perfilAcesso;
     
