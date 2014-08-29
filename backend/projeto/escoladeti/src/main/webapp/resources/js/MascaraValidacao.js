@@ -147,7 +147,7 @@ function ValidaEmail(ObjEmail)
 {
     
     var txt = ObjEmail;
-    if ((txt.length != 0) && ((txt.indexOf("@") < 1) || (txt.indexOf('.') < 7)))
+    if ((txt.length != 0) && ((txt.indexOf("@") < 1) || (txt.indexOf('.') < 7 && (txt.length != 0))))
     {
         return false;
     }else{
