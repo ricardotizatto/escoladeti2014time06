@@ -9,7 +9,7 @@ import br.unicesumar.escoladeti.entity.PessoaFisica;
 
 public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long> {
 
-    public Page<PessoaFisica> findByNomeContainingOrSobrenomeContainingOrderByNomeAsc(String nome,String sobrenomenome, Pageable pageable);
+    public Page<PessoaFisica> findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(String nome,String sobrenomenome, String cpf, Pageable pageable);
     
     public Page<PessoaFisica> findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrue(String nome,String sobrenomenome, Pageable pageable);
     

@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.entity;
 import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
 import br.unicesumar.escoladeti.enums.Sexo;
 import br.unicesumar.escoladeti.util.string.StringUtils;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -200,7 +201,17 @@ public abstract class Pessoa extends Entidade {
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg),"RG é obrigatório");
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf),"CPF é obrigatório");
             }
-            Preconditions.checkNotNull(this.dataNascimento);
+            Preconditions.checkNotNull(this.dataNascimento,"Data é obrigatória");
+            
+            //data digitada vem com um dia anterior
+            Date hoje = new Date();
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+            if(f.format(hoje).equals(f.format(this.dataNascimento))){    
+                //throw new RuntimeException("data de hoje: " + f.format(hoje)+ "minha data: " + f.format(this.dataNascimento));
+                throw new RuntimeException("Data inválida");
+            }
+            
+
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome),"Sobrenome é obrigatório");
             Preconditions.checkNotNull(this.sexo);
 
