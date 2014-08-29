@@ -57,24 +57,26 @@
     <div class="row ">
         <div class="col-sm-12">
             <ul class="pagination">
-                <li class="{{livros.pageNumber == 1 ? 'disabled' : ''}}">
-                    <a ng-click="getTodos(1)"> <span class="glyphicon glyphicon-fast-backward"></span></a>
+                <li>
+                    <a ng-click="getTodos(1)"> 
+                        <span class=" {livros.pageNumber == 1 ? 'disabled' : ''} glyphicon glyphicon-fast-backward"></span>
+                    </a>
                 </li>
-                <li class="{{livros.pageNumber == 1 ? 'disabled' : ''}}">
-                    <a ng-click="getTodos(livros.pageNumber - 1)"> 
-                        <span class="glyphicon glyphicon-step-backward"></span>
+                <li>
+                    <a ng-click="{livros.pageNumber == 1 ? 'disabled' : 'getTodos(livros.pageNumber - 1)'}"> 
+                        <span class="{livros.pageNumber == 1 ? 'disabled' : ''} glyphicon glyphicon-step-backward"></span>
                     </a>
                 </li>
                 <li ng-repeat="numeroPagina in livros.pagesAround" class="{{numeroPagina == livros.pageNumber ? 'active' : ''}}">
                         <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
-                <li class="{{livros.pageNumber == livros.pageCount ? 'disabled' : '' }}">
+                <li>
                     <a ng-click="getTodos(livros.pageNumber + 1)"> 
-                        <span class="glyphicon glyphicon-step-forward"></span>
+                        <span class="{livros.pageNumber == livros.pageCount ? 'disabled' : '' } glyphicon glyphicon-step-forward"></span>
                     </a>
                 </li>
-                <li class="{{livros.pageNumber == livros.pageCount ? 'disabled' : ''}}">
-                    <a ng-click="getTodos(livros.pageCount)"> 
+                <li>
+                    <a ng-click="{livros.pageNumber == livros.pageCount ? 'disabled' : 'getTodos(livros.pageCount)'} "> 
                         <span class="glyphicon glyphicon-fast-forward" />
                     </a>
                 </li>
