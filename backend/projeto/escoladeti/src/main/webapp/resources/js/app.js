@@ -55,11 +55,11 @@ app.config(['$routeProvider',
                 controller: 'itemAcessoController'
             })
             .when('/cadastropais/:paisId', {
-                templateUrl: './pages/CadastroPais.html',
+                templateUrl: './pages/pais/cadastro.html',
                 controller: 'PaisController'
             })
             .when('/cadastropais', {
-                templateUrl: './pages/CadastroPais.html',
+                templateUrl: './pages/pais/cadastro.html',
                 controller: 'PaisController'
             })
             .when('/cadastroestado', {
@@ -99,7 +99,7 @@ app.config(['$routeProvider',
                 controller : 'DistritoController'
             })
             .when('/listapais', {
-                templateUrl: './pages/ListaPais.html',
+                templateUrl: './pages/pais/lista.html',
                 controller: 'PaisController'
             })
             .when('/listaestado', {

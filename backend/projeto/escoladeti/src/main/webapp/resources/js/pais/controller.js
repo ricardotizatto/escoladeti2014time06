@@ -64,7 +64,7 @@ function PaisController($scope, $routeParams, paisService) {
                 })
                 .error(function(data, status) {
                     console.log('pais não salvo ', data);
-                    toastr.warning(data.message);
+                    //toastr.warning(data.message);
                     console.log(data.messageDeveloper);
                 });
     };

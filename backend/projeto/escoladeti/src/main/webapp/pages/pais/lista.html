@@ -8,7 +8,7 @@
         <div class="form-group col-sm-5">
             <div class="input-group">
                 <span class="input-group-addon"> <span
-                    class="glyphicon glyphicon-search"></span>
+                        class="glyphicon glyphicon-search"></span>
                 </span> <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaPaisContendoNome()"  placeholder="Busca por nome do país"/>
             </div>
         </div>
@@ -16,7 +16,7 @@
             <div>
                 <span class="pull-right">
                     <button type='submit' class='btn btn-primary btn-padrao'
-                        value='novo' ng-click="novo()">
+                            value='novo' ng-click="novo()">
                         <span class='glyphicon glyphicon-plus-sign'></span> Novo
                     </button>
                 </span>
@@ -53,24 +53,24 @@
             <ul class="pagination">
                 <li class="{{paises.pageNumber == 1 ? 'disabled' : ''}}"><a
                         ng-click="getTodos(1)"> <span
-                                class="glyphicon glyphicon-fast-backward"></span></a></li>
+                            class="glyphicon glyphicon-fast-backward"></span></a></li>
                 <li class="{{paises.pageNumber == 1 ? 'disabled' : ''}}"><a
                         ng-click="getTodos(paises.pageNumber - 1)"> <span
-                                class="glyphicon glyphicon-step-backward"></span>
-                </a></li>
+                            class="glyphicon glyphicon-step-backward"></span>
+                    </a></li>
                 <li ng-repeat="numeroPagina in paises.pagesAround"
-                        class="{{numeroPagina == paises.pageNumber ? 'active' : ''}}">
-                        <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+                    class="{{numeroPagina == paises.pageNumber ? 'active' : ''}}">
+                    <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
                 <li class="{{paises.pageNumber == paises.pageCount ? 'disabled' : '' }}">
-                        <a ng-click="getTodos(paises.pageNumber + 1)"> <span
-                                class="glyphicon glyphicon-step-forward"></span>
-                </a>
+                    <a ng-click="getTodos(paises.pageNumber + 1)"> <span
+                            class="glyphicon glyphicon-step-forward"></span>
+                    </a>
                 </li>
                 <li class="{{paises.pageNumber == paises.pageCount ? 'disabled' : ''}}">
-                        <a ng-click="getTodos(paises.pageCount)"> <span
-                                class="glyphicon glyphicon-fast-forward" /></span>
-                </a>
+                    <a ng-click="getTodos(paises.pageCount)"> <span
+                            class="glyphicon glyphicon-fast-forward" /></span>
+                    </a>
                 </li>
             </ul>
         </div>
