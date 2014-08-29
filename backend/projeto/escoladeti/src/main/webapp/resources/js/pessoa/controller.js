@@ -26,16 +26,21 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     $scope.validaCpf = function(cpf) {
         if (!ValidarCPF(cpf)) {
-            toastr.warning("CPF inválido.");
-            $scope.pessoaFisica.cpf = $scope.pessoaFisica.c;
+            toastr.warning("CPF inválido!");
+            $scope.pessoa.cpf = $scope.pessoa.c;
         }
     };
 
     $scope.validaCnpj = function(cnpj) {
-        if (!ValidarCNPJ(cnpj)) {
-            toastr.warning("CNPJ inválido.");
-            $scope.pessoaJuridica.cnpj = $scope.pessoaJuridica.c;
+        if (!ValidarCNPJ(cnpj) && $scope.pessoa.aluno !== 'true') {
+            toastr.warning("CNPJ inválido!");
+            $scope.pessoa.cnpj = $scope.pessoa.c;
         }
+    };
+    
+    $scope.validaEmail = function() {
+        if(ValidaEmail($scope.pessoa.email) === false)
+           toastr.warning("E-mail inválido!"); 
     };
 
 //    $scope.modificarEstado = function(estadoId) {
