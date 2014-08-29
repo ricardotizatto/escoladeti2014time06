@@ -1,6 +1,9 @@
 package br.unicesumar.escoladeti.controller;
 
+import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Evento;
+import br.unicesumar.escoladeti.entity.Pais;
+import br.unicesumar.escoladeti.repository.EventoRepository;
 import br.unicesumar.escoladeti.service.EventoService;
 import java.io.Serializable;
 import java.util.List;
@@ -15,31 +18,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/rest/eventoSource")
 public class EventoController implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Autowired
     private EventoService eventoService;
-    
-    @RequestMapping(value= "/evento", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/evento", method = RequestMethod.POST)
     @ResponseBody
-    public Evento salvar(@RequestBody Evento evento){
+    public Evento salvar(@RequestBody Evento evento) {
         return this.eventoService.salvar(evento);
     }
-    
-    @RequestMapping(value="/evento/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/evento/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Evento getById(@PathVariable Long id){
+    public Evento getById(@PathVariable Long id) {
         return eventoService.getById(id);
     }
-    
-    @RequestMapping(value="/evento", method = RequestMethod.GET)
+
+//    @RequestMapping(value = "/evento", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<Evento> getTodos() {
+//        return eventoService.getTodos(1);
+//    }
+     
+    @RequestMapping(value = "/evento", method = RequestMethod.GET)
     @ResponseBody
-    public List<Evento> getTodos(){
-        return eventoService.getTodos();
+    public DataPage<Evento> getTodos() {
+        return eventoService.getTodos(1);
     }
-    
-    @RequestMapping(value="/evento", method = RequestMethod.DELETE)
+
+    @RequestMapping(value = {"/listar/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
-    public String deletar(@RequestBody Evento evento){
+    public DataPage<Evento> listarEvento(@PathVariable Integer pagina) {
+        return eventoService.getTodos(pagina);
+    }
+
+    @RequestMapping(value = "/evento", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deletar(@RequestBody Evento evento) {
         eventoService.deletar(evento);
         return "deleted";
     }

@@ -1,11 +1,10 @@
 package br.unicesumar.escoladeti.controller;
 
-import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
-
 import java.io.Serializable;
 import java.util.List;
 
-import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.sortSkipAndLimit;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,47 +13,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.unicesumar.escoladeti.entity.Pais;
+import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacao;
 import br.unicesumar.escoladeti.entity.Solicitacao;
-import br.unicesumar.escoladeti.entity.SolicitacaoItem;
-import br.unicesumar.escoladeti.repository.SolicitacaoRepository;
+import br.unicesumar.escoladeti.service.SolicitacaoService;
 
 @Controller
-@RequestMapping("/rest/solicitacaoResouce")
+@RequestMapping("/rest/solicitacoes")
 public class SolicitacaoController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private SolicitacaoRepository repository;	
+	private SolicitacaoService solicitacaoService;	
 	
     
-	@RequestMapping(value = "/solicitacao", method = RequestMethod.POST)	
+	@RequestMapping( method = RequestMethod.POST)	
 	@ResponseBody
-	public Solicitacao salvar(@RequestBody Solicitacao solicitacao) {
-		for(SolicitacaoItem item : solicitacao.getItensSolicitacao()) {
-			item.setSolicitacao(solicitacao);
-		}
-		
-		return repository.save(solicitacao);
+	public Solicitacao salvar(@Valid @RequestBody ComandoSalvarSolicitacao comando) {		
+		return solicitacaoService.salvar(comando);
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)	
+	@ResponseBody
+	public Solicitacao atualizar(@Valid @RequestBody ComandoSalvarSolicitacao comando,
+		@PathVariable("id") Long id) {		
+		return solicitacaoService.atualizar(id, comando);
 	}
     
-    
-	@RequestMapping(value = "/solicitacao", method = RequestMethod.GET)	
+	@RequestMapping(method = RequestMethod.GET)	
 	@ResponseBody
 	public List<Solicitacao> retornarTodos() {
-		return repository.findAll();
+		return solicitacaoService.listar();
 	}
 	
-	@RequestMapping(value= {"/solicitacao/{id}"}, method = RequestMethod.GET )
+	@RequestMapping( value= {"/{id}"}, method = RequestMethod.GET )
 	@ResponseBody
 	public Solicitacao getSolicitacao(@PathVariable Long id) {
-		return repository.findOne(id);
+		return solicitacaoService.buscar(id);
 	}
 	
-	@RequestMapping(value = { "/solicitacao/pag/{pagina}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/paginar/{pagina}" }, method = RequestMethod.GET)
 	@ResponseBody
 	public DataPage<Solicitacao> paginar(@PathVariable Integer pagina) {
-		return new DataPage<>(repository.findAll(pageRequestForAsc(pagina, "id")));
+		return solicitacaoService.paginar(pagina);
 	}
 	
 	

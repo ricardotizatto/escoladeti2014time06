@@ -1,11 +1,16 @@
 package br.unicesumar.escoladeti.controller;
 
+import java.util.List;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,6 +58,23 @@ public class ExceptionController {
 		
 		return new InfoError("Erro ao salvar", e.getLocalizedMessage() );
 	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public InfoError processValidationError(MethodArgumentNotValidException ex) {
+        BindingResult result = ex.getBindingResult();
+        List<FieldError> fieldErrors = result.getFieldErrors();
+        StringBuilder builder = new StringBuilder();
+
+        for (FieldError error : fieldErrors) {
+        	builder.append("*");
+        	builder.append(error.getDefaultMessage());
+        	builder.append("<br>");
+        }
+        
+        return new InfoError(builder.toString(), builder.toString());
+    }
 	
 
 }

@@ -21,7 +21,6 @@ public class Evento extends Entidade {
     private String local;
     private String ministrante;
 
-   // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idevento", referencedColumnName = "id")
     private List<Participante> participante;
@@ -29,8 +28,6 @@ public class Evento extends Entidade {
     private String titulo;
     private String descricao;
     private double valor;
-
-    
 
     @ManyToOne
     @JoinColumn(name = "id_pagamento", nullable = true)
@@ -123,5 +120,4 @@ public class Evento extends Entidade {
     public void setMinistrante(String ministrante) {
         this.ministrante = ministrante;
     }
-    
 }

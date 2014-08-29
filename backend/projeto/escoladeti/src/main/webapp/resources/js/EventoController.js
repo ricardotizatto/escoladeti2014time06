@@ -1,5 +1,5 @@
-﻿function eventoController($scope, $http, $routeParams) {
-    console.log('Carregando controller');
+function eventoController($scope, $http, $routeParams) {
+    
     $scope.idCurso;
     $scope.tituloCurso;
     $scope.descricao;
@@ -14,9 +14,12 @@
 
     $scope.editar = function(evento) {
         console.log(evento);
+        console.log('id lopuca' +evento.id);
         window.location = '#/cadastroevento/' + evento.id;
     };
-
+    
+         
+        
     $scope.deletar = function(evento) {
         $http({
             method: 'DELETE',
@@ -99,26 +102,29 @@
         window.location = '#/cadastroevento';
     };
 
-    $scope.getTodos = function() {
+    $scope.getTodos = function(numeroPagina) {
 
-        $http.get("./rest/eventoSource/evento")
-                .success(function(eventos, status) {
-                    $scope.eventos = eventos;
+        $http.get("./rest/eventoSource/listar/pag/" + numeroPagina)
+                .success(function(listaEventos, status) {
+                    $scope.eventos = listaEventos.list;
                 })
                 .error(function(data, status) {
-                    console.log('erro ao buscar eventos');
+                    console.log('erro ao buscar eventos' + data);
                 });
     };
-
+           
     $scope.carregarEvento = function() {
-        if ($routeParams.eventoId) {
-            $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
-                    .success(function(evento) {
-                        $scope.evento = evento;
-                    });
+        if (!$routeParams.eventoId) {            
+            $scope.evento = {};
+            return;
         }
+        $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
+                    .success(function(ev) {
+                        $scope.evento = ev;
+                        return;
+                    });
     };
-
+       
     $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data) {
         $scope.idCurso = indice;
         $scope.tituloCurso = titulo;

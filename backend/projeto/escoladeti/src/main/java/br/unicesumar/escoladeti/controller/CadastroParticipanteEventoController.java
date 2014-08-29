@@ -25,7 +25,7 @@ public class CadastroParticipanteEventoController {
     
     @RequestMapping(value = "./eventos", method = RequestMethod.GET)
     @ResponseBody
-    public List<Evento> getTodos() {
-        return eventoService.getTodos();
+    public DataPage<Evento> getTodos() {
+        return eventoService.getTodos(1);
     }
 }
