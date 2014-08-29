@@ -36,13 +36,11 @@
 				class="table table-striped table-hover">
 				<tr>
 					<th class="col-md-5">Nome</th>
-					<th class="col-md-2">Data fundação</th>
 					<th class="col-md-4">Estado</th>
 					<th class="col-md-1">Ações</th>
 				</tr>
 				<tr ng-repeat="cidade in cidades.list">
 					<td>{{cidade.nome}}</td>
-					<td>{{cidade.fundacao | date: 'dd-MM-yyyy'}}</td>
 					<td>{{cidade.unidadeFederativa.nome}}</td>
 					<td>
 						<button class='btn btn-warning btn-sm' ng-click="editar(cidade)">
