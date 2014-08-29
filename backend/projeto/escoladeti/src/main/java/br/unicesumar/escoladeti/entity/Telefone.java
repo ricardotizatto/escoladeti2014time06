@@ -15,10 +15,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Telefone extends Entidade {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Column(length = 2)
-	@NotNull
+    @Column(length = 2)
+    @NotNull
     private Integer ddd;
 
     @NotNull

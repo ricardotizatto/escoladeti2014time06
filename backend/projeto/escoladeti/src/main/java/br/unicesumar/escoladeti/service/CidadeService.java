@@ -20,15 +20,9 @@ public class CidadeService {
     private CidadeRepository cidadeRepository;
     
     public Cidade salvar(Cidade cidade){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String data = sdf.format(cidade.getFundacao());
-        Date hoje = new Date();
-        String atual = sdf.format(hoje);
-        
-        if(Integer.parseInt(data) > Integer.parseInt(atual) )
-            throw new RuntimeException("Data fundação maior que hoje.");
         return this.cidadeRepository.save(cidade);
     }
+    
     public DataPage<Cidade> getTodos(Integer pagina){
         return new DataPage<>(cidadeRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }

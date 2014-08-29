@@ -18,21 +18,17 @@ app.config(['$routeProvider',
                 templateUrl: './pages/Login.html',
                 controller: 'LoginController'
             })
-            .when('/pessoafisica', {
-                templateUrl: './pages/CadastroPessoaFisica.html',
-                controller: 'PessoaFisicaController'
+            .when('/pessoa', {
+                templateUrl: './pages/pessoa/cadastro.html',
+                controller: 'PessoaController'
             })
-            .when('/pessoafisica/:pessoaFisicaId', {
-                templateUrl: './pages/CadastroPessoaFisica.html',
-                controller: 'PessoaFisicaController'
+            .when('/pessoa/:pessoaId/:pessoaTipo', {
+                templateUrl: './pages/pessoa/cadastro.html',
+                controller: 'PessoaController'
             })
-            .when('/pessoajuridica', {
-                templateUrl: './pages/CadastroPessoaJuridica.html',
-                controller: 'PessoaJuridicaController'
-            })
-            .when('/pessoajuridica/:pessoaJuridicaId', {
-                templateUrl: './pages/CadastroPessoaJuridica.html',
-                controller: 'PessoaJuridicaController'
+            .when('/listapessoa', {
+                templateUrl: './pages/pessoa/lista.html',
+                controller: 'PessoaController'
             })
             .when('/cadastrousuario', {
                 templateUrl: './pages/CadastroUsuario.html',
@@ -109,14 +105,6 @@ app.config(['$routeProvider',
             .when('/listaestado', {
                 templateUrl: './pages/ListaEstado.html',
                 // controller : 'nomeDoController'
-            })
-            .when('/listapessoafisica', {
-                templateUrl: './pages/ListaPessoaFisica.html',
-                controller: 'PessoaFisicaController'
-            })
-            .when('/listapessoajuridica', {
-                templateUrl: './pages/ListaPessoaJuridica.html',
-                controller: 'PessoaJuridicaController'
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',

@@ -8,7 +8,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		this.livro = {};	
 		this.status = 'ABERTO';
 	};	
-	
+
 	$scope.itemCorrente = new ItemCorrente();
 	
 	$scope.select2Options = {
@@ -72,6 +72,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 			solicitacao.itensSolicitacao.forEach(function (item) {
 				item.livro = item.livro.id; 
 			});
+
 		});
 	};
 	
