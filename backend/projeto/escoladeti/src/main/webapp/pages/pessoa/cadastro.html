@@ -38,11 +38,11 @@
                 </div>
                 <div class="form-group col-sm-4">
                     <label> Nome </label> 
-                    <input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome"  maxlength="50" title="Nome"/>
+                    <input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome"  maxlength="50" title="Nome" ng-required="pessoa.tipo == 'F'" />
                 </div>
                 <div class="form-group col-sm-4">
                     <label> Sobrenome </label> 
-                    <input class="form-control" name="sobrenome" type="text" ng-model="pessoa.sobrenome" placeholder="Sobrenome"  maxlength="50" title="Sobrenome"/>
+                    <input class="form-control" name="sobrenome" type="text" ng-model="pessoa.sobrenome" placeholder="Sobrenome"  maxlength="50" title="Sobrenome" ng-required="pessoa.tipo == 'F'"/>
                 </div>
                 <div class="form-group col-sm-2">
                     <span class="pull-right"> <label>Sexo</label>
@@ -62,15 +62,15 @@
             <div class="row">
                 <div class="form-group col-sm-3">
                     <label> RG </label> 
-                    <input class="form-control" type="text" id="rg" ng-model="pessoa.rg" title="9.999.999-9" maxlength="12" placeholder="Números do R.G." ng-="getRequired(pessoa.aluno)" />
+                    <input class="form-control" type="text" id="rg" ng-model="pessoa.rg" title="Número do R.G." maxlength="12" placeholder="Número do R.G." ng-required="pessoa.tipo == 'F' && pessoa.aluno == 'false'" />
                 </div>
                 <div class="form-group col-sm-3">
                     <label> CPF </label> 
-                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="999.999.999-99" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" ng-="getRequired(pessoa.aluno)" />
+                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Número do CPF" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" ng-required="pessoa.tipo == 'F' && pessoa.aluno == 'false'" />
                 </div>
                 <div class="form-group col-sm-2">
                     <label>Nascimento </label> 
-                    <input class="form-control maskNascimento" name="dataNascimento" type="date" ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa"  />
+                    <input class="form-control maskNascimento" name="dataNascimento" type="date" ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa" ng-required="pessoa.tipo == 'F'" />
                 </div>
                 <div class="form-group col-sm-4">
                     <label>Email</label>
@@ -78,7 +78,7 @@
                         <span class="input-group-addon"> 
                             <span class="glyphicon glyphicon-envelope"></span>
                         </span> 
-                        <input class="form-control" name="email" type="email" maxlength="100" ng-model="pessoa.email" placeholder="Endereço de email" >
+                        <input class="form-control" name="email" type="text" maxlength="100" ng-model="pessoa.email" ng-blur="validaEmail()" placeholder="Endereço de email" ng-required="pessoa.tipo == 'F'" >
                     </div>
                 </div>
             </div>
@@ -89,32 +89,32 @@
             <div class="row ">
                 <div class="form-group col-sm-4">
                     <label> Nome </label> 
-                    <input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome Fantasia" maxlength="50" title="Nome"  />
+                    <input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome Fantasia" maxlength="50" title="Nome" ng-required="pessoa.tipo == 'J'" />
                 </div>
                 <div class="form-group col-sm-5">
                     <label> Razão Social </label> 
-                    <input class="form-control" name="razaoSocial" type="text" ng-model="pessoa.razaoSocial"  placeholder="Razao Social" maxlength="50" title="Razão Social"/>
+                    <input class="form-control" name="razaoSocial" type="text" ng-model="pessoa.razaoSocial"  placeholder="Razao Social" maxlength="50" title="Razão Social" ng-required="pessoa.tipo == 'J'"/>
                 </div>
                 <div class="form-group col-sm-3">
                     <label for="cnpj"> CNPJ </label> 
                     <input class="form-control mascaraCNPJ" id="cnpj" type="text" pattern="^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" title="11.222.333/9999-22" ng-blur="validaCnpj(pessoa.cnpj)"
-                            ng-model="pessoa.cnpj"  placeholder="Número do CNPJ"/>
+                            ng-model="pessoa.cnpj"  placeholder="Número do CNPJ" ng-required="pessoa.tipo == 'J'"/>
                 </div>
             </div>
             <div class="row ">
                 <div class="form-group col-sm-3">
                     <label> Inscrição Municipal </label> 
                     <input class="form-control" name="inscricaoEstadual" type="text" maxlength="15" pattern="^[0-9]*$" title="Apenas numeros"
-                                ng-model="pessoa.inscricaoMunicipal"  placeholder="Número Inscrição Municipal"/>
+                                ng-model="pessoa.inscricaoMunicipal"  placeholder="Número Inscrição Municipal" ng-required="pessoa.tipo == 'J'"/>
                 </div>
                 <div class="form-group col-sm-3">
                     <label> Inscrição Estadual </label> 
                     <input class="form-control" name="dataCriacao" type="text" maxlength="12" pattern="^[0-9]*$" title="Apenas numeros"
-                                ng-model="pessoa.inscricaoEstadual" placeholder="Número Inscrição Estadual"/>
+                                ng-model="pessoa.inscricaoEstadual" placeholder="Número Inscrição Estadual" ng-required="pessoa.tipo == 'J'"/>
                 </div>
                 <div class="form-group col-sm-2">
                     <label> Data de Criação </label> 
-                    <input class="form-control" name="dataCriacao" type="date" ng-model="pessoa.dataCriacao"  title="11/01/2000"/>
+                    <input class="form-control" name="dataCriacao" type="date" ng-model="pessoa.dataCriacao"  title="11/01/2000" ng-required="pessoa.tipo == 'J'"/>
                 </div>
                 <div class="form-group col-sm-4">
                     <label>Email</label>
@@ -122,7 +122,7 @@
                         <span class="input-group-addon"> <span
                                 class="glyphicon glyphicon-envelope"></span>
                         </span> 
-                        <input class="form-control" name="email" type="email" maxlength="100" ng-model="pessoa.email"  placeholder="Endereço de email">
+                        <input class="form-control" name="email" type="email" maxlength="100" ng-model="pessoa.email"  ng-blur="validaEmail()" placeholder="Endereço de email" ng-required="pessoa.tipo == 'J'">
                     </div>
                 </div>
             </div>
@@ -232,15 +232,15 @@
                             </div>
                             <div class="form-group col-sm-2">
                                 <label>DDD</label> 
-                                <input class="form-control" id="numeroDdd" type="text" ng-model="telefone.ddd" maxlength="2" pattern="[0-9]{2}" placeholder="99" >
+                                <input class="form-control" id="numeroDdd" type="text" ng-model="telefone.ddd" maxlength="2" pattern="[0-9]{2}" placeholder="99" required="required" >
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Número</label> 
-                                <input class="form-control" id="telefone" type="text" ng-model="telefone.numero" maxlength="15" pattern="[0-9]{4}-[0-9]{4,5}" placeholder="9999-9999" >
+                                <input class="form-control" id="telefone" type="text" ng-model="telefone.numero" maxlength="15" pattern="[0-9]{4}-[0-9]{4,5}" placeholder="9999-9999" required="required" >
                             </div>
                             <div class="form-group col-sm-3">
                                 <label>Ramal</label> 
-                                <input class="form-control" name="numeroTelefone" type="number" ng-model="telefone.ramal" placeholder="N° de ramal">
+                                <input class="form-control" name="numeroTelefone" type="number" ng-model="telefone.ramal" placeholder="N° de ramal" >
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -248,7 +248,7 @@
                             <button class="btn btn-danger btn-padrao" data-dismiss="modal">
                                         <span class="glyphicon glyphicon-remove"></span> Sair
                                 </button>
-                                <button type="submit" class="btn btn-success btn-padrao">
+                                <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()" >
                                         <span class="glyphicon glyphicon-ok"></span> Salvar
                                 </button> 
                             </span>
