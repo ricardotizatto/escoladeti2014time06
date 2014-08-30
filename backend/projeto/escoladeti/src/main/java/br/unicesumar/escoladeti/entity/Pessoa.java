@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static javassist.CtMethod.ConstParameter.string;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -193,9 +196,13 @@ public abstract class Pessoa extends Entidade {
         
         public PessoaFisica buildPessoaFisica() {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
+            if(!StringUtils.onlyLetters(this.nome)){
+                throw new RuntimeException("Nome inválido");
+            }
+            
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
-
+            
             Preconditions.checkNotNull(this.aluno);
             if (!this.aluno) {
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg),"RG é obrigatório");
@@ -211,8 +218,10 @@ public abstract class Pessoa extends Entidade {
                 throw new RuntimeException("Data inválida");
             }
             
-
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome),"Sobrenome é obrigatório");
+            if(!StringUtils.onlyLetters(this.sobrenome)){
+                throw new RuntimeException("Sobrenome inválido");
+            }
             Preconditions.checkNotNull(this.sexo);
 
             PessoaFisica pessoa = new PessoaFisica();
