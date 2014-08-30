@@ -1,7 +1,9 @@
 <div class="container" ng-controller="livroController" ng-init="getTodos(1)">
     <div class="row">
         <div class="form-group col-sm-12">
-            <legend><span class="glyphicon glyphicon-list-alt"></span> Livro</legend>
+            <legend>
+                <span class="glyphicon glyphicon-list-alt"> Livro </span>
+            </legend>
         </div>
     </div>
     <div class="row">
@@ -17,7 +19,7 @@
             <div>
                 <span class="pull-right">
                     <button type='submit' class='btn btn-primary btn-padrao'
-                        value='novo' ng-click="novo()">
+                            value='novo' ng-click="novo()">
                         <span class='glyphicon glyphicon-plus-sign'></span> Novo
                     </button>
                 </span>
@@ -27,30 +29,30 @@
     <div class="row">
         <div class="col-sm-12 table-responsive">
             <table class="table table-striped table-hover">
-                    <tr>
-                        <th class="col-md-4">Nome</th>
-                        <th class="col-md-2">Autor</th>
-                        <th class="col-md-2">Editora</th>
-                        <th class="col-md-2">Disciplina</th>
-                        <th class="col-md-1">Ano Ed.</th>
-                        <th class="col-md-1">Ações</th>
-                    </tr>
-                    
-                    <tr ng-repeat="livro in livros.list">
-                            <td>{{livro.nome}}</td>
-                             <td>{{livro.autor}}</td>
-                             <td>{{livro.editora}}</td>
-                            <td>{{livro.disciplina}}</td>
-                            <td>{{livro.anoEdicao}}</td>
-                            <td>
-                                <button class='btn btn-warning btn-sm' ng-click="editar(livro)">
-                                        <span class='glyphicon glyphicon-edit'></span>
-                                </button>
-                                <button class='btn btn-danger btn-sm' ng-click="deletar(livro)">
-                                        <span class='glyphicon glyphicon-remove-circle'></span>
-                                </button>
-                            </td>
-                    </tr>
+                <tr>
+                    <th class="col-md-3">Nome</th>
+                    <th class="col-md-2">Autor</th>
+                    <th class="col-md-2">Editora</th>
+                    <th class="col-md-2">Disciplina</th>
+                    <th class="col-md-1">Ano Ed.</th>
+                    <th class="col-md-2">Ações</th>
+                </tr>
+
+                <tr ng-repeat="livro in livros.list">
+                    <td>{{livro.nome}}</td>
+                    <td>{{livro.autor}}</td>
+                    <td>{{livro.editora}}</td>
+                    <td>{{livro.disciplina}}</td>
+                    <td>{{livro.anoEdicao}}</td>
+                    <td>
+                        <button class='btn btn-warning btn-sm' ng-click="editar(livro)">
+                            <span class='glyphicon glyphicon-edit'></span>
+                        </button>
+                        <button class='btn btn-danger btn-sm' ng-click="deletar(livro)">
+                            <span class='glyphicon glyphicon-remove-circle'></span>
+                        </button>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -59,25 +61,25 @@
             <ul class="pagination">
                 <li>
                     <a ng-click="getTodos(1)"> 
-                        <span class=" {livros.pageNumber == 1 ? 'disabled' : ''} glyphicon glyphicon-fast-backward"></span>
+                        <span class="glyphicon glyphicon-fast-backward"></span>
                     </a>
                 </li>
                 <li>
-                    <a ng-click="{livros.pageNumber == 1 ? 'disabled' : 'getTodos(livros.pageNumber - 1)'}"> 
-                        <span class="{livros.pageNumber == 1 ? 'disabled' : ''} glyphicon glyphicon-step-backward"></span>
+                    <a ng-click="livros.pageNumber <= 1 ? getTodos(1) : getTodos(livros.pageNumber - 1)"> 
+                        <span class="glyphicon glyphicon-step-backward"></span>
                     </a>
                 </li>
                 <li ng-repeat="numeroPagina in livros.pagesAround" class="{{numeroPagina == livros.pageNumber ? 'active' : ''}}">
-                        <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+                    <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
                 <li>
-                    <a ng-click="getTodos(livros.pageNumber + 1)"> 
-                        <span class="{livros.pageNumber == livros.pageCount ? 'disabled' : '' } glyphicon glyphicon-step-forward"></span>
+                    <a ng-click="livros.pageNumber === livros.pageCount ? getTodos(livros.pageCount) : getTodos(livros.pageNumber + 1)"> 
+                        <span class="glyphicon glyphicon-step-forward"></span>
                     </a>
                 </li>
                 <li>
-                    <a ng-click="{livros.pageNumber == livros.pageCount ? 'disabled' : 'getTodos(livros.pageCount)'} "> 
-                        <span class="glyphicon glyphicon-fast-forward" />
+                    <a ng-click="getTodos(livros.pageCount)"> 
+                        <span class="glyphicon glyphicon-fast-forward"></span>
                     </a>
                 </li>
             </ul>

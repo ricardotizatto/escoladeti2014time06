@@ -46,7 +46,7 @@ function livroController($scope, $http, $routeParams) {
                 $scope.livro = livro;
             });
             
-    }
+    };
 
     $scope.editar = function(livro) {
         console.log(livro);
@@ -65,7 +65,7 @@ function livroController($scope, $http, $routeParams) {
                 });
                 $scope.livros = retorno.data;
             });
-    } 
+    };
 
     $scope.salvar = function() {
   
@@ -80,6 +80,7 @@ function livroController($scope, $http, $routeParams) {
                 $scope.livro = getNovoLivro();
                 console.log("livro salva = " + livro);
                 toastr.success('Livro ' + livro.nome + ' salvo com sucesso');
+                $scope.voltar();
             })
             .error(function(data, status) {
                 console.log("erro ao salvar livro" + data);
@@ -100,7 +101,7 @@ function livroController($scope, $http, $routeParams) {
             .error(function(data, status) {
                 console.log('erro ao buscar livros ' + data);
             });
-    }
+    };
 
     function getNovoLivro() {
         console.log('novo livro');
@@ -110,6 +111,5 @@ function livroController($scope, $http, $routeParams) {
     $scope.voltar = function() {
         $scope.livro = {};
         window.location = '#/listalivro';
-    }
-    
+    };
 }
