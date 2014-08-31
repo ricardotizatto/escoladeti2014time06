@@ -6,24 +6,30 @@
     </div>
     <form action="" novalidate method="POST" role="form" name="formPais" ng-submit="salvar()">							
         <div class="col-sm-2">
-            <div class="form-group has-success has-feedback">
+            <div class="form-group {{formPais.codigo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                 <label class="control-label"> Código </label>
-                <input type="number" title="Código do País" class="form-control" 
-                       ng-model="pais.codigo" required min="0" max="999" placeholder="999" 
-                       maxlength="3" >
-                <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <input type="text" name="codigo" title="Código do País" class="form-control" ng-pattern="/\d{3}/"
+                       ng-model="pais.codigo" required placeholder="999" ng-minlength="3" ng-maxlength="3" maxlength="3"
+                       >
+                <span class="glyphicon {{formPais.codigo.$invalid ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
+
             </div>
         </div>
-
-        <div class="form-group col-sm-8">
-            <label> Nome </label>
-            <input class="form-control" title="Nome do pais deve ser maisculo"  name="nome" 
-                   type="text" ng-model="pais.nome" onkeyup="toUpper(this)"  pattern="[\w\s]+" maxlength="40" required placeholder="BRASIL"/>
+        <div class="col-sm-8">
+            <div class="form-group {{formPais.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                <label class="control-label"> Nome </label>
+                <input type="text" name="nome" class="form-control" title="Nome do pais deve ser maisculo" 
+                       ng-model="pais.nome" ng-minlength="3" ng-maxlength="40" maxlength="40" placeholder="BRASIL" required>
+                <span class="glyphicon {{formPais.nome.$invalid ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
+            </div>
         </div>
-        <div class="form-group col-sm-2">
-            <label> Sigla </label>
-            <input class="form-control" title="Sigla deve ser literal maiusculo"  
-                   name="nome" type="text" ng-model="pais.sigla" onkeyup="toUpper(this)" required maxlength="3" pattern="[A-Z]{3}" placeholder="BRA"  />
+        <div class="col-sm-2">
+            <div class="form-group {{formPais.sigla.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                <label class="control-label"> Sigla </label>
+                <input class="form-control" title="Sigla deve ser literal maiusculo"  
+                       name="sigla" type="text" ng-model="pais.sigla" required maxlength="3" ng-minlength="3" placeholder="BRA" >
+                <span class="glyphicon {{formPais.sigla.$invalid ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12">

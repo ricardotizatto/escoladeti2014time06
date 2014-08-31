@@ -63,11 +63,11 @@ app.config(['$routeProvider',
                 controller: 'PaisController'
             })
             .when('/cadastroestado', {
-                templateUrl: './pages/CadastroEstado.html',
+                templateUrl: './pages/estado/cadastro.html',
                 controller: 'EstadoController'
             })
             .when('/cadastroestado/:unidadeFederativaId', {
-                templateUrl: './pages/CadastroEstado.html',
+                templateUrl: './pages/estado/cadastro.html',
                 controller: 'EstadoController'
             })
             .when('/cadastrocidade', {
@@ -103,8 +103,8 @@ app.config(['$routeProvider',
                 controller: 'PaisController'
             })
             .when('/listaestado', {
-                templateUrl: './pages/ListaEstado.html',
-                // controller : 'nomeDoController'
+                templateUrl: './pages/estado/lista.html',
+                controller : 'EstadoController'
             })
             .when('/listacidade', {
                 templateUrl: './pages/ListaCidade.html',

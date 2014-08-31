@@ -1,0 +1,54 @@
+<div class="container" ng-controller="EstadoController" ng-init="carregarEstado()" >
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <legend> Cadastro de Estado </legend>
+        </div>
+    </div>
+    <form method="POST" role="form" name="formEstado"ng-submit="salvar()">							
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group {{formEstado.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"> Nome </label>
+                    <input type="text" class="form-control" name="nome" title="Nome do estado deve ser literal"  
+                           ng-model="unidadeFederativa.nome"  ng-minlength="4" ng-maxlength="40" maxlength="50" onkeyup="toUpper(this)" ng-pattern="/^[A-Za-z]+$/" required placeholder="Nome do Estado" >
+                    <span class="glyphicon {{formEstado.nome.$invalid  ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group {{formEstado.sigla.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"> Sigla </label>
+                    <input class="form-control" name="sigla"  type="text" onkeyup="toUpper(this)" ng-model="unidadeFederativa.sigla" 
+                           title="Sigla deve ser literal" required ng-minlength="2" ng-maxlength="2" ng-pattern="/^[A-Za-z]{2}$/" maxlength="2" placeholder="sigla do estado">
+                    <span class="glyphicon {{formEstado.sigla.$invalid  ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group {{formEstado.pais.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label">Pais</label>  
+                    <span class="glyphicon {{formEstado.pais.$error.required  ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
+                    <select type="text" name="pais" ui-select2="select2Options" class="input-default" ng-minlength="1" ng-model="unidadeFederativa.idPais" required>
+                        <option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nome}}</option>
+                    </select>
+                    
+                </div>
+            </div>
+        </div>	
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="pull-right">
+                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                    </a>  
+                    <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formEstado.$invalid">
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar
+                    </button>
+                </span>		
+            </div>
+        </div>
+        <div class="row"><div class="col-sm-12"><hr></div></div>			
+    </form>
+
+
+
+</div>
