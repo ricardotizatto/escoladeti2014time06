@@ -36,7 +36,7 @@ public class PessoaService {
     }
 
     public DataPage<PessoaFisica> buscarAluno(Integer pagina, String busca) {
-        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrue(busca,busca, pageRequestForAsc(pagina, "nome")));
+        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrueOrCpfContainingAndAlunoTrue(busca,busca,busca, pageRequestForAsc(pagina, "nome")));
     }
 
     public DataPage<PessoaJuridica> paginarJuridica(Integer pagina) {

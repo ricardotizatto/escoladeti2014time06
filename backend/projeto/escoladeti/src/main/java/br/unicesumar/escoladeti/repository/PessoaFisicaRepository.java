@@ -11,7 +11,7 @@ public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long
 
     public Page<PessoaFisica> findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(String nome,String sobrenomenome, String cpf, Pageable pageable);
     
-    public Page<PessoaFisica> findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrue(String nome,String sobrenomenome, Pageable pageable);
+    public Page<PessoaFisica> findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrueOrCpfContainingAndAlunoTrue(String nome,String sobrenomenome, String cpf, Pageable pageable);
     
     public Page<PessoaFisica> findByAlunoTrue(Pageable pageable);
 

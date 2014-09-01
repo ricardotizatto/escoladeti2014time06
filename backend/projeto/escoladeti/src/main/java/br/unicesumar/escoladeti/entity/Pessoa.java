@@ -210,11 +210,10 @@ public abstract class Pessoa extends Entidade {
             }
             Preconditions.checkNotNull(this.dataNascimento,"Data é obrigatória");
             
-            //data digitada vem com um dia anterior
+            //data digitada vem com um dia anterior do front deve ser algo do angular
             Date hoje = new Date();
             SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-            if(f.format(hoje).equals(f.format(this.dataNascimento))){    
-                //throw new RuntimeException("data de hoje: " + f.format(hoje)+ "minha data: " + f.format(this.dataNascimento));
+            if(f.format(hoje).equals(f.format(this.dataNascimento)) || this.dataNascimento.after(hoje)){    
                 throw new RuntimeException("Data inválida");
             }
             
