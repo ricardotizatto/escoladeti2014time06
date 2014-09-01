@@ -8,29 +8,30 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group {{formEstado.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                    <label class="control-label"> Nome </label>
-                    <input type="text" class="form-control" name="nome" title="Nome do estado deve ser literal"  
-                           ng-model="unidadeFederativa.nome"  ng-minlength="4" ng-maxlength="40" maxlength="50" onkeyup="toUpper(this)" ng-pattern="/^[A-Za-z]+$/" required placeholder="Nome do Estado" >
+                    <label class="control-label"> <strong>Nome * </strong> </label>
+                    <input type="text" class="form-control" name="nome" title="Nome do estado"  
+                           ng-model="unidadeFederativa.nome" ng-pattern="/^[A-Za-z\s]{3,40}$/" required placeholder="Nome do Estado" >
+                    <span class="help-block" ng-show="formEstado.nome.$error.pattern">Apenas letras e mínimo de 3.</span>
                     <span class="glyphicon {{formEstado.nome.$invalid  ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="form-group {{formEstado.sigla.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                    <label class="control-label"> Sigla </label>
-                    <input class="form-control" name="sigla"  type="text" onkeyup="toUpper(this)" ng-model="unidadeFederativa.sigla" 
-                           title="Sigla deve ser literal" required ng-minlength="2" ng-maxlength="2" ng-pattern="/^[A-Za-z]{2}$/" maxlength="2" placeholder="sigla do estado">
+                    <label class="control-label"> <strong> Sigla * </strong> </label>
+                    <input class="form-control" name="sigla"  type="text" ng-model="unidadeFederativa.sigla" 
+                           title="Sigla deve ser literal" required ng-minlength="2" ng-maxlength="2" ng-pattern="/^[A-Za-z]{2,2}$/" maxlength="2" placeholder="sigla do estado">
+                    <span class="help-block" ng-show="formEstado.sigla.$error.pattern">Apenas letras e mínimo de 2.</span>
                     <span class="glyphicon {{formEstado.sigla.$invalid  ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group {{formEstado.pais.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                    <label class="control-label">Pais</label>  
-                    <span class="glyphicon {{formEstado.pais.$error.required  ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>
-                    <select type="text" name="pais" ui-select2="select2Options" class="input-default" ng-minlength="1" ng-model="unidadeFederativa.idPais" required>
+                    <label class="control-label"><strong>Pais *</strong></label>
+                    <select type="text" name="pais" ui-select2="select2Options" class="input-default" ng-model="unidadeFederativa.idPais" required>
                         <option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nome}}</option>
                     </select>
-                    
+
                 </div>
             </div>
         </div>	

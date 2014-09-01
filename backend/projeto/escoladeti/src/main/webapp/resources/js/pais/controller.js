@@ -61,6 +61,7 @@ function PaisController($scope, $routeParams, paisService) {
                 .success(function(pais, status) {
                     $scope.pais = getNovoPais();
                     toastr.success('Pais '+pais.nome+' salvo com sucesso.');
+                    window.location = '#/listapais';
                 })
                 .error(function(data, status) {
                     console.log('pais não salvo ', data);
