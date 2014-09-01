@@ -3,13 +3,11 @@ package br.unicesumar.escoladeti.entity;
 import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
 import br.unicesumar.escoladeti.enums.Sexo;
 import br.unicesumar.escoladeti.util.string.StringUtils;
+import br.unicesumar.escoladeti.util.validacao.Validar;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import static javassist.CtMethod.ConstParameter.string;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -201,6 +199,7 @@ public abstract class Pessoa extends Entidade {
             }
             
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+            Preconditions.checkArgument(Validar.validaEmail(this.email),"Email inválido!");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
             
             Preconditions.checkNotNull(this.aluno);
