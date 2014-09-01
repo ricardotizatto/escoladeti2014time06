@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.entity;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
 import br.unicesumar.escoladeti.enums.Sexo;
+import br.unicesumar.escoladeti.util.data.DateUtil;
 import br.unicesumar.escoladeti.util.string.StringUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -209,11 +210,7 @@ public abstract class Pessoa extends Entidade {
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf),"CPF é obrigatório");
             }
             Preconditions.checkNotNull(this.dataNascimento,"Data é obrigatória");
-            
-            //data digitada vem com um dia anterior do front deve ser algo do angular
-            Date hoje = new Date();
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-            if(f.format(hoje).equals(f.format(this.dataNascimento)) || this.dataNascimento.after(hoje)){    
+            if(DateUtil.validDate(this.dataNascimento)){
                 throw new RuntimeException("Data inválida");
             }
             
@@ -250,7 +247,10 @@ public abstract class Pessoa extends Entidade {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal),"Inscrição Municipal é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial),"Razão Social é obrigatório");
             Preconditions.checkNotNull(this.dataCriacao);
-
+            if(DateUtil.validDate(this.dataCriacao)){
+                throw new RuntimeException("Data inválida");
+            }
+            
             PessoaJuridica pessoa = new PessoaJuridica();
             
             pessoa.setTipo(this.tipo);
