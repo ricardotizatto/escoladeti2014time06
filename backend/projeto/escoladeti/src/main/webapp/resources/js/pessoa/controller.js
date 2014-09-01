@@ -113,7 +113,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pagina = [];
             if ($scope.busca !== "") {
                 Pessoa.buscarFisica({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.construirPaginaFisica(pagina);
+                    $scope.construirPagina(pagina);
                 });
             } else {
                 $scope.filtroPessoaFisica();
@@ -123,7 +123,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pagina = [];
             if ($scope.busca !== "") {
                 Pessoa.buscarJuridica({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.construirPaginaJuridica(pagina);
+                    $scope.construirPagina(pagina);
                 });
             } else {
                 $scope.filtroPessoaJuridica();
@@ -133,7 +133,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pagina = [];
             if ($scope.busca !== "") {
                 Pessoa.buscarAluno({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.construirPaginaFisica(pagina);
+                    $scope.construirPagina(pagina);
                 });
             } else {
                 $scope.filtroAluno();
@@ -145,7 +145,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log("filtro pessoa juridica");
         $scope.pagina = [];
         Pessoa.paginarJuridica({pagina: 1}, function(pagina) {
-            $scope.construirPaginaJuridica(pagina);
+            $scope.construirPagina(pagina);
         });
     };
 
@@ -153,7 +153,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log("filtro pessoa fisica");
         $scope.pagina = [];
         Pessoa.paginarFisica({pagina: 1}, function(pagina) {
-            $scope.construirPaginaFisica(pagina);
+            $scope.construirPagina(pagina);
         });
     };
 
@@ -161,35 +161,29 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log("aluno");
         $scope.pagina = [];
         Pessoa.paginarAluno({pagina: 1}, function(pagina) {
-            $scope.construirPaginaFisica(pagina);
+            $scope.construirPagina(pagina);
         });
     };
 
-    $scope.construirPaginaFisica = function(pagina) {
+    $scope.construirPagina = function(pagina) {
         for (i = 0; i < pagina.list.length; i++) {
             $scope.pagina[i] = {};
             $scope.pagina[i].id    = pagina.list[i].id;
             $scope.pagina[i].tipo  = pagina.list[i].tipo;
-            $scope.pagina[i].aluno = pagina.list[i].aluno;
-            $scope.pagina[i].nome  = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
-            $scope.pagina[i].doc   = pagina.list[i].cpf;
-            $scope.pagina[i].data  = pagina.list[i].dataNascimento;
             $scope.pagina[i].email = pagina.list[i].email;
+            if(pagina.list[i].tipo === 'J'){
+                $scope.pagina[i].nome  = pagina.list[i].nome;
+                $scope.pagina[i].doc   = pagina.list[i].cnpj;
+                $scope.pagina[i].data  = pagina.list[i].dataCriacao;
+            }else{
+                $scope.pagina[i].aluno = pagina.list[i].aluno;
+                $scope.pagina[i].nome  = pagina.list[i].nome + ' ' + pagina.list[i].sobrenome;
+                $scope.pagina[i].doc   = pagina.list[i].cpf;
+                $scope.pagina[i].data  = pagina.list[i].dataNascimento;
+            }
         }
     };
 
-    $scope.construirPaginaJuridica = function(pagina) {
-        for (i = 0; i < pagina.list.length; i++) {
-            $scope.pagina[i] = {};
-            $scope.pagina[i].id    = pagina.list[i].id;
-            $scope.pagina[i].tipo  = pagina.list[i].tipo;
-            $scope.pagina[i].nome  = pagina.list[i].nome;
-            $scope.pagina[i].doc   = pagina.list[i].cnpj;
-            $scope.pagina[i].data  = pagina.list[i].dataCriacao;
-            $scope.pagina[i].email = pagina.list[i].email;
-        }
-    };
-    
     $scope.novaPessoa = function(tipo){
         if ($scope.tipo === "J") {
             $scope.pessoa = new Pessoa({
