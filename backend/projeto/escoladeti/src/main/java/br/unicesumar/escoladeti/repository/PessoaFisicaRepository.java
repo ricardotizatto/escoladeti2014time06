@@ -17,4 +17,6 @@ public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long
 
     public PessoaFisica findById(Long id);
 
+    public PessoaFisica findByCpf(String cpf);
+
 }
