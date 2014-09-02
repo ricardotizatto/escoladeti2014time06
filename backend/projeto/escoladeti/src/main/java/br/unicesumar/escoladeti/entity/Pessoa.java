@@ -63,7 +63,7 @@ public abstract class Pessoa extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getEmail() {
@@ -71,7 +71,7 @@ public abstract class Pessoa extends Entidade {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toUpperCase();
     }
 
     public String getTipo() {

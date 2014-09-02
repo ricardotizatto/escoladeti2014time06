@@ -202,12 +202,12 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     $scope.salvar = function() {
  
-        $scope.pessoa.nome = $scope.pessoa.nome.toUpperCase();
-        $scope.pessoa.email = $scope.pessoa.email.toUpperCase();
+        $scope.pessoa.nome = $scope.pessoa.nome;
+        $scope.pessoa.email = $scope.pessoa.email;
         if($scope.pessoa.tipo === "J"){
-            $scope.pessoa.razaoSocial = $scope.pessoa.razaoSocial.toUpperCase();
+            $scope.pessoa.razaoSocial = $scope.pessoa.razaoSocial;
         }else{
-            $scope.pessoa.sobrenome = $scope.pessoa.sobrenome.toUpperCase();
+            $scope.pessoa.sobrenome = $scope.pessoa.sobrenome;
         }
         
         if ($scope.pessoa.id) {

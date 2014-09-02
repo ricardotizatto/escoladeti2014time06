@@ -75,7 +75,7 @@ public class PessoaFisica extends Pessoa {
     }
 
     public void setSobrenome(String sobreNome) {
-        this.sobrenome = sobreNome;
+        this.sobrenome = sobreNome.toUpperCase();
     }
 
     public Sexo getSexo() {
