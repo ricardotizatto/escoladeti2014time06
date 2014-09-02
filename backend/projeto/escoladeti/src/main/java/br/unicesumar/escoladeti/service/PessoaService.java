@@ -55,7 +55,7 @@ public class PessoaService {
 
     public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id){
         if (comando.getTipo().equals("F")) {
-            if(pessoaFisicaRepository.findByCpf(comando.getCpf()) == null || comando.getAluno()){
+            if(comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null){
                 PessoaFisica pessoaFisica = Pessoa.builder()
                         .telefones(comando.getTelefones())
                         .nome(comando.getNome())
