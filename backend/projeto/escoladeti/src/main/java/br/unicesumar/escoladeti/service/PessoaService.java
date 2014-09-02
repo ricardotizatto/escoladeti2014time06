@@ -48,8 +48,9 @@ public class PessoaService {
             return pessoaJuridicaRepository.findOne(id);
         } else if (tipo.equals("F")) {
             return pessoaFisicaRepository.findOne(id);
-        } 
-        throw new RuntimeException("Tipo de pessoa inválido");
+        }else{ 
+            throw new RuntimeException("Tipo de pessoa inválido");
+        }
 
     }
 
@@ -111,7 +112,8 @@ public class PessoaService {
             pessoaJuridicaRepository.delete(id);
         } else if (tipo.equals("F")) {
             pessoaFisicaRepository.delete(id);
+        }else{
+            throw new RuntimeException("Tipo de pessoa inválido");
         }
-        throw new RuntimeException("Tipo de pessoa inválido");
     }
 }
