@@ -56,7 +56,7 @@ public class PessoaService {
 
     public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id){
         if (comando.getTipo().equals("F")) {
-            if(comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null){
+            if(id != null ||comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null){
                 PessoaFisica pessoaFisica = Pessoa.builder()
                         .telefones(comando.getTelefones())
                         .nome(comando.getNome())
@@ -78,10 +78,10 @@ public class PessoaService {
 
                 return pessoaFisica;
             }
-            throw new RuntimeException("Pessoa "+ comando.getNome() +" já cadastrada no sistema");
+            throw new RuntimeException("Já existe uma pessoa com o cpf "+ comando.getCpf() +" cadastrada no sistema");
 
         } else if (comando.getTipo().equals("J")) {
-            if(pessoaJuridicaRepository.findByCnpj(comando.getCnpj()) == null){
+            if(id != null || pessoaJuridicaRepository.findByCnpj(comando.getCnpj()) == null ){
             PessoaJuridica pessoaJuridica = Pessoa.builder()
                     .telefones(comando.getTelefones())
                     .nome(comando.getNome())
@@ -102,7 +102,7 @@ public class PessoaService {
 
             return pessoaJuridica;
             }
-            throw new RuntimeException("Pessoa "+ comando.getNome() +" já cadastrada no sistema");
+            throw new RuntimeException("Já existe uma pessoa com o cnpj"+ comando.getCnpj() +" cadastrada no sistema");
         }
         throw new RuntimeException("Tipo de pessoa inválido");
     }
