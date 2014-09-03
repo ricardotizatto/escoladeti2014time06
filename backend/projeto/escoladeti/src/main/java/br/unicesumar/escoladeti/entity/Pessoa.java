@@ -2,7 +2,10 @@ package br.unicesumar.escoladeti.entity;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
 import br.unicesumar.escoladeti.enums.Sexo;
+import br.unicesumar.escoladeti.util.data.DateUtil;
 import br.unicesumar.escoladeti.util.string.StringUtils;
+import br.unicesumar.escoladeti.util.validacao.Validar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,7 +63,7 @@ public abstract class Pessoa extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getEmail() {
@@ -68,7 +71,7 @@ public abstract class Pessoa extends Entidade {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toUpperCase();
     }
 
     public String getTipo() {
@@ -192,16 +195,28 @@ public abstract class Pessoa extends Entidade {
         
         public PessoaFisica buildPessoaFisica() {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
+            if(!StringUtils.onlyLetters(this.nome)){
+                throw new RuntimeException("Nome inválido");
+            }
+            
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+            Preconditions.checkArgument(Validar.validaEmail(this.email),"Email inválido!");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
-
+            
             Preconditions.checkNotNull(this.aluno);
             if (!this.aluno) {
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg),"RG é obrigatório");
                 Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf),"CPF é obrigatório");
             }
-            Preconditions.checkNotNull(this.dataNascimento);
+            Preconditions.checkNotNull(this.dataNascimento,"Data é obrigatória");
+            if(DateUtil.validDate(this.dataNascimento)){
+                throw new RuntimeException("Data inválida");
+            }
+            
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome),"Sobrenome é obrigatório");
+            if(!StringUtils.onlyLetters(this.sobrenome)){
+                throw new RuntimeException("Sobrenome inválido");
+            }
             Preconditions.checkNotNull(this.sexo);
 
             PessoaFisica pessoa = new PessoaFisica();
@@ -231,7 +246,10 @@ public abstract class Pessoa extends Entidade {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal),"Inscrição Municipal é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial),"Razão Social é obrigatório");
             Preconditions.checkNotNull(this.dataCriacao);
-
+            if(DateUtil.validDate(this.dataCriacao)){
+                throw new RuntimeException("Data inválida");
+            }
+            
             PessoaJuridica pessoa = new PessoaJuridica();
             
             pessoa.setTipo(this.tipo);
