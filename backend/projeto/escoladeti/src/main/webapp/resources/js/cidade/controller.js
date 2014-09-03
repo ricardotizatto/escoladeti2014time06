@@ -114,7 +114,6 @@ function CidadeController($scope, $routeParams, cidadeService, estadoService) {
 		console.log('Nova Cidade');
 		return {
 			nome : '',
-			fundacao : null,
 			unidadeFederativa : null
 		};
 	}

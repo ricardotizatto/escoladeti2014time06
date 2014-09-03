@@ -6,16 +6,11 @@
     </div>
     <form method="POST" role="form" ng-submit="salvar()">							
         <div class="row">
-            <div class="form-group col-sm-6">
+            <div class="form-group col-sm-8">
                 <label> Nome </label>
                 <input class="form-control" name="nome" title="Nome da cidade deve ser literal" type="text" onkeyup="toUpper(this)" 
                        ng-model="cidade.nome" pattern="[\w\s]+" maxlength="50" required placeholder="Nome da cidade" />
-            </div>
-            <div class="form-group col-sm-2">
-                <label> Data funda��o </label>
-                <input class="form-control" name="dataFundacao"  type="date" ng-model="cidade.fundacao" 
-                       title="Ex.: 12/12/2000"/>
-            </div>
+            </div>            
             <div class="form-group col-sm-4">
                 <label>  Estado </label>                
                 <select type="text" ui-select2 class="input-default" ng-model="cidade.idUnidadeFederativa" >
