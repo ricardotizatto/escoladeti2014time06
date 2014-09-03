@@ -572,12 +572,12 @@
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="7404066940885-62">
+	<!--changeSet author="Jhonatan (generated)" id="7404066940885-62">
 		<addForeignKeyConstraint baseColumnNames="idevento"
 			baseTableName="participante" constraintName="fk_2fjc5r6enc9aq6a7p29fwwu53"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento" />
-	</changeSet>
+	</changeSet-->
 	<changeSet author="Jhonatan (generated)" id="1404066940885-63">
 		<addForeignKeyConstraint baseColumnNames="id_responsavel"
 			baseTableName="partematerial" constraintName="fk_50svmn3of6b1ynejwnd2giv5r"

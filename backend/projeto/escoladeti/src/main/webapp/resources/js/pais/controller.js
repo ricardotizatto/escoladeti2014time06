@@ -92,6 +92,7 @@ function PaisController($scope, $routeParams, paisService) {
 
     $scope.voltar = function() {
         $scope.pais = {};
+        //$location.path('/listapais');
         window.location = '#/listapais';
     };
 
