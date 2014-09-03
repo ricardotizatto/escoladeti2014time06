@@ -24,8 +24,8 @@ public class PessoaJuridica extends Pessoa {
 
     public PessoaJuridica(String cnpj, String inscricaoEstadual, String razaoSocial, Date dataCriacao) {
         this.cnpj = cnpj;
-        this.inscricaoEstadual = inscricaoEstadual;
-        this.razaoSocial = razaoSocial;
+        this.inscricaoEstadual = inscricaoEstadual.toUpperCase();
+        this.razaoSocial = razaoSocial.toUpperCase();
         this.dataCriacao = dataCriacao;
     }
 

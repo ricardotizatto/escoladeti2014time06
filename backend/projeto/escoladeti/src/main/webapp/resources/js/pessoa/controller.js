@@ -201,15 +201,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     };
 
     $scope.salvar = function() {
- 
-        $scope.pessoa.nome = $scope.pessoa.nome;
-        $scope.pessoa.email = $scope.pessoa.email;
-        if($scope.pessoa.tipo === "J"){
-            $scope.pessoa.razaoSocial = $scope.pessoa.razaoSocial;
-        }else{
-            $scope.pessoa.sobrenome = $scope.pessoa.sobrenome;
-        }
-        
+   
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function() {
                 toastr.success($scope.pessoa.nome + ' atualizado com sucesso');
