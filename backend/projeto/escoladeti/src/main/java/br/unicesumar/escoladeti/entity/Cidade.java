@@ -1,14 +1,9 @@
 package br.unicesumar.escoladeti.entity;
 
-import java.util.Date;
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -19,11 +14,6 @@ public class Cidade extends Entidade {
     @NotEmpty
     private String nome;
 
-    @Column(nullable = false)
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fundacao;
-
     @ManyToOne
     @JoinColumn(name = "unidadefederativaId", nullable = false)
     private UnidadeFederativa unidadeFederativa;
@@ -31,39 +21,27 @@ public class Cidade extends Entidade {
     public Cidade() {
     }
 
-    public Cidade(String nome, Date fundacao, UnidadeFederativa unidadeFederativa) {
+    public Cidade(String nome, UnidadeFederativa unidadeFederativa) {
         this.nome = nome;
-        this.fundacao = fundacao;
         this.unidadeFederativa = unidadeFederativa;
     }
 
-    public Cidade(Long id, String nome, Date fundacao, UnidadeFederativa unidadeFederativa) {
+    public Cidade(Long id, String nome, UnidadeFederativa unidadeFederativa) {
         this.id = id;
         this.nome = nome;
-        this.fundacao = fundacao;
         this.unidadeFederativa = unidadeFederativa;
     }
-    
-    
 
     public Cidade(Long id) {
-    	this.id = id;
+        this.id = id;
     }
 
-	public String getNome() {
+    public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Date getFundacao() {
-        return fundacao;
-    }
-
-    public void setFundacao(Date fundacao) {
-        this.fundacao = fundacao;
     }
 
     public UnidadeFederativa getUnidadeFederativa() {
@@ -73,30 +51,30 @@ public class Cidade extends Entidade {
     public void setUnidadeFederativa(UnidadeFederativa unidadeFederativa) {
         this.unidadeFederativa = unidadeFederativa;
     }
-   /* 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cidade other = (Cidade) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.fundacao, other.fundacao)) {
-            return false;
-        }
-        if (!Objects.equals(this.unidadeFederativa, other.unidadeFederativa)) {
-            return false;
-        }
+    /* 
+     @Override
+     public boolean equals(Object obj) {
+     if (obj == null) {
+     return false;
+     }
+     if (getClass() != obj.getClass()) {
+     return false;
+     }
+     final Cidade other = (Cidade) obj;
+     if (!Objects.equals(this.nome, other.nome)) {
+     return false;
+     }
+     if (!Objects.equals(this.fundacao, other.fundacao)) {
+     return false;
+     }
+     if (!Objects.equals(this.unidadeFederativa, other.unidadeFederativa)) {
+     return false;
+     }
         
-        return true;
-    }*/
+     return true;
+     }*/
 
-	public static Cidade of(Long id) {
-		return new Cidade(id);
-	}
+    public static Cidade of(Long id) {
+        return new Cidade(id);
+    }
 }

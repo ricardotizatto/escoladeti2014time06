@@ -6,19 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacao;
 import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacaoItem;
 import br.unicesumar.escoladeti.controller.DataPage;
-import br.unicesumar.escoladeti.entity.Livro;
 import br.unicesumar.escoladeti.entity.Solicitacao;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
 import br.unicesumar.escoladeti.enums.StatusItem;
-import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 import br.unicesumar.escoladeti.repository.SolicitacaoRepository;
 
 @Service
@@ -118,6 +114,5 @@ public class SolicitacaoService {
 	public List<Solicitacao> listar() {
 		return solicitacaoRepository.findAll();
 	}
-	
 	
 }

@@ -1,21 +1,20 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
+import br.unicesumar.escoladeti.enums.Sexo;
+import br.unicesumar.escoladeti.util.string.StringUtils;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.parboiled.common.Preconditions;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,27 +23,20 @@ public abstract class Pessoa extends Entidade {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    @NotEmpty
-    @Column(length = 50)
     private String nome;
-
-    @NotNull
-    @NotEmpty
-    @Column(length = 100)
     private String email;
+    private String tipo;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval=true)
-    @JsonManagedReference
+    @NotEmpty(message = "deve ser cadastrado ao menos um telefone")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "pessoa")
     private Set<Telefone> telefones;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval=true)
-    @JsonManagedReference
-    private Set<Endereco> enderecos;
-
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<Endereco> enderecos;
+    
     public Pessoa() {
-    	telefones = new HashSet<Telefone>();
-    	enderecos = new HashSet<Endereco>();
+        this.telefones = new HashSet<Telefone>();
     }
 
     public Set<Telefone> getTelefones() {
@@ -55,13 +47,13 @@ public abstract class Pessoa extends Entidade {
         this.telefones = telefones;
     }
 
-    public Set<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(Set<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
+//    public Set<Endereco> getEnderecos() {
+//        return enderecos;
+//    }
+//
+//    public void setEnderecos(Set<Endereco> enderecos) {
+//        this.enderecos = enderecos;
+//    }
 
     public String getNome() {
         return nome;
@@ -77,5 +69,190 @@ public abstract class Pessoa extends Entidade {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public static PessoaBuilder builder() {
+        return new PessoaBuilder();
+    }
+
+    public static class PessoaBuilder {
+
+        private String nome;
+
+        private String email;
+
+        private String tipo;
+
+        private String rg;
+
+        private String cpf;
+
+        private Date dataNascimento;
+
+        private String sobrenome;
+
+        private Sexo sexo;
+
+        private boolean aluno;
+
+        private String cnpj;
+
+        private String inscricaoEstadual;
+
+        private String inscricaoMunicipal;
+
+        private String razaoSocial;
+
+        private Date dataCriacao;
+        
+        private Set<Telefone> telefones;
+        
+        public PessoaBuilder nome(String nome) {
+            this.nome = nome;
+            return this;
+        }
+
+        public PessoaBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public PessoaBuilder tipo(String tipo) {
+            this.tipo = tipo;
+            return this;
+        }
+
+        public PessoaBuilder rg(String rg) {
+            this.rg = rg;
+            return this;
+        }
+
+        public PessoaBuilder cpf(String cpf) {
+            this.cpf = cpf;
+            return this;
+        }
+
+        public PessoaBuilder dataNascimento(Date dataNascimento) {
+            this.dataNascimento = dataNascimento;
+            return this;
+        }
+
+        public PessoaBuilder sobrenome(String sobrenome) {
+            this.sobrenome = sobrenome;
+            return this;
+        }
+
+        public PessoaBuilder sexo(Sexo sexo) {
+            this.sexo = sexo;
+            return this;
+        }
+
+        public PessoaBuilder aluno(boolean aluno) {
+            this.aluno = aluno;
+            return this;
+        }
+
+        public PessoaBuilder cnpj(String cnpj) {
+            this.cnpj = cnpj;
+            return this;
+        }
+
+        public PessoaBuilder inscricaoEstadual(String inscricaoEstadual) {
+            this.inscricaoEstadual = inscricaoEstadual;
+            return this;
+        }
+
+        public PessoaBuilder inscricaoMunicipal(String inscricaoMunicipal) {
+            this.inscricaoMunicipal = inscricaoMunicipal;
+            return this;
+        }
+
+        public PessoaBuilder razaoSocial(String razaoSocial) {
+            this.razaoSocial = razaoSocial;
+            return this;
+        }
+
+        public PessoaBuilder dataCriacao(Date dataCriacao) {
+            this.dataCriacao = dataCriacao;
+            return this;
+        }
+        
+         public PessoaBuilder telefones(Set<Telefone> telefones) {
+            this.telefones = telefones;
+            return this;
+        }
+        
+        public PessoaFisica buildPessoaFisica() {
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
+
+            Preconditions.checkNotNull(this.aluno);
+            if (!this.aluno) {
+                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg),"RG é obrigatório");
+                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf),"CPF é obrigatório");
+            }
+            Preconditions.checkNotNull(this.dataNascimento);
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome),"Sobrenome é obrigatório");
+            Preconditions.checkNotNull(this.sexo);
+
+            PessoaFisica pessoa = new PessoaFisica();
+            
+            pessoa.setTipo(this.tipo);
+            pessoa.setNome(this.nome);
+            pessoa.setEmail(this.email);
+            pessoa.setRg(this.rg);
+            pessoa.setCpf(this.cpf);
+            pessoa.setDataNascimento(this.dataNascimento);
+            pessoa.setSobrenome(this.sobrenome);
+            pessoa.setSexo(this.sexo);
+            pessoa.setAluno(this.aluno);
+            pessoa.setTelefones(this.telefones);
+            for (Telefone telefone : pessoa.getTelefones() ) {
+                telefone.setPessoa(pessoa);
+            }
+            return pessoa;
+        }
+
+        public PessoaJuridica buildPessoaJuridica() {
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.cnpj),"CNPJ é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoEstadual),"Inscrição Estadual é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal),"Inscrição Municipal é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial),"Razão Social é obrigatório");
+            Preconditions.checkNotNull(this.dataCriacao);
+
+            PessoaJuridica pessoa = new PessoaJuridica();
+            
+            pessoa.setTipo(this.tipo);
+            pessoa.setNome(this.nome);
+            pessoa.setEmail(this.email);
+            pessoa.setCnpj(this.cnpj);
+            pessoa.setInscricaoEstadual(this.inscricaoEstadual);
+            pessoa.setInscricaoMunicipal(this.inscricaoMunicipal);
+            pessoa.setRazaoSocial(this.razaoSocial);
+            pessoa.setDataCriacao(this.dataCriacao);
+            pessoa.setTelefones(this.telefones);
+            for (Telefone telefone : pessoa.getTelefones()) {
+                telefone.setPessoa(pessoa);
+            }
+            return pessoa;   
+            	
+        }
+        
+        public PessoaBuilder adicionarTelefones(
+                Set<ComandoSalvarTelefone> telefone) {
+            return null;
+        }
     }
 }
