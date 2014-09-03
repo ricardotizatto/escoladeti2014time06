@@ -4,11 +4,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet author="Walber e Leivid (generated)" id="2404066940885-7">
+    <changeSet author="Walber e Leivid (generated)" id="3404066940885-7">
         <createTable tableName="cep">
-            <column name="id" type="INT8">
-                <constraints nullable="false" />
-            </column>
+            <column name="id" type="INT8"/>
             <column name="cep" type="VARCHAR(10)" />
             <column name="uf" type="VARCHAR(2)" />
             <column name="cidade" type="VARCHAR(255)" />
@@ -17,10 +15,22 @@
             <column name="logradouro" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
+    <changeSet author="Walber e Leivid (generated)" id="3404066940885-6">
+        <createTable tableName="cepunico">
+            <column name="id" type="INT8"/>
+            <column name="cep" type="VARCHAR(10)" />
+            <column name="uf" type="VARCHAR(2)" />
+            <column name="cidade" type="VARCHAR(255)" />
+        </createTable>
+    </changeSet>    
     <changeSet author="Walber e Leivid (generated)" id="7404066940885-32">
         <addPrimaryKey columnNames="id" constraintName="cep_pkey"
                        tableName="cep" />
     </changeSet>
+    <changeSet author="Walber e Leivid (generated)" id="8404066940885-32">
+        <addPrimaryKey columnNames="id" constraintName="cepunic1o_pkey"
+                       tableName="cepunico" />
+    </changeSet>    
     
     <changeSet author="Walber e Leivid (generated)" id="createViewBuscaCep20140820">
         <createView viewName="buscacep"
@@ -39,19 +49,48 @@
     
     <changeSet author="Walber e Leivid (generated)" id="createIndexCepUnico20140821">
         <createIndex 
-                indexName="CepUnicoIndex"
-                schemaName="public"
-                tableName="cepunico">
+            indexName="CepUnicoIndex"
+            schemaName="public"
+            tableName="cepunico">
             <column name="cep" type="varchar(10)"/>
         </createIndex>
     </changeSet>
     <changeSet author="Walber e Leivid (generated)" id="createIndexCep20140821">
         <createIndex 
-                indexName="CepIndex"
-                schemaName="public"
-                tableName="cep">
+            indexName="CepIndex"
+            schemaName="public"
+            tableName="cep">
             <column name="cep" type="varchar(10)"/>
         </createIndex>
     </changeSet>
+    <changeSet id="mart003" author="martinho" >
+    <dropNotNullConstraint 
+            columnDataType="VARCHAR(255)"
+            columnName="cpf"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+    <changeSet id="mart004" author="martinho" >
+    <dropNotNullConstraint 
+            columnDataType="VARCHAR(255)"
+            columnName="rg"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+    <changeSet id="mart005" author="martinho" >
+        <modifyDataType
+            newDataType="VARCHAR(15)"
+            columnName="cpf"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+    <changeSet id="mart006" author="martinho" >
+        <modifyDataType
+            newDataType="VARCHAR(15)"
+            columnName="rg"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+       
 </databaseChangeLog>
    
