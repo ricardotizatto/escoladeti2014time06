@@ -1,0 +1,43 @@
+<div class="container" ng-controller="PaisController" ng-init="carregarPais()">
+    <div class="row">
+        <div class="form-group col-sm-12">
+            <legend> Cadastro de País </legend>
+        </div>
+    </div>
+    <form action="" novalidate method="POST" role="form" name="formPais" ng-submit="salvar()">							
+        <div class="col-sm-2">
+            <div class="form-group {{formPais.codigo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                <label class="control-label"> <strong>Código *</strong></label>
+                <input type="text" name="codigo" title="Código do País" class="form-control" ng-pattern="/[0-9]{3}/" maxlength="3"
+                       ng-model="pais.codigo" required placeholder="999">
+                <span class="help-block" ng-show="formPais.codigo.$error.pattern">Apenas números e 3 dígitos.</span>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group {{formPais.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                <label class="control-label"><strong> Nome *</strong></label>
+                <input type="text" name="nome" class="form-control" title="Nome do pais deve ser maisculo" ng-pattern="/[a-zA-Z\s]{3,40}/"
+                       ng-model="pais.nome" placeholder="BRASIL" maxlength="40" required>
+                <span class="help-block" ng-show="formPais.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group {{formPais.sigla.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                <label class="control-label"><strong>Sigla *</strong></label>
+                <input class="form-control" title="Sigla deve ser literal maiusculo"  
+                       name="sigla" type="text" ng-model="pais.sigla" required maxlength="3" ng-minlength="3" placeholder="BRA" ng-pattern="/[a-zA-Z]{3}/" >
+                <span class="help-block" ng-show="formPais.sigla.$error.pattern">Apenas letras e no mínimo 3.</span>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <span class="pull-right">
+                <a class="btn btn-link" ng-click="voltar()" ><span class="glyphicon glyphicon-backward "> Voltar </span>
+                </a>
+                <button type="submit" class="btn btn-primary" ng-disabled="formPais.$invalid">
+                    <span class="glyphicon glyphicon-ok" ></span> Salvar
+                </button>
+            </span>		
+        </div>
+        <div class="row"><div class="col-sm-12"><hr></div></div>				
+    </form>
+</div>

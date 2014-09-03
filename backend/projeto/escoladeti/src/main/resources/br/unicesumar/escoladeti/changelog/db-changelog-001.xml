@@ -173,12 +173,12 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-14">
+	<changeSet author="Jhonatan (generated)" id="1404066940885-22">
 		<createTable tableName="pais">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
 			</column>
-			<column name="codigo" type="INT4">
+			<column name="codigo" type="INT8">
 				<constraints nullable="false" />
 			</column>
 			<column name="nome" type="VARCHAR(255)">
@@ -572,12 +572,12 @@
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-62">
+	<!--changeSet author="Jhonatan (generated)" id="7404066940885-62">
 		<addForeignKeyConstraint baseColumnNames="idevento"
 			baseTableName="participante" constraintName="fk_2fjc5r6enc9aq6a7p29fwwu53"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento" />
-	</changeSet>
+	</changeSet-->
 	<changeSet author="Jhonatan (generated)" id="1404066940885-63">
 		<addForeignKeyConstraint baseColumnNames="id_responsavel"
 			baseTableName="partematerial" constraintName="fk_50svmn3of6b1ynejwnd2giv5r"
@@ -649,230 +649,234 @@
 	</changeSet>
 	<!--  >changeSet author="Jhonatan (generated)" id="1404066940885-74">
 
-		<addForeignKeyConstraint baseColumnNames="pessoaid"
-			baseTableName="pessoaendereco" constraintName="fk_hefjlv0de2niktickknlrs1uc"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
-	</changeSet-->
-	<changeSet author="Jhonatan (generated)" id="1404066940885-75">
-		<addForeignKeyConstraint baseColumnNames="id_solicitante"
-			baseTableName="solicitacao" constraintName="fk_iykxmb06bdcvyhy537e0wfm4s"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-76">
-		<addForeignKeyConstraint baseColumnNames="id_solicitacao"
-			baseTableName="solicitacaoitem" constraintName="fk_jaaovgxhxy2jf2vp17srxuhh3"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-77">
-		<addForeignKeyConstraint baseColumnNames="id_temacesso"
-			baseTableName="usuarioitemacesso" constraintName="fk_jx82tg2d5arnqvqyidw05u76i"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemacesso" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-78">
+            <addForeignKeyConstraint baseColumnNames="pessoaid"
+                    baseTableName="pessoaendereco" constraintName="fk_hefjlv0de2niktickknlrs1uc"
+                    deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                    onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+    </changeSet-->
+    <changeSet author="Jhonatan (generated)" id="1404066940885-75">
+        <addForeignKeyConstraint baseColumnNames="id_solicitante"
+                                         baseTableName="solicitacao" constraintName="fk_iykxmb06bdcvyhy537e0wfm4s"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-76">
+        <addForeignKeyConstraint baseColumnNames="id_solicitacao"
+                                         baseTableName="solicitacaoitem" constraintName="fk_jaaovgxhxy2jf2vp17srxuhh3"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-77">
+        <addForeignKeyConstraint baseColumnNames="id_temacesso"
+                                         baseTableName="usuarioitemacesso" constraintName="fk_jx82tg2d5arnqvqyidw05u76i"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemacesso" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-78">
 
-		<addForeignKeyConstraint baseColumnNames="cidadeid"
-			baseTableName="distrito" constraintName="fk_k1bqlrexubf41a5ebnf4rcwfm"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
-	</changeSet>
-	<changeSet author="Walber (generated)" id="1404066940885-91">
-		<addForeignKeyConstraint baseColumnNames="cidadeid"
-			baseTableName="endereco" constraintName="fk_endereco_cidade"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-79">
-		<addForeignKeyConstraint baseColumnNames="id_ordemproducao"
-			baseTableName="partematerial" constraintName="fk_k2defsfhcqdvf2i5961wy75lt"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ordemproducao" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-80">
-		<addForeignKeyConstraint baseColumnNames="id"
-			baseTableName="pessoafisica" constraintName="fk_khllj98ham1jkopj1qxetfgud"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-81">
+        <addForeignKeyConstraint baseColumnNames="cidadeid"
+                                         baseTableName="distrito" constraintName="fk_k1bqlrexubf41a5ebnf4rcwfm"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+    </changeSet>
+    <changeSet author="Walber (generated)" id="1404066940885-91">
+        <addForeignKeyConstraint baseColumnNames="cidadeid"
+                                         baseTableName="endereco" constraintName="fk_endereco_cidade"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-79">
+        <addForeignKeyConstraint baseColumnNames="id_ordemproducao"
+                                         baseTableName="partematerial" constraintName="fk_k2defsfhcqdvf2i5961wy75lt"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ordemproducao" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-80">
+        <addForeignKeyConstraint baseColumnNames="id"
+                                         baseTableName="pessoafisica" constraintName="fk_khllj98ham1jkopj1qxetfgud"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-81">
 
-		<addForeignKeyConstraint baseColumnNames="pessoaid"
-			baseTableName="endereco" constraintName="fk_lqjohmkeu43csocxp1b9op32k"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-82">
+        <addForeignKeyConstraint baseColumnNames="pessoaid"
+                                         baseTableName="endereco" constraintName="fk_lqjohmkeu43csocxp1b9op32k"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-82">
 
-		<addForeignKeyConstraint baseColumnNames="paisid"
-			baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-83">
-		<addForeignKeyConstraint baseColumnNames="solicitacao_id"
-			baseTableName="solicitacao_alunos" constraintName="fk_pap9cabe1luaxos2myl3sufle"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-84">
-		<addForeignKeyConstraint baseColumnNames="id_bairro"
-			baseTableName="bairro_faixacep" constraintName="fk_q6bxtm7dxap99m36x8dnng4i8"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bairro" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-85">
-		<addForeignKeyConstraint baseColumnNames="alunos_id"
-			baseTableName="solicitacao_alunos" constraintName="fk_qljj652c2tu4jdue4poy9lw4d"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-86">
-		<addForeignKeyConstraint baseColumnNames="id_usuario"
-			baseTableName="usuarioperfilacesso" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
-	</changeSet>
-	<!--  changeSet author="Jhonatan (generated)" id="1404066940885-87">
-		<addForeignKeyConstraint baseColumnNames="endereco_id"
-			baseTableName="pessoaendereco" constraintName="fk_rniq3f662vwastrnxk4mm8khm"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
-	</changeSet-->
-	<changeSet author="Jhonatan (generated)" id="1404066940885-88">
-		<addUniqueConstraint columnNames="cnpj"
-			constraintName="uk_2xclbh1scxkxx5e7vv48bqaq" deferrable="false"
-			disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-89">
-		<addUniqueConstraint columnNames="cpf"
-			constraintName="uk_795p7d8b4isbwwye0rd3je0cw" deferrable="false"
-			disabled="false" initiallyDeferred="false" tableName="pessoafisica" />
-	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-90">
-		<addUniqueConstraint columnNames="inscricaoestadual"
-			constraintName="uk_8ncbf29ly0ca3nepsptgevtgd" deferrable="false"
-			disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
-	</changeSet>
-	<changeSet id="esti001" author="Jhonatan">
-		<dropTable tableName="solicitacao_alunos"/>
+        <addForeignKeyConstraint baseColumnNames="paisid"
+                                         baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-83">
+        <addForeignKeyConstraint baseColumnNames="solicitacao_id"
+                                         baseTableName="solicitacao_alunos" constraintName="fk_pap9cabe1luaxos2myl3sufle"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacao" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-84">
+        <addForeignKeyConstraint baseColumnNames="id_bairro"
+                                         baseTableName="bairro_faixacep" constraintName="fk_q6bxtm7dxap99m36x8dnng4i8"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bairro" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-85">
+        <addForeignKeyConstraint baseColumnNames="alunos_id"
+                                         baseTableName="solicitacao_alunos" constraintName="fk_qljj652c2tu4jdue4poy9lw4d"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-86">
+        <addForeignKeyConstraint baseColumnNames="id_usuario"
+                                         baseTableName="usuarioperfilacesso" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m"
+                                         deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                         onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
+    </changeSet>
+    <!--  changeSet author="Jhonatan (generated)" id="1404066940885-87">
+            <addForeignKeyConstraint baseColumnNames="endereco_id"
+                    baseTableName="pessoaendereco" constraintName="fk_rniq3f662vwastrnxk4mm8khm"
+                    deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                    onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
+    </changeSet-->
+    <changeSet author="Jhonatan (generated)" id="1404066940885-88">
+        <addUniqueConstraint columnNames="cnpj"
+                                     constraintName="uk_2xclbh1scxkxx5e7vv48bqaq" deferrable="false"
+                                     disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-89">
+        <addUniqueConstraint columnNames="cpf"
+                                     constraintName="uk_795p7d8b4isbwwye0rd3je0cw" deferrable="false"
+                                     disabled="false" initiallyDeferred="false" tableName="pessoafisica" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-90">
+        <addUniqueConstraint columnNames="inscricaoestadual"
+                                     constraintName="uk_8ncbf29ly0ca3nepsptgevtgd" deferrable="false"
+                                     disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
+    </changeSet>
+    <changeSet id="esti001" author="Jhonatan">
+        <dropTable tableName="solicitacao_alunos"/>
 		
-		<addColumn tableName="solicitacao">
-			<column name="id_aluno" type="INT8" >
-				<constraints nullable="false" />
-			</column>
-		</addColumn>
+        <addColumn tableName="solicitacao">
+            <column name="id_aluno" type="INT8" >
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
 		
-		<addColumn tableName="solicitacao">
-			<column name="numero" type="INT4" >
-				<constraints nullable="false" />
-			</column>
-		</addColumn>
+        <addColumn tableName="solicitacao">
+            <column name="numero" type="INT4" >
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
 		
-		<addColumn tableName="solicitacao">
-			<column name="id_municipio" type="INT8">
-			</column>
-		</addColumn>
+        <addColumn tableName="solicitacao">
+            <column name="id_municipio" type="INT8">
+            </column>
+        </addColumn>
 		
-		<addColumn tableName="solicitacao">
-			<column name="id_cidadenre" type="INT8">
-			</column>
-		</addColumn>
+        <addColumn tableName="solicitacao">
+            <column name="id_cidadenre" type="INT8">
+            </column>
+        </addColumn>
 		
-		<!--  >addColumn tableName="solicitacao">
-			<column name="id_endereco" type="INT8"></column>
-		</addColumn-->
+        <!--  >addColumn tableName="solicitacao">
+                <column name="id_endereco" type="INT8"></column>
+        </addColumn-->
 		
-		<addColumn tableName="solicitacao">
-			<column name="cep" type="VARCHAR(11)"></column>
-		</addColumn>
+        <addColumn tableName="solicitacao">
+            <column name="cep" type="VARCHAR(11)"></column>
+        </addColumn>
 		
-		<addColumn tableName="solicitacao">
-			<column name="serie" type="VARCHAR(20)"></column>
-		</addColumn>
+        <addColumn tableName="solicitacao">
+            <column name="serie" type="VARCHAR(20)"></column>
+        </addColumn>
 						
-		<addColumn tableName="solicitacao">
-			<column name="ensino" type="VARCHAR(20)"></column>
-		</addColumn>				
+        <addColumn tableName="solicitacao">
+            <column name="ensino" type="VARCHAR(20)"></column>
+        </addColumn>				
 		
 		
-		<addForeignKeyConstraint constraintName="fk_solicitacaoaluno" 
-			referencedTableName="pessoafisica" baseColumnNames="id_aluno" baseTableName="solicitacao" 
-			referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_solicitacaoaluno" 
+                                         referencedTableName="pessoafisica" baseColumnNames="id_aluno" baseTableName="solicitacao" 
+                                         referencedColumnNames="id"/>
 		
-		<addForeignKeyConstraint constraintName="fk_solicitacaoendereco" 
-			referencedTableName="endereco" baseColumnNames="id_endereco" baseTableName="solicitacao" 
-			referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_solicitacaoendereco" 
+                                         referencedTableName="endereco" baseColumnNames="id_endereco" baseTableName="solicitacao" 
+                                         referencedColumnNames="id"/>
 			
-		<addForeignKeyConstraint constraintName="fk_solicitacaocidnre" 
-			referencedTableName="cidade" baseColumnNames="id_cidadenre" baseTableName="solicitacao" 
-			referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_solicitacaocidnre" 
+                                         referencedTableName="cidade" baseColumnNames="id_cidadenre" baseTableName="solicitacao" 
+                                         referencedColumnNames="id"/>
 			
-		<addForeignKeyConstraint constraintName="fk_solicitacaocid" 
-			referencedTableName="cidade" baseColumnNames="id_municipio" baseTableName="solicitacao" 
-			referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_solicitacaocid" 
+                                         referencedTableName="cidade" baseColumnNames="id_municipio" baseTableName="solicitacao" 
+                                         referencedColumnNames="id"/>
 			
-		<dropColumn tableName="solicitacao" columnName="id_solicitante"/>
-	</changeSet>
+        <dropColumn tableName="solicitacao" columnName="id_solicitante"/>
+    </changeSet>
 	
-	<changeSet id="esti004" author="Jhonatan">
-		<addColumn tableName="solicitacaoitem">
-			<column name="outro" type="VARCHAR(255)">
+    <changeSet id="esti004" author="Jhonatan">
+        <addColumn tableName="solicitacaoitem">
+            <column name="outro" type="VARCHAR(255)">
 			
-			</column>
-		</addColumn>
+            </column>
+        </addColumn>
 		
-		<dropColumn tableName="solicitacao" columnName="nre"/>
-	</changeSet>
+        <dropColumn tableName="solicitacao" columnName="nre"/>
+    </changeSet>
 	
-	<changeSet id="esti005" author="Jhonatan">
-		<addColumn tableName="solicitacao">
-			<column name="escola" type="varchar(255)"></column>
-		</addColumn>
-	</changeSet>
+    <changeSet id="esti005" author="Jhonatan">
+        <addColumn tableName="solicitacao">
+            <column name="escola" type="varchar(255)"></column>
+        </addColumn>
+    </changeSet>
 	
-	<changeSet id="esti006" author="Jhonatan">
-		<addColumn tableName="solicitacao">
-			<column name="numeroendereco" type="int4"></column>
-			<column name="endereco" type="varchar(255)"></column>			
-		</addColumn>
+    <changeSet id="esti006" author="Jhonatan">
+        <addColumn tableName="solicitacao">
+            <column name="numeroendereco" type="int4"></column>
+            <column name="endereco" type="varchar(255)"></column>			
+        </addColumn>
 		
-		<dropColumn tableName="solicitacao" columnName="id_endereco"/>
-	</changeSet>
+        <dropColumn tableName="solicitacao" columnName="id_endereco"/>
+    </changeSet>
 	
-	<changeSet id="est007" author="jhonatan">
-		<dropColumn tableName="solicitacao" columnName="numero"/>
-	</changeSet>
+    <changeSet id="est007" author="jhonatan">
+        <dropColumn tableName="solicitacao" columnName="numero"/>
+    </changeSet>
 	
-	<changeSet id="est008" author="jhonatan">
-		<addColumn tableName="solicitacaoitem">
-			<column name="status" type="varchar(20)"></column>
-		</addColumn>
-	</changeSet>
+    <changeSet id="est008" author="jhonatan">
+        <addColumn tableName="solicitacaoitem">
+            <column name="status" type="varchar(20)"></column>
+        </addColumn>
+    </changeSet>
         
-        <changeSet id="mart001" author="martinho">
-            <addColumn tableName="pessoafisica">
-                <column name="aluno" type="boolean">
-                    <constraints nullable="false" />
-                </column>
-            </addColumn>
-        </changeSet> 
+    <changeSet id="mart001" author="martinho">
+        <addColumn tableName="pessoafisica">
+            <column name="aluno" type="boolean">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet> 
         
-        <changeSet id="mart002" author="martinho">
-            <addColumn tableName="pessoa">
-                <column name="tipo" type="varchar(1)">
-                    <constraints nullable="false" />
-                </column>
-            </addColumn>
-        </changeSet>      
+    <changeSet id="mart002" author="martinho">
+        <addColumn tableName="pessoa">
+            <column name="tipo" type="varchar(1)">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>      
+    <changeSet id="1404066940885-92" author="Walber">
+        <modifyDataType columnName="codigo" newDataType="varchar(3)" tableName="pais"/>
+    </changeSet>
         
-<!--        <changeSet id="est009" author="Alisson Molinari">
-            <addForeignKeyConstraint baseTableName="participante" baseColumnNames="idevento" 
-                                     constraintName="FK_PARTICIPANTE_EVENTO" referencedTableName="evento" 
-                                     referencedColumnNames="id">
-            </addForeignKeyConstraint>
-        </changeSet>-->
+        
+    <!--        <changeSet id="est009" author="Alisson Molinari">
+        <addForeignKeyConstraint baseTableName="participante" baseColumnNames="idevento" 
+                                 constraintName="FK_PARTICIPANTE_EVENTO" referencedTableName="evento" 
+                                 referencedColumnNames="id">
+        </addForeignKeyConstraint>
+    </changeSet>-->
 </databaseChangeLog>
    

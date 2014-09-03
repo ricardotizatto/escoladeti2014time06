@@ -24,30 +24,30 @@ public class UnidadeFederativa extends Entidade{
     public UnidadeFederativa() {
     }    
 
-    public UnidadeFederativa(String nome, String sigla, Pais pais, Long id) {
-            this.id = id;
-            this.nome = nome;
-            this.sigla = sigla;
-            this.pais = pais;
-    }
-
-    public UnidadeFederativa(String nome, String sigla, Pais pais) {
-            this.nome = nome;
-            this.sigla = sigla;
-            this.pais = pais;
-    }
+//    public UnidadeFederativa(String nome, String sigla, Pais pais, Long id) {
+//            this.id = id;
+//            this.nome = nome;
+//            this.sigla = sigla;
+//            this.pais = pais;
+//    }
+//
+//    public UnidadeFederativa(String nome, String sigla, Pais pais) {
+//            this.nome = nome;
+//            this.sigla = sigla;
+//            this.pais = pais;
+//    }
 
     public String getNome() {
             return nome;
     }
     public void setNome(String nome) {
-            this.nome = nome;
+            this.nome = nome.toUpperCase();
     }
     public String getSigla() {
             return sigla;
     }
     public void setSigla(String sigla) {
-            this.sigla = sigla;
+            this.sigla = sigla.toUpperCase();
     }
     public Pais getPais() {
             return pais;

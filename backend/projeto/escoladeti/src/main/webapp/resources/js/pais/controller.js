@@ -61,10 +61,11 @@ function PaisController($scope, $routeParams, paisService) {
                 .success(function(pais, status) {
                     $scope.pais = getNovoPais();
                     toastr.success('Pais '+pais.nome+' salvo com sucesso.');
+                    window.location = '#/listapais';
                 })
                 .error(function(data, status) {
                     console.log('pais não salvo ', data);
-                    toastr.warning(data.message);
+                    //toastr.warning(data.message);
                     console.log(data.messageDeveloper);
                 });
     };
@@ -91,6 +92,7 @@ function PaisController($scope, $routeParams, paisService) {
 
     $scope.voltar = function() {
         $scope.pais = {};
+        //$location.path('/listapais');
         window.location = '#/listapais';
     };
 
