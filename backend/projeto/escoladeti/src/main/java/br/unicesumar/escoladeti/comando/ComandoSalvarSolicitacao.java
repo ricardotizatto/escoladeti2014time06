@@ -16,8 +16,7 @@ import java.util.List;
 public class ComandoSalvarSolicitacao {
 	   
     @NotNull(message = "Aluno é obrigatório" )
-    @Min(value = 0, message = "aluno é obrigatório")
-    @Max(value = 100)
+    @Min(value = 0, message = "Aluno é obrigatório")    @Max(value = 100)
     private Long aluno;
     
     @NotBlank(message = "Escola é obrigatório")
