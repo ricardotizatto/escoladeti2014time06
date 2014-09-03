@@ -39,7 +39,7 @@ public class PessoaFisica extends Pessoa {
         this.rg = rg;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
-        this.sobrenome = sobrenome;
+        this.sobrenome = sobrenome.toUpperCase();
     }
 
     public PessoaFisica(Long id) {
@@ -75,7 +75,7 @@ public class PessoaFisica extends Pessoa {
     }
 
     public void setSobrenome(String sobreNome) {
-        this.sobrenome = sobreNome;
+        this.sobrenome = sobreNome.toUpperCase();
     }
 
     public Sexo getSexo() {
