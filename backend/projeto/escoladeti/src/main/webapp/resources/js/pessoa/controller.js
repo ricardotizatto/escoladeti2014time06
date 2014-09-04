@@ -334,7 +334,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
 
     jQuery(function($) {
         $.mask.definitions['~'] = '[+-]';
-        $("#numeroDdd").mask("99");
+        //$("#numeroDdd").mask("99");
         $("#telefone").mask("9999-9999?9");
         $("#ramal").mask("9?");
         $("#cep").mask("99.999-999");
