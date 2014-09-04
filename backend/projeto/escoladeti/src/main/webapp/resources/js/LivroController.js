@@ -99,7 +99,7 @@ function livroController($scope, $http, $routeParams) {
                         toastr.warning("Erro ao salvar livro!");
                     });
         }
-        ;
+    };
     
     $scope.getTodos = function(numeroPagina) {
     	console.log(numeroPagina);
@@ -124,6 +124,5 @@ function livroController($scope, $http, $routeParams) {
     $scope.voltar = function() {
         $scope.livro = {};
         window.location = '#/listalivro';
-    }
-    
-}
+    };
+ }

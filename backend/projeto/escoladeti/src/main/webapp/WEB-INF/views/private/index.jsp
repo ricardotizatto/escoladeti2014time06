@@ -7,7 +7,7 @@
         <link rel="shortcut icon" type="image/png" href="./resources/imagens/icone-amacap.png" />
 
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
-        <link href="./resources/css/bootstrap.css" rel="stylesheet">
+        <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">        
         <link href="./resources/css/toastr.css" rel="stylesheet">        
         <link href="./resources/css/jquery-ui.css" rel="stylesheet">
