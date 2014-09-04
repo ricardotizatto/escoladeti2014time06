@@ -45,6 +45,11 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	$scope.editar = function(solicitacao) {
 		$location.path('/cadastrosolicitacao/'+ solicitacao.id);
 	};
+
+    $scope.ecluirItem = function (item) {
+        var index = $scope.solicitacao.itensSolicitacao.indexOf(item);
+        $scope.solicitacao.itensSolicitacao.splice(index, 1);
+    };
 	
 	$scope.carregarSolicitacao = function () {
 		$log.debug('carrgegando solicitacao x');
@@ -82,7 +87,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
 	$http({
 		method: 'GET',
-		url: './rest/pessoaFisicaSource/pessoaFisica/lista'			
+		url: './rest/pessoas'
 	}).success(function (data) {
 		$scope.pessoas = data;
 	});

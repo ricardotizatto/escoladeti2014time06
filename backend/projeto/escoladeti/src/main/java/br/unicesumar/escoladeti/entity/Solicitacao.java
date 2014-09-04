@@ -58,7 +58,6 @@ public class Solicitacao extends Entidade {
     @JoinColumn(name = "id_responsavel")
     private PessoaFisica responsavel;
 
-    @NotEmpty(message="Devem ser inseridos materiais que serão produzidos")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER, mappedBy="solicitacao")
     private List<SolicitacaoItem> itensSolicitacao;
 

@@ -33,6 +33,8 @@ public class SolicitacaoItem extends Entidade{
 	
 	@Enumerated(EnumType.STRING)
 	private StatusItem status;
+
+
 	
 	public SolicitacaoItem() {
 	}
