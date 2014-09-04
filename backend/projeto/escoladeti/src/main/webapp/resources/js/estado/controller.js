@@ -96,6 +96,7 @@ function EstadoController ($scope, $routeParams, paisService, estadoService) {
                 $scope.unidadeFederativa = getNovoEstado();
                 console.log("unidadeFederativa salva = " + unidadeFederativa);
                 toastr.success('Estado '+unidadeFederativa.nome+' salvo com sucesso.');
+                window.location = "#/listaestado";
             })
             .error(function (data) {
                 console.log("erro ao salvar unidadeFederativa" + data);

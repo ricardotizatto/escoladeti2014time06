@@ -1,13 +1,11 @@
 ﻿function participanteController($scope, $http, $routeParams) {
     console.log('Carregando controller');
     $scope.idModal;
-    $scope.cpfModal;
     $scope.deficienteModal;
+    $scope.necessidadeModal;
     $scope.emailModal;
     $scope.ideventoModal;
     $scope.nomeModal;
-    $scope.rgModal;
-    $scope.sexoModal;
     $scope.telefoneModal;
     $scope.pagamentoModal;
     $scope.idCurso;
@@ -19,7 +17,6 @@
     $scope.fimCurso;
     $scope.ministranteCurso;
     $scope.deficiente;
-    $scope.sexo;
     $scope.inicio;
     $scope.fim;
     $scope.tipoEvento;
@@ -49,13 +46,6 @@
     $scope.salvar = function() {
         console.log(angular.toJson($scope.participante, true));
         
-        
-        if($scope.participante.cpf === undefined)
-            return toastr.warning('Preencha o campo CPF');
-        
-        if($scope.participante.rg === undefined)
-            return toastr.warning('Preencha o campo RG');
-        
         if($scope.participante.nome === undefined)
             return toastr.warning('Preencha o campo Nome');
         
@@ -69,10 +59,12 @@
         if($scope.participante.deficiente === undefined)
             return toastr.warning('Preencha o campo Possui necessidades especiais');
         
-        if($scope.participante.sexo === undefined)
-            return toastr.warning('Preencha o campo Sexo');
-        
-        
+        if ($scope.participante.deficiente === 'N'){
+          $scope.participante.necessidade = '';  
+        }
+        if($scope.participante.necessidade === undefined)
+            return toastr.warning('Quais');
+       
         if ($scope.validacampos() !== "")
         {
             toastr.warning("Atenção: " + $scope.validacampos());
@@ -99,8 +91,7 @@
     $scope.salvarAlteracao = function() {
 
 
-        $scope.participante.id = $scope.idModal;
-        $scope.participante.cpf = $scope.cpfModal;
+        $scope.participante.id = $scope.idModal;  
         $scope.participante.deficiente = $scope.deficienteModal;
         $scope.participante.email = $scope.emailModal;
         if ($scope.ideventoModal === null) {
@@ -109,11 +100,10 @@
             $scope.participante.idevento = $scope.ideventoModal;
         }
         $scope.participante.nome = $scope.nomeModal;
-        $scope.participante.rg = $scope.rgModal;
-        $scope.participante.sexo = $scope.sexoModal;
         $scope.participante.telefone = $scope.telefoneModal;
         $scope.participante.pagamento = $scope.pagamentoModal;
-
+        $scope.participante.necessidade = $scope.necessidadeModal;
+        
         console.log(angular.toJson($scope.participante, true));
   
             $http.post("./rest/participanteSource/participante", $scope.participante)
@@ -136,17 +126,13 @@
 
     $scope.novo = function() {
         $scope.idModal = {};
-        $scope.cpfModal = {};
         $scope.deficienteModal = {};
         $scope.emailModal = {};
         $scope.ideventoModal = {};
         $scope.nomeModal = {};
-        $scope.rgModal = {};
-        $scope.sexoModal = {};
         $scope.telefoneModal = {};
         $scope.pagamentoModal = {};
         $scope.deficiente = {};
-        $scope.sexo = {};
         $scope.participante = $scope.getNovoParticipante();
         //window.location = '#/cadastroparticipanteevento';
         console.log("novo");
@@ -154,26 +140,19 @@
     
     $scope.novoParticipante = function(){
         $scope.idModal = {};
-        $scope.cpfModal = {};
         $scope.deficienteModal = {};
         $scope.emailModal = {};
         $scope.ideventoModal = {};
         $scope.nomeModal = {};
-        $scope.rgModal = {};
-        $scope.sexoModal = {};
         $scope.telefoneModal = {};
         $scope.pagamentoModal = {};
         $scope.deficiente = {};
-        $scope.sexo = {};
         $scope.participante = $scope.getNovoParticipante();
         window.location = '#/cadastroparticipanteevento';
         console.log("novo");
     }
     
     $scope.validacampos = function() {
-        
-       if(ValidarCPF($scope.participante.cpf) === false)
-           return ("Por favor corrija o CPF digitado.");
        
        if(ValidaEmail($scope.participante.email) === false)
            return "Por favor corrija o Email digitado.";
