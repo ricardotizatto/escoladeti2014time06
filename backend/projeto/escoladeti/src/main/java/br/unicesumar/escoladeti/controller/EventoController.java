@@ -40,7 +40,6 @@ public class EventoController implements Serializable {
 //    public List<Evento> getTodos() {
 //        return eventoService.getTodos(1);
 //    }
-     
     @RequestMapping(value = "/evento", method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Evento> getTodos() {
@@ -58,5 +57,13 @@ public class EventoController implements Serializable {
     public String deletar(@RequestBody Evento evento) {
         eventoService.deletar(evento);
         return "deleted";
+    }
+
+    @RequestMapping(value = "/evento", method = RequestMethod.PUT)
+    @ResponseBody
+    public Evento editar(@RequestBody Evento evento) {
+        Evento eventoEditado = this.eventoService.getById(evento.getId());
+        System.out.println("Evento " + evento.getId());
+        return eventoService.salvar(eventoEditado);
     }
 }

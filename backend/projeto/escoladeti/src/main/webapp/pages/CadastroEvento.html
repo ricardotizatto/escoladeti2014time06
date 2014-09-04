@@ -11,7 +11,7 @@
                 <div class="col-sm-1"></div>
                 <div class="form-group col-sm-7">
                     <label> Titulo </label>
-                    <input class="form-control" name="titulo" type="text" ng-model="evento.titulo" placeholder="Titulo" />
+                    <input class="form-control" name="titulo" type="text" ng-model="evento.titulo" placeholder="Titulo" onkeyup="toUpper(this)"/>
                 </div>
                 <div class="form-group col-sm-2"> 
                     <label> Tipo </label>
@@ -26,18 +26,18 @@
                 <div class="col-sm-1"></div>
                 <div class="form-group col-sm-7">
                     <label> Realização </label>
-                    <input class="form-control" name="organizacao" type="text" ng-model="evento.organizacao" placeholder="Organização responsavel" />
+                    <input class="form-control" name="organizacao" type="text" ng-model="evento.organizacao" placeholder="Organização responsavel" onkeyup="toUpper(this)"/>
                 </div>
                 <div class="col-sm-2">
-                    <label>Valor</label>
-                    <input class="form-control" type="text" name="valor" placeholder="R$00.00" ng-model="evento.valor" />
+                    <label>Valor R$</label>
+                    <input class="form-control" type="text" id="valor" name="valor" placeholder="00.00" ng-model="evento.valor" onkeypress="MascaraValor(valor);" />
                 </div>
             </div>
             <div class="row ">
                 <div class="col-sm-1"></div>
                 <div class="form-group col-sm-7">
                     <label> Ministrante </label>
-                    <input class="form-control" name="ministrante" type="text" ng-model="evento.ministrante" placeholder="Ministrante do curso ou evento"/>
+                    <input class="form-control" name="ministrante" type="text" ng-model="evento.ministrante" placeholder="Ministrante do curso ou evento" onkeyup="toUpper(this)"/>
                 </div>
             </div>            
             <div class="row ">           
@@ -55,7 +55,7 @@
                 <div class="col-sm-1"></div>
                 <div class="form-group col-sm-6">
                     <label> Local </label>
-                    <input class="form-control" name="local" type="text" ng-model="evento.local" placeholder="Local do evento"/>
+                    <input class="form-control" name="local" type="text" ng-model="evento.local" placeholder="Local do evento" onkeyup="toUpper(this)"/>
                 </div>   
             </div>            
             <div class="row">
@@ -79,8 +79,8 @@
 
                 <div class="col-sm-9">
                     <span class="pull-right">	
-                        <a href="#/listaevento" class="btn btn-danger btn-padrao">
-                            <span class="glyphicon glyphicon-remove" ></span> Cancelar
+                        <a class="btn btn-primary btn-padrao" ng-click="voltar()">
+                            <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
                         </a>
                         <button type="submit" class="btn btn-success btn-padrao">
                             <span class="glyphicon glyphicon-ok"  ></span> Salvar	
