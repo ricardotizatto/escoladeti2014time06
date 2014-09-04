@@ -52,24 +52,27 @@
     <div class="row ">
         <div class="col-sm-12">
             <ul class="pagination">
-                <li class="{{unidadesFederativas.pageNumber == 1 ? 'disabled' : ''}}"><a ng-click="getTodos(1)"> 
-                        <span class="glyphicon glyphicon-fast-backward"></span></a></li>
-                <li class="{{unidadesFederativas.pageNumber == 1 ? 'disabled' : ''}}"><a
-                        ng-click="getTodos(unidadesFederativas.pageNumber - 1)"> 
+                <li>
+                    <a ng-click="getTodos(1)"> 
+                        <span class="glyphicon glyphicon-fast-backward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="unidadesFederativas.pageNumber <= 1 ? getTodos(1) : getTodos(unidadesFederativas.pageNumber)"> 
                         <span class="glyphicon glyphicon-step-backward"></span>
-                    </a></li>
-                <li ng-repeat="numeroPagina in unidadesFederativas.pagesAround"
-                    class="{{numeroPagina == unidadesFederativas.pageNumber ? 'active' : ''}}">
+                    </a>
+                </li>
+                <li ng-repeat="numeroPagina in unidadesFederativas.pagesAround" class="{{numeroPagina == unidadesFederativas.pageNumber ? 'active' : ''}}">
                     <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
-                <li class="{{unidadesFederativas.pageNumber == unidadesFederativas.pageCount ? 'disabled' : '' }}">
-                    <a ng-click="getTodos(unidadesFederativas.pageNumber + 1)"> 
+                <li>
+                    <a ng-click="unidadesFederativas.pageNumber === unidadesFederativas.pageCount ? getTodos(unidadesFederativas.pageCount) : getTodos(unidadesFederativas.pageNumber + 1)"> 
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </a>
                 </li>
-                <li class="{{unidadesFederativas.pageNumber == unidadesFederativas.pageCount ? 'disabled' : ''}}">
-                    <a ng-click="getTodos(unidadesFederativas.pageCount)"> 
-                        <span class="glyphicon glyphicon-fast-forward" /></span>
+                <li>
+                    <a ng-click="unidadesFederativas.pageCount == 0 ? getTodos(1) : getTodos(unidadesFederativas.pageCount)"> 
+                        <span class="glyphicon glyphicon-fast-forward"></span>
                     </a>
                 </li>
             </ul>
