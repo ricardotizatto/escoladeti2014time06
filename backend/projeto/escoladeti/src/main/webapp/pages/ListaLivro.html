@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a ng-click="livros.pageNumber <= 1 ? getTodos(1) : getTodos(livros.pageNumber - 1)"> 
+                    <a ng-click="livros.pageNumber <= 1 ? getTodos(1) : getTodos(livros.pageNumber)"> 
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </a>
                 </li>
@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li>
-                    <a ng-click="getTodos(livros.pageCount)"> 
+                    <a ng-click="livros.pageCount = 0 ? getTodos(1) : getTodos(livros.pageCount)"> 
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </a>
                 </li>

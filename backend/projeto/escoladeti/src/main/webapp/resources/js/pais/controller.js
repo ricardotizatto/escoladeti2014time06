@@ -70,16 +70,19 @@ function PaisController($scope, $routeParams, paisService) {
     };
     
     $scope.getTodos = function(numeroPagina) {
-    	console.log(numeroPagina);
         paisService.listar(numeroPagina)
             .success(function(listaPaises, status) {
+                
+                listaPaises.list.forEach(function (pais) {
+                        delete pais.info; 
+                });
                 $scope.paises = listaPaises;
             })
             .error(function(data, status) {
                 console.log('erro ao buscar paises ' + data);
             });
     };
-
+   
     function getNovoPais() {
         console.log('novo pais');
         return {
@@ -93,7 +96,6 @@ function PaisController($scope, $routeParams, paisService) {
         $scope.pais = {};
         window.location = '#/listapais';
     };
-
 }
 
 controllers.controller('PaisController', ['$scope', '$routeParams', 'paisService', PaisController ]);
