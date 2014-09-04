@@ -20,7 +20,7 @@
         </div>
     </div>  
     <hr>
-    <form action="" method="POST" role="form" ng-submit="salvar()">
+    <form action="" novalidade method="POST" name="formPessoa" role="form" ng-submit="salvar()">
         <!-- Inicio Pessoa Fisica -->
         <div class="pessoaFisica" ng-show=" pessoa.tipo === 'F' ">
             <div class="row ">
@@ -36,9 +36,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-sm-4">
-                    <label> Nome </label> 
-                    <input class="form-control" name="nome" type="text" ng-model="pessoa.nome" placeholder="Nome"  maxlength="50" title="Nome" ng-required="pessoa.tipo == 'F'" />
+                <div class="col-sm-4">
+                    <div class="form-group {{formPessoa.nomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                         <label class="control-label"><strong> Nome *</strong></label> 
+                        <input class="form-control" name="nomeFisica" type="text" ng-model="pessoa.nome" placeholder="Nome"  maxlength="50" title="Nome" ng-required="pessoa.tipo == 'F'" ng-pattern="/[a-zA-Z\s]{2,50}/" />
+                        <span class="help-block" ng-show="formPessoa.nomeFisica.$error.pattern">Apenas letras e no mínimo 2.</span>
+                    </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label> Sobrenome </label> 
