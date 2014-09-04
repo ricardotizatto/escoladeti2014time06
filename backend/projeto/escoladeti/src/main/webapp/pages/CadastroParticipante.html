@@ -32,7 +32,7 @@
                 <label>Email</label>
                 <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email"  >
                 <label>Telefone</label>
-                <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone"  >
+                <input class="form-control" id="telefone" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(telefone);" maxlength="15" placeholder="(99)9999-9999" required="required" >
                 <div class="row">
                     <div class="form-group col-sm-10">
                         <label>Possui necessidades especiais?</label>
