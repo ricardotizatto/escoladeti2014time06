@@ -39,18 +39,13 @@
                 <div class="col-sm-4">
                     <div class="form-group {{formPessoa.nomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                          <label class="control-label"><strong> Nome *</strong></label> 
-                        <input class="form-control" name="nomeFisica" type="text" ng-model="pessoa.nome" placeholder="Nome"  maxlength="50" title="Nome" ng-required="pessoa.tipo == 'F'" ng-pattern="/[a-zA-Z\s]+{2,50}/" />
+                        <input class="form-control" name="nomeFisica" type="text" ng-model="pessoa.nome" placeholder="Nome"  maxlength="50" title="Nome" ng-required="pessoa.tipo == 'F'" ng-pattern="/[a-zA-Z\s]{2,50}/" />
                         <span class="help-block" ng-show="formPessoa.nomeFisica.$error.pattern">Apenas letras e no mínimo 2.</span>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="form group {{formPessoa.sobrenomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback" >
-                        <label class="control-label"><strong> Sobrenome *</strong> </label> 
-                        <input class="form-control" name="sobrenomeFisica" pattern="[a-zA-Z\s]+{2,50}" type="text" ng-model="pessoa.sobrenome" placeholder="Sobrenome"  maxlength="50" title="Sobrenome" ng-required="pessoa.tipo == 'F'"/>
-                        <span class="help-block" ng-show="formPessoa.sobrenomeFisica.$error.pattern">Apenas letras e no mínimo 2.</span>
-                    </div>
-                    
-                    
+                <div class="form-group col-sm-4">
+                    <label> Sobrenome </label> 
+                    <input class="form-control" name="sobrenome" pattern="[a-zA-Z\s]+" type="text" ng-model="pessoa.sobrenome" placeholder="Sobrenome"  maxlength="50" title="Sobrenome" ng-required="pessoa.tipo == 'F'"/>
                 </div>
                 <div class="form-group col-sm-2">
                     <span class="pull-right"> <label>Sexo</label>
@@ -67,37 +62,26 @@
                     </span>
                 </div>
             </div>
-                <div class="col-sm-3">
-                    <div class="form-group {{formPessoa.rgFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                        <label class="control-label"> <strong>RG *</strong></label> 
-                        <input class="form-control" ng-pattern="/[0-9]{5,15}/" name="rgFisica" type="text" id="rg" ng-model="pessoa.rg" title="Número do R.G." maxlength="12" placeholder="Número do R.G." ng-required="pessoa.tipo == 'F' && pessoa.aluno == 'false'" />
-                        <span class="help-block" ng-show="formPessoa.rgFisica.$error.pattern">Apenas números e no mínimo 5.</span>
-                    </div>
-                    
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label> RG </label> 
+                    <input class="form-control" type="text" id="rg" ng-model="pessoa.rg" title="Número do R.G." maxlength="12" placeholder="Número do R.G." ng-required="pessoa.tipo == 'F' && pessoa.aluno == 'false'" />
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group {{formPessoa.cpfFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                        <label class="control-label"> <strong>CPF *</strong></label> 
-                        <input class="form-control" type="text" id="cpf" name="cpfFisica" ng-model="pessoa.cpf"  ng-pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Número do CPF" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" ng-required="pessoa.tipo == 'F' && pessoa.aluno == 'false'" />
-                        <span class="help-block" ng-show="formPessoa.cpfFisica.$error.pattern">Apenas números e no mínimo 11.</span>
-                    </div>
+                <div class="form-group col-sm-3">
+                    <label> CPF </label> 
+                    <input class="form-control" type="text" id="cpf" name="cpf" ng-model="pessoa.cpf"  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Número do CPF" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" placeholder="Número do CPF" ng-required="pessoa.tipo == 'F' && pessoa.aluno == 'false'" />
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group {{formPessoa.nascimentoFisica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                        <label class="control-label"> <strong>Nascimento *</strong> </label> 
-                        <input class="form-control maskNascimento" name="nascimentoFisica" type="date" ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa" ng-required="pessoa.tipo == 'F'" />
-                    </div>                    
+                <div class="form-group col-sm-2">
+                    <label>Nascimento </label> 
+                    <input class="form-control maskNascimento" name="dataNascimento" type="date" ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa" ng-required="pessoa.tipo == 'F'" />
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group {{formPessoa.emailFisica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                        <label class="control-label"><strong>Email *</strong></label>
-                        <div class="input-group">
-                            <span class="input-group-addon"> 
-                                <span class="glyphicon glyphicon-envelope"></span>
-                            </span> 
-                            <input class="form-control" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" name="emailFisica" type="text" maxlength="100" ng-model="pessoa.email" ng-blur="validaEmail()" placeholder="Endereço de email" ng-required="pessoa.tipo == 'F'" >
-                            <span class="help-block" ng-show="formPessoa.emailFisica.$error.pattern">Email deve ser válido.</span>
-                        </div>
+                <div class="form-group col-sm-4">
+                    <label>Email</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span> 
+                        <input class="form-control" name="email" type="text" maxlength="100" ng-model="pessoa.email" ng-blur="validaEmail()" placeholder="Endereço de email" ng-required="pessoa.tipo == 'F'" >
                     </div>
                 </div>
             </div>
@@ -224,7 +208,7 @@
         <div class="row"><div class="col-sm-12"><hr></div></div>
     </form>
     <!-- Modal contato-->
-    <form action="" method="POST" role="form" name="formTelefone" ng-submit="salvarTelefone()">
+    <form action="" method="POST" role="form" ng-submit="salvarTelefone()">
         <div class="modal fade" id="modalTelefone" tabindex="-1" role="dialog" aria-labelledby="modalTelefoneLabel" aria-hidden="true">
             <div class="modal-dialog-pessoa">
                 <div class="modal-content">
@@ -235,39 +219,33 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                            <div class="col-sm-3">
-                                <div class="form-group  {{formTelefone.tipoTelefone.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                                    <label class="control-label"> <strong>Telefone *</strong></label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"> <span class="glyphicon glyphicon-phone-alt"></span></span> 
-                                        <select class="selectpicker show-tick form-control" name="tipoTelefone" ng-init="telefone.tipo = 'CELULAR'" ng-model="telefone.tipo" data-live-search="true" required>
-                                                <option value="CELULAR">Celular</option>
-                                                <option value="COMERCIAL">Comercial</option>
-                                                <option value="RESIDENCIAL">Residencial</option>
-                                        </select>
-                                    </div>
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label> Telefone</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <span
+                                            class="glyphicon glyphicon-phone-alt"></span>
+                                    </span> 
+                                    <select class="selectpicker show-tick form-control" name="tipoTelefone" ng-init="telefone.tipo = 'CELULAR'" ng-model="telefone.tipo" data-live-search="true">
+                                            <option value="CELULAR">Celular</option>
+                                            <option value="COMERCIAL">Comercial</option>
+                                            <option value="RESIDENCIAL">Residencial</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="form-group {{formTelefone.ddd.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                                    <label class="control-label"> <strong>DDD *</strong></label> 
-                                    <input class="form-control" id="numeroDdd" name="ddd" type="text" ng-model="telefone.ddd" maxlength="2" ng-pattern="[0-9]{2,2}" placeholder="99" required="required" >
-                                    <span class="help-block" ng-show="formTelefone.ddd.$error.pattern">Apenas números e mínimo de 2.</span>
-                                </div>  
+                            <div class="form-group col-sm-2">
+                                <label>DDD</label> 
+                                <input class="form-control" id="numeroDdd" type="text" ng-model="telefone.ddd" maxlength="2" pattern="[0-9]{2}" placeholder="99" required="required" >
                             </div>
-                            <div class="col-sm-4">
-                                <div class="form-group {{formTelefone.numero.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                                    <label class="control-label"><strong>Número *</strong></label> 
-                                    <input class="form-control" id="telefone" name="numero" type="text" ng-model="telefone.numero" maxlength="15" ng-pattern="[0-9]{4}-[0-9]{4,5}" placeholder="9999-9999" required="required" >
-                                    <span class="help-block" ng-show="formTelefone.numero.$error.pattern">Apenas números e mínimo de 8.</span>
-                                </div>
+                            <div class="form-group col-sm-4">
+                                <label>Número</label> 
+                                <input class="form-control" id="telefone" type="text" ng-model="telefone.numero" maxlength="15" pattern="[0-9]{4}-[0-9]{4,5}" placeholder="9999-9999" required="required" >
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group {{formTelefone.ramal.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                                    <label class="control-label"><strong>Ramal *</strong></label> 
-                                    <input class="form-control" name="ramal" type="number" ng-model="telefone.ramal" placeholder="N° de ramal" >
-                                </div>
+                            <div class="form-group col-sm-3">
+                                <label>Ramal</label> 
+                                <input class="form-control" name="numeroTelefone" type="number" ng-model="telefone.ramal" placeholder="N° de ramal" >
                             </div>
+                        </div>
                         <div class="modal-footer">
                             <span class="pull-right">
                             <button class="btn btn-danger btn-padrao" data-dismiss="modal">
