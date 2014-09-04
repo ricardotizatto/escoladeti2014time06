@@ -22,12 +22,7 @@ function PaisService($http) {
 		},
 		
 		salvar: function (pais) {
-			return $http.post('./rest/paisSource/pais', {
-				nome: pais.nome.toUpperCase(),
-				id: pais.id,
-				codigo: pais.codigo,
-				sigla: pais.sigla.toUpperCase()
-			});
+			return $http.post('./rest/paisSource/pais', pais);
 		},
 	
 		listar: function (nrPagina) {
