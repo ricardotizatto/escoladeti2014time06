@@ -55,27 +55,27 @@ app.config(['$routeProvider',
                 controller: 'itemAcessoController'
             })
             .when('/cadastropais/:paisId', {
-                templateUrl: './pages/CadastroPais.html',
+                templateUrl: './pages/pais/cadastro.html',
                 controller: 'PaisController'
             })
             .when('/cadastropais', {
-                templateUrl: './pages/CadastroPais.html',
+                templateUrl: './pages/pais/cadastro.html',
                 controller: 'PaisController'
             })
             .when('/cadastroestado', {
-                templateUrl: './pages/CadastroEstado.html',
+                templateUrl: './pages/estado/cadastro.html',
                 controller: 'EstadoController'
             })
             .when('/cadastroestado/:unidadeFederativaId', {
-                templateUrl: './pages/CadastroEstado.html',
+                templateUrl: './pages/estado/cadastro.html',
                 controller: 'EstadoController'
             })
             .when('/cadastrocidade', {
-                templateUrl: './pages/CadastroCidade.html',
+                templateUrl: './pages/cidade/cadastro.html',
                 controller: 'CidadeController'
             })
             .when('/cadastrocidade/:cidadeId', {
-                templateUrl: './pages/CadastroCidade.html',
+                templateUrl: './pages/cidade/cadastro.html',
                 controller: 'CidadeController'
             })
             .when('/cadastrodistrito', {
@@ -99,15 +99,15 @@ app.config(['$routeProvider',
                 controller : 'DistritoController'
             })
             .when('/listapais', {
-                templateUrl: './pages/ListaPais.html',
+                templateUrl: './pages/pais/lista.html',
                 controller: 'PaisController'
             })
             .when('/listaestado', {
-                templateUrl: './pages/ListaEstado.html',
-                // controller : 'nomeDoController'
+                templateUrl: './pages/estado/lista.html',
+                controller : 'EstadoController'
             })
             .when('/listacidade', {
-                templateUrl: './pages/ListaCidade.html',
+                templateUrl: './pages/cidade/lista.html',
                 controller : 'CidadeController'
             })
             .when('/listabairro', {

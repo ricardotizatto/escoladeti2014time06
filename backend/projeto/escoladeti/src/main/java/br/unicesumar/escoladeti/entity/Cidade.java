@@ -22,16 +22,16 @@ public class Cidade extends Entidade {
     public Cidade() {
     }
 
-    public Cidade(String nome, UnidadeFederativa unidadeFederativa) {
-        this.nome = nome;
-        this.unidadeFederativa = unidadeFederativa;
-    }
-
-    public Cidade(Long id, String nome, UnidadeFederativa unidadeFederativa) {
-        this.id = id;
-        this.nome = nome;
-        this.unidadeFederativa = unidadeFederativa;
-    }
+//    public Cidade(String nome, UnidadeFederativa unidadeFederativa) {
+//        this.nome = nome;
+//        this.unidadeFederativa = unidadeFederativa;
+//    }
+//
+//    public Cidade(Long id, String nome, UnidadeFederativa unidadeFederativa) {
+//        this.id = id;
+//        this.nome = nome;
+//        this.unidadeFederativa = unidadeFederativa;
+//    }
 
     public Cidade(Long id) {
         this.id = id;
@@ -42,7 +42,7 @@ public class Cidade extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public UnidadeFederativa getUnidadeFederativa() {

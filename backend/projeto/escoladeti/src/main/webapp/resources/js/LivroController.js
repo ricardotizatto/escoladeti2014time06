@@ -46,7 +46,7 @@ function livroController($scope, $http, $routeParams) {
                 $scope.livro = livro;
             });
             
-    }
+    };
 
     $scope.editar = function(livro) {
         console.log(livro);
@@ -65,7 +65,7 @@ function livroController($scope, $http, $routeParams) {
                 });
                 $scope.livros = retorno.data;
             });
-    } 
+    };
 
      $scope.salvar = function() {
 
@@ -76,30 +76,17 @@ function livroController($scope, $http, $routeParams) {
 
         console.log($scope.livro);
         $http.post("./rest/livroSource/livro", $scope.livro)
-                .success(function(livro, status) {
-                    $scope.livro = getNovoLivro();
-                    console.log("livro salva = " + livro);
-                    toastr.success('Livro ' + livro.nome + ' salvo com sucesso');
-                })
-        if ($scope.livro.inicio > $scope.livro.fim) {
-            toastr.warning('A data de Edição não pode ser maior que a data atual');
-        } else {
-            $http.post("./rest/livroSource/livro", $scope.livro)
-                    .success(function(livro, status) {
-                        //$scope.evento = getNovoEvento();
-                        //window.location = '#/listaevento';
-                        toastr.success("Livro cadastrado com sucesso!");
-                        setTimeout(function() {
-                            window.location = "#/listalivro"
-                        }, 5000);
-                        console.log("livro salva = " + livro);
-                    })
-                    .error(function(data, status) {
-                        console.log("erro ao salvar livro", data);
-                        toastr.warning("Erro ao salvar livro!");
-                    });
-        }
-        ;
+            .success(function(livro, status) {
+                $scope.livro = getNovoLivro();
+                console.log("livro salva = " + livro);
+                toastr.success('Livro ' + livro.nome + ' salvo com sucesso');
+                $scope.voltar();
+            })
+            .error(function(data, status) {
+                console.log("erro ao salvar livro" + data);
+                toastr.error(data.message);
+            });
+    };
     
     $scope.getTodos = function(numeroPagina) {
     	console.log(numeroPagina);
@@ -114,7 +101,7 @@ function livroController($scope, $http, $routeParams) {
             .error(function(data, status) {
                 console.log('erro ao buscar livros ' + data);
             });
-    }
+    };
 
     function getNovoLivro() {
         console.log('novo livro');
@@ -124,6 +111,5 @@ function livroController($scope, $http, $routeParams) {
     $scope.voltar = function() {
         $scope.livro = {};
         window.location = '#/listalivro';
-    }
-    
+    };
 }

@@ -11,45 +11,51 @@ import org.springframework.validation.annotation.Validated;
 @Entity
 @Validated
 public class Pais extends Entidade {
-	private static final long serialVersionUID = 1L;
 	
-	@NotNull
+
+    private static final long serialVersionUID = 1L;
+
+    @NotNull
     @Column
     @NotEmpty
     private String nome;
 	
-	@NotNull
+
+    @NotNull
     @Column
     @NotEmpty
     private String sigla;
-    
+
     @NotNull
     @Column
-    private Integer codigo;
+   
+    private String codigo;
 
     public Pais() {
 
     }
     
-    public Pais(Long id, String nome, String sigla, Integer codigo) {
-        this.id = id;
-        this.nome = nome;
-        this.sigla = sigla;
-        this.codigo = codigo;
-    }
+    
+//    public Pais(Long id, String nome, String sigla, String codigo) {
+//        this.id = id;
+//        this.nome = nome;
+//        this.sigla = sigla;
+//        this.codigo = codigo;
+//    }
+//
+//    public Pais(String nome, String sigla, String codigo) {
+//        this.nome = nome;
+//        this.sigla = sigla;
+//        this.codigo = codigo;
+//    }
 
-    public Pais(String nome, String sigla, Integer codigo) {
-        this.nome = nome;
-        this.sigla = sigla;
-        this.codigo = codigo;
-    }
-
+    
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getSigla() {
@@ -57,19 +63,8 @@ public class Pais extends Entidade {
     }
 
     public void setSigla(String sigla) {
-        this.sigla = sigla;
+        this.sigla = sigla.toUpperCase();
     }
-    
-    public void setCodigo(Integer codigo) throws Exception {
-    	if (codigo < 1) {
-    		throw new Exception("Código do país deve ser maior que 0.");
-    	}
-		this.codigo = codigo;
-	}
-    
-    public Integer getCodigo() {
-		return codigo;
-	}
 
     @Override
     public int hashCode() {
