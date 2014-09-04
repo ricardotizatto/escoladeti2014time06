@@ -37,4 +37,8 @@ public class PaisService {
 	public Pais getById(Long id) {
 		return paisRepository.findById(id);
 	}
+        public Pais buscarPaisPorNomeSiglaCodigo(Pais pais) {
+       return this.paisRepository.findByNomeAndSiglaAndCodigo(
+                pais.getNome(), pais.getSigla(), pais.getCodigo());
+    }
 }

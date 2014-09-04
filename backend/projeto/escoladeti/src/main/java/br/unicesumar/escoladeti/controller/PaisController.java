@@ -22,9 +22,12 @@ public class PaisController implements Serializable {
 
 	@RequestMapping(value = "/pais", method = RequestMethod.POST)
 	@ResponseBody
-	public Pais salvar(@RequestBody Pais pais) {
-		return paisService.salvar(pais);
-	}
+	public Pais salvar(@RequestBody Pais pais) throws Exception  {
+            if (!pais.equals(paisService.buscarPaisPorNomeSiglaCodigo(pais))) {
+            return this.paisService.salvar(pais);
+        }
+        throw new Exception("O País " + pais.getNome() + " já está cadastrado!");
+    }
 
 	@RequestMapping(value = "/pais", method = RequestMethod.PUT)
 	@ResponseBody

@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -73,6 +74,32 @@ public class Cidade extends Entidade {
         
      return true;
      }*/
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.nome);
+        hash = 79 * hash + Objects.hashCode(this.unidadeFederativa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cidade other = (Cidade) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.unidadeFederativa, other.unidadeFederativa)) {
+            return false;
+        }
+        return true;
+    }
 
     public static Cidade of(Long id) {
         return new Cidade(id);

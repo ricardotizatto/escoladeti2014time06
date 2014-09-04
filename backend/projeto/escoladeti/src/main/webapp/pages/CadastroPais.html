@@ -9,7 +9,7 @@
             <div class="form-group col-sm-2">
                 <label> Código </label>
 
-                <input type="number" title="Código do País" class="form-control" 
+                <input type="text" title="Código do País" class="form-control" 
                 	ng-model="pais.codigo" required="required"  pattern="^(\d{3})$" placeholder="999"
                 	maxlength="3" /> <!-- ExpressÃ£o para validar 3 digitos numericos -->
             </div>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group col-sm-2">
                 <label> Sigla </label>
-                <input class="form-control" title="Sigla deve ser literal maiusculo"  
+                <input class="form-control" title="Sigla deve ser literal maiusculo, com 3 digitos"  
                 name="nome" type="text" ng-model="pais.sigla" onkeyup="toUpper(this)" required maxlength="3" pattern="[A-Z]{3}" placeholder="BRA"  />
             </div>
         </div>

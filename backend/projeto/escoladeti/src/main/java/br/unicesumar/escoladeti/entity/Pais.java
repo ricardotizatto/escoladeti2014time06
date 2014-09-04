@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -29,7 +30,7 @@ public class Pais extends Entidade {
     public Pais() {
 
     }
-
+    
     public Pais(Long id, String nome, String sigla, Integer codigo) {
         this.id = id;
         this.nome = nome;
@@ -70,5 +71,34 @@ public class Pais extends Entidade {
 		return codigo;
 	}
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        hash = 67 * hash + Objects.hashCode(this.sigla);
+        hash = 67 * hash + Objects.hashCode(this.codigo);
+        return hash;
+    }
 
-}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pais other = (Pais) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        } 
+        if (!Objects.equals(this.sigla, other.sigla)) {
+            return false;
+        } 
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        return true;
+    }
+    
+   }
