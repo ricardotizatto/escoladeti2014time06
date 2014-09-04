@@ -11,32 +11,32 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PaisService implements Serializable{
-
-    @Autowired
-    private PaisRepository paisRepository;
-
-    public Pais salvar(Pais pais) {
-        return paisRepository.save(pais);
-    }
-
-    public List<Pais> listarTodosPaises() {
-        return paisRepository.findAll();
-    }
-
-    public DataPage<Pais> getTodos(Integer pagina) {
-        return new DataPage<>(paisRepository.findAll(pageRequestForAsc(pagina, "nome")));
-    }
-
-    public DataPage<Pais> getPaisPorNome(String nomeParcial) {
-        return new DataPage<Pais>(paisRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
-
-    }
-
-    public void deletar(Pais pais) {
-        paisRepository.delete(pais);
-    }
-
-    public Pais getById(Long id) {
-        return paisRepository.findById(id);
-    }
+	
+	@Autowired
+	private PaisRepository paisRepository;
+	
+	public Pais salvar(Pais pais) {
+		return paisRepository.save(pais);
+	}
+        
+	public List<Pais> listarTodosPaises() {
+		return paisRepository.findAll();
+	}
+	
+	public DataPage<Pais> getTodos(Integer pagina){
+		return new DataPage<>(paisRepository.findAll(pageRequestForAsc(pagina, "nome")));
+	}
+        
+	public DataPage<Pais> getPaisPorNome(String nomeParcial) {
+		return new DataPage<>(paisRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+		
+	}
+	
+	public void deletar(Pais pais) {
+		paisRepository.delete(pais);
+	}
+	
+	public Pais getById(Long id) {
+		return paisRepository.findById(id);
+	}
 }
