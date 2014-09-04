@@ -173,11 +173,13 @@
 			</column>
 		</createTable>
 	</changeSet>
+
 	<changeSet author="Jhonatan (generated)" id="1404066940885-22">
 		<createTable tableName="pais">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />
 			</column>
+
 			<column name="codigo" type="INT8">
 				<constraints nullable="false" />
 			</column>
@@ -878,5 +880,10 @@
                                  referencedColumnNames="id">
         </addForeignKeyConstraint>
     </changeSet>-->
+        
+       <changeSet id="ali001" author="Alisson Molinari">
+            <dropNotNullConstraint tableName="participante" columnName="cpf" />
+            <dropColumn tableName="participante" columnName="cpf" />
+       </changeSet>
 </databaseChangeLog>
    

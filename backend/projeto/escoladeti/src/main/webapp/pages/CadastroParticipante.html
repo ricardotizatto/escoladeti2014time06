@@ -1,4 +1,5 @@
-<div class="container" ng-controller="participanteController" ng-init="carregarEventos();novo()">
+<div class="container" ng-controller="participanteController" ng-init="carregarEventos();
+            novo()">
     <fieldset>
         <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
         <div class="row">
@@ -6,16 +7,16 @@
                 <legend> Cursos Disponíveis </legend>
             </div>
         </div>
-        <form action="" method="POST" name="participante" ng-submit="salvar()">
+        <form action="" method="POST" ng-submit="salvar()">
             <div class="form-group col-sm-7">
                 <div class="blogShort" ng-repeat="evento in eventos">
                     <h1>{{evento.titulo}}</h1>
                     <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
                     <article><p>
-                            {{evento.descricao.substring(0,180)}}
+                            {{evento.descricao.substring(0, 180)}}
                         </p></article>
                     <input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}">
-                    <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id,evento.titulo,evento.descricao,evento.local,evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
+                    <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id, evento.titulo, evento.descricao, evento.local, evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
                         <b>+ Detalhes</b>
                     </button><br>
                     <hr/>
@@ -26,33 +27,32 @@
             <div class="form-group col-sm-4">
                 <legend>Dados Pessoais</legend>
                 <br>
-                <label>CPF</label>
-                <input class="form-control" type="text" ng-change="participante.cpf"  maxlength="14" placeholder="Número do CPF" ng-model="participante.cpf" id="cpf">
-                <label>RG</label>
-                <input class="form-control"  type="text" placeholder="R.G." ng-model="participante.rg"  >
                 <label>Nome</label>
                 <input class="form-control" type="text"  placeholder="Nome" ng-model="participante.nome"  >
                 <label>Email</label>
                 <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email"  >
                 <label>Telefone</label>
-                <input class="form-control" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(participante.telefone);" maxlength="15" placeholder="Telefone"  >
+                <input class="form-control" id="telefone" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(telefone);" maxlength="15" placeholder="(99)9999-9999" required="required" >
                 <div class="row">
                     <div class="form-group col-sm-10">
                         <label>Possui necessidades especiais?</label>
-                        <select class="selectpicker show-tick form-control" name="deficiente" ng-model="participante.deficiente" data-live-search="true"  >
-                            <option value="S" >Sim</option>
-                            <option value="N" >Não</option>
-                        </select>
-                    </div> 
-                    <div class="form-group col-sm-4">
-                        <label>Sexo</label>
-                        <select class="selectpicker show-tick form-control" name="sexo" ng-model="participante.sexo"  >
-                            <option value="M" >M</option>
-                            <option value="F" >F</option>
-                        </select>
+                        <div class="btn-group">
+                            <!--data-toggle="buttons" verificar uso-->
+                            <label class="btn btn-primary btn-radio-amacapa"> <input
+                                    ng-model="participante.deficiente" name="participante" value="S"
+                                    type="radio" required /> Sim
+                            </label> <label class="btn btn-primary btn-radio-amacapa"> <input
+                                    ng-model="participante.deficiente" name="participante" value="N"
+                                    type="radio" required /> Não
+                            </label>
+                        </div>
                     </div>
-
-
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" ng-show="participante.deficiente === 'S'">
+                        <label>Quais </label>
+                        <input class="form-control" type="text"  placeholder="QUAIS" ng-model="participante.necessidade"  >
+                    </div>
                 </div>
             </div>
 
@@ -60,9 +60,8 @@
 
             <div align="right">
                 <button type="button"  class="btn btn-danger btn-padrao"  ng-click="novo()"> <span class="glyphicon glyphicon-refresh" ></span> Limpar</button>
-                <button class="btn btn-success btn-padrao"> <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
+                <button class="btn btn-success btn-padrao" > <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
             </div>
-
 
             <!-- Modal detalhamento-->
             <div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
@@ -106,12 +105,3 @@
         </form>
     </fieldset>
 </div>
-
-<script>
-                    jQuery(function($) {
-                        $.mask.definitions['~'] = '[+-]';
-
-                        $("#cpf").mask("999.999.999-99");
-
-                    });
-</script>
