@@ -29,7 +29,8 @@
         <script type="text/javascript" src="./resources/libs/angular-ui.js"></script>        
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
-        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>        
+        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>  
+        <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>        
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>

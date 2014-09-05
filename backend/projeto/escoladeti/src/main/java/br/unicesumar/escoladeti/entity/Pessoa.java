@@ -199,8 +199,8 @@ public abstract class Pessoa extends Entidade {
                 throw new RuntimeException("Nome inválido");
             }
             
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
-            Preconditions.checkArgument(Validar.validaEmail(this.email),"Email inválido!");
+//            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+//            Preconditions.checkArgument(Validar.validaEmail(this.email),"Email inválido!");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
             
             Preconditions.checkNotNull(this.aluno);
@@ -239,16 +239,17 @@ public abstract class Pessoa extends Entidade {
 
         public PessoaJuridica buildPessoaJuridica() {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+//            Preconditions.checkArgument(StringUtils.isNotEmpty(this.email),"Email é obrigatório");
+//            Preconditions.checkArgument(Validar.validaEmail(this.email),"Email inválido!");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.cnpj),"CNPJ é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoEstadual),"Inscrição Estadual é obrigatório");
+//            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoEstadual),"Inscrição Estadual é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal),"Inscrição Municipal é obrigatório");
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial),"Razão Social é obrigatório");
-            Preconditions.checkNotNull(this.dataCriacao);
-            if(DateUtil.validDate(this.dataCriacao)){
-                throw new RuntimeException("Data inválida");
-            }
+//            Preconditions.checkNotNull(this.dataCriacao);)
+//            if(DateUtil.validDate(this.dataCriacao)){
+//                throw new RuntimeException("Data inválida");
+//            }
             
             PessoaJuridica pessoa = new PessoaJuridica();
             

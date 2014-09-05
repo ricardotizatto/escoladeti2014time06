@@ -8,7 +8,8 @@ var app = angular.module('app',
 		 'ngResource',
 		 'controllers',
 		 'ui.select2',
-		 'ui.bootstrap']);
+		 'ui.bootstrap',
+                 'ui.utils']);
 
 app.config(['$routeProvider',
     function($routeProvider) {

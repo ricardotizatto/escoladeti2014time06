@@ -338,9 +338,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         $("#telefone").mask("9999-9999?9");
         $("#ramal").mask("9?");
         $("#cep").mask("99.999-999");
-        $("#cpf").mask("999.999.999-99");
+        //$("#cpf").mask("999.999.999-99");
         //$("#rg").mask("9.999.999-*");
-        $("#cnpj").mask("99.999.999/9999-99");
+        //$("#cnpj").mask("99.999.999/9999-99");
     });
 }
 
