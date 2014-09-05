@@ -3,11 +3,11 @@ package br.unicesumar.escoladeti.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class PerfilAcesso extends Entidade {
+public class Menu extends Entidade {
 
     private String nome;
 
-    public PerfilAcesso() {
+    public Menu() {
     }
 
     public String getNome() {
@@ -17,5 +17,4 @@ public class PerfilAcesso extends Entidade {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
 }

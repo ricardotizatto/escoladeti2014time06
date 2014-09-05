@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.unicesumar.escoladeti.controller;
 
-import br.unicesumar.escoladeti.entity.PerfilAcesso;
 import br.unicesumar.escoladeti.entity.Usuario;
-import br.unicesumar.escoladeti.entity.UsuarioPerfilAcesso;
-import br.unicesumar.escoladeti.repository.UsuarioPerfilAcessoRepository;
 import br.unicesumar.escoladeti.service.UsuarioService;
 import java.io.Serializable;
 import java.util.List;
@@ -20,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- *
- * @author Diogo
- */
 @Controller
 @RequestMapping("/rest/usuarioSource")
 public class UsuarioController implements Serializable {
@@ -35,7 +23,6 @@ public class UsuarioController implements Serializable {
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     @ResponseBody
     public Usuario salvar(@RequestBody Usuario usuario) {
-        System.out.println(usuario.getNome());
         return this.usuarioService.salvar(usuario);
     }
 
