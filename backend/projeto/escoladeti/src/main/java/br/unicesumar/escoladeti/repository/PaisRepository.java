@@ -14,7 +14,7 @@ public interface PaisRepository extends JpaRepository<Pais, Long> {
     public Pais findById(Long id);
     
     public Pais findByNomeAndSiglaAndCodigo(
-            String nome, String Sigla, Integer Codigo);
+            String nome, String Sigla, String Codigo);
     
     public Page<Pais> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
     

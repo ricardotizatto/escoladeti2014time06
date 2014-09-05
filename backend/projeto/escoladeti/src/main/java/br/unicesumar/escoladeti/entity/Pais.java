@@ -27,27 +27,26 @@ public class Pais extends Entidade {
     private String sigla;
 
     @NotNull
-    @Column
-   
+    @Column   
     private String codigo;
 
     public Pais() {
 
     }
+  
     
-    
-//    public Pais(Long id, String nome, String sigla, String codigo) {
-//        this.id = id;
-//        this.nome = nome;
-//        this.sigla = sigla;
-//        this.codigo = codigo;
-//    }
-//
-//    public Pais(String nome, String sigla, String codigo) {
-//        this.nome = nome;
-//        this.sigla = sigla;
-//        this.codigo = codigo;
-//    }
+    public Pais(Long id, String nome, String sigla, String codigo) {
+        this.id = id;
+        this.nome = nome;
+        this.sigla = sigla;
+        this.codigo = codigo;
+    }
+
+    public Pais(String nome, String sigla, String codigo) {
+        this.nome = nome;
+        this.sigla = sigla;
+        this.codigo = codigo;
+    }
 
     
     public String getNome() {
@@ -66,12 +65,20 @@ public class Pais extends Entidade {
         this.sigla = sigla.toUpperCase();
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + Objects.hashCode(this.sigla);
-        hash = 67 * hash + Objects.hashCode(this.codigo);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + Objects.hashCode(this.sigla);
+        hash = 37 * hash + Objects.hashCode(this.codigo);
         return hash;
     }
 
@@ -86,14 +93,11 @@ public class Pais extends Entidade {
         final Pais other = (Pais) obj;
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
-        } 
+        }
         if (!Objects.equals(this.sigla, other.sigla)) {
-            return false;
-        } 
-        if (!Objects.equals(this.codigo, other.codigo)) {
             return false;
         }
         return true;
     }
-    
+       
    }

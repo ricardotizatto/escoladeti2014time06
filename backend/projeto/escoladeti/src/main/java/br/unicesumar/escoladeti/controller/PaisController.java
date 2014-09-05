@@ -17,21 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/rest/paisSource")
 public class PaisController implements Serializable {
 
+    private PaisService paisService ;
+            
 	@RequestMapping(value = "/pais", method = RequestMethod.POST)
 	@ResponseBody
 	public Pais salvar(@RequestBody Pais pais) throws Exception  {
             if (!pais.equals(paisService.buscarPaisPorNomeSiglaCodigo(pais))) {
             return this.paisService.salvar(pais);
         }
-        throw new Exception("O PaÌs " + pais.getNome() + " j· est· cadastrado!");
+        throw new Exception("O Pa√≠s " + pais.getNome() + " j√° est√° cadastrado!");
     }
-
-    @RequestMapping(value = "/pais", method = RequestMethod.POST)
-    @ResponseBody
-    public Pais salvar(@RequestBody Pais pais) {
-        return paisService.salvar(pais);
-    }
-
+        
     @RequestMapping(value = "/pais", method = RequestMethod.PUT)
     @ResponseBody
     public Pais editar(@RequestBody Pais pais) {
