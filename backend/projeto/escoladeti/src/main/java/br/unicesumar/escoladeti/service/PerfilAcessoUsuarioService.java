@@ -14,13 +14,14 @@ public class PerfilAcessoUsuarioService implements Serializable {
     private PerfilAcessoUsuarioRepository perfilAcessoUsuarioRepository;
 
     public PerfilAcessoUsuario salvar(PerfilAcessoUsuario perfilAcessoUsuario) {
+        this.perfilAcessoUsuarioRepository.deleteByUsuario(perfilAcessoUsuario.getUsuario());
         return this.perfilAcessoUsuarioRepository.save(perfilAcessoUsuario);
     }
 
     public void deletar(PerfilAcessoUsuario perfilAcessoUsuario) {
         this.perfilAcessoUsuarioRepository.delete(perfilAcessoUsuario);
     }
-
+    
     public PerfilAcessoUsuario getById(Long id) {
         return this.perfilAcessoUsuarioRepository.findById(id);
     }
