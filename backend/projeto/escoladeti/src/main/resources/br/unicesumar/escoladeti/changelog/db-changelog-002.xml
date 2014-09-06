@@ -91,6 +91,13 @@
             schemaName="public"
             tableName="pessoafisica"/>
     </changeSet> 
+    <changeSet id="wwr1" author="winicius" >
+    <dropNotNullConstraint 
+            columnDataType="VARCHAR(50)"
+            columnName="email"
+            schemaName="public"
+            tableName="pessoa"/>
+    </changeSet> 
        
 </databaseChangeLog>
    
