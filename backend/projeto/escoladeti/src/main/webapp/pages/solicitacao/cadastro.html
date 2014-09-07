@@ -119,7 +119,11 @@
                                     <td><a href="#/cadastrolivro/{{item.livro}}">{{getDescricaoMaterial(item)}}</a></td>
                                     <td>{{item.traducaoMaterial}}{{item.traducaoMaterial == 'OUTRO' ? '-'+item.outro : ''}}</td>
                                     <td><span class="label label-warning getStatusItem(item.status)" >{{item.status}}</span> </td>
-                                    <td><i class="glyphicon glyphicon-trash"></i> </td>
+                                    <td>
+                                        <a href="javascript:void(0)" ng-click="excluirItem(item)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

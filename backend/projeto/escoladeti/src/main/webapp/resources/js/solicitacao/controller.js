@@ -47,7 +47,8 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		$location.path('/cadastrosolicitacao/'+ solicitacao.id);
 	};
 
-    $scope.ecluirItem = function (item) {
+    $scope.excluirItem = function (item) {
+        console.log('excluindo item');
         var index = $scope.solicitacao.itensSolicitacao.indexOf(item);
         $scope.solicitacao.itensSolicitacao.splice(index, 1);
     };
@@ -128,7 +129,9 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	};
 	
 	$scope.adicionarMaterial = function () {
-		console.log($scope.itemCorrente)
+		if (!$scope.itemCorrente.livro) {
+            return;
+        }
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
 	};
