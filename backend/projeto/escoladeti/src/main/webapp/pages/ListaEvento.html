@@ -60,7 +60,7 @@
         <div class="col-sm-12">
             <ul class="pagination">
                 <li>
-                    <a ng-click="getTodos(1)">
+                    <a ng-click="getTodos(1)"> 
                         <span class="glyphicon glyphicon-fast-backward"></span>
                     </a>
                 </li>
@@ -69,17 +69,16 @@
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </a>
                 </li>
-                <li ng-repeat="numeroPagina in eventos.pagesAround"
-                        class="{{numeroPagina == eventos.pageNumber ? 'active' : ''}}">
-                        <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+                <li ng-repeat="numeroPagina in eventos.pagesAround" class="{{numeroPagina == eventos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
-                <li class="{{eventos.pageNumber == eventos.pageCount ? 'disabled' : '' }}">
+                <li>
                     <a ng-click="eventos.pageNumber === eventos.pageCount ? getTodos(eventos.pageCount) : getTodos(eventos.pageNumber + 1)"> 
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </a>
                 </li>
                 <li>
-                    <a ng-click="eventos.pageCount = 0 ? getTodos(1) : getTodos(eventos.pageCount)"> 
+                    <a ng-click="eventos.pageCount == 0 ? getTodos(1) : getTodos(eventos.pageCount)">
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </a>
                 </li>

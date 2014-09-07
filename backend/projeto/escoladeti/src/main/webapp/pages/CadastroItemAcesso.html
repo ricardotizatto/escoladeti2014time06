@@ -8,10 +8,22 @@
         <form action="" method="POST" role="form" ng-submit="salvar()" >							
             <div class="row ">
                 <div class="form-group col-sm-6">
-                   <label>Nome componente</label>
-                    <input class="form-control" name="nome" type="text" placeholder="Nome componente" ng-model="itemAcesso.nomeComponente" required maxlength="60" />
+                    <label>Nome</label>
+                    <input class="form-control" name="nome" type="text" placeholder="Nome componente" ng-model="itemAcesso.nome" required maxlength="60" />
                 </div>
-            </div>	
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <label>Menu</label>
+                    <select ng-model="meuMenu" ng-options="menu.nome for menu in menus track by menu.id" ng-change="getSubMenus()"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Sub Menu</label>
+                    <select ng-model="meuSubMenu" ng-options="subMenu.nome for subMenu in subMenus"></select>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <span class="pull-right">	
@@ -19,7 +31,7 @@
                             <span class="glyphicon glyphicon-remove" ></span> Cancelar 
                         </a>
                         <button type="submit" class="btn btn-success btn-padrao" >
-                            <span class="glyphicon glyphicon-ok" ></span> Salvar </a>	
+                            <span class="glyphicon glyphicon-ok" ></span> Salvar
                         </button>
                     </span>		
                 </div>

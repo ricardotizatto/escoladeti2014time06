@@ -58,30 +58,30 @@
 	<div class="row ">
 		<div class="col-sm-12">
 			<ul class="pagination">
-				<li class="{{distritos.pageNumber == 1 ? 'disabled' : ''}}"><a
-					ng-click="getTodos(1)"> <span
-						class="glyphicon glyphicon-fast-backward"></span></a></li>
-				<li class="{{distritos.pageNumber == 1 ? 'disabled' : ''}}"><a
-					ng-click="getTodos(distritos.pageNumber - 1)"> <span
-						class="glyphicon glyphicon-step-backward"></span>
-				</a></li>
-				<li ng-repeat="numeroPagina in distritos.pagesAround"
-					class="{{numeroPagina == distritos.pageNumber ? 'active' : ''}}">
-					<a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
-				</li>
-				<li
-					class="{{distritos.pageNumber == distritos.pageCount ? 'disabled' : '' }}">
-					<a ng-click="getTodos(distritos.pageNumber + 1)"> <span
-						class="glyphicon glyphicon-step-forward"></span>
-				</a>
-				</li>
-				<li
-					class="{{distritos.pageNumber == distritos.pageCount ? 'disabled' : ''}}">
-					<a ng-click="getTodos(distritos.pageCount)"> <span
-						class="glyphicon glyphicon-fast-forward" />
-				</a>
-				</li>
-			</ul>
+                <li>
+                    <a ng-click="getTodos(1)"> 
+                        <span class="glyphicon glyphicon-fast-backward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="distritos.pageNumber <= 1 ? getTodos(1) : getTodos(distritos.pageNumber)"> 
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                    </a>
+                </li>
+                <li ng-repeat="numeroPagina in distritos.pagesAround" class="{{numeroPagina == distritos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+                </li>
+                <li>
+                    <a ng-click="distritos.pageNumber === distritos.pageCount ? getTodos(distritos.pageCount) : getTodos(distritos.pageNumber + 1)"> 
+                        <span class="glyphicon glyphicon-step-forward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="distritos.pageCount == 0 ? getTodos(1) : getTodos(distritos.pageCount)"> 
+                        <span class="glyphicon glyphicon-fast-forward"></span>
+                    </a>
+                </li>
+            </ul>
 		</div>
 	</div>
 </div>

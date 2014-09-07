@@ -1,8 +1,12 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.util.data.DateUtil;
+import br.unicesumar.escoladeti.util.number.NumberUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import org.parboiled.common.Preconditions;
 
 @Entity
 public class Livro extends Entidade {
@@ -61,6 +65,7 @@ public class Livro extends Entidade {
     public void setAnoEdicao(Long anoEdicao) {
         this.anoEdicao = anoEdicao;
     }
+
 
 
     @Override

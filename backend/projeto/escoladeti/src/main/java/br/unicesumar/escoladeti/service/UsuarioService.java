@@ -12,52 +12,49 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UsuarioService {
-	
-	private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
-	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 
-	public UsuarioRepository getUsuarioRepository() {
-		return usuarioRepository;
-	}
+    private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-	public void inicializarUsuarioAdmin() {
-		logger.info("Verificando existência do usuário 'admin'...");
-		Usuario root = getUsuarioRepository().findByLogin("admin");
-		if (root == null) {
-			logger.info("Usuário 'admin' não encontrado, criando...");
+    public UsuarioRepository getUsuarioRepository() {
+        return usuarioRepository;
+    }
 
-			root = new Usuario("Administrador", "123mudar", "admin", "adminescoladeti@gmail.com");
-			root.setAtivo(true);
-			
-			logger.debug("Salvando {}", root);
-			getUsuarioRepository().save(root);
-			
-			inicializarUsuarios();
-		}
-		logger.info("Usuário 'admin' verificado.");
-	}
+    public void inicializarUsuarioAdmin() {
+        logger.info("Verificando existência do usuário 'admin'...");
+        Usuario root = getUsuarioRepository().findByLogin("admin");
+        if (root == null) {
+            logger.info("Usuário 'admin' não encontrado, criando...");
 
-	private void inicializarUsuarios() {
-		
-	}
-        
-        // Daqui pra baixo
-        
-        public Usuario salvar(Usuario usuario){
-            return this.usuarioRepository.save(usuario);
+            root = new Usuario("Administrador", "123mudar", "admin", "adminescoladeti@gmail.com");
+            root.setAtivo(true);
+
+            logger.debug("Salvando {}", root);
+            getUsuarioRepository().save(root);
+
+            inicializarUsuarios();
         }
-        
-        public List<Usuario> getTodos(){
-            return this.usuarioRepository.findAll();
-        }
-        
-        public void deletar(Usuario usuario){
-            this.usuarioRepository.delete(usuario);
-        }
-        
-        public Usuario getById (Long id){
-            return this.usuarioRepository.findById(id);
-        }
+        logger.info("Usuário 'admin' verificado.");
+    }
+
+    private void inicializarUsuarios() {
+    }
+
+    // Daqui pra baixo
+    public Usuario salvar(Usuario usuario) {
+        return this.usuarioRepository.save(usuario);
+    }
+
+    public List<Usuario> getTodos() {
+        return this.usuarioRepository.findAll();
+    }
+
+    public void deletar(Usuario usuario) {
+        this.usuarioRepository.delete(usuario);
+    }
+
+    public Usuario getById(Long id) {
+        return this.usuarioRepository.findById(id);
+    }
 }

@@ -4,30 +4,36 @@
             <legend> <span class="glyphicon glyphicon-book"></span> Cadastro de Livro</legend>
         </div>
     </div>
-    <form action="" method="POST" role="form" ng-submit="salvar()">	
+    <form action="" method="POST" role="form" name="formLivro" ng-submit="salvar()">	
         <div class="row">
-            <div class="form-group col-sm-7">
-                <label> Nome </label>
-                <input class="form-control" title="Nome do livro deve ser literal"  name="nome" type="text" ng-model="livro.nome"  pattern="+[A-Z ]+" maxlength="40" required placeholder="nome do livro" />
+
+            <div class="form-group {{formLivro.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+                <label class="control-label"><strong> Nome * </strong></label>
+                <input class="form-control" title="Nome do livro deve ser literal"  name="nome" type="text" ng-model="livro.nome"  ng-pattern="/[a-zA-Z\s]{3,40}/" maxlength="40" required placeholder="nome do livro" >
+                <span class="help-block" ng-show="formLivro.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
             </div>
 
-            <div class="form-group col-sm-5">
-                <label> Autor </label>
-                <input class="form-control" title="Nome do autor deve ser literal"  name="autor" type="text" ng-model="livro.autor" required placeholder="nome do autor" />
+            <div class="form-group {{formLivro.autor.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+                <label class="control-label"><strong> Autor * </strong></label>
+                <input class="form-control" title="Nome do autor deve ser literal"  name="autor" type="text" ng-model="livro.autor" ng-pattern="/[a-zA-Z\s]{3,40}/" maxlength="40" required placeholder="nome do autor" />
+                <span class="help-block" ng-show="formLivro.autor.$error.pattern">Apenas letras e no mínimo 3.</span>
             </div>
         </div>
         <div class="row ">
-            <div class="form-group col-sm-5">
-                <label> Editora </label>
-                <input class="form-control" title="Nome da editora deve ser literal"  name="editora" type="text" ng-model="livro.editora" maxlength="40" required placeholder="nome da editora" />
+            <div class="form-group {{formLivro.editora.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+                <label class="control-label"><strong> Editora * </strong></label>
+                <input class="form-control" title="Nome da editora deve ser literal"  name="editora" type="text" ng-model="livro.editora" ng-pattern="/[a-zA-Z\s]{3,40}/" maxlength="40" required placeholder="nome da editora" />
+                <span class="help-block" ng-show="formLivro.editora.$error.pattern">Apenas letras e no mínimo 3.</span>
             </div>
-            <div class="form-group col-sm-4">
-                <label> Disciplina </label>
-                <input class="form-control" title="Nome da disciplina deve ser literal"  name="disciplina" type="text" ng-model="livro.disciplina" maxlength="40" required placeholder="nome da disciplina" />
+            <div class="form-group {{formLivro.disciplina.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-4">
+                <label class="control-label"><strong> Disciplina * </strong></label>
+                <input class="form-control" title="Nome da disciplina deve ser literal"  name="disciplina" type="text" ng-model="livro.disciplina" ng-pattern="/[a-zA-Z\s]{3,40}/" maxlength="40" required placeholder="nome da disciplina" />
+                <span class="help-block" ng-show="formLivro.disciplina.$error.pattern">Apenas letras e no mínimo 3.</span>
             </div>
-            <div class="form-group col-sm-3">
-                <label>Ano Edição</label>
-                <input class="form-control" title="Data de ser quatro digitos numéricos"  name="anoEdicao" type="text" ng-model="livro.anoEdicao" pattern="[0-9]{4}" maxlength="4" required placeholder="Ano da Edição" />
+            <div class="form-group {{formLivro.anoEdicao.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-3">
+                <label class="control-label"><strong> Ano Edição * </strong></label>
+                <input class="form-control" title="Data de ser quatro digitos numéricos"  name="anoEdicao" type="text" ng-model="livro.anoEdicao" ng-pattern="/[0-9]{4,4}/" maxlength="4" required placeholder="Ano da Edição" />
+                <span class="help-block" ng-show="formLivro.anoEdicao.$error.pattern">Apenas numeros e no mínimo 4.</span>
             </div>
         </div>
         <div class="row">
@@ -36,9 +42,9 @@
                     <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
                         <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
                     </a>  
-                    <button type="submit" class="btn btn-success btn-padrao">
-                        <span class="glyphicon glyphicon-ok" ></span> Salvar
-                    </button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="formLivro.$invalid">
+                    <span class="glyphicon glyphicon-ok" ></span> Salvar
+                </button>
                 </span>		
             </div>
         </div>
