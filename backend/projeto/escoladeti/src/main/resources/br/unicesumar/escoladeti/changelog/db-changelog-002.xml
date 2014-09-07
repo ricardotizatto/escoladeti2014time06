@@ -63,5 +63,34 @@
             <column name="cep" type="varchar(10)"/>
         </createIndex>
     </changeSet>
+    <changeSet id="mart003" author="martinho" >
+    <dropNotNullConstraint 
+            columnDataType="VARCHAR(255)"
+            columnName="cpf"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+    <changeSet id="mart004" author="martinho" >
+    <dropNotNullConstraint 
+            columnDataType="VARCHAR(255)"
+            columnName="rg"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+    <changeSet id="mart005" author="martinho" >
+        <modifyDataType
+            newDataType="VARCHAR(15)"
+            columnName="cpf"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+    <changeSet id="mart006" author="martinho" >
+        <modifyDataType
+            newDataType="VARCHAR(15)"
+            columnName="rg"
+            schemaName="public"
+            tableName="pessoafisica"/>
+    </changeSet> 
+       
 </databaseChangeLog>
    

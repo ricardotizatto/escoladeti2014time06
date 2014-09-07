@@ -123,7 +123,7 @@ function eventoController($scope, $http, $routeParams) {
         $scope.evento.organizacao = $scope.evento.organizacao.toUpperCase();
         $scope.evento.ministrante = $scope.evento.ministrante.toUpperCase();
         $scope.evento.local = $scope.evento.local.toUpperCase();
-        
+
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function(evento, status) {
                     $scope.evento = getNovoEvento();
@@ -147,7 +147,7 @@ function eventoController($scope, $http, $routeParams) {
 
         $http.get("./rest/eventoSource/listar/pag/" + numeroPagina)
                 .success(function(listaEventos, status) {
-                    $scope.eventos = listaEventos.list;
+                    $scope.eventos = listaEventos;
                 })
                 .error(function(data, status) {
                     console.log('erro ao buscar eventos' + data);
@@ -191,5 +191,6 @@ function eventoController($scope, $http, $routeParams) {
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);
 }
+
 
 

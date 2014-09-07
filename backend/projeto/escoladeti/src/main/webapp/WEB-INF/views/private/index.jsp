@@ -7,7 +7,7 @@
         <link rel="shortcut icon" type="image/png" href="./resources/imagens/icone-amacap.png" />
 
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
-        <link href="./resources/css/bootstrap.css" rel="stylesheet">
+        <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">        
         <link href="./resources/css/toastr.css" rel="stylesheet">        
         <link href="./resources/css/jquery-ui.css" rel="stylesheet">
@@ -21,7 +21,8 @@
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
         <script type="text/javascript" src="./resources/libs/funcoes.js"></script>		
         <script type="text/javascript" src="./resources/libs/toastr.js"></script>
-        <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>
+        <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script> 
+        <script type="text/javascript" src="./resources/libs/jquery.maskMoney.min.js" ></script> 
 
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>        
         <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>        

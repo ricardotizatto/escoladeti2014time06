@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.util.data.DateUtil;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class Evento extends Entidade {
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.data = data;           
     }
 
         public String getOrganizacao() {
@@ -119,5 +120,9 @@ public class Evento extends Entidade {
 
     public void setMinistrante(String ministrante) {
         this.ministrante = ministrante;
+    }
+    
+    public boolean validaData(){
+        return DateUtil.validBeforeDate(this.data);
     }
 }

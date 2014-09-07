@@ -59,6 +59,9 @@
         if($scope.participante.deficiente === undefined)
             return toastr.warning('Preencha o campo Possui necessidades especiais');
         
+        if ($scope.participante.deficiente === 'N'){
+          $scope.participante.necessidade = '';  
+        }
         if($scope.participante.necessidade === undefined)
             return toastr.warning('Quais');
        

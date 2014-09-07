@@ -151,18 +151,25 @@ function mascaraInteiro(){
 	return true;
 }
 
-function ValidaEmail(ObjEmail)
-{
+function ValidaEmail(ObjEmail){  
     
-    var txt = ObjEmail;
-    if ((txt.length != 0) && ((txt.indexOf("@") < 1) || (txt.indexOf('.') < 7)))
-    {
-        return false;
-    }else{
-        return true;
-    }
+    var usuario = ObjEmail.substring(0, ObjEmail.indexOf("@")); 
+    var dominio = ObjEmail.substring(ObjEmail.indexOf("@") + 1, ObjEmail.length); 
+       
+    if ((usuario.length >= 1) && 
+       (dominio.length >= 3) && 
+       (usuario.search("@") == - 1) && 
+       (dominio.search("@") == - 1) && 
+       (usuario.search(" ") == - 1) && 
+       (dominio.search(" ") == - 1) && 
+       (dominio.search(".") != - 1) && 
+       (dominio.indexOf(".") >= 1) && 
+       (dominio.lastIndexOf(".") < dominio.length - 1)) { 
+       return true;
+   }else{ 
+       return false;
+   }
 }
-
 //valida o CNPJ digitado
 function ValidarCNPJ(obj){
 	var cnpj = obj;

@@ -94,6 +94,7 @@ function CidadeController($scope, $routeParams, cidadeService, estadoService) {
 			$scope.cidade = getNovaCidade();
 			console.log("cidade salva = " + cidade);
 			toastr.success('Cidade ' + cidade.nome + ' salva com sucesso.');
+                        window.location = "#/listacidade";
 		}).error(function(data) {
 			console.log("erro ao salvar cidade" + data);
 			toastr.warning(data.message);
@@ -114,7 +115,6 @@ function CidadeController($scope, $routeParams, cidadeService, estadoService) {
 		console.log('Nova Cidade');
 		return {
 			nome : '',
-			fundacao : null,
 			unidadeFederativa : null
 		};
 	}
