@@ -1,7 +1,8 @@
 var controllers = angular.module('controllers');
 
-function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao) {
-	
+function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa) {
+    $log.debug('iniciando SolicitacaoController em teste6d');
+
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
@@ -85,19 +86,15 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		$scope.pagina = pagina;
 	});
 	
-	$http({
-		method: 'GET',
-		url: './rest/pessoas'
-	}).success(function (data) {
-		$scope.pessoas = data;
-	});
-	
-	$http({
-		method: 'GET',
-		url: './rest/cidadeSource/listar'			
-	}).success(function (data) {
-		$scope.cidades = data;
-	});
+    $log.debug('listar alunos');
+    Pessoa.listarAlunos(function (alunos) {
+       this.alunos = alunos;
+    });
+
+
+    Pessoa.listarPessoasFisicas(function (pessoasFisicas) {
+        this.pessoasFisicas = pessoasFisicas;
+    });
 	
 	$http({
 		method: 'GET',
@@ -160,5 +157,6 @@ controllers.controller('SolicitacaoController',
 		 '$routeParams',
 		 '$http',
 		 'SolicitacaoFactory',
+         'PessoaFactory',
 		 SolicitacaoController
 		 ]);

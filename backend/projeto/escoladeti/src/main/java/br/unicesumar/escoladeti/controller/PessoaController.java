@@ -6,6 +6,7 @@ import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.service.PessoaService;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,4 +81,28 @@ public class PessoaController implements Serializable {
     public DataPage<PessoaJuridica> buscarJuridica(@PathVariable Integer pagina, @PathVariable String busca) {
         return pessoaService.buscarJuridica(pagina, busca);
     }
+
+    /**
+     * @author Catabriga
+     * Metodos para retornar uma lista com todos alunos.
+     * @return List de pessoas fisicas que são alunos
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/alunos")
+    @ResponseBody
+    public List<PessoaFisica> listarAlunos() {
+        return pessoaService.listarAlunos();
+    }
+
+
+    /**
+     * @author Catabriga
+     * Metodon para listar pessoas fisicas que não são alunos
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/fisicas")
+    @ResponseBody
+    public List<PessoaFisica> listarPessoasfisicas() {
+        return pessoaService.listarPessoasFisicas();
+    }
+
+
 }

@@ -11,6 +11,8 @@ import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PessoaService {
 
@@ -115,5 +117,14 @@ public class PessoaService {
         }else{
             throw new RuntimeException("Tipo de pessoa inválido");
         }
+    }
+
+
+    public List<PessoaFisica> listarAlunos() {
+        return pessoaFisicaRepository.findByAlunoTrue();
+    }
+
+    public List<PessoaFisica> listarPessoasFisicas() {
+        return pessoaFisicaRepository.findByAlunoFalse();
     }
 }
