@@ -9,7 +9,7 @@
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">        
-        <link href="./resources/css/toastr.css" rel="stylesheet">        
+        <link href="./resources/css/toastr.css" rel="stylesheet">
         <link href="./resources/css/jquery-ui.css" rel="stylesheet">
         <link href="./resources/css/select2.css" rel="stylesheet">
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
@@ -33,6 +33,7 @@
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>        
+        <script type="text/javascript" src="./resources/js/directives.js"></script>
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
@@ -51,6 +52,7 @@
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>
+        <script type="text/javascript" src="./resources/js/PerfilAcessoUsuarioController.js"></script>
         <script type="text/javascript" src="./resources/js/ListaUsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>
         <script type="text/javascript" src="./resources/js/ListaBairroController.js" ></script>
@@ -66,8 +68,8 @@
         <link  href="./resources/vendor/css/jquery.sidr.light.css">
         <link rel="stylesheet" href="./resources/vendor/css/custom-icons.css">
         <link rel="stylesheet" href="./resources/vendor/css/style.css">
-        <link rel="stylesheet" href="./resources/vendor/css/responsive.css">     
-        <link rel="stylesheet" href="./resources/vendor/css/custom-icon-set.css">        
+        <link rel="stylesheet" href="./resources/vendor/css/responsive.css">
+        <link rel="stylesheet" href="./resources/vendor/css/custom-icon-set.css">
 
 
 
@@ -158,10 +160,10 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-user"></i>
-                            <span class="title">Usu·rios</span>
+                            <span class="title">Usu√°rios</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listausuario">Usu·rio</a></li>
+                            <li><a href="#/listausuario">Usu√°rio</a></li>
                             <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                             <li><a href="#/listaitemacesso">Item de acesso</a></li>
                         </ul>
@@ -186,12 +188,12 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-cog"></i>
-                            <span class="title">PRODU«√O</span>
+                            <span class="title">PRODU√áAO</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">SolicitaÁ„o</a></li>
-                            <li><a href="#/acompanhamento">Acompanhamento de SolicitaÁ„o</a></li>
-                            <li><a href="#/listaordemproducao">Ordem de ProduÁ„o</a></li>
+                            <li><a href="#/listasolicitacoes">Solicita√ß√£o</a></li>
+                            <li><a href="#/acompanhamento">Acompanhamento de Solicita√ß√£o</a></li>
+                            <li><a href="#/listaordemproducao">Ordem de Produ√ß√£o</a></li>
                         </ul>
                     </li>
                     <li>
@@ -208,7 +210,7 @@
 
             <div class="page-content">
                 <div class="clearfix"></div>
-                <div class="content">
+                <div class="content container">
                     <div ng-view></div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ function perfilAcessoController($scope, $http, $routeParams) {
                 .success(function(perfils, status) {
                     $scope.perfilsAcesso = perfils;
                 }).error(function(data, status) {
-            console.log('Erro ao carregar perfils ! ' + data);
+            console.log('Erro ao carregar perfis de acesso! ' + data);
         });
     };
 

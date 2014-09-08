@@ -23,12 +23,15 @@ public class LivroController implements Serializable {
     @RequestMapping(value = "/livro", method = RequestMethod.POST)
     @ResponseBody
     public Livro salvar(@RequestBody Livro livro) throws Exception {
-        if (!livro.equals(livroService.buscarLivroPorNomeAutorEditoraAnoEdicao(livro))) {
-            return this.livroService.salvar(livro);
-        }
-        throw new Exception("O Livro " + livro.getNome() + " já está cadastrado!");
-    }
-
+//        if (livro.isYearValid()) {
+//            if (!livro.equals(livroService.buscarLivroPorNomeAutorEditoraAnoEdicao(livro))) {
+//                return this.livroService.salvar(livro);
+//            }
+//          throw new Exception("O Livro " + livro.getNome() + " já está cadastrado!");
+//        }
+//        throw new Exception("O Ano não pode ser maior que o atual");
+//    }
+    return this.livroService.salvar(livro);}
     @RequestMapping(value = "/livro/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Livro getById(@PathVariable Long id) {
@@ -40,14 +43,13 @@ public class LivroController implements Serializable {
     public DataPage<Livro> getTodos() {
         return this.livroService.getTodos(1);
     }
-    
+
     @RequestMapping(value = "/livros", method = RequestMethod.GET)
     @ResponseBody
     public List<Livro> getTodosList() {
         return this.livroService.getTodos();
     }
-    
-    
+
     @RequestMapping(value = "/livro", params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Livro> getPorNome(@RequestParam String q) {

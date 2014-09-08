@@ -8,36 +8,53 @@ function PessoaFactory($resource) {
 				acao: 'paginarFisica'
 			}
 		},
-                paginarAluno: {
-                    method: 'GET',
-                    params: {
-                        acao: 'paginarAluno'
-                    }
-                },
-                paginarJuridica: {
-                        method: 'GET',
-                        params: {
-                                acao: 'paginarJuridica'
-                         }
-                },
-                buscarFisica: {
-                    method: 'GET',
-                    params: {
-                        acao: 'buscarFisica'
-                    }
-                },
-                buscarAluno: {
-                    method: 'GET',
-                    params: {
-                        acao: 'buscarAluno'
-                    }
-                },
-                buscarJuridica: {
-                    method: 'GET',
-                    params: {
-                        acao: 'buscarJuridica'
-                    }
-                }
+
+        paginarAluno: {
+            method: 'GET',
+            params: {
+                acao: 'paginarAluno'
+            }
+        },
+        paginarJuridica: {
+                method: 'GET',
+                params: {
+                        acao: 'paginarJuridica'
+                 }
+        },
+        buscarFisica: {
+            method: 'GET',
+            params: {
+                acao: 'buscarFisica'
+            }
+        },
+        buscarAluno: {
+            method: 'GET',
+            params: {
+                acao: 'buscarAluno'
+            }
+        },
+        buscarJuridica: {
+            method: 'GET',
+            params: {
+                acao: 'buscarJuridica'
+            }
+        },
+
+        listarAlunos: {
+            method: 'GET',
+            isArray: true,
+            params: {
+                acao: 'alunos'
+            }
+            },
+
+        listarPessoasFisicas: {
+            method: 'GET',
+            isArray: true,
+            params: {
+                acao: 'fisicas'
+            }
+        }
                 
 	});
 }
