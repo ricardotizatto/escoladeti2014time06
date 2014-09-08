@@ -19,7 +19,6 @@ public class ComandoSalvarSolicitacao {
     @Min(value = 0, message = "Aluno é obrigatório")    @Max(value = 100)
     private Long aluno;
     
-    @NotBlank(message = "Escola é obrigatório")
     private String escola;
     
     @Min(value = 0, message = "Nre inválido")

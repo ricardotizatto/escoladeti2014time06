@@ -3,10 +3,12 @@
 
 angular.module('controllers', ['services']);
 angular.module('services', []);
+angular.module('directives', []);
 var app = angular.module('app', 
 		['ngRoute',
 		 'ngResource',
 		 'controllers',
+         'directives',
 		 'ui.select2',
 		 'ui.bootstrap']);
 

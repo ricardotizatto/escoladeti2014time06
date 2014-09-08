@@ -32,6 +32,7 @@
         <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>        
 
         <script type="text/javascript" src="./resources/js/app.js"></script>        
+        <script type="text/javascript" src="./resources/js/directives.js"></script>
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>

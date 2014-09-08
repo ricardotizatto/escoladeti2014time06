@@ -1,6 +1,6 @@
 var controllers = angular.module('controllers');
 
-function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa) {
+function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa, Cidade) {
     $log.debug('iniciando SolicitacaoController em teste6d');
 
 	var ItemCorrente = function () {
@@ -16,6 +16,12 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		allowClear: true,
 		placeholder: 'selecione'
 	},
+
+
+    Cidade.buscarTodos().success(function (cidades) {
+        console.log('cidades:',cidades);
+        $scope.cidades = cidades;
+    });
 	
 	$scope.enviarSolicitacao = function () {
 		$log.debug('enviando solicitacao');
@@ -23,11 +29,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		if ($scope.solicitacao.id) {
 			$scope.solicitacao.$update(function () {
 				toastr.success('salvo com sucesso');
-				$scope.solicitacao = new Solicitacao({
-					ensino: 'FUNDAMENTAL',
-					serie: '1-SERIE',
-					itensSolicitacao : []
-				});			
+                $location.path('/listasolicitacoes');
 			});
 			
 			return;
@@ -35,11 +37,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 				
 		$scope.solicitacao.$save(function () {
 			toastr.success('salvo com sucesso');
-			$scope.solicitacao = new Solicitacao({
-				ensino: 'FUNDAMENTAL',
-				serie: '1-SERIE',
-				itensSolicitacao : []
-			});			
+            $location.path('/listasolicitacoes');
 		});
 	};
 	
@@ -89,12 +87,12 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
     $log.debug('listar alunos');
     Pessoa.listarAlunos(function (alunos) {
-       this.alunos = alunos;
+        $scope.alunos = alunos;
     });
 
 
     Pessoa.listarPessoasFisicas(function (pessoasFisicas) {
-        this.pessoasFisicas = pessoasFisicas;
+        $scope.pessoasFisicas = pessoasFisicas;
     });
 	
 	$http({
@@ -161,5 +159,6 @@ controllers.controller('SolicitacaoController',
 		 '$http',
 		 'SolicitacaoFactory',
          'PessoaFactory',
+         'cidadeService',
 		 SolicitacaoController
 		 ]);

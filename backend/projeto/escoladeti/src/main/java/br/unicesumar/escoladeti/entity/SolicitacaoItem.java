@@ -80,12 +80,12 @@ public class SolicitacaoItem extends Entidade{
 	}
 	
 	public static class SolicitacaoItemBuilder {
-		private Long livro;
+		private Livro livro;
 		private String status;
 		private String traducaoMaterial;
 		private String outro;
 		
-		public SolicitacaoItem.SolicitacaoItemBuilder livro(Long livro) {
+		public SolicitacaoItem.SolicitacaoItemBuilder livro(Livro livro) {
 			this.livro = livro;
 			return this;
 		}
@@ -106,8 +106,9 @@ public class SolicitacaoItem extends Entidade{
 		}
 		
 		public SolicitacaoItem build() {
+
 			SolicitacaoItem solicitacaoItem = new SolicitacaoItem();
-			solicitacaoItem.setLivro(Livro.of(this.livro));
+			solicitacaoItem.setLivro(livro);
 			solicitacaoItem.setTraducaoMaterial(TraducaoMaterial.of(this.traducaoMaterial));
 			solicitacaoItem.setOutro(this.outro);
                         
@@ -131,4 +132,17 @@ public class SolicitacaoItem extends Entidade{
 	public static SolicitacaoItemBuilder builder() {
 		return new SolicitacaoItemBuilder();
 	}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof  SolicitacaoItem)) {
+            return false;
+        }
+
+        SolicitacaoItem outroItem = (SolicitacaoItem) obj;
+
+        return outroItem.livro.equals(this.livro)
+                && outroItem.traducaoMaterial.equals(this.traducaoMaterial)
+                && !outroItem.traducaoMaterial.equals(TraducaoMaterial.OUTRO);
+    }
 }
