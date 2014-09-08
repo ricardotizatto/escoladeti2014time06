@@ -5,6 +5,8 @@ import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unicesumar.escoladeti.entity.Livro;
+import br.unicesumar.escoladeti.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class SolicitacaoService {
 	
 	@Autowired
 	private SolicitacaoRepository solicitacaoRepository;
+
+    @Autowired
+    private LivroRepository livroRepository;
 	
 	public void deletar(Long id) {
 		solicitacaoRepository.delete(id);		
@@ -54,9 +59,15 @@ public class SolicitacaoService {
 		List<SolicitacaoItem> itens = new ArrayList<SolicitacaoItem>();
 		
 		for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
+            Livro livro = livroRepository.findById(comandoItem.getLivro());
+
+            if (livro == null) {
+                throw new RuntimeException("Livro não encontrado.");
+            }
+
 			SolicitacaoItem solicitacaoItem = SolicitacaoItem
 					.builder()
-					.livro(comandoItem.getLivro())
+					.livro(livro)
 					.outro(comandoItem.getOutro())
 					.traducaoMaterial(comandoItem.getTraducaoMaterial())
 					.status(StatusItem.ABERTO)
@@ -71,7 +82,7 @@ public class SolicitacaoService {
 		return solicitacaoRepository.save(solicitacao);
 	}
 	
-	public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) {
+	public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) throws Exception {
 		SolicitacaoBuilder solicitacaoBuilder = Solicitacao
 				.builder()
 				.id(id)
@@ -92,13 +103,22 @@ public class SolicitacaoService {
 		List<SolicitacaoItem> itens = new ArrayList<SolicitacaoItem>();
 		
 		for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
+            Livro livro = livroRepository.findById(comandoItem.getLivro());
+
+            if (livro == null) {
+                throw new RuntimeException("Livro não encontrado.");
+            }
+
 			SolicitacaoItem solicitacaoItem = SolicitacaoItem
 					.builder()
-					.livro(comandoItem.getLivro())
+					.livro(livro)
 					.outro(comandoItem.getOutro())
 					.traducaoMaterial(comandoItem.getTraducaoMaterial())
 					.status(StatusItem.ABERTO)
 					.build();
+
+            validarDuplicados(itens, solicitacaoItem);
+
 			itens.add(solicitacaoItem);
 		}
 		
@@ -111,7 +131,15 @@ public class SolicitacaoService {
 		
 	}
 
-	public List<Solicitacao> listar() {
+    private void validarDuplicados(List<SolicitacaoItem> itens, SolicitacaoItem solicitacaoItem) throws Exception {
+        for (SolicitacaoItem item : itens) {
+            if (item.equals(solicitacaoItem)) {
+                throw new RuntimeException("Só pode existir um livro para um tipo de tradução.");
+            }
+        }
+    }
+
+    public List<Solicitacao> listar() {
 		return solicitacaoRepository.findAll();
 	}
 	

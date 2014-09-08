@@ -26,7 +26,14 @@ public class ExceptionController {
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public InfoError handleException(Exception e) {
 		return new InfoError(e.getMessage(), e.getLocalizedMessage() );
-	}	
+	}
+
+    @ExceptionHandler( RuntimeException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public InfoError handleException(RuntimeException e) {
+        return new InfoError(e.getMessage(), e.getLocalizedMessage() );
+    }
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	@ResponseBody

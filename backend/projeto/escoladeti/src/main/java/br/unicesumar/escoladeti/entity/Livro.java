@@ -70,45 +70,27 @@ public class Livro extends Entidade {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.nome);
-        hash = 83 * hash + Objects.hashCode(this.disciplina);
-        hash = 83 * hash + Objects.hashCode(this.autor);
-        hash = 83 * hash + Objects.hashCode(this.editora);
-        hash = 83 * hash + Objects.hashCode(this.anoEdicao);
-        return hash;
+        return Objects.hash(this.id);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
+        if (obj == null || !(obj instanceof Livro)) {
+          return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Livro other = (Livro) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.disciplina, other.disciplina)) {
-            return false;
-        }
-        if (!Objects.equals(this.autor, other.autor)) {
-            return false;
-        }
-        if (!Objects.equals(this.editora, other.editora)) {
-            return false;
-        }
-        if (!Objects.equals(this.anoEdicao, other.anoEdicao)) {
-            return false;
-        }
-        return true;
+
+        Livro outroLivro = (Livro) obj;
+
+        boolean igual = outroLivro.nome.equals(this.nome)
+                && outroLivro.anoEdicao.equals(this.anoEdicao)
+                && outroLivro.disciplina.equals(this.disciplina)
+                && outroLivro.editora.equals(this.editora);
+
+        return igual;
     }
 
 	public static Livro of(Long id) {
 		return new Livro(id);
 	}
-    
     
 }

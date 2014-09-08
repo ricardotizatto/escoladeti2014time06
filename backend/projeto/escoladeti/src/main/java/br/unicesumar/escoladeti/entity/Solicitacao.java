@@ -58,7 +58,6 @@ public class Solicitacao extends Entidade {
     @JoinColumn(name = "id_responsavel")
     private PessoaFisica responsavel;
 
-    @NotEmpty(message="Devem ser inseridos materiais que serão produzidos")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER, mappedBy="solicitacao")
     private List<SolicitacaoItem> itensSolicitacao;
 
@@ -276,11 +275,12 @@ public class Solicitacao extends Entidade {
 	    public Solicitacao build() {
 	    	checkNotNull(this.aluno, "Aluno é obrigatório");
 	    	checkNotNull(this.dataChegada, "Data chegada é obrigatório");
-	    	checkNotNull(this.escola, "Escola é obrigatorio");
-	    	checkNotNull(this.cep, "CEP é obrigatório");
 	    	checkNotNull(this.itensSolicitacao, "Itens das solicitação são obrigatórios");
 	    	checkArgument(this.itensSolicitacao.size() > 0, "É obrigatório ter itens");
 	    	checkNotNull(this.numeroEndereco, "Número de endereço é obrigatório");
+            checkNotNull(this.cep, "CEP é obrigatório");
+	    	checkNotNull(this.endereco, "Endereço é obrigatório");
+	    	checkNotNull(this.municipio, "Municipio é obrigatório");
 	    	checkNotNull(this.responsavel, "Responsável é obrigatório");
 	    	
 	    	Solicitacao solicitacao = new Solicitacao();

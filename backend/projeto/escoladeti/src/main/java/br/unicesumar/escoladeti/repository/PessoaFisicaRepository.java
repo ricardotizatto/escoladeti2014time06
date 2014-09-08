@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 
+import java.util.List;
+
 public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long> {
 
     public Page<PessoaFisica> findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(String nome,String sobrenomenome, String cpf, Pageable pageable);
@@ -18,5 +20,9 @@ public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long
     public PessoaFisica findById(Long id);
 
     public PessoaFisica findByCpf(String cpf);
+
+    public List<PessoaFisica> findByAlunoTrue();
+
+    public List<PessoaFisica> findByAlunoFalse();
 
 }

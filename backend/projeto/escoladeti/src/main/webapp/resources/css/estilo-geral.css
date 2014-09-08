@@ -4,6 +4,12 @@
     font-family:  arial, verdana, Serif, sans-serif, Georgia, "Times New Roman";
 }
 
+
+.container {
+    width:100%;
+}
+
+
 body{
     padding-top: 70px;
 }

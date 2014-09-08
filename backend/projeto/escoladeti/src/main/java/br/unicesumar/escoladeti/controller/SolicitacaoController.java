@@ -35,7 +35,7 @@ public class SolicitacaoController implements Serializable{
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)	
 	@ResponseBody
 	public Solicitacao atualizar(@Valid @RequestBody ComandoSalvarSolicitacao comando,
-		@PathVariable("id") Long id) {		
+		@PathVariable("id") Long id) throws Exception {
 		return solicitacaoService.atualizar(id, comando);
 	}
     
