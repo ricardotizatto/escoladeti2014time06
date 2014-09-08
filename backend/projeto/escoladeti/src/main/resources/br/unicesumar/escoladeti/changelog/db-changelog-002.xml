@@ -91,9 +91,17 @@
             schemaName="public"
             tableName="pessoafisica"/>
     </changeSet> 
-    <changeSet id="wwr1" author="winicius" >
-    <dropNotNullConstraint 
-            columnDataType="VARCHAR(50)"
+    
+    <changeSet id="mart007" author="martinho" >
+        <dropNotNullConstraint 
+            columnDataType="VARCHAR(255)"
+            columnName="email"
+            schemaName="public"
+            tableName="pessoa"/>
+    </changeSet> 
+    <changeSet id="mart008" author="martinho" >
+        <modifyDataType
+            newDataType="VARCHAR(50)"
             columnName="email"
             schemaName="public"
             tableName="pessoa"/>

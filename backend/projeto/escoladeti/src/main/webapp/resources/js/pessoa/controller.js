@@ -170,11 +170,13 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         if ($scope.tipo === "J") {
             $scope.pessoa = new Pessoa({
                 tipo: "J",
+                email: "",
                 telefones: []
             });
         } else {
             $scope.pessoa = new Pessoa({
                 tipo:  "F",
+                email: "",
                 aluno: "false",
                 sexo:  "MASCULINO",
                 telefones: []
@@ -183,7 +185,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     };
 
     $scope.salvar = function() {
-   
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function() {
                 toastr.success($scope.pessoa.nome + ' atualizado com sucesso');
