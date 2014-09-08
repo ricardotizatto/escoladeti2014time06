@@ -24,7 +24,16 @@ public class DateUtil {
             }
         }
         
-        //verifica se ano Ã© maior que o ano atual
+        public static boolean validBeforeDate(Date data){
+            Date hoje = new Date();
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+            if(f.format(hoje).equals(f.format(data)) || data.before(hoje)){    
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //verifica se ano é maior que o ano atual
         public static boolean validYear(Date ano){
             Date hoje = new Date();
             SimpleDateFormat f = new SimpleDateFormat("yyyy");
@@ -34,5 +43,4 @@ public class DateUtil {
                 return false;
             }
         }
-
 }

@@ -5,6 +5,7 @@ import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.entity.Pais;
 import br.unicesumar.escoladeti.repository.EventoRepository;
 import br.unicesumar.escoladeti.service.EventoService;
+import br.unicesumar.escoladeti.util.data.DateUtil;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,11 @@ public class EventoController implements Serializable {
 
     @RequestMapping(value = "/evento", method = RequestMethod.POST)
     @ResponseBody
-    public Evento salvar(@RequestBody Evento evento) {
-        return this.eventoService.salvar(evento);
+    public Evento salvar(@RequestBody Evento evento) throws Exception {
+        if (!DateUtil.validBeforeDate(evento.getData())){
+            return this.eventoService.salvar(evento);
+        }
+        throw new Exception ("A data não pode ser menor do que a data atual");
     }
 
     @RequestMapping(value = "/evento/{id}", method = RequestMethod.GET)
@@ -40,7 +44,6 @@ public class EventoController implements Serializable {
 //    public List<Evento> getTodos() {
 //        return eventoService.getTodos(1);
 //    }
-     
     @RequestMapping(value = "/evento", method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Evento> getTodos() {
@@ -58,5 +61,13 @@ public class EventoController implements Serializable {
     public String deletar(@RequestBody Evento evento) {
         eventoService.deletar(evento);
         return "deleted";
+    }
+
+    @RequestMapping(value = "/evento", method = RequestMethod.PUT)
+    @ResponseBody
+    public Evento editar(@RequestBody Evento evento) {
+        Evento eventoEditado = this.eventoService.getById(evento.getId());
+        System.out.println("Evento " + evento.getId());
+        return eventoService.salvar(eventoEditado);
     }
 }

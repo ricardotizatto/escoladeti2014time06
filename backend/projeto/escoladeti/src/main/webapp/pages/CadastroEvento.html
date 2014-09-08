@@ -6,71 +6,100 @@
                 <legend> Cadastro de Evento  </legend>
             </div>
         </div>
-        <form action="" method="POST" role="form" ng-submit="salvar()">	
+        <form action="" novalidate method="POST" role="form" name="formEvento" ng-submit="salvar()">	
             <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="form-group col-sm-7">
-                    <label> Titulo </label>
-                    <input class="form-control" name="titulo" type="text" ng-model="evento.titulo" placeholder="Titulo" />
-                </div>
-                <div class="form-group col-sm-2"> 
-                    <label> Tipo </label>
-                    <select class="form-control" ng-model="evento.tipoEvento">
-                        <option value="1">Curso</option>
-                        <option value="2">Palestra</option>
-                        <option value="3">Reunião</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-sm-1"></div>
-                <div class="form-group col-sm-7">
-                    <label> Realização </label>
-                    <input class="form-control" name="organizacao" type="text" ng-model="evento.organizacao" placeholder="Organização responsavel" />
+                <div class="col-sm-7">
+                    <div class="form-group {{formEvento.titulo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Titulo *</strong></label>
+                        <input type="text" name="titulo" title="Titulo do Evento deve ser maisculo" class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/"
+                               ng-model="evento.titulo" required placeholder="Titulo"/>
+                        <span class="help-block" ng-show="formEvento.titulo.$error.pattern">Apenas letras e no mínimo 3.</span>
+                    </div>
                 </div>
                 <div class="col-sm-2">
-                    <label>Valor</label>
-                    <input class="form-control" type="text" name="valor" placeholder="R$00.00" ng-model="evento.valor" />
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-sm-1"></div>
-                <div class="form-group col-sm-7">
-                    <label> Ministrante </label>
-                    <input class="form-control" name="ministrante" type="text" ng-model="evento.ministrante" placeholder="Ministrante do curso ou evento"/>
-                </div>
-            </div>            
-            <div class="row ">           
-                <div class="col-sm-1"></div>
-                <div class="col-sm-9">
-                    <label> Descrição do Evento</label>
-                    <textarea class="form-control" rows="5" cols="5" ng-model="evento.descricao" placeholder="No mundo atual, a revolução dos costumes maximiza as possibilidades por conta dos relacionamentos verticais entre as hierarquias..."></textarea>
-                    <div class="required-icon">
-                        <div class="text"></div>
+                    <div class="form-group {{formEvento.tipo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Tipo *</strong></label>
+                        <select name="tipo" class="form-control" ng-model="evento.tipoEvento" required>
+                            <option value="1">Curso</option>
+                            <option value="2">Palestra</option>
+                            <option value="3">Reunião</option>
+                        </select>
+                        <span class="help-block" ng-show="formEvento.tipo.$error.required">Selecione o tipo do evento</span>
                     </div>
                 </div>
             </div>
-            <br />
             <div class="row">
-                <div class="col-sm-1"></div>
+                <div class="col-sm-7">
+                    <div class="form-group {{formEvento.organizacao.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Realização *</strong></label>
+                        <input type="text" name="organizacao" title="Realizacao do Evento deve ser maisculo" class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/"
+                               ng-model="evento.organizacao" required placeholder="Organização responsavel"/>
+                        <span class="help-block" ng-show="formEvento.organizacao.$error.pattern">Apenas letras e no mínimo 3.</span>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group {{formEvento.valor.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Valor R$ *</strong></label>
+                        <input type="text" name="valor" title="Substituir (,) por (.)" class="form-control" ng-pattern="/[0-9]{3}/"
+                               ng-model="evento.valor" required placeholder="00.00"/>
+                        <span class="help-block" ng-show="formEvento.valor.$error.pattern">Apenas números.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="form-group {{formEvento.ministrante.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Ministrante *</strong></label>
+                        <input type="text" name="ministrante" class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/"
+                               ng-model="evento.ministrante" required placeholder="Ministrante do curso ou evento"/>
+                        <span class="help-block" ng-show="formEvento.ministrante.$error.pattern">Apenas letras e no mínimo 3.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group {{formEvento.descricao.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Descrição do Evento *</strong></label>
+                        <textarea name="descricao" class="form-control" rows="5" cols="5" ng-pattern="/[a-zA-Z\s]{3,200}/"
+                                  required ng-model="evento.descricao" placeholder="Digite uma descrição para o evento..."></textarea>
+                        <span class="help-block" ng-show="formEvento.descricao.$error.pattern">Apenas letras e no mínimo 3.</span>
+                        <div class="required-icon">
+                            <div class="text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="form-group col-sm-6">
-                    <label> Local </label>
-                    <input class="form-control" name="local" type="text" ng-model="evento.local" placeholder="Local do evento"/>
+                    <div class="form-group {{formEvento.local.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Local *</strong></label>
+                        <input class="form-control" name="local" type="text" ng-pattern="/[a-zA-Z\s]{3,200}/"
+                               ng-model="evento.local" required placeholder="Local do evento""/>
+                        <span class="help-block" ng-show="formEvento.local.$error.pattern">Apenas letras e no mínimo 3.</span>
+                    </div>
                 </div>   
             </div>            
             <div class="row">
-                <div class="col-sm-1"></div>
                 <div class="col-sm-2">
-                    <label> Data </label>
-                    <input type="date" class="form-control" ng-model="evento.data" placeholder="dd/mm/aaaa" />
+                    <div class="form-group {{formEvento.data.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Data *</strong></label>
+                        <input name="data" type="date" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.data" required placeholder="dd/mm/aaaa" />
+                        <span class="help-block" ng-show="formEvento.data.$error.pattern">Apenas números.</span>
+                    </div>
                 </div>
                 <div class="col-sm-2">
-                    <label> Início </label>
-                    <input type="time" class="form-control" ng-model="evento.inicio" placeholder="00:00" />
+                    <div class="form-group {{formEvento.inicio.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Início *</strong></label>
+                        <input name="inicio" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.inicio" required="" placeholder="00:00" />
+                        <span class="help-block" ng-show="formEvento.inicio.$error.pattern">Apenas números.</span>
+                    </div>
                 </div>
                 <div class="col-sm-2">
-                    <label> Término </label>
-                    <input type="time" class="form-control" ng-model="evento.fim" placeholder="00:00" />
+                    <div class="form-group {{formEvento.termino.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Término *</strong></label>
+                        <input name="termino" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.fim" required="" placeholder="00:00" />
+                        <span class="help-block" ng-show="formEvento.termino.$error.pattern">Apenas números.</span>
+                    </div>
                 </div>
 
             </div>
@@ -79,10 +108,10 @@
 
                 <div class="col-sm-9">
                     <span class="pull-right">	
-                        <a href="#/listaevento" class="btn btn-danger btn-padrao">
-                            <span class="glyphicon glyphicon-remove" ></span> Cancelar
+                        <a class="btn btn-primary btn-padrao" ng-click="voltar()">
+                            <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
                         </a>
-                        <button type="submit" class="btn btn-success btn-padrao">
+                        <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formEvento.$invalid">
                             <span class="glyphicon glyphicon-ok"  ></span> Salvar	
                         </button>
                     </span>		
