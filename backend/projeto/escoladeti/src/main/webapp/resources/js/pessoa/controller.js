@@ -79,6 +79,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function(pessoa) {
             
             $scope.pessoa = pessoa;
+            $scope.telefone = pessoa.telefones[0];
             if(pessoa.tipo !== 'J'){
                $scope.pessoa.aluno = String(pessoa.aluno); 
             }
@@ -254,6 +255,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     $scope.delTelefone = function(index) {
         toastr.warning("Telefone removido  " + $scope.pessoa.telefones[index].numero + "!");
         $scope.pessoa.telefones.splice(index, 1);
+        $scope.telefone = {};
     };
 
 
