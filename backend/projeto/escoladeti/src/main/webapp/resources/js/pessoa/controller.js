@@ -242,7 +242,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         $scope.pessoa.telefones.push($scope.telefone);
         console.log($scope.telefones);
         toastr.success("Telefone adicionado " + $scope.telefone.numero + " !");
-        $scope.telefone = getNovoTelefone();
+        //$scope.telefone = getNovoTelefone();
         $scope.indiceTelefone = {};
     };
 

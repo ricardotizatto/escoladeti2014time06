@@ -105,7 +105,7 @@
             <div class="row ">
                 <div class="col-sm-4">
                     <div class="form-group {{formPessoa.nomeJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                        <label class="control-label"> <strong>Nome *</strong></label> 
+                        <label class="control-label"> <strong>Nome Fantasia *</strong></label> 
                         <input class="form-control" name="nomeJuridica" type="text" ng-model="pessoa.nome" placeholder="Nome Fantasia" maxlength="50" title="Nome" ng-required="pessoa.tipo == 'J'" ng-pattern="/^[a-zA-Z\s]{2,50}$/" />
                         <span class="help-block" ng-show="formPessoa.nomeJuridica.$error.pattern">Apenas letras e no mínimo 2.</span>
                     </div>
@@ -140,9 +140,11 @@
                     <input class="form-control" name="dataCriacao" type="text" maxlength="12" ng-pattern="/^[0-9]+$/" title="Apenas numeros"
                                 ng-model="pessoa.inscricaoEstadual" placeholder="Número Inscrição Estadual"/>
                 </div>
-                <div class="form-group col-sm-2">
-                    <label  class="control-label"> <strong> Data de Criação </strong></label> 
-                    <input class="form-control" name="dataCriacao" type="date" ng-model="pessoa.dataCriacao"  title="11/01/2000"/>
+                <div class="col-sm-2">
+                    <div class="form-group {{formPessoa.dataCriacaoJuridica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Data de Criação *</strong> </label> 
+                        <input class="form-control maskNascimento" name="dataCriacaoJuridica" type="date" ng-model="pessoa.dataCriacao" placeholder="dd/mm/aaaa" ng-required="pessoa.tipo == 'J'" />
+                    </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="control-label"> <strong>Email </strong></label>
@@ -188,34 +190,47 @@
                     </tr>
                 </table>
             </div>
-            <div class="form-group col-sm-5">
-                <legend>
-                    <span class="glyphicon glyphicon-phone-alt"></span> Telefone
-                    <button type="submit" class="btn btn-primary btn-sm"
-                            data-toggle="modal" data-target="#modalTelefone">
-                            <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </legend>
-                <table class="table table-hover table-striped">
-                    <tbody>
-                        <tr ng-repeat="telefone in pessoa.telefones">
-                            <td class="text-center">{{telefone.tipo + " - " + "(" + telefone.ddd + ")" + telefone.numero}}</td>
-                            <td>
-                                <span class="pull-right">
-                                    <button class='btn btn-warning btn-sm'
-                                            ng-click="editarTelefone($index)" data-toggle="modal"
-                                            data-target="#modalTelefone">
-                                            <span class='glyphicon glyphicon-edit'></span>
-                                    </button>
-                                    <button class='btn btn-danger btn-sm'
-                                            ng-click="delTelefone($index)">
-                                            <span class='glyphicon glyphicon-remove-circle'></span>
-                                    </button>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-sm-5">
+                <div class="form-group {{formTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <div class="row" >
+                        <div class="col-sm-5"> 
+                            <legend>
+                                <span class="glyphicon glyphicon-phone-alt"></span> Telefone
+                                <button type="submit" class="btn btn-primary btn-sm"
+                                        data-toggle="modal" data-target="#modalTelefone" ng-click="novoTelefone()">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </legend>
+                        </div>    
+                        <div class="col-sm-7">    
+                            <span class="help-block" ng-show="formTelefone.$invalid">* Deve haver ao menos 1 telefone cadastrado</span>
+                        </div>
+                    </div>    
+                    <div class="row" >  
+                        <div class="col-sm-12"> 
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <tr ng-repeat="telefone in pessoa.telefones">
+                                        <td class="text-center">{{telefone.tipo + " - " + "(" + telefone.ddd + ")" + telefone.numero}}</td>
+                                        <td>
+                                            <span class="pull-right">
+                                                <button class='btn btn-warning btn-sm'
+                                                        ng-click="editarTelefone($index)" data-toggle="modal"
+                                                        data-target="#modalTelefone">
+                                                        <span class='glyphicon glyphicon-edit'></span>
+                                                </button>
+                                                <button class='btn btn-danger btn-sm'
+                                                        ng-click="delTelefone($index)">
+                                                        <span class='glyphicon glyphicon-remove-circle'></span>
+                                                </button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>    
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -224,8 +239,8 @@
                     <a class="btn btn-primary btn-padrao" ng-click="voltar()"> 
                         <i class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
                     </a>
-                    <button type="submit" class="btn btn-success btn-padrao">
-                        <span class="glyphicon glyphicon-ok" ng-disabled="formPessoa.$invalid"></span> Salvar
+                    <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formPessoa.$invalid || formTelefone.$invalid" >
+                        <span class="glyphicon glyphicon-ok"></span> Salvar
                     </button>
                 </span>
             </div>
@@ -246,7 +261,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-3">
-                                <div class="form-group {{formTelefone.tipoTelefone.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                                <div class="form-group">
                                     <label class="control-label"> <strong>Telefone *</strong></label>
                                     <div class="input-group">
                                         <span class="input-group-addon"> <span
@@ -286,8 +301,8 @@
                             <button class="btn btn-danger btn-padrao" data-dismiss="modal">
                                         <span class="glyphicon glyphicon-remove"></span> Sair
                                 </button>
-                                <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()" >
-                                        <span class="glyphicon glyphicon-ok" ng-disabled="telefone.$invalid"></span> Salvar
+                                <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()" ng-disabled="formTelefone.$invalid" >
+                                        <span class="glyphicon glyphicon-ok"></span> Salvar
                                 </button> 
                             </span>
                         </div>
