@@ -141,9 +141,9 @@
                                 ng-model="pessoa.inscricaoEstadual" placeholder="Número Inscrição Estadual"/>
                 </div>
                 <div class="col-sm-2">
-                    <div class="form-group {{formPessoa.dataCriacaoJuridica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                        <label class="control-label"><strong>Data de Criação *</strong> </label> 
-                        <input class="form-control maskNascimento" name="dataCriacaoJuridica" type="date" ng-model="pessoa.dataCriacao" placeholder="dd/mm/aaaa" ng-required="pessoa.tipo == 'J'" />
+                    <div class="form-group">
+                        <label class="control-label"><strong>Data de Criação</strong> </label> 
+                        <input class="form-control" name="dataCriacaoJuridica" type="date" ng-model="pessoa.dataCriacao" placeholder="dd/mm/aaaa" />
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -193,17 +193,17 @@
             <div class="col-sm-5">
                 <div class="form-group {{formTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <div class="row" >
-                        <div class="col-sm-5"> 
+                        <div class="col-sm-4"> 
                             <legend>
-                                <span class="glyphicon glyphicon-phone-alt"></span> Telefone
+                                <span class="glyphicon glyphicon-phone-alt"></span> <strong class="control-label" > Telefone *</strong>
                                 <button type="submit" class="btn btn-primary btn-sm"
                                         data-toggle="modal" data-target="#modalTelefone" ng-click="novoTelefone()">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </legend>
                         </div>    
-                        <div class="col-sm-7">    
-                            <span class="help-block" ng-show="formTelefone.$invalid">* Deve haver ao menos 1 telefone cadastrado</span>
+                        <div class="col-sm-8">    
+                            <!--<span class="help-block" ng-show="formTelefone.$invalid">Deve haver ao menos 1 telefone cadastrado</span>-->
                         </div>
                     </div>    
                     <div class="row" >  
