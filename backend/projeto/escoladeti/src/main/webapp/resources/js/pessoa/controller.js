@@ -255,7 +255,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     $scope.delTelefone = function(index) {
         toastr.warning("Telefone removido  " + $scope.pessoa.telefones[index].numero + "!");
         $scope.pessoa.telefones.splice(index, 1);
-        $scope.telefone = {};
+        if($scope.pessoa.telefones.length === 0){
+            $scope.telefone = {};
+        }   
     };
 
 
