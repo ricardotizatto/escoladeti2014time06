@@ -225,7 +225,7 @@
                         <i class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
                     </a>
                     <button type="submit" class="btn btn-success btn-padrao">
-                        <span class="glyphicon glyphicon-ok"></span> Salvar
+                        <span class="glyphicon glyphicon-ok" ng-disabled="formPessoa.$invalid"></span> Salvar
                     </button>
                 </span>
             </div>
@@ -287,7 +287,7 @@
                                         <span class="glyphicon glyphicon-remove"></span> Sair
                                 </button>
                                 <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()" >
-                                        <span class="glyphicon glyphicon-ok"></span> Salvar
+                                        <span class="glyphicon glyphicon-ok" ng-disabled="telefone.$invalid"></span> Salvar
                                 </button> 
                             </span>
                         </div>

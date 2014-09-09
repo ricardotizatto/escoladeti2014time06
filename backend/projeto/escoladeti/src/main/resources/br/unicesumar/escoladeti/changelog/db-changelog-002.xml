@@ -106,6 +106,20 @@
             schemaName="public"
             tableName="pessoa"/>
     </changeSet> 
+    <changeSet id="wwr001" author="winicius" >
+        <dropNotNullConstraint 
+            columnDataType="VARCHAR(255)"
+            columnName="inscricaoestadual"
+            schemaName="public"
+            tableName="pessoajuridica"/>
+    </changeSet> 
+    <changeSet id="wwr002" author="winicius" >
+        <dropNotNullConstraint 
+            columnDataType="date"
+            columnName="datacriacao"
+            schemaName="public"
+            tableName="pessoajuridica"/>
+    </changeSet> 
        
 </databaseChangeLog>
    
