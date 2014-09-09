@@ -64,9 +64,9 @@ public class PessoaController implements Serializable {
         return pessoaService.paginarAluno(pagina);
     }
 
-    @RequestMapping(value = {"/buscarAluno/{pagina}/{busca}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/buscarAluno/{pagina}"},params = "busca", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<PessoaFisica> buscarAluno(@PathVariable Integer pagina, @PathVariable String busca) {
+    public DataPage<PessoaFisica> buscarAluno(@PathVariable Integer pagina, @RequestParam String busca) {
         return pessoaService.buscarAluno(pagina, busca);
     }
 
@@ -76,9 +76,9 @@ public class PessoaController implements Serializable {
         return pessoaService.paginarJuridica(pagina);
     }
 
-    @RequestMapping(value = {"/buscarJuridica/{pagina}/{busca}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/buscarJuridica/{pagina}"},params = "busca", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<PessoaJuridica> buscarJuridica(@PathVariable Integer pagina, @PathVariable String busca) {
+    public DataPage<PessoaJuridica> buscarJuridica(@PathVariable Integer pagina, @RequestParam String busca) {
         return pessoaService.buscarJuridica(pagina, busca);
     }
 

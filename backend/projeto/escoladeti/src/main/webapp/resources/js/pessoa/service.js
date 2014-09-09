@@ -1,13 +1,13 @@
 function PessoaFactory($resource) {
-	return $resource("./rest/pessoas/:id/:acao/:pagina/:busca/:tipo", {id: '@id'},{
+    return $resource("./rest/pessoas/:id/:acao/:pagina/:tipo", {id: '@id'},{
 		
-		update: {method: 'PUT'},
-		paginarFisica: {
-			method: 'GET',
-			params: {
-				acao: 'paginarFisica'
-			}
-		},
+        update: {method: 'PUT'},
+        paginarFisica: {
+                method: 'GET',
+                params: {
+                        acao: 'paginarFisica'
+                }
+        },
 
         paginarAluno: {
             method: 'GET',
@@ -16,21 +16,24 @@ function PessoaFactory($resource) {
             }
         },
         paginarJuridica: {
-                method: 'GET',
-                params: {
-                        acao: 'paginarJuridica'
-                 }
+            method: 'GET',
+            params: {
+                acao: 'paginarJuridica',
+                busca : $resource("busca")
+            }
         },
         buscarFisica: {
             method: 'GET',
             params: {
-                acao: 'buscarFisica'
+                acao: 'buscarFisica',
+                busca : $resource("busca")
             }
         },
         buscarAluno: {
             method: 'GET',
             params: {
-                acao: 'buscarAluno'
+                acao: 'buscarAluno',
+                busca : $resource("busca")
             }
         },
         buscarJuridica: {
@@ -56,7 +59,7 @@ function PessoaFactory($resource) {
             }
         }
                 
-	});
+    });
 }
 
 angular.module('services')
