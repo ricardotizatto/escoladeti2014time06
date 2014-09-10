@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.PerfilAcesso;
@@ -17,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- *
- * @author Walber
- */
 @Controller
 @RequestMapping("/rest/perfilAcessoSource")
 public class PerfilAcessoController implements Serializable {
@@ -29,14 +20,13 @@ public class PerfilAcessoController implements Serializable {
 
     @Autowired
     private PerfilAcessoService perfilService;
-
+   
     @RequestMapping(value = "/perfilAcesso", method = RequestMethod.POST)
     @ResponseBody
     public PerfilAcesso salvar(@RequestBody PerfilAcesso perfil) {
-        System.out.println("Perfil" + perfil.getNome());
-        return this.perfilService.salvar(perfil);
+           return this.perfilService.salvar(perfil);
     }
-
+   
     @RequestMapping(value = "/perfilAcesso/{id}", method = RequestMethod.GET)
     @ResponseBody
     public PerfilAcesso getById(@PathVariable Long id) {
