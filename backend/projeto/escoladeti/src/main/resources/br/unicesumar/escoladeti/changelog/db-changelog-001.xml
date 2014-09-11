@@ -505,10 +505,10 @@
         <addPrimaryKey columnNames="id" constraintName="participante_pkey"
                        tableName="participante" />
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940885-46">
+<!--    <changeSet author="Jhonatan (generated)" id="1404066940885-46">
         <addPrimaryKey columnNames="id" constraintName="perfilacesso_pkey"
                        tableName="perfilacesso" />
-    </changeSet>
+    </changeSet>-->
     <changeSet author="Jhonatan (generated)" id="1404066940885-47">
         <addPrimaryKey columnNames="id" constraintName="pessoa_pkey"
                        tableName="pessoa" />
