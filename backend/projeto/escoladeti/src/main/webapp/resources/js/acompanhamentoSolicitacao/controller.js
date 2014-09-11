@@ -1,6 +1,6 @@
 var controllers = angular.module('controllers');
 
-function acompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams) {
+function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams) {
     var $this = this;
 
     $log.debug('carregando acomapanhamento solicitacao');
@@ -98,12 +98,12 @@ function acompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     };
 }
 
-controllers.controller('acompanhamentoSolicitacaoController',  
+controllers.controller('AcompanhamentoSolicitacaoController',  
 		[
 		 '$scope',
 		 '$location',
 		 '$log',
 		 '$http',
 		 '$routeParams',
-		 acompanhamentoSolicitacaoController
+		 AcompanhamentoSolicitacaoController
 		 ]);

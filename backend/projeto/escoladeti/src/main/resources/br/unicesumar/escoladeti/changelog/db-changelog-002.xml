@@ -120,6 +120,11 @@
             schemaName="public"
             tableName="pessoajuridica"/>
     </changeSet> 
-       
+    
+    <changeSet id="mart009" author="martinho">
+        <dropNotNullConstraint tableName="cidade" columnName="fundacao" />
+        <dropColumn tableName="cidade" columnName="fundacao" />
+    </changeSet>
+ 
 </databaseChangeLog>
    
