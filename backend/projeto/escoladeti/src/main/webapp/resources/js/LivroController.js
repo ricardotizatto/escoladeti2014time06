@@ -80,11 +80,15 @@ function livroController($scope, $http, $routeParams) {
                 $scope.livro = getNovoLivro();
                 console.log("livro salva = " + livro);
                 toastr.success('Livro ' + livro.nome + ' salvo com sucesso');
+<<<<<<< HEAD
                 $scope.voltar();
+=======
+                setTimeout(function(){window.location="#/listalivro"}, 5000);
+>>>>>>> eaf97577c924fb18eeae6d0fe136a0b1919ac569
             })
             .error(function(data, status) {
                 console.log("erro ao salvar livro" + data);
-                toastr.error(data.message);
+               // toastr.error(data.message);
             });
     };
 
