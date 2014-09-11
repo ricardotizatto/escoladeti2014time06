@@ -147,8 +147,6 @@
                             <li><a href="#/listaestado">Estado</a></li>
                             <li><a href="#/listacidade">Cidade</a></li>
                             <li><a href="#/listadistrito">Distrito</a></li>
-                            <li><a href="#/listabairro">Bairro</a></li>
-                            <li><a href="#/listacep">Faixa de CEP</a></li>
                         </ul>
                     </li>
                     <li>
@@ -160,10 +158,9 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-user"></i>
-                            <span class="title">Usu√°rios</span>
+                            <span class="title">Usu·rios</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listausuario">Usu√°rio</a></li>
                             <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                             <li><a href="#/listaitemacesso">Item de acesso</a></li>
                         </ul>
@@ -188,12 +185,12 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-cog"></i>
-                            <span class="title">PRODU√áAO</span>
+                            <span class="title">PRODU«√O</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">Solicita√ß√£o</a></li>
-                            <li><a href="#/acompanhamento">Acompanhamento de Solicita√ß√£o</a></li>
-                            <li><a href="#/listaordemproducao">Ordem de Produ√ß√£o</a></li>
+                            <li><a href="#/listasolicitacoes">SolicitaÁ„o</a></li>
+                            <li><a href="#/acompanhamento">Acompanhamento de SolicitaÁ„o</a></li>
+                            <li><a href="#/listaordemproducao">Ordem de ProduÁ„o</a></li>
                         </ul>
                     </li>
                     <li>
