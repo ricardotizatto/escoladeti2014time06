@@ -33,7 +33,7 @@ public class DateUtil {
                 return false;
             }
         }
-        //verifica se ano é maior que o ano atual
+        //verifica se ano maior que o ano atual
         public static boolean validYear(Date ano){
             Date hoje = new Date();
             SimpleDateFormat f = new SimpleDateFormat("yyyy");

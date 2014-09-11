@@ -9,7 +9,7 @@
         <link href="./resources/css/submenudropdown.css" rel="stylesheet">
         <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="./resources/css/bootstrap-dialog.min.css" rel="stylesheet">        
-        <link href="./resources/css/toastr.css" rel="stylesheet">        
+        <link href="./resources/css/toastr.css" rel="stylesheet">
         <link href="./resources/css/jquery-ui.css" rel="stylesheet">
         <link href="./resources/css/select2.css" rel="stylesheet">
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
@@ -30,9 +30,11 @@
         <script type="text/javascript" src="./resources/libs/angular-ui.js"></script>        
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
-        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>        
+        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>  
+        <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>        
+        <script type="text/javascript" src="./resources/js/directives.js"></script>
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
@@ -67,8 +69,8 @@
         <link  href="./resources/vendor/css/jquery.sidr.light.css">
         <link rel="stylesheet" href="./resources/vendor/css/custom-icons.css">
         <link rel="stylesheet" href="./resources/vendor/css/style.css">
-        <link rel="stylesheet" href="./resources/vendor/css/responsive.css">     
-        <link rel="stylesheet" href="./resources/vendor/css/custom-icon-set.css">        
+        <link rel="stylesheet" href="./resources/vendor/css/responsive.css">
+        <link rel="stylesheet" href="./resources/vendor/css/custom-icon-set.css">
 
 
 
@@ -146,8 +148,6 @@
                             <li><a href="#/listaestado">Estado</a></li>
                             <li><a href="#/listacidade">Cidade</a></li>
                             <li><a href="#/listadistrito">Distrito</a></li>
-                            <li><a href="#/listabairro">Bairro</a></li>
-                            <li><a href="#/listacep">Faixa de CEP</a></li>
                         </ul>
                     </li>
                     <li>
@@ -162,7 +162,6 @@
                             <span class="title">Usuários</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listausuario">Usuário</a></li>
                             <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                             <li><a href="#/listaitemacesso">Item de acesso</a></li>
                         </ul>
@@ -209,7 +208,7 @@
 
             <div class="page-content">
                 <div class="clearfix"></div>
-                <div class="content">
+                <div class="content container">
                     <div ng-view></div>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 var controllers = angular.module('controllers');
 
-function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao) {
-	
+function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa, Cidade) {
+    $log.debug('iniciando SolicitacaoController em teste6d');
+
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
@@ -15,6 +16,12 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		allowClear: true,
 		placeholder: 'selecione'
 	},
+
+
+    Cidade.buscarTodos().success(function (cidades) {
+        console.log('cidades:',cidades);
+        $scope.cidades = cidades;
+    });
 	
 	$scope.enviarSolicitacao = function () {
 		$log.debug('enviando solicitacao');
@@ -22,11 +29,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		if ($scope.solicitacao.id) {
 			$scope.solicitacao.$update(function () {
 				toastr.success('salvo com sucesso');
-				$scope.solicitacao = new Solicitacao({
-					ensino: 'FUNDAMENTAL',
-					serie: '1-SERIE',
-					itensSolicitacao : []
-				});			
+                $location.path('/listasolicitacoes');
 			});
 			
 			return;
@@ -34,17 +37,19 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 				
 		$scope.solicitacao.$save(function () {
 			toastr.success('salvo com sucesso');
-			$scope.solicitacao = new Solicitacao({
-				ensino: 'FUNDAMENTAL',
-				serie: '1-SERIE',
-				itensSolicitacao : []
-			});			
+            $location.path('/listasolicitacoes');
 		});
 	};
 	
 	$scope.editar = function(solicitacao) {
 		$location.path('/cadastrosolicitacao/'+ solicitacao.id);
 	};
+
+    $scope.excluirItem = function (item) {
+        console.log('excluindo item');
+        var index = $scope.solicitacao.itensSolicitacao.indexOf(item);
+        $scope.solicitacao.itensSolicitacao.splice(index, 1);
+    };
 	
 	$scope.carregarSolicitacao = function () {
 		$log.debug('carrgegando solicitacao x');
@@ -80,19 +85,15 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		$scope.pagina = pagina;
 	});
 	
-	$http({
-		method: 'GET',
-		url: './rest/pessoaFisicaSource/pessoaFisica/lista'			
-	}).success(function (data) {
-		$scope.pessoas = data;
-	});
-	
-	$http({
-		method: 'GET',
-		url: './rest/cidadeSource/listar'			
-	}).success(function (data) {
-		$scope.cidades = data;
-	});
+    $log.debug('listar alunos');
+    Pessoa.listarAlunos(function (alunos) {
+        $scope.alunos = alunos;
+    });
+
+
+    Pessoa.listarPessoasFisicas(function (pessoasFisicas) {
+        $scope.pessoasFisicas = pessoasFisicas;
+    });
 	
 	$http({
 		method: 'GET',
@@ -126,7 +127,9 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	};
 	
 	$scope.adicionarMaterial = function () {
-		console.log($scope.itemCorrente)
+		if (!$scope.itemCorrente.livro) {
+            return;
+        }
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
 	};
@@ -155,5 +158,7 @@ controllers.controller('SolicitacaoController',
 		 '$routeParams',
 		 '$http',
 		 'SolicitacaoFactory',
+         'PessoaFactory',
+         'cidadeService',
 		 SolicitacaoController
 		 ]);
