@@ -1,7 +1,6 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
-import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.service.AcompanhamentoSolicitacaoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
