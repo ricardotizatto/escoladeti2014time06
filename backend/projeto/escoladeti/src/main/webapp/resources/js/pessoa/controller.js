@@ -1,11 +1,14 @@
 var controllers = angular.module('controllers');
 
 function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) {
+    
+    $scope.mask = '999.999.999-99';
+    
     $scope.select2 = 'one';
     console.log('Carregando controller');
     
     $scope.init = function() {
-        $scope.tipoPessoa = 'F';
+        //$scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica(1);
     };
 //
@@ -156,8 +159,13 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     };
 
     $scope.filtroPessoaFisica = function(numeroPagina) {
-        Pessoa.paginarFisica({pagina: numeroPagina}, function(pagina) {
-            $scope.pagina = pagina;
+        Pessoa.get({pagina: numeroPagina}, 
+            function(pagina) {
+                console.log(pagina);
+                $scope.pagina = pagina;
+        },
+        function(erro){
+            console.log(erro);
         });
     };
 
@@ -343,7 +351,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         $("#telefone").mask("9999-9999?9");
         $("#ramal").mask("9?");
         $("#cep").mask("99.999-999");
-        //$("#cpf").mask("999.999.999-99");
+        $("#cpf").mask("999.999.999-99");
         //$("#rg").mask("9.999.999-*");
         //$("#cnpj").mask("99.999.999/9999-99");
     });

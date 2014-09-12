@@ -22,7 +22,7 @@
     <hr>
     <form action="" novalidade method="POST" name="formPessoa" role="form" ng-submit="salvar()">
         <!-- Inicio Pessoa Fisica -->
-        <div class="pessoaFisica" ng-show=" pessoa.tipo === 'F' ">
+        <div class="pessoaFisica" ng-show=" pessoa.tipo === 'F'">
             <div class="row ">
                 <div class="form-group col-sm-2">
                     <label>Aluno</label>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group {{formPessoa.nomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                         <label class="control-label"><strong> Nome *</strong></label> 
+                        <label class="control-label"><strong> Nome *</strong></label> 
                         <input class="form-control" name="nomeFisica" type="text" ng-model="pessoa.nome" placeholder="Nome"  maxlength="50" title="Nome" ng-required="pessoa.tipo == 'F'" ng-pattern="/^[a-zA-Z\s]{2,50}$/" title="Nome da pessoa" />
                         <span class="help-block" ng-show="formPessoa.nomeFisica.$error.pattern">Apenas letras e no mínimo 2.</span>
                     </div>
@@ -101,7 +101,7 @@
         </div>    
         <!-- Fim Pessoa Fisica -->
         <!-- Inicio Pessoa Jurídica -->
-        <div class="pessoaJuridica" ng-show=" pessoa.tipo === 'J' " >
+        <div class="pessoaJuridica" ng-show=" pessoa.tipo === 'J'" >
             <div class="row ">
                 <div class="col-sm-4">
                     <div class="form-group {{formPessoa.nomeJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
@@ -118,27 +118,27 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                	<div class="form-group {{formPessoa.cnpjJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                		 <label class="control-label"><strong> CNPJ *</strong> </label> 
-                    	<input class="form-control" ui-mask="99.999.999/9999-99" name="cnpjJuridica" type="text"  title="11.222.333/9999-22" ng-blur="validaCnpj(pessoa.cnpj)"
-                            ng-model="pessoa.cnpj" ng-required="pessoa.tipo == 'J'"/>
-                            <span class="help-block" ng-show="formPessoa.cnpjJuridica.$error.pattern">Apenas números e 14 digitos.</span>
-                	</div>
+                    <div class="form-group {{formPessoa.cnpjJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong> CNPJ *</strong> </label> 
+                        <input class="form-control" ui-mask="99.999.999/9999-99" name="cnpjJuridica" type="text"  title="11.222.333/9999-22" ng-blur="validaCnpj(pessoa.cnpj)"
+                               ng-model="pessoa.cnpj" ng-required="pessoa.tipo == 'J'"/>
+                        <span class="help-block" ng-show="formPessoa.cnpjJuridica.$error.pattern">Apenas números e 14 digitos.</span>
+                    </div>
                 </div>
             </div>
             <div class="row ">
                 <div class="col-sm-3">
-                	<div class="form-group {{formPessoa.inscMunicipalJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                    	<label class="control-label"><strong> Inscrição Municipal *</strong></label> 
-                    	<input class="form-control" name="inscMunicipalJuridica" type="text" maxlength="15" ng-pattern="/^[0-9]{4,15}$/" title="Apenas numeros"
-                                ng-model="pessoa.inscricaoMunicipal"  placeholder="Número Inscrição Municipal" ng-required="pessoa.tipo == 'J'"/>
+                    <div class="form-group {{formPessoa.inscMunicipalJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong> Inscrição Municipal *</strong></label> 
+                        <input class="form-control" name="inscMunicipalJuridica" type="text" maxlength="15" ng-pattern="/^[0-9]{4,15}$/" title="Apenas numeros"
+                               ng-model="pessoa.inscricaoMunicipal"  placeholder="Número Inscrição Municipal" ng-required="pessoa.tipo == 'J'"/>
                         <span class="help-block" ng-show="formPessoa.inscMunicipalJuridica.$error.pattern">Apenas números e no mínimo 4.</span>
                     </div>
                 </div>
                 <div class="form-group col-sm-3">
                     <label class="control-label"> <strong>Inscrição Estadual </strong></label> 
                     <input class="form-control" name="dataCriacao" type="text" maxlength="12" ng-pattern="/^[0-9]+$/" title="Apenas numeros"
-                                ng-model="pessoa.inscricaoEstadual" placeholder="Número Inscrição Estadual"/>
+                           ng-model="pessoa.inscricaoEstadual" placeholder="Número Inscrição Estadual"/>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
@@ -158,10 +158,10 @@
             </div>
         </div>    
         <!-- Fim Pessoa Jurídica -->
-        
+
         <label> &nbsp; </label>
         <div class="row">
-            <div class="form-group col-sm-7">
+            <div class="form-group col-sm-6">
                 <legend>
                     <span class="glyphicon glyphicon-home"></span> Endereço
                     <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEndereco" ng-click="novoEndereco()">
@@ -176,24 +176,24 @@
                                 endereco.cidade.unidadeFederativa.sigla}}</td>
                         <td>
                             <span class="pull-right">
-                            <button class='btn btn-warning btn-sm'
-                                    ng-click="editarEndereco($index)" data-toggle="modal"
-                                    data-target="#modalEndereco">
+                                <button class='btn btn-warning btn-sm'
+                                        ng-click="editarEndereco($index)" data-toggle="modal"
+                                        data-target="#modalEndereco">
                                     <span class='glyphicon glyphicon-edit'></span>
-                            </button>
-                            <button class='btn btn-danger btn-sm'
-                                    ng-click="delEndereco($index)">
+                                </button>
+                                <button class='btn btn-danger btn-sm'
+                                        ng-click="delEndereco($index)">
                                     <span class='glyphicon glyphicon-remove-circle'></span>
-                            </button>
+                                </button>
                             </span>
                         </td>
                     </tr>
                 </table>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <div class="form-group {{formTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <div class="row" >
-                        <div class="col-sm-4"> 
+                        <div class="col-sm-6"> 
                             <legend>
                                 <span class="glyphicon glyphicon-phone-alt"></span> <strong class="control-label" > Telefone * </strong>
                                 <button type="submit" class="btn btn-primary btn-sm"
@@ -217,11 +217,11 @@
                                                 <button class='btn btn-warning btn-sm'
                                                         ng-click="editarTelefone($index)" data-toggle="modal"
                                                         data-target="#modalTelefone">
-                                                        <span class='glyphicon glyphicon-edit'></span>
+                                                    <span class='glyphicon glyphicon-edit'></span>
                                                 </button>
                                                 <button class='btn btn-danger btn-sm'
                                                         ng-click="delTelefone($index)">
-                                                        <span class='glyphicon glyphicon-remove-circle'></span>
+                                                    <span class='glyphicon glyphicon-remove-circle'></span>
                                                 </button>
                                             </span>
                                         </td>
@@ -270,9 +270,9 @@
                                                         class="glyphicon glyphicon-phone-alt"></span>
                                                 </span> 
                                                 <select class="selectpicker show-tick form-control" name="tipoTelefone" ng-init="telefone.tipo = 'CELULAR'" ng-model="telefone.tipo" data-live-search="true">
-                                                        <option value="CELULAR">Celular</option>
-                                                        <option value="COMERCIAL">Comercial</option>
-                                                        <option value="RESIDENCIAL">Residencial</option>
+                                                    <option value="CELULAR">Celular</option>
+                                                    <option value="COMERCIAL">Comercial</option>
+                                                    <option value="RESIDENCIAL">Residencial</option>
                                                 </select>
                                             </div>
                                         </div>  
@@ -366,15 +366,15 @@
                                         <div class="form-group col-sm-6">
                                             <label>Principal</label>
                                             <div>
-                                            <div class="btn-group">
-                                                <!--data-toggle="buttons" verificar uso-->
-                                                <label class="btn btn-primary btn-radio-amacapa"> 
-                                                    <input ng-model="principal" value="S" type="radio"  /> Sim
-                                                </label> 
-                                                <label class="btn btn-primary btn-radio-amacapa"> 
-                                                    <input ng-model="principal" value="N" type="radio"  /> Não
-                                                </label>
-                                            </div>
+                                                <div class="btn-group">
+                                                    <!--data-toggle="buttons" verificar uso-->
+                                                    <label class="btn btn-primary btn-radio-amacapa"> 
+                                                        <input ng-model="principal" value="S" type="radio"  /> Sim
+                                                    </label> 
+                                                    <label class="btn btn-primary btn-radio-amacapa"> 
+                                                        <input ng-model="principal" value="N" type="radio"  /> Não
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
@@ -422,7 +422,7 @@
                                                 <button type="submit" class="btn btn-success btn-padrao">
                                                     <span class="glyphicon glyphicon-ok"></span> Salvar
                                                 </button>
-                                        </span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

@@ -5,6 +5,7 @@ import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.service.PessoaService;
+import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
 import java.io.Serializable;
 import java.util.List;
 
@@ -50,6 +51,12 @@ public class PessoaController implements Serializable {
     @ResponseBody
     public DataPage<PessoaFisica> paginarFisica(@PathVariable Integer pagina) {
         return pessoaService.paginarFisica(pagina);
+    }
+    
+    @RequestMapping(value = {"/{pagina}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<PessoaFisicaJuridica> paginar(@PathVariable Integer pagina) {
+        return pessoaService.paginarPessoaFisicaJuridica(pagina);
     }
 
     @RequestMapping(value = {"/buscarFisica/{pagina}"},params = "busca", method = RequestMethod.GET)

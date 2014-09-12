@@ -57,6 +57,10 @@ function PessoaFactory($resource) {
             params: {
                 acao: 'fisicas'
             }
+        },
+        paginar : {
+            method : 'GET',
+            isArray : true
         }
                 
     });

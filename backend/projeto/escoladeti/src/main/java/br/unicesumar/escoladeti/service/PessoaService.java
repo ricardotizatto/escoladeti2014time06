@@ -6,8 +6,10 @@ import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
+import br.unicesumar.escoladeti.repository.PessoaFisicaJuridicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
+import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,12 @@ public class PessoaService {
 
     @Autowired
     private PessoaJuridicaRepository pessoaJuridicaRepository;
+    
     @Autowired
     private PessoaFisicaRepository pessoaFisicaRepository;
+    
+    @Autowired
+    private PessoaFisicaJuridicaRepository pessoaFisicaJuridicaRepository;
 
     public DataPage<PessoaFisica> paginarFisica(Integer pagina) {
         return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
@@ -126,5 +132,9 @@ public class PessoaService {
 
     public List<PessoaFisica> listarPessoasFisicas() {
         return pessoaFisicaRepository.findByAlunoFalse();
+    }
+
+    public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(Integer pagina) {
+        return new DataPage<>(pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
 }
