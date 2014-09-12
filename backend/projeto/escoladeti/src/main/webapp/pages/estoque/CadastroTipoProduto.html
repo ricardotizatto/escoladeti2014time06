@@ -1,0 +1,33 @@
+﻿<div class="container" ng-controller="produtoController" ng-init="carregarProduto()">
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <legend> Cadastro de Produto </legend>
+            </div>
+        </div>
+        <form action="" method="POST" role="form" name="formProduto" ng-submit="salvar()">							
+            <div class="row ">
+                <div class="form-group {{formProduto.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+                <label class="control-label"><strong> Nome do Produto * </strong></label>
+                    <input class="form-control" name="nome" type="text" ng-model="produto.nome" ng-pattern="/[a-zA-Z\s]{3,40}/" maxlength="40" required/>
+                    <span class="help-block" ng-show="formProduto.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="pull-right">	
+                        <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                    </a>  
+                        <button type="submit" class="btn btn-padrao btn-success" ng-disabled="formProduto.$invalid">
+                            <span class="glyphicon glyphicon-ok" ></span> Salvar	
+                        </button>
+                    </span>		
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12"><hr></div>
+            </div>
+        </form>
+    </fieldset>
+</div>

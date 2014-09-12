@@ -46,7 +46,9 @@
         <script type="text/javascript" src="./resources/js/solicitacao/service.js" ></script>           
         <script type="text/javascript" src="./resources/js/pessoa/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/service.js" ></script>
-
+        <script type="text/javascript" src="./resources/js/estoque/ProdutoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/estoque/EstoqueController.js" ></script>
+        
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
 
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
@@ -202,6 +204,17 @@
                             <li><a href="#/listalivro">Livro</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dropbox"></i>
+                            <span class="title">Estoque</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#/listaproduto">Produto</a></li>
+                            <li><a href="#/listaestoque">Estoque</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
 
