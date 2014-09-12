@@ -319,7 +319,7 @@
     <!-- Modal endereço-->
     <div class="row">
         <div class="col-sm-12">
-            <form action="" method="POST" role="form" ng-submit="salvarEndereco()">
+            <form action="" method="POST" name="formEndereco" role="form" ng-submit="salvarEndereco()">
                 <div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -332,39 +332,39 @@
                             <div class="modal-body">
                                 <div class=container>
                                     <div class="row">
-                                        <!--div class="form-group col-sm-4">
-                                        <label> Pais </label> <select id="pais" ng-model="endereco.pais"
-                                                class="selectpicker show-tick form-control"
-                                                data-live-search="true" ng-model="paises"
-                                                ng-options="p.nome for p in paises" data-filter="true">
-                                        </select>
-                                        </div-->
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label> Pais </label> 
-                                                <select type="text" ui-select2="select2Options" class="input-default" ng-model="pais.id" ng-change="modificarPais(pais.id)" ng-value="pais.id" >
-                                                    <option ng-repeat="p in paises" value="{{p.id}}">{{p.nome}}</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label> Estado </label> 
-                                                <select type="text" ui-select2 class="input-default" ng-model="unidadeFederativa.id" ng-change="modificarEstado(unidadeFederativa.id)" ng-value="unidadeFederativa.id" >
-                                                    <option ng-repeat="uf in unidadesFederativas" value="{{uf.id}}">{{uf.nome}}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-12">
-                                                <label> Cidade </label> 
-                                                <select type="text" ui-select2="select2Options" style="width: 100%" ng-model="cidade.id" ng-change="modificarCidade(cidade.id)" ng-value="cidade.id" >
-                                                    <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
-                                                </select>
+                                        <div class="col-sm-6">
+                                            <div class="form-group {{formEndereco.cep.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                <label class="control-label">Cep *</label>
+                                                <input class="form-control" ui-mask="99.999-999" name="cep" type="text" ng-model="endereco.cep" ng-blur="buscaCep(endereco.cep)" ng-pattern="/[0-9]/" required="required"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label>Principal</label>
+                                            <label class="control-label"> Pais </label> 
+                                            <select type="text" ui-select2="select2Options" class="input-default" ng-model="pais.id" ng-change="modificarPais(pais.id)" ng-value="pais.id" >
+                                                <option ng-repeat="p in paises" value="{{p.id}}">{{p.nome}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label class="control-label"> Estado </label> 
+                                            <select type="text" ui-select2 class="input-default" ng-model="unidadeFederativa.id" ng-change="modificarEstado(unidadeFederativa.id)" ng-value="unidadeFederativa.id" >
+                                                <option ng-repeat="uf in unidadesFederativas" value="{{uf.id}}">{{uf.nome}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label"> Cidade </label> 
+                                            <select type="text" ui-select2="select2Options" style="width: 100%" ng-model="cidade.id" ng-change="modificarCidade(cidade.id)" ng-value="cidade.id" >
+                                                <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label class="control-label">Principal</label>
                                             <div>
                                                 <div class="btn-group">
                                                     <!--data-toggle="buttons" verificar uso-->
@@ -378,13 +378,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label>Cep</label> 
-                                            <input class="form-control" id="cep" type="text" ng-model="endereco.cep" maxlength="10" placeholder="99.999-999"  />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-3">
-                                            <label>Tipo</label> 
+                                            <label class="control-label">Tipo</label> 
                                             <select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="endereco.tipoEndereco" data-live-search="true" >
                                                 <option value="ALAMEDA">Alameda</option>
                                                 <option value="AVENIDA">Avenida</option>
@@ -397,20 +391,25 @@
                                                 <option value="OUTROS">Outros</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-sm-6">
-                                            <label>Logradouro</label> 
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label">Logradouro</label> 
                                             <input class="form-control" name="descEndereco" type="text" ng-model="endereco.logradouro" placeholder="Logradouro"  />
                                         </div>
+                                    </div>
+                                    <div class="row">                                
                                         <div class="form-group col-sm-3">
-                                            <label>Número</label> <input class="form-control" name="numero" type="text" ng-model="endereco.numero" placeholder="N°" ="" />
+                                            <label class="control-label">Número</label>
+                                            <input class="form-control" name="numero" type="number" ng-model="endereco.numero" placeholder="N°" />
+                                        </div>
+                                        <div class="form-group col-sm-9">
+                                            <label>Bairro</label> <input class="form-control" name="complemento" type="text" ng-model="endereco.bairro" placeholder="Bairro"  />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label>Bairro</label> <input class="form-control" name="complemento" type="text" ng-model="endereco.bairro" placeholder="Bairro"  />
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label>Complemento</label> <input class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" />
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label">Complemento</label> <input class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -426,7 +425,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                                
                         </div>
                     </div>
                 </div>

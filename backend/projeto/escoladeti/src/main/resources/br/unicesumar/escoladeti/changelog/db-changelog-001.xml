@@ -937,4 +937,7 @@
                                  referencedTableName="evento" 
                                  referencedColumnNames="id" />
     </changeSet>
+    <changeSet id="walber001" author="Walber">
+        <dropColumn tableName="cidade" columnName="fundacao"/>
+    </changeSet>
 </databaseChangeLog>

@@ -69,7 +69,7 @@ public class PessoaFisicaJuridica extends Entidade implements Serializable{
 
     public String getCpfCnpj() {
         if(this.getTipo() == 'F'){
-            if(this.cpfCnpj == null)
+            if(this.cpfCnpj.isEmpty() || this.cpfCnpj == null)
                 return "";
             return Mascara.cpf(this.cpfCnpj);
         }

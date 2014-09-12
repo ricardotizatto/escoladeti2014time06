@@ -1,12 +1,12 @@
 var controllers = angular.module('controllers');
 
-function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) {
-    
+function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, BuscaCep) {
+
     $scope.mask = '999.999.999-99';
-    
+
     $scope.select2 = 'one';
     console.log('Carregando controller');
-    
+
     $scope.init = function() {
         //$scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica(1);
@@ -36,10 +36,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             $scope.pessoa.cnpj = $scope.pessoa.c;
         }
     };
-    
+
     $scope.validaEmail = function() {
-        if(ValidaEmail($scope.pessoa.email) === false)
-           toastr.warning("E-mail inválido!"); 
+        if (ValidaEmail($scope.pessoa.email) === false)
+            toastr.warning("E-mail inválido!");
     };
 
 //    $scope.modificarEstado = function(estadoId) {
@@ -68,23 +68,23 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         console.log('Nova Pessoa');
         window.location = '#/pessoa';
     };
-    
+
     $scope.carregarPessoa = function() {
         console.log('carregando pessoa:');
 
         if (!$routeParams.pessoaId) {
-            $scope.novaPessoa("F"); 
+            $scope.novaPessoa("F");
             $log.debug('criando pessoa');
             return;
         }
-        
+
         $log.debug('buscando pessoa');
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function(pessoa) {
-            
+
             $scope.pessoa = pessoa;
             $scope.telefone = pessoa.telefones[0];
-            if(pessoa.tipo !== 'J'){
-               $scope.pessoa.aluno = String(pessoa.aluno); 
+            if (pessoa.tipo !== 'J') {
+                $scope.pessoa.aluno = String(pessoa.aluno);
             }
         });
     };
@@ -107,49 +107,22 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         window.location = '#/pessoa/' + p.id + '/' + p.tipo;
     };
 
-    $scope.buscaPessoaContendoNome = function(tipoPessoa) {
+    $scope.buscaPessoaContendoNome = function() {
         $scope.busca = $scope.busca.toUpperCase();
-        if (tipoPessoa === 'F') {
-            $scope.pagina = [];
-            if ($scope.busca !== "") {
-                Pessoa.buscarFisica({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.pagina = pagina;
-                });
-            } else {
-                $scope.filtroPessoaFisica(1);
-            }
-        }
-        if (tipoPessoa === 'J') {
-            $scope.pagina = [];
-            if ($scope.busca !== "") {
-                Pessoa.buscarJuridica({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.pagina = pagina;
-                });
-            } else {
-                $scope.filtroPessoaJuridica(1);
-            }
-        }
-        if (tipoPessoa === 'A') {
-            $scope.pagina = [];
-            if ($scope.busca !== "") {
-                Pessoa.buscarAluno({pagina: 1, busca: $scope.busca}, function(pagina) {
-                    $scope.pagina = pagina;
-                });
-            } else {
-                $scope.filtroAluno(1);
-            }
-        }
+        Pessoa.buscarPessoa({pagina: 1, busca: $scope.busca}, function(pagina) {
+            $scope.pagina = pagina;
+        });
     };
-    
-    $scope.getTodos = function(numeroPagina){
+
+    $scope.getTodos = function(numeroPagina) {
         if ($scope.tipoPessoa === 'J') {
             $scope.filtroPessoaJuridica(numeroPagina);
-        }else if ($scope.tipoPessoa === 'A') {
+        } else if ($scope.tipoPessoa === 'A') {
             $scope.filtroAluno(numeroPagina);
-        }else {
+        } else {
             $scope.filtroPessoaFisica(numeroPagina);
         }
-    };    
+    };
 
 
     $scope.filtroPessoaJuridica = function(numeroPagina) {
@@ -159,14 +132,14 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     };
 
     $scope.filtroPessoaFisica = function(numeroPagina) {
-        Pessoa.get({pagina: numeroPagina}, 
-            function(pagina) {
-                console.log(pagina);
-                $scope.pagina = pagina;
+        Pessoa.get({pagina: numeroPagina},
+        function(pagina) {
+            console.log(pagina);
+            $scope.pagina = pagina;
         },
-        function(erro){
-            console.log(erro);
-        });
+                function(erro) {
+                    console.log(erro);
+                });
     };
 
     $scope.filtroAluno = function(numeroPagina) {
@@ -175,7 +148,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         });
     };
 
-    $scope.novaPessoa = function(tipo){
+    $scope.novaPessoa = function(tipo) {
         if ($scope.tipo === "J") {
             $scope.pessoa = new Pessoa({
                 tipo: "J",
@@ -184,10 +157,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             });
         } else {
             $scope.pessoa = new Pessoa({
-                tipo:  "F",
+                tipo: "F",
                 email: "",
                 aluno: "false",
-                sexo:  "MASCULINO",
+                sexo: "MASCULINO",
                 telefones: []
             });
         }
@@ -197,19 +170,19 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function() {
                 toastr.success($scope.pessoa.nome + ' atualizado com sucesso');
-                $scope.novaPessoa($scope.pessoa.tipo); 
+                $scope.novaPessoa($scope.pessoa.tipo);
                 window.location = '#/listapessoa';
             });
             return;
         }
         $scope.pessoa.$save(function() {
-            toastr.success($scope.pessoa.nome + ' salvo com sucesso');           
+            toastr.success($scope.pessoa.nome + ' salvo com sucesso');
             $scope.novaPessoa($scope.pessoa.tipo);
             window.location = '#/listapessoa';
         });
-        
+
     };
-    
+
     $scope.deletar = function(pessoa) {
 
         BootstrapDialog.confirm('Deseja realmente deletar a Pessoa: <b>' + pessoa.nome + '</b>?', function(result) {
@@ -263,9 +236,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
     $scope.delTelefone = function(index) {
         toastr.warning("Telefone removido  " + $scope.pessoa.telefones[index].numero + "!");
         $scope.pessoa.telefones.splice(index, 1);
-        if($scope.pessoa.telefones.length === 0){
+        if ($scope.pessoa.telefones.length === 0) {
             $scope.telefone = {};
-        }   
+        }
     };
 
 
@@ -338,6 +311,27 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa) 
             principal: 'S'
         };
     }
+    
+    $scope.buscaCep = function(c){
+        //$scope.endereco = getNovoEndereco();
+        if(!c){
+            return;
+        }
+        BuscaCep.get({cep : c},
+        function(cep){
+           console.log(cep);
+           
+           if(!c.cidade){
+               return;
+           }
+           $scope.endereco = cep;
+           $scope.pais = cep.cidade.unidadeFederativa.pais;
+           $scope.unidadeFederativa = cep.cidade.unidadeFederativa;
+           $scope.cidade = cep.cidade;
+        },function(mesage){
+            console.log(mesage);
+        });
+    };
 
     function getNovoTelefone() {
         return {
@@ -365,5 +359,6 @@ controllers.controller('PessoaController',
             '$routeParams',
             '$http',
             'PessoaFactory',
+            'BuscaCepFactory',
             PessoaController
         ]);

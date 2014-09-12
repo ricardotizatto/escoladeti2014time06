@@ -137,4 +137,7 @@ public class PessoaService {
     public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(Integer pagina) {
         return new DataPage<>(pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
+    public DataPage<PessoaFisicaJuridica> buscarPessoa(Integer pagina, String busca) {
+        return new DataPage<>(pessoaFisicaJuridicaRepository.findByNomeContainingOrCpfCnpjContainingOrderByNomeAsc(busca,busca, pageRequestForAsc(pagina, "nome")));
+    }
 }

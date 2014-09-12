@@ -29,6 +29,12 @@ function PessoaFactory($resource) {
                 busca : $resource("busca")
             }
         },
+        buscarPessoa: {
+            method: 'GET',
+            params: {
+                acao: 'buscarPessoa'
+            }
+        },
         buscarAluno: {
             method: 'GET',
             params: {

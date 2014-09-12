@@ -120,7 +120,7 @@
             schemaName="public"
             tableName="pessoajuridica"/>
     </changeSet> 
-    <changeSet author="Walber(generated)" id="createViewPessoaFisicaJuridica20140911">
+    <changeSet author="Walber(generated)" id="createViewPessoaFisicaJuridica20140912">
         <createView viewName="viewpessoa"
                     replaceIfExists="true"
                     schemaName="public">
@@ -133,7 +133,7 @@
             FROM PESSOA T1 
             LEFT JOIN PESSOAFISICA T2 ON T1.ID = T2.ID
             LEFT JOIN PESSOAJURIDICA T3 ON T1.ID = T3.ID
-            ORDER BY T1.ID
+            ORDER BY T1.NOME
         </createView>
     </changeSet>
 </databaseChangeLog>
