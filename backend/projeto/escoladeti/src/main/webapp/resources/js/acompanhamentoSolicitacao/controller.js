@@ -1,7 +1,15 @@
 var controllers = angular.module('controllers');
 
-function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams) {
-    var $this = this;
+function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams, SolicitacaoItem) {
+    //var $this = this;
+    
+    $log.debug('listar todas as SolicitacaoItens');
+    SolicitacaoItem.listartodos(function(SolicitacaoItens) {
+        $scope.solicitacaoItens = SolicitacaoItens;
+        for (var i=0; i< $scope.solicitacaoItens.length; i++) {
+            $scope.solicitacaoItens[i].dataChegada = new Date();
+        } 
+    });
 
     $log.debug('carregando acomapanhamento solicitacao');
     
@@ -19,10 +27,10 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
             {id: 011, status: 'producao', dataChegada: '05/08/2014', material: "A Pequena Sereia", traducao: "brille", responsavel: "Rafael Prando", ordem: '006'},
         ];
 
-    $scope.getTodos = function() {
-        $log.debug('acomapanhamento getTodos');
-        $scope.solicitacoes = $scope.solicitacoesDB;
-    };
+//    $scope.getTodos = function() {
+//        $log.debug('acomapanhamento getTodos');
+//        $scope.solicitacoes = $scope.solicitacoesDB;
+//    };
     
     
     $scope.getSolicitacaoStatus = function(status) {
@@ -59,41 +67,45 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     
     $scope.getStatus = function(status) {
         switch (status) {
-            case "aguardando":
+            case "AGUARDANDO":
                 return "warning";
                 break;
-            case "producao":
+            case "PRODUCAO":
                 return "success";
                 break;
-            case "produzido":
+            case "PRODUZIDO":
                 return "info";
                 break;
-            case "finalizado":
+            case "FINALIZADO":
                 return "primary";
                 break;
-            case "cancelado":
+            case "CANCELADO":
                 return "danger";
                 break;
+            default :
+            return "warning";
         }
     };
     
     $scope.getIcone = function(status) {
         switch (status) {
-            case "aguardando":
+            case "AGUARDANDO":
                 return "fa fa-spinner";
                 break;
-            case "producao":
+            case "PRODUCAO":
                 return "fa fa-cogs";
                 break;
-            case "produzido":
+            case "PRODUZIDO":
                 return "fa fa-file-text-o";
                 break;
-            case "finalizado":
+            case "FINALIZADO":
                 return "fa fa-check-circle-o";
                 break;
-            case "cancelado":
+            case "CANCELADO":
                 return "fa fa-times";
                 break;
+            default : 
+            return "fa fa-spinner";
         }
     };
 }
@@ -105,5 +117,6 @@ controllers.controller('AcompanhamentoSolicitacaoController',
 		 '$log',
 		 '$http',
 		 '$routeParams',
+                 'AcompanhamentoSolicitacaoFactory',
 		 AcompanhamentoSolicitacaoController
 		 ]);

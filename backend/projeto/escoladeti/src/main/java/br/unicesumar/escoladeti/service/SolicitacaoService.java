@@ -70,7 +70,7 @@ public class SolicitacaoService {
 					.livro(livro)
 					.outro(comandoItem.getOutro())
 					.traducaoMaterial(comandoItem.getTraducaoMaterial())
-					.status(StatusItem.ABERTO)
+					.status(StatusItem.AGUARDANDO)
 					.build();
 			itens.add(solicitacaoItem);
 		}
@@ -114,7 +114,7 @@ public class SolicitacaoService {
 					.livro(livro)
 					.outro(comandoItem.getOutro())
 					.traducaoMaterial(comandoItem.getTraducaoMaterial())
-					.status(StatusItem.ABERTO)
+					.status(StatusItem.AGUARDANDO)
 					.build();
 
             validarDuplicados(itens, solicitacaoItem);

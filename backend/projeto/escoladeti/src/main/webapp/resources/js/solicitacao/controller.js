@@ -7,7 +7,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
 		this.livro = {};	
-		this.status = 'ABERTO';
+		this.status = 'AGUARDANDO';
 	};	
 
 	$scope.itemCorrente = new ItemCorrente();
@@ -139,9 +139,9 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	$scope.getStatusItem = function (status) {
 		console.log(item);
 		switch (status) {
-			case 'ABERTO':
+			case 'AGUARDANDO':
 				return 'warning';
-			case 'ANDAMENTO':
+			case 'PRODUCAO':
 				return 'primary';
 			case 'CANCELADO':
 				return 'danger';

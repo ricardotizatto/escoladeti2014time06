@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
+import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.service.AcompanhamentoSolicitacaoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,10 @@ public class AcompanhamentoSolicitacaoController{
     @Autowired
     private AcompanhamentoSolicitacaoService acompanhamentosolicitacaoService;	
 
-    @RequestMapping(value = { "/listar" }, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/listartodos" )
     @ResponseBody
-    public List<AcompanhamentoDTO> listar() {
-            return acompanhamentosolicitacaoService.listar() ;
+    public List<SolicitacaoItem> listarTodos() {
+            return acompanhamentosolicitacaoService.listarTodos() ;
     }
 	
 }
