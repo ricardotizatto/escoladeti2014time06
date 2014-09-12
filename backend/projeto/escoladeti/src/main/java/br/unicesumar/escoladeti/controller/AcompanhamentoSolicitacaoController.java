@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.service.AcompanhamentoSolicitacaoService;
 import java.util.List;
@@ -18,7 +19,7 @@ public class AcompanhamentoSolicitacaoController{
 
     @RequestMapping(value = { "/listar" }, method = RequestMethod.GET)
     @ResponseBody
-    public List<SolicitacaoItem> listar() {
+    public List<AcompanhamentoDTO> listar() {
             return acompanhamentosolicitacaoService.listar() ;
     }
 	
