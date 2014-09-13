@@ -13,8 +13,8 @@ public class AcompanhamentoSolicitacaoService {
     @Autowired
     private SolicitacaoItemRepository solicitacaoItemRepository;
 
-    public List<SolicitacaoItem> listarTodos() {
-        return solicitacaoItemRepository.findAll();
-    }
+//    public List<SolicitacaoItem> listarTodos() {
+//        return solicitacaoItemRepository.findAll();
+//    }
 	
 }
