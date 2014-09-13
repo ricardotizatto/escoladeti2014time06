@@ -1,8 +1,8 @@
-function produtoController($scope, $http, $routeParams) {
+function estoqueController($scope, $http, $routeParams) {
     console.log('Carregando controller');
 
     $scope.deletar = function(estoque) {
-        console.log('deletando produto ' + JSON.stringify(estoque));
+        console.log('deletando movimento de estoque ' + JSON.stringify(estoque));
         
         BootstrapDialog.confirm('Deseja realmente deletar o Estoque: <b>' + estoque.nome + '</b>?', function(result) {
             if (result) {
@@ -28,7 +28,7 @@ function produtoController($scope, $http, $routeParams) {
     };
     
     $scope.novo = function() {
-        $scope.produto = getNovoEstoque();
+        $scope.estoque = getNovoEstoque();
         window.location = '#/cadastromovimentoestoque';
     };
         
@@ -64,7 +64,7 @@ function produtoController($scope, $http, $routeParams) {
         console.log($scope.estoque);
         $http.post("./rest/estoqueSource/estoque", $scope.estoque)
             .success(function(estoque, status) {
-                $scope.estoque = getNovoProduto();
+                $scope.estoque = getNovoEstoque();
                 console.log("estoque salva = " + estoque);
                 toastr.success('Estoque ' + estoque.nome + ' salvo com sucesso');
                 setTimeout(function(){window.location="#/listaestoque"}, 5000);
@@ -102,7 +102,7 @@ function produtoController($scope, $http, $routeParams) {
     };
 
     function getNovoEstoque() {
-        console.log('novo produto');
+        console.log('novo movimento estoque');
         return {};
     };
     
