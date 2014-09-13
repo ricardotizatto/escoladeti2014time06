@@ -15,12 +15,12 @@
                 </div>
                 <div class="col-md-5 form-group {{solicitacaoForm.aluno.$error.required? 'has-error' : 'has-success' }} has-feedback">
                     <label>Aluno *</label>
-                    <select ui-select2="select2Options"
-                            class="input-default"
-                            ng-model="solicitacao.aluno" required name="aluno" >
-                        <option value=""></option>
-                        <option ng-repeat="aluno in alunos" value="{{aluno.id}}">{{aluno.nome}}</option>
-                    </select>
+                    <!--<select ui-select2="select2Options"-->
+                            <!--class="input-default"-->
+                            <!--ng-model="solicitacao.aluno" required name="aluno" >-->
+                        <!--<option value=""></option>-->
+                        <!--<option ng-repeat="aluno in alunos" value="{{aluno.id}}">{{aluno.nome}}</option>-->
+                    <!--</select>-->
                 </div>
                 <div class="col-md-2 form-group">
                     <label>Série</label> <select class="form-control"
@@ -54,25 +54,25 @@
                 </div>
                 <div class="col-md-3 form-group {{solicitacaoForm.responsavel.$error.required? 'has-error' : 'has-success' }} has-feedback">
                     <label>Responsável *</label>
-                    <select ui-select2="select2Options" class="input-default"
-                            ng-model="solicitacao.responsavel" name="responsavel" required="required">
-                        <option value=""></option>
-                        <option ng-repeat="p in pessoasFisicas" value="{{p.id}}">{{p.nome}}</option>
-                    </select>
+                    <!--<select ui-select2="select2Options" class="input-default"-->
+                            <!--ng-model="solicitacao.responsavel" name="responsavel" required="required">-->
+                        <!--<option value=""></option>-->
+                        <!--<option ng-repeat="p in pessoasFisicas" value="{{p.id}}">{{p.nome}}</option>-->
+                    <!--</select>-->
                 </div>
 
                 <div class="col-md-3 form-group {{solicitacaoForm.dataChegada.$error.required? 'has-error' : 'has-success' }} has-feedback">
                     <label>Data de chegada *</label>
                     <input type="date" class="form-control" ng-model="solicitacao.dataChegada" name="dataChegada" required="required">
                 </div>
-                <div class="col-md-3 form-group">
-                    <label>NRE</label> <select ui-select2="select2Options" class="input-default"
-                                               ng-model="solicitacao.nre">
-                        <option value=""></option>
-                        <option ng-repeat="c in cidades" value="{{c.id}}"
-                                >{{c.nome}}</option>
-                    </select>
-                </div>
+                <!--<div class="col-md-3 form-group">-->
+                    <!--<label>NRE</label> <select ui-select2="select2Options" class="input-default"-->
+                                               <!--ng-model="solicitacao.nre">-->
+                        <!--<option value=""></option>-->
+                        <!--<option ng-repeat="c in cidades" value="{{c.id}}"-->
+                                <!-->{{c.nome}}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
             </div>
             <fieldset>
                 <legend>Endereço</legend>
@@ -94,10 +94,10 @@
                     </div>
                     <div class="col-md-3 form-group {{solicitacaoForm.municipio.$error.required? 'has-error' : 'has-success' }} has-feedback">
                         <label>Município *</label>
-                        <select ui-select2="select2Options" class="input-default" ng-model="solicitacao.municipio" name="municipio" required>
-                            <option value=""></option>
-                            <option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>
-                        </select>
+                        <input ui-select2="select2Options" class="input-default" ng-model="solicitacao.municipio" name="municipio" required>
+                            <!--<option value=""></option>-->
+                            <!--<option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>-->
+                        <!--</select>-->
                     </div>
 
                 </div>
@@ -168,10 +168,10 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Livro</label> 
-                                        <select ui-select2="select2Options" class="input-default"
-                                                ng-model="itemCorrente.livro" require="true">
-                                            <option ng-repeat="l in livros" value="{{l.id}}">{{l.nome}}</option>
-                                        </select>
+                                        <!--<select ui-select2="select2Options" class="input-default"-->
+                                                <!--ng-model="itemCorrente.livro" require="true">-->
+                                            <!--<option ng-repeat="l in livros" value="{{l.id}}">{{l.nome}}</option>-->
+                                        <!--</select>-->
                                     </div>
 
                                     <div class="col-md-4">

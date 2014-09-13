@@ -14,12 +14,49 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
 	$scope.select2Options = {
 		allowClear: true,
-		placeholder: 'selecione'
-	},
+		placeholder: 'selecione',
+
+        ajax: {
+            url: './rest/cidadeSource/cidade',
+
+            data: function (termo) {
+                var termoPesquisa;
+
+                if (termo)  {
+                    termoPesquisa = termo.toUpperCase();
+                }
+                return {
+                    q: termoPesquisa
+                };
+
+            },
+            results: function (data, page) {
+
+                var cidades = data.list.map(function (cidade) {
+                    return {
+                        text: cidade.nome,
+                        id: cidade.id
+                    }
+                });
+
+                return {
+                    results: cidades
+                };
+            }
+
+
+        },
+
+        initSelection: function (element, callback) {
+            //console.log('iniSelection', element);
+            //callback({id:1, text: 'teste'});
+        }
+
+	};
 
 
     Cidade.buscarTodos().success(function (cidades) {
-        console.log('cidades:',cidades);
+        //console.log('cidades:',cidades);
         $scope.cidades = cidades;
     });
 	
