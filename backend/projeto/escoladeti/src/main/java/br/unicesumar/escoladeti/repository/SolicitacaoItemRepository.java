@@ -31,6 +31,25 @@ public class SolicitacaoItemRepository{
         if (pesquisa.getStatus() != null) {
             consultaBase += " and si.status =" + pesquisa.getStatus();
         }
+        if(pesquisa.getDataInicio() != null && pesquisa.getDataFim() != null){
+            consultaBase += " and so.datachegada between =" + pesquisa.getDataInicio() + " and " + pesquisa.getDataFim();
+        }
+        if(pesquisa.getSolicitacaoId() != null){
+            consultaBase += " and id_solicitacao =" +pesquisa.getSolicitacaoId();
+        }
+        if(pesquisa.getOrdemId() != null){
+            consultaBase += " and op.id =" + pesquisa.getOrdemId();
+        }
+        if(pesquisa.getMaterial() != null){
+            consultaBase += " and li.nome =" +pesquisa.getMaterial();
+        }
+        if(pesquisa.getResponsavel() != null){
+            consultaBase += " and pe.nome =" +pesquisa.getResponsavel();
+        }
+//        verificar de onde busca o revisor
+//        if(pesquisa.getRevisor()!= null){
+//            consultaBase += " and pe.nome =" +pesquisa.getRevisor();
+//        }
         try {
             Connection conexao = dataSource.getConnection();
             PreparedStatement preparedStatement = conexao.prepareStatement(consultaBase);
