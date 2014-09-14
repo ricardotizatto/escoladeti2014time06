@@ -1,8 +1,6 @@
 package br.unicesumar.escoladeti.repository;
 
 import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
-import br.unicesumar.escoladeti.entity.Solicitacao;
-import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,12 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 public class SolicitacaoItemRepository{
     
