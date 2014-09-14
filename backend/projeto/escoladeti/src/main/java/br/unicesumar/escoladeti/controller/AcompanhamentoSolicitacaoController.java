@@ -17,19 +17,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/rest/acompanhamentosolicitacoes")
 public class AcompanhamentoSolicitacaoController{
 	
-    @Autowired
-    private AcompanhamentoSolicitacaoService acompanhamentosolicitacaoService;	
+//    @Autowired
+//    private AcompanhamentoSolicitacaoService acompanhamentosolicitacaoService;	
 
-    @RequestMapping(method = RequestMethod.GET, value = "/listartodos" )
-    @ResponseBody
-    public List<SolicitacaoItem> listarTodos() {
-        return acompanhamentosolicitacaoService.listarTodos() ;
-    }
     
     @RequestMapping( method = RequestMethod.PUT, value = "/listarpesquisa")	
     @ResponseBody
     public PesquisaSolicitacao listarPesquisa(@Valid @RequestBody PesquisaSolicitacao pesquisa) {		
         return pesquisa; //solicitacaoService.salvar(comando);
     }
-	
+
+//    @RequestMapping(method = RequestMethod.GET, value = "/listartodos" )
+//    @ResponseBody
+//    public List<SolicitacaoItem> listarTodos() {
+//            return acompanhamentosolicitacaoService.listarTodos() ;
+//    }	
 }

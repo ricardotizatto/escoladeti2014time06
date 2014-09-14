@@ -10,7 +10,6 @@ public class AcompanhamentoDTO {
     private String traducao;
     private String responsavel;
     private Long ordemId;
-    private Long codigoOrdemProducao;
     private String material;
     private Date dataEnvio;
 
@@ -62,14 +61,6 @@ public class AcompanhamentoDTO {
         this.ordemId = ordemId;
     }
 
-    public Long getCodigoOrdemProducao() {
-        return codigoOrdemProducao;
-    }
-
-    public void setCodigoOrdemProducao(Long codigoOrdemProducao) {
-        this.codigoOrdemProducao = codigoOrdemProducao;
-    }
-
     public String getMaterial() {
         return material;
     }
@@ -85,6 +76,5 @@ public class AcompanhamentoDTO {
     public void setDataEnvio(Date dataEnvio) {
         this.dataEnvio = dataEnvio;
     }
-
-   
+    
 }
