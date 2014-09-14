@@ -40,7 +40,7 @@ public class UnidadeFederativaService {
             return this.federativaRepository.findById(id);
     }
 
-    public UnidadeFederativa buscarUnidadeFederativaPorNomeSiglaPais(UnidadeFederativa unidadeFederativa) {
+    public UnidadeFederativa buscarUnidadeFederativaPorNomeSigla(UnidadeFederativa unidadeFederativa) {
         return this.federativaRepository.findByNomeAndSigla(
                 unidadeFederativa.getNome(), unidadeFederativa.getSigla());//, unidadeFederativa.getIdPaisDoEstado());
     }
