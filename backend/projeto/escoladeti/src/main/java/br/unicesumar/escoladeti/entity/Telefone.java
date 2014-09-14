@@ -40,7 +40,7 @@ public class Telefone extends Entidade {
     private Pessoa pessoa;
     
     public Telefone(){
-    	setDdd(0);
+
     }
 
     public String getNumero() {

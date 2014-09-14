@@ -1,7 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity

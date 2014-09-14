@@ -35,6 +35,7 @@
 
         <script type="text/javascript" src="./resources/js/app.js"></script>        
         <script type="text/javascript" src="./resources/js/directives.js"></script>
+        <script type="text/javascript" src="./resources/js/buscacep/service.js"></script>
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
@@ -61,7 +62,6 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
 

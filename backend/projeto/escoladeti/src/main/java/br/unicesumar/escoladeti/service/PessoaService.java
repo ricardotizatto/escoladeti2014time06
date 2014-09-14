@@ -3,11 +3,14 @@ package br.unicesumar.escoladeti.service;
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
 import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
+import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
+import br.unicesumar.escoladeti.repository.PessoaFisicaJuridicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
+import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +21,12 @@ public class PessoaService {
 
     @Autowired
     private PessoaJuridicaRepository pessoaJuridicaRepository;
+    
     @Autowired
     private PessoaFisicaRepository pessoaFisicaRepository;
+    
+    @Autowired
+    private PessoaFisicaJuridicaRepository pessoaFisicaJuridicaRepository;
 
     public DataPage<PessoaFisica> paginarFisica(Integer pagina) {
         return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
@@ -51,7 +58,7 @@ public class PessoaService {
         } else if (tipo.equals("F")) {
             return pessoaFisicaRepository.findOne(id);
         }else{ 
-            throw new RuntimeException("Tipo de pessoa inválido");
+            throw new RuntimeException("Tipo de pessoa invÃ¡lido");
         }
 
     }
@@ -61,6 +68,7 @@ public class PessoaService {
             if(id != null ||comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null){
                 PessoaFisica pessoaFisica = Pessoa.builder()
                         .telefones(comando.getTelefones())
+                        .enderecos(comando.getEnderecos())
                         .nome(comando.getNome())
                         .email(comando.getEmail())
                         .tipo(comando.getTipo())
@@ -80,12 +88,13 @@ public class PessoaService {
 
                 return pessoaFisica;
             }
-            throw new RuntimeException("Já existe uma pessoa com o cpf "+ comando.getCpf() +" cadastrada no sistema");
+            throw new RuntimeException("JÃ¡ existe uma pessoa com o cpf "+ comando.getCpf() +" cadastrada no sistema");
 
         } else if (comando.getTipo().equals("J")) {
             if(id != null || pessoaJuridicaRepository.findByCnpj(comando.getCnpj()) == null ){
             PessoaJuridica pessoaJuridica = Pessoa.builder()
                     .telefones(comando.getTelefones())
+                    .enderecos(comando.getEnderecos())
                     .nome(comando.getNome())
                     .email(comando.getEmail())
                     .tipo(comando.getTipo())
@@ -104,9 +113,9 @@ public class PessoaService {
 
             return pessoaJuridica;
             }
-            throw new RuntimeException("Já existe uma pessoa com o cnpj"+ comando.getCnpj() +" cadastrada no sistema");
+            throw new RuntimeException("JÃ¡ existe uma pessoa com o cnpj"+ comando.getCnpj() +" cadastrada no sistema");
         }
-        throw new RuntimeException("Tipo de pessoa inválido");
+        throw new RuntimeException("Tipo de pessoa invÃ¡lido");
     }
     
     public void deletarPessoa(Long id, String tipo) {
@@ -115,7 +124,7 @@ public class PessoaService {
         } else if (tipo.equals("F")) {
             pessoaFisicaRepository.delete(id);
         }else{
-            throw new RuntimeException("Tipo de pessoa inválido");
+            throw new RuntimeException("Tipo de pessoa invÃ¡lido");
         }
     }
 
@@ -126,5 +135,12 @@ public class PessoaService {
 
     public List<PessoaFisica> listarPessoasFisicas() {
         return pessoaFisicaRepository.findByAlunoFalse();
+    }
+
+    public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(Integer pagina) {
+        return new DataPage<>(pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
+    }
+    public DataPage<PessoaFisicaJuridica> buscarPessoa(Integer pagina, String busca) {
+        return new DataPage<>(pessoaFisicaJuridicaRepository.findByNomeContainingOrCpfCnpjContainingOrderByNomeAsc(busca,busca, pageRequestForAsc(pagina, "nome")));
     }
 }
