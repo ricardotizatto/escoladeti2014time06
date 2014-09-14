@@ -141,6 +141,14 @@ app.config(['$routeProvider',
                 templateUrl: './pages/CadastroParticipante.html',
                 controller: 'participanteController'
             })
+            .when('/editarparticipante', {
+                templateUrl: './pages/EditarParticipante.html',
+                controller: 'participanteController'
+            })
+            .when('/editarparticipante/:idParticipante', {
+                templateUrl: './pages/EditarParticipante.html',
+                controller: 'participanteController'
+            })
             .when('/listaordemproducao', {
                 templateUrl: './pages/ListaOrdemProducao.html',
                 controller: 'OrdemProducaoController'

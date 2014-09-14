@@ -11,6 +11,5 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     public Evento findById(Long id);
 
-//    public List<Evento> findByTituloContainingOrderByTituloAsc(String titulo);
     public Page<Evento> findByTituloContainingOrderByTituloAsc(String titulo, Pageable pageable);
 }

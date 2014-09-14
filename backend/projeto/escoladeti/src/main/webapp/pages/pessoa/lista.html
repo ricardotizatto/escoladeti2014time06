@@ -16,15 +16,17 @@
         <div class="form-group col-sm-4">
             <div>
                 <div class="btn-group">
-                    <label class="btn btn-primary btn-radio-amacapa">
-                        <input ng-model="tipoPessoa" value="J" type="radio" ng-click="filtroPessoaJuridica(1)" /> Jurídica
-                    </label> 
-                    <label class="btn btn-primary btn-radio-amacapa">
-                        <input ng-model="tipoPessoa" value="F" type="radio" ng-click="filtroPessoaFisica(1)" /> Física
-                    </label>
-                    <label class="btn btn-primary btn-radio-amacapa">
-                        <input ng-model="tipoPessoa" value="A" type="radio" ng-click="filtroAluno(1)" /> Aluno
-                    </label>
+                    <span class="pull-right">
+                        <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="tipoPessoa" value="J" type="radio" ng-click="filtroPessoaJuridica(1)" /> Jurídica
+                        </label> 
+                        <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="tipoPessoa" value="F" type="radio" ng-click="filtroPessoaFisica(1)" /> Física
+                        </label>
+                        <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="tipoPessoa" value="A" type="radio" ng-click="filtroAluno(1)" /> Aluno
+                        </label>
+                    </span>
                 </div>
             </div>
         </div>
