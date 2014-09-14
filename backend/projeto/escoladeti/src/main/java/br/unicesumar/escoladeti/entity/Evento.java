@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.util.data.DateUtil;
 import java.util.Date;
 import java.util.List;
 
@@ -28,17 +29,14 @@ public class Evento extends Entidade {
     private String titulo;
     private String descricao;
     private double valor;
-
-    @ManyToOne
-    @JoinColumn(name = "id_pagamento", nullable = true)
-    private Pagamento pagamento;
+    private boolean statusevento;
 
     public Date getData() {
         return data;
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.data = data;           
     }
 
         public String getOrganizacao() {
@@ -47,14 +45,6 @@ public class Evento extends Entidade {
 
     public void setOrganizacao(String organizacao) {
         this.organizacao = organizacao;
-    }
-
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
     }
 
     public String getTitulo() {
@@ -120,4 +110,17 @@ public class Evento extends Entidade {
     public void setMinistrante(String ministrante) {
         this.ministrante = ministrante;
     }
+    
+    public boolean validaData(){
+        return DateUtil.validBeforeDate(this.data);
+    }
+
+    public boolean getStatusevento() {
+        return statusevento;
+    }
+
+    public void setStatusevento(boolean statusevento) {
+        this.statusevento = statusevento;
+    }
+
 }

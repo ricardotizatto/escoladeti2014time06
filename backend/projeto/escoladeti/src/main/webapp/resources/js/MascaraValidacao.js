@@ -47,6 +47,14 @@ function MascaraRG(rg){
 	return formataCampo(rg, '00.000.000-0', event);
 }
 
+function MascaraValor(valor){
+    if(mascaraInteiro(valor)== false){
+        event.returnValue = false;
+    }
+    
+    return formataCampo(valor,'000.00',event);
+}
+
 //valida telefone
 function ValidaTelefone(tel){
 	exp = /\d{4}\-\d{4}/

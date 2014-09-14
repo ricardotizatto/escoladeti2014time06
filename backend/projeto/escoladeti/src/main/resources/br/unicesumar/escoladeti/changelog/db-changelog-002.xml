@@ -91,35 +91,6 @@
             schemaName="public"
             tableName="pessoafisica"/>
     </changeSet> 
-    
-    <changeSet id="mart007" author="martinho" >
-        <dropNotNullConstraint 
-            columnDataType="VARCHAR(255)"
-            columnName="email"
-            schemaName="public"
-            tableName="pessoa"/>
-    </changeSet> 
-    <changeSet id="mart008" author="martinho" >
-        <modifyDataType
-            newDataType="VARCHAR(50)"
-            columnName="email"
-            schemaName="public"
-            tableName="pessoa"/>
-    </changeSet> 
-    <changeSet id="wwr001" author="winicius" >
-        <dropNotNullConstraint 
-            columnDataType="VARCHAR(255)"
-            columnName="inscricaoestadual"
-            schemaName="public"
-            tableName="pessoajuridica"/>
-    </changeSet> 
-    <changeSet id="wwr002" author="winicius" >
-        <dropNotNullConstraint 
-            columnDataType="date"
-            columnName="datacriacao"
-            schemaName="public"
-            tableName="pessoajuridica"/>
-    </changeSet> 
        
 </databaseChangeLog>
    
