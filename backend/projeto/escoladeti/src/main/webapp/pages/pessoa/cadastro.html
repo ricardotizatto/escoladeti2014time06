@@ -161,34 +161,36 @@
 
         <label> &nbsp; </label>
         <div class="row">
-            <div class="form-group col-sm-6">
-                <legend>
-                    <span class="glyphicon glyphicon-home"></span> Endereço
-                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEndereco" ng-click="novoEndereco()">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </legend>
-                <table class="table table-hover table-striped">
-                    <tr ng-repeat="endereco in pessoa.enderecos">
-                        <td class="text-center">{{endereco.tipoEndereco + " : " +
+            <div class="col-sm-6">
+                <div class="form-group {{pessoa.enderecos.length < 1 ? 'has-error' : 'has-success'}} has-feedback">
+                    <legend>
+                        <span class="glyphicon glyphicon-home"></span> <strong class="control-label">Endereço *</strong>
+                        <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEndereco" ng-click="novoEndereco()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </legend>
+                    <table class="table table-hover table-striped">
+                        <tr ng-repeat="endereco in pessoa.enderecos">
+                            <td class="text-center">{{endereco.tipo + " : " +
                                 endereco.logradouro + ", " + endereco.numero + " - " +
                                 endereco.cidade.nome + " - " +
                                 endereco.cidade.unidadeFederativa.sigla}}</td>
-                        <td>
-                            <span class="pull-right">
-                                <button class='btn btn-warning btn-sm'
-                                        ng-click="editarEndereco($index)" data-toggle="modal"
-                                        data-target="#modalEndereco">
-                                    <span class='glyphicon glyphicon-edit'></span>
-                                </button>
-                                <button class='btn btn-danger btn-sm'
-                                        ng-click="delEndereco($index)">
-                                    <span class='glyphicon glyphicon-remove-circle'></span>
-                                </button>
-                            </span>
-                        </td>
-                    </tr>
-                </table>
+                            <td>
+                                <span class="pull-right">
+                                    <button class='btn btn-warning btn-sm'
+                                            ng-click="editarEndereco($index)" data-toggle="modal"
+                                            data-target="#modalEndereco">
+                                        <span class='glyphicon glyphicon-edit'></span>
+                                    </button>
+                                    <button class='btn btn-danger btn-sm'
+                                            ng-click="delEndereco($index)">
+                                        <span class='glyphicon glyphicon-remove-circle'></span>
+                                    </button>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group {{formTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
@@ -202,9 +204,6 @@
                                 </button>
                             </legend>
                         </div>    
-                        <div class="col-sm-8">    
-                            <!--<span class="help-block" ng-show="formTelefone.$invalid">Deve haver ao menos 1 telefone cadastrado</span>-->
-                        </div>
                     </div>    
                     <div class="row" >  
                         <div class="col-sm-12"> 
@@ -239,7 +238,7 @@
                     <a class="btn btn-primary btn-padrao" ng-click="voltar()"> 
                         <i class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
                     </a>
-                    <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formPessoa.$invalid || formTelefone.$invalid" >
+                    <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formPessoa.$invalid || formTelefone.$invalid || pessoa.enderecos.length < 1" >
                         <span class="glyphicon glyphicon-ok"></span> Salvar
                     </button>
                 </span>
@@ -334,82 +333,97 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group {{formEndereco.cep.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                                                <label class="control-label">Cep *</label>
+                                                <label class="control-label"><strong>Cep *</strong></label>
                                                 <input class="form-control" ui-mask="99.999-999" name="cep" type="text" ng-model="endereco.cep" ng-blur="buscaCep(endereco.cep)" ng-pattern="/[0-9]/" required="required"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label class="control-label"> Pais </label> 
-                                            <select type="text" ui-select2="select2Options" class="input-default" ng-model="pais.id" ng-change="modificarPais(pais.id)" ng-value="pais.id" >
-                                                <option ng-repeat="p in paises" value="{{p.id}}">{{p.nome}}</option>
-                                            </select>
+                                        <div class="col-sm-6">
+                                            <div class="form-group {{formEndereco.pais.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                <label class="control-label"><strong> Pais *</strong></label> 
+                                                <select type="text" ui-select2="select2Options" name="pais" class="input-default" ng-model="endereco.cidade.unidadeFederativa.pais.id" ng-change="modificarPais(cidade.unidadeFederativa.pais.id)" ng-value="endereco.cidade.unidadeFederativa.pais.id" required >
+                                                    <option ng-repeat="p in paises" value="{{p.id}}">{{p.nome}}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-sm-6">
-                                            <label class="control-label"> Estado </label> 
-                                            <select type="text" ui-select2 class="input-default" ng-model="unidadeFederativa.id" ng-change="modificarEstado(unidadeFederativa.id)" ng-value="unidadeFederativa.id" >
-                                                <option ng-repeat="uf in unidadesFederativas" value="{{uf.id}}">{{uf.nome}}</option>
-                                            </select>
+                                        <div class="col-sm-6">
+                                            <div class="form-group {{formEndereco.unidadeFederativa.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                <label class="control-label"><strong> Estado * </strong></label> 
+                                                <select type="text" ui-select2 class="input-default" name="unidadeFederativa" ng-model="endereco.cidade.unidadeFederativa.id" ng-change="modificarEstado(cidade.unidadeFederativa.id)" ng-value="endereco.cidade.unidadeFederativa.id" required>
+                                                    <option ng-repeat="uf in unidadesFederativas" value="{{uf.id}}">{{uf.nome}}</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-sm-12">
-                                            <label class="control-label"> Cidade </label> 
-                                            <select type="text" ui-select2="select2Options" style="width: 100%" ng-model="cidade.id" ng-change="modificarCidade(cidade.id)" ng-value="cidade.id" >
-                                                <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
-                                            </select>
+                                        <div class="col-sm-12">
+                                            <div class="form-group {{formEndereco.cidade.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                <label class="control-label"><strong> Cidade * </strong></label> 
+                                                <select type="text" ui-select2="select2Options" name="cidade" style="width: 100%" ng-model="endereco.cidade.id" ng-change="modificarCidade(cidade.id)" ng-value="endereco.cidade.id" required>
+                                                    <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label class="control-label">Principal</label>
-                                            <div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Principal</label>
                                                 <div class="btn-group">
-                                                    <!--data-toggle="buttons" verificar uso-->
                                                     <label class="btn btn-primary btn-radio-amacapa"> 
-                                                        <input ng-model="principal" value="S" type="radio"  /> Sim
+                                                        <input ng-model="endereco.principal" name="principal" value="S" type="radio"  /> Sim
                                                     </label> 
                                                     <label class="btn btn-primary btn-radio-amacapa"> 
-                                                        <input ng-model="principal" value="N" type="radio"  /> Não
+                                                        <input ng-model="endereco.principal" name="principal" value="N" type="radio"  /> Não
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-sm-6">
-                                            <label class="control-label">Tipo</label> 
-                                            <select class="selectpicker show-tick form-control" name="tipoEndereco" ng-model="endereco.tipoEndereco" data-live-search="true" >
-                                                <option value="ALAMEDA">Alameda</option>
-                                                <option value="AVENIDA">Avenida</option>
-                                                <option value="RUA">Rua</option>
-                                                <option value="ESTRADA">Estrada</option>
-                                                <option value="LADEIRA">Ladeira</option>
-                                                <option value="PRACA">Praça</option>
-                                                <option value="TRAVESSA">Travessa</option>
-                                                <option value="RODOVIA">Rodovia</option>
-                                                <option value="OUTROS">Outros</option>
-                                            </select>
+                                        <div class="col-sm-6">
+                                            <div class="form-group {{formEndereco.tipo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                <label class="control-label"><strong>Tipo *</strong></label> 
+                                                <select class="selectpicker show-tick form-control" name="tipo" ng-model="endereco.tipo" data-live-search="true" required >
+                                                    <option value="ALAMEDA">Alameda</option>
+                                                    <option value="AVENIDA">Avenida</option>
+                                                    <option value="RUA" selected>Rua</option>
+                                                    <option value="ESTRADA">Estrada</option>
+                                                    <option value="LADEIRA">Ladeira</option>
+                                                    <option value="PRACA">Praça</option>
+                                                    <option value="TRAVESSA">Travessa</option>
+                                                    <option value="RODOVIA">Rodovia</option>
+                                                    <option value="OUTROS">Outros</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group {{formEndereco.logradouro.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                <label class="control-label"><strong>Logradouro *</strong></label> 
+                                                <input class="form-control" name="logradouro" type="text" ng-model="endereco.logradouro" placeholder="Logradouro" maxlength="40" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group {{formEndereco.numero.$invalid ? 'has-error' : ''}} has-feedback">
+                                                <label class="control-label"><strong>Número </strong></label>
+                                                <input class="form-control" name="numero" type="number" ng-model="endereco.numero" placeholder="N°" min="0" >
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="form-group {{formEndereco.bairro.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                <label class="control-label"><strong>Bairro *</strong></label> 
+                                                <input class="form-control" name="bairro" type="text" ng-model="endereco.bairro" placeholder="Bairro" maxlength="40" required>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-12">
-                                            <label class="control-label">Logradouro</label> 
-                                            <input class="form-control" name="descEndereco" type="text" ng-model="endereco.logradouro" placeholder="Logradouro"  />
-                                        </div>
-                                    </div>
-                                    <div class="row">                                
-                                        <div class="form-group col-sm-3">
-                                            <label class="control-label">Número</label>
-                                            <input class="form-control" name="numero" type="number" ng-model="endereco.numero" placeholder="N°" />
-                                        </div>
-                                        <div class="form-group col-sm-9">
-                                            <label>Bairro</label> <input class="form-control" name="complemento" type="text" ng-model="endereco.bairro" placeholder="Bairro"  />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-12">
-                                            <label class="control-label">Complemento</label> <input class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" />
+                                            <label class="control-label"><strong>Complemento </strong></label>
+                                            <input class="form-control" name="complemento" type="text" ng-model="endereco.complemento" placeholder="Complemento" maxlength="40">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -418,7 +432,7 @@
                                                 <button class="btn btn-danger btn-padrao" ng-click="novoEndereco()" data-dismiss="modal">
                                                     <span class="glyphicon glyphicon-remove"></span> Sair
                                                 </button>
-                                                <button type="submit" class="btn btn-success btn-padrao">
+                                                <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formEndereco.$invalid">
                                                     <span class="glyphicon glyphicon-ok"></span> Salvar
                                                 </button>
                                             </span>
