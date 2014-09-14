@@ -28,7 +28,7 @@ public class ParticipanteController implements Serializable {
     @RequestMapping(value="/participante/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Participante getById(@PathVariable Long id){
-        System.out.println("buscando por id:");
+        System.out.println("buscando por id:"+ id);
         return participanteService.getById(id);
     }
     
@@ -45,8 +45,14 @@ public class ParticipanteController implements Serializable {
         System.out.println("buscando por id:" +idevento);
         return participanteService.getByIdevento(idevento);
     }
-        
     
+    @RequestMapping(value="/listaparticipantes/total/{idevento}", method = RequestMethod.GET)
+    @ResponseBody
+    public int getTotalParticipantesEvento(@PathVariable Long idevento){
+        System.out.println("buscando total de participantes por evento." +idevento);
+        return participanteService.getByIdevento(idevento).size();
+    }
+        
     @RequestMapping(value="/participante", method = RequestMethod.DELETE)
     @ResponseBody
     public String deletar(@RequestBody Participante participante){

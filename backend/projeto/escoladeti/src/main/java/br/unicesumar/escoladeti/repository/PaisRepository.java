@@ -12,9 +12,19 @@ import br.unicesumar.escoladeti.entity.Pais;
 public interface PaisRepository extends JpaRepository<Pais, Long> {
 
     public Pais findById(Long id);
-
     
-    public Page<Pais> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);    
-   
-
+    public Pais findByNomeAndSiglaAndCodigo(
+            String nome, String Sigla, String Codigo);
+    
+    public Page<Pais> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
+    
+   // public Page<Pais> findByActiveTrue (Integer codigo, Pageable pageable) ;
+    
+    
+    
+// public interface UserRepository extends JpaRepository<User, Long> {
+//
+//  @Query(value = "select count(*) from pais", nativeQuery = true)
+//  User findByCodigo(Integer codigo);
+//}   
 }
