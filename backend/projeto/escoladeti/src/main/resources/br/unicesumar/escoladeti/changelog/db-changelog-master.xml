@@ -48,4 +48,5 @@
 
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-001.xml" />
         <include file="br/unicesumar/escoladeti/changelog/db-changelog-002.xml" />
+        <include file="br/unicesumar/escoladeti/changelog/db-changelog-003.xml" />
 </databaseChangeLog> 
