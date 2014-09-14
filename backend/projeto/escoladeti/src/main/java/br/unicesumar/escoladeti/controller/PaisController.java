@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/rest/paisSource")
 public class PaisController implements Serializable {
 
+    @Autowired
     private PaisService paisService ;
             
 	@RequestMapping(value = "/pais", method = RequestMethod.POST)
