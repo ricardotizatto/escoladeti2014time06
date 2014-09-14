@@ -1,8 +1,9 @@
 package br.unicesumar.escoladeti.pesquisa;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PesquisaSolicitacao {
     
     private String status;

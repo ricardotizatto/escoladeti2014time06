@@ -6,8 +6,12 @@ function AcompanhamentoSolicitacaoFactory($resource) {
                 method: 'GET',
                 isArray: true,
                 params: {
-                        acao: 'listartodos'
+                    acao: 'listartodos'
                 }
+            },
+            listarPesquisa: {
+                method: 'PUT',
+                acao: 'listarpesquisa'
             }
 	});
 }
