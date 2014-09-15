@@ -21,10 +21,10 @@ public class PessoaService {
 
     @Autowired
     private PessoaJuridicaRepository pessoaJuridicaRepository;
-    
+
     @Autowired
     private PessoaFisicaRepository pessoaFisicaRepository;
-    
+
     @Autowired
     private PessoaFisicaJuridicaRepository pessoaFisicaJuridicaRepository;
 
@@ -33,7 +33,7 @@ public class PessoaService {
     }
 
     public DataPage<PessoaFisica> buscarFisica(Integer pagina, String busca) {
-        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(busca,busca,busca, pageRequestForAsc(pagina, "nome")));
+        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(busca, busca, busca, pageRequestForAsc(pagina, "nome")));
     }
 
     public DataPage<PessoaFisica> paginarAluno(Integer pagina) {
@@ -41,7 +41,7 @@ public class PessoaService {
     }
 
     public DataPage<PessoaFisica> buscarAluno(Integer pagina, String busca) {
-        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrueOrCpfContainingAndAlunoTrue(busca,busca,busca, pageRequestForAsc(pagina, "nome")));
+        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrueOrCpfContainingAndAlunoTrue(busca, busca, busca, pageRequestForAsc(pagina, "nome")));
     }
 
     public DataPage<PessoaJuridica> paginarJuridica(Integer pagina) {
@@ -49,23 +49,27 @@ public class PessoaService {
     }
 
     public DataPage<PessoaJuridica> buscarJuridica(Integer pagina, String busca) {
-        return new DataPage<>(pessoaJuridicaRepository.findByNomeContainingOrCnpjContainingOrderByNomeAsc(busca, busca,pageRequestForAsc(pagina, "nome")));
+        return new DataPage<>(pessoaJuridicaRepository.findByNomeContainingOrCnpjContainingOrderByNomeAsc(busca, busca, pageRequestForAsc(pagina, "nome")));
     }
 
-    public Pessoa buscar(Long id, String tipo){
+    public Pessoa buscar(Long id, String tipo) {
         if (tipo.equals("J")) {
             return pessoaJuridicaRepository.findOne(id);
         } else if (tipo.equals("F")) {
             return pessoaFisicaRepository.findOne(id);
-        }else{ 
+        } else {
             throw new RuntimeException("Tipo de pessoa invÃ¡lido");
         }
 
     }
 
-    public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id){
+    public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id) {
+
         if (comando.getTipo().equals("F")) {
-            if(id != null ||comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null){
+            if (pessoaFisicaRepository.findByCpf(comando.getCpf()).getCpf().equals(comando.getCpf()) && !comando.getCpf().isEmpty()) {
+                throw new RuntimeException("CPF já cadastrado.");
+            }
+            if (id != null || comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null) {
                 PessoaFisica pessoaFisica = Pessoa.builder()
                         .telefones(comando.getTelefones())
                         .enderecos(comando.getEnderecos())
@@ -88,46 +92,48 @@ public class PessoaService {
 
                 return pessoaFisica;
             }
-            throw new RuntimeException("JÃ¡ existe uma pessoa com o cpf "+ comando.getCpf() +" cadastrada no sistema");
+            throw new RuntimeException("JÃ¡ existe uma pessoa com o cpf " + comando.getCpf() + " cadastrada no sistema");
 
         } else if (comando.getTipo().equals("J")) {
-            if(id != null || pessoaJuridicaRepository.findByCnpj(comando.getCnpj()) == null ){
-            PessoaJuridica pessoaJuridica = Pessoa.builder()
-                    .telefones(comando.getTelefones())
-                    .enderecos(comando.getEnderecos())
-                    .nome(comando.getNome())
-                    .email(comando.getEmail())
-                    .tipo(comando.getTipo())
-                    .cnpj(comando.getCnpj())
-                    .inscricaoEstadual(comando.getInscricaoEstadual())
-                    .inscricaoMunicipal(comando.getInscricaoMunicipal())
-                    .razaoSocial(comando.getRazaoSocial())
-                    .dataCriacao(comando.getDataCriacao())
-                    .buildPessoaJuridica();
-
-            if (id != null) {
-                pessoaJuridica.setId(id);
+            if (pessoaJuridicaRepository.findByCnpj(comando.getCnpj()).getCnpj().equals(comando.getCnpj())) {
+                throw new RuntimeException("CNPJ já cadastrado.");
             }
+            if (id != null || pessoaJuridicaRepository.findByCnpj(comando.getCnpj()) == null) {
+                PessoaJuridica pessoaJuridica = Pessoa.builder()
+                        .telefones(comando.getTelefones())
+                        .enderecos(comando.getEnderecos())
+                        .nome(comando.getNome())
+                        .email(comando.getEmail())
+                        .tipo(comando.getTipo())
+                        .cnpj(comando.getCnpj())
+                        .inscricaoEstadual(comando.getInscricaoEstadual())
+                        .inscricaoMunicipal(comando.getInscricaoMunicipal())
+                        .razaoSocial(comando.getRazaoSocial())
+                        .dataCriacao(comando.getDataCriacao())
+                        .buildPessoaJuridica();
 
-            pessoaJuridicaRepository.save(pessoaJuridica);
+                if (id != null) {
+                    pessoaJuridica.setId(id);
+                }
 
-            return pessoaJuridica;
+                pessoaJuridicaRepository.save(pessoaJuridica);
+
+                return pessoaJuridica;
             }
-            throw new RuntimeException("JÃ¡ existe uma pessoa com o cnpj"+ comando.getCnpj() +" cadastrada no sistema");
+            throw new RuntimeException("JÃ¡ existe uma pessoa com o cnpj" + comando.getCnpj() + " cadastrada no sistema");
         }
         throw new RuntimeException("Tipo de pessoa invÃ¡lido");
     }
-    
+
     public void deletarPessoa(Long id, String tipo) {
         if (tipo.equals("J")) {
             pessoaJuridicaRepository.delete(id);
         } else if (tipo.equals("F")) {
             pessoaFisicaRepository.delete(id);
-        }else{
+        } else {
             throw new RuntimeException("Tipo de pessoa invÃ¡lido");
         }
     }
-
 
     public List<PessoaFisica> listarAlunos() {
         return pessoaFisicaRepository.findByAlunoTrue();
@@ -140,7 +146,8 @@ public class PessoaService {
     public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(Integer pagina) {
         return new DataPage<>(pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
+
     public DataPage<PessoaFisicaJuridica> buscarPessoa(Integer pagina, String busca) {
-        return new DataPage<>(pessoaFisicaJuridicaRepository.findByNomeContainingOrCpfCnpjContainingOrderByNomeAsc(busca,busca, pageRequestForAsc(pagina, "nome")));
+        return new DataPage<>(pessoaFisicaJuridicaRepository.findByNomeContainingOrCpfCnpjContainingOrderByNomeAsc(busca, busca, pageRequestForAsc(pagina, "nome")));
     }
 }

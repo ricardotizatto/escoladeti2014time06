@@ -254,7 +254,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
     $scope.editarEndereco = function (indice) {
-
+        
         $scope.indiceEndereco = indice;
 
         $scope.endereco = angular.copy($scope.pessoa.enderecos[indice]);
@@ -330,12 +330,12 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         };
     }
 
-    $scope.carregarPais = function () {
+    (function () {
         PaisService.buscarTodos()
                 .success(function (paises) {
                     $scope.paises = paises;
                 });
-    };
+    })();
 
     jQuery(function ($) {
         $.mask.definitions['~'] = '[+-]';
