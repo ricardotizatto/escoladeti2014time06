@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.comando;
 
+import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Telefone;
 import br.unicesumar.escoladeti.enums.Sexo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,6 +25,7 @@ public class ComandoSalvarPessoa {
     private String razaoSocial;
     private Date dataCriacao;
     private Set<Telefone> telefones;
+    private Set<Endereco> enderecos;
 
     public Set<Telefone> getTelefones() {
         return telefones;
@@ -32,6 +34,15 @@ public class ComandoSalvarPessoa {
     public void setTelefones(Set<Telefone> telefones) {
         this.telefones = telefones;
     }
+    
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+    
     public ComandoSalvarPessoa() {
 
     }

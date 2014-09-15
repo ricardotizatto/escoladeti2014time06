@@ -45,8 +45,8 @@ public class CidadeService {
 		return this.cidadeRepository.findByUnidadeFederativaId(estadoId);
 	}
     
-   /* public Cidade buscarCidadePorNomeFundacaoUnidadeFederativa(Cidade cidade) {
-        return this.cidadeRepository.findByNomeAndFundacaoAndUnidadeFederativa(
-                cidade.getNome(), cidade.getFundacao(), cidade.getUnidadeFederativa());
-    }*/
+   public Cidade buscarCidadePorNomeFederativa(Cidade cidade) {
+        return this.cidadeRepository.findByNomeAndUnidadeFederativa(
+                cidade.getNome(), cidade.getUnidadeFederativa());
+    }
 }
