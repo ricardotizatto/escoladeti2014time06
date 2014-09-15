@@ -10,6 +10,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     $scope.init = function () {
         //$scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica(1);
+        $scope.focusCpf = false;
     };
 
     $scope.modificarPais = function (paisId) {
@@ -22,16 +23,22 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
     $scope.validaCpf = function (cpf) {
-        if (!ValidarCPF(cpf)) {
+        if(!cpf)
+            return;
+        $scope.focusCpf = !ValidarCPF(cpf);
+        if ($scope.focusCpf && cpf) {
             toastr.warning("CPF inválido!");
-            $scope.pessoa.cpf = $scope.pessoa.c;
+            $scope.pessoa.cpf = undefined;
         }
     };
 
     $scope.validaCnpj = function (cnpj) {
-        if (!ValidarCNPJ(cnpj) && $scope.pessoa.aluno !== 'true') {
+        if(!cnpj)
+            return;
+        $scope.focusCnpj = !ValidarCNPJ(cnpj);
+        if ($scope.focusCnpj && $scope.pessoa.aluno !== 'true') {
             toastr.warning("CNPJ inválido!");
-            $scope.pessoa.cnpj = $scope.pessoa.c;
+            $scope.pessoa.cnpj = undefined;
         }
     };
 
@@ -85,8 +92,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         } else {
             $scope.filtroPessoaFisica(numeroPagina);
         }
-        
-        Pessoa.get(function(pessoas){
+
+        Pessoa.get(function (pessoas) {
             $scope.totalItems = pessoas.length;
         });
     };
@@ -130,7 +137,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                 aluno: "false",
                 sexo: "MASCULINO",
                 telefones: [],
-                enderecos : []
+                enderecos: []
             });
         }
     };
@@ -225,15 +232,15 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
     $scope.salvarEndereco = function () {
-        
-        
+
+
         $scope.endereco.logradouro = angular.uppercase($scope.endereco.logradouro);
         $scope.endereco.bairro = angular.uppercase($scope.endereco.bairro);
-        
-        if($scope.endereco.complemento)
+
+        if ($scope.endereco.complemento)
             $scope.endereco.complemento = angular.uppercase($scope.endereco.complemento);
-        
-        if(angular.isUndefined($scope.indiceEndereco))
+
+        if (angular.isUndefined($scope.indiceEndereco))
             $scope.pessoa.enderecos.push($scope.endereco);
         else
             $scope.pessoa.enderecos[$scope.indiceEndereco] = $scope.endereco;
@@ -243,19 +250,19 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         $scope.unidadeFederativa = {};
         $scope.cidade = {};
         $scope.indiceEndereco = undefined;
-        
+
     };
 
     $scope.editarEndereco = function (indice) {
-        
+
         $scope.indiceEndereco = indice;
-                
+
         $scope.endereco = angular.copy($scope.pessoa.enderecos[indice]);
 
         console.log($scope.endereco);
 
         $scope.modificarPais($scope.endereco.cidade.unidadeFederativa.pais.id);
-        
+
         $scope.modificarEstado($scope.endereco.cidade.unidadeFederativa.id);
 
         $scope.modificarCidade($scope.endereco.cidade.id);
@@ -310,7 +317,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             $scope.modificarEstado(cep.cidade.unidadeFederativa.id);
             $scope.endereco.id = null;
             $scope.endereco.principal = 'S';
-            
+
             console.log($scope.endereco);
         }, function (mesage) {
             console.log(mesage);
