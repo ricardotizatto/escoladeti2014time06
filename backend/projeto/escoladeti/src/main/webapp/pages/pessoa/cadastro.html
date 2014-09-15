@@ -29,9 +29,9 @@
                     <div>
                         <div class="btn-group">
                             <label class="btn btn-primary btn-radio-amacapa">
-                                <input ng-model="pessoa.aluno" value="true" type="radio" /> SIM
+                                <input ng-model="pessoa.aluno" value="true" type="radio" name="aluno" /> SIM
                             </label> <label class="btn btn-primary btn-radio-amacapa">
-                                <input ng-model="pessoa.aluno" value="false" type="radio" /> NÃO
+                                <input ng-model="pessoa.aluno" value="false" type="radio" name="aluno"/> NÃO
                             </label>
                         </div>
                     </div>
@@ -74,9 +74,9 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="form-group {{formPessoa.cpfFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <div class="form-group {{formPessoa.cpfFisica.$invalid && pessoa.aluno === 'false' ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"> <strong>CPF *</strong> </label> 
-                        <input class="form-control" ui-mask="999.999.999-99" type="text" name="cpfFisica" ng-model="pessoa.cpf" title="Número do CPF" ng-blur="validaCpf(pessoa.cpf)" maxlength="14" ng-required="pessoa.tipo == 'F' && pessoa.aluno == 'false'" />
+                        <input class="form-control" ui-mask="999.999.999-99" type="text" name="cpfFisica" ng-model="pessoa.cpf" title="Número do CPF" my-blur="validaCpf(pessoa.cpf)" my-focus="focusCpf" maxlength="14" ng-required="pessoa.tipo === 'F' && pessoa.aluno === 'false'" >
                         <span class="help-block" ng-show="formPessoa.cpfFisica.$error.pattern">Apenas números e 11 dígitos.</span>
                     </div>
                 </div>
@@ -118,9 +118,9 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="form-group {{formPessoa.cnpjJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <div class="form-group {{formPessoa.cnpjJuridica.$invalid || pessoa.focusCnpj ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong> CNPJ *</strong> </label> 
-                        <input class="form-control" ui-mask="99.999.999/9999-99" name="cnpjJuridica" type="text"  title="11.222.333/9999-22" ng-blur="validaCnpj(pessoa.cnpj)"
+                        <input class="form-control" ui-mask="99.999.999/9999-99" name="cnpjJuridica" type="text"  title="11.222.333/9999-22" my-blur="validaCnpj(pessoa.cnpj)" my-focus="focusCnpj"
                                ng-model="pessoa.cnpj" ng-required="pessoa.tipo == 'J'"/>
                         <span class="help-block" ng-show="formPessoa.cnpjJuridica.$error.pattern">Apenas números e 14 digitos.</span>
                     </div>

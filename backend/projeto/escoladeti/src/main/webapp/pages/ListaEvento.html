@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="form-group col-sm-4">
-                 <label> &nbsp; </label>
+                <label> &nbsp; </label>
                 <div class="btn-group">
                     <div ng-switch on="selected">
                         <button class='btn btn-primary btn-padrao' ng-switch-when='true' ng-click='getTodos(1)'>
@@ -46,56 +46,60 @@
                 <th class="col-md-1">Editar</th>
             </tr>
             <tr ng-repeat="ev in eventos.list| filter : busca">
-                    <td ng-show="ev.statusevento == selected">
-                        <button type='button' class='btn btn-success btn-sm' ng-show="ev.statusevento == true">
-                            <span class='glyphicon glyphicon-folder-open'></span>
-                        </button>
-                        <button type='button' class='btn btn-danger btn-sm' ng-show="ev.statusevento == false">
-                            <span class='glyphicon glyphicon-folder-close'></span>
-                        </button>
-                    </td>
-                    <td ng-show="ev.statusevento == selected">{{ev.titulo}}</td>
-                    <td ng-show="ev.statusevento == selected" >{{ev.descricao.substring(0,180)}}</td>
-                    <td ng-show="ev.statusevento == selected">{{getTipoEvento(ev.tipoEvento)}}</td>
-                    <td ng-show="ev.statusevento == selected">
-                        <button type='button' class='btn btn-warning btn-sm' ng-click="listarParticipantes(ev)">
-                            GERENCIAR 
-                        </button>
-                    </td>
-                    <td ng-show="ev.statusevento == selected">
-                        <button type='button' class='btn btn-warning btn-sm' ng-click="editar(ev)">
-                            <span class='glyphicon glyphicon-edit'></span>
-                        </button>
-                    </td>
+                <td ng-show="ev.statusevento == selected">
+                    <button type='button' class='btn btn-success btn-sm' ng-show="ev.statusevento == true">
+                        <span class='glyphicon glyphicon-folder-open'></span>
+                    </button>
+                    <button type='button' class='btn btn-danger btn-sm' ng-show="ev.statusevento == false">
+                        <span class='glyphicon glyphicon-folder-close'></span>
+                    </button>
+                </td>
+                <td ng-show="ev.statusevento == selected">{{ev.titulo}}</td>
+                <td ng-show="ev.statusevento == selected" >{{ev.descricao.substring(0, 180)}}</td>
+                <td ng-show="ev.statusevento == selected">{{getTipoEvento(ev.tipoEvento)}}</td>
+                <td ng-show="ev.statusevento == selected">
+                    <button type='button' class='btn btn-warning btn-sm' ng-click="listarParticipantes(ev)">
+                        GERENCIAR 
+                    </button>
+                </td>
+                <td ng-show="ev.statusevento == selected">
+                    <button type='button' class='btn btn-warning btn-sm' ng-click="editar(ev)">
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                </td>
             </tr>
         </table>
 
-        <div class="col-sm-12">
-            <ul class="pagination">
-                <li>
-                    <a ng-click="getTodos(1)"> 
-                        <span class="glyphicon glyphicon-fast-backward"></span>
-                    </a>
-                </li>
-                <li>
-                    <a ng-click="eventos.pageNumber <= 1 ? getTodos(1) : getTodos(eventos.pageNumber)"> 
-                        <span class="glyphicon glyphicon-step-backward"></span>
-                    </a>
-                </li>
-                <li ng-repeat="numeroPagina in eventos.pagesAround" class="{{numeroPagina == eventos.pageNumber ? 'active' : ''}}">
-                    <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
-                </li>
-                <li>
-                    <a ng-click="eventos.pageNumber === eventos.pageCount ? getTodos(eventos.pageCount) : getTodos(eventos.pageNumber + 1)"> 
-                        <span class="glyphicon glyphicon-step-forward"></span>
-                    </a>
-                </li>
-                <li>
-                    <a ng-click="eventos.pageCount === 0 ? getTodos(1) : getTodos(eventos.pageCount)">
-                        <span class="glyphicon glyphicon-fast-forward"></span>
-                    </a>
-                </li>            </ul>
-        </div>
+        <!--        <div class="col-sm-12">
+                    <ul class="pagination">
+                        <li>
+                            <a ng-click="getTodos(1)"> 
+                                <span class="glyphicon glyphicon-fast-backward"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="eventos.pageNumber <= 1 ? getTodos(1) : getTodos(eventos.pageNumber)"> 
+                                <span class="glyphicon glyphicon-step-backward"></span>
+                            </a>
+                        </li>
+                        <li ng-repeat="numeroPagina in eventos.pagesAround" class="{{numeroPagina == eventos.pageNumber ? 'active' : ''}}">
+                            <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+                        </li>
+                        <li>
+                            <a ng-click="eventos.pageNumber === eventos.pageCount ? getTodos(eventos.pageCount) : getTodos(eventos.pageNumber + 1)"> 
+                                <span class="glyphicon glyphicon-step-forward"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="eventos.pageCount === 0 ? getTodos(1) : getTodos(eventos.pageCount)">
+                                <span class="glyphicon glyphicon-fast-forward"></span>
+                            </a>
+                        </li>            </ul>
+                </div>-->
+        <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="totalItems" items-per-page="eventos.maxRows"
+                    ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        </pagination>
 
     </fieldset>
     <hr>

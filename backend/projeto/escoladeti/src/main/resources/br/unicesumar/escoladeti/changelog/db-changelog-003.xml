@@ -41,7 +41,10 @@
             columnDataType="boolean"
             columnName="presente"
             tableName="participante"/>
-    </changeSet>     
+    </changeSet>
+    <changeSet id="w201409151639" author=" Walber ">
+        <dropUniqueConstraint tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
+    </changeSet>
 
 </databaseChangeLog>
    
