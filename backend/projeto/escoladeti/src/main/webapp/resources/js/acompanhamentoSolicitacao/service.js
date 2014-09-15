@@ -1,16 +1,9 @@
 function AcompanhamentoSolicitacaoFactory($resource) {
 	return $resource("./rest/acompanhamentosolicitacoes/:id/:acao/:pagina", {id: '@id'},{
 		
-            update: {method: 'PUT'},
-            listartodos: {
+            listarPesquisa: {
                 method: 'GET',
                 isArray: true,
-                params: {
-                    acao: 'listartodos'
-                }
-            },
-            listarPesquisa: {
-                method: 'PUT',
                 acao: 'listarpesquisa'
             }
 	});

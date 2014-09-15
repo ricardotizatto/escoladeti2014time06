@@ -1,50 +1,30 @@
 var controllers = angular.module('controllers');
 
-function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams, SolicitacaoItem){ 
+function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams, PesquisaSolicitacao){ 
 
-    $scope.getTodos = function() {
-        $log.debug('listar todas as SolicitacaoItens');
-        //$scope.carregaPesquisaSolicitacao(null);
-        SolicitacaoItem.listartodos(function(SolicitacaoItens) {
-            $scope.solicitacaoItens = SolicitacaoItens;
-            for (var i=0; i< $scope.solicitacaoItens.length; i++) {
-                $scope.solicitacaoItens[i].dataChegada = new Date();
-            } 
+    $scope.init = function() {
+        $scope.getPesquisaSolicitacao();
+    };
+    
+    $scope.getPesquisaSolicitacao = function(status) {
+        $log.debug('PESQUISANDO');
+        $scope.carregaPesquisaSolicitacao(status);
+        $scope.pesquisaSolicitacao.$listarPesquisa(function(pesquisaSolicitacao) {
+            $scope.solicitacaoItens = pesquisaSolicitacao;
         });
     };
     
-    $scope.getPesquisar  = function() {
-        $log.debug('PESQUISANDO');
-        $scope.carregaPesquisaSolicitacao("AGUARDANDO");
-        $log.debug('Status: ' + $scope.pesquisaSolicitacao.status);
-        
-	$scope.pesquisaSolicitacao.$listarPesquisa(function () {
-            toastr.success('Pesquisa salvo com sucesso');
-	});
-    };
-    
     $scope.carregaPesquisaSolicitacao = function(status) {
-        $scope.pesquisaSolicitacao = {
-            status: status,
-            dataInicio: $scope.buscaDataChegadaIni.toUpperCase(),
-            dataFim: $scope.buscaDataChegadaFim.toUpperCase(),
-            solicitacaoId: $scope.buscaSolicitacao.toUpperCase(),
-            ordemId: $scope.buscaOrdem.toUpperCase(),
-            material: $scope.buscaMaterial.toUpperCase(),
-            responsavel: $scope.buscaResponsavel.toUpperCase(),
-            revisor: $scope.buscaRevisor.toUpperCase()
-        };
-    };
-    
-    $scope.getSolicitacaoStatus = function(status) {
-        $log.debug('acomapanhamento getSolicitacaoStatus');
-        $scope.solicitacoes = [];
-//        for (var i=0; i< $scope.solicitacoesDB.length; i++) {
-//            if($scope.solicitacoesDB[i].status == status){
-//                $log.debug('status: '+ $scope.solicitacoesDB[i].status);
-//                $scope.solicitacoes.push($scope.solicitacoesDB[i]);
-//            }
-//        }   
+        $scope.pesquisaSolicitacao = new PesquisaSolicitacao({
+            status: status === "" || undefined ? null : status,
+            dataInicio: $scope.buscaDataChegadaIni === "" || undefined ? null : $scope.buscaDataChegadaIni,
+            dataFim: $scope.buscaDataChegadaFim === "" || undefined ? null : $scope.buscaDataChegadaFim,
+            solicitacaoId: $scope.buscaSolicitacao === "" || undefined ? null : $scope.buscaSolicitacao,
+            ordemId: $scope.buscaOrdem === "" || undefined ? null : $scope.buscaOrdem,
+            material: $scope.buscaMaterial === "" || undefined ? null : $scope.buscaMaterial,
+            responsavel: $scope.buscaResponsavel === "" || undefined ? null : $scope.buscaResponsavel,
+            revisor: $scope.buscaRevisor === "" || undefined ? null : $scope.buscaRevisor
+        });
     };
     
     $scope.produzir = function(soliciataoId) {
@@ -52,7 +32,7 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     };
     
     $scope.expandir = function(soliciatao) {
-        $location.path('/cadastrosolicitacao/'+ 80);
+        $location.path('/cadastrosolicitacao/'+ soliciatao.id);
     };
     
     $scope.cancelar = function(soliciataoId) {

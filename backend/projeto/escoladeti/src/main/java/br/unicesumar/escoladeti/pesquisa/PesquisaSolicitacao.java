@@ -20,7 +20,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = status.toUpperCase();
     }
 
     public Date getDataInicio() {
@@ -60,7 +60,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setMaterial(String material) {
-        this.material = material;
+        this.material = material.toUpperCase();
     }
 
     public String getResponsavel() {
@@ -68,7 +68,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
+        this.responsavel = responsavel.toUpperCase();
     }
 
     public String getRevisor() {
@@ -76,7 +76,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setRevisor(String revisor) {
-        this.revisor = revisor;
+        this.revisor = revisor.toUpperCase();
     }
     
     
