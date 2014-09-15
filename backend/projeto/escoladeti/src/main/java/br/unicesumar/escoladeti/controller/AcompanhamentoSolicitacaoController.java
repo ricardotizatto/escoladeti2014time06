@@ -19,10 +19,18 @@ public class AcompanhamentoSolicitacaoController{
     @Autowired
     private AcompanhamentoSolicitacaoService acompanhamentosolicitacaoService;	
 
-    @RequestMapping( method = RequestMethod.GET, value = "/listarpesquisa")	
+    @RequestMapping( method = RequestMethod.POST, value = "/listarPesquisa")	
     @ResponseBody
-    public List<AcompanhamentoDTO> listarPesquisa(@Valid @RequestBody PesquisaSolicitacao pesquisa) {		
-        return acompanhamentosolicitacaoService.listarItens(pesquisa);
+    public PesquisaSolicitacao listarPesquisa(@Valid @RequestBody PesquisaSolicitacao pesquisa) {		
+        return pesquisa;//acompanhamentosolicitacaoService.listarItens(pesquisa);
+    }
+    
+    @RequestMapping( method = RequestMethod.GET, value = "/listarItens")
+    @ResponseBody
+    public List<AcompanhamentoDTO> listarItens(){
+        PesquisaSolicitacao ps = new PesquisaSolicitacao();
+        ps.setStatus("CANCELADO");
+        return acompanhamentosolicitacaoService.listarItens(ps);
     }
 
 }

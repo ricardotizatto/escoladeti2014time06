@@ -7,17 +7,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SolicitacaoItemRepository{
     
-    @Autowired
-    private DataSource dataSource;
+    //@Autowired
+    //private DataSource dataSource;
     public List<AcompanhamentoDTO>listarItens(PesquisaSolicitacao pesquisa) {
+        
         List<AcompanhamentoDTO>itens = new ArrayList<>();
+        
+        AcompanhamentoDTO acompanhamentoDTO = new AcompanhamentoDTO();
+        acompanhamentoDTO.setStatus(pesquisa.getStatus());
+        acompanhamentoDTO.setTraducao("BRILLE");
+        acompanhamentoDTO.setResponsavel("JOAO");
+        acompanhamentoDTO.setOrdemId(100L);
+        acompanhamentoDTO.setSolicitacaoId(200L);
+        acompanhamentoDTO.setMaterial("CINDERELA");
+        acompanhamentoDTO.setDataChegada(new Date());
+        acompanhamentoDTO.setDataEnvio(new Date());
+        itens.add(acompanhamentoDTO);
+        
+         /*
         String consultaBase = "select  so.datachegada dataChegada, so.id id_solicitacao, pe.nome responsavel, si.traducaomaterial traducao, op.id ordemId,si.status, li.nome nomeMaterial from solicitacaoitem  si "
                 + " join solicitacao so on(so.id = si.id_solicitacao) "
                 + " join pessoafisica pf on(pf.id = so.id_responsavel) " 
@@ -69,9 +83,9 @@ public class SolicitacaoItemRepository{
                 itens.add(acompanhamentoDTO);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new RuntimeException("erro ao realizar pesquisa");
-        }
+        }*/
         return itens;
     }
 }
