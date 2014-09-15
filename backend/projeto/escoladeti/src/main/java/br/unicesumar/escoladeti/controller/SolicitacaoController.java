@@ -56,6 +56,6 @@ public class SolicitacaoController implements Serializable{
 	public DataPage<Solicitacao> paginar(@PathVariable Integer pagina) {
 		return solicitacaoService.paginar(pagina);
 	}
-	
-	
+
+
 }
