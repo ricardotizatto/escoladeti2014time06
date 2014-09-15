@@ -14,8 +14,8 @@
                                                  disabled="disabled" ng-model="solicitacao.id">
                 </div>
                 <div class="col-md-5 form-group {{solicitacaoForm.aluno.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                    <label>Aluno *</label>
-                    <!--<select ui-select2="select2Options"-->
+                    <label class="control-label">Aluno *</label>
+                    <select ui-select2="select2Options"-->
                             <!--class="input-default"-->
                             <!--ng-model="solicitacao.aluno" required name="aluno" >-->
                         <!--<option value=""></option>-->
@@ -53,7 +53,7 @@
                     <input type="text" class="form-control" ng-model="solicitacao.escola" />
                 </div>
                 <div class="col-md-3 form-group {{solicitacaoForm.responsavel.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                    <label>Responsável *</label>
+                    <label class="control-label">Responsável *</label>
                     <!--<select ui-select2="select2Options" class="input-default"-->
                             <!--ng-model="solicitacao.responsavel" name="responsavel" required="required">-->
                         <!--<option value=""></option>-->
@@ -62,23 +62,19 @@
                 </div>
 
                 <div class="col-md-3 form-group {{solicitacaoForm.dataChegada.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                    <label>Data de chegada *</label>
+                    <label class="control-label">Data de chegada *</label>
                     <input type="date" class="form-control" ng-model="solicitacao.dataChegada" name="dataChegada" required="required">
                 </div>
-                <!--<div class="col-md-3 form-group">-->
-                    <!--<label>NRE</label> <select ui-select2="select2Options" class="input-default"-->
-                                               <!--ng-model="solicitacao.nre">-->
-                        <!--<option value=""></option>-->
-                        <!--<option ng-repeat="c in cidades" value="{{c.id}}"-->
-                                <!-->{{c.nome}}</option>-->
-                    <!--</select>-->
-                <!--</div>-->
+                <div class="col-md-3 form-group">
+                    <label>NRE</label>
+                    <input ui-select2="select2Options" class="input-default" ng-model="solicitacao.new" name="nre" required>
+                </div>                  
             </div>
             <fieldset>
                 <legend>Endereço</legend>
                 <div class="row">
                     <div class="col-md-3 form-group {{solicitacaoForm.endereco.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                        <label>Endereço *</label>
+                        <label class="control-label">Endereço *</label>
                         <input type="text" class="form-control" ng-model="solicitacao.endereco" name="endereco" required maxlength="100">
                     </div>
                     <div class="col-md-3 form-group {{solicitacaoForm.cep.$error.required? 'has-error' : 'has-success' }} has-feedback">
@@ -87,17 +83,14 @@
                     </div>
                     <div class="col-md-3 form-group {{solicitacaoForm.numero.$error.required ||
                          solicitacaoForm.numero.$error.pattern? 'has-error' : 'has-success' }} has-feedback">
-                        <label>Número *</label>
+                        <label class="control-label">Número *</label>
                         <input type="text" class="form-control" ng-model="solicitacao.numeroEndereco" name="numero" ng-pattern="/^\d{4,4}$/"
                                 maxlength="4" required="">
                         <span class="help-block" ng-show="solicitacaoForm.numero.$error.pattern">4 números.</span>
                     </div>
                     <div class="col-md-3 form-group {{solicitacaoForm.municipio.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                        <label>Município *</label>
-                        <input ui-select2="select2Options" class="input-default" ng-model="solicitacao.municipio" name="municipio" required>
-                            <!--<option value=""></option>-->
-                            <!--<option ng-repeat="c in cidades" value="{{c.id}}">{{c.nome}}</option>-->
-                        <!--</select>-->
+                        <label class="control-label">Município *</label>
+                        <input ui-select2="select2Options" class="input-default" ng-model="solicitacao.municipio" name="municipio" required>                          
                     </div>
 
                 </div>

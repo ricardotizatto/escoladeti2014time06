@@ -36,21 +36,28 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
                     return {
                         text: cidade.nome,
                         id: cidade.id
-                    }
+                    };
                 });
 
                 return {
                     results: cidades
                 };
-            }
-
-
+            }         
         },
-
-        initSelection: function (element, callback) {
-            //console.log('iniSelection', element);
-            //callback({id:1, text: 'teste'});
+        
+        initSelection: function(element, callback) {
+        	var valor = element.val();
+        	console.log('valor busca cidade',valor);
+        	Cidade.buscar(valor).success(function (cidade) {
+        		console.log('cidade', cidade);
+        		callback({
+        			text: cidade.nome,
+        			id: cidade.id
+        		});
+        		
+        	});        	
         }
+	
 
 	};
 
@@ -62,6 +69,14 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
 	$scope.enviarSolicitacao = function () {
 		$log.debug('enviando solicitacao');
+		
+		if ($scope.solicitacao.municipio) {
+			$scope.solicitacao.municipio = $scope.solicitacao.municipio.id;
+		}
+		
+		if ($scope.solicitacao.nre) {
+			$scope.solicitacao.nre = $scope.solicitacao.nre.id;
+		}
 		
 		if ($scope.solicitacao.id) {
 			$scope.solicitacao.$update(function () {
