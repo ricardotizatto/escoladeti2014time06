@@ -47,8 +47,8 @@ public class PaisController implements Serializable {
 
     @RequestMapping(value = "/pais", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Pais> getTodos() {
-        return paisService.getTodos(1);
+    public List<Pais> getTodos() {
+        return paisService.getTodos();
     }
 
     

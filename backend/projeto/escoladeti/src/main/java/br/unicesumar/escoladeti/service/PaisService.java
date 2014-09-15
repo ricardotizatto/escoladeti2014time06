@@ -43,4 +43,8 @@ public class PaisService implements Serializable{
        return this.paisRepository.findByNomeAndSiglaAndCodigo(
                 pais.getNome(), pais.getSigla(), pais.getCodigo());
     }
+
+    public List<Pais> getTodos() {
+        return this.paisRepository.findAll();
+    }
 }

@@ -85,6 +85,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         } else {
             $scope.filtroPessoaFisica(numeroPagina);
         }
+        
+        Pessoa.get(function(pessoas){
+            $scope.totalItems = pessoas.length;
+        });
     };
 
 

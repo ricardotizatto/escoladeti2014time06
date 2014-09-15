@@ -78,6 +78,10 @@ function PaisController($scope, $routeParams, paisService) {
                         delete pais.info; 
                 });
                 $scope.paises = listaPaises;
+                paisService.buscarTodos()
+                        .success(function(lista){
+                            $scope.totalItems = lista.length;
+                });
             })
             .error(function(data, status) {
                 console.log('erro ao buscar paises ' + data);

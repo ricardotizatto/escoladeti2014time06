@@ -72,7 +72,7 @@
             </table>
         </div>
     </div>    
-    <div class="row ">
+<!--    <div class="row ">
         <div class="col-sm-12">
             <ul class="pagination">
                 <li>
@@ -100,7 +100,11 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div>-->
+    <pagination boundary-links="true" num-pages="pagina.pageCount" total-items="totalItems" items-per-page="pagina.maxRows"
+                ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="pagina.maxPagesToShow"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
 </div>    
 <script>
     jQuery(function ($) {
