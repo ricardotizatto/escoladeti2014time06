@@ -6,13 +6,17 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
-		this.livro = {};	
+		this.livro = null;
 		this.status = 'ABERTO';
 	};	
 
 	$scope.itemCorrente = new ItemCorrente();
-	
-	$scope.select2Options = {
+
+    $scope.select2Options = {
+      allowClear: true
+    };
+
+	$scope.select2Cidade = {
 		allowClear: true,
 		placeholder: 'selecione',
 
@@ -179,9 +183,34 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	};
 	
 	$scope.adicionarMaterial = function () {
-		if (!$scope.itemCorrente.livro) {
+        var livroId  = $scope.itemCorrente.livro,
+            traducao = $scope.itemCorrente.traducaoMaterial,
+            outro = $scope.itemCorrente.outro;
+
+        $scope.solicitacao.itensSolicitacao.forEach(function (item) {
+            console.log(item);
+            if (livroId === item.livro
+                && traducao == item.traducaoMaterial) {
+                toastr.warning('Livro já adicionado para esta tradução.');
+                livroId = null;
+            }
+        });
+
+        console.log(traducao);
+        if (traducao === 'OUTRO' && !outro) {
+            toastr.warning('É necessário especificar a tradução.');
             return;
         }
+
+        if (outro) {
+            $scope.itemCorrente.outro = outro.toUpperCase();
+        }
+
+        if (!livroId) {
+            return;
+        }
+
+        $('#modalLivro').modal('hide');
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
 	};
