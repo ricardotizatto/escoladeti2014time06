@@ -30,7 +30,7 @@ public class SolicitacaoItemRepository{
         }
         if(pesquisa.getDataInicio() != null && pesquisa.getDataFim() != null){
 
-            consultaBase += " and so.datachegada between =" + "'"+ pesquisa.getDataInicio()+"'";
+            consultaBase += " and so.datachegada between " + "'"+ pesquisa.getDataInicio()+"'";
             consultaBase += "and" + "'"+pesquisa.getDataFim()+"'";
         }
         if(pesquisa.getDataInicio() != null){
