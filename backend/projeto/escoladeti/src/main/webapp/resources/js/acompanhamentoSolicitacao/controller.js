@@ -8,18 +8,19 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     
     $scope.getPesquisaSolicitacao = function(status) {
         $log.debug('Pesquisando status: ' + status);
-        
-        var parametrosPesquisa = {
-            status: status === "" || undefined ? null : status,
-            dataInicio: $scope.buscaDataChegadaIni === "" || undefined ? null : $scope.buscaDataChegadaIni,
-            dataFim: $scope.buscaDataChegadaFim === "" || undefined ? null : $scope.buscaDataChegadaFim,
-            solicitacaoId: $scope.buscaSolicitacao === "" || undefined ? null : $scope.buscaSolicitacao,
-            ordemId: $scope.buscaOrdem === "" || undefined ? null : $scope.buscaOrdem,
-            material: $scope.buscaMaterial === "" || undefined ? null : $scope.buscaMaterial,
-            responsavel: $scope.buscaResponsavel === "" || undefined ? null : $scope.buscaResponsavel,
-            revisor: $scope.buscaRevisor === "" || undefined ? null : $scope.buscaRevisor
-        };
-        PesquisaSolicitacao.query(parametrosPesquisa, function(solicitacaoItens) {
+        $log.debug('Data ini: ' + $scope.buscaDataChegadaIni + ' Fim ' + $scope.buscaDataChegadaFim);
+
+        PesquisaSolicitacao.query({
+                status: status,
+                dataInicio: $scope.buscaDataChegadaIni,
+                dataFim: $scope.buscaDataChegadaFim,
+                solicitacaoId: $scope.buscaSolicitacao,
+                ordemId: $scope.buscaOrdem,
+                material: $scope.buscaMaterial,
+                responsavel: $scope.buscaResponsavel,
+                revisor: $scope.buscaRevisor
+                
+            }, function(solicitacaoItens) {
             $scope.solicitacaoItens = solicitacaoItens;
         });
     };

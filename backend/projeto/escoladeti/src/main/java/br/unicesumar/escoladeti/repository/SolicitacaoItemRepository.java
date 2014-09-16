@@ -27,22 +27,22 @@ public class SolicitacaoItemRepository{
                 + " where 1=1 ";
         
         if (pesquisa.getStatus() != null ) {
-            consultaBase += " and si.status =" + "'"+pesquisa.getStatus()+"'";
+            consultaBase += " and si.status =" + "'" +pesquisa.getStatus()+"'";
         }
         if(pesquisa.getDataInicio() != null && pesquisa.getDataFim() != null){
-            consultaBase += " and so.datachegada between =" + pesquisa.getDataInicio() + " and " + pesquisa.getDataFim();
+            consultaBase += " and so.datachegada between =" + "'" + pesquisa.getDataInicio()+ "'" + " and " + "'" + pesquisa.getDataFim()+"'";
         }
         if(pesquisa.getSolicitacaoId() != null){
-            consultaBase += " and solicitacaoId =" +pesquisa.getSolicitacaoId();
+            consultaBase += " and so.id =" + "'" +pesquisa.getSolicitacaoId()+"'";
         }
         if(pesquisa.getOrdemId() != null){
-            consultaBase += " and op.id =" + pesquisa.getOrdemId();
+            consultaBase += " and op.id =" + "'" + pesquisa.getOrdemId()+"'";
         }
         if(pesquisa.getMaterial() != null){
-            consultaBase += " and li.nome =" +pesquisa.getMaterial();
+            consultaBase += " and li.nome =" + "'" +pesquisa.getMaterial()+"'";
         }
         if(pesquisa.getResponsavel() != null){
-            consultaBase += " and pe.nome =" +pesquisa.getResponsavel();
+            consultaBase += " and pe.nome =" + "'" +pesquisa.getResponsavel()+"'";
         }
 //        verificar de onde busca o revisor
 //        if(pesquisa.getRevisor()!= null){

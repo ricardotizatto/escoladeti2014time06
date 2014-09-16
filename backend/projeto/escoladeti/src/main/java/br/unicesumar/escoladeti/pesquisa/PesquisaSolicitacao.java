@@ -2,6 +2,8 @@ package br.unicesumar.escoladeti.pesquisa;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PesquisaSolicitacao {
@@ -20,7 +22,9 @@ public class PesquisaSolicitacao {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        if (status != null) {
+            this.status = status.toUpperCase();
+        }
     }
 
     public Date getDataInicio() {
@@ -60,7 +64,9 @@ public class PesquisaSolicitacao {
     }
 
     public void setMaterial(String material) {
-        this.material = material.toUpperCase();
+        if (material != null) {
+            this.material = material.toUpperCase();
+        }
     }
 
     public String getResponsavel() {
@@ -68,7 +74,9 @@ public class PesquisaSolicitacao {
     }
 
     public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel.toUpperCase();
+        if(responsavel != null){
+            this.responsavel = responsavel.toUpperCase();
+        }    
     }
 
     public String getRevisor() {
@@ -76,7 +84,9 @@ public class PesquisaSolicitacao {
     }
 
     public void setRevisor(String revisor) {
-        this.revisor = revisor.toUpperCase();
+        if (revisor != null) {
+            this.revisor = revisor.toUpperCase();
+        }
     }
     
     

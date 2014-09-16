@@ -26,24 +26,24 @@ public class AcompanhamentoSolicitacaoController{
     @RequestMapping( method = RequestMethod.GET)
     @ResponseBody
     public List<AcompanhamentoDTO> listarItens(
-        @RequestParam(required = false, value = "status") String status
-//        @RequestParam(required = false, value = "dataInicio") Date dataInicio,
-//        @RequestParam(required = false, value = "dataFim") Date dataFim,
-//        @RequestParam(required = false, value = "solicitacaoId") Long solicitacaoId,
-//        @RequestParam(required = false, value = "ordemId") Long ordemId,
-//        @RequestParam(required = false, value = "material") String material,
-//        @RequestParam(required = false, value = "responsavel") String responsavel,
-//        @RequestParam(required = false, value = "revisor") String revisor
+        @RequestParam(required = false, value = "status") String status,
+        @RequestParam(required = false, value = "dataInicio") String dataInicio,
+        @RequestParam(required = false, value = "dataFim") String dataFim,
+        @RequestParam(required = false, value = "solicitacaoId") Long solicitacaoId,
+        @RequestParam(required = false, value = "ordemId") Long ordemId,
+        @RequestParam(required = false, value = "material") String material,
+        @RequestParam(required = false, value = "responsavel") String responsavel,
+        @RequestParam(required = false, value = "revisor") String revisor
     ){
         PesquisaSolicitacao ps = new PesquisaSolicitacao();
             ps.setStatus(status);
-//            ps.setDataInicio(dataInicio);
-//            ps.setDataFim(dataFim);
-//            ps.setSolicitacaoId(solicitacaoId);
-//            ps.setOrdemId(ordemId);
-//            ps.setMaterial(material);
-//            ps.setResponsavel(responsavel);
-//            ps.setRevisor(revisor);
+            ps.setDataInicio(dataInicio);
+            ps.setDataFim(dataFim);
+            ps.setSolicitacaoId(solicitacaoId);
+            ps.setOrdemId(ordemId);
+            ps.setMaterial(material);
+            ps.setResponsavel(responsavel);
+            ps.setRevisor(revisor);
         return acompanhamentosolicitacaoService.listarItens(ps,dataSource);
     }
 
