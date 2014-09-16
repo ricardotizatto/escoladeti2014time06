@@ -1,7 +1,7 @@
 package br.unicesumar.escoladeti.enums;
 
 public enum OrdemProducaoStatus {
-	ANDAMENTO, FINALIZADO, REJEITADO;
+	ANDAMENTO, REJEITADO, IMPRESSO, REVISADO, ENVIADO;
 	
 }
 	

@@ -45,6 +45,12 @@
     <changeSet id="w201409151639" author=" Walber ">
         <dropUniqueConstraint tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
     </changeSet>
+    
+    <changeSet id="40246" author="Catabirga">
+        <dropTable tableName="ordemproducao"></dropTable>
+        <dropTable tableName="partematerial"></dropTable>
+
+    </changeSet>
 
 </databaseChangeLog>
    

@@ -1,7 +1,7 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.OrdemProducao;
-import br.unicesumar.escoladeti.entity.ParteMaterial;
+import br.unicesumar.escoladeti.entity.Volume;
 import br.unicesumar.escoladeti.service.OrdemProducaoService;
 import br.unicesumar.escoladeti.service.ParteMaterialService;
 import java.io.Serializable;
@@ -69,25 +69,25 @@ public class OrdemProducaoController implements Serializable{
     //
     @RequestMapping(value = "/parteMaterial", method = RequestMethod.POST)
     @ResponseBody
-    public ParteMaterial salvarParteMaterial(@RequestBody ParteMaterial parteMaterial) {
+    public Volume salvarParteMaterial(@RequestBody Volume parteMaterial) {
         return this.parteMaterialService.salvar(parteMaterial);
     }
 
     @RequestMapping(value = "/parteMaterial", method = RequestMethod.GET)
     @ResponseBody
-    public List<ParteMaterial> getTodasPartesMateriais() {
+    public List<Volume> getTodasPartesMateriais() {
         return this.parteMaterialService.getTodos();
     }
 
     @RequestMapping(value = "/parteMaterial/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ParteMaterial getParteMaterialById(@PathVariable Long id) {
+    public Volume getParteMaterialById(@PathVariable Long id) {
         return this.parteMaterialService.getById(id);
     }
 
     @RequestMapping(value = "/parteMaterial", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deletar(@RequestBody ParteMaterial parteMaterial) {
+    public String deletar(@RequestBody Volume parteMaterial) {
         this.parteMaterialService.remover(parteMaterial);
         return "deleted";
     }

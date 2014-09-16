@@ -3,11 +3,10 @@
     <fieldset>
         <div class="row">
             <div class="form-group col-sm-12">
-                <legend> <span class="glyphicon glyphicon-file"></span> Cadastro de Parte do Material</legend>
+                <legend> <span class="glyphicon glyphicon-file">Volume</span></legend>
             </div>
         </div>
-        <form action="" method="POST" role="form">
-            <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>	
+        <form action="" role="form">
             
             <div class="row ">
                 <div class="form-group col-sm-1">
@@ -19,25 +18,21 @@
                     <input class="form-control" type="text" ng-model="parteMaterial.responsavel" />
                 </div>
                 <div class="form-group col-sm-2"> 
-                    <label> Inicio </label>
+                    <label> Página Inicio </label>
                     <input class="form-control" name="inicio" type="number" ng-model="parteMaterial.inicio" />
                 </div>
                 <div class="form-group col-sm-2">
-                    <label> Fim </label>
+                    <label> Página Fim </label>
                     <input class="form-control" name="fim" type="number" ng-model="parteMaterial.fim" />
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="status"> Status </label>
-                    <select id="status" class="selectpicker show-tick form-control" data-live-search="true" ng-model="parteMaterial.status" >
-                        <option>ANDAMENTO</option>
-                        <option>FINALIZADO</option>
-                        <option>REJEITADO</option>
-                    </select>
+                    <input class="form-control" id="status" disabled>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-10 form-group">
                     <label>Enviar Arquivo</label>
                     <div class="input-group">
                         <span class="input-group-btn">
@@ -48,7 +43,7 @@
                         <input type="text" class="form-control" readonly>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2 form-group">
                     <span class="pull-right">
                         <label> &nbsp;</label>
                         <span class="input-group">
@@ -59,12 +54,27 @@
                     </span>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="control-label">Data Impressão</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="control-label">Data Revisão</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="control-label">Data Envio</label>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
             
             <div class="row"> <div class="form-group col-sm-12">  &nbsp; </div> </div>	
 
             <div class="row">
                 <div class="form-group col-sm-4">
-                    <label> Revisão </label>
+                    <label>Responsável Revisão </label>
                     <input class="form-control" type="text" ng-model="parteMaterial.revisao" />
                 </div>
                 <div class="col-sm-8">

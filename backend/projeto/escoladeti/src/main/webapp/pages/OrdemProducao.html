@@ -1,7 +1,7 @@
 <div class="container" ng-controller="OrdemProducaoController" ng-init="carregarOrdemProducao()">
     <div class="row">
         <div class="form-group col-sm-12">
-            <legend> <span class="glyphicon glyphicon-file"></span> Ordem de produção </legend>
+            <legend> <span class="fa fa-cogs"></span> Produção </legend>
         </div>
     </div>
     <form action="" method="POST" role="form" ng-submit="salvar()" >							
@@ -25,11 +25,13 @@
         </div>
         <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
         <div class="row">
-            <div class="form-group col-sm-12">
-                <a  class='btn btn-primary btn-padrao' ng-click="novaParteMaterial(ordemProducao)" >
-                    <span class='glyphicon glyphicon-plus-sign' title="Nova parte"></span> Nova Parte
+            <div class="col-sm-3 form-group ">
+                <a  class='btn btn-primary form-control' ng-click="novaParteMaterial(ordemProducao)" >
+                    <span class='glyphicon glyphicon-plus-sign' title="Novo volume"></span> Novo Volume
                 </a>
-                <a  class='btn btn-success btn-padrao' ng-click="finalizarOrdemProducao(ordemProducao)" >
+            </div>
+            <div class="col-sm-3 form-group ">
+                <a  class='btn btn-success form-control' ng-click="finalizarOrdemProducao(ordemProducao)" >
                     <span class='glyphicon glyphicon-ok-circle' title="Finalizar"></span> Finalizar
                 </a>
             </div>
@@ -71,10 +73,7 @@
                 <span class="pull-right">
                     <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
                         <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
-                    </a>  
-                    <button type="submit" class="btn btn-success btn-padrao">
-                        <span class="glyphicon glyphicon-ok" ></span> Salvar
-                    </button>
+                    </a>
                 </span>		
             </div>
         </div>

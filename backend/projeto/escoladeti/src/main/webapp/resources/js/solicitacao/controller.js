@@ -148,7 +148,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
             return {
                 nome: aluno.nome + ' ' + aluno.sobrenome,
                 id: aluno.id
-            }
+            };
         });
     });
 

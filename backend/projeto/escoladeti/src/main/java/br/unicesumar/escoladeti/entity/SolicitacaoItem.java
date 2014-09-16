@@ -1,16 +1,14 @@
 package br.unicesumar.escoladeti.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.unicesumar.escoladeti.enums.StatusItem;
 import br.unicesumar.escoladeti.enums.TraducaoMaterial;
+
+import java.util.List;
 
 @Entity
 public class SolicitacaoItem extends Entidade{
@@ -33,6 +31,9 @@ public class SolicitacaoItem extends Entidade{
 	
 	@Enumerated(EnumType.STRING)
 	private StatusItem status;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idItemSolicitacao")
+    private List<Volume> volumes;
 
     private SolicitacaoItem(Long id) {
         this.id = id;
@@ -80,6 +81,18 @@ public class SolicitacaoItem extends Entidade{
 	public StatusItem getStatus() {
 		return status;
 	}
+
+    public List<Volume> getVolumes() {
+        return volumes;
+    }
+
+    public void setVolumes(List<Volume> volumes) {
+        this.volumes = volumes;
+    }
+
+    public Long getNumeroSolicitacao() {
+        return this.solicitacao.getId();
+    }
 
     public static SolicitacaoItem criar(Long id) {
         return new SolicitacaoItem(id);
