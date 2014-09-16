@@ -28,14 +28,12 @@
                         </div>
                     </div>
                 </div>-->
-        <div class="form-group col-sm-12">
-            <div>
-                <span class="pull-right">
-                    <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novo()">
-                        <span class='glyphicon glyphicon-plus-sign'></span> Novo
-                    </button>
-                </span>
-            </div>
+        <div class="form-group col-sm-7">
+            <span class="pull-right">
+                <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novo()">
+                    <span class='glyphicon glyphicon-plus-sign'></span> Novo
+                </button>
+            </span> 
         </div>
     </div>
     <div class="row">
@@ -72,35 +70,35 @@
             </table>
         </div>
     </div>    
-<!--    <div class="row ">
-        <div class="col-sm-12">
-            <ul class="pagination">
-                <li>
-                    <a ng-click="getTodos(1)"> 
-                        <span class="glyphicon glyphicon-fast-backward"></span>
-                    </a>
-                </li>
-                <li>
-                    <a ng-click="pagina.pageNumber <= 1 ? getTodos(1) : getTodos(pagina.pageNumber)"> 
-                        <span class="glyphicon glyphicon-step-backward"></span>
-                    </a>
-                </li>
-                <li ng-repeat="numeroPagina in pagina.pagesAround" class="{{numeroPagina == pagina.pageNumber ? 'active' : ''}}">
-                    <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
-                </li>
-                <li>
-                    <a ng-click="pagina.pageNumber === pagina.pageCount ? getTodos(pagina.pageCount) : getTodos(pagina.pageNumber + 1)"> 
-                        <span class="glyphicon glyphicon-step-forward"></span>
-                    </a>
-                </li>
-                <li>
-                    <a ng-click="pagina.pageCount == 0 ? getTodos(1) : getTodos(pagina.pageCount)"> 
-                        <span class="glyphicon glyphicon-fast-forward"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>-->
+    <!--    <div class="row ">
+            <div class="col-sm-12">
+                <ul class="pagination">
+                    <li>
+                        <a ng-click="getTodos(1)"> 
+                            <span class="glyphicon glyphicon-fast-backward"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="pagina.pageNumber <= 1 ? getTodos(1) : getTodos(pagina.pageNumber)"> 
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                        </a>
+                    </li>
+                    <li ng-repeat="numeroPagina in pagina.pagesAround" class="{{numeroPagina == pagina.pageNumber ? 'active' : ''}}">
+                        <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+                    </li>
+                    <li>
+                        <a ng-click="pagina.pageNumber === pagina.pageCount ? getTodos(pagina.pageCount) : getTodos(pagina.pageNumber + 1)"> 
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="pagina.pageCount == 0 ? getTodos(1) : getTodos(pagina.pageCount)"> 
+                            <span class="glyphicon glyphicon-fast-forward"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
     <pagination boundary-links="true" num-pages="pagina.pageCount" total-items="totalItems" items-per-page="pagina.maxRows"
                 ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="pagina.maxPagesToShow"
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
