@@ -17,7 +17,7 @@ public class SolicitacaoItemRepository{
         
         List<AcompanhamentoDTO>itens = new ArrayList<>();
          
-        String consultaBase = "select  so.datachegada dataChegada, so.id solicitacaoId, pe.nome responsavel, si.traducaomaterial traducao, op.id ordemId,si.status, li.nome nomeMaterial from solicitacaoitem  si "
+        String consultaBase = "select  so.datachegada dataChegada, so.id solicitacaoId, pe.nome responsavel, pf.sobrenome, si.traducaomaterial traducao, op.id ordemId,si.status, li.nome nomeMaterial from solicitacaoitem  si "
                 + " join solicitacao so on(so.id = si.id_solicitacao) "
                 + " join pessoafisica pf on(pf.id = so.id_responsavel) " 
                 + " join pessoa pe on(pf.id = pe.id) "
@@ -25,24 +25,31 @@ public class SolicitacaoItemRepository{
                 + " left join material ma on(ma.id = si.id_material) "
                 + " left join livro li on(li.id = si.id_material) "
                 + " where 1=1 ";
-        
         if (pesquisa.getStatus() != null ) {
             consultaBase += " and si.status =" + "'" +pesquisa.getStatus()+"'";
         }
         if(pesquisa.getDataInicio() != null && pesquisa.getDataFim() != null){
-            consultaBase += " and so.datachegada between =" + "'" + pesquisa.getDataInicio()+ "'" + " and " + "'" + pesquisa.getDataFim()+"'";
+
+            consultaBase += " and so.datachegada between =" + "'"+ pesquisa.getDataInicio()+"'";
+            consultaBase += "and" + "'"+pesquisa.getDataFim()+"'";
+        }
+        if(pesquisa.getDataInicio() != null){
+            consultaBase += " and so.datachegada >=" + "'"+ pesquisa.getDataInicio()+"'";
+        }
+        if(pesquisa.getDataFim()!= null){
+            consultaBase += " and so.datachegada <=" + "'"+ pesquisa.getDataFim()+"'";
         }
         if(pesquisa.getSolicitacaoId() != null){
-            consultaBase += " and so.id =" + "'" +pesquisa.getSolicitacaoId()+"'";
+            consultaBase += " and solicitacaoId =" + "'"+pesquisa.getSolicitacaoId()+"'";
         }
         if(pesquisa.getOrdemId() != null){
-            consultaBase += " and op.id =" + "'" + pesquisa.getOrdemId()+"'";
+            consultaBase += " and op.id =" + "'"+pesquisa.getOrdemId()+"'";
         }
         if(pesquisa.getMaterial() != null){
-            consultaBase += " and li.nome =" + "'" +pesquisa.getMaterial()+"'";
+            consultaBase += " and li.nome =" + "'"+pesquisa.getMaterial()+"'";
         }
         if(pesquisa.getResponsavel() != null){
-            consultaBase += " and pe.nome =" + "'" +pesquisa.getResponsavel()+"'";
+            consultaBase += " and pe.nome =" + "'"+pesquisa.getResponsavel()+"'";
         }
 //        verificar de onde busca o revisor
 //        if(pesquisa.getRevisor()!= null){
