@@ -11,6 +11,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         //$scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica(1);
         $scope.focusCpf = false;
+        $scope.enderecoPrincipal = false;
     };
 
     $scope.modificarPais = function (paisId) {
@@ -221,8 +222,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 // Endereco    
 
     $scope.modificarCidade = function (cidadeId) {
-        /*    	if($scope.endereco.cidade && $scope.indiceEndereco >= 0)
-         return;*/
         if (!cidadeId)
             return;
         CidadeService.buscar(cidadeId)
@@ -231,9 +230,13 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                 });
     };
 
-    $scope.salvarEndereco = function () {
-
-
+    $scope.salvarEndereco = function () {      
+        if(contemEnderecoPrincipal($scope.endereco.principal)){
+            console.log('Entrou aqui!');
+            toastr.warning('Endereço principal já informado!');
+            return;
+        }
+        
         $scope.endereco.logradouro = angular.uppercase($scope.endereco.logradouro);
         $scope.endereco.bairro = angular.uppercase($scope.endereco.bairro);
 
@@ -246,9 +249,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             $scope.pessoa.enderecos[$scope.indiceEndereco] = $scope.endereco;
         toastr.success('Endereço adicionado !');
         $scope.endereco = getNovoEndereco();
-        $scope.pais = {};
-        $scope.unidadeFederativa = {};
-        $scope.cidade = {};
         $scope.indiceEndereco = undefined;
 
     };
@@ -267,6 +267,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
         $scope.modificarCidade($scope.endereco.cidade.id);
 
+
     };
 
     $scope.delEndereco = function (index) {
@@ -282,12 +283,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         $scope.cidades = [];
         $scope.unidadesFederativas = [];
         $scope.pais = {};
-        $scope.carregarPais();
     };
 
     $scope.modificarEstado = function (estadoId) {
-        if (!$scope.endereco.cidade)
-            $scope.cidade = {};
+                 
         if (!estadoId || estadoId === null)
             return;
         CidadeService.buscaCidadesPorEstado(estadoId)
@@ -295,11 +294,26 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                     $scope.cidades = data;
                 });
     };
+    
+    function contemEnderecoPrincipal(principal){
+        var contem = false;
+        if(angular.isUndefined($scope.pessoa.enderecos)){
+            console.log('Undefined!');
+            return contem;
+        }
+        angular.forEach($scope.pessoa.enderecos,function(value, key){
+            if(value.principal === 'S' && value.principal === principal){
+                contem = true;
+            }
+                
+        });
+        return contem;
+    };
 
     function getNovoEndereco() {
         return {
             tipoEndereco: 'RUA',
-            principal: 'S'
+            principal: contemEnderecoPrincipal() ? 'N' : 'S'
         };
     }
 

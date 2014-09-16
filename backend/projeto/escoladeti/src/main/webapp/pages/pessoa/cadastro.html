@@ -318,7 +318,7 @@
     <!-- Modal endereço-->
     <div class="row">
         <div class="col-sm-12">
-            <form action="" method="POST" name="formEndereco" role="form" ng-submit="salvarEndereco()">
+            <form name="formEndereco" role="form" ng-submit="salvarEndereco()">
                 <div class="modal fade" id="modalEndereco" tabindex="-1" role="dialog" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -342,7 +342,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group {{formEndereco.pais.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                 <label class="control-label"><strong> Pais *</strong></label> 
-                                                <select type="text" ui-select2="select2Options" name="pais" class="input-default" ng-model="endereco.cidade.unidadeFederativa.pais.id" ng-change="modificarPais(cidade.unidadeFederativa.pais.id)" ng-value="endereco.cidade.unidadeFederativa.pais.id" required >
+                                                <select type="text" ui-select2="select2Options" name="pais" class="input-default" ng-model="endereco.cidade.unidadeFederativa.pais.id" ng-change="modificarPais(endereco.cidade.unidadeFederativa.pais.id)" ng-value="endereco.cidade.unidadeFederativa.pais.id" required >
                                                     <option ng-repeat="p in paises" value="{{p.id}}">{{p.nome}}</option>
                                                 </select>
                                             </div>
@@ -350,7 +350,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group {{formEndereco.unidadeFederativa.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                 <label class="control-label"><strong> Estado * </strong></label> 
-                                                <select type="text" ui-select2 class="input-default" name="unidadeFederativa" ng-model="endereco.cidade.unidadeFederativa.id" ng-change="modificarEstado(cidade.unidadeFederativa.id)" ng-value="endereco.cidade.unidadeFederativa.id" required>
+                                                <select type="text" ui-select2 class="input-default" name="unidadeFederativa" ng-model="endereco.cidade.unidadeFederativa.id" ng-change="modificarEstado(endereco.cidade.unidadeFederativa.id)" ng-value="endereco.cidade.unidadeFederativa.id" required>
                                                     <option ng-repeat="uf in unidadesFederativas" value="{{uf.id}}">{{uf.nome}}</option>
                                                 </select>
                                             </div>
@@ -360,7 +360,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group {{formEndereco.cidade.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                 <label class="control-label"><strong> Cidade * </strong></label> 
-                                                <select type="text" ui-select2="select2Options" name="cidade" style="width: 100%" ng-model="endereco.cidade.id" ng-change="modificarCidade(cidade.id)" ng-value="endereco.cidade.id" required>
+                                                <select type="text" ui-select2="select2Options" name="cidade" style="width: 100%" ng-model="endereco.cidade.id" ng-change="modificarCidade(endereco.cidade.id)" ng-value="endereco.cidade.id" required>
                                                     <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
                                                 </select>
                                             </div>
@@ -370,10 +370,10 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="control-label">Principal</label>
+                                                <label class="control-label"><strong>Principal</strong></label>
                                                 <div class="btn-group">
                                                     <label class="btn btn-primary btn-radio-amacapa"> 
-                                                        <input ng-model="endereco.principal" name="principal" value="S" type="radio"  /> Sim
+                                                        <input ng-model="endereco.principal" name="principal" value="S" type="radio" /> Sim
                                                     </label> 
                                                     <label class="btn btn-primary btn-radio-amacapa"> 
                                                         <input ng-model="endereco.principal" name="principal" value="N" type="radio"  /> Não

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PessoaService {
@@ -66,8 +67,11 @@ public class PessoaService {
     public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id) {
 
         if (comando.getTipo().equals("F")) {
-            if (pessoaFisicaRepository.findByCpf(comando.getCpf()).getCpf().equals(comando.getCpf()) && !comando.getCpf().isEmpty()) {
-                throw new RuntimeException("CPF já cadastrado.");
+            PessoaFisica pf = pessoaFisicaRepository.findByCpf(comando.getCpf());
+            if (pf != null) {
+                if (pf.getCpf().equals(comando.getCpf()) && !Objects.equals(pf.getId(), id)) {
+                    throw new RuntimeException("CPF já cadastrado.");
+                }
             }
             if (id != null || comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null) {
                 PessoaFisica pessoaFisica = Pessoa.builder()
@@ -95,8 +99,11 @@ public class PessoaService {
             throw new RuntimeException("JÃ¡ existe uma pessoa com o cpf " + comando.getCpf() + " cadastrada no sistema");
 
         } else if (comando.getTipo().equals("J")) {
-            if (pessoaJuridicaRepository.findByCnpj(comando.getCnpj()).getCnpj().equals(comando.getCnpj())) {
-                throw new RuntimeException("CNPJ já cadastrado.");
+            PessoaJuridica pj = pessoaJuridicaRepository.findByCnpj(comando.getCnpj());
+            if (pj != null) {
+                if (pj.getCnpj().equals(comando.getCnpj()) && !Objects.equals(pj.getId(), id)) {
+                    throw new RuntimeException("CNPJ já cadastrado.");
+                }
             }
             if (id != null || pessoaJuridicaRepository.findByCnpj(comando.getCnpj()) == null) {
                 PessoaJuridica pessoaJuridica = Pessoa.builder()
