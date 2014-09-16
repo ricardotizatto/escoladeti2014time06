@@ -1,135 +1,137 @@
 package br.unicesumar.escoladeti.service;
 
-import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
+import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacao;
+import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacaoItem;
+import br.unicesumar.escoladeti.controller.DataPage;
+import br.unicesumar.escoladeti.entity.Livro;
+import br.unicesumar.escoladeti.entity.Solicitacao;
+import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
+import br.unicesumar.escoladeti.entity.SolicitacaoItem;
+import br.unicesumar.escoladeti.enums.StatusItem;
+import br.unicesumar.escoladeti.repository.LivroRepository;
+import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
+import br.unicesumar.escoladeti.repository.SolicitacaoRepository;
+import br.unicesumar.escoladeti.util.number.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unicesumar.escoladeti.entity.Livro;
-import br.unicesumar.escoladeti.repository.LivroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacao;
-import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacaoItem;
-import br.unicesumar.escoladeti.controller.DataPage;
-import br.unicesumar.escoladeti.entity.Solicitacao;
-import br.unicesumar.escoladeti.entity.SolicitacaoItem;
-import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
-import br.unicesumar.escoladeti.enums.StatusItem;
-import br.unicesumar.escoladeti.repository.SolicitacaoRepository;
+import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 
 @Service
 public class SolicitacaoService {
-	
-	@Autowired
-	private SolicitacaoRepository solicitacaoRepository;
+
+    @Autowired
+    private SolicitacaoRepository solicitacaoRepository;
+
+    @Autowired
+    private SolicitacaoItemRepository solicitacaoItemRepository;
+
 
     @Autowired
     private LivroRepository livroRepository;
-	
-	public void deletar(Long id) {
-		solicitacaoRepository.delete(id);		
-	}
 
-	public DataPage<Solicitacao> paginar(Integer pagina) {
-		return new DataPage<>(solicitacaoRepository.findAll(pageRequestForAsc(pagina, "id")));
-	}
+    public void deletar(Long id) {
+        solicitacaoRepository.delete(id);
+    }
 
-	public Solicitacao buscar(Long id) {
-		return solicitacaoRepository.findOne(id);
-	}
+    public DataPage<Solicitacao> paginar(Integer pagina, String termo) {
+        if (termo != null && NumberUtils.isNumber(termo)) {
+            return new DataPage<>(solicitacaoRepository.findByIdOrderByIdAsc(
+                    Long.parseLong(termo), pageRequestForAsc(pagina, "id")));
+        }
 
-	public Solicitacao salvar(ComandoSalvarSolicitacao comando) {
-		SolicitacaoBuilder solicitacaoBuilder = Solicitacao
-				.builder()
-				.aluno(comando.getAluno())
-				.cep(comando.getCep())
-				.dataChegada(comando.getDataChegada())
-				.endereco(comando.getEndereco())
-				.escola(comando.getEscola())
-				.ensino(comando.getEnsino())
-				.municipio(comando.getMunicipio())
-				.nre(comando.getNre())
-				.numeroEndereco(comando.getNumeroEndereco())
-				.responsavel(comando.getResponsavel())
-				.serie(comando.getSerie());
-		
-		
-		List<SolicitacaoItem> itens = new ArrayList<SolicitacaoItem>();
-		
-		for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
-            Livro livro = livroRepository.findById(comandoItem.getLivro());
+        return new DataPage<>(solicitacaoRepository.findAll(pageRequestForAsc(pagina, "id")));
+    }
 
-            if (livro == null) {
-                throw new RuntimeException("Livro não encontrado.");
+    public Solicitacao buscar(Long id) {
+        return solicitacaoRepository.findOne(id);
+    }
+
+    public Solicitacao salvar(ComandoSalvarSolicitacao comando) {
+        Solicitacao solicitacao = Solicitacao
+                .builder()
+                .aluno(comando.getAluno())
+                .cep(comando.getCep())
+                .dataChegada(comando.getDataChegada())
+                .endereco(comando.getEndereco())
+                .escola(comando.getEscola())
+                .ensino(comando.getEnsino())
+                .municipio(comando.getMunicipio())
+                .nre(comando.getNre())
+                .numeroEndereco(comando.getNumeroEndereco())
+                .responsavel(comando.getResponsavel())
+                .serie(comando.getSerie())
+                .build();
+
+        Solicitacao solicitacaoSalva = solicitacaoRepository.save(solicitacao);
+
+        for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
+
+            SolicitacaoItem solicitacaoItem = SolicitacaoItem
+                    .builder()
+                    .outro(comandoItem.getOutro())
+                    .traducaoMaterial(comandoItem.getTraducaoMaterial())
+                    .status(StatusItem.AGUARDANDO)
+                    .solicitacao(solicitacao)
+                    .build();
+
+            solicitacaoItemRepository.save(solicitacaoItem);
+        }
+
+        return solicitacaoRepository.findOne(solicitacaoSalva.getId());
+    }
+
+    public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) throws Exception {
+        Solicitacao solicitacaoEncontrada = solicitacaoRepository.findOne(id);
+        limparItens(solicitacaoEncontrada);
+
+         Solicitacao solicitacao = Solicitacao
+                .builder()
+                .id(id)
+                .aluno(comando.getAluno())
+                .cep(comando.getCep())
+                .dataChegada(comando.getDataChegada())
+                .endereco(comando.getEndereco())
+                .ensino(comando.getEnsino())
+                .escola(comando.getEscola())
+                .municipio(comando.getMunicipio())
+                .nre(comando.getNre())
+                .numeroEndereco(comando.getNumeroEndereco())
+                .responsavel(comando.getResponsavel())
+                .serie(comando.getSerie())
+                .build();
+
+        Solicitacao solicitacaoSalva = solicitacaoRepository.save(solicitacao);
+
+        for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
+
+            SolicitacaoItem solicitacaoItem = SolicitacaoItem
+                    .builder()
+                    .id(comandoItem.getId())
+                    .livro(Livro.of(comandoItem.getLivro()))
+                    .outro(comandoItem.getOutro())
+                    .status(StatusItem.AGUARDANDO)
+                    .traducaoMaterial(comandoItem.getTraducaoMaterial())
+                    .solicitacao(solicitacaoSalva)
+                    .build();
+
+            solicitacaoItemRepository.save(solicitacaoItem);
+        }
+
+
+        return solicitacaoRepository.findOne(id);
+    }
+
+    private void limparItens(Solicitacao solicitacao) {
+        for (SolicitacaoItem item : solicitacao.getItensSolicitacao()) {
+            if (item.getStatus().equals(StatusItem.AGUARDANDO)) {
+                solicitacaoItemRepository.delete(item);
             }
-
-			SolicitacaoItem solicitacaoItem = SolicitacaoItem
-					.builder()
-					.livro(livro)
-					.outro(comandoItem.getOutro())
-					.traducaoMaterial(comandoItem.getTraducaoMaterial())
-					.status(StatusItem.ABERTO)
-					.build();
-			itens.add(solicitacaoItem);
-		}
-		
-		Solicitacao solicitacao = solicitacaoBuilder
-				.itensSolicitacao(itens)
-				.build();
-		
-		return solicitacaoRepository.save(solicitacao);
-	}
-	
-	public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) throws Exception {
-		SolicitacaoBuilder solicitacaoBuilder = Solicitacao
-				.builder()
-				.id(id)
-				.aluno(comando.getAluno())
-				.cep(comando.getCep())
-				.dataChegada(comando.getDataChegada())
-				.endereco(comando.getEndereco())
-				.ensino(comando.getEnsino())
-
-				.escola(comando.getEscola())
-				.municipio(comando.getMunicipio())
-				.nre(comando.getNre())
-				.numeroEndereco(comando.getNumeroEndereco())
-				.responsavel(comando.getResponsavel())
-				.serie(comando.getSerie());
-		
-		
-		List<SolicitacaoItem> itens = new ArrayList<SolicitacaoItem>();
-		
-		for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
-            Livro livro = livroRepository.findById(comandoItem.getLivro());
-
-            if (livro == null) {
-                throw new RuntimeException("Livro não encontrado.");
-            }
-
-			SolicitacaoItem solicitacaoItem = SolicitacaoItem
-					.builder()
-					.livro(livro)
-					.outro(comandoItem.getOutro())
-					.traducaoMaterial(comandoItem.getTraducaoMaterial())
-					.status(StatusItem.ABERTO)
-					.build();
-
-            validarDuplicados(itens, solicitacaoItem);
-
-			itens.add(solicitacaoItem);
-		}
-		
-		Solicitacao solicitacao = solicitacaoBuilder
-				.itensSolicitacao(itens)
-				.build();
-		
-		return solicitacaoRepository.save(solicitacao);
-		
-		
-	}
+        }
+    }
 
     private void validarDuplicados(List<SolicitacaoItem> itens, SolicitacaoItem solicitacaoItem) throws Exception {
         for (SolicitacaoItem item : itens) {
@@ -140,7 +142,7 @@ public class SolicitacaoService {
     }
 
     public List<Solicitacao> listar() {
-		return solicitacaoRepository.findAll();
-	}
-	
+        return solicitacaoRepository.findAll();
+    }
+
 }

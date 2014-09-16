@@ -54,14 +54,13 @@ public class Solicitacao extends Entidade {
     
     private String ensino;
     
-    @ManyToOne
+
     @JoinColumn(name = "id_responsavel")
     private PessoaFisica responsavel;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER, mappedBy="solicitacao")
+    @OneToMany(fetch=FetchType.EAGER, mappedBy="solicitacao")
     private List<SolicitacaoItem> itensSolicitacao;
 
-    @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataChegada;
 
@@ -201,8 +200,6 @@ public class Solicitacao extends Entidade {
 	    
 	    private Long responsavel;
 
-	    private List<SolicitacaoItem> itensSolicitacao;
-
 	    private Date dataChegada;
 
 	    private Long id;
@@ -218,11 +215,6 @@ public class Solicitacao extends Entidade {
 	    
 	    public SolicitacaoBuilder nre(Long nre) {
 			this.nre = nre;
-			return this;
-		}
-	    
-	    public SolicitacaoBuilder itensSolicitacao(List<SolicitacaoItem> itensSolicitacao) {
-			this.itensSolicitacao = itensSolicitacao;
 			return this;
 		}
 	    
@@ -275,8 +267,6 @@ public class Solicitacao extends Entidade {
 	    public Solicitacao build() {
 	    	checkNotNull(this.aluno, "Aluno é obrigatório");
 	    	checkNotNull(this.dataChegada, "Data chegada é obrigatório");
-	    	checkNotNull(this.itensSolicitacao, "Itens das solicitação são obrigatórios");
-	    	checkArgument(this.itensSolicitacao.size() > 0, "É obrigatório ter itens");
 	    	checkNotNull(this.numeroEndereco, "Número de endereço é obrigatório");
             checkNotNull(this.cep, "CEP é obrigatório");
 	    	checkNotNull(this.endereco, "Endereço é obrigatório");
@@ -290,7 +280,6 @@ public class Solicitacao extends Entidade {
 	    	solicitacao.setEndereco(this.endereco);
 	    	solicitacao.setEnsino(this.ensino);
 	    	solicitacao.setEscola(this.escola);
-	    	solicitacao.setItensSolicitacao(this.itensSolicitacao);
 	    	solicitacao.setMunicipio(Cidade.of(this.municipio));
 	    	
 	    	if (id != null) {
