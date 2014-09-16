@@ -4,17 +4,16 @@ import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
 import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.sql.DataSource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AcompanhamentoSolicitacaoService {
     
-    //@Autowired
-    private SolicitacaoItemRepository solicitacaoItemRepository;
+    private SolicitacaoItemRepository solicitacaoItemRepository = new SolicitacaoItemRepository();
     
-    public List<AcompanhamentoDTO>listarItens(PesquisaSolicitacao pesquisa) {
-        return solicitacaoItemRepository.listarItens(pesquisa);
+    public List<AcompanhamentoDTO>listarItens(PesquisaSolicitacao pesquisa, DataSource dataSouce) {
+        return solicitacaoItemRepository.listarItens(pesquisa, dataSouce);
     }
 	
 }

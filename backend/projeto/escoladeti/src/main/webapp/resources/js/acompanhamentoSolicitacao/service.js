@@ -7,12 +7,6 @@ function AcompanhamentoSolicitacaoFactory($resource) {
                 params: {
                     acao: 'listarPesquisa'
                 }
-            },
-            listarItens: {
-                method: 'GET',
-                params: {
-                    acao: 'listarItens' 
-                }
             }
 	});
 }

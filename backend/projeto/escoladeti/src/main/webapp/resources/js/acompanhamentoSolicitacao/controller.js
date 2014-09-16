@@ -9,7 +9,7 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     $scope.getPesquisaSolicitacao = function(status) {
         $log.debug('Pesquisando status: ' + status);
         
-        $scope.pesquisaSolicitacao = new PesquisaSolicitacao({
+        var parametrosPesquisa = {
             status: status === "" || undefined ? null : status,
             dataInicio: $scope.buscaDataChegadaIni === "" || undefined ? null : $scope.buscaDataChegadaIni,
             dataFim: $scope.buscaDataChegadaFim === "" || undefined ? null : $scope.buscaDataChegadaFim,
@@ -18,34 +18,10 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
             material: $scope.buscaMaterial === "" || undefined ? null : $scope.buscaMaterial,
             responsavel: $scope.buscaResponsavel === "" || undefined ? null : $scope.buscaResponsavel,
             revisor: $scope.buscaRevisor === "" || undefined ? null : $scope.buscaRevisor
+        };
+        PesquisaSolicitacao.query(parametrosPesquisa, function(solicitacaoItens) {
+            $scope.solicitacaoItens = solicitacaoItens;
         });
-        
-        $scope.pesquisaSolicitacao.$listarPesquisa(function(pesquisaSolicitacao) {
-            toastr.warning("pesquisaSolicitacao Status " + pesquisaSolicitacao.status 
-                    + ' dataInicio '+ pesquisaSolicitacao.dataInicio
-                    + ' dataFim '+ pesquisaSolicitacao.dataFim 
-                    + ' solicitacaoId '+ pesquisaSolicitacao.solicitacaoId 
-                    + ' ordemId '+ pesquisaSolicitacao.ordemId 
-                    + ' material '+ pesquisaSolicitacao.material 
-                    + ' responsavel '+ pesquisaSolicitacao.responsavel 
-                    + ' revisor '+ pesquisaSolicitacao.revisor 
-                    );
-            $scope.solicitacaoItens = pesquisaSolicitacao;
-        });
-        
-//        PesquisaSolicitacao.listarItens(function(pesquisaSolicitacao) {
-//            toastr.warning("pesquisaSolicitacao Status " + pesquisaSolicitacao.status
-//                    + ' dataInicio ' + pesquisaSolicitacao.dataInicio
-//                    + ' dataFim ' + pesquisaSolicitacao.dataFim
-//                    + ' solicitacaoId ' + pesquisaSolicitacao.solicitacaoId
-//                    + ' ordemId ' + pesquisaSolicitacao.ordemId
-//                    + ' material ' + pesquisaSolicitacao.material
-//                    + ' responsavel ' + pesquisaSolicitacao.responsavel
-//                    + ' revisor ' + pesquisaSolicitacao.revisor
-//                    );
-//            $scope.solicitacaoItens = pesquisaSolicitacao;
-//        });
-        
     };
     
     $scope.produzir = function(soliciataoId) {
