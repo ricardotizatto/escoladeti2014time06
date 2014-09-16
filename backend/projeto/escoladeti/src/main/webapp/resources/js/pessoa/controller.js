@@ -67,7 +67,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function (pessoa) {
 
             $scope.pessoa = pessoa;
-            $scope.telefone = pessoa.telefones[0];
             if (pessoa.tipo !== 'J') {
                 $scope.pessoa.aluno = String(pessoa.aluno);
             }
@@ -198,6 +197,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         if ($scope.indiceTelefone >= 0) {
             $scope.pessoa.telefones.splice($scope.indiceTelefone, 1);
         }
+        
         $scope.pessoa.telefones.push($scope.telefone);
         console.log($scope.telefones);
         toastr.success("Telefone adicionado " + $scope.telefone.numero + " !");
@@ -350,7 +350,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                     $scope.paises = paises;
                 });
     })();
-
+    
+    
     jQuery(function ($) {
         $.mask.definitions['~'] = '[+-]';
         //$("#numeroDdd").mask("99");
@@ -361,6 +362,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         //$("#rg").mask("9.999.999-*");
         //$("#cnpj").mask("99.999.999/9999-99");
     });
+    
+    $scope.mascaraTelefone = function(numero){
+        return numero.substring(0,4) +'-'+ numero.substring(4,numero.length);
+    };
 }
 
 controllers.controller('PessoaController',

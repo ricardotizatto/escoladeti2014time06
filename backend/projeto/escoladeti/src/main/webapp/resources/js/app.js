@@ -8,7 +8,7 @@ var app = angular.module('app',
 		['ngRoute',
 		 'ngResource',
 		 'controllers',
-         'directives',
+                 'directives',
 		 'ui.select2',
 		 'ui.bootstrap',
                  'ui.utils']);

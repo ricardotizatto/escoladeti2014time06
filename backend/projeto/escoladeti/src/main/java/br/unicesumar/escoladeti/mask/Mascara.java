@@ -45,4 +45,18 @@ public class Mascara {
 
     }
 
+    public static String telefone(String valor) {
+        String pattern = "####-####?#";
+        MaskFormatter mask;
+        String mascarado = null;
+        try {
+            mask = new MaskFormatter(pattern);
+            mask.setValueContainsLiteralCharacters(false);
+            mascarado = mask.valueToString(valor);
+        } catch (ParseException ex) {
+            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mascarado;
+    }
+
 }
