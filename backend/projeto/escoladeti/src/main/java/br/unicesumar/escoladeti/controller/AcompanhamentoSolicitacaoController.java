@@ -27,8 +27,8 @@ public class AcompanhamentoSolicitacaoController{
     @ResponseBody
     public List<AcompanhamentoDTO> listarItens(
         @RequestParam(required = false, value = "status") String status,
-        @RequestParam(required = false, value = "dataInicio") String dataInicio,
-        @RequestParam(required = false, value = "dataFim") String dataFim,
+        @RequestParam(required = false, value = "dataInicio") Date dataInicio,
+        @RequestParam(required = false, value = "dataFim") Date dataFim,
         @RequestParam(required = false, value = "solicitacaoId") Long solicitacaoId,
         @RequestParam(required = false, value = "ordemId") Long ordemId,
         @RequestParam(required = false, value = "material") String material,

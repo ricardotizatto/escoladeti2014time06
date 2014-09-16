@@ -84,7 +84,7 @@
                             </div>    
                             <div class="row base-time-line">
                                 <div class="col-sm-4">
-                                    <h4 class="inline m-b-5"><span class="time-line-responsavel" > Responsável: </span><span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span> </h4>
+                                    <h4 class="inline m-b-5"><span class="time-line-responsavel" > Responsável: </span><span class="text-success semi-bold">{{solicitacaoItem.responsavel + ' ' + solicitacaoItem.sobrenomeResponsavel}}</span> </h4>
                                 </div>
                                 <div class="col-sm-3">
                                     <div ng-show="{{solicitacaoItem.dataEnvio}}" > <h5 class="inline m-b-5"><span class="text-primary semi-bold">Envio: {{solicitacaoItem.dataEnvio}}</span> </h5> </div>

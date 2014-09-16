@@ -17,7 +17,7 @@ public class SolicitacaoItemRepository{
         
         List<AcompanhamentoDTO>itens = new ArrayList<>();
          
-        String consultaBase = "select  so.datachegada dataChegada, so.id solicitacaoId, pe.nome responsavel, pf.sobrenome, si.traducaomaterial traducao, op.id ordemId,si.status, li.nome nomeMaterial from solicitacaoitem  si "
+        String consultaBase = "select  so.datachegada dataChegada, so.id solicitacaoId, pe.nome responsavel, pf.sobrenome sobrenomeResponsavel, si.traducaomaterial traducao, op.id ordemId,si.status, li.nome nomeMaterial from solicitacaoitem  si "
                 + " join solicitacao so on(so.id = si.id_solicitacao) "
                 + " join pessoafisica pf on(pf.id = so.id_responsavel) " 
                 + " join pessoa pe on(pf.id = pe.id) "
@@ -40,7 +40,7 @@ public class SolicitacaoItemRepository{
             consultaBase += " and so.datachegada <=" + "'"+ pesquisa.getDataFim()+"'";
         }
         if(pesquisa.getSolicitacaoId() != null){
-            consultaBase += " and solicitacaoId =" + "'"+pesquisa.getSolicitacaoId()+"'";
+            consultaBase += " and so.id =" + "'"+pesquisa.getSolicitacaoId()+"'";
         }
         if(pesquisa.getOrdemId() != null){
             consultaBase += " and op.id =" + "'"+pesquisa.getOrdemId()+"'";
@@ -66,6 +66,7 @@ public class SolicitacaoItemRepository{
                 acompanhamentoDTO.setDataChegada(resultado.getDate("dataChegada"));
                 acompanhamentoDTO.setTraducao(resultado.getString("traducao"));
                 acompanhamentoDTO.setResponsavel(resultado.getString("responsavel"));
+                acompanhamentoDTO.setSobrenomeResponsavel(resultado.getString("sobrenomeResponsavel"));
                 acompanhamentoDTO.setOrdemId(resultado.getLong("ordemId"));
                 acompanhamentoDTO.setMaterial(resultado.getString("nomeMaterial"));
 //                acompanhamentoDTO.setDataEnvio(resultado.getDate("dataEnvio")); NAO EXISTE AINDA

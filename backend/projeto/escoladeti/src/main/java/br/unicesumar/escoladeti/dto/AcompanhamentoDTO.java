@@ -9,6 +9,7 @@ public class AcompanhamentoDTO {
     private Date dataChegada;
     private String traducao;
     private String responsavel;
+    private String sobrenomeResponsavel;
     private Long ordemId;
     private String material;
     private Date dataEnvio;
@@ -51,6 +52,14 @@ public class AcompanhamentoDTO {
 
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
+    }
+    
+    public String getSobrenomeResponsavel() {
+        return sobrenomeResponsavel;
+    }
+
+    public void setSobrenomeResponsavel(String sobrenomeResponsavel) {
+        this.sobrenomeResponsavel = sobrenomeResponsavel;
     }
 
     public Long getOrdemId() {

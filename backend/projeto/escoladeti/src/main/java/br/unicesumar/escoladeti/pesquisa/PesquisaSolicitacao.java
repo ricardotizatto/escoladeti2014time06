@@ -2,8 +2,6 @@ package br.unicesumar.escoladeti.pesquisa;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PesquisaSolicitacao {
@@ -32,7 +30,12 @@ public class PesquisaSolicitacao {
     }
 
     public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
+        if(dataFim != null && dataInicio.after(dataFim)){
+            this.dataInicio = dataInicio;
+        }else if(dataInicio != null){
+            throw new RuntimeException("Data de Inicio não pode ser maior que Final"); 
+        } 
+        
     }
 
     public Date getDataFim() {
@@ -40,7 +43,11 @@ public class PesquisaSolicitacao {
     }
 
     public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
+        if (dataInicio != null && dataFim.before(dataInicio)) {
+            this.dataFim = dataFim;
+        }else if(dataFim != null){
+            throw new RuntimeException("Data Final não pode ser Menos que da Inicio");
+        }
     }
 
     public Long getSolicitacaoId() {
