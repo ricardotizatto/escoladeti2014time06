@@ -20,7 +20,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setStatus(String status) {
-        this.status = status.toUpperCase();
+        this.status = status;
     }
 
     public Date getDataInicio() {

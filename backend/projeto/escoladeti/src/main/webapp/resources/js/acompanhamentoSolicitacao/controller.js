@@ -28,8 +28,8 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
         window.location = '#/ordemproducao/' + soliciataoId;
     };
     
-    $scope.expandir = function(soliciatao) {
-        $location.path('/cadastrosolicitacao/'+ soliciatao.id);
+    $scope.expandir = function(soliciataoId) {
+        $location.path('/cadastrosolicitacao/'+ soliciataoId);
     };
     
     $scope.cancelar = function(soliciataoId) {

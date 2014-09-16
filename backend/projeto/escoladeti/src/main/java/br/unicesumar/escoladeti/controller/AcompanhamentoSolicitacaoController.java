@@ -6,10 +6,8 @@ import br.unicesumar.escoladeti.service.AcompanhamentoSolicitacaoService;
 import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,14 +36,14 @@ public class AcompanhamentoSolicitacaoController{
 //        @RequestParam(required = false, value = "revisor") String revisor
     ){
         PesquisaSolicitacao ps = new PesquisaSolicitacao();
-        ps.setStatus(status);
-//        ps.setDataInicio(dataInicio);
-//        ps.setDataFim(dataFim);
-//        ps.setSolicitacaoId(solicitacaoId);
-//        ps.setOrdemId(ordemId);
-//        ps.setMaterial(material);
-//        ps.setResponsavel(responsavel);
-//        ps.setRevisor(revisor);
+            ps.setStatus(status);
+//            ps.setDataInicio(dataInicio);
+//            ps.setDataFim(dataFim);
+//            ps.setSolicitacaoId(solicitacaoId);
+//            ps.setOrdemId(ordemId);
+//            ps.setMaterial(material);
+//            ps.setResponsavel(responsavel);
+//            ps.setRevisor(revisor);
         return acompanhamentosolicitacaoService.listarItens(ps,dataSource);
     }
 

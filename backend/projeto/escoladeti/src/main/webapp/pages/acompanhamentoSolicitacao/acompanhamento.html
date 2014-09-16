@@ -59,7 +59,7 @@
                 <li ng-repeat="solicitacaoItem in solicitacaoItens">
                     <time class="cbp_tmtime">
                         <span class="date">chegada</span>
-                        <span class="time">{{solicitacaoItem.dataChegada | date:'MM-dd-yyyy' }}</span>
+                        <span class="time">{{solicitacaoItem.dataChegada | date:'dd-MM-yyyy' }}</span>
                     </time>
                     <a href=""><div class="btn-status-linha cbp_tmicon {{getStatus(solicitacaoItem.status)}} animated bounceIn" ng-click="getsolicitacaoItemStatus(solicitacaoItem.status)" >  <i class="{{getIcone(solicitacaoItem.status)}}"></i> </div></a>
                     <div class="cbp_tmlabel">
@@ -69,22 +69,22 @@
                                     <table class="table table-responsive table-fixed-layout">
                                         <thead>
                                         <th class="col-md-2">Solicitação</th>
-                                        <th ng-show="{{solicitacaoItem.ordem}}" class="col-md-2">Ordem</th>
+                                        <th ng-show="{{solicitacaoItem.ordemId}}" class="col-md-2">Ordem</th>
                                         <th class="col-md-5">Material</th>
                                         <th class="col-md-3">Tradução</th>
                                         </thead>
                                         <tbody>
-                                        <td>{{solicitacaoItem.id}}</td>
-                                        <td ng-show="{{solicitacaoItem.ordem}}" >{{solicitacaoItem.ordem}}</td>
-                                        <td>{{solicitacaoItem.livro.nome}}</td>
-                                        <td>{{solicitacaoItem.traducaoMaterial}}</td>
+                                        <td>{{solicitacaoItem.solicitacaoId}}</td>
+                                        <td ng-show="{{solicitacaoItem.ordemId}}" >{{solicitacaoItem.ordemId}}</td>
+                                        <td>{{solicitacaoItem.material}}</td>
+                                        <td>{{solicitacaoItem.traducao}}</td>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>    
                             <div class="row base-time-line">
                                 <div class="col-sm-4">
-                                    <h4 class="inline m-b-5"><span class="text-success semi-bold">Responsavel: {{solicitacaoItem.responsavel}}</span> </h4>
+                                    <h4 class="inline m-b-5"><span class="time-line-responsavel" > Responsável: </span><span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span> </h4>
                                 </div>
                                 <div class="col-sm-3">
                                     <div ng-show="{{solicitacaoItem.dataEnvio}}" > <h5 class="inline m-b-5"><span class="text-primary semi-bold">Envio: {{solicitacaoItem.dataEnvio}}</span> </h5> </div>
@@ -92,14 +92,14 @@
                                 <div class="col-sm-5">
                                     <span class="pull-right">
                                         <button type="submit" class="btn btn-danger btn-small" ng-show="{{solicitacaoItem.status == 'AGUARDANDO' || solicitacaoItem.status =='PRODUCAO' }}"
-                                            ng-click="cancelar(solicitacaoItem.id)"><i class="glyphicon glyphicon-remove" ></i> Cancelar 
+                                            ng-click="cancelar(solicitacaoItem.solicitacaoId)"><i class="glyphicon glyphicon-remove" ></i> Cancelar 
                                         </button>  
-                                        <button type="submit" class="btn btn-success btn-small" ng-show="{{solicitacaoItem.status == 'AGUARDANDO' }}" ng-click="produzir(solicitacaoItem.id)" >
+                                        <button type="submit" class="btn btn-success btn-small" ng-show="{{solicitacaoItem.status == 'AGUARDANDO' }}" ng-click="produzir(solicitacaoItem.solicitacaoId)" >
                                             <i class="fa fa-cogs"></i> Produzir
                                         </button>
                                         <button type="submit" class="btn btn-primary btn-small" 
                                             ng-show="{{solicitacaoItem.status == 'PRODUCAO' || solicitacaoItem.status =='PRODUZIDO' || solicitacaoItem.status =='FINALIZADO' }}" 
-                                            ng-click="expandir(solicitacaoItem.id)" ><i class="fa fa-arrows-alt" ></i> Expandir
+                                            ng-click="expandir(solicitacaoItem.solicitacaoId)" ><i class="fa fa-arrows-alt" ></i> Expandir
                                         </button>
                                     </span>     
                                 </div>
