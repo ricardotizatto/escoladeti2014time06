@@ -10,8 +10,8 @@
                ng-submit="enviarSolicitacao()" name="solicitacaoForm">
             <div class="row">
                 <div class="col-md-2 form-group">
-                    <label>Número</label> <input type="number" class="form-control"
-                                                 disabled="disabled" ng-model="solicitacao.id">
+                    <label>Número</label>
+                    <input type="number" class="form-control" disabled="disabled" ng-model="solicitacao.id">
                 </div>
                 <div class="col-md-5 form-group {{solicitacaoForm.aluno.$error.required? 'has-error' : 'has-success' }} has-feedback">
                     <label class="control-label">Aluno *</label>
@@ -29,6 +29,15 @@
                         </span>
                     </div>
                 </div>
+                <div class="col-md-3 form-group">
+                    <label>Ensino</label>
+                    <select class="form-control" ng-model="solicitacao.ensino">
+                        <option value=""></option>
+                        <option value="MEDIO">MEDIO</option>
+                        <option value="FUNDAMENTAL">FUNDAMENTAL</option>
+                        <option VALUE="SUPERIOR">SUPERIOR</option>
+                    </select>
+                </div>
                 <div class="col-md-2 form-group">
                     <label>Série</label>
                     <select class="form-control" ng-model="solicitacao.serie">
@@ -42,15 +51,6 @@
                         <option VALUE="7-ANO">7-ANO</option>
                         <option VALUE="8-ANO">8-ANO</option>
                         <option VALUE="9-ANO">9-ANO</option>
-                    </select>
-                </div>
-                <div class="col-md-3 form-group">
-                    <label>Ensino</label>
-                    <select class="form-control" ng-model="solicitacao.ensino">
-                        <option value=""></option>
-                        <option value="MEDIO">MEDIO</option>
-                        <option value="FUNDAMENTAL">FUNDAMENTAL</option>
-                        <option VALUE="SUPERIOR">SUPERIOR</option>
                     </select>
                 </div>
             </div>
@@ -87,13 +87,17 @@
             <fieldset>
                 <legend>Endereço</legend>
                 <div class="row">
-                    <div class="col-md-3 form-group {{solicitacaoForm.endereco.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                        <label class="control-label">Endereço *</label>
-                        <input type="text" class="form-control" ng-model="solicitacao.endereco" name="endereco" required maxlength="100">
-                    </div>
                     <div class="col-md-3 form-group {{solicitacaoForm.cep.$error.required? 'has-error' : 'has-success' }} has-feedback">
                         <label class="control-label">CEP *</label>
                         <input type="text" class="form-control" ng-model="solicitacao.cep" id="cep" name="cep" required>
+                    </div>
+                    <div class="col-md-3 form-group {{solicitacaoForm.municipio.$error.required? 'has-error' : 'has-success' }} has-feedback">
+                        <label class="control-label">Município *</label>
+                        <input ui-select2="select2Cidade" class="input-default" ng-model="solicitacao.municipio" name="municipio" required>
+                    </div>
+                    <div class="col-md-3 form-group {{solicitacaoForm.endereco.$error.required? 'has-error' : 'has-success' }} has-feedback">
+                        <label class="control-label">Endereço *</label>
+                        <input type="text" class="form-control" ng-model="solicitacao.endereco" name="endereco" required maxlength="100">
                     </div>
                     <div class="col-md-3 form-group {{solicitacaoForm.numero.$error.required ||
                          solicitacaoForm.numero.$error.pattern? 'has-error' : 'has-success' }} has-feedback">
@@ -101,10 +105,6 @@
                         <input type="text" class="form-control" ng-model="solicitacao.numeroEndereco" name="numero" ng-pattern="/^\d{4,4}$/"
                                maxlength="4" required="">
                         <span class="help-block" ng-show="solicitacaoForm.numero.$error.pattern">4 números.</span>
-                    </div>
-                    <div class="col-md-3 form-group {{solicitacaoForm.municipio.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                        <label class="control-label">Município *</label>
-                        <input ui-select2="select2Cidade" class="input-default" ng-model="solicitacao.municipio" name="municipio" required>
                     </div>
 
                 </div>
@@ -132,7 +132,7 @@
                             <tr ng-repeat="item in solicitacao.itensSolicitacao">
                                 <td><a href="#/cadastrolivro/{{item.livro}}">{{getDescricaoMaterial(item)}}</a></td>
                                 <td>{{item.traducaoMaterial}}{{item.traducaoMaterial == 'OUTRO' ? '-'+item.outro : ''}}</td>
-                                <td><span class="label label-warning getStatusItem(item.status)" >{{item.status}}</span> </td>
+                                <td><span class="label label-inverse" >{{item.status}}</span> </td>
                                 <td>
                                     <a href="javascript:void(0)" ng-click="excluirItem(item)">
                                         <i class="glyphicon glyphicon-trash"></i>

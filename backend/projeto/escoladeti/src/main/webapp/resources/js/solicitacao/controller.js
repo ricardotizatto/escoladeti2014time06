@@ -1,13 +1,14 @@
 var controllers = angular.module('controllers');
 
-function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa, Cidade) {
+function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa, Cidade, BuscaCep) {
     $log.debug('iniciando SolicitacaoController em teste6d');
 
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
 		this.livro = null;
-		this.status = 'ABERTO';
+		this.status = 'AGUARDANDO';
+        this.BuscaCep = BuscaCep;
 	};	
 
 	$scope.itemCorrente = new ItemCorrente();
@@ -38,7 +39,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 
                 var cidades = data.list.map(function (cidade) {
                     return {
-                        text: cidade.nome,
+                        text: cidade.nome + ' - ' + cidade.unidadeFederativa.sigla,
                         id: cidade.id
                     };
                 });
@@ -143,12 +144,22 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
     $log.debug('listar alunos');
     Pessoa.listarAlunos(function (alunos) {
-        $scope.alunos = alunos;
+        $scope.alunos = alunos.map(function (aluno) {
+            return {
+                nome: aluno.nome + ' ' + aluno.sobrenome,
+                id: aluno.id
+            }
+        });
     });
 
 
     Pessoa.listarPessoasFisicas(function (pessoasFisicas) {
-        $scope.pessoasFisicas = pessoasFisicas;
+        $scope.pessoasFisicas = pessoasFisicas.map(function (pessoa) {
+            return {
+                nome: pessoa.nome + ' ' + pessoa.sobrenome,
+                id: pessoa.id
+            }
+        });
     });
 	
 	$http({
@@ -215,19 +226,25 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		$scope.itemCorrente = new ItemCorrente();
 	};
         
-        $("#cep").mask("99999-999");
-	
-	$scope.getStatusItem = function (status) {
-		console.log(item);
-		switch (status) {
-			case 'ABERTO':
-				return 'warning';
-			case 'ANDAMENTO':
-				return 'primary';
-			case 'CANCELADO':
-				return 'danger';
-		}
-	};
+    $("#cep").mask("99999-999");
+
+    $scope.buscarSolicitacao = function () {
+        var  param = {
+            termo: $scope.buscaSolicitacao,
+            pagina: 1
+        };
+
+        Solicitacao.paginar(param, function (pagina) {
+            $scope.pagina = pagina;
+        });
+    };
+
+    $scope.buscarPagina = function (numero) {
+        Solicitacao.paginar({pagina: numero}, function (pagina) {
+            $scope.pagina = pagina;
+        });
+    };
+
 	
 }
 
@@ -241,5 +258,6 @@ controllers.controller('SolicitacaoController',
 		 'SolicitacaoFactory',
          'PessoaFactory',
          'cidadeService',
+         'BuscaCepFactory',
 		 SolicitacaoController
 		 ]);

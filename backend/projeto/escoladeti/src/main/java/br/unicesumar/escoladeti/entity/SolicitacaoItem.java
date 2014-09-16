@@ -34,12 +34,14 @@ public class SolicitacaoItem extends Entidade{
 	@Enumerated(EnumType.STRING)
 	private StatusItem status;
 
+    private SolicitacaoItem(Long id) {
+        this.id = id;
+    }
 
-	
-	public SolicitacaoItem() {
-	}
-	
-	public Solicitacao getSolicitacao() {
+    public SolicitacaoItem() {
+    }
+
+    public Solicitacao getSolicitacao() {
 		return solicitacao;
 	}
 	
@@ -78,14 +80,20 @@ public class SolicitacaoItem extends Entidade{
 	public StatusItem getStatus() {
 		return status;
 	}
-	
-	public static class SolicitacaoItemBuilder {
+
+    public static SolicitacaoItem criar(Long id) {
+        return new SolicitacaoItem(id);
+    }
+
+    public static class SolicitacaoItemBuilder {
 		private Livro livro;
 		private String status;
 		private String traducaoMaterial;
 		private String outro;
-		
-		public SolicitacaoItem.SolicitacaoItemBuilder livro(Livro livro) {
+        private Long id;
+        private Solicitacao solicitacao;
+
+        public SolicitacaoItem.SolicitacaoItemBuilder livro(Livro livro) {
 			this.livro = livro;
 			return this;
 		}
@@ -106,12 +114,12 @@ public class SolicitacaoItem extends Entidade{
 		}
 		
 		public SolicitacaoItem build() {
-
 			SolicitacaoItem solicitacaoItem = new SolicitacaoItem();
 			solicitacaoItem.setLivro(livro);
 			solicitacaoItem.setTraducaoMaterial(TraducaoMaterial.of(this.traducaoMaterial));
 			solicitacaoItem.setOutro(this.outro);
-                        
+            solicitacaoItem.setId(this.id);
+            solicitacaoItem.setSolicitacao(this.solicitacao);
 			solicitacaoItem.setStatus(StatusItem.of(this.status));
 			
 			if(solicitacaoItem.getTraducaoMaterial().equals(TraducaoMaterial.OUTRO)
@@ -127,7 +135,17 @@ public class SolicitacaoItem extends Entidade{
 			this.status = status.name();
 			return this;
 		}
-	}
+
+        public SolicitacaoItemBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public SolicitacaoItemBuilder solicitacao(Solicitacao solicitacao) {
+            this.solicitacao = solicitacao;
+            return this;
+        }
+    }
 
 	public static SolicitacaoItemBuilder builder() {
 		return new SolicitacaoItemBuilder();

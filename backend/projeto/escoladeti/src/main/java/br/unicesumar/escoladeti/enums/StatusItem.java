@@ -1,7 +1,7 @@
 package br.unicesumar.escoladeti.enums;
 
 public enum StatusItem {
-	ABERTO, ANDAMENTO, FINALIZADO, CANCELADO;
+	AGUARDANDO, PRODUCAO, PRODUZIDO, FINALIZADO, CANCELADO;
 
 	public static StatusItem of(String status) {
 		try {
