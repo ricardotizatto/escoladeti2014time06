@@ -26,22 +26,28 @@
         <table width="100%" border="0" class="table table-striped table-hover" >
             <tr>
                 <th width="20%">Nome</th>
-                <th width="20%">CPF</th>
-                <th width="20%">RG</th>
                 <th width="20%">Email</th>
                 <th width="20%">Telefone</th>
-                <th width="20%">Sexo</th>
                 <th width="20%">Pagamento</th>
+                <th width="20%">Presença</th>
                 <th width="20%">Alterar</th>
             </tr>
-            <tr ng-repeat="participante in participantes| filter : busca">
+            <tr ng-repeat="participante in participantes | filter : busca">
                 <td>{{participante.nome}}</td>
-                <td>{{participante.cpf}}</td>
-                <td>{{participante.rg}}</td>
                 <td>{{participante.email}}</td>
                 <td>{{participante.telefone}}</td>
-                <td>{{participante.sexo}}</td>
                 <td>{{participante.pagamento}}</td>
+                <td>
+                    <div ng-switch on="atualizaPresencaAux(participante)">
+                        <button class='btn btn-primary btn-success' ng-switch-when='true' ng-click="alteraPresenca(participante)">
+                            <span class='glyphicon glyphicon-ok'></span> Presente
+                        </button>
+                        <button class='btn btn-primary btn-danger' ng-switch-when='false' ng-click="alteraPresenca(participante)">
+                            <span class='glyphicon glyphicon-off'></span> Faltou
+                        </button>
+                    </div>
+                    
+                 </td>
                 <td><button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="editar(participante)">
                         <span class='glyphicon glyphicon-edit'></span>
                     </button></td>

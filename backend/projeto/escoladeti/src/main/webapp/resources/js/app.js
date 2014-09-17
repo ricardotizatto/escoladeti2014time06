@@ -8,7 +8,7 @@ var app = angular.module('app',
 		['ngRoute',
 		 'ngResource',
 		 'controllers',
-         'directives',
+                 'directives',
 		 'ui.select2',
 		 'ui.bootstrap',
                  'ui.utils']);
@@ -139,6 +139,14 @@ app.config(['$routeProvider',
             })
             .when('/cadastroparticipante', {
                 templateUrl: './pages/CadastroParticipante.html',
+                controller: 'participanteController'
+            })
+            .when('/editarparticipante', {
+                templateUrl: './pages/EditarParticipante.html',
+                controller: 'participanteController'
+            })
+            .when('/editarparticipante/:idParticipante', {
+                templateUrl: './pages/EditarParticipante.html',
                 controller: 'participanteController'
             })
             .when('/listaordemproducao', {

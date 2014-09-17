@@ -19,6 +19,8 @@ public class ComandoSalvarSolicitacaoItem {
 	private String outro;
 	
 	private String status;
+
+    private Long id;
 	
 	public String getTraducaoMaterial() {
 		return traducaoMaterial;
@@ -44,5 +46,16 @@ public class ComandoSalvarSolicitacaoItem {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean pussuiId() {
+        return this.id != null;
+    }
 }

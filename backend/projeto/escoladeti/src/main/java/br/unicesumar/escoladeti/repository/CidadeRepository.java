@@ -13,9 +13,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
     public Cidade findById(Long id);
         
-    /*public Cidade findByNomeAndFundacaoAndUnidadeFederativa(
-            String nome, Date fundacao, UnidadeFederativa unidadeFederativa);
-    */
+    public Cidade findByNomeAndUnidadeFederativa(
+            String nome, UnidadeFederativa unidadeFederativa);
+   
     public Page<Cidade> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
 
 	public List<Cidade> findByUnidadeFederativaId(Long estadoId);

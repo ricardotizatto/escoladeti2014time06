@@ -63,20 +63,7 @@
             <column name="cep" type="varchar(10)"/>
         </createIndex>
     </changeSet>
-    <changeSet id="mart003" author="martinho" >
-    <dropNotNullConstraint 
-            columnDataType="VARCHAR(255)"
-            columnName="cpf"
-            schemaName="public"
-            tableName="pessoafisica"/>
-    </changeSet> 
-    <changeSet id="mart004" author="martinho" >
-    <dropNotNullConstraint 
-            columnDataType="VARCHAR(255)"
-            columnName="rg"
-            schemaName="public"
-            tableName="pessoafisica"/>
-    </changeSet> 
+    
     <changeSet id="mart005" author="martinho" >
         <modifyDataType
             newDataType="VARCHAR(15)"
@@ -91,7 +78,24 @@
             schemaName="public"
             tableName="pessoafisica"/>
     </changeSet> 
-    
+    <changeSet author="Walber(generated)" id="createViewPessoaFisicaJuridica201400916">
+        <createView viewName="viewpessoa"
+                    replaceIfExists="true"
+                    schemaName="public">
+            SELECT 
+            T1.ID, 
+            T1.NOME || ' '|| COALESCE(T2.SOBRENOME,'') AS NOME, 
+            T1.EMAIL,T1.TIPO, COALESCE(T2.CPF,T3.CNPJ) AS CPF_CNPJ, 
+            COALESCE(T2.RG,T3.INSCRICAOESTADUAL) AS RG_INSCRICAOMUNICIPAL, 
+            COALESCE(T2.DATANASCIMENTO,T3.DATACRIACAO) AS NASCIMENTO_CRIACAO,
+            COALESCE(T2.ALUNO,FALSE) AS ALUNO
+            FROM PESSOA T1 
+            LEFT JOIN PESSOAFISICA T2 ON T1.ID = T2.ID
+            LEFT JOIN PESSOAJURIDICA T3 ON T1.ID = T3.ID
+            ORDER BY T1.NOME
+        </createView>
+    </changeSet>
+
     <changeSet id="mart007" author="martinho" >
         <dropNotNullConstraint 
             columnDataType="VARCHAR(255)"

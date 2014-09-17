@@ -37,7 +37,7 @@ function CidadeService($http) {
 		},
 		buscaCidadesPorEstado : function(estadoId){
 			return $http.get('./rest/cidadeSource/listarPorEstado/' + estadoId);
-		}		
+		}
 	};
 }
 

@@ -1,6 +1,6 @@
 var controllers = angular.module('controllers');
 
-function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa, Cidade) {
+function SolicitacaoController($scope, $location, $log, $routeParams, $http, Solicitacao, Pessoa, Cidade, BuscaCep) {
     $log.debug('iniciando SolicitacaoController em teste6d');
 
 	var ItemCorrente = function () {
@@ -8,23 +8,80 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		this.traducaoMaterial = "BRAILLE";
 		this.livro = {};	
 		this.status = 'AGUARDANDO';
+        this.BuscaCep = BuscaCep;
 	};	
 
 	$scope.itemCorrente = new ItemCorrente();
-	
-	$scope.select2Options = {
+
+    $scope.select2Options = {
+      allowClear: true
+    };
+
+	$scope.select2Cidade = {
 		allowClear: true,
-		placeholder: 'selecione'
-	},
+		placeholder: 'selecione',
+
+        ajax: {
+            url: './rest/cidadeSource/cidade',
+
+            data: function (termo) {
+                var termoPesquisa;
+
+                if (termo)  {
+                    termoPesquisa = termo.toUpperCase();
+                }
+                return {
+                    q: termoPesquisa
+                };
+
+            },
+            results: function (data, page) {
+
+                var cidades = data.list.map(function (cidade) {
+                    return {
+                        text: cidade.nome + ' - ' + cidade.unidadeFederativa.sigla,
+                        id: cidade.id
+                    };
+                });
+
+                return {
+                    results: cidades
+                };
+            }         
+        },
+        
+        initSelection: function(element, callback) {
+        	var valor = element.val();
+        	console.log('valor busca cidade',valor);
+        	Cidade.buscar(valor).success(function (cidade) {
+        		console.log('cidade', cidade);
+        		callback({
+        			text: cidade.nome,
+        			id: cidade.id
+        		});
+        		
+        	});        	
+        }
+	
+
+	};
 
 
     Cidade.buscarTodos().success(function (cidades) {
-        console.log('cidades:',cidades);
+        //console.log('cidades:',cidades);
         $scope.cidades = cidades;
     });
 	
 	$scope.enviarSolicitacao = function () {
 		$log.debug('enviando solicitacao');
+		
+		if ($scope.solicitacao.municipio) {
+			$scope.solicitacao.municipio = $scope.solicitacao.municipio.id;
+		}
+		
+		if ($scope.solicitacao.nre) {
+			$scope.solicitacao.nre = $scope.solicitacao.nre.id;
+		}
 		
 		if ($scope.solicitacao.id) {
 			$scope.solicitacao.$update(function () {
@@ -87,12 +144,22 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
     $log.debug('listar alunos');
     Pessoa.listarAlunos(function (alunos) {
-        $scope.alunos = alunos;
+        $scope.alunos = alunos.map(function (aluno) {
+            return {
+                nome: aluno.nome + ' ' + aluno.sobrenome,
+                id: aluno.id
+            }
+        });
     });
 
 
     Pessoa.listarPessoasFisicas(function (pessoasFisicas) {
-        $scope.pessoasFisicas = pessoasFisicas;
+        $scope.pessoasFisicas = pessoasFisicas.map(function (pessoa) {
+            return {
+                nome: pessoa.nome + ' ' + pessoa.sobrenome,
+                id: pessoa.id
+            }
+        });
     });
 	
 	$http({
@@ -127,14 +194,57 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	};
 	
 	$scope.adicionarMaterial = function () {
-		if (!$scope.itemCorrente.livro) {
+        var livroId  = $scope.itemCorrente.livro,
+            traducao = $scope.itemCorrente.traducaoMaterial,
+            outro = $scope.itemCorrente.outro;
+
+        $scope.solicitacao.itensSolicitacao.forEach(function (item) {
+            console.log(item);
+            if (livroId === item.livro
+                && traducao == item.traducaoMaterial) {
+                toastr.warning('Livro já adicionado para esta tradução.');
+                livroId = null;
+            }
+        });
+
+        console.log(traducao);
+        if (traducao === 'OUTRO' && !outro) {
+            toastr.warning('É necessário especificar a tradução.');
             return;
         }
+
+        if (outro) {
+            $scope.itemCorrente.outro = outro.toUpperCase();
+        }
+
+        if (!livroId) {
+            return;
+        }
+
+        $('#modalLivro').modal('hide');
 		$scope.solicitacao.itensSolicitacao.push($scope.itemCorrente);
 		$scope.itemCorrente = new ItemCorrente();
 	};
         
-        $("#cep").mask("99999-999");
+    $("#cep").mask("99999-999");
+
+    $scope.buscarSolicitacao = function () {
+        var  param = {
+            termo: $scope.buscaSolicitacao,
+            pagina: 1
+        };
+
+        Solicitacao.paginar(param, function (pagina) {
+            $scope.pagina = pagina;
+        });
+    };
+
+    $scope.buscarPagina = function (numero) {
+        Solicitacao.paginar({pagina: numero}, function (pagina) {
+            $scope.pagina = pagina;
+        });
+    };
+
 	
 	$scope.getStatusItem = function (status) {
 		console.log(item);
@@ -160,5 +270,6 @@ controllers.controller('SolicitacaoController',
 		 'SolicitacaoFactory',
          'PessoaFactory',
          'cidadeService',
+         'BuscaCepFactory',
 		 SolicitacaoController
 		 ]);

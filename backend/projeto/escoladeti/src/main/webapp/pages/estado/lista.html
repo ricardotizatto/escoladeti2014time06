@@ -49,33 +49,37 @@
             </table>
         </div>
     </div> 
-    <div class="row ">
-        <div class="col-sm-12">
-            <ul class="pagination">
-                <li>
-                    <a ng-click="getTodos(1)"> 
-                        <span class="glyphicon glyphicon-fast-backward"></span>
-                    </a>
-                </li>
-                <li>
-                    <a ng-click="unidadesFederativas.pageNumber <= 1 ? getTodos(1) : getTodos(unidadesFederativas.pageNumber)"> 
-                        <span class="glyphicon glyphicon-step-backward"></span>
-                    </a>
-                </li>
-                <li ng-repeat="numeroPagina in unidadesFederativas.pagesAround" class="{{numeroPagina == unidadesFederativas.pageNumber ? 'active' : ''}}">
-                    <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
-                </li>
-                <li>
-                    <a ng-click="unidadesFederativas.pageNumber === unidadesFederativas.pageCount ? getTodos(unidadesFederativas.pageCount) : getTodos(unidadesFederativas.pageNumber + 1)"> 
-                        <span class="glyphicon glyphicon-step-forward"></span>
-                    </a>
-                </li>
-                <li>
-                    <a ng-click="unidadesFederativas.pageCount == 0 ? getTodos(1) : getTodos(unidadesFederativas.pageCount)"> 
-                        <span class="glyphicon glyphicon-fast-forward"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!--    <div class="row ">
+            <div class="col-sm-12">
+                <ul class="pagination">
+                    <li>
+                        <a ng-click="getTodos(1)"> 
+                            <span class="glyphicon glyphicon-fast-backward"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="unidadesFederativas.pageNumber <= 1 ? getTodos(1) : getTodos(unidadesFederativas.pageNumber)"> 
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                        </a>
+                    </li>
+                    <li ng-repeat="numeroPagina in unidadesFederativas.pagesAround" class="{{numeroPagina == unidadesFederativas.pageNumber ? 'active' : ''}}">
+                        <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+                    </li>
+                    <li>
+                        <a ng-click="unidadesFederativas.pageNumber === unidadesFederativas.pageCount ? getTodos(unidadesFederativas.pageCount) : getTodos(unidadesFederativas.pageNumber + 1)"> 
+                            <span class="glyphicon glyphicon-step-forward"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="unidadesFederativas.pageCount == 0 ? getTodos(1) : getTodos(unidadesFederativas.pageCount)"> 
+                            <span class="glyphicon glyphicon-fast-forward"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+    <pagination boundary-links="true" num-pages="unidadesFederativas.pageCount" total-items="totalItems" items-per-page="unidadesFederativas.maxRows"
+                ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="unidadesFederativas.maxPagesToShow"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
 </div>
