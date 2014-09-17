@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
+import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;

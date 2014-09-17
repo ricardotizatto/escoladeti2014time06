@@ -312,7 +312,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
     function getNovoEndereco() {
         return {
-            tipoEndereco: 'RUA',
+            tipo: 'RUA',
             principal: contemEnderecoPrincipal() ? 'N' : 'S'
         };
     }

@@ -13,12 +13,7 @@ diretivas.directive('mascararTelefone', function () {
     return {
         restrict: 'A',
         replace: true,
-        link : function(scope, element, attrs){
-            var numero = scope.$eval(attrs.mascararTelefone);
-            telefone = numero.substring(0,4) + '-'+ numero.substring(4,numero.length);
-            console.log(telefone);
-        },
-        template : '<td>' + telefone + '</td>'
+        template : "<td>{{telefone.numero.substring(0,4) +'-'+ telefone.numero.substring(4,telefone.numero.length)}}</td>"
     };
 });
 

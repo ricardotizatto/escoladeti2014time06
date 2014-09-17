@@ -222,7 +222,7 @@
                                 <tr ng-repeat="telefone in pessoa.telefones">
                                     <td ng-bind="telefone.tipo"></td>
                                     <td ng-bind="telefone.ddd"></td>
-                                    <td ng-bind="telefone.numero" mascarar-Telefone="telefone.numero"></td>
+                                    <td mascarar-Telefone></td>
                                     <td>
                                         <button class='btn btn-warning btn-sm'
                                                 ng-click="editarTelefone($index)" data-toggle="modal"
