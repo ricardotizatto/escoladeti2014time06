@@ -57,12 +57,13 @@
             replaceIfExists="true"
             schemaName="public">
             SELECT T1.ID AS ID_SOLICITACAO,
-                 T2.STATUS AS STATUS_ITEM,
-                 T1.DATACHEGADA,
-                 T2.TRADUCAOMATERIAL,
-                 T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
-                 T5.ID AS ID_ORDEM,
-                 COALESCE(T7.NOME,'') AS REVISOR
+            T2.STATUS AS STATUS_ITEM,
+            T1.DATACHEGADA,
+            T2.TRADUCAOMATERIAL,
+            T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
+            T5.ID AS ID_ORDEM,
+            COALESCE(T7.NOME,'') AS REVISOR,
+            T8.NOME AS NOMEMATERIAL
             FROM SOLICITACAO T1
             LEFT JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
             LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
@@ -70,6 +71,7 @@
             LEFT JOIN ORDEMPRODUCAO T5 ON T2.ID = T5.SOLICITACAOITEM_ID
             LEFT JOIN PARTEMATERIAL T6 ON T5.ID = T6.ID_ORDEMPRODUCAO
             LEFT JOIN PESSOA T7 ON T6.ID_RESPONSAVELREVISAO = T7.ID
+            LEFT JOIN LIVRO T8 ON T8.id = T2.ID_MATERIAL
             ORDER BY T1.DATACHEGADA
         </createView>
     </changeSet>

@@ -3,22 +3,22 @@ package br.unicesumar.escoladeti.view;
 import br.unicesumar.escoladeti.entity.Entidade;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
 
 @Entity(name = "viewAcompanhamentoSolicitacao")
-public class ViewAcompanhamentoSolicitacao implements Serializable{
+public class ViewAcompanhamentoSolicitacao extends Entidade implements Serializable{
     
-    @Id
+    @Column(name = "ID_SOLICITACAO")
     private Long solicitacaoId;
+    @Column(name = "STATUS_ITEM")
     private String status;
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataChegada;
     private String traducao;
     private String responsavel;
     private String sobrenomeResponsavel;
     private Long ordemId;
+    @Column(name = "NOMEMATERIAL")
     private String material;
     private Date dataEnvio;
 
