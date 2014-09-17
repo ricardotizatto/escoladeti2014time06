@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AcompanhamentoSolicitacaoService {
 
-    private SolicitacaoItemRepository solicitacaoItemRepository = new SolicitacaoItemRepository();
+    //private SolicitacaoItemRepository solicitacaoItemRepository = new SolicitacaoItemRepository();
     
     public List<AcompanhamentoDTO>listarItens(PesquisaSolicitacao pesquisa, DataSource dataSouce) {
-        return solicitacaoItemRepository.listarItens(pesquisa, dataSouce);
+        return null; //solicitacaoItemRepository.listarItens(pesquisa, dataSouce);
     }
 	
 }

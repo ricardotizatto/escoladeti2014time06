@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.repository;
 
 import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
+import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +9,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+public interface SolicitacaoItemRepository extends JpaRepository<SolicitacaoItem, Long>{
+
+}
+
+
+/*
 @Repository
 public class SolicitacaoItemRepository{
     
@@ -80,3 +88,4 @@ public class SolicitacaoItemRepository{
         return itens;
     }
 }
+*/
