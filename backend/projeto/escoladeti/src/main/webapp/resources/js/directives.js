@@ -17,6 +17,18 @@ diretivas.directive('mascararTelefone', function () {
     };
 });
 
+diretivas.directive('mascararPessoacpfcnpj', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        template : "<td>{{ pessoa.tipo === 'F' ? \n\
+            pessoa.cpfCnpj.substring(0,3) +'.'+ pessoa.cpfCnpj.substring(3,6) +'.'+ pessoa.cpfCnpj.substring(6,9) +'-'+ pessoa.cpfCnpj.substring(9,pessoa.cpfCnpj.length) : \n\
+            pessoa.cpfCnpj.substring(0,2) +'.'+ pessoa.cpfCnpj.substring(2,5) +'.'+ pessoa.cpfCnpj.substring(5,8) +'/'+ pessoa.cpfCnpj.substring(8,12) +'-'+ pessoa.cpfCnpj.substring(12,pessoa.cpfCnpj.length) \n\
+            }}</td>"
+    };
+});
+
+
 diretivas.directive('myFocus', function () {
     return {
         restrict: 'A',
