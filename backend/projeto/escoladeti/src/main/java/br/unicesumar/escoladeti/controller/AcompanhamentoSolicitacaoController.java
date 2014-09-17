@@ -45,12 +45,14 @@ public class AcompanhamentoSolicitacaoController {
 
     @RequestMapping(value="/filtros",method = RequestMethod.GET)
     @ResponseBody
-    public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(@RequestParam(value = "dataChegadaInicio", required = false) Date dataChegadaInicio,
-            @RequestParam(value = "dataChegadaFim", required = false) Date dataChegadaFim, @RequestParam(value = "status",required = false) String status) {
-//        PesquisaSolicitacao ps = new PesquisaSolicitacao();
-//        ps.setDataChegadaInicio(dataChegadaInicio);
-//        ps.setDataChegadaFim(dataChegadaFim);
-        System.out.println("CHEGOU AQUI!");
+    public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(
+            @RequestParam(value = "dataChegadaInicio", required = false) Date dataChegadaInicio,
+            @RequestParam(value = "dataChegadaFim", required = false) Date dataChegadaFim, 
+            @RequestParam(value = "status",required = false) String status) 
+    {
+        PesquisaSolicitacao ps = new PesquisaSolicitacao();
+        ps.setDataChegadaInicio(dataChegadaInicio);
+        ps.setDataChegadaFim(dataChegadaFim);
         return acompanhamentosolicitacaoService.listarItensFiltrados(dataChegadaInicio,dataChegadaFim,status);
     }
 }

@@ -1,11 +1,13 @@
 package br.unicesumar.escoladeti.pesquisa;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.text.DateFormat;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PesquisaSolicitacao {
-    
+
     private String itemStatus;
     private Date dataChegadaInicio;
     private Date dataChegadaFim;
@@ -30,12 +32,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setDataChegadaInicio(Date dataChegadaInicio) {
-        if(dataChegadaFim != null && dataChegadaInicio.after(dataChegadaFim)){
-            this.dataChegadaInicio = dataChegadaInicio;
-        }else if(dataChegadaInicio != null){
-            throw new RuntimeException("Data de Inicio não pode ser maior que Final"); 
-        } 
-        
+        this.dataChegadaInicio = dataChegadaInicio;
     }
 
     public Date getDataChegadaFim() {
@@ -43,11 +40,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setDataChegadaFim(Date dataChegadaFim) {
-        if (dataChegadaInicio != null && dataChegadaFim.before(dataChegadaInicio)) {
-            this.dataChegadaFim = dataChegadaFim;
-        }else if(dataChegadaFim != null){
-            throw new RuntimeException("Data Final não pode ser Menos que da Inicio");
-        }
+        this.dataChegadaFim = dataChegadaFim;
     }
 
     public Long getSolicitacaoId() {
@@ -81,9 +74,9 @@ public class PesquisaSolicitacao {
     }
 
     public void setResponsavel(String responsavel) {
-        if(responsavel != null){
+        if (responsavel != null) {
             this.responsavel = responsavel.toUpperCase();
-        }    
+        }
     }
 
     public String getRevisor() {
@@ -95,6 +88,5 @@ public class PesquisaSolicitacao {
             this.revisor = revisor.toUpperCase();
         }
     }
-    
-    
+
 }

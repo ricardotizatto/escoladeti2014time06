@@ -11,8 +11,8 @@ public interface ViewAcompanhamentoSolicitacaoRepository extends JpaRepository<V
 
     @Query(value = "select a "
             + "from viewAcompanhamentoSolicitacao a "
-            + "where a.datachegada between nullif(?1,a.datachegada) and nullif(?2,a.datachegada) "
-            + "and a.itemStatus = ?3", nativeQuery = false)
+            + "where a.datachegada between ?1 and ?2 "
+            + "and a.status_item = ?3", nativeQuery = true)
     public List<ViewAcompanhamentoSolicitacao> findByStartDataChegadaBetweenAndItem(Date dataChegadaInicio, Date dataChegadaFim, String status);
        
 }
