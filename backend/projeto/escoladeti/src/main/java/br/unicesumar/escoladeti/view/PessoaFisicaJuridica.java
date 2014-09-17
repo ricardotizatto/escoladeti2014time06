@@ -6,16 +6,11 @@
 package br.unicesumar.escoladeti.view;
 
 import br.unicesumar.escoladeti.entity.Entidade;
-import br.unicesumar.escoladeti.mask.Mascara;
 import java.io.Serializable;
-import java.text.ParseException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -68,12 +63,7 @@ public class PessoaFisicaJuridica extends Entidade implements Serializable{
     }
 
     public String getCpfCnpj() {
-        if(this.getTipo() == 'F'){
-            if(this.cpfCnpj.isEmpty() || this.cpfCnpj == null)
-                return "";
-            return Mascara.cpf(this.cpfCnpj);
-        }
-        return Mascara.cpnj(this.cpfCnpj);
+        return this.cpfCnpj;
     }
 
     public void setCpfCnpj(String CpfCnpj) {

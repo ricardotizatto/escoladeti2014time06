@@ -53,7 +53,8 @@
                     <td>{{pessoa.nome}}</td>
                     <td>{{pessoa.tipo === 'F' ? 'FISICA' : 'JURIDICA'}}</td>
                     <td>{{pessoa.aluno === true ? 'SIM' : 'NAO'}}</td>
-                    <td>{{pessoa.cpfCnpj}}</td>
+<!--                    <td>{{pessoa.cpfCnpj}}</td>-->
+                    <td mascarar-Pessoacpfcnpj></td>
                     <td>{{pessoa.nascimentoCriacao| date: 'dd-MM-yyyy' }}</td>
                     <td>{{pessoa.email}}</td>
                     <td>
