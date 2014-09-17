@@ -52,7 +52,7 @@
         <renameColumn tableName="endereco" oldColumnName="tipoendereco" newColumnName="tipo"/>
     </changeSet>
     
-    <changeSet author="martinho" id="mart009" >
+    <changeSet author="martinho" id="mart012" >
         <createView viewName="viewAcompanhamentoSolicitacao"
             replaceIfExists="true"
             schemaName="public">

@@ -19,7 +19,7 @@ public class AcompanhamentoSolicitacaoService {
 //        return null; //solicitacaoItemRepository.listarItens(pesquisa, dataSouce);
 //    }
     
-    public List<ViewAcompanhamentoSolicitacao> listarItens(PesquisaSolicitacao pesquisa) {
+    public List<ViewAcompanhamentoSolicitacao> listarItens() {
         return viewAcompanhamentoSolicitacaoRepository.findAll();
     }	
 }
