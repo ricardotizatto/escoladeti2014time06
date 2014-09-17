@@ -51,6 +51,28 @@
     <changeSet id="w201409161857" author="">
         <renameColumn tableName="endereco" oldColumnName="tipoendereco" newColumnName="tipo"/>
     </changeSet>
+    
+    <changeSet author="martinho" id="mart009" >
+        <createView viewName="viewAcompanhamentoSolicitacao"
+            replaceIfExists="true"
+            schemaName="public">
+            SELECT T1.ID AS ID_SOLICITACAO,
+                 T2.STATUS AS STATUS_ITEM,
+                 T1.DATACHEGADA,
+                 T2.TRADUCAOMATERIAL,
+                 T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
+                 T5.ID AS ID_ORDEM,
+                 COALESCE(T7.NOME,'') AS REVISOR
+            FROM SOLICITACAO T1
+            LEFT JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
+            LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
+            LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
+            LEFT JOIN ORDEMPRODUCAO T5 ON T2.ID = T5.SOLICITACAOITEM_ID
+            LEFT JOIN PARTEMATERIAL T6 ON T5.ID = T6.ID_ORDEMPRODUCAO
+            LEFT JOIN PESSOA T7 ON T6.ID_RESPONSAVELREVISAO = T7.ID
+            ORDER BY T1.DATACHEGADA
+        </createView>
+    </changeSet>
 
 </databaseChangeLog>
    

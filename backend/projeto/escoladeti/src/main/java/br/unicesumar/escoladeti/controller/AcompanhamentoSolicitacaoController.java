@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.controller;
 import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
 import br.unicesumar.escoladeti.service.AcompanhamentoSolicitacaoService;
+import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
 import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
@@ -25,7 +26,7 @@ public class AcompanhamentoSolicitacaoController{
 
     @RequestMapping( method = RequestMethod.GET)
     @ResponseBody
-    public List<AcompanhamentoDTO> listarItens(
+    public List<ViewAcompanhamentoSolicitacao> listarItens(
         @RequestParam(required = false, value = "status") String status,
         @RequestParam(required = false, value = "dataInicio") Date dataInicio,
         @RequestParam(required = false, value = "dataFim") Date dataFim,
@@ -44,7 +45,7 @@ public class AcompanhamentoSolicitacaoController{
             ps.setMaterial(material);
             ps.setResponsavel(responsavel);
             ps.setRevisor(revisor);
-        return acompanhamentosolicitacaoService.listarItens(ps,dataSource);
+        return acompanhamentosolicitacaoService.listarItens(ps);
     }
 
 }
