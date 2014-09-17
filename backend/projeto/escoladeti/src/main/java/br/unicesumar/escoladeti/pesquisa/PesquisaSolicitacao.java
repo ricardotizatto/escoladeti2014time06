@@ -6,46 +6,46 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PesquisaSolicitacao {
     
-    private String status;
-    private Date dataInicio;
-    private Date dataFim;
+    private String itemStatus;
+    private Date dataChegadaInicio;
+    private Date dataChegadaFim;
     private Long solicitacaoId;
     private Long ordemId;
-    private String material;
+    private String nomeMaterial;
     private String responsavel;
     private String revisor;
 
-    public String getStatus() {
-        return status;
+    public String getItemStatus() {
+        return itemStatus;
     }
 
-    public void setStatus(String status) {
-        if (status != null) {
-            this.status = status.toUpperCase();
+    public void setItemStatus(String itemStatus) {
+        if (itemStatus != null) {
+            this.itemStatus = itemStatus.toUpperCase();
         }
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public Date getDataChegadaInicio() {
+        return dataChegadaInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        if(dataFim != null && dataInicio.after(dataFim)){
-            this.dataInicio = dataInicio;
-        }else if(dataInicio != null){
+    public void setDataChegadaInicio(Date dataChegadaInicio) {
+        if(dataChegadaFim != null && dataChegadaInicio.after(dataChegadaFim)){
+            this.dataChegadaInicio = dataChegadaInicio;
+        }else if(dataChegadaInicio != null){
             throw new RuntimeException("Data de Inicio não pode ser maior que Final"); 
         } 
         
     }
 
-    public Date getDataFim() {
-        return dataFim;
+    public Date getDataChegadaFim() {
+        return dataChegadaFim;
     }
 
-    public void setDataFim(Date dataFim) {
-        if (dataInicio != null && dataFim.before(dataInicio)) {
-            this.dataFim = dataFim;
-        }else if(dataFim != null){
+    public void setDataChegadaFim(Date dataChegadaFim) {
+        if (dataChegadaInicio != null && dataChegadaFim.before(dataChegadaInicio)) {
+            this.dataChegadaFim = dataChegadaFim;
+        }else if(dataChegadaFim != null){
             throw new RuntimeException("Data Final não pode ser Menos que da Inicio");
         }
     }
@@ -66,13 +66,13 @@ public class PesquisaSolicitacao {
         this.ordemId = ordemId;
     }
 
-    public String getMaterial() {
-        return material;
+    public String getNomeMaterial() {
+        return nomeMaterial;
     }
 
-    public void setMaterial(String material) {
-        if (material != null) {
-            this.material = material.toUpperCase();
+    public void setNomeMaterial(String nomeMaterial) {
+        if (nomeMaterial != null) {
+            this.nomeMaterial = nomeMaterial.toUpperCase();
         }
     }
 

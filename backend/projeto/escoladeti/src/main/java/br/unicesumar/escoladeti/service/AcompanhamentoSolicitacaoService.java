@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.service;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
 import br.unicesumar.escoladeti.repository.ViewAcompanhamentoSolicitacaoRepository;
 import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,8 @@ public class AcompanhamentoSolicitacaoService {
     public List<ViewAcompanhamentoSolicitacao> listarItens() {
         return viewAcompanhamentoSolicitacaoRepository.findAll();
     }	
+
+    public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(Date dataInicio, Date dataFim, String status) {
+        return this.viewAcompanhamentoSolicitacaoRepository.findByStartDataChegadaBetweenAndItem(dataInicio,dataFim,status);
+    }
 }

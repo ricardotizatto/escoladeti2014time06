@@ -1,27 +1,41 @@
 package br.unicesumar.escoladeti.view;
 
-import br.unicesumar.escoladeti.entity.Entidade;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 @Entity(name = "viewAcompanhamentoSolicitacao")
-public class ViewAcompanhamentoSolicitacao extends Entidade implements Serializable{
+public class ViewAcompanhamentoSolicitacao implements Serializable{
     
+    @Id
     @Column(name = "ID_SOLICITACAO")
     private Long solicitacaoId;
-    @Column(name = "STATUS_ITEM")
-    private String status;
-    private Date dataChegada;
-    private String traducao;
+    
+    @Column(name = "status_item")
+    private String itemStatus;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date datachegada;
+    
+    @Column(name = "traducaomaterial")
+    private String traducaoMaterial;
+    
     private String responsavel;
-    private String sobrenomeResponsavel;
+    
+    @Column(name = "id_ordem")
     private Long ordemId;
-    @Column(name = "NOMEMATERIAL")
-    private String material;
-    private Date dataEnvio;
+    
+    private String revisor;
+    
+    @Column(name = "nomematerial")
+    private String nomeMaterial;
 
+    public ViewAcompanhamentoSolicitacao() {
+    }
+    
     public Long getSolicitacaoId() {
         return solicitacaoId;
     }
@@ -30,28 +44,28 @@ public class ViewAcompanhamentoSolicitacao extends Entidade implements Serializa
         this.solicitacaoId = solicitacaoId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getItemStatus() {
+        return itemStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setItemStatus(String itemStatus) {
+        this.itemStatus = itemStatus;
     }
 
-    public Date getDataChegada() {
-        return dataChegada;
+    public Date getDatachegada() {
+        return datachegada;
     }
 
-    public void setDataChegada(Date dataChegada) {
-        this.dataChegada = dataChegada;
+    public void setDatachegada(Date datachegada) {
+        this.datachegada = datachegada;
     }
 
-    public String getTraducao() {
-        return traducao;
+    public String getTraducaoMaterial() {
+        return traducaoMaterial;
     }
 
-    public void setTraducao(String traducao) {
-        this.traducao = traducao;
+    public void setTraducaoMaterial(String traducaoMaterial) {
+        this.traducaoMaterial = traducaoMaterial;
     }
 
     public String getResponsavel() {
@@ -62,14 +76,6 @@ public class ViewAcompanhamentoSolicitacao extends Entidade implements Serializa
         this.responsavel = responsavel;
     }
 
-    public String getSobrenomeResponsavel() {
-        return sobrenomeResponsavel;
-    }
-
-    public void setSobrenomeResponsavel(String sobrenomeResponsavel) {
-        this.sobrenomeResponsavel = sobrenomeResponsavel;
-    }
-
     public Long getOrdemId() {
         return ordemId;
     }
@@ -78,20 +84,22 @@ public class ViewAcompanhamentoSolicitacao extends Entidade implements Serializa
         this.ordemId = ordemId;
     }
 
-    public String getMaterial() {
-        return material;
+    public String getRevisor() {
+        return revisor;
     }
 
-    public void setMaterial(String material) {
-        this.material = material;
+    public void setRevisor(String revisor) {
+        this.revisor = revisor;
     }
 
-    public Date getDataEnvio() {
-        return dataEnvio;
+    public String getNomeMaterial() {
+        return nomeMaterial;
     }
 
-    public void setDataEnvio(Date dataEnvio) {
-        this.dataEnvio = dataEnvio;
+    public void setNomeMaterial(String nomeMaterial) {
+        this.nomeMaterial = nomeMaterial;
     }
+    
+        
     
 }
