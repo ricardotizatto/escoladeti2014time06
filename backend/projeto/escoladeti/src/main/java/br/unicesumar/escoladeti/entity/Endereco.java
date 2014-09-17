@@ -17,7 +17,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Endereco extends Entidade {
 
-    @Column(length = 10)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(length = 10)
     @NotNull
     @NotEmpty
     private String cep;
@@ -29,25 +34,17 @@ public class Endereco extends Entidade {
     @NotNull
     private String logradouro;
 
-    @NotNull
-    private String bairro;
-
     @Column(length = 100)
     private String complemento;
 
     @NotNull
     private char principal;
 
-//    @Embedded
-//    private Logradouro logradouro;
-//    @ManyToOne
-//    @JoinColumn(name = "id_bairro")
-//    @JsonBackReference
-//    private Bairro bairro;
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipoendereco")
     private TipoEndereco tipo;
+    
+    @NotNull
+    private String bairro;
 
     @ManyToOne
     @JoinColumn(name = "pessoaid", referencedColumnName = "id")
@@ -57,51 +54,21 @@ public class Endereco extends Entidade {
     @ManyToOne
     @JoinColumn(name = "cidadeid", nullable = false)
     private Cidade cidade;
-
+    
+    public Endereco(){
+    }
+    
     public String getBairro() {
-        return bairro;
-    }
+		return bairro;
+	}
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
 
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
-
-    public TipoEndereco getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoEndereco tipoEndereco) {
-        this.tipo = tipoEndereco;
-    }
-
-    public Endereco() {
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public String getCep() {
+	public String getCep() {
         return cep;
     }
 
@@ -115,6 +82,14 @@ public class Endereco extends Entidade {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getComplemento() {
@@ -133,18 +108,28 @@ public class Endereco extends Entidade {
         this.principal = principal;
     }
 
-//    public Logradouro getLogradouro() {
-//        return logradouro;
-//    }
-//
-//    public void setLogradouro(Logradouro logradouro) {
-//        this.logradouro = logradouro;
-//    }
-//    public Bairro getBairro() {
-//        return bairro;
-//    }
-//
-//    public void setBairro(Bairro bairro) {
-//        this.bairro = bairro;
-//    }
+    public TipoEndereco getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoEndereco tipo) {
+        this.tipo = tipo;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+    
 }

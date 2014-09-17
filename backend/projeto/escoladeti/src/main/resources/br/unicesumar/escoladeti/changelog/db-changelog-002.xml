@@ -78,12 +78,13 @@
             schemaName="public"
             tableName="pessoafisica"/>
     </changeSet> 
-    <changeSet author="Walber(generated)" id="createViewPessoaFisicaJuridica20140912">
+    <changeSet author="Walber(generated)" id="createViewPessoaFisicaJuridica201400916">
         <createView viewName="viewpessoa"
                     replaceIfExists="true"
                     schemaName="public">
             SELECT 
-            T1.ID, T1.NOME || ' '|| COALESCE(T2.SOBRENOME,T3.RAZAOSOCIAL) AS NOME, 
+            T1.ID, 
+            T1.NOME || ' '|| COALESCE(T2.SOBRENOME,'') AS NOME, 
             T1.EMAIL,T1.TIPO, COALESCE(T2.CPF,T3.CNPJ) AS CPF_CNPJ, 
             COALESCE(T2.RG,T3.INSCRICAOESTADUAL) AS RG_INSCRICAOMUNICIPAL, 
             COALESCE(T2.DATANASCIMENTO,T3.DATACRIACAO) AS NASCIMENTO_CRIACAO,

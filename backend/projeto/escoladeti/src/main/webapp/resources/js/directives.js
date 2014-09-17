@@ -9,6 +9,14 @@ diretivas.directive('tsRequired', function () {
     }
 });
 
+diretivas.directive('mascararTelefone', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        template : "<td>{{telefone.numero.substring(0,4) +'-'+ telefone.numero.substring(4,telefone.numero.length)}}</td>"
+    };
+});
+
 diretivas.directive('myFocus', function () {
     return {
         restrict: 'A',
