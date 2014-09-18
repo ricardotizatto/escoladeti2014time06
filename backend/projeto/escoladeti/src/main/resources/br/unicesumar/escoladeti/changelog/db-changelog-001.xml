@@ -496,6 +496,7 @@
 <!--<changeSet author="Jhonatan (generated)" id="1404066940885-43">
         <addPrimaryKey columnNames="id" constraintName="pais_pkey"
                        tableName="pais" />
+                       -->
     <changeSet author="Jhonatan (generated)" id="1404066940885-44">
         <addPrimaryKey columnNames="id" constraintName="partematerial_pkey"
                        tableName="partematerial" />

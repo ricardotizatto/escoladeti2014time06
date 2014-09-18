@@ -3,6 +3,8 @@ package br.unicesumar.escoladeti.pesquisa;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,17 +33,42 @@ public class PesquisaSolicitacao {
         return dataChegadaInicio;
     }
 
-    public void setDataChegadaInicio(Date dataChegadaInicio) {
-        this.dataChegadaInicio = dataChegadaInicio;
-    }
+    public void setDataChegadaInicio(String dataChegadaInicio) {
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    		
+
+		try {
+			if(dataChegadaInicio == null || dataChegadaInicio.isEmpty()){
+				this.dataChegadaInicio = sdf.parse("0001-01-31");
+			} else {
+				this.dataChegadaInicio = sdf.parse(dataChegadaInicio);
+			}
+		}catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
 
     public Date getDataChegadaFim() {
         return dataChegadaFim;
     }
 
-    public void setDataChegadaFim(Date dataChegadaFim) {
-        this.dataChegadaFim = dataChegadaFim;
-    }
+    
+	public void setDataChegadaFim(String dataChegadaFim) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");    		
+
+		try {
+			if(dataChegadaFim == null || dataChegadaFim.isEmpty()){
+				System.out.println("ENTROU");
+				this.dataChegadaFim = sdf.parse("9999-12-31");
+			} else {
+				this.dataChegadaFim = sdf.parse(dataChegadaFim);
+			}
+		}catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+        
 
     public Long getSolicitacaoId() {
         return solicitacaoId;

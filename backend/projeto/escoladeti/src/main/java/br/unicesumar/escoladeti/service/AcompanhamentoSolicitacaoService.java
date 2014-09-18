@@ -24,7 +24,8 @@ public class AcompanhamentoSolicitacaoService {
         return viewAcompanhamentoSolicitacaoRepository.findAll();
     }	
 
-    public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(Date dataInicio, Date dataFim, String status) {
-        return this.viewAcompanhamentoSolicitacaoRepository.findByStartDataChegadaBetweenAndItem(dataInicio,dataFim,status);
+    public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(PesquisaSolicitacao ps) {
+    	System.out.println(ps.getItemStatus());
+        return this.viewAcompanhamentoSolicitacaoRepository.findByDatachegadaBetweenAndItemStatusContaining(ps.getDataChegadaInicio(), ps.getDataChegadaFim(), ps.getItemStatus());
     }
 }
