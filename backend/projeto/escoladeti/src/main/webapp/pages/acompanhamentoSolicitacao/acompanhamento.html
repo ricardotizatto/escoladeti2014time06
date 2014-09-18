@@ -10,26 +10,33 @@
                 <h4> Filtro por Campos </h4>
                 <hr>
                 <table class="table-responsive tabela-filtro">
-                    <tr></tr>
-                    <tr>
+                   <!-- <tr>
                         <th class="col-md-3"><h5>Data chegada</h5></th>
-                        <th class="col-md-3"><h5>Número</h5></th>
                         <th class="col-md-6"><h5>Nome</h5></th>
+                    </tr>-->
+                    <tr>
+                        <td class="col-md-3" >
+                            <input class="form-control" type="date" ng-model="buscaDataChegadaIni" ng-change="" placeholder="Início" />
+                        </td>
+                        <td class="col-md-6" >
+                            <input class="form-control" type="text" ng-model="buscaMaterial" ng-change=""  placeholder="Material" />
+                        </td>
                     </tr>
                     <tr>
-                        <td><input class="form-control" type="date" ng-model="buscaDataChegadaIni" ng-change="" placeholder="Início" /></td>
-                        <td><input class="form-control" type="number" ng-model="buscaSolicitacao" ng-change=""  placeholder="Solicitacao"/></td>
-                        <td><input class="form-control" type="text" ng-model="buscaMaterial" ng-change=""  placeholder="Material" /></td>
+                        <td>
+                            <input class="form-control" type="date" ng-model="buscaDataChegadaFim" ng-change="" placeholder="Fim" />
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" ng-model="buscaResponsavel" ng-change=""  placeholder="Responsável" />
+                        </td>
                     </tr>
                     <tr>
-                        <td><input class="form-control" type="date" ng-model="buscaDataChegadaFim" ng-change="" placeholder="Fim" /></td>
-                        <td><input class="form-control" type="number" ng-model="buscaOrdem" ng-change=""  placeholder="Ordem"/></td>
-                        <td><input class="form-control" type="text" ng-model="buscaResponsavel" ng-change=""  placeholder="Responsável" /></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input class="form-control" type="text" ng-model="buscaRevisor" ng-change=""  placeholder="Revisor"/></td>
+                        <td>
+                            <input class="form-control" type="number" ng-model="buscaSolicitacao" ng-change=""  placeholder="Solicitacao"/>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" ng-model="buscaRevisor" ng-change=""  placeholder="Revisor"/>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -43,7 +50,7 @@
                         <td class="col-md-12">
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('AGUARDANDO')" ><img src="./resources/imagens/btn-aguardando.png" alt="botão Aguardando"/><br>aguardando</a> 
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('PRODUCAO')" ><img src="./resources/imagens/btn-producao.png" alt="botão procução"/><br>produção</a>
-                            <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('PRODUZIDO')" ><img src="./resources/imagens/btn-produzido.png" alt="botão produzido"/><br>produzido</a>
+                            <!--<a class="btn-status" href="" ng-click="getPesquisaSolicitacao('PRODUZIDO')" ><img src="./resources/imagens/btn-produzido.png" alt="botão produzido"/><br>produzido</a>-->
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('FINALIZADO')" ><img src="./resources/imagens/btn-finalizado.png" alt="botão finalizado"/><br>finalizado</a>
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('CANCELADO')" ><img src="./resources/imagens/btn-cancelado.png" alt="botão cancelado"/><br>cancelado</a>
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao()" ><img src="./resources/imagens/btn-todos.png" alt="botão todos"/><br>todos</a>

@@ -1,7 +1,7 @@
 package br.unicesumar.escoladeti.service;
 
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
-import br.unicesumar.escoladeti.repository.ViewAcompanhamentoSolicitacaoRepository;
+import br.unicesumar.escoladeti.repository.AcompanhamentoSolicitacaoRepository;
 import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class AcompanhamentoSolicitacaoService {
     
     @Autowired
-    private ViewAcompanhamentoSolicitacaoRepository viewAcompanhamentoSolicitacaoRepository;
+    private AcompanhamentoSolicitacaoRepository acompanhamentoSolicitacaoRepository;
 
     //private SolicitacaoItemRepository solicitacaoItemRepository = new SolicitacaoItemRepository();
     
@@ -21,11 +21,11 @@ public class AcompanhamentoSolicitacaoService {
 //    }
     
     public List<ViewAcompanhamentoSolicitacao> listarItens() {
-        return viewAcompanhamentoSolicitacaoRepository.findAll();
+        return acompanhamentoSolicitacaoRepository.findAll();
     }	
 
     public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(PesquisaSolicitacao ps) {
-        return this.viewAcompanhamentoSolicitacaoRepository.findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
+        return this.acompanhamentoSolicitacaoRepository.findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
         		ps.getDataChegadaInicio(), 
         		ps.getDataChegadaFim(),
         		ps.getStatus(),
