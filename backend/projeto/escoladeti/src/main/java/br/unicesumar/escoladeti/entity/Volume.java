@@ -2,36 +2,37 @@ package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.*;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import br.unicesumar.escoladeti.enums.OrdemProducaoStatus;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import br.unicesumar.escoladeti.enums.VolumeStatus;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
-public class Volume extends Entidade {
+public class Volume  {
 
-    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_responsavel")
-    private PessoaFisica responsavel;
+    @JoinColumn(name = "id_responsavel", insertable = false, updatable = false)
+    private Usuario responsavel;
 
-    private Long paginaInicio;
+    @Column(name = "pagina_inicio")
+    private Integer paginaInicio;
 
-    private Long paginaFim;
+    @Column(name = "pagina_fim")
+    private Integer paginaFim;
 
     @Enumerated(EnumType.STRING)
-    private OrdemProducaoStatus status;
+    private VolumeStatus status;
 
-    @JoinColumn(name = "id_solicitacao_item", referencedColumnName = "id")
-    private Long idItemSolicitacao;
+    @Column(name = "id_solicitacao_item")
+    private Long idSolicitacaoItem;
 
     @ManyToOne
-    @JoinColumn(name = "id_responsavelrevisao")
-    private PessoaFisica responsavelRevisao;
+    @JoinColumn(name = "id_responsavelrevisao", insertable = false, updatable = false)
+    private Usuario responsavelRevisao;
 
     private String observacao;
 
@@ -44,51 +45,51 @@ public class Volume extends Entidade {
     @Column(name = "data_enviado")
     private Date dataEnviado;
 
-    public PessoaFisica getResponsavel() {
+    public Usuario getResponsavel() {
         return responsavel;
     }
 
-    public void setResponsavel(PessoaFisica responsavel) {
+    public void setResponsavel(Usuario responsavel) {
         this.responsavel = responsavel;
     }
 
-    public Long getPaginaInicio() {
+    public Integer getPaginaInicio() {
         return paginaInicio;
     }
 
-    public void setPaginaInicio(Long paginaInicio) {
+    public void setPaginaInicio(Integer paginaInicio) {
         this.paginaInicio = paginaInicio;
     }
 
-    public Long getPaginaFim() {
+    public Integer getPaginaFim() {
         return paginaFim;
     }
 
-    public void setPaginaFim(Long paginaFim) {
+    public void setPaginaFim(Integer paginaFim) {
         this.paginaFim = paginaFim;
     }
 
-    public OrdemProducaoStatus getStatus() {
+    public VolumeStatus getStatus() {
         return status;
     }
 
-    public void setStatus(OrdemProducaoStatus status) {
+    public void setStatus(VolumeStatus status) {
         this.status = status;
     }
 
-    public Long getIdItemSolicitacao() {
-        return idItemSolicitacao;
+    public Long getIdSolicitacaoItem() {
+        return idSolicitacaoItem;
     }
 
-    public void setIdItemSolicitacao(Long idItemSolicitacao) {
-        this.idItemSolicitacao = idItemSolicitacao;
+    public void setIdSolicitacaoItem(Long idSolicitacaoItem) {
+        this.idSolicitacaoItem = idSolicitacaoItem;
     }
 
-    public PessoaFisica getResponsavelRevisao() {
+    public Usuario getResponsavelRevisao() {
         return responsavelRevisao;
     }
 
-    public void setResponsavelRevisao(PessoaFisica responsavelRevisao) {
+    public void setResponsavelRevisao(Usuario responsavelRevisao) {
         this.responsavelRevisao = responsavelRevisao;
     }
 
@@ -123,4 +124,18 @@ public class Volume extends Entidade {
     public void setDataEnviado(Date dataEnviado) {
         this.dataEnviado = dataEnviado;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void rejeitar() {
+        setStatus(VolumeStatus.REJEITADO);
+        this.dataImpressao = null;
+    }
+
 }

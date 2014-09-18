@@ -46,11 +46,39 @@
         <dropUniqueConstraint tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
     </changeSet>
     
-    <changeSet id="40246" author="Catabirga">
-        <dropTable tableName="ordemproducao"></dropTable>
-        <dropTable tableName="partematerial"></dropTable>
+    <changeSet id="40246" author="Catabriga">
+        <dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
+        <dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>
+
+        <createTable tableName="volume">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="id_responsavel" type="int8"></column>
+            <column name="pagina_inicio" type="int4"></column>
+            <column name="pagina_fim" type="int4"></column>
+            <column name="status" type="varchar"></column>
+            <column name="id_solicitacao_item" type="int8">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="id_responsavelrevisao" type="int8"></column>
+            <column name="observacao" type="varchar"></column>
+            <column name="data_impressao" type="date"></column>
+            <column name="data_revisao" type="date"></column>
+            <column name="data_enviado" type="date"></column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_responsavel" constraintName="fk_usuario_volumeresponsavel"
+                                 referencedTableName="usuario"
+                                 referencedColumnNames="id"></addForeignKeyConstraint>
+        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_responsavelrevisao" constraintName="usuario_volumeresprevisao"
+                                 referencedTableName="usuario"
+                                 referencedColumnNames="id"></addForeignKeyConstraint>
+        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_solicitacao_item" constraintName="solitem_volumesolitem"
+                                 referencedTableName="solicitacaoitem"
+                                 referencedColumnNames="id"></addForeignKeyConstraint>
 
     </changeSet>
 
 </databaseChangeLog>
-   
+

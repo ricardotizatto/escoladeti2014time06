@@ -9,6 +9,7 @@ import br.unicesumar.escoladeti.enums.StatusItem;
 import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class SolicitacaoItem extends Entidade{
@@ -32,8 +33,9 @@ public class SolicitacaoItem extends Entidade{
 	@Enumerated(EnumType.STRING)
 	private StatusItem status;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idItemSolicitacao")
-    private List<Volume> volumes;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_solicitacao_item")
+    private Set<Volume> volumes;
 
     private SolicitacaoItem(Long id) {
         this.id = id;
@@ -82,11 +84,11 @@ public class SolicitacaoItem extends Entidade{
 		return status;
 	}
 
-    public List<Volume> getVolumes() {
+    public Set<Volume> getVolumes() {
         return volumes;
     }
 
-    public void setVolumes(List<Volume> volumes) {
+    public void setVolumes(Set<Volume> volumes) {
         this.volumes = volumes;
     }
 
