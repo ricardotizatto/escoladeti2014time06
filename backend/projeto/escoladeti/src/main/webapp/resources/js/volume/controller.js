@@ -45,21 +45,33 @@ VolumeController.prototype = {
 
         this.Volume.get(params, function (volume) {
             self.volume = volume;
+            self.ajustarVolume();
         });
+    },
+
+    ajustarVolume: function () {
+
+        if (this.volume.responsavel) {
+            this.volume.responsavel = this.volume.responsavel.id;
+        }
     },
 
     novoVolume: function () {
         var self = this;
 
         this.volume = new this.Volume({
-            status: "ANDAMENTO"
+            status: "ANDAMENTO",
+            idSolicitacaoItem: this.routeParams.idOrdemProducao
         });
 
         console.log(this.volume);
     },
 
     salvarVolume: function () {
+        var self = this;
+
         var mensagemSucesso = function () {
+            self.ajustarVolume();
             toastr.success('Volume salvo com sucesso');
         };
 

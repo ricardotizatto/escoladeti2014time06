@@ -20,6 +20,10 @@ public class VolumeService {
     @Autowired
     private VolumeRepository volumeRepository;
 
+    public void deletar(Long id) {
+        volumeRepository.delete(id);
+    }
+
     public Volume marcarComoImprimido(Long id, ComandoAlterarData comandoAlterarData) {
         Volume volume = volumeRepository.findOne(id);
         volume.setDataImpressao(comandoAlterarData.getData());
@@ -71,8 +75,13 @@ public class VolumeService {
     }
 
     public Volume atualizarVolume( Long id, ComandoSalvarVolume comandoSalvarVolume) {
+        Volume volumeSalvo = volumeRepository.findOne(id);
         Volume volume = montarVolume(comandoSalvarVolume);
         volume.setId(id);
+        volume.setStatus(volumeSalvo.getStatus());
+        volume.setDataEnviado(volumeSalvo.getDataEnviado());
+        volume.setDataImpressao(volume.getDataImpressao());
+        volume.setDataEnviado(volumeSalvo.getDataEnviado());
         return volumeRepository.save(volume);
     }
 
