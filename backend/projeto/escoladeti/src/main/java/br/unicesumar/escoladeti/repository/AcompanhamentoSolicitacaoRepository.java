@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
 
-public interface ViewAcompanhamentoSolicitacaoRepository extends JpaRepository<ViewAcompanhamentoSolicitacao, Long>{     
+public interface AcompanhamentoSolicitacaoRepository extends JpaRepository<ViewAcompanhamentoSolicitacao, Long>{     
 
     @Query(value = " from viewAcompanhamentoSolicitacao a "
             + "where a.dataChegada >= ?1 "

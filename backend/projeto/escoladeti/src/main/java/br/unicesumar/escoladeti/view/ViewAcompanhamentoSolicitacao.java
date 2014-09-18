@@ -10,13 +10,10 @@ import javax.persistence.Temporal;
 @Entity(name = "viewAcompanhamentoSolicitacao")
 public class ViewAcompanhamentoSolicitacao implements Serializable{
     
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_SOLICITACAO")
+    @Id
+    @Column(name = "ID_SOLICITACAO")
     private Long solicitacaoId;
     
     private String status;
