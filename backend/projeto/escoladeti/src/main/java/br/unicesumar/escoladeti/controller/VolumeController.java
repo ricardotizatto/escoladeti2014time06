@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * Created by Jhonatan on 16/09/2014.
@@ -38,6 +39,13 @@ public class VolumeController {
     public @ResponseBody Volume buscar(
             @PathVariable("id") Long idVolume) {
         return volumeService.buscar(idVolume);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody String deletar(
+            @PathVariable("id") Long idVolume) {
+        volumeService.deletar(idVolume);
+        return "deletado";
     }
 
 }

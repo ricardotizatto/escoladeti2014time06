@@ -23,7 +23,7 @@ public class SolicitacaoItem extends Entidade{
 	
 	@ManyToOne
 	@JoinColumn(name="id_material")
-	private Livro livro;	
+	private Livro livro;
 
 	@ManyToOne
 	@JoinColumn(name="id_solicitacao")
@@ -34,7 +34,7 @@ public class SolicitacaoItem extends Entidade{
 	private StatusItem status;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_solicitacao_item")
+    @JoinColumn(name = "id_solicitacao_item", insertable = false, updatable = false)
     private Set<Volume> volumes;
 
     private SolicitacaoItem(Long id) {

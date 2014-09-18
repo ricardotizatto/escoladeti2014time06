@@ -4,13 +4,15 @@ angular.module('controllers')
         '$routeParams',
         '$location',
         'OrdemProducaoFactory',
+        'VolumeFactory',
         OrdemProducaoController
     ]);
 
-function OrdemProducaoController($routeParams, $location, OrdemProducao) {
+function OrdemProducaoController($routeParams, $location, OrdemProducao, Volume) {
     this.OrdemProducao = OrdemProducao;
     this.routeParams = $routeParams;
     this.location = $location;
+    this.Volume = Volume;
     this.iniciar();
 }
 
@@ -29,5 +31,18 @@ OrdemProducaoController.prototype = {
     editarVolume: function (idVolume) {
         var url = '/ordem-producao/' + this.item.id + '/volume/'+ idVolume;
         this.location.path(url);
+    },
+
+    deletarVolume: function(item) {
+        var self = this;
+
+        BootstrapDialog.confirm('Deseja deletar o volume ?', function(result) {
+            if (result) {
+                self.Volume.delete(item, function () {
+                    toastr.success('Volume deletado com sucesso');
+                    self.item.volumes.splice(self.item.volumes.indexOf(item), 1);
+                });
+            }
+        });
     }
 };

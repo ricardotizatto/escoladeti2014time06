@@ -43,14 +43,14 @@
                         <tr>
                             <th class="col-md-2">Parte</th>
                             <th class="col-md-3">Responsável</th>
-                            <th class="col-md-3">Revisor</th>
+                            <th class="col-md-3">Paginas</th>
                             <th class="col-md-2">Status</th>
                             <th class="col-md-2">Ação</th>
                         </tr>
-                        <tr ng-repeat="volume in ctrl.item.volumes">
+                        <tr ng-repeat="volume in ctrl.item.volumes | orderBy : paginas">
                                 <td>{{volume.id}}</td>
                                 <td>{{volume.responsavel.nome}}</td>
-                                <td>{{volume.responsavelRevisao.nome}}</td>
+                                <td>{{volume.paginaInicio}}/{{volume.paginaFim}}</td>
                                 <td>{{volume.status}}</td>
                             <td>
                                 <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="" title="Download">
@@ -59,7 +59,7 @@
                                 <a class='btn btn-warning btn-sm' ng-click="ctrl.editarVolume(volume.id)" title="Editar">
                                     <span class='glyphicon glyphicon-edit' ></span>
                                 </a>
-                                <a class='btn btn-danger btn-sm'  ng-click="deletarParteMaterial(ordemProducao, parteMaterial)" title="Excluir">
+                                <a class='btn btn-danger btn-sm'  ng-click="ctrl.deletarVolume(volume)" title="Excluir">
                                     <span class='glyphicon glyphicon-remove-circle'></span>
                                 </a>
                             </td>

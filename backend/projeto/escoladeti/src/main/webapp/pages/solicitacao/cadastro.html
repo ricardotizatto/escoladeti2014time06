@@ -134,7 +134,7 @@
                                 <td>{{item.traducaoMaterial}}{{item.traducaoMaterial == 'OUTRO' ? '-'+item.outro : ''}}</td>
                                 <td><span class="label label-inverse" >{{item.status}}</span> </td>
                                 <td>
-                                    <a href="javascript:void(0)" ng-click="excluirItem(item)">
+                                    <a href="javascript:void(0)" ng-click="excluirItem(item)" data-ng-show="item.status == 'AGUARDANDO'">
                                         <i class="glyphicon glyphicon-trash"></i>
                                     </a>
                                 </td>
@@ -185,7 +185,6 @@
                                     <div class="col-md-4">
                                         <label>Tradução</label>
                                         <select ng-model="itemCorrente.traducaoMaterial" class="form-control">
-                                            <option value=""></option>
                                             <option value="BRAILLE">BRAILLE</option>
                                             <option value="MECDAISY">MECDAISY</option>
                                             <option value="DOSVOX">DOSVOX</option>
