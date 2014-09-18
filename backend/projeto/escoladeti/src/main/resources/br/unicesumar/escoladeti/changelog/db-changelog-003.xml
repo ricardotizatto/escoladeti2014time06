@@ -45,7 +45,14 @@
     <changeSet id="w201409151639" author=" Walber ">
         <dropUniqueConstraint tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
     </changeSet>
-    
+
+    <changeSet id="w201409161308" author="Walber">
+        <dropNotNullConstraint tableName="pessoajuridica" columnName="inscricaoestadual"/>
+    </changeSet>
+    <changeSet id="w201409161857" author="">
+        <renameColumn tableName="endereco" oldColumnName="tipoendereco" newColumnName="tipo"/>
+    </changeSet>
+
     <changeSet id="40246" author="Catabriga">
         <dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
         <dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>
@@ -77,6 +84,7 @@
         <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_solicitacao_item" constraintName="solitem_volumesolitem"
                                  referencedTableName="solicitacaoitem"
                                  referencedColumnNames="id"></addForeignKeyConstraint>
+
 
     </changeSet>
 

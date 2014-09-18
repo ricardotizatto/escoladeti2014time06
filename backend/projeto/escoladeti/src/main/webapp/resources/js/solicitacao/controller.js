@@ -6,7 +6,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
-		this.livro = null;
+		this.livro = {};	
 		this.status = 'AGUARDANDO';
         this.BuscaCep = BuscaCep;
 	};	
@@ -245,6 +245,18 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
         });
     };
 
+	
+	$scope.getStatusItem = function (status) {
+		console.log(item);
+		switch (status) {
+			case 'AGUARDANDO':
+				return 'warning';
+			case 'PRODUCAO':
+				return 'primary';
+			case 'CANCELADO':
+				return 'danger';
+		}
+	};
 	
 }
 

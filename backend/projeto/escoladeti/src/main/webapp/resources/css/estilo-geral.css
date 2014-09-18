@@ -264,3 +264,6 @@ select.select2 {
 .btn-status{ margin: 0px 9px; float: left; font-size: 9px;}
 .btn-status-linha:hover, .btn-status:hover{  opacity: 0.6; filter: alpha(opacity=60); font-weight: bold; }
 .btn-status img:hover{  opacity: 0.6; filter: alpha(opacity=60);}
+
+.tabela-filtro td{ padding: 1px 1px; text-align: center;}
+.time-line-responsavel{ font-size: 11px; }

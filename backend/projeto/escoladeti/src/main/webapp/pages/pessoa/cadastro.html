@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="form-group {{formPessoa.cnpjJuridica.$invalid || pessoa.focusCnpj ? 'has-error' : 'has-success'}} has-feedback">
+                    <div class="form-group {{formPessoa.cnpjJuridica.$invalid|| pessoa.focusCnpj ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong> CNPJ *</strong> </label> 
                         <input class="form-control" ui-mask="99.999.999/9999-99" name="cnpjJuridica" type="text"  title="11.222.333/9999-22" my-blur="validaCnpj(pessoa.cnpj)" my-focus="focusCnpj"
                                ng-model="pessoa.cnpj" ng-required="pessoa.tipo == 'J'"/>
@@ -170,30 +170,35 @@
                         </button>
                     </legend>
                     <table class="table table-hover table-striped">
+                        <tr>
+                            <th class="col-sm-1">Principal</th>
+                            <th class="col-sm-1">Tipo</th>
+                            <th class="col-sm-4">Logradouro - Bairro</th>
+                            <th class="col-sm-4">Cidade - Estado</th>
+                            <th class="col-sm-2">Ações</th>
+                        </tr>
                         <tr ng-repeat="endereco in pessoa.enderecos">
-                            <td class="text-center">{{endereco.tipo + " : " +
-                                endereco.logradouro + ", " + endereco.numero + " - " +
-                                endereco.cidade.nome + " - " +
-                                endereco.cidade.unidadeFederativa.sigla}}</td>
+                            <td ng-bind="endereco.principal === 'S' ? 'SIM' : 'NÃO'"></td>
+                            <td ng-bind="endereco.tipo"></td>
+                            <td ng-bind="endereco.logradouro + ', ' + endereco.numero + ' - ' + endereco.bairro"></td>
+                            <td ng-bind="endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla"></td>
                             <td>
-                                <span class="pull-right">
-                                    <button class='btn btn-warning btn-sm'
-                                            ng-click="editarEndereco($index)" data-toggle="modal"
-                                            data-target="#modalEndereco">
-                                        <span class='glyphicon glyphicon-edit'></span>
-                                    </button>
-                                    <button class='btn btn-danger btn-sm'
-                                            ng-click="delEndereco($index)">
-                                        <span class='glyphicon glyphicon-remove-circle'></span>
-                                    </button>
-                                </span>
+                                <button class='btn btn-warning btn-sm'
+                                        ng-click="editarEndereco($index)" data-toggle="modal"
+                                        data-target="#modalEndereco">
+                                    <span class='glyphicon glyphicon-edit'></span>
+                                </button>
+                                <button class='btn btn-danger btn-sm'
+                                        ng-click="delEndereco($index)">
+                                    <span class='glyphicon glyphicon-remove-circle'></span>
+                                </button>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group {{formTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                <div class="form-group {{pessoa.telefones.length < 1 ? 'has-error' : 'has-success'}} has-feedback">
                     <div class="row" >
                         <div class="col-sm-6"> 
                             <legend>
@@ -208,24 +213,28 @@
                     <div class="row" >  
                         <div class="col-sm-12"> 
                             <table class="table table-hover table-striped">
-                                <tbody>
-                                    <tr ng-repeat="telefone in pessoa.telefones">
-                                        <td class="text-center">{{telefone.tipo + " - " + "(" + telefone.ddd + ")" + telefone.numero}}</td>
-                                        <td>
-                                            <span class="pull-right">
-                                                <button class='btn btn-warning btn-sm'
-                                                        ng-click="editarTelefone($index)" data-toggle="modal"
-                                                        data-target="#modalTelefone">
-                                                    <span class='glyphicon glyphicon-edit'></span>
-                                                </button>
-                                                <button class='btn btn-danger btn-sm'
-                                                        ng-click="delTelefone($index)">
-                                                    <span class='glyphicon glyphicon-remove-circle'></span>
-                                                </button>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tr>
+                                    <th class="col-sm-2">Tipo</th>
+                                    <th class="col-sm-2">DDD</th>
+                                    <th class="col-sm-6">Número</th>
+                                    <th class="col-sm-2">Ações</th>
+                                </tr>
+                                <tr ng-repeat="telefone in pessoa.telefones">
+                                    <td ng-bind="telefone.tipo"></td>
+                                    <td ng-bind="telefone.ddd"></td>
+                                    <td mascarar-Telefone></td>
+                                    <td>
+                                        <button class='btn btn-warning btn-sm'
+                                                ng-click="editarTelefone($index)" data-toggle="modal"
+                                                data-target="#modalTelefone">
+                                            <span class='glyphicon glyphicon-edit'></span>
+                                        </button>
+                                        <button class='btn btn-danger btn-sm'
+                                                ng-click="delTelefone($index)">
+                                            <span class='glyphicon glyphicon-remove-circle'></span>
+                                        </button>
+                                    </td>
+                                </tr>
                             </table>
                         </div>    
                     </div>
@@ -238,7 +247,7 @@
                     <a class="btn btn-primary btn-padrao" ng-click="voltar()"> 
                         <i class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
                     </a>
-                    <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formPessoa.$invalid || formTelefone.$invalid || pessoa.enderecos.length < 1" >
+                    <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formPessoa.$invalid || pessoa.enderecos.length < 1 || pessoa.telefones.length < 1" >
                         <span class="glyphicon glyphicon-ok"></span> Salvar
                     </button>
                 </span>
@@ -447,3 +456,15 @@
         </div>
     </div>    
 </div>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $.mask.definitions['~'] = '[+-]';
+        //$("#numeroDdd").mask("99");
+        $("#telefone").mask("9999-9999?9");
+        $("#ramal").mask("9?");
+        $("#cep").mask("99.999-999");
+        $("#cpf").mask("999.999.999-99");
+        //$("#rg").mask("9.999.999-*");
+        //$("#cnpj").mask("99.999.999/9999-99");
+    });
+</script>

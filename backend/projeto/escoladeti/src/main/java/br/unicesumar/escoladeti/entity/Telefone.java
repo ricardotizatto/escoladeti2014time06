@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import br.unicesumar.escoladeti.enums.TipoTelefone;
+import br.unicesumar.escoladeti.mask.Mascara;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -24,27 +25,26 @@ public class Telefone extends Entidade {
     @NotNull
     @Column(length = 10)
     private String numero;
-    
+
     @Column(length = 10)
     private Integer ramal;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     private TipoTelefone tipo;
-    
+
 //    @JoinColumn(name = "id_pessoa",referencedColumnName = "id")
-    
     @ManyToOne
-    @JoinColumn(name="pessoaid",referencedColumnName = "id")
+    @JoinColumn(name = "pessoaid", referencedColumnName = "id")
     @JsonBackReference
     private Pessoa pessoa;
-    
-    public Telefone(){
+
+    public Telefone() {
 
     }
 
     public String getNumero() {
-        return numero;
+        return this.numero;
     }
 
     public void setNumero(String numero) {
@@ -74,12 +74,12 @@ public class Telefone extends Entidade {
     public void setTipo(TipoTelefone tipo) {
         this.tipo = tipo;
     }
-    
+
     public void setRamal(Integer ramal) {
-		this.ramal = ramal;
-	}
-    
+        this.ramal = ramal;
+    }
+
     public Integer getRamal() {
-		return ramal;
-	}
+        return ramal;
+    }
 }

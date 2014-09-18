@@ -176,10 +176,9 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940885-14">
+    <changeSet author="Jhonatan (generated)" id="1404066940886-14">
         <createTable tableName="pais">
             <column name="id" type="INT8">
-                <constraints nullable="false" />
             </column>
             <column name="codigo" type="INT4">
                 <constraints nullable="false" />
@@ -493,10 +492,10 @@
         <addPrimaryKey columnNames="id" constraintName="pagamento_pkey"
                        tableName="pagamento" />
     </changeSet>
-<!--    <changeSet author="Jhonatan (generated)" id="1404066940885-43">
+    <changeSet author="Jhonatan (generated)" id="1404066940885-43">
         <addPrimaryKey columnNames="id" constraintName="pais_pkey"
                        tableName="pais" />
-    </changeSet>-->
+    </changeSet>
     <changeSet author="Jhonatan (generated)" id="1404066940885-44">
         <addPrimaryKey columnNames="id" constraintName="partematerial_pkey"
                        tableName="partematerial" />
@@ -707,7 +706,6 @@
                                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
     </changeSet>
     <changeSet author="Jhonatan (generated)" id="1404066940885-82">
-
         <addForeignKeyConstraint baseColumnNames="paisid"
                                  baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy"
                                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"

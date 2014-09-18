@@ -48,12 +48,14 @@
         <script type="text/javascript" src="./resources/js/solicitacao/service.js" ></script>           
         <script type="text/javascript" src="./resources/js/pessoa/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/service.js" ></script>
+
         <script type="text/javascript" src="./resources/js/ordemProducao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/ordemProducao/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/controller.js" ></script>
 
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/service.js" ></script>
 
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>

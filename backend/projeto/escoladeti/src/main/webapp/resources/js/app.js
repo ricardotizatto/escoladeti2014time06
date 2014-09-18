@@ -8,7 +8,7 @@ var app = angular.module('app',
 		['ngRoute',
 		 'ngResource',
 		 'controllers',
-         'directives',
+                 'directives',
 		 'ui.select2',
 		 'ui.bootstrap',
                  'ui.utils']);
@@ -219,7 +219,7 @@ app.config(['$routeProvider',
             })
             .when('/acompanhamento', {
                 templateUrl: './pages/acompanhamentoSolicitacao/acompanhamento.html',
-                 controller: 'acompanhamentoSolicitacaoController'
+                 controller: 'AcompanhamentoSolicitacaoController'
             })
             .when('/cadastroparticipanteevento', {
                 templateUrl: './pages/CadastroParticipanteEvento.html',
