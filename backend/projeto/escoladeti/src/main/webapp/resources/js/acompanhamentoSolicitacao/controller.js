@@ -3,21 +3,20 @@ var controllers = angular.module('controllers');
 function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams, PesquisaSolicitacao){ 
 
     $scope.init = function() {
-        $scope.getPesquisaSolicitacao();
+        $scope.getPesquisaSolicitacao('TODOS');
     };
     
-    $scope.getPesquisaSolicitacao = function(status) {
-        $log.debug('Pesquisando status: ' + status);
+    $scope.getPesquisaSolicitacao = function(buscaStatus) {
+        $log.debug('Pesquisando status: ' + buscaStatus);
         $log.debug('Data ini: ' + $scope.buscaDataChegadaIni + ' Fim ' + $scope.buscaDataChegadaFim);
 
         PesquisaSolicitacao.query({
-                status: status,
-                dataInicio: $scope.buscaDataChegadaIni,
-                dataFim: $scope.buscaDataChegadaFim,
-                solicitacaoId: $scope.buscaSolicitacao,
-                ordemId: $scope.buscaOrdem,
-                material: $scope.buscaMaterial,
+                dataChegadaInicio : $scope.buscaDataChegadaIni,
+                dataChegadaFim : $scope.buscaDataChegadaFim,
+                status: buscaStatus,
+                traducaoMaterial : $scope.buscaTraducaoMaterial,
                 responsavel: $scope.buscaResponsavel,
+                material: $scope.buscaMaterial,                
                 revisor: $scope.buscaRevisor
                 
             }, function(solicitacaoItens) {

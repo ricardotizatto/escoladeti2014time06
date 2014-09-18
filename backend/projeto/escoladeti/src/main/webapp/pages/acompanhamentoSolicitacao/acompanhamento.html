@@ -53,7 +53,7 @@
                             <!--<a class="btn-status" href="" ng-click="getPesquisaSolicitacao('PRODUZIDO')" ><img src="./resources/imagens/btn-produzido.png" alt="botão produzido"/><br>produzido</a>-->
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('FINALIZADO')" ><img src="./resources/imagens/btn-finalizado.png" alt="botão finalizado"/><br>finalizado</a>
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('CANCELADO')" ><img src="./resources/imagens/btn-cancelado.png" alt="botão cancelado"/><br>cancelado</a>
-                            <a class="btn-status" href="" ng-click="getPesquisaSolicitacao()" ><img src="./resources/imagens/btn-todos.png" alt="botão todos"/><br>todos</a>
+                            <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('TODOS')" ><img src="./resources/imagens/btn-todos.png" alt="botão todos"/><br>todos</a>
                         </td>
                     </tr>
                 </table>
@@ -83,7 +83,7 @@
                                         <tbody>
                                         <td>{{solicitacaoItem.solicitacaoId}}</td>
                                         <td ng-show="{{solicitacaoItem.ordemId}}" >{{solicitacaoItem.ordemId}}</td>
-                                        <td>{{solicitacaoItem.nomeMaterial}}</td>
+                                        <td>{{solicitacaoItem.material}}</td>
                                         <td>{{solicitacaoItem.traducaoMaterial}}</td>
                                         </tbody>
                                     </table>
