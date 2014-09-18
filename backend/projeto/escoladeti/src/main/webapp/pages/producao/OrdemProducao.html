@@ -1,35 +1,37 @@
-<div class="container" ng-controller="OrdemProducaoController" ng-init="carregarOrdemProducao()">
+<div class="container" ng-controller="OrdemProducaoController as ctrl" >
     <div class="row">
         <div class="form-group col-sm-12">
-            <legend> <span class="glyphicon glyphicon-file"></span> Ordem de produção </legend>
+            <legend> <span class="fa fa-cogs"></span> Produção </legend>
         </div>
     </div>
     <form action="" method="POST" role="form" ng-submit="salvar()" >							
         <div class="row ">
             <div class="form-group col-sm-3">
                 <label> Solicitação </label>
-                <input class="form-control " type="text" disabled ng-model="ordemProducao.id" pattern="[A-Za-z ]+" maxlength="40" required  />  
+                <input class="form-control " type="text" disabled ng-model="ctrl.item.numeroSolicitacao" pattern="[A-Za-z ]+" maxlength="40" required  />
             </div>
             <div class="form-group col-sm-3">
                 <label> Material </label>
-                <input class="form-control " type="text" disabled ng-model="ordemProducao.material" pattern="[A-Za-z ]+" maxlength="40" required  />  
+                <input class="form-control " type="text" disabled ng-model="ctrl.item.livro.nome" pattern="[A-Za-z ]+" maxlength="40" required  />
             </div>
             <div class="form-group col-sm-3">
                 <label> Tradução </label>
-                <input class="form-control " type="text" disabled ng-model="ordemProducao.traducao" pattern="[A-Za-z ]+" maxlength="40" required  />  
+                <input class="form-control " type="text" disabled ng-model="ctrl.item.traducaoMaterial" pattern="[A-Za-z ]+" maxlength="40" required  />
             </div>
             <div class="form-group col-sm-3">
                 <label> Status </label>
-                <input class="form-control " type="text" disabled ng-model="ordemProducao.status" pattern="[A-Za-z ]+" maxlength="40" required  />  
+                <input class="form-control " type="text" disabled ng-model="ctrl.item.status" pattern="[A-Za-z ]+" maxlength="40" required  />
             </div>
         </div>
         <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
         <div class="row">
-            <div class="form-group col-sm-12">
-                <a  class='btn btn-primary btn-padrao' ng-click="novaParteMaterial(ordemProducao)" >
-                    <span class='glyphicon glyphicon-plus-sign' title="Nova parte"></span> Nova Parte
+            <div class="col-sm-3 form-group ">
+                <a  class='btn btn-primary form-control' href="/#/ordem-producao/{{ctrl.item.id}}/volume">
+                    <span class='glyphicon glyphicon-plus-sign' title="Novo volume"></span> Novo Volume
                 </a>
-                <a  class='btn btn-success btn-padrao' ng-click="finalizarOrdemProducao(ordemProducao)" >
+            </div>
+            <div class="col-sm-3 form-group ">
+                <a  class='btn btn-success form-control' ng-click="finalizarOrdemProducao(ordemProducao)" >
                     <span class='glyphicon glyphicon-ok-circle' title="Finalizar"></span> Finalizar
                 </a>
             </div>
@@ -45,16 +47,16 @@
                             <th class="col-md-2">Status</th>
                             <th class="col-md-2">Ação</th>
                         </tr>
-                        <tr ng-repeat="parteMaterial in ordemProducao.parteMaterial">
-                                <td>{{parteMaterial.parte}}</td>
-                                <td>{{parteMaterial.responsavel}}</td>
-                                <td>{{parteMaterial.revisao}}</td>
-                                <td>{{parteMaterial.status}}</td>
+                        <tr ng-repeat="volume in ctrl.item.volumes">
+                                <td>{{volume.id}}</td>
+                                <td>{{volume.responsavel.nome}}</td>
+                                <td>{{volume.responsavelRevisao.nome}}</td>
+                                <td>{{volume.status}}</td>
                             <td>
                                 <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="" title="Download">
                                     <span class='glyphicon glyphicon-download'><input type="file"></span>
                                 </a>
-                                <a class='btn btn-warning btn-sm' ng-click="editarParteMaterial(ordemProducao, parteMaterial )" title="Editar">
+                                <a class='btn btn-warning btn-sm' ng-click="ctrl.editarVolume(volume.id)" title="Editar">
                                     <span class='glyphicon glyphicon-edit' ></span>
                                 </a>
                                 <a class='btn btn-danger btn-sm'  ng-click="deletarParteMaterial(ordemProducao, parteMaterial)" title="Excluir">
@@ -71,10 +73,7 @@
                 <span class="pull-right">
                     <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
                         <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
-                    </a>  
-                    <button type="submit" class="btn btn-success btn-padrao">
-                        <span class="glyphicon glyphicon-ok" ></span> Salvar
-                    </button>
+                    </a>
                 </span>		
             </div>
         </div>
