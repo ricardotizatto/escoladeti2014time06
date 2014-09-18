@@ -14,11 +14,11 @@ public interface ViewAcompanhamentoSolicitacaoRepository extends JpaRepository<V
     @Query(value = " from viewAcompanhamentoSolicitacao a "
             + "where a.dataChegada >= ?1 "
             + "and a.dataChegada <= ?2 "
-            + "and a.status = nullif(?3,a.status) "
-            + "and a.material like %?4% "
-            + "and a.responsavel like %?5% "
-            + "and a.revisor like %?6% "
-            + "and a.traducaoMaterial like %?7%", nativeQuery = false)
+            + "and CASE a.status WHEN 'TODOS' THEN  like nullif(?3,nullif(a.status,'todos')) "
+            + "and nullif(a.material,'todos') like nullif(?4,nullif(a.material,'todos')) "
+            + "and nullif(a.responsavel,'todos') like nullif(?5,nullif(a.responsavel,'todos')) "
+            + "and nullif(a.revisor,'todos') like nullif(?6,nullif(a.revisor,'todos')) "
+            + "and nullif(a.traducaoMaterial,'todos') like nullif(?7,nullif(a.traducaoMaterial,'todos'))", nativeQuery = false)
     public List<ViewAcompanhamentoSolicitacao> findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
     		Date dataInicio, 
     		Date dataFim,

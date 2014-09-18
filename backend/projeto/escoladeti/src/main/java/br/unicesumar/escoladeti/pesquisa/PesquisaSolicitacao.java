@@ -18,20 +18,19 @@ public class PesquisaSolicitacao {
     private String material;
     
     public String getStatus() {
-    	if(this.status.isEmpty())
-			return null;
 		return status;
 	}
 
 	public String getTraducaoMaterial() {
-		if(this.traducaoMaterial.isEmpty())
-			return null;
 		return traducaoMaterial;
 	}
 
 
 	public void setTraducaoMaterial(String traducaoMaterial) {
-		this.traducaoMaterial = traducaoMaterial;
+		if(traducaoMaterial.isEmpty())
+			this.traducaoMaterial = "TODOS";
+		else
+			this.traducaoMaterial = traducaoMaterial;
 	}
 
 
@@ -41,13 +40,14 @@ public class PesquisaSolicitacao {
 	}
 
 	public String getMaterial() {
-    	if(this.material.isEmpty())
-			return null;
 		return material;
 	}
 
 	public void setMaterial(String material) {
-		this.material = material;
+		if(material.isEmpty())
+			this.material = "TODOS";
+		else
+			this.material = material;
 	}
 
 	private String responsavel;
@@ -106,22 +106,21 @@ public class PesquisaSolicitacao {
     }
 
     public void setResponsavel(String responsavel) {
-        if (responsavel != null) {
-            this.responsavel = responsavel.toUpperCase();
-        }
+    	if(responsavel.isEmpty())
+    		this.responsavel = "TODOS";
+    	else
+    		this.responsavel = responsavel;
     }
 
     public String getRevisor() {
-    	if(this.revisor.isEmpty())
-			return null;
-    	
         return revisor;
     }
 
     public void setRevisor(String revisor) {
-        if (revisor != null) {
-            this.revisor = revisor.toUpperCase();
-        }
+    	if(revisor.isEmpty())
+    		this.revisor = "TODOS";
+    	else
+    		this.revisor = revisor;
     }
 
 }
