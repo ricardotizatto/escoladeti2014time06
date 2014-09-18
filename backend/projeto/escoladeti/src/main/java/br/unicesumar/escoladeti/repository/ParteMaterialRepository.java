@@ -1,11 +1,11 @@
 package br.unicesumar.escoladeti.repository;
 
-import br.unicesumar.escoladeti.entity.ParteMaterial;
+import br.unicesumar.escoladeti.entity.Volume;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ParteMaterialRepository  extends JpaRepository<ParteMaterial, Long> {    
+public interface ParteMaterialRepository  extends JpaRepository<Volume, Long> {
     
-    ParteMaterial findByStatus(String status);
+    Volume findByStatus(String status);
     
-    ParteMaterial findByResponsavel(String nomeResponsavel);
+    Volume findByResponsavel(String nomeResponsavel);
 }
