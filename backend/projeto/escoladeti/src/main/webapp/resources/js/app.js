@@ -237,17 +237,17 @@ app.config(['$routeProvider',
                 templateUrl: './pages/estoque/CadastroTipoProduto.html',
                 controller: 'produtoController'
             })
-            .when('/listaestoque', {
-                templateUrl: './pages/estoque/ListaEstoque.html',
-                controller: 'estoqueController'
+            .when('/listamovimento', {
+                templateUrl: './pages/estoque/ListaMovimento.html',
+                controller: 'movimentoController'
             })
-            .when('/cadastromovimentoestoque', {
-                templateUrl: './pages/estoque/CadastroMovimentoEstoque.html',
-                controller: 'estoqueController'
+            .when('/cadastromovimento', {
+                templateUrl: './pages/estoque/CadastroMovimento.html',
+                controller: 'movimentoController'
             })
-            .when('/cadastromovimentoestoque/:idMovimento', {
-                templateUrl: './pages/estoque/CadastroMovimentoEstoque.html',
-                controller: 'estoqueController'
+            .when('/cadastromovimento/:idMovimento', {
+                templateUrl: './pages/estoque/CadastroMovimento.html',
+                controller: 'movimentoController'
             })
             .when('/cadastroparticipanteevento/:idParticipante', {
                 templateUrl: './pages/CadastroParticipanteEvento.html',

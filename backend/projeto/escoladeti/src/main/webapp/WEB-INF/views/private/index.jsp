@@ -47,7 +47,7 @@
         <script type="text/javascript" src="./resources/js/pessoa/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estoque/ProdutoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/estoque/EstoqueController.js" ></script>
+        <script type="text/javascript" src="./resources/js/estoque/MovimentoController.js" ></script>
         
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
 
@@ -211,7 +211,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a href="#/listaproduto">Produto</a></li>
-                            <li><a href="#/listaestoque">Estoque</a></li>
+                            <li><a href="#/listamovimento">Movimento</a></li>
                         </ul>
                     </li>
 

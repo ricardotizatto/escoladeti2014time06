@@ -22,7 +22,7 @@ public class EstoqueService {
     }
 
     public DataPage<Estoque> getTodos(Integer pagina) {
-        return new DataPage<>(estoqueRepository.findAll(pageRequestForAsc(pagina, "")));
+        return new DataPage<>(estoqueRepository.findAll(pageRequestForAsc(pagina, "id")));
     }
 
     public void deletar(Estoque estoque) {

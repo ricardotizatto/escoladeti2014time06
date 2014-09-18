@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
         estoqueService.deletar(estoque);
         return "arquivo deletado";		
     }
-    
+
     @RequestMapping(value = {"/listar/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Estoque> listarEstoque(@PathVariable Integer pagina) {

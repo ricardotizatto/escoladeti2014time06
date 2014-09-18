@@ -17,7 +17,7 @@ public class Estoque extends Entidade {
     
     @Column(nullable = false)
     @NotEmpty
-    private Long quantidade;
+    private Long qtdeTotal;
     
     @OneToMany
     @JoinColumn(name="produtoId",referencedColumnName = "id")
@@ -35,11 +35,11 @@ public class Estoque extends Entidade {
     }
 
     public Long getQuantidade() {
-        return quantidade;
+        return qtdeTotal;
     }
 
     public void setQuantidade(Long quantidade) {
-        this.quantidade = quantidade;
+        this.qtdeTotal = quantidade;
     }
 
     public List<Produto> getProdutos() {

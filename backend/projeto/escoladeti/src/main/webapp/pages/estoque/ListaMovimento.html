@@ -1,8 +1,8 @@
-<div class="container" ng-controller="estoqueController" ng-init="getTodos(1)">
+<div class="container" ng-controller="movimentoController" ng-init="getTodos(1)">
     <div class="row">
         <div class="form-group col-sm-12">
             <legend>
-                <span class="glyphicon glyphicon-list-alt"> Estoque </span>
+                <span class="glyphicon glyphicon-list-alt"> Movimento </span>
             </legend>
         </div>
     </div>
@@ -12,7 +12,7 @@
                 <span class="input-group-addon"> 
                     <span class="glyphicon glyphicon-search"></span>
                 </span> 
-                <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaLivrosContendoNome()"  placeholder="Busca produto no estoque"/>
+                <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaLivrosContendoNome()"  placeholder="Busca movimento"/>
             </div>
         </div>
         <div class="form-group col-sm-7">
@@ -32,21 +32,19 @@
                 <tr>
                     <th class="col-md-6">Produto</th>
                     <th class="col-md-3">Movimentação</th>
-                    <th class="col-md-2">Total</th>
+                    <th class="col-md-2">Quantidade</th>
                     <th class="col-md-2">Ações</th>
                 </tr>
 
-                <tr ng-repeat="livro in livros.list">
-                    <td>{{livro.nome}}</td>
-                    <td>{{livro.autor}}</td>
-                    <td>{{livro.editora}}</td>
-                    <td>{{livro.disciplina}}</td>
-                    <td>{{livro.anoEdicao}}</td>
+                <tr ng-repeat="movimento in movimentos.list">
+                    <td>{{movimento.produto}}</td>
+                    <td>{{movimento.movimentacao}}</td>
+                    <td>{{movimento.quantidade}}</td>
                     <td>
-                        <button class='btn btn-warning btn-sm' ng-click="editar(livro)">
+                        <button class='btn btn-warning btn-sm' ng-click="editar(movimento)">
                             <span class='glyphicon glyphicon-edit'></span>
                         </button>
-                        <button class='btn btn-danger btn-sm' ng-click="deletar(livro)">
+                        <button class='btn btn-danger btn-sm' ng-click="deletar(movimento)">
                             <span class='glyphicon glyphicon-remove-circle'></span>
                         </button>
                     </td>
@@ -63,20 +61,20 @@
                     </a>
                 </li>
                 <li>
-                    <a ng-click="livros.pageNumber <= 1 ? getTodos(1) : getTodos(livros.pageNumber)"> 
+                    <a ng-click="movimentos.pageNumber <= 1 ? getTodos(1) : getTodos(movimentos.pageNumber)"> 
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </a>
                 </li>
-                <li ng-repeat="numeroPagina in livros.pagesAround" class="{{numeroPagina == livros.pageNumber ? 'active' : ''}}">
+                <li ng-repeat="numeroPagina in movimentos.pagesAround" class="{{numeroPagina == movimentos.pageNumber ? 'active' : ''}}">
                     <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
                 <li>
-                    <a ng-click="livros.pageNumber === livros.pageCount ? getTodos(livros.pageCount) : getTodos(livros.pageNumber + 1)"> 
+                    <a ng-click="movimentos.pageNumber === movimentos.pageCount ? getTodos(movimentos.pageCount) : getTodos(movimentos.pageNumber + 1)"> 
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </a>
                 </li>
                 <li>
-                    <a ng-click="livros.pageCount == 0 ? getTodos(1) : getTodos(livros.pageCount)"> 
+                    <a ng-click="movimentos.pageCount == 0 ? getTodos(1) : getTodos(movimentos.pageCount)"> 
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </a>
                 </li>
