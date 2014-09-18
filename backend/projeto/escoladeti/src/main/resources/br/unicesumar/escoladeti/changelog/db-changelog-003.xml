@@ -53,7 +53,7 @@
         <renameColumn tableName="endereco" oldColumnName="tipoendereco" newColumnName="tipo"/>
     </changeSet>
     
-    <changeSet author="martinho" id="mart012" >
+    <changeSet author="martinho" id="mart013" >
         <createView viewName="viewAcompanhamentoSolicitacao"
             replaceIfExists="true"
             schemaName="public">
@@ -62,17 +62,15 @@
             T1.DATACHEGADA,
             T2.TRADUCAOMATERIAL,
             T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
-            T5.ID AS ID_ORDEM,
-            COALESCE(T7.NOME,'') AS REVISOR,
-            T8.NOME AS NOMEMATERIAL
+            T6.NOME AS REVISOR,
+            T7.NOME AS MATERIAL
             FROM SOLICITACAO T1
-            LEFT JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
+            JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
             LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
             LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
-            LEFT JOIN ORDEMPRODUCAO T5 ON T2.ID = T5.SOLICITACAOITEM_ID
-            LEFT JOIN PARTEMATERIAL T6 ON T5.ID = T6.ID_ORDEMPRODUCAO
-            LEFT JOIN PESSOA T7 ON T6.ID_RESPONSAVELREVISAO = T7.ID
-            LEFT JOIN LIVRO T8 ON T8.id = T2.ID_MATERIAL
+            LEFT JOIN VOLUME T5 ON T2.ID = T5.ID_SOLICITACAO_ITEM
+            LEFT JOIN PESSOA T6 ON T5.ID_RESPONSAVELREVISAO = T6.ID
+            LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
             ORDER BY T1.DATACHEGADA
         </createView>
     </changeSet>

@@ -10,24 +10,48 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PesquisaSolicitacao {
 
-    private String itemStatus;
+    private String status;
     private Date dataChegadaInicio;
     private Date dataChegadaFim;
     private Long solicitacaoId;
-    private Long ordemId;
-    private String nomeMaterial;
-    private String responsavel;
+    private String traducaoMaterial;
+    private String material;
+    
+    public String getStatus() {
+    	if(this.status.isEmpty())
+			return null;
+		return status;
+	}
+
+	public String getTraducaoMaterial() {
+		if(this.traducaoMaterial.isEmpty())
+			return null;
+		return traducaoMaterial;
+	}
+
+
+	public void setTraducaoMaterial(String traducaoMaterial) {
+		this.traducaoMaterial = traducaoMaterial;
+	}
+
+
+	public void setStatus(String status) {
+		if(status != null || !status.isEmpty())
+			this.status = status.toUpperCase();
+	}
+
+	public String getMaterial() {
+    	if(this.material.isEmpty())
+			return null;
+		return material;
+	}
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+
+	private String responsavel;
     private String revisor;
-
-    public String getItemStatus() {
-        return itemStatus;
-    }
-
-    public void setItemStatus(String itemStatus) {
-        if (itemStatus != null) {
-            this.itemStatus = itemStatus.toUpperCase();
-        }
-    }
 
     public Date getDataChegadaInicio() {
         return dataChegadaInicio;
@@ -58,7 +82,6 @@ public class PesquisaSolicitacao {
 
 		try {
 			if(dataChegadaFim == null || dataChegadaFim.isEmpty()){
-				System.out.println("ENTROU");
 				this.dataChegadaFim = sdf.parse("9999-12-31");
 			} else {
 				this.dataChegadaFim = sdf.parse(dataChegadaFim);
@@ -78,24 +101,6 @@ public class PesquisaSolicitacao {
         this.solicitacaoId = solicitacaoId;
     }
 
-    public Long getOrdemId() {
-        return ordemId;
-    }
-
-    public void setOrdemId(Long ordemId) {
-        this.ordemId = ordemId;
-    }
-
-    public String getNomeMaterial() {
-        return nomeMaterial;
-    }
-
-    public void setNomeMaterial(String nomeMaterial) {
-        if (nomeMaterial != null) {
-            this.nomeMaterial = nomeMaterial.toUpperCase();
-        }
-    }
-
     public String getResponsavel() {
         return responsavel;
     }
@@ -107,6 +112,9 @@ public class PesquisaSolicitacao {
     }
 
     public String getRevisor() {
+    	if(this.revisor.isEmpty())
+			return null;
+    	
         return revisor;
     }
 

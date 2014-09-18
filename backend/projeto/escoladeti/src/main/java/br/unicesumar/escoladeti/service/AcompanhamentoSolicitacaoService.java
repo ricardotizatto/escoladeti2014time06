@@ -25,7 +25,14 @@ public class AcompanhamentoSolicitacaoService {
     }	
 
     public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(PesquisaSolicitacao ps) {
-    	System.out.println(ps.getItemStatus());
-        return this.viewAcompanhamentoSolicitacaoRepository.findByDatachegadaBetweenAndItemStatusContaining(ps.getDataChegadaInicio(), ps.getDataChegadaFim(), ps.getItemStatus());
+        return this.viewAcompanhamentoSolicitacaoRepository.findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
+        		ps.getDataChegadaInicio(), 
+        		ps.getDataChegadaFim(),
+        		ps.getStatus(),
+        		ps.getMaterial(),
+        		ps.getResponsavel(),
+        		ps.getRevisor(),
+        		ps.getTraducaoMaterial()
+        		);
     }
 }

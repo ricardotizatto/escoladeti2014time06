@@ -10,28 +10,29 @@ import javax.persistence.Temporal;
 @Entity(name = "viewAcompanhamentoSolicitacao")
 public class ViewAcompanhamentoSolicitacao implements Serializable{
     
-    @Id
-    @Column(name = "ID_SOLICITACAO")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name = "ID_SOLICITACAO")
     private Long solicitacaoId;
     
-    @Column(name = "status_item")
-    private String itemStatus;
+    private String status;
     
+    @Column(name="datachegada")
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date datachegada;
+    private Date dataChegada;
     
     @Column(name = "traducaomaterial")
     private String traducaoMaterial;
     
     private String responsavel;
     
-    @Column(name = "id_ordem")
-    private Long ordemId;
-    
     private String revisor;
     
-    @Column(name = "nomematerial")
-    private String nomeMaterial;
+    private String material;
 
     public ViewAcompanhamentoSolicitacao() {
     }
@@ -44,23 +45,23 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
         this.solicitacaoId = solicitacaoId;
     }
 
-    public String getItemStatus() {
-        return itemStatus;
-    }
+    public String getStatus() {
+		return status;
+	}
 
-    public void setItemStatus(String itemStatus) {
-        this.itemStatus = itemStatus;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public Date getDatachegada() {
-        return datachegada;
-    }
+    public Date getDataChegada() {
+		return dataChegada;
+	}
 
-    public void setDatachegada(Date datachegada) {
-        this.datachegada = datachegada;
-    }
+	public void setDataChegada(Date datachegada) {
+		this.dataChegada = datachegada;
+	}
 
-    public String getTraducaoMaterial() {
+	public String getTraducaoMaterial() {
         return traducaoMaterial;
     }
 
@@ -76,13 +77,6 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
         this.responsavel = responsavel;
     }
 
-    public Long getOrdemId() {
-        return ordemId;
-    }
-
-    public void setOrdemId(Long ordemId) {
-        this.ordemId = ordemId;
-    }
 
     public String getRevisor() {
         return revisor;
@@ -92,12 +86,12 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
         this.revisor = revisor;
     }
 
-    public String getNomeMaterial() {
-        return nomeMaterial;
+    public String getMaterial() {
+        return material;
     }
 
-    public void setNomeMaterial(String nomeMaterial) {
-        this.nomeMaterial = nomeMaterial;
+    public void setMaterial(String material) {
+        this.material = material;
     }
     
         

@@ -11,13 +11,21 @@ import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
 
 public interface ViewAcompanhamentoSolicitacaoRepository extends JpaRepository<ViewAcompanhamentoSolicitacao, Long>{     
 
-//    @Query(value = "select a "
-//            + "from viewAcompanhamentoSolicitacao a "
-//            + "where a.datachegada between :dataInicio and :dataFim "
-//            + "and a.itemStatus like :filtroStatus", nativeQuery = false)
-    public List<ViewAcompanhamentoSolicitacao> findByDatachegadaBetweenAndItemStatusContaining(
+    @Query(value = " from viewAcompanhamentoSolicitacao a "
+            + "where a.dataChegada >= ?1 "
+            + "and a.dataChegada <= ?2 "
+            + "and a.status = nullif(?3,a.status) "
+            + "and a.material like %?4% "
+            + "and a.responsavel like %?5% "
+            + "and a.revisor like %?6% "
+            + "and a.traducaoMaterial like %?7%", nativeQuery = false)
+    public List<ViewAcompanhamentoSolicitacao> findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
     		Date dataInicio, 
     		Date dataFim,
-    		String itemStatus);
+    		String status,
+    		String material,
+    		String responsavel,
+    		String revisor,
+    		String traducaoMaterial);
        
 }
