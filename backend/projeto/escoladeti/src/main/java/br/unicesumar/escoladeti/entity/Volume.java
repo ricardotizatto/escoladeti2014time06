@@ -15,7 +15,7 @@ public class Volume  {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_responsavel", insertable = false, updatable = false)
+    @JoinColumn(name = "id_responsavel")
     private Usuario responsavel;
 
     @Column(name = "pagina_inicio")
@@ -31,7 +31,7 @@ public class Volume  {
     private Long idSolicitacaoItem;
 
     @ManyToOne
-    @JoinColumn(name = "id_responsavelrevisao", insertable = false, updatable = false)
+    @JoinColumn(name = "id_responsavelrevisao")
     private Usuario responsavelRevisao;
 
     private String observacao;

@@ -72,6 +72,7 @@ public class SolicitacaoService {
 
             SolicitacaoItem solicitacaoItem = SolicitacaoItem
                     .builder()
+                    .livro(Livro.of(comandoItem.getLivro()))
                     .outro(comandoItem.getOutro())
                     .traducaoMaterial(comandoItem.getTraducaoMaterial())
                     .status(StatusItem.AGUARDANDO)
@@ -107,6 +108,10 @@ public class SolicitacaoService {
         Solicitacao solicitacaoSalva = solicitacaoRepository.save(solicitacao);
 
         for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
+
+            if (!StatusItem.of(comandoItem.getStatus()).equals(StatusItem.AGUARDANDO)) {
+                continue;
+            }
 
             SolicitacaoItem solicitacaoItem = SolicitacaoItem
                     .builder()
