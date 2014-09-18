@@ -35,7 +35,9 @@ public class PesquisaSolicitacao {
 
 
 	public void setStatus(String status) {
-		if(status != null || !status.isEmpty())
+		if(status.isEmpty())
+			this.status = "TODOS";
+		else
 			this.status = status.toUpperCase();
 	}
 
