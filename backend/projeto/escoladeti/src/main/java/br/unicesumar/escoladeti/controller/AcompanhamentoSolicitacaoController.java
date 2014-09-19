@@ -51,6 +51,7 @@ public class AcompanhamentoSolicitacaoController {
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(
+                        @RequestParam(value = "solicitacaoId", required = false) Long solicitacaoId,
 			@RequestParam(value = "dataChegadaInicio", required = false) String dataChegadaInicio,
 			@RequestParam(value = "dataChegadaFim", required = false) String dataChegadaFim,
 			@RequestParam(value = "status", required = false) String status,
@@ -59,6 +60,7 @@ public class AcompanhamentoSolicitacaoController {
 			@RequestParam(value = "material", required = false) String material,
 			@RequestParam(value = "revisor", required = false) String revisor) {
 		PesquisaSolicitacao ps = new PesquisaSolicitacao();
+                ps.setSolicitacaoId(solicitacaoId);
 		ps.setDataChegadaInicio(dataChegadaInicio);
 		ps.setDataChegadaFim(dataChegadaFim);
 		ps.setStatus(status);

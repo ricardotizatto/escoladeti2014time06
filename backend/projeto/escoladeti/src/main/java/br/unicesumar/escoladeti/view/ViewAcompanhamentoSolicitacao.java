@@ -13,7 +13,6 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_SOLICITACAO")
     private Long solicitacaoId;
     
     private String status;
@@ -30,6 +29,9 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
     private String revisor;
     
     private String material;
+    
+    @Column(name = "outratraducao")
+    private String outraTraducao;
 
     public ViewAcompanhamentoSolicitacao() {
     }
@@ -43,27 +45,35 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
     }
 
     public String getStatus() {
-		return status;
-	}
+        return status;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Date getDataChegada() {
-		return dataChegada;
-	}
+        return dataChegada;
+    }
 
-	public void setDataChegada(Date datachegada) {
-		this.dataChegada = datachegada;
-	}
-
-	public String getTraducaoMaterial() {
+    public void setDataChegada(Date datachegada) {
+        this.dataChegada = datachegada;
+    }
+    
+    public String getTraducaoMaterial() {
         return traducaoMaterial;
     }
 
     public void setTraducaoMaterial(String traducaoMaterial) {
         this.traducaoMaterial = traducaoMaterial;
+    }
+    
+    public String getOutraTraducao() {
+        return outraTraducao;
+    }
+
+    public void setOutraTraducao(String outraTraducao) {
+        this.outraTraducao = outraTraducao;
     }
 
     public String getResponsavel() {
@@ -73,7 +83,6 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
     }
-
 
     public String getRevisor() {
         return revisor;
@@ -89,8 +98,6 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
 
     public void setMaterial(String material) {
         this.material = material;
-    }
-    
-        
+    }   
     
 }

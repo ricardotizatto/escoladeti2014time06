@@ -74,6 +74,7 @@
 
 
 	</changeSet>
+        <!--
 	<changeSet id="w201409181739" author="Walber">
 		<preConditions onFail="CONTINUE">
 			<sqlCheck expectedResult="t">select exists(select * from information_schema.tables where table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck>
@@ -84,28 +85,29 @@
 		<preConditions onFail="CONTINUE">
 			<sqlCheck expectedResult="t">select exists(select * from information_schema.views b  where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck>
 		</preConditions>
-		<dropTable tableName="viewAcompanhamentoSolicitacao" />
+		<dropView viewName="viewAcompanhamentoSolicitacao" />
 	</changeSet>
-
+        -->
 	<changeSet author="martinho" id="mart013">
 		<createView viewName="viewAcompanhamentoSolicitacao"
-			replaceIfExists="true" schemaName="public">
-            SELECT T1.ID AS ID_SOLICITACAO,
-            T2.STATUS AS STATUS_ITEM,
-            T1.DATACHEGADA,
-            T2.TRADUCAOMATERIAL,
-            T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
-            T6.NOME AS REVISOR,
-            T7.NOME AS MATERIAL
-            FROM SOLICITACAO T1
-            JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
-            LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
-            LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
-            LEFT JOIN VOLUME T5 ON T2.ID = T5.ID_SOLICITACAO_ITEM
-            LEFT JOIN PESSOA T6 ON T5.ID_RESPONSAVELREVISAO = T6.ID
-            LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
-            ORDER BY T1.DATACHEGADA
-        </createView>
+                    replaceIfExists="true" schemaName="public">
+                    SELECT T1.ID AS SOLICITACAOID,
+                    T2.STATUS AS STATUS,
+                    T1.DATACHEGADA,
+                    T2.TRADUCAOMATERIAL,
+                    T2.OUTRO AS OUTRATRADUCAO,
+                    T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
+                    T6.NOME AS REVISOR,
+                    T7.NOME AS MATERIAL
+                    FROM SOLICITACAO T1
+                    JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
+                    LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
+                    LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
+                    LEFT JOIN VOLUME T5 ON T2.ID = T5.ID_SOLICITACAO_ITEM
+                    LEFT JOIN PESSOA T6 ON T5.ID_RESPONSAVELREVISAO = T6.ID
+                    LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
+                    ORDER BY T1.DATACHEGADA
+            </createView>
 	</changeSet>
 
 

@@ -8,17 +8,16 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     
     $scope.getPesquisaSolicitacao = function(buscaStatus) {
         $log.debug('Pesquisando status: ' + buscaStatus);
-        $log.debug('Data ini: ' + $scope.buscaDataChegadaIni + ' Fim ' + $scope.buscaDataChegadaFim);
 
         PesquisaSolicitacao.query({
+                solicitacaoId: $scope.buscaSolicitacao,
                 dataChegadaInicio : $scope.buscaDataChegadaIni,
                 dataChegadaFim : $scope.buscaDataChegadaFim,
                 status: buscaStatus,
                 traducaoMaterial : $scope.buscaTraducaoMaterial,
                 responsavel: $scope.buscaResponsavel,
                 material: $scope.buscaMaterial,                
-                revisor: $scope.buscaRevisor
-                
+                revisor: $scope.buscaRevisor     
             }, function(solicitacaoItens) {
             $scope.solicitacaoItens = solicitacaoItens;
         });

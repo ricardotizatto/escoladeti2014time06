@@ -13,20 +13,15 @@ public class AcompanhamentoSolicitacaoService {
     
     @Autowired
     private AcompanhamentoSolicitacaoRepository acompanhamentoSolicitacaoRepository;
-
-    //private SolicitacaoItemRepository solicitacaoItemRepository = new SolicitacaoItemRepository();
-    
-//    public List<AcompanhamentoDTO>listarItens(PesquisaSolicitacao pesquisa, DataSource dataSouce) {
-//        return null; //solicitacaoItemRepository.listarItens(pesquisa, dataSouce);
-//    }
     
     public List<ViewAcompanhamentoSolicitacao> listarItens() {
         return acompanhamentoSolicitacaoRepository.findAll();
     }	
 
     public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(PesquisaSolicitacao ps) {
-        return this.acompanhamentoSolicitacaoRepository.findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
-        		ps.getDataChegadaInicio(), 
+        return this.acompanhamentoSolicitacaoRepository.findBySolicitacaoIdContainingAndDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
+        		ps.getSolicitacaoId(),
+                        ps.getDataChegadaInicio(), 
         		ps.getDataChegadaFim(),
         		ps.getStatus(),
         		ps.getMaterial(),

@@ -16,7 +16,6 @@ public class PesquisaSolicitacao {
     private Long solicitacaoId;
     private String traducaoMaterial;
     private String material;
-
     private String responsavel;
     private String revisor;
 
@@ -99,7 +98,12 @@ public class PesquisaSolicitacao {
     }
 
     public void setSolicitacaoId(Long solicitacaoId) {
-        this.solicitacaoId = solicitacaoId;
+//        if (solicitacaoId == null) {
+//            this.solicitacaoId = 0L;
+//        } else {
+            this.solicitacaoId = solicitacaoId;
+//        }
+        
     }
 
     public String getResponsavel() {
