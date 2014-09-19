@@ -1,7 +1,11 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.service.RelatorioParticipanteService;
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +21,7 @@ public class RelatorioParticipanteEventoController implements Serializable {
     private RelatorioParticipanteService relatorioParticipanteService;
     
     @RequestMapping(value="/{idevento}", method = RequestMethod.GET)
-    @ResponseBody
-    public void imprimirRelatorio(@PathVariable Long idevento){
-       relatorioParticipanteService.imprimirRelatorio(idevento);
-       //TODO retornar pdf compilado e abrir em uma nova janela
+    public void imprimirRelatorio(@PathVariable Long idevento, HttpServletResponse response) throws IOException, JRException, SQLException {
+        relatorioParticipanteService.imprimir(idevento, response);
     }
-
 }

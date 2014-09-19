@@ -236,6 +236,19 @@
         }
     };
     
+    $scope.imprimirRelatorio = function () {
+        if ($routeParams.idevento) {
+            $http.get("./relatorio/participantes/" + $routeParams.idevento)
+                .success(function(data, status) {
+//                $scope.participantes = participantes;
+                    console.log('entrou no método sucesso angular');
+            })
+                .error(function(data, status) {
+                console.log('erro ao buscar eventos para impressão');
+            });
+        }
+    };
+    
     $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data, inicio, fim, ministrante) {
         $scope.idCurso = indice;
         $scope.tituloCurso = titulo;

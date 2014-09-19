@@ -17,6 +17,7 @@
 		<jackson-version>1.9.13</jackson-version>
 		<netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 	</properties>
+        
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -87,6 +88,12 @@
 			<artifactId>jasperreports</artifactId>
 			<version>5.5.0</version>
 		</dependency>
+                
+                <dependency>
+                   <groupId>org.codehaus.groovy</groupId>
+                   <artifactId>groovy</artifactId>
+                   <version>2.3.0</version>
+               </dependency>
 
 		<!-- AspectJ -->
 		<dependency>
@@ -258,6 +265,7 @@
 			<version>2.1.2</version>
 		</dependency>
 	</dependencies>
+        
 	<build>
 		<plugins>
 			<plugin>

@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.service.ParticipanteService;
+import br.unicesumar.escoladeti.service.RelatorioParticipanteService;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,42 +16,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/rest/participanteSource")
 public class ParticipanteController implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Autowired
     private ParticipanteService participanteService;
-    
-    @RequestMapping(value= "/participante", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/participante", method = RequestMethod.POST)
     @ResponseBody
-    public Participante salvar(@RequestBody Participante participante){
+    public Participante salvar(@RequestBody Participante participante) {
         return this.participanteService.salvar(participante);
     }
-    
-    @RequestMapping(value="/participante/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/participante/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Participante getById(@PathVariable Long id){
+    public Participante getById(@PathVariable Long id) {
         System.out.println("buscando por id:");
         return participanteService.getById(id);
     }
-    
-    @RequestMapping(value="/participante", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/participante", method = RequestMethod.GET)
     @ResponseBody
-    public List<Participante> getTodos(){
+    public List<Participante> getTodos() {
         System.out.println("buscando geral:");
         return participanteService.getTodos();
     }
-    
-    @RequestMapping(value="/listaparticipantes/{idevento}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/listaparticipantes/{idevento}", method = RequestMethod.GET)
     @ResponseBody
-    public List<Participante> getByIdevento(@PathVariable Long idevento){
-        System.out.println("buscando por id:" +idevento);
+    public List<Participante> getByIdevento(@PathVariable Long idevento) {
+        System.out.println("buscando por id:" + idevento);
         return participanteService.getByIdevento(idevento);
     }
-        
-    
-    @RequestMapping(value="/participante", method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/participante", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deletar(@RequestBody Participante participante){
+    public String deletar(@RequestBody Participante participante) {
         participanteService.deletar(participante);
         return "deleted";
     }
+
 }
