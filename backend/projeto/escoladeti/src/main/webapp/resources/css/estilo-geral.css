@@ -265,4 +265,4 @@ select.select2 {
 .btn-status-linha:hover, .btn-status:hover{  opacity: 0.6; filter: alpha(opacity=60); font-weight: bold; }
 .btn-status img:hover{  opacity: 0.6; filter: alpha(opacity=60);}
 
-#quantidadeEstoque{border-radius: 4px;}
+#quantidadeMovimento{border-radius: 4px;}

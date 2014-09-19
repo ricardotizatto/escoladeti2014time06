@@ -1,59 +1,60 @@
-﻿<div class="container" ng-controller="movimentoController" ng-init="carregarMovimento()>
-    <fieldset>
-        <div class="row">
-            <div class="form-group col-sm-12">
-                <legend> Movimentação de Produtos </legend>
-            </div>
+﻿<div class="container" ng-controller="movimentoController" ng-init="carregarMovimento()">
+      <fieldset>
+      <div class="row">
+      <div class="form-group col-sm-12">
+        <legend> Movimentação de Produtos </legend>
+    </div>
+</div>
+<form action="" method="POST" role="form" name="formMovimento" ng-submit="salvar()" >							
+    <div class="row ">
+        <div class="col-md-5 form-group {{formMovimento.Produto.$error.required? 'has-error' : 'has-success' }} has-feedback col-sm-5">
+            <label class="control-label"><strong> Produto *</strong></label>
+            <select ui-select2 name="Produto" class="input-default" ng-model="movimento.produto" required >
+                <option value=""></option>
+                <option ng-repeat="produto in produto.list track by produto.id" value="{{produto.id}}">{{produto.nome}}</option>
+            </select>
         </div>
-        <form action="" method="POST" role="form" name="formMovimento" ng-submit="salvar()" >							
-            <div class="row ">
-                <div class="col-md-5 form-group {{formMovimento.Produto.$error.required? 'has-error' : 'has-success' }} has-feedback col-sm-5">
-                    <label class="control-label"><strong> Produto *</strong></label>
-                    <select ui-select2 name="Produto" class="input-default" ng-model="movimento.produtos" required >
-                        <option value=""></option>
-                        <option ng-repeat="produto in produtos.list" value="{{produto.id}}">{{produto.nome}}</option>
-                    </select>
-                </div>
 
-                <div class="form-group {{formMovimento.quantidade.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
-                    <label class="control-label"><strong> Quantidade * </strong></label>
-                    <input class="form-control" title="Quantidade deve ser somente números"  name="quantidade" type="text" ng-model="estoque.quantidade"  ng-pattern="/[0-9]{2,5}/" maxlength="5" id="quantidadeEstoque" required placeholder="Quantidade" >
-                    <span class="help-block" ng-show="formMovimento.quantidade.$error.pattern">Apenas numeros e no mínimo 2.</span>
-                </div>
+        <div class="form-group {{formMovimento.quantidade.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+            <label class="control-label"><strong> Quantidade * </strong></label>
+            <input class="form-control" title="Quantidade deve ser somente números"  name="quantidade" type="text" ng-model="movimento.quantidade"  ng-pattern="/[0-9]{2,5}/" maxlength="5" id="quantidadeMovimento" required placeholder="Quantidade" >
+            <span class="help-block" ng-show="formMovimento.quantidade.$error.pattern">Apenas numeros e no mínimo 2.</span>
+        </div>
 
-            <div class="row">
-                <div class="form-group col-sm-3">
-                    <label>Movimentação</label>
-                    <div>
-                        <div class="btn-group">
-                            <label class="btn btn-primary btn-radio-amacapa">
-                                <input ng-model="movimento.tipo" value="ENTRADA" type="radio" /> ENTRADA
-                            </label> <label class="btn btn-primary btn-radio-amacapa">
-                                <input ng-model="movimento.tipo" value="SAIDA" type="radio" /> SAIDA
-                            </label>
-                        </div>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label>Movimentação</label>
+                <div>
+                    <div class="btn-group">
+                        <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="movimento.tipo" value="ENTRADA" type="radio" /> ENTRADA
+                        </label> <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="movimento.tipo" value="SAIDA" type="radio" /> SAIDA
+                        </label>
                     </div>
                 </div>
             </div>
+        </div>
 
 
 
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <span class="pull-right">	
-                        <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
-                            <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
-                        </a>  
-                        <button type="submit" class="btn btn-padrao btn-success" ng-disabled="formMovimento.$invalid">
-                            <span class="glyphicon glyphicon-ok" ></span> Salvar	
-                        </button>
-                    </span>		
-                </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="pull-right">	
+                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                    </a>  
+                    <button type="submit" class="btn btn-padrao btn-success" ng-disabled="formMovimento.$invalid">
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar	
+                    </button>
+                </span>		
             </div>
-            <div class="row">
-                <div class="col-sm-12"><hr></div>
-            </div>
-        </form>
-    </fieldset>
+        </div>
+        <div class="row">
+            <div class="col-sm-12"><hr></div>
+        </div>
+    </div>
+</form>
+</fieldset>
 </div>

@@ -30,15 +30,15 @@
         <div class="col-sm-12 table-responsive">
             <table class="table table-striped table-hover">
                 <tr>
-                    <th class="col-md-6">Produto</th>
+                    <th class="col-md-5">Produto</th>
                     <th class="col-md-3">Movimentação</th>
                     <th class="col-md-2">Quantidade</th>
                     <th class="col-md-2">Ações</th>
                 </tr>
 
                 <tr ng-repeat="movimento in movimentos.list">
-                    <td>{{movimento.produto}}</td>
-                    <td>{{movimento.movimentacao}}</td>
+                    <td>{{movimento.produto.nome}}</td>
+                    <td>{{movimento.tipo}}</td>
                     <td>{{movimento.quantidade}}</td>
                     <td>
                         <button class='btn btn-warning btn-sm' ng-click="editar(movimento)">

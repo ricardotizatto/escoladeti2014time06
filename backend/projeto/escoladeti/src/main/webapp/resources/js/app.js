@@ -245,7 +245,7 @@ app.config(['$routeProvider',
                 templateUrl: './pages/estoque/CadastroMovimento.html',
                 controller: 'movimentoController'
             })
-            .when('/cadastromovimento/:idMovimento', {
+            .when('/cadastromovimento/:movimentoId', {
                 templateUrl: './pages/estoque/CadastroMovimento.html',
                 controller: 'movimentoController'
             })

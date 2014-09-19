@@ -22,6 +22,9 @@ public class MovimentacaoController implements Serializable{
     @RequestMapping(value="/movimentacao", method= RequestMethod.POST)
     @ResponseBody
     public Movimentacao salvar(@RequestBody Movimentacao movimentacao) throws Exception {
+            System.out.println("ERRO "+movimentacao.getTipo());
+            System.out.println("ERRO "+movimentacao.getQuantidade());
+            System.out.println("ERRO "+movimentacao.getProduto().getNome());
             return this.movimentacaoService.salvar(movimentacao);
     }
 

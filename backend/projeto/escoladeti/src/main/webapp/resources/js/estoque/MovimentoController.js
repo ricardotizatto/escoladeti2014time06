@@ -8,7 +8,7 @@ function movimentoController($scope, $http, $routeParams) {
     $scope.deletar = function(movimento) {
         console.log('deletando movimento de produto' + JSON.stringify(movimento));
 
-        BootstrapDialog.confirm('Deseja realmente deletar o Movimento: <b>' + movimento.produto + ' ' + movimento.quantidade + '</b>?', function(result) {
+        BootstrapDialog.confirm('Deseja realmente deletar o Movimento: <b>' + movimento.produto.nome + ' ' + movimento.quantidade + '</b>?', function(result) {
             if (result) {
                 $http({
                     method: 'DELETE',
@@ -19,11 +19,11 @@ function movimentoController($scope, $http, $routeParams) {
                         .success(function(data, status) {
                     $scope.getTodos(1);
                     console.log('Movimento deletado!');
-                    toastr.success('Movimento ' + movimento.produto + ' ' + movimento.quantidade + ' deletado com sucesso');
+                    toastr.success('Movimento ' + movimento.produto.nome + ' ' + movimento.quantidade + ' deletado com sucesso');
                 })
                         .error(function(data, status) {
                     console.log('Movimento não foi deletado' + data);
-                    toastr.error('Erro ao deletar o movimento: ' + movimento.produto + ' ' + movimento.quantidade + ' - ' + data.message);
+                    toastr.error('Erro ao deletar o movimento: ' + movimento.produto.nome + ' ' + movimento.quantidade + ' - ' + data.message);
                 });
             } else {
                 $scope.getTodos(1);
@@ -46,8 +46,15 @@ function movimentoController($scope, $http, $routeParams) {
         $http.get('./rest/movimentacaoSource/movimentacao/' + $routeParams.movimentoId)
                 .success(function(movimento, status) {
             console.log(movimento);
-            delete movimento.info;
+            
+            
             $scope.movimento = movimento;
+            $scope.produto.list.forEach(function(produto) {
+                if (produto.id === $scope.movimento.produto.id) {
+                    $scope.movimento.produto = produto.id;
+                }
+
+            });
         });
 
     };
@@ -58,17 +65,26 @@ function movimentoController($scope, $http, $routeParams) {
     };
 
 
+
     $scope.salvar = function() {
 
-        $scope.movimento.tipo = $scope.movimento.tipo.toUpperCase();
-        $scope.movimento.quantidade = $scope.movimento.quantidade;
+//        $scope.movimento.tipo = $scope.movimento.tipo.toUpperCase();
+//        $scope.movimento.quantidade = $scope.movimento.quantidade;
+
+
+        $scope.produto.list.forEach(function(produto) {
+            if (produto.id == $scope.movimento.produto) {
+                $scope.movimento.produto = produto;
+            }
+
+        });
 
         console.log($scope.movimento);
         $http.post("./rest/movimentacaoSource/movimentacao", $scope.movimento)
                 .success(function(movimento, status) {
             $scope.movimento = getNovoMovimento();
             console.log("movimento salva = " + movimento);
-            toastr.success('Movimento ' + movimento.produto + ' ' + movimento.quantidade + ' salvo com sucesso');
+            toastr.success('Movimento ' + movimento.produto.nome + ' ' + movimento.quantidade + ' salvo com sucesso');
             setTimeout(function() {
                 window.location = "#/listamovimento"
             }, 2000);
@@ -97,7 +113,7 @@ function movimentoController($scope, $http, $routeParams) {
     $http.get("./rest/produtoSource/produto")
             .success(function(listaProdutos, status) {
 
-        $scope.produtos = listaProdutos;
+        $scope.produto = listaProdutos;
     })
             .error(function(data, status) {
         console.log('erro ao buscar produto ' + data);

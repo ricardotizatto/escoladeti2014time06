@@ -14,7 +14,7 @@ public class Movimentacao extends Entidade {
     
     @OneToOne
     @JoinColumn(name="produtoId",referencedColumnName = "id")
-    private Produto produtos;
+    private Produto produto;
 
     public String getTipo() {
         return tipo;
