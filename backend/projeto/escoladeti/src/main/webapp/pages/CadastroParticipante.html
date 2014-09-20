@@ -19,10 +19,10 @@
                         <th class="col-md-3" data-field="details"></th>
                     </tr>
                     <tr ng-repeat="evento in eventos" ng-click="chk{{evento.id}}">
-                        <td><input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
-                        <td>{{evento.titulo}}</td>
-                        <td>{{evento.descricao.substring(0, 180)}}</td>
-                        <td>
+                        <td ng-show="evento.statusevento == true"><input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
+                        <td ng-show="evento.statusevento == true">{{evento.titulo}}</td>
+                        <td ng-show="evento.statusevento == true">{{evento.descricao.substring(0, 180)}}</td>
+                        <td ng-show="evento.statusevento == true">
                             <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id, evento.titulo, evento.descricao, evento.local, evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
                                 <b>+ Detalhes</b>
                             </button>

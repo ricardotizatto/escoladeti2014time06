@@ -109,24 +109,23 @@
                 <div class="col-sm-9">
                     <span class="pull-right">	
                         <a class="btn btn-primary btn-padrao" ng-click="voltar()">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+                            <span class="glyphicon glyphicon-circle-arrow-left" ></span>&nbsp;Voltar
                         </a>
-                        
-                        <a class="btn btn-primary btn-padrao" ng-show="evento.statusevento == true" ng-click="encerrar()">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span>Fechar
+                         &nbsp;&nbsp; 
+                        <a class="btn btn-primary btn-danger" ng-show="evento.statusevento == true" ng-click="encerrar()">
+                            <span class="glyphicon glyphicon-remove-circle" ></span>&nbsp;Fechar
                         </a>
-                        
-                        
+                         &nbsp;&nbsp; 
                         <a class="btn btn-primary btn-padrao" ng-show="evento.statusevento == false" ng-click="reativar()">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span>Ativar
+                            <span class="glyphicon glyphicon-circle-arrow-right" ></span>&nbsp;Ativar
                         </a>
-                        
+                        &nbsp;&nbsp; 
                         <a class="btn btn-primary btn-danger" ng-show="evento.id > 0" ng-click="deletar(evento)">
-                            <span class="glyphicon glyphicon-remove-circle" ></span>Excluir
+                            <span class="glyphicon glyphicon-remove-circle" ></span>&nbsp;Excluir
                         </a>
-                        
+                        &nbsp;&nbsp; 
                         <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formEvento.$invalid">
-                            <span class="glyphicon glyphicon-ok"  ></span> Salvar	
+                            <span class="glyphicon glyphicon-ok"  ></span>&nbsp;Salvar
                         </button>
                     </span>		
                 </div>

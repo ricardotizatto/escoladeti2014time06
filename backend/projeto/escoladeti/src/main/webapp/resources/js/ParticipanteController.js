@@ -22,6 +22,7 @@
     $scope.tipoEvento;
     $scope.valor;
     $scope.presencaaux;
+    $scope.idevento;
 
     $scope.editar = function(participante) {
         console.log(participante);
@@ -60,7 +61,7 @@
             return toastr.warning('Preencha o campo Possui necessidades especiais');
         
         if ($scope.participante.deficiente === 'N'){
-          $scope.participante.necessidade = '';  
+          $scope.participante.necessidade = 'N/P';  
         }
         if($scope.participante.necessidade === undefined)
             return toastr.warning('Quais');
@@ -76,8 +77,7 @@
                     .success(function(participante, status) {
                 console.log("participante salva = " + participante.nome);
                 toastr.success("Participante cadastrado com sucesso!");
-                setTimeout(function(){window.location="#/listaevento"}, 5000);
-                $scope.novo();
+                setTimeout(function(){window.location="#/listaevento"}, 500);
 
             })
                     .error(function(data, status) {
@@ -222,6 +222,7 @@
     $scope.listarParticipantes = function() {
 
         if ($routeParams.idevento) {
+            $scope.idevento = $routeParams.idevento; 
             $http.get("./rest/participanteSource/listaparticipantes/" + $routeParams.idevento)
                     .success(function(participantes, status) {
                 $scope.participantes = participantes;
