@@ -22,6 +22,10 @@ public class Usuario extends Entidade {
         setSenha(senha);
     }
 
+    private Usuario(Long id) {
+        this.id = id;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -60,5 +64,10 @@ public class Usuario extends Entidade {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+
+    public static Usuario of(Long id) {
+        return new Usuario(id);
     }
 }

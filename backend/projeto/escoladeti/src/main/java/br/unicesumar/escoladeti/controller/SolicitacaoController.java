@@ -26,10 +26,6 @@ public class SolicitacaoController implements Serializable{
 	private SolicitacaoService solicitacaoService;
 
 
-    @Autowired
-    DataSource dataSource;
-	
-
     @Transactional
 	@RequestMapping( method = RequestMethod.POST)	
 	@ResponseBody

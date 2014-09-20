@@ -149,16 +149,8 @@ app.config(['$routeProvider',
                 templateUrl: './pages/EditarParticipante.html',
                 controller: 'participanteController'
             })
-            .when('/listaordemproducao', {
-                templateUrl: './pages/ListaOrdemProducao.html',
-                controller: 'OrdemProducaoController'
-            })
-            .when('/ordemproducao', {
-                templateUrl: './pages/OrdemProducao.html',
-                controller: 'OrdemProducaoController'
-            })
-            .when('/ordemproducao/:ordemProducaoId', {
-                templateUrl: './pages/OrdemProducao.html',
+            .when('/ordem-producao/:id', {
+                templateUrl: './pages/producao/OrdemProducao.html',
                 controller: 'OrdemProducaoController'
             })
             .when('/cadastrolivro', {
@@ -193,13 +185,13 @@ app.config(['$routeProvider',
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
             })
-            .when('/cadastropartematerial/:ordemProducaoId', {
-                templateUrl: './pages/CadastroParteMaterial.html',
-                controller: 'OrdemProducaoController'
+            .when('/ordem-producao/:idOrdemProducao/volume', {
+                templateUrl: './pages/producao/volume.html',
+                controller: 'VolumeController'
             })
-            .when('/cadastropartematerial/:ordemProducaoId/:parteMaterialId', {
-                templateUrl: './pages/CadastroParteMaterial.html',
-                controller: 'OrdemProducaoController'
+            .when('/ordem-producao/:idOrdemProducao/volume/:id', {
+                templateUrl: './pages/producao/volume.html',
+                controller: 'VolumeController'
             })	
             .when('/principal', {
                 templateUrl: './pages/Principal.html'
@@ -232,6 +224,30 @@ app.config(['$routeProvider',
             .when('/cadastroparticipanteevento', {
                 templateUrl: './pages/CadastroParticipanteEvento.html',
                 controller: 'participanteController'
+            })
+            .when('/listaproduto', {
+                templateUrl: './pages/estoque/ListaProduto.html',
+                controller: 'produtoController'
+            })
+            .when('/cadastrotipoproduto', {
+                templateUrl: './pages/estoque/CadastroTipoProduto.html',
+                controller: 'produtoController'
+            })
+            .when('/cadastrotipoproduto/:produtoId', {
+                templateUrl: './pages/estoque/CadastroTipoProduto.html',
+                controller: 'produtoController'
+            })
+            .when('/listamovimento', {
+                templateUrl: './pages/estoque/ListaMovimento.html',
+                controller: 'movimentoController'
+            })
+            .when('/cadastromovimento', {
+                templateUrl: './pages/estoque/CadastroMovimento.html',
+                controller: 'movimentoController'
+            })
+            .when('/cadastromovimento/:movimentoId', {
+                templateUrl: './pages/estoque/CadastroMovimento.html',
+                controller: 'movimentoController'
             })
             .when('/cadastroparticipanteevento/:idParticipante', {
                 templateUrl: './pages/CadastroParticipanteEvento.html',
