@@ -31,7 +31,7 @@ public class PesquisaSolicitacao {
         if (traducaoMaterial == null || traducaoMaterial.isEmpty()) {
             this.traducaoMaterial = "TODOS";
         } else {
-            this.traducaoMaterial = traducaoMaterial;
+            this.traducaoMaterial = traducaoMaterial.toUpperCase();
         }
     }
 
@@ -51,7 +51,7 @@ public class PesquisaSolicitacao {
         if (material == null || material.isEmpty()) {
             this.material = "TODOS";
         } else {
-            this.material = material;
+            this.material = material.toUpperCase();
         }
     }
 
@@ -109,7 +109,7 @@ public class PesquisaSolicitacao {
         if (responsavel == null || responsavel.isEmpty()) {
             this.responsavel = "TODOS";
         } else {
-            this.responsavel = responsavel;
+            this.responsavel = responsavel.toUpperCase();
         }
     }
 
@@ -121,7 +121,7 @@ public class PesquisaSolicitacao {
         if (revisor == null || revisor.isEmpty()) {
             this.revisor = "TODOS";
         } else {
-            this.revisor = revisor;
+            this.revisor = revisor.toUpperCase();
         }
     }
 
