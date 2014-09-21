@@ -1,92 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
-    <changeSet id="40241" author="leivid">
-        <addColumn tableName="evento">
-            <column name="statusevento" type="boolean">
-            </column>
-        </addColumn>
-    </changeSet>
-    
-    <changeSet id="40242" author="leivid">
-        <addDefaultValue 
-            defaultValueBoolean="true"
-            columnDataType="boolean"
-            columnName="statusevento"
-            tableName="evento"/>
-    </changeSet> 
-    
-    <changeSet id="40243" author="leivid">
-        <update tableName="evento">
-            <column name="statusevento" type="boolean"/>
-        </update>
-    </changeSet>
-    
-    <changeSet id="40244" author="leivid">
-        <dropTable cascadeConstraints="true" tableName="pagamento"></dropTable>
-    </changeSet>
-    
 
-    <changeSet id="40245" author="leivid">
-        <addColumn tableName="participante">
-            <column name="presente" type="boolean">
-            </column>
-        </addColumn>
-        <addDefaultValue 
-            defaultValueBoolean="true"
-            columnDataType="boolean"
-            columnName="presente"
-            tableName="participante"/>
-    </changeSet>
-    <changeSet id="w201409151639" author=" Walber ">
-        <dropUniqueConstraint tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
-    </changeSet>
+	<changeSet id="40241" author="leivid">
+		<addColumn tableName="evento">
+			<column name="statusevento" type="boolean">
+			</column>
+		</addColumn>
+	</changeSet>
 
-    <changeSet id="w201409161308" author="Walber">
-        <dropNotNullConstraint tableName="pessoajuridica" columnName="inscricaoestadual"/>
-    </changeSet>
-    <changeSet id="w201409161857" author="">
-        <renameColumn tableName="endereco" oldColumnName="tipoendereco" newColumnName="tipo"/>
-    </changeSet>
+	<changeSet id="40242" author="leivid">
+		<addDefaultValue defaultValueBoolean="true"
+			columnDataType="boolean" columnName="statusevento" tableName="evento" />
+	</changeSet>
 
-    <changeSet id="40246" author="Catabriga">
-        <dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
-        <dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>
+	<changeSet id="40243" author="leivid">
+		<update tableName="evento">
+			<column name="statusevento" type="boolean" />
+		</update>
+	</changeSet>
 
-        <createTable tableName="volume">
-            <column name="id" type="int8">
-                <constraints nullable="false" primaryKey="true"></constraints>
-            </column>
-            <column name="id_responsavel" type="int8"></column>
-            <column name="pagina_inicio" type="int4"></column>
-            <column name="pagina_fim" type="int4"></column>
-            <column name="status" type="varchar"></column>
-            <column name="id_solicitacao_item" type="int8">
-                <constraints nullable="false"></constraints>
-            </column>
-            <column name="id_responsavelrevisao" type="int8"></column>
-            <column name="observacao" type="varchar"></column>
-            <column name="data_impressao" type="date"></column>
-            <column name="data_revisao" type="date"></column>
-            <column name="data_enviado" type="date"></column>
-        </createTable>
-
-        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_responsavel" constraintName="fk_usuario_volumeresponsavel"
-                                 referencedTableName="usuario"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
-        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_responsavelrevisao" constraintName="usuario_volumeresprevisao"
-                                 referencedTableName="usuario"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
-        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_solicitacao_item" constraintName="solitem_volumesolitem"
-                                 referencedTableName="solicitacaoitem"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
+	<changeSet id="40244" author="leivid">
+		<dropTable cascadeConstraints="true" tableName="pagamento"></dropTable>
+	</changeSet>
 
 
-    </changeSet>
+	<changeSet id="40245" author="leivid">
+		<addColumn tableName="participante">
+			<column name="presente" type="boolean">
+			</column>
+		</addColumn>
+		<addDefaultValue defaultValueBoolean="true"
+			columnDataType="boolean" columnName="presente" tableName="participante" />
+	</changeSet>
+	<changeSet id="w201409151639" author=" Walber "> <dropUniqueConstraint 
+		tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" /> 
+		</changeSet> <changeSet id="w201409161308" author="Walber"> <dropNotNullConstraint 
+		tableName="pessoajuridica" columnName="inscricaoestadual"/> </changeSet>
+	<changeSet id="40246" author="Catabriga">
+		<dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
+		<dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>
+
+		<createTable tableName="volume">
+			<column name="id" type="int8">
+				<constraints nullable="false" primaryKey="true"></constraints>
+			</column>
+			<column name="id_responsavel" type="int8"></column>
+			<column name="pagina_inicio" type="int4"></column>
+			<column name="pagina_fim" type="int4"></column>
+			<column name="status" type="varchar"></column>
+			<column name="id_solicitacao_item" type="int8">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="id_responsavelrevisao" type="int8"></column>
+			<column name="observacao" type="varchar"></column>
+			<column name="data_impressao" type="date"></column>
+			<column name="data_revisao" type="date"></column>
+			<column name="data_enviado" type="date"></column>
+		</createTable>
+
+		<addForeignKeyConstraint baseTableName="volume"
+			baseColumnNames="id_responsavel" constraintName="fk_usuario_volumeresponsavel"
+			referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
+		<addForeignKeyConstraint baseTableName="volume"
+			baseColumnNames="id_responsavelrevisao" constraintName="usuario_volumeresprevisao"
+			referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
+		<addForeignKeyConstraint baseTableName="volume"
+			baseColumnNames="id_solicitacao_item" constraintName="solitem_volumesolitem"
+			referencedTableName="solicitacaoitem" referencedColumnNames="id"></addForeignKeyConstraint>
+
+
+	</changeSet>
+        <!--
+	<changeSet id="w201409181739" author="Walber">
+		<preConditions onFail="CONTINUE">
+			<sqlCheck expectedResult="t">select exists(select * from information_schema.tables where table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck>
+		</preConditions>
+		<dropTable tableName="viewAcompanhamentoSolicitacao" />
+	</changeSet>
+		<changeSet id="w201409181806" author="Walber">
+		<preConditions onFail="CONTINUE">
+			<sqlCheck expectedResult="t">select exists(select * from information_schema.views b  where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck>
+		</preConditions>
+		<dropView viewName="viewAcompanhamentoSolicitacao" />
+	</changeSet>
+        -->
+	<changeSet author="martinho" id="mart013">
+		<createView viewName="viewAcompanhamentoSolicitacao"
+                    replaceIfExists="true" schemaName="public">
+                    SELECT T1.ID AS SOLICITACAOID,
+                    T2.STATUS AS STATUS,
+                    T1.DATACHEGADA,
+                    T2.TRADUCAOMATERIAL,
+                    T2.OUTRO AS OUTRATRADUCAO,
+                    T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
+                    T6.NOME AS REVISOR,
+                    T7.NOME AS MATERIAL
+                    FROM SOLICITACAO T1
+                    JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
+                    LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
+                    LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
+                    LEFT JOIN VOLUME T5 ON T2.ID = T5.ID_SOLICITACAO_ITEM
+                    LEFT JOIN PESSOA T6 ON T5.ID_RESPONSAVELREVISAO = T6.ID
+                    LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
+                    ORDER BY T1.DATACHEGADA
+            </createView>
+	</changeSet>
+
 
 </databaseChangeLog>
 

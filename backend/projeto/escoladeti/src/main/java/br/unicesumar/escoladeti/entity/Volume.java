@@ -37,12 +37,15 @@ public class Volume  {
     private String observacao;
 
     @Column(name = "data_impressao")
+    @Temporal(TemporalType.DATE)
     private Date dataImpressao;
 
     @Column(name = "data_revisao")
+    @Temporal(TemporalType.DATE)
     private Date dataRevisao;
 
     @Column(name = "data_enviado")
+    @Temporal(TemporalType.DATE)
     private Date dataEnviado;
 
     public Usuario getResponsavel() {

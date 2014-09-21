@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet author="Jhonatan (generated)" id="1404066940885-1">
@@ -69,7 +69,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="Walber (generated)" id="7404066940885-7">
+    <changeSet author="Walber (generated)" id="7404066940889-7">
         <createTable tableName="endereco">
             <column name="id" type="INT8">
                 <constraints nullable="false" />
@@ -84,11 +84,11 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="principal" type="VARCHAR(1)">
+            <column name="principal" type="CHAR(1)">
                 <constraints nullable="false" />
             </column>
 
-            <column name="tipoendereco" type="VARCHAR(30)"/>	
+            <column name="tipo" type="VARCHAR(30)"/>	
             <column name="pessoaid" type="INT8">
                 <constraints nullable="false" />
             </column>
@@ -520,6 +520,7 @@
         <addPrimaryKey columnNames="id" constraintName="pessoafisica_pkey"
                        tableName="pessoafisica" />
     </changeSet>
+    
     <changeSet author="Jhonatan (generated)" id="1404066940885-50">
         <addPrimaryKey columnNames="id" constraintName="pessoajuridica_pkey"
                        tableName="pessoajuridica" />
