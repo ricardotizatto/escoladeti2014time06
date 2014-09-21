@@ -269,6 +269,10 @@ select.select2 {
 
 .time-line-responsavel{ font-size: 11px; }
 
+.tabela-filtro td{ margin: 0px; padding: 0px; text-align: center;}
+.campos-filtro{ margin: 0px; padding: 0px; text-align: center;}
+.data-filtro{ color: #0090d9; }
+
 .tabela-filtro td{ padding: 1px 1px; text-align: center;}
 .tabela-filtro td{ margin: 0px; padding: 0px; text-align: center;}
 .campos-filtro{ margin: 0px; padding: 0px; text-align: center;}

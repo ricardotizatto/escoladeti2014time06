@@ -36,6 +36,16 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
         });
     };
     
+    $scope.limpar = function() {
+        $scope.buscaSolicitacao = "";
+        $scope.buscaDataChegadaIni = "";
+        $scope.buscaDataChegadaFim = "";
+        $scope.buscaTraducaoMaterial = "";
+        $scope.buscaResponsavel = "";
+        $scope.buscaMaterial = "";
+        $scope.buscaRevisor = "";  
+    };
+    
     $scope.produzir = function(soliciataoId) {
         window.location = '#/ordemproducao/' + soliciataoId;
     };
