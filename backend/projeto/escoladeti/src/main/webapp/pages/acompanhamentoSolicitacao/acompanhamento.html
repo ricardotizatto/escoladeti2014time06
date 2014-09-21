@@ -100,7 +100,7 @@
                 <li ng-repeat="solicitacaoItem in solicitacaoItens | orderBy:'dataChegada'">
                     <time class="cbp_tmtime">
                         <span class="date">chegada</span>
-                        <span class="time">{{solicitacaoItem.dataChegada | date:'dd-MM-yyyy' }}</span>
+                        <a href="" ng-click="buscar('dataChegada', solicitacaoItem.dataChegada)" ><span class="time">{{solicitacaoItem.dataChegada | date:'dd-MM-yyyy' }}</span></a>
                     </time>
                     <a href=""><div class="btn-status-linha cbp_tmicon {{getStatus(solicitacaoItem.status)}} animated bounceIn" ng-click="getPesquisaSolicitacao(solicitacaoItem.status)" >  <i class="{{getIcone(solicitacaoItem.status)}}"></i> </div></a>
                     <div class="cbp_tmlabel">
@@ -115,17 +115,17 @@
                                         <th class="col-md-3">Tradução</th>
                                         </thead>
                                         <tbody>
-                                        <td>{{solicitacaoItem.solicitacaoId}}</td>
+                                        <td><a href="" ng-click="buscar('solicitacaoId', solicitacaoItem.solicitacaoId)" >{{solicitacaoItem.solicitacaoId}}</a></td>
                                         <td ng-show="{{solicitacaoItem.ordemId}}" >{{solicitacaoItem.ordemId}}</td>
-                                        <td>{{solicitacaoItem.material}}</td>
-                                        <td>{{solicitacaoItem.traducaoMaterial != 'OUTRO' ? solicitacaoItem.traducaoMaterial : solicitacaoItem.outraTraducao }}</td>
+                                        <td><a href="" ng-click="buscar('material', solicitacaoItem.material)" >{{solicitacaoItem.material}}</a></td>
+                                        <td><a href="" ng-click="buscar('traducaoMaterial', solicitacaoItem.traducaoMaterial != 'OUTRO' ? solicitacaoItem.traducaoMaterial : solicitacaoItem.outraTraducao)" >{{solicitacaoItem.traducaoMaterial != 'OUTRO' ? solicitacaoItem.traducaoMaterial : solicitacaoItem.outraTraducao }}</a></td>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>    
                             <div class="row base-time-line">
                                 <div class="col-sm-5">
-                                    <h4 class="inline m-b-5"><span class="time-line-responsavel" > Responsável: </span><span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span> </h4>
+                                    <h4 class="inline m-b-5"><span class="time-line-responsavel" > Responsável: </span><a href="" ng-click="buscar('responsavel', solicitacaoItem.responsavel)" > <span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span></a></h4>
                                 </div>
                                 <div class="col-sm-2">
                                     <div ng-show="{{solicitacaoItem.dataEnvio}}" > <h5 class="inline m-b-5"><span class="text-primary semi-bold">Envio: {{solicitacaoItem.dataEnvio}}</span> </h5> </div>

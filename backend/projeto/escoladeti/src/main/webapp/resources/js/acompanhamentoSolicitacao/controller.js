@@ -36,6 +36,29 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
         });
     };
     
+    $scope.buscar = function(campoBusca, busca) {
+        switch (campoBusca) {
+            case "solicitacaoId":
+                $scope.buscaSolicitacao = busca;
+                break;
+            case "dataChegada":
+                $scope.buscaDataChegadaIni = busca;
+                $scope.buscaDataChegadaFim = busca;
+                break;
+            case "traducaoMaterial":
+                $scope.buscaTraducaoMaterial = busca;
+                break;     
+            case "responsavel":
+                $scope.buscaResponsavel = busca;
+                break;
+            case "material":
+                $scope.buscaMaterial = busca;
+                break;    
+        }
+        
+        $scope.getPesquisaSolicitacao('TODOS');
+    };
+    
     $scope.limpar = function() {
         $scope.buscaSolicitacao = "";
         $scope.buscaDataChegadaIni = "";
