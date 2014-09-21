@@ -19,7 +19,20 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
                 material: $scope.buscaMaterial,                
                 revisor: $scope.buscaRevisor     
             }, function(solicitacaoItens) {
-            $scope.solicitacaoItens = solicitacaoItens;
+                $log.debug('solicitacaoItens.length: ' + solicitacaoItens.length);
+                $log.debug('$scope.buscaSolicitacao: ' + $scope.buscaSolicitacao);
+                $scope.solicitacaoItens = [];
+                if($scope.buscaSolicitacao === undefined || $scope.buscaSolicitacao === "" || $scope.buscaSolicitacao === null){
+                   $scope.solicitacaoItens = solicitacaoItens;
+                }else{
+                    for (i=0; i<solicitacaoItens.length; i++) {
+                        $log.debug('solicitacaoItens[i].solicitacaoId: ' + solicitacaoItens[i].solicitacaoId);
+                        if(solicitacaoItens[i].solicitacaoId === $scope.buscaSolicitacao){
+                            $scope.solicitacaoItens.push(solicitacaoItens[i]); 
+                        }
+                    }
+                }
+            //$scope.solicitacaoItens = solicitacaoItens;
         });
     };
     

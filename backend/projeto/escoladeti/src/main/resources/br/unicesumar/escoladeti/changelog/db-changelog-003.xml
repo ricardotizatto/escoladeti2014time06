@@ -36,10 +36,10 @@
 		<addDefaultValue defaultValueBoolean="true"
 			columnDataType="boolean" columnName="presente" tableName="participante" />
 	</changeSet>
-	<!-- <changeSet id="w201409151639" author=" Walber "> <dropUniqueConstraint 
+	<changeSet id="w201409151639" author=" Walber "> <dropUniqueConstraint 
 		tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" /> 
 		</changeSet> <changeSet id="w201409161308" author="Walber"> <dropNotNullConstraint 
-		tableName="pessoajuridica" columnName="inscricaoestadual"/> </changeSet> -->
+		tableName="pessoajuridica" columnName="inscricaoestadual"/> </changeSet>
 	<changeSet id="40246" author="Catabriga">
 		<dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
 		<dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>

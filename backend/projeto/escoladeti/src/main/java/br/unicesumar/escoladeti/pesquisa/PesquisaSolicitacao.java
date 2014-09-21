@@ -98,12 +98,7 @@ public class PesquisaSolicitacao {
     }
 
     public void setSolicitacaoId(Long solicitacaoId) {
-//        if (solicitacaoId == null) {
-//            this.solicitacaoId = 0L;
-//        } else {
-            this.solicitacaoId = solicitacaoId;
-//        }
-        
+        this.solicitacaoId = solicitacaoId;
     }
 
     public String getResponsavel() {

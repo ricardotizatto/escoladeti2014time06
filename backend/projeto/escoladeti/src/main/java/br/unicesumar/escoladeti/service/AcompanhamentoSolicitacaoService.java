@@ -19,8 +19,8 @@ public class AcompanhamentoSolicitacaoService {
     }	
 
     public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(PesquisaSolicitacao ps) {
-        return this.acompanhamentoSolicitacaoRepository.findBySolicitacaoIdContainingAndDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
-        		ps.getSolicitacaoId(),
+        return this.acompanhamentoSolicitacaoRepository.findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
+        		//ps.getSolicitacaoId(),
                         ps.getDataChegadaInicio(), 
         		ps.getDataChegadaFim(),
         		ps.getStatus(),
