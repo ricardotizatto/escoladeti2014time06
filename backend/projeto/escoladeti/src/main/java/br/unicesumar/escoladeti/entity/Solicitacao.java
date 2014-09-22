@@ -27,8 +27,8 @@ import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
 public class Solicitacao extends Entidade {
 
     private static final long serialVersionUID = 1L;
-    @NotNull(message="Aluno é obrigatorio")
-    @ManyToOne(fetch=FetchType.EAGER)
+
+    @ManyToOne
     @JoinColumn(name="id_aluno")
     private PessoaFisica aluno;
     
@@ -46,8 +46,6 @@ public class Solicitacao extends Entidade {
     
     private String endereco;
     
-    @Min(value=0, message="Informe um endereço válido")
-    @Max(value=9999, message="Informe um endereço válido")
     private Integer numeroEndereco;
     
     private String serie;
@@ -55,6 +53,7 @@ public class Solicitacao extends Entidade {
     private String ensino;
     
 
+    @ManyToOne
     @JoinColumn(name = "id_responsavel")
     private PessoaFisica responsavel;
 

@@ -54,6 +54,10 @@ VolumeController.prototype = {
         if (this.volume.responsavel) {
             this.volume.responsavel = this.volume.responsavel.id;
         }
+
+        if (this.volume.dataImpressao) {
+            this.volume.dataImpressao = new Date(this.volume);
+        }
     },
 
     novoVolume: function () {
@@ -83,5 +87,14 @@ VolumeController.prototype = {
         }
 
         this.volume.$save(mensagemSucesso);
+    },
+
+    marcarComoImpresso: function () {
+        var self = this;
+
+        this.volume.$marcarComoImpresso(function () {
+            self.ajustarVolume();
+            toastr.success('Volume marcado como impresso');
+        });
     }
 }

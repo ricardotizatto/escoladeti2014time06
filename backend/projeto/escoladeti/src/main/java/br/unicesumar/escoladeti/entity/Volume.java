@@ -36,12 +36,15 @@ public class Volume  {
 
     private String observacao;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_impressao")
     private Date dataImpressao;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_revisao")
     private Date dataRevisao;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_enviado")
     private Date dataEnviado;
 
@@ -135,7 +138,6 @@ public class Volume  {
 
     public void rejeitar() {
         setStatus(VolumeStatus.REJEITADO);
-        this.dataImpressao = null;
     }
 
 }

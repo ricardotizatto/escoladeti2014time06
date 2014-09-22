@@ -10,6 +10,9 @@ import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
  * Created by Jhonatan on 16/09/2014.
@@ -24,11 +27,22 @@ public class VolumeService {
         volumeRepository.delete(id);
     }
 
+    @Transactional
     public Volume marcarComoImprimido(Long id, ComandoAlterarData comandoAlterarData) {
         Volume volume = volumeRepository.findOne(id);
+
+        if (!volume.getStatus().equals(VolumeStatus.ANDAMENTO)) {
+            throw new RuntimeException("Sómente volume em Andamento pode ser marcado como impresso.");
+        }
+
+        if (comandoAlterarData.getData().compareTo(new Date()) > 0) {
+            throw new RuntimeException("Data da impressão não pode ser maior que a data atual");
+        }
+
         volume.setDataImpressao(comandoAlterarData.getData());
         volume.setStatus(VolumeStatus.IMPRESSO);
-        return volumeRepository.save(volume);
+        Volume volumeSalvo = volumeRepository.save(volume);
+        return volumeSalvo;
     }
 
     public Volume marcarComoRevisado(Long id, ComandoMarcarRevisado comandoMarcarRevisado) {
@@ -46,8 +60,10 @@ public class VolumeService {
         return volumeRepository.save(volume);
     }
 
-    public Volume rejeitar(Long id) {
+    public Volume rejeitar(Long id, ComandoMarcarRevisado comandoMarcarRevisado) {
         Volume volume = volumeRepository.findOne(id);
+        volume.setDataRevisao(comandoMarcarRevisado.getDataRevisao());
+        volume.setResponsavelRevisao(Usuario.of(comandoMarcarRevisado.getRevisor()));
         volume.rejeitar();
         return volumeRepository.save(volume);
     }
