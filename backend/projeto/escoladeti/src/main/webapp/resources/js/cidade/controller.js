@@ -23,7 +23,7 @@ function CidadeController($scope, $routeParams, cidadeService, estadoService) {
 				+ cidade.nome + '</b>?', function(result) {
 			if (result) {
 				cidadeService.deletar(cidade).success(function(data, status) {
-					$scope.getTodos(1);
+					$scope.getTodos($scope.pageNumber);
 					console.log('Cidade deletada!');
 					toastr.success('Cidade ' + cidade.nome + ' deletada.');
 				}).error(function(data, status) {
@@ -106,12 +106,7 @@ function CidadeController($scope, $routeParams, cidadeService, estadoService) {
 		cidadeService.listar(numeroPagina).success(function(listaCidades) {
 			$scope.cidades = listaCidades;
                         
-                        console.log($scope.cidades);
-                        
-                        cidadeService.buscarTodos()
-                                .success(function(list){
-                                    $scope.totalItems = list.length;
-                        })
+            console.log($scope.cidades);
 		}).error(function(data) {
 			console.log('erro ao buscar Cidades ' + data.developerMessage);
 		});

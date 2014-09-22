@@ -70,7 +70,7 @@
             </tr>
         </table>
 
-        <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="totalItems" items-per-page="eventos.maxRows"
+        <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="eventos.pageCount*eventos.maxRows" items-per-page="eventos.maxRows"
                     ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"
                     previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
         </pagination>

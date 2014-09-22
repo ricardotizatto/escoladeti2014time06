@@ -68,7 +68,9 @@ public class PessoaService {
 
         if (comando.getTipo().equals("F")) {
             PessoaFisica pf = pessoaFisicaRepository.findByCpf(comando.getCpf());
-            if (pf != null) {
+            
+            String cpf = comando.getCpf();
+            if (cpf != null) {
                 if (pf.getCpf().equals(comando.getCpf()) && !Objects.equals(pf.getId(), id)) {
                     throw new RuntimeException("CPF já cadastrado.");
                 }

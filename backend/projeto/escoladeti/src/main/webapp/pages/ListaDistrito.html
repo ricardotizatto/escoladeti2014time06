@@ -84,7 +84,7 @@
                 </ul>
                     </div>
             </div>-->
-    <pagination boundary-links="true" num-pages="distritos.pageCount" total-items="totalItems" items-per-page="distritos.maxRows"
+    <pagination boundary-links="true" num-pages="distritos.pageCount" total-items="distritos.pageCount*distritos.maxRows" items-per-page="distritos.maxRows"
                 ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="distritos.maxPagesToShow"
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </pagination>

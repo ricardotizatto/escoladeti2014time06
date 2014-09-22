@@ -88,7 +88,7 @@
 		<dropView viewName="viewAcompanhamentoSolicitacao" />
 	</changeSet>
         -->
-	<changeSet author="martinho" id="mart013">
+	<changeSet author="martinho" id="mart0132">
 		<createView viewName="viewAcompanhamentoSolicitacao"
                     replaceIfExists="true" schemaName="public">
                     SELECT T1.ID AS SOLICITACAOID,
@@ -108,6 +108,10 @@
                     LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
                     ORDER BY T1.DATACHEGADA
             </createView>
+	</changeSet>
+	
+	<changeSet id="w201409212348" author="Walber">
+	<addUniqueConstraint columnNames="nome,codigo,sigla" tableName="pais"/>
 	</changeSet>
 
 

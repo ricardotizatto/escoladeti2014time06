@@ -85,9 +85,10 @@
                 </ul>
             </div>
         </div>-->
-    <pagination boundary-links="true" num-pages="livros.pageCount" total-items="totalItems" items-per-page="livros.maxRows"
+    <pagination boundary-links="true" num-pages="livros.pageCount" total-items="livros.pageCount*livros.maxRows" items-per-page="livros.maxRows"
                 ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="livros.maxPagesToShow"
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </pagination>
+    
 </div>
 

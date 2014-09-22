@@ -492,10 +492,10 @@
         <addPrimaryKey columnNames="id" constraintName="pagamento_pkey"
                        tableName="pagamento" />
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940885-43">
+    <!--changeSet author="Jhonatan (generated)" id="1404066940885-43">
         <addPrimaryKey columnNames="id" constraintName="pais_pkey"
                        tableName="pais" />
-    </changeSet>
+    </changeSet-->
     <changeSet author="Jhonatan (generated)" id="1404066940885-44">
         <addPrimaryKey columnNames="id" constraintName="partematerial_pkey"
                        tableName="partematerial" />
