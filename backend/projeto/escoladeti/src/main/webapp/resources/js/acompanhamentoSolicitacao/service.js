@@ -1,6 +1,5 @@
 function AcompanhamentoSolicitacaoFactory($resource) {
 	return $resource("./rest/acompanhamentosolicitacoes/:id/:acao", {id: '@id'},{
-
 	});
 }
 

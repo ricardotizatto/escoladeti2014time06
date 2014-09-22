@@ -3,26 +3,70 @@ var controllers = angular.module('controllers');
 function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams, PesquisaSolicitacao){ 
 
     $scope.init = function() {
-        $scope.getPesquisaSolicitacao();
+        $scope.getPesquisaSolicitacao('TODOS');
     };
     
-    $scope.getPesquisaSolicitacao = function(status) {
-        $log.debug('Pesquisando status: ' + status);
-        $log.debug('Data ini: ' + $scope.buscaDataChegadaIni + ' Fim ' + $scope.buscaDataChegadaFim);
+    $scope.getPesquisaSolicitacao = function(buscaStatus) {
+        $log.debug('Pesquisando status: ' + buscaStatus);
 
         PesquisaSolicitacao.query({
-                status: status,
-                dataInicio: $scope.buscaDataChegadaIni,
-                dataFim: $scope.buscaDataChegadaFim,
                 solicitacaoId: $scope.buscaSolicitacao,
-                ordemId: $scope.buscaOrdem,
-                material: $scope.buscaMaterial,
+                dataChegadaInicio : $scope.buscaDataChegadaIni,
+                dataChegadaFim : $scope.buscaDataChegadaFim,
+                status: buscaStatus,
+                traducaoMaterial : $scope.buscaTraducaoMaterial,
                 responsavel: $scope.buscaResponsavel,
-                revisor: $scope.buscaRevisor
-                
+                material: $scope.buscaMaterial,                
+                revisor: $scope.buscaRevisor     
             }, function(solicitacaoItens) {
-            $scope.solicitacaoItens = solicitacaoItens;
+                $log.debug('solicitacaoItens.length: ' + solicitacaoItens.length);
+                $log.debug('$scope.buscaSolicitacao: ' + $scope.buscaSolicitacao);
+                $scope.solicitacaoItens = [];
+                if($scope.buscaSolicitacao === undefined || $scope.buscaSolicitacao === "" || $scope.buscaSolicitacao === null){
+                   $scope.solicitacaoItens = solicitacaoItens;
+                }else{
+                    for (i=0; i<solicitacaoItens.length; i++) {
+                        $log.debug('solicitacaoItens[i].solicitacaoId: ' + solicitacaoItens[i].solicitacaoId);
+                        if(solicitacaoItens[i].solicitacaoId === $scope.buscaSolicitacao){
+                            $scope.solicitacaoItens.push(solicitacaoItens[i]); 
+                        }
+                    }
+                }
+            //$scope.solicitacaoItens = solicitacaoItens;
         });
+    };
+    
+    $scope.buscar = function(campoBusca, busca) {
+        switch (campoBusca) {
+            case "solicitacaoId":
+                $scope.buscaSolicitacao = busca;
+                break;
+            case "dataChegada":
+                $scope.buscaDataChegadaIni = busca;
+                $scope.buscaDataChegadaFim = busca;
+                break;
+            case "traducaoMaterial":
+                $scope.buscaTraducaoMaterial = busca;
+                break;     
+            case "responsavel":
+                $scope.buscaResponsavel = busca;
+                break;
+            case "material":
+                $scope.buscaMaterial = busca;
+                break;    
+        }
+        
+        $scope.getPesquisaSolicitacao('TODOS');
+    };
+    
+    $scope.limpar = function() {
+        $scope.buscaSolicitacao = "";
+        $scope.buscaDataChegadaIni = "";
+        $scope.buscaDataChegadaFim = "";
+        $scope.buscaTraducaoMaterial = "";
+        $scope.buscaResponsavel = "";
+        $scope.buscaMaterial = "";
+        $scope.buscaRevisor = "";  
     };
     
     $scope.produzir = function(soliciataoId) {

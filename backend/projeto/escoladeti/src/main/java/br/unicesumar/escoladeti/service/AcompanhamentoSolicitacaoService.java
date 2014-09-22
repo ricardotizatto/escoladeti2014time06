@@ -1,19 +1,33 @@
 package br.unicesumar.escoladeti.service;
 
-import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
-import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
+import br.unicesumar.escoladeti.repository.AcompanhamentoSolicitacaoRepository;
+import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
+import java.util.Date;
 import java.util.List;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AcompanhamentoSolicitacaoService {
-
-    //private SolicitacaoItemRepository solicitacaoItemRepository = new SolicitacaoItemRepository();
     
-    public List<AcompanhamentoDTO>listarItens(PesquisaSolicitacao pesquisa, DataSource dataSouce) {
-        return null; //solicitacaoItemRepository.listarItens(pesquisa, dataSouce);
+    @Autowired
+    private AcompanhamentoSolicitacaoRepository acompanhamentoSolicitacaoRepository;
+    
+    public List<ViewAcompanhamentoSolicitacao> listarItens() {
+        return acompanhamentoSolicitacaoRepository.findAll();
+    }	
+
+    public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(PesquisaSolicitacao ps) {
+        return this.acompanhamentoSolicitacaoRepository.findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
+        		//ps.getSolicitacaoId(),
+                        ps.getDataChegadaInicio(), 
+        		ps.getDataChegadaFim(),
+        		ps.getStatus(),
+        		ps.getMaterial(),
+        		ps.getResponsavel(),
+        		ps.getRevisor(),
+        		ps.getTraducaoMaterial()
+        		);
     }
-	
 }

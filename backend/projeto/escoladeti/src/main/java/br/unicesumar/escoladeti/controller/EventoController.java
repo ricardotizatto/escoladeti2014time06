@@ -23,11 +23,7 @@ public class EventoController implements Serializable {
     @RequestMapping(value = "/evento", method = RequestMethod.POST)
     @ResponseBody
     public Evento salvar(@RequestBody Evento evento) throws Exception {
-        if (!DateUtil.validBeforeDate(evento.getData())){
-
-            return this.eventoService.salvar(evento);
-        }
-        throw new Exception ("A data não pode ser menor do que a data atual: " + evento.getData());
+        return this.eventoService.salvar(evento);
     }
 
     @RequestMapping(value = "/evento/{id}", method = RequestMethod.GET)

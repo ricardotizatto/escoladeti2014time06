@@ -38,14 +38,17 @@ public class Volume  {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_impressao")
+    @Temporal(TemporalType.DATE)
     private Date dataImpressao;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_revisao")
+    @Temporal(TemporalType.DATE)
     private Date dataRevisao;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_enviado")
+    @Temporal(TemporalType.DATE)
     private Date dataEnviado;
 
     public Usuario getResponsavel() {

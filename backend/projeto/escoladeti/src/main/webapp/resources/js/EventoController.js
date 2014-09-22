@@ -187,16 +187,16 @@ function eventoController($scope, $http, $routeParams) {
      $scope.getTipoEvento = function(tipo){
         switch(tipo) {
             case "1": 
-                return 'Curso';
+                return 'CURSO';
                 break;
             case "2":
-                return 'Palestra';
+                return 'PALESTRA';
                 break;
             case "3":
-                return 'Reuniao';
+                return 'REUNIAO';
                 break;   
             default:
-                return 'Curso';
+                return 'CURSO';
                 break;
         }
     };

@@ -48,7 +48,9 @@
         <script type="text/javascript" src="./resources/js/solicitacao/service.js" ></script>           
         <script type="text/javascript" src="./resources/js/pessoa/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/service.js" ></script>
-
+        <script type="text/javascript" src="./resources/js/estoque/ProdutoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/estoque/MovimentoController.js" ></script>
+        
         <script type="text/javascript" src="./resources/js/ordemProducao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/ordemProducao/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/service.js" ></script>
@@ -165,10 +167,10 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-user"></i>
-                            <span class="title">USU√ÅRIOS</span>
+                            <span class="title">USU¡RIOS</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listausuario">Usu√°rio</a></li>
+                            <li><a href="#/listausuario">Usu·rio</a></li>
                             <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                             <li><a href="#/listaitemacesso">Item de acesso</a></li>
                         </ul>
@@ -193,11 +195,11 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-cog"></i>
-                            <span class="title">PRODU√á√ÉO</span>
+                            <span class="title">PRODU«√O</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">Solicita√ß√£o</a></li>
-                            <li><a href="#/acompanhamento">Acompanhamento de Solicita√ß√£o</a></li>
+                            <li><a href="#/listasolicitacoes">SolicitaÁ„o</a></li>
+                            <li><a href="#/acompanhamento">Acompanhamento de SolicitaÁ„o</a></li>
                         </ul>
                     </li>
                     <li>
@@ -209,6 +211,17 @@
                             <li><a href="#/listalivro">Livro</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dropbox"></i>
+                            <span class="title">Estoque</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#/listaproduto">Produto</a></li>
+                            <li><a href="#/listamovimento">Movimento</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
 

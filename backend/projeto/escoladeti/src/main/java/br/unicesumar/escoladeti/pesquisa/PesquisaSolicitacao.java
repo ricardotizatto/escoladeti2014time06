@@ -1,16 +1,20 @@
 package br.unicesumar.escoladeti.pesquisa;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PesquisaSolicitacao {
-    
+
     private String status;
-    private Date dataInicio;
-    private Date dataFim;
+    private Date dataChegadaInicio;
+    private Date dataChegadaFim;
     private Long solicitacaoId;
-    private Long ordemId;
+    private String traducaoMaterial;
     private String material;
     private String responsavel;
     private String revisor;
@@ -19,34 +23,73 @@ public class PesquisaSolicitacao {
         return status;
     }
 
+    public String getTraducaoMaterial() {
+        return traducaoMaterial;
+    }
+
+    public void setTraducaoMaterial(String traducaoMaterial) {
+        if (traducaoMaterial == null || traducaoMaterial.isEmpty()) {
+            this.traducaoMaterial = "TODOS";
+        } else {
+            this.traducaoMaterial = traducaoMaterial.toUpperCase();
+        }
+    }
+
     public void setStatus(String status) {
-        if (status != null) {
+        if (status == null || status.isEmpty()) {
+            this.status = "TODOS";
+        } else {
             this.status = status.toUpperCase();
         }
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
+    public String getMaterial() {
+        return material;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        if(dataFim != null && dataInicio.after(dataFim)){
-            this.dataInicio = dataInicio;
-        }else if(dataInicio != null){
-            throw new RuntimeException("Data de Inicio não pode ser maior que Final"); 
-        } 
-        
+    public void setMaterial(String material) {
+        if (material == null || material.isEmpty()) {
+            this.material = "TODOS";
+        } else {
+            this.material = material.toUpperCase();
+        }
     }
 
-    public Date getDataFim() {
-        return dataFim;
+    public Date getDataChegadaInicio() {
+        return dataChegadaInicio;
     }
 
-    public void setDataFim(Date dataFim) {
-        if (dataInicio != null && dataFim.before(dataInicio)) {
-            this.dataFim = dataFim;
-        }else if(dataFim != null){
-            throw new RuntimeException("Data Final não pode ser Menos que da Inicio");
+    public void setDataChegadaInicio(String dataChegadaInicio) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            if (dataChegadaInicio == null || dataChegadaInicio.isEmpty()) {
+                this.dataChegadaInicio = sdf.parse("0001-01-31");
+            } else {
+                this.dataChegadaInicio = sdf.parse(dataChegadaInicio);
+            }
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public Date getDataChegadaFim() {
+        return dataChegadaFim;
+    }
+
+    public void setDataChegadaFim(String dataChegadaFim) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            if (dataChegadaFim == null || dataChegadaFim.isEmpty()) {
+                this.dataChegadaFim = sdf.parse("9999-12-31");
+            } else {
+                this.dataChegadaFim = sdf.parse(dataChegadaFim);
+            }
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
@@ -58,32 +101,16 @@ public class PesquisaSolicitacao {
         this.solicitacaoId = solicitacaoId;
     }
 
-    public Long getOrdemId() {
-        return ordemId;
-    }
-
-    public void setOrdemId(Long ordemId) {
-        this.ordemId = ordemId;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
-        if (material != null) {
-            this.material = material.toUpperCase();
-        }
-    }
-
     public String getResponsavel() {
         return responsavel;
     }
 
     public void setResponsavel(String responsavel) {
-        if(responsavel != null){
+        if (responsavel == null || responsavel.isEmpty()) {
+            this.responsavel = "TODOS";
+        } else {
             this.responsavel = responsavel.toUpperCase();
-        }    
+        }
     }
 
     public String getRevisor() {
@@ -91,10 +118,11 @@ public class PesquisaSolicitacao {
     }
 
     public void setRevisor(String revisor) {
-        if (revisor != null) {
+        if (revisor == null || revisor.isEmpty()) {
+            this.revisor = "TODOS";
+        } else {
             this.revisor = revisor.toUpperCase();
         }
     }
-    
-    
+
 }

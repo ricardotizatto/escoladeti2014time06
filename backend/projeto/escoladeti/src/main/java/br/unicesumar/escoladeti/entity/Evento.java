@@ -44,7 +44,7 @@ public class Evento extends Entidade {
     }
 
     public void setOrganizacao(String organizacao) {
-        this.organizacao = organizacao;
+        this.organizacao = organizacao.toUpperCase();
     }
 
     public String getTitulo() {
@@ -52,7 +52,7 @@ public class Evento extends Entidade {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        this.titulo = titulo.toUpperCase();
     }
 
     public String getDescricao() {
@@ -60,7 +60,7 @@ public class Evento extends Entidade {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toUpperCase();
     }
 
     public String getInicio() {
@@ -76,7 +76,7 @@ public class Evento extends Entidade {
     }
 
     public void setTipoEvento(String tipoEvento) {
-        this.tipoEvento = tipoEvento;
+        this.tipoEvento = tipoEvento.toUpperCase();
     }
 
     public String getLocal() {
@@ -84,7 +84,7 @@ public class Evento extends Entidade {
     }
 
     public void setLocal(String local) {
-        this.local = local;
+        this.local = local.toUpperCase();
     }
     
     public double getValor() {
@@ -108,7 +108,7 @@ public class Evento extends Entidade {
     }
 
     public void setMinistrante(String ministrante) {
-        this.ministrante = ministrante;
+        this.ministrante = ministrante.toUpperCase();
     }
     
     public boolean validaData(){
