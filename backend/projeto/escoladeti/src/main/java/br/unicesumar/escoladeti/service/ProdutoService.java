@@ -15,7 +15,11 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     public Produto salvar(Produto produto) throws Exception {
-        return this.produtoRepository.save(produto);
+
+        if (!produto.equals(buscarProdutoPorNome(produto))) {
+            return this.produtoRepository.save(produto);
+        }
+        throw new Exception("O Produto " + produto.getNome() + " já está cadastrado!");
     }
 
     public DataPage<Produto> getTodos(Integer pagina) {
@@ -36,6 +40,11 @@ public class ProdutoService {
 
     public Produto getById(Long id) {
         return this.produtoRepository.findById(id);
+    }
+
+    public Produto buscarProdutoPorNome(Produto produto) {
+        return this.produtoRepository.findByNome(
+                produto.getNome());
     }
 
 }
