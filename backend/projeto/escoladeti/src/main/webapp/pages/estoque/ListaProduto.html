@@ -48,7 +48,7 @@
             </table>
         </div>
     </div>
-    <div class="row ">
+<!--    <div class="row ">
         <div class="col-sm-12">
             <ul class="pagination">
                 <li>
@@ -76,6 +76,12 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div>-->
+    
+     <pagination boundary-links="true" num-pages="produtos.pageCount" total-items="produtos.pageCount*produtos.maxRows" items-per-page="produtos.maxRows"
+                ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="produtos.maxPagesToShow"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
+    
 </div>
 
