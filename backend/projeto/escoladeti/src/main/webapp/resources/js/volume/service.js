@@ -41,5 +41,6 @@ function VolumeFactory($resource) {
                 acao: 'andamento'
             }
         }
+
     });
 }

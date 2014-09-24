@@ -1,14 +1,17 @@
 package br.unicesumar.escoladeti.comando;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 /**
  * Created by Jhonatan on 16/09/2014.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoMarcarRevisado {
 
     private Long revisor;
-    private Date dataRevisao;
+    private Date data;
 
     public Long getRevisor() {
         return revisor;
@@ -18,11 +21,11 @@ public class ComandoMarcarRevisado {
         this.revisor = revisor;
     }
 
-    public Date getDataRevisao() {
-        return dataRevisao;
+    public Date getData() {
+        return data;
     }
 
-    public void setDataRevisao(Date dataRevisao) {
-        this.dataRevisao = dataRevisao;
+    public void setData(Date data) {
+        this.data = data;
     }
 }

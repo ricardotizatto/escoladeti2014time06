@@ -54,6 +54,7 @@ public class VolumeController {
         return volumeService.marcarComoImprimido(idVolume, comandoAlterarData);
     }
 
+
     @RequestMapping(value = "/{id}/rejeitado", method = RequestMethod.PUT)
     public @ResponseBody Volume marcarComoRejeitado(
             @PathVariable("id") Long idVolume,

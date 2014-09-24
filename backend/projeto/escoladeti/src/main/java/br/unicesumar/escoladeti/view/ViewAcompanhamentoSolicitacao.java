@@ -2,10 +2,7 @@ package br.unicesumar.escoladeti.view;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 
 @Entity(name = "viewAcompanhamentoSolicitacao")
 public class ViewAcompanhamentoSolicitacao implements Serializable{
@@ -13,6 +10,8 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
+    private Long id;
+
     private Long solicitacaoId;
     
     private String status;
@@ -25,8 +24,6 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
     private String traducaoMaterial;
     
     private String responsavel;
-    
-    private String revisor;
     
     private String material;
     
@@ -84,20 +81,23 @@ public class ViewAcompanhamentoSolicitacao implements Serializable{
         this.responsavel = responsavel;
     }
 
-    public String getRevisor() {
-        return revisor;
-    }
-
-    public void setRevisor(String revisor) {
-        this.revisor = revisor;
-    }
-
     public String getMaterial() {
         return material;
     }
 
     public void setMaterial(String material) {
         this.material = material;
-    }   
-    
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

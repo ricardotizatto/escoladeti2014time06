@@ -1,6 +1,6 @@
 var controllers = angular.module('controllers');
 
-function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams, PesquisaSolicitacao){ 
+function AcompanhamentoSolicitacaoController($scope, $location, $log, OrdemProducao){
 
     $scope.init = function() {
         $scope.getPesquisaSolicitacao('TODOS');
@@ -9,7 +9,7 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     $scope.getPesquisaSolicitacao = function(buscaStatus) {
         $log.debug('Pesquisando status: ' + buscaStatus);
 
-        PesquisaSolicitacao.query({
+        OrdemProducao.query({
                 solicitacaoId: $scope.buscaSolicitacao,
                 dataChegadaInicio : $scope.buscaDataChegadaIni,
                 dataChegadaFim : $scope.buscaDataChegadaFim,
@@ -77,10 +77,11 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
         $location.path('/cadastrosolicitacao/'+ soliciataoId);
     };
     
-    $scope.cancelar = function(soliciataoId) {
-        $log.debug('cancelar: '+ soliciataoId);
-        BootstrapDialog.confirm('Deseja realmente cancelar a Solicitacao: <b>' + soliciataoId + '</b>?', function(result) {
+    $scope.cancelar = function(item) {
+        $log.debug('cancelar: '+ item.id);
+        BootstrapDialog.confirm('Deseja realmente cancelar a Ordem: <b>' + item.id + '</b>?', function(result) {
             if (result) {
+                item.$cancelar();
                 return;
             }
             return;
@@ -130,6 +131,21 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
             return "fa fa-spinner";
         }
     };
+
+//    $scope.cancelar = function (item) {
+//        var ordem = new OrdemProducao(item);
+//        ordem.$cancelar(function () {
+//            toastr.success('Ordem cancelada com sucesso');
+//        });
+//    };
+//
+    $scope.produzir = function (item) {
+
+        item.$produzir(function () {
+            toastr.success('Ordem enviada para produção');
+        });
+    }
+
 }
 
 controllers.controller('AcompanhamentoSolicitacaoController',  
@@ -137,8 +153,6 @@ controllers.controller('AcompanhamentoSolicitacaoController',
 		 '$scope',
 		 '$location',
 		 '$log',
-		 '$http',
-		 '$routeParams',
-                 'AcompanhamentoSolicitacaoFactory',
+         'OrdemProducaoFactory',
 		 AcompanhamentoSolicitacaoController
 		 ]);
