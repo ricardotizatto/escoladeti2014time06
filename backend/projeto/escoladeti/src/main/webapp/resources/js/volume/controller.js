@@ -111,7 +111,7 @@ VolumeController.prototype = {
         $('#modalImpressao').modal('show');
 
         this.aoAlterarStatus = function () {
-            this.volume.$rejeitar(function () {
+            self.volume.$rejeitar(function () {
                 self.ajustarVolume();
                 $('#modalImpressao').modal('hide');
                 toastr.success('Volume rejeitado');
@@ -125,14 +125,12 @@ VolumeController.prototype = {
         $('#modalImpressao').modal('show');
 
         this.aoAlterarStatus = function () {
-            this.volume.$marcarComoImpresso(function () {
+            self.volume.$marcarComoImpresso(function () {
                 self.ajustarVolume();
                 $('#modalImpressao').modal('hide');
 
                 toastr.success('Volume marcado como impresso');
             });
-
-
         }
 
     },
@@ -142,14 +140,12 @@ VolumeController.prototype = {
         $('#modalImpressao').modal('show');
 
         this.aoAlterarStatus = function () {
-            this.volume.$marcarComoRevisado(function () {
+            self.volume.$marcarComoRevisado(function () {
                 self.ajustarVolume();
                 $('#modalImpressao').modal('hide');
 
                 toastr.success('Volume marcado como impresso');
             });
-
-
         }
 
     },
@@ -159,13 +155,13 @@ VolumeController.prototype = {
         $('#modalImpressao').modal('show');
 
         this.aoAlterarStatus = function () {
-            this.volume.$marcarComoEnviado(function () {
+
+            self.volume.$marcarComoEnviado(function () {
                 self.ajustarVolume();
                 $('#modalImpressao').modal('hide');
 
                 toastr.success('Volume marcado como enviado');
             });
-
 
         }
 

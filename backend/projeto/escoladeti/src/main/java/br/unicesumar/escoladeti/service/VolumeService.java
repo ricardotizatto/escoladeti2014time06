@@ -40,32 +40,32 @@ public class VolumeService {
     }
 
     @Transactional
-    public Volume marcarComoImprimido(Long id, ComandoAlterarData comandoAlterarData) {
+    public Volume marcarComoImprimido(Long id, ComandoSalvarVolume comandoSalvarVolume) {
         Volume volume = volumeRepository.findOne(id);
-        volume.marcarComoImprimido(comandoAlterarData.getData());
+        volume.marcarComoImprimido(comandoSalvarVolume);
         Volume volumeSalvo = volumeRepository.save(volume);
         return volumeSalvo;
     }
 
     @Transactional
-    public Volume marcarComoRevisado(Long id, ComandoMarcarRevisado comandoMarcarRevisado) {
+    public Volume marcarComoRevisado(Long id, ComandoSalvarVolume comando) {
         Volume volume = volumeRepository.findOne(id);
 
-        volume.marcarComoRevisado(comandoMarcarRevisado.getData(), comandoMarcarRevisado.getRevisor());
+        volume.marcarComoRevisado(comando.getDataAsDate(), comando.getRevisor(), comando.getObservacao());
         return volumeRepository.save(volume);
     }
 
     @Transactional
-    public Volume marcarComoEnviado(Long id, ComandoAlterarData comandoAlterarData) {
+    public Volume marcarComoEnviado(Long id, ComandoSalvarVolume comando) {
         Volume volume = volumeRepository.findOne(id);
-        volume.marcarComoEnviado(comandoAlterarData.getData());
+        volume.marcarComoEnviado(comando.getDataAsDate(), comando.getObservacao());
         return volumeRepository.save(volume);
     }
 
     @Transactional
-    public Volume rejeitar(Long id, ComandoMarcarRevisado comandoMarcarRevisado) {
+    public Volume rejeitar(Long id, ComandoSalvarVolume comando) {
         Volume volume = volumeRepository.findOne(id);
-        volume.rejeitar(comandoMarcarRevisado.getData(), comandoMarcarRevisado.getRevisor());
+        volume.rejeitar(comando.getDataAsDate(), comando.getRevisor(), comando.getObservacao());
         return volumeRepository.save(volume);
     }
 

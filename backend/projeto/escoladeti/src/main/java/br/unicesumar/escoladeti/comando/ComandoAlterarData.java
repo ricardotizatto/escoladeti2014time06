@@ -1,7 +1,10 @@
 package br.unicesumar.escoladeti.comando;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -9,13 +12,23 @@ import java.util.Date;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoAlterarData {
-    private Date data;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private String data;
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public Date getDataAsDate() {
+        try {
+            return data == null ? null : simpleDateFormat.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Data inválida");
+        }
+    }
+
+    public void setData(String data) {
         this.data = data;
     }
 }

@@ -50,29 +50,29 @@ public class VolumeController {
     @RequestMapping(value = "/{id}/impresso", method = RequestMethod.PUT)
     public @ResponseBody Volume marcarComoImpresso(
             @PathVariable("id") Long idVolume,
-            @RequestBody ComandoAlterarData comandoAlterarData) {
-        return volumeService.marcarComoImprimido(idVolume, comandoAlterarData);
+            @RequestBody ComandoSalvarVolume comandoSalvarVolume) {
+        return volumeService.marcarComoImprimido(idVolume, comandoSalvarVolume);
     }
 
 
     @RequestMapping(value = "/{id}/rejeitado", method = RequestMethod.PUT)
     public @ResponseBody Volume marcarComoRejeitado(
             @PathVariable("id") Long idVolume,
-            @RequestBody ComandoMarcarRevisado comando) {
+            @RequestBody ComandoSalvarVolume comando) {
         return volumeService.rejeitar(idVolume, comando);
     }
 
     @RequestMapping(value = "/{id}/revisado", method = RequestMethod.PUT)
     public @ResponseBody Volume marcarComoRevisado(
             @PathVariable("id") Long idVolume,
-            @RequestBody ComandoMarcarRevisado comando) {
+            @RequestBody ComandoSalvarVolume comando) {
         return volumeService.marcarComoRevisado(idVolume, comando);
     }
 
     @RequestMapping(value = "/{id}/enviado", method = RequestMethod.PUT)
     public @ResponseBody Volume marcarComoEnviado(
             @PathVariable("id") Long idVolume,
-            @RequestBody ComandoAlterarData comando) {
+            @RequestBody ComandoSalvarVolume comando) {
         return volumeService.marcarComoEnviado(idVolume, comando);
     }
 

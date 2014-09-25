@@ -131,24 +131,29 @@
                             </div>    
                             <div class="row base-time-line">
                                 <div class="col-md-8">
-                                    <h4 class="inline m-b-5"><span class="time-line-responsavel" > Responsável: </span><a href="" ng-click="buscar('responsavel', solicitacaoItem.responsavel)" > <span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span></a></h4>
+                                    <h4 class="inline m-b-5">
+                                        <label > Responsável: </label>
+                                        <a href="" ng-click="buscar('responsavel', solicitacaoItem.responsavel)" >
+                                            <span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span>
+                                        </a>
+                                    </h4>
                                 </div>
                                 <div class="col-md-4">
 
                                     <div class="col-md-12 form-group" data-ng-show=" solicitacaoItem.status == 'AGUARDANDO' || solicitacaoItem.status =='PRODUCAO' "  >
-                                        <button class="btn btn-danger btn-small "
+                                        <button class="btn btn-danger btn-small " style="width: 100%"
                                                 data-ng-click="cancelar(solicitacaoItem)"><i class="glyphicon glyphicon-remove" ></i> Cancelar
                                         </button>
                                     </div>
                                     <div class="col-md-12 form-group" data-ng-show="solicitacaoItem.status == 'AGUARDANDO' ">
-                                        <button class="btn btn-success btn-small input-default"
+                                        <button class="btn btn-success btn-small input-default" style="width: 100%"
                                                 data-ng-click="produzir(solicitacaoItem)" >
                                             <i class="fa fa-cogs"></i> Produzir
                                         </button>
                                     </div>
                                     <div class="col-md-12 form-group"
                                          data-ng-show="solicitacaoItem.status == 'CANCELADO' || solicitacaoItem.status =='PRODUCAO' || solicitacaoItem.status =='FINALIZADO' ">
-                                        <a  class="btn btn-primary btn-small input-default" href="#/ordem-producao/{{solicitacaoItem.id}}">
+                                        <a  class="btn btn-primary btn-small input-default" href="#/ordem-producao/{{solicitacaoItem.id}}" style="width: 100%">
                                             <i class="fa fa-arrows-alt" ></i> Expandir
                                         </a>
                                     </div>

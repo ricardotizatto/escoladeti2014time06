@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.*;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -139,7 +140,7 @@ public class Volume  {
         this.id = id;
     }
 
-    public void rejeitar(Date data, Long revisor) {
+    public void rejeitar(Date data, Long revisor, String observacao) {
         if (data == null) {
             throw  new RuntimeException("Data da rejeição deve ser informada.");
         }
@@ -161,6 +162,7 @@ public class Volume  {
         }
         setStatus(VolumeStatus.REJEITADO);
         setResponsavelRevisao(Usuario.of(revisor));
+        setObservacao(observacao);
         setDataRevisao(data);
     }
 
@@ -177,7 +179,7 @@ public class Volume  {
         this.responsavelRevisao = null;
     }
 
-    public void marcarComoEnviado(Date data) {
+    public void marcarComoEnviado(Date data, String observacao) {
         if (!getStatus().equals(VolumeStatus.REVISADO)) {
             throw new RuntimeException("Sómente volume revisado pode ser marcado como enviado.");
         }
@@ -195,11 +197,12 @@ public class Volume  {
         }
 
         setStatus(VolumeStatus.ENVIADO);
+        setObservacao(observacao);
         setDataEnviado(data);
 
     }
 
-    public void marcarComoRevisado(Date data, Long revisor) {
+    public void marcarComoRevisado(Date data, Long revisor, String observacao) {
         if (revisor == null) {
             throw new RuntimeException("Informe um revisor.");
         }
@@ -222,24 +225,29 @@ public class Volume  {
 
         setDataRevisao(data);
         setResponsavelRevisao(Usuario.of(revisor));
+        setObservacao(observacao);
         setStatus(VolumeStatus.REVISADO);
     }
 
-    public void marcarComoImprimido(Date data) {
+    public void marcarComoImprimido(ComandoSalvarVolume comandoSalvarVolume) {
 
         if (!getStatus().equals(VolumeStatus.ANDAMENTO)) {
             throw new RuntimeException("Sómente volume em Andamento pode ser marcado como impresso.");
         }
 
-        if (data == null) {
+        if (comandoSalvarVolume.getDataAsDate() == null) {
             throw new RuntimeException("Informe data de impressão");
         }
 
-        if (data.after(new Date())) {
+        if (comandoSalvarVolume.getDataAsDate().after(new Date())) {
             throw new RuntimeException("Data da impressão deve ser menor ou igual a data atual.");
         }
 
-        setDataImpressao(data);
+        setPaginaInicio(comandoSalvarVolume.getPaginaInicio());
+        setPaginaFim(comandoSalvarVolume.getPaginaFim());
+        setResponsavel(Usuario.of(comandoSalvarVolume.getResponsavel()));
+        setObservacao(comandoSalvarVolume.getObservacao());
+        setDataImpressao(comandoSalvarVolume.getDataAsDate());
         setStatus(VolumeStatus.IMPRESSO);
     }
 

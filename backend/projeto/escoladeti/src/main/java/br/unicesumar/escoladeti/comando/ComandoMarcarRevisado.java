@@ -2,6 +2,8 @@ package br.unicesumar.escoladeti.comando;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -9,9 +11,9 @@ import java.util.Date;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoMarcarRevisado {
-
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Long revisor;
-    private Date data;
+    private String data;
 
     public Long getRevisor() {
         return revisor;
@@ -21,11 +23,19 @@ public class ComandoMarcarRevisado {
         this.revisor = revisor;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public Date getDataAsDate() {
+        try {
+            return data == null ? null : simpleDateFormat.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Data inválida");
+        }
+    }
+    public void setData(String data) {
         this.data = data;
     }
 }

@@ -62,7 +62,7 @@
                 <div class="col-md-3 form-group {{solicitacaoForm.responsavel.$error.required? 'has-error' : 'has-success' }} has-feedback">
                     <label class="control-label">Responsável *</label>
                     <div class="input-group">
-                        <select ui-select2="select2Options" class="input-default"
+                        <select ui-select2="select2Options" class="input-default" data-ng-change="buscarEndereco()"
                                 ng-model="solicitacao.responsavel" name="responsavel" required="required">
                             <option value=""></option>
                             <option ng-repeat="p in pessoasFisicas" value="{{p.id}}">{{p.nome}}</option>

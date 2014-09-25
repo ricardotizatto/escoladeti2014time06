@@ -233,6 +233,10 @@ public class SolicitacaoItem extends Entidade{
     }
 
     public void finalizar() {
+        if (volumes.size() == 0) {
+            throw new RuntimeException("Só é possível finalizar ordem com volumes.");
+        }
+
         for (Volume volume : volumes) {
             if (!volume.getStatus().equals(VolumeStatus.ENVIADO)) {
                 throw new RuntimeException("Todos volumes precisam estar enviados para finalizar a ordem");
