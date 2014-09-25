@@ -1,5 +1,7 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.comando.ComandoAlterarData;
+import br.unicesumar.escoladeti.comando.ComandoMarcarRevisado;
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.entity.Volume;
 import br.unicesumar.escoladeti.service.VolumeService;
@@ -10,9 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Map;
 
-/**
- * Created by Jhonatan on 16/09/2014.
- */
 @Controller
 @RequestMapping(value = "/rest/volumes")
 public class VolumeController {
@@ -46,6 +45,41 @@ public class VolumeController {
             @PathVariable("id") Long idVolume) {
         volumeService.deletar(idVolume);
         return "deletado";
+    }
+
+    @RequestMapping(value = "/{id}/impresso", method = RequestMethod.PUT)
+    public @ResponseBody Volume marcarComoImpresso(
+            @PathVariable("id") Long idVolume,
+            @RequestBody ComandoSalvarVolume comandoSalvarVolume) {
+        return volumeService.marcarComoImprimido(idVolume, comandoSalvarVolume);
+    }
+
+
+    @RequestMapping(value = "/{id}/rejeitado", method = RequestMethod.PUT)
+    public @ResponseBody Volume marcarComoRejeitado(
+            @PathVariable("id") Long idVolume,
+            @RequestBody ComandoSalvarVolume comando) {
+        return volumeService.rejeitar(idVolume, comando);
+    }
+
+    @RequestMapping(value = "/{id}/revisado", method = RequestMethod.PUT)
+    public @ResponseBody Volume marcarComoRevisado(
+            @PathVariable("id") Long idVolume,
+            @RequestBody ComandoSalvarVolume comando) {
+        return volumeService.marcarComoRevisado(idVolume, comando);
+    }
+
+    @RequestMapping(value = "/{id}/enviado", method = RequestMethod.PUT)
+    public @ResponseBody Volume marcarComoEnviado(
+            @PathVariable("id") Long idVolume,
+            @RequestBody ComandoSalvarVolume comando) {
+        return volumeService.marcarComoEnviado(idVolume, comando);
+    }
+
+    @RequestMapping(value = "/{id}/andamento", method = RequestMethod.PUT)
+    public @ResponseBody Volume reativar(
+            @PathVariable("id") Long idVolume) {
+        return volumeService.reativar(idVolume);
     }
 
 }

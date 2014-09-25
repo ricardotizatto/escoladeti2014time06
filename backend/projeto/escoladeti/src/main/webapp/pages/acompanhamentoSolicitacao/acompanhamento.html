@@ -62,7 +62,7 @@
                         <td>
                             <div class="form-group campos-filtro">
                                 <div class="col-sm-12 campos-filtro">
-                                    <input class="form-control" type="text" ng-model="buscaRevisor" ng-change=""  placeholder="Revisor"/>
+                                    <input class="form-control" type="text" ng-model="buscaRevisor" ng-change="" disabled/>
                                 </div>
                             </div>  
                         </td>
@@ -102,7 +102,12 @@
                         <span class="date">chegada</span>
                         <a href="" ng-click="buscar('dataChegada', solicitacaoItem.dataChegada)" ><span class="time">{{solicitacaoItem.dataChegada | date:'dd-MM-yyyy' }}</span></a>
                     </time>
-                    <a href=""><div class="btn-status-linha cbp_tmicon {{getStatus(solicitacaoItem.status)}} animated bounceIn" ng-click="getPesquisaSolicitacao(solicitacaoItem.status)" >  <i class="{{getIcone(solicitacaoItem.status)}}"></i> </div></a>
+                    <a href="">
+                        <div class="btn-status-linha cbp_tmicon {{getStatus(solicitacaoItem.status)}} animated bounceIn" ng-click="getPesquisaSolicitacao(solicitacaoItem.status)"
+                                style="padding: 10px">
+                            <i class="{{getIcone(solicitacaoItem.status)}}"></i>
+                        </div>
+                    </a>
                     <div class="cbp_tmlabel">
                         <div class="p-t-10 p-l-30 p-r-20 p-b-20 xs-p-r-10 xs-p-l-10 xs-p-t-5">
                             <div class="row">
@@ -110,13 +115,14 @@
                                     <table class="table table-responsive table-fixed-layout">
                                         <thead>
                                         <th class="col-md-2">Solicitação</th>
-                                        <th ng-show="{{solicitacaoItem.ordemId}}" class="col-md-2">Ordem</th>
+                                        <th class="col-md-2">Ordem</th>
+                                        <th ng-show="solicitacaoItem.ordemId" class="col-md-2">Ordem</th>
                                         <th class="col-md-5">Material</th>
                                         <th class="col-md-3">Tradução</th>
                                         </thead>
                                         <tbody>
                                         <td><a href="" ng-click="buscar('solicitacaoId', solicitacaoItem.solicitacaoId)" >{{solicitacaoItem.solicitacaoId}}</a></td>
-                                        <td ng-show="{{solicitacaoItem.ordemId}}" >{{solicitacaoItem.ordemId}}</td>
+                                        <td>{{solicitacaoItem.id}}</td>
                                         <td><a href="" ng-click="buscar('material', solicitacaoItem.material)" >{{solicitacaoItem.material}}</a></td>
                                         <td><a href="" ng-click="buscar('traducaoMaterial', solicitacaoItem.traducaoMaterial != 'OUTRO' ? solicitacaoItem.traducaoMaterial : solicitacaoItem.outraTraducao)" >{{solicitacaoItem.traducaoMaterial != 'OUTRO' ? solicitacaoItem.traducaoMaterial : solicitacaoItem.outraTraducao }}</a></td>
                                         </tbody>
@@ -124,25 +130,35 @@
                                 </div>
                             </div>    
                             <div class="row base-time-line">
-                                <div class="col-sm-5">
-                                    <h4 class="inline m-b-5"><span class="time-line-responsavel" > Responsável: </span><a href="" ng-click="buscar('responsavel', solicitacaoItem.responsavel)" > <span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span></a></h4>
+                                <div class="col-md-8">
+                                    <h4 class="inline m-b-5">
+                                        <label > Responsável: </label>
+                                        <a href="" ng-click="buscar('responsavel', solicitacaoItem.responsavel)" >
+                                            <span class="text-success semi-bold">{{solicitacaoItem.responsavel}}</span>
+                                        </a>
+                                    </h4>
                                 </div>
-                                <div class="col-sm-2">
-                                    <div ng-show="{{solicitacaoItem.dataEnvio}}" > <h5 class="inline m-b-5"><span class="text-primary semi-bold">Envio: {{solicitacaoItem.dataEnvio}}</span> </h5> </div>
-                                </div>
-                                <div class="col-sm-5">
-                                    <span class="pull-right">
-                                        <button type="submit" class="btn btn-danger btn-small" ng-show="{{solicitacaoItem.status == 'AGUARDANDO' || solicitacaoItem.status =='PRODUCAO' }}"
-                                            ng-click="cancelar(solicitacaoItem.solicitacaoId)"><i class="glyphicon glyphicon-remove" ></i> Cancelar 
-                                        </button>  
-                                        <button type="submit" class="btn btn-success btn-small" ng-show="{{solicitacaoItem.status == 'AGUARDANDO' }}" ng-click="produzir(solicitacaoItem.solicitacaoId)" >
+                                <div class="col-md-4">
+
+                                    <div class="col-md-12 form-group" data-ng-show=" solicitacaoItem.status == 'AGUARDANDO' || solicitacaoItem.status =='PRODUCAO' "  >
+                                        <button class="btn btn-danger btn-small " style="width: 100%"
+                                                data-ng-click="cancelar(solicitacaoItem)"><i class="glyphicon glyphicon-remove" ></i> Cancelar
+                                        </button>
+                                    </div>
+                                    <div class="col-md-12 form-group" data-ng-show="solicitacaoItem.status == 'AGUARDANDO' ">
+                                        <button class="btn btn-success btn-small input-default" style="width: 100%"
+                                                data-ng-click="produzir(solicitacaoItem)" >
                                             <i class="fa fa-cogs"></i> Produzir
                                         </button>
-                                        <button type="submit" class="btn btn-primary btn-small" 
-                                            ng-show="{{solicitacaoItem.status == 'PRODUCAO' || solicitacaoItem.status =='PRODUZIDO' || solicitacaoItem.status =='FINALIZADO' }}" 
-                                            ng-click="expandir(solicitacaoItem.solicitacaoId)" ><i class="fa fa-arrows-alt" ></i> Expandir
-                                        </button>
-                                    </span>     
+                                    </div>
+                                    <div class="col-md-12 form-group"
+                                         data-ng-show="solicitacaoItem.status == 'CANCELADO' || solicitacaoItem.status =='PRODUCAO' || solicitacaoItem.status =='FINALIZADO' ">
+                                        <a  class="btn btn-primary btn-small input-default" href="#/ordem-producao/{{solicitacaoItem.id}}" style="width: 100%">
+                                            <i class="fa fa-arrows-alt" ></i> Expandir
+                                        </a>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

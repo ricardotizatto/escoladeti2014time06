@@ -21,12 +21,11 @@ public class AcompanhamentoSolicitacaoService {
     public List<ViewAcompanhamentoSolicitacao> listarItensFiltrados(PesquisaSolicitacao ps) {
         return this.acompanhamentoSolicitacaoRepository.findByDataChegadaBetweenAndStatusContainingAndMaterialContainingAndResponsavelContainingAndRevisorContainingAndTraducaoMaterialContaining(
         		//ps.getSolicitacaoId(),
-                        ps.getDataChegadaInicio(), 
+                ps.getDataChegadaInicio(),
         		ps.getDataChegadaFim(),
         		ps.getStatus(),
         		ps.getMaterial(),
         		ps.getResponsavel(),
-        		ps.getRevisor(),
         		ps.getTraducaoMaterial()
         		);
     }

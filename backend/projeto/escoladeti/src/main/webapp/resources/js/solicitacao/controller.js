@@ -17,6 +17,31 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
       allowClear: true
     };
 
+    $scope.buscarEndereco = function () {
+
+        var endereco = $scope.pessoasFisicasOriginal.filter(function (pessoa) {
+                console.log(pessoa);
+                return $scope.solicitacao.responsavel == pessoa.id;
+            })
+            .pop()
+            .enderecos
+            .filter(function (endereco) {
+                return endereco.principal == 'S';
+            })
+            .pop();
+
+        var solicitacao = $scope.solicitacao;
+        solicitacao.cep = endereco.cep;
+        solicitacao.numeroEndereco = endereco.numero;
+        solicitacao.endereco = endereco.logradouro;
+        solicitacao.municipio = {
+            text: endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla,
+            id: endereco.cidade.id
+        };
+
+
+    };
+
 	$scope.select2Cidade = {
 		allowClear: true,
 		placeholder: 'selecione',
@@ -154,6 +179,8 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 
 
     Pessoa.listarPessoasFisicas(function (pessoasFisicas) {
+        $scope.pessoasFisicasOriginal = pessoasFisicas;
+
         $scope.pessoasFisicas = pessoasFisicas.map(function (pessoa) {
             return {
                 nome: pessoa.nome + ' ' + pessoa.sobrenome,

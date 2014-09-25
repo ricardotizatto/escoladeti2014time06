@@ -23,7 +23,7 @@
                             <option data-ng-repeat="aluno in alunos" value="{{aluno.id}}">{{aluno.nome}}</option>
                         </select>
                         <span class="input-group-btn">
-                            <a href="/#/pessoa" class="btn btn-primary" target="_blank">
+                            <a href="#/pessoa" class="btn btn-primary" target="_blank">
                                 <i class="fa fa-user"></i>
                             </a>
                         </span>
@@ -62,13 +62,13 @@
                 <div class="col-md-3 form-group {{solicitacaoForm.responsavel.$error.required? 'has-error' : 'has-success' }} has-feedback">
                     <label class="control-label">Responsável *</label>
                     <div class="input-group">
-                        <select ui-select2="select2Options" class="input-default"
+                        <select ui-select2="select2Options" class="input-default" data-ng-change="buscarEndereco()"
                                 ng-model="solicitacao.responsavel" name="responsavel" required="required">
                             <option value=""></option>
                             <option ng-repeat="p in pessoasFisicas" value="{{p.id}}">{{p.nome}}</option>
                         </select>
                         <div class="input-group-btn">
-                            <a href="/#/pessoa" class="btn btn-primary" target="_blank">
+                            <a href="#/pessoa" class="btn btn-primary" target="_blank">
                                 <i class="fa fa-user"></i>
                             </a>
                         </div>
@@ -163,9 +163,9 @@
             </div>
         </form>
         <div class="row">
-            <div class="modal fade in" id="modalLivro" tabindex="-1" role="dialog"
+            <div class="modal  fade in" id="modalLivro" tabindex="-1" role="dialog"
                  aria-labelledby="" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <form role="form" name="modalForm">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -200,9 +200,13 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="row">
-                                    <a class="btn btn-danger btn-padrao" data-dismiss="modal">Fechar</a>
-                                    <button class="btn btn-success btn-padrao"
-                                            ng-click="adicionarMaterial()">Adicionar</button>
+                                    <div class="col-md-2 col-md-offset-8 form-group">
+                                        <a class="btn btn-danger form-control" data-dismiss="modal">Fechar</a>
+                                    </div>
+                                    <div class="col-md-2 form-group">
+                                        <button class="btn btn-success form-control"
+                                                ng-click="adicionarMaterial()">Adicionar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
