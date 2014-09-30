@@ -19,7 +19,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 
     $scope.buscarEndereco = function () {
 
-        var endereco = $scope.pessoasFisicasOriginal.filter(function (pessoa) {
+        var endereco = $scope.pessoasOriginal.filter(function (pessoa) {
                 console.log(pessoa);
                 return $scope.solicitacao.responsavel == pessoa.id;
             })
@@ -168,7 +168,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	});
 	
     $log.debug('listar alunos');
-    Pessoa.listarAlunos(function (alunos) {
+    Pessoa.listarTodasPessoas(function (alunos) {
         $scope.alunos = alunos.map(function (aluno) {
             return {
                 nome: aluno.nome + ' ' + aluno.sobrenome,
@@ -178,10 +178,10 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
     });
 
 
-    Pessoa.listarPessoasFisicas(function (pessoasFisicas) {
-        $scope.pessoasFisicasOriginal = pessoasFisicas;
+    Pessoa.listarTodasPessoas(function (pessoas) {
+        $scope.pessoasOriginal = pessoas;
 
-        $scope.pessoasFisicas = pessoasFisicas.map(function (pessoa) {
+        $scope.pessoas = pessoas.map(function (pessoa) {
             return {
                 nome: pessoa.nome + ' ' + pessoa.sobrenome,
                 id: pessoa.id
