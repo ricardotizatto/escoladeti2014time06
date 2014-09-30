@@ -151,6 +151,10 @@ public class PessoaService {
     public List<PessoaFisica> listarPessoasFisicas() {
         return pessoaFisicaRepository.findByAlunoFalse();
     }
+    
+    public List<PessoaFisica> listarTodasPessoas(){
+        return pessoaFisicaRepository.findAll();
+    }
 
     public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(Integer pagina) {
         return new DataPage<>(pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
