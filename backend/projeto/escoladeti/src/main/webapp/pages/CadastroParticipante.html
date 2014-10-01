@@ -1,5 +1,4 @@
-<div class="container" ng-controller="participanteController" ng-init="carregarEventos();
-            novo()">
+<div class="container" ng-controller="participanteController" ng-init="carregarEventos(); novo()">
     <fieldset>
         <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
         <div class="row">
@@ -7,51 +6,74 @@
                 <legend> Cursos Disponíveis </legend>
             </div>
         </div>
-        <form action="" method="POST" ng-submit="salvar()">
-            <div class="form-group col-sm-7">
-                <div class="blogShort" ng-repeat="evento in eventos">
-                    <h1>{{evento.titulo}}</h1>
-                    <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
-                    <article><p>
-                            {{evento.descricao.substring(0, 180)}}
-                        </p></article>
-                    <input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}">
-                    <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id, evento.titulo, evento.descricao, evento.local, evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
-                        <b>+ Detalhes</b>
-                    </button><br>
-                    <hr/>
-                </div>
-
+        <form action="" novalidate method="POST" name="formParticipante" ng-submit="salvar()">
+            
+            
+            <div class="col-sm-7">
+                
+              <table class="table table-striped table-hover" >
+                    <tr>
+                        <th class="col-md-1" data-field="state" data-radio="true"></th>
+                        <th class="col-md-3" data-field="title" data-switchable="false">Curso</th>
+                        <th class="col-md-3" data-field="descricao">Descrição</th>
+                        <th class="col-md-3" data-field="details"></th>
+                    </tr>
+                    <tr ng-repeat="evento in eventos" ng-click="chk{{evento.id}}">
+                        <td ng-show="evento.statusevento == true"><input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
+                        <td ng-show="evento.statusevento == true">{{evento.titulo}}</td>
+                        <td ng-show="evento.statusevento == true">{{evento.descricao.substring(0, 180)}}</td>
+                        <td ng-show="evento.statusevento == true">
+                            <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id, evento.titulo, evento.descricao, evento.local, evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
+                                <b>+ Detalhes</b>
+                            </button>
+                        </td>
+                    </tr>
+               </table>
+                
             </div>
+                       
+            
+            
             <div class="col-sm-1"></div>
             <div class="form-group col-sm-4">
-                <legend>Dados Pessoais</legend>
-                <br>
-                <label>Nome</label>
-                <input class="form-control" type="text"  placeholder="Nome" ng-model="participante.nome"  >
-                <label>Email</label>
-                <input class="form-control" type="text"  placeholder="Endereço de email" ng-model="participante.email"  >
-                <label>Telefone</label>
-                <input class="form-control" id="telefone" type="text" ng-model="participante.telefone" onKeyPress="MascaraTelefone(telefone);" maxlength="15" placeholder="(99)9999-9999" required="required" >
+
+                <div class="form-group {{formParticipante.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"><strong>Nome *</strong></label>
+                    <input class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/" 
+                           type="text" name="nome"  id="nome" placeholder="Nome" ng-model="participante.nome" required >
+                    <span class="help-block" ng-show="formParticipante.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
+                </div>    
+                <div class="form-group {{formParticipante.email.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                     <label class="control-label"><strong>Email *</strong></label>
+                    <input class="form-control" type="text" name="email" placeholder="Endereço de email" ng-model="participante.email" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
+                    <span class="help-block" ng-show="formParticipante.email.$error.pattern">Dígite um email válido. Ex email@gmail.com</span>
+                </div>  
+                <div class="form-group {{formParticipante.telefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"><strong>Telefone *</strong></label>
+                    <input class="form-control" id="telefone" name="telefone" type="text" ng-model="participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required/>
+                    <span class="help-block" ng-show="formParticipante.telefone.$error.pattern">Dígite um telefone válido. Ex:(44)9999-4567</span>
+                </div>   
+                
+                    
                 <div class="row">
                     <div class="form-group col-sm-10">
-                        <label>Possui necessidades especiais?</label>
+                        <label class="control-label"><strong>Possui necessidades especiais?</strong></label>
                         <div class="btn-group">
                             <!--data-toggle="buttons" verificar uso-->
                             <label class="btn btn-primary btn-radio-amacapa"> <input
-                                    ng-model="participante.deficiente" name="participante" value="S"
-                                    type="radio" required /> Sim
+                                    ng-model="participante.deficiente" name="deficiente" value="S"
+                                    type="radio" /> Sim
                             </label> <label class="btn btn-primary btn-radio-amacapa"> <input
-                                    ng-model="participante.deficiente" name="participante" value="N"
-                                    type="radio" required /> Não
+                                    ng-model="participante.deficiente" name="deficiente" value="N"
+                                    type="radio" /> Não
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12" ng-show="participante.deficiente === 'S'">
-                        <label>Quais </label>
-                        <input class="form-control" type="text"  placeholder="QUAIS" ng-model="participante.necessidade"  >
+                        <label class="control-label"><strong>Quais Necessidades?</strong></label>
+                        <input class="form-control" type="text" name="necessidade" placeholder="QUAIS" ng-model="participante.necessidade"  >
                     </div>
                 </div>
             </div>
@@ -60,7 +82,7 @@
 
             <div align="right">
                 <button type="button"  class="btn btn-danger btn-padrao"  ng-click="novo()"> <span class="glyphicon glyphicon-refresh" ></span> Limpar</button>
-                <button class="btn btn-success btn-padrao" > <span class="glyphicon glyphicon-ok" ></span> Confirmar</button>
+                <button class="btn btn-success btn-padrao" ng-disabled="formParticipante.$invalid"> <span class="glyphicon glyphicon-ok" ></span> Salvar</button>
             </div>
 
             <!-- Modal detalhamento-->
@@ -72,32 +94,32 @@
                             <h4 class="modal-title" id="modalEnderecoLabel">Detalhes do Curso</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="row">
+                            <div class="row" style="width: 560px; margin-left: 9px;">
                                 <div class="blogShort">
                                     <h1>{{tituloCurso}}</h1>
-                                    <!--<em>This snippet use <a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Sexy Sidebar Navigation</a></em>-->
+                                    
                                     <article><p>
                                             {{DetalhesCurso}}
                                         </p></article>
 
                                     <article><p>
-                                            <b>Ministrante: </b> {{ministranteCurso}}
+                                            <b>MINISTRANTE: </b> {{ministranteCurso}}
                                         </p></article>
 
                                     <article><p>
-                                            <b>Data:</b> {{dataCurso}}
+                                            <b>DATA:</b> {{dataCurso}}
                                         </p></article>
                                     <article><p>
-                                            <b>Horário : </b> {{inicioCurso}} às {{fimCurso}}
+                                            <b>HORÁRIO: </b> {{inicioCurso}} às {{fimCurso}}
                                         </p></article>
                                     <article><p>
-                                            <b>Local:</b> {{localCurso}}
+                                            <b>LOCAL:</b> {{localCurso}}
                                         </p></article>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>Fechar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" ><span class="glyphicon glyphicon-remove" ></span>FECHAR</button>
                         </div>
                     </div>
                 </div>

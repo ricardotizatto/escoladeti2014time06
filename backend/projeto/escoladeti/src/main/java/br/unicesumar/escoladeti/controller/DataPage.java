@@ -35,6 +35,7 @@ public class DataPage<T> implements Serializable {
         this.pageNumber = page.getNumber() + 1;
         this.pageCount = page.getTotalPages();
         this.pagesAround = generatePagesAround();
+
     }
 
     private int[] generatePagesAround() {
@@ -77,5 +78,13 @@ public class DataPage<T> implements Serializable {
 
     public int[] getPagesAround() {
         return pagesAround;
+    }
+
+    public int getMaxRows() {
+        return MAX_ROWS;
+    }
+
+    public int getMaxPagesToShow() {
+        return MAX_PAGES_TO_SHOW;
     }
 }

@@ -21,10 +21,12 @@
     $scope.fim;
     $scope.tipoEvento;
     $scope.valor;
+    $scope.presencaaux;
+    $scope.idevento;
 
     $scope.editar = function(participante) {
         console.log(participante);
-        window.location = '#/cadastroparticipanteevento/' + participante.id;
+        window.location = '#/editarparticipante/' + participante.id;
     };
 
     $scope.deletar = function(participante) {
@@ -55,12 +57,11 @@
         if($scope.participante.telefone === undefined)
             return toastr.warning('Preencha o campo Telefone');
           
-        //alert($scope.participante.deficiente);      
         if($scope.participante.deficiente === undefined)
             return toastr.warning('Preencha o campo Possui necessidades especiais');
         
         if ($scope.participante.deficiente === 'N'){
-          $scope.participante.necessidade = '';  
+          $scope.participante.necessidade = 'N/P';  
         }
         if($scope.participante.necessidade === undefined)
             return toastr.warning('Quais');
@@ -71,13 +72,12 @@
             
         }else{         
             $scope.participante.pagamento = "PENDENTE";
+            $scope.participante.presente = true;
             $http.post("./rest/participanteSource/participante", $scope.participante)
                     .success(function(participante, status) {
-                //$scope.participante = getNovoParticipante();
                 console.log("participante salva = " + participante.nome);
                 toastr.success("Participante cadastrado com sucesso!");
-                setTimeout(function(){window.location="#/listaevento"}, 5000);
-                $scope.novo();
+                setTimeout(function(){window.location="#/listaevento"}, 500);
 
             })
                     .error(function(data, status) {
@@ -89,39 +89,37 @@
     };
 
     $scope.salvarAlteracao = function() {
-
-
-        $scope.participante.id = $scope.idModal;  
-        $scope.participante.deficiente = $scope.deficienteModal;
-        $scope.participante.email = $scope.emailModal;
-        if ($scope.ideventoModal === null) {
-            $scope.participante.idevento = $routeParams.idevento;
-        } else {
-            $scope.participante.idevento = $scope.ideventoModal;
-        }
-        $scope.participante.nome = $scope.nomeModal;
-        $scope.participante.telefone = $scope.telefoneModal;
-        $scope.participante.pagamento = $scope.pagamentoModal;
-        $scope.participante.necessidade = $scope.necessidadeModal;
-        
-        console.log(angular.toJson($scope.participante, true));
-  
-            $http.post("./rest/participanteSource/participante", $scope.participante)
+        $http.post("./rest/participanteSource/participante", $scope.participante)
                     .success(function(participante, status) {
-                //$scope.participante = getNovoParticipante();
-                $scope.listarParticipantes();
-                console.log("participante salva = " + participante);
-                $scope.info = {};
-                $scope.info.message = 'Participante ' + $scope.nomeModal + ' alterado com sucesso';
-                $scope.info.status = 'success';
-                $scope.novo();
+                toastr.success("Participante Alterado com sucesso!");
             })
                     .error(function(data, status) {
-                console.log("erro ao salvar participante" + data);
                         $scope.info = {};
                         $scope.info.status = 'danger';
-                        $scope.info.message = 'Erro ao alterar participante: ' + $scope.nomeModal + ' - '+ data.message;
+                        $scope.info.message = 'Erro ao salvar participante: ' + $scope.nomeModal + ' - '+ data.message;
             });
+        window.location = '#/listaparticipantes/'+$scope.participante.idevento;
+    };
+    
+     $scope.alteraPresenca = function(part) {
+         participante = part;
+        participante.presente = !participante.presente; 
+        presencaaux = participante.presente;
+        $http.post("./rest/participanteSource/participante", participante)
+                    .success(function(participante, status) {
+                console.log("Presenca confirmada , aluno: "+ participante.nome);
+                window.location = '#/listaparticipantes/'+participante.idevento;
+            })
+                    .error(function(data, status) {
+                        $scope.info = {};
+                        $scope.info.status = 'danger';
+                        $scope.info.message = 'Erro ao registrar presenca. ';
+            });
+    };
+    
+    $scope.atualizaPresencaAux = function(part){
+        $scope.presencaaux = part.presente;
+        return  $scope.presencaaux;
     };
 
     $scope.novo = function() {
@@ -134,7 +132,6 @@
         $scope.pagamentoModal = {};
         $scope.deficiente = {};
         $scope.participante = $scope.getNovoParticipante();
-        //window.location = '#/cadastroparticipanteevento';
         console.log("novo");
     };
     
@@ -148,7 +145,7 @@
         $scope.pagamentoModal = {};
         $scope.deficiente = {};
         $scope.participante = $scope.getNovoParticipante();
-        window.location = '#/cadastroparticipanteevento';
+        window.location = '#/cadastroparticipante';
         console.log("novo");
     }
     
@@ -182,15 +179,29 @@
 
     $scope.carregarParticipante = function() {
         console.log('carregar participante',$routeParams.idParticipante)
-        if ($routeParams.idParticipante) {
-            $http.get('./rest/participanteSource/participante/' + $routeParams.idParticipante)
-                    .success(function(participante) {
-                $scope.participante = participante;
-            });
+        
+        if (!$routeParams.idParticipante) {
+           $scope.participante = {};
+            return;
         }
+        $http.get("./rest/participanteSource/participante/" + $routeParams.idParticipante)
+                .success(function(ptcpnt) {
+                    $scope.participante = ptcpnt;
+                    console.log($scope.participante);
+                    return;
+                });
+        
     };
-
     
+    $scope.getById = function(id) {
+
+        $http.get("./rest/participanteSource/participante/" + id)
+                .success(function(ptcpnt) {
+                    $scope.participante = ptcpnt;
+                    return;
+                });
+        
+    };
 
     $scope.getNovoParticipante = function() {
         console.log('novo participante');
@@ -208,30 +219,29 @@
         });
     };
 
-//    $scope.carregarParticipanteAlterar = function(idModal, cpfModal, deficienteModal, emailModal, ideventoModal, nomeModal, rgModal, sexoModal, telefoneModal, pagamentoModal) {
-//
-//        $scope.idModal = idModal;
-//        $scope.cpfModal = cpfModal;
-//        $scope.deficienteModal = deficienteModal;
-//        $scope.emailModal = emailModal;
-//        $scope.ideventoModal = ideventoModal;
-//        $scope.nomeModal = nomeModal;
-//        $scope.rgModal = rgModal;
-//        $scope.sexoModal = sexoModal;
-//        $scope.telefoneModal = telefoneModal;
-//        $scope.pagamentoModal = pagamentoModal;
-//
-//    };
-
     $scope.listarParticipantes = function() {
 
         if ($routeParams.idevento) {
+            $scope.idevento = $routeParams.idevento; 
             $http.get("./rest/participanteSource/listaparticipantes/" + $routeParams.idevento)
                     .success(function(participantes, status) {
                 $scope.participantes = participantes;
             })
                     .error(function(data, status) {
                 console.log('erro ao buscar eventos');
+            });
+        }
+    };
+    
+    $scope.imprimirRelatorio = function () {
+        if ($routeParams.idevento) {
+            $http.get("./relatorio/participantes/" + $routeParams.idevento)
+                .success(function(data, status) {
+//                $scope.participantes = participantes;
+                    console.log('entrou no método sucesso angular');
+            })
+                .error(function(data, status) {
+                console.log('erro ao buscar eventos para impressão');
             });
         }
     };
@@ -248,8 +258,7 @@
     };
     
     $scope.voltar = function() {
-        $scope.participante = {};
-        //window.location = '#/listarparticipantes';
+        window.location = '#/listaparticipantes/'+$scope.participante.idevento;
     }
 
 }

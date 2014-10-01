@@ -1,5 +1,5 @@
-﻿function eventoController($scope, $http, $routeParams) {
-    
+function eventoController($scope, $http, $routeParams) {
+
     $scope.idCurso;
     $scope.tituloCurso;
     $scope.descricao;
@@ -11,120 +11,150 @@
     $scope.organizacao;
     $scope.tipoEvento;
     $scope.valor;
+    $scope.selected;
+    
 
     $scope.editar = function(evento) {
         console.log(evento);
-        console.log('id lopuca' +evento.id);
         window.location = '#/cadastroevento/' + evento.id;
     };
-    
-         
-        
+
     $scope.deletar = function(evento) {
-        $http({
-            method: 'DELETE',
-            data: evento,
-            url: './rest/eventoSource/evento',
-            headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-                .success(function(data) {
-                    console.log("evento deletado");
-                    toastr.success("Evento apagado com sucesso!");
-                    $scope.getTodos();
-                }).error(function(data) {
-            console.log("erro ao deletar evento ");
-            toastr.warning("Erro ao apagar evento!");
+        console.log('deletando evento ' + JSON.stringify(evento));
+
+        BootstrapDialog.confirm('Deseja realmente deletar o Evento: <b>' + evento.titulo + '</b>?', function(result) {
+            if (result) {
+                $http({
+                    method: 'DELETE',
+                    data: evento,
+                    url: './rest/eventoSource/evento',
+                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                })
+                        .success(function(data, status) {
+                            $scope.getTodos(1);
+                            console.log('evento deletado');
+                            BootstrapDialog.show({
+                                title: 'Notifica&ccedil;&atilde;o',
+                                message: 'Evento <b>' + evento.titulo + '</b> deletado com Sucesso!',
+                                type: BootstrapDialog.TYPE_SUCCESS,
+                                buttons: [{
+                                        id: 'btn-ok',
+                                        icon: 'glyphicon glyphicon-ok',
+                                        label: ' OK',
+                                        cssClass: 'btn-success btn-padrao',
+                                        autospin: false,
+                                        action: function(dialogRef) {
+                                            dialogRef.close();
+                                        }
+                                    }]
+                            });
+                            $scope.voltar();
+                        })
+                        .error(function(data, status) {
+                            console.log('erro ao deletar evento ' + data);
+                            BootstrapDialog.show({
+                                title: 'Notifica&ccedil;&atilde;o',
+                                message: 'Ocorreu um erro ao deletar o Evento: <b>' + evento.titulo + '</b>',
+                                type: BootstrapDialog.TYPE_DANGER,
+                                buttons: [{
+                                        id: 'btn-ok',
+                                        icon: 'glyphicon glyphicon-ok',
+                                        label: ' OK',
+                                        cssClass: 'btn-success btn-padrao',
+                                        autospin: false,
+                                        action: function(dialogRef) {
+                                            dialogRef.close();
+                                        }
+                                    }]
+                            });
+                        });
+            } else {
+                $scope.getTodos(1);
+            }
         });
     };
 
-    $scope.listarParticipantes = function(evento) {
-        console.log(evento);
-        window.location = '#/listaparticipantes/' + evento.id;
 
+    $scope.listarParticipantes = function(evento) {
+        window.location = '#/listaparticipantes/' + evento.id;
     };
 
-    $scope.salvar = function() {
-        console.log(angular.toJson($scope.evento, true));
-
-        if($scope.evento.titulo === undefined)
-            return toastr.warning('Preencha o campo titulo');
-        
-        if($scope.evento.tipoEvento === undefined)
-            return toastr.warning('Escolha um tipo de evento');
-
-        if($scope.evento.organizacao === undefined)
-            return toastr.warning('Preencha o campo Realização');
-         
-        if($scope.evento.valor === undefined){
-            return toastr.warning('Preencha o campo Valor');
-        }else{
-            $scope.evento.valor = $scope.evento.valor.replace(',', '.');
-        }
-        
-        if($scope.evento.ministrante === undefined)
-            return toastr.warning('Preencha o campo Ministrante');
-        
-        if($scope.evento.descricao === undefined)
-            return toastr.warning('Preencha o campo Descrição do Evento');
-        
-        if($scope.evento.local === undefined)
-            return toastr.warning('Preencha o campo Local');
-        
-        if($scope.evento.data === undefined)
-            return toastr.warning('Preencha o campo Data');
-        
-        if($scope.evento.inicio === undefined)
-            return toastr.warning('Preencha o campo Início');
-        
-        if($scope.evento.fim === undefined)
-            return toastr.warning('Preencha o campo Término');
-        
-        if ($scope.evento.inicio > $scope.evento.fim) {
-            toastr.warning('A hora de inicio não pode ser maior que a hora do encerramento do evento');
-        } else {
-            $http.post("./rest/eventoSource/evento", $scope.evento)
-            .success(function(evento, status) {
-                //$scope.evento = getNovoEvento();
-                //window.location = '#/listaevento';
-                toastr.success("Evento cadastrado com sucesso!");
-                setTimeout(function(){window.location="#/listaevento"}, 5000);
-                console.log("evento salva = " + evento);
+    $scope.getTotalParticipantes = function(id) {
+        var total;
+         if (id) {
+            $http.get("./rest/participanteSource/listaparticipantes/total/" + id)
+                    .success(function(total, status) {
+                total = total;
             })
-            .error(function(data, status) {
-                console.log("erro ao salvar evento", data);
-                toastr.warning("Erro ao salvar evento!");
+                    .error(function(data, status) {
+                console.log('erro ao buscar eventos');
             });
         }
+        if(total > 0){
+            return total;
+        }else{
+            return 0;
+        }
+    };
+    
+    $scope.salvar = function(acao) {
+        console.log(angular.toJson($scope.evento, true));
+        if(!($scope.evento.id >0)){
+            $scope.evento.statusevento = true;
+        }
+        $http.post("./rest/eventoSource/evento", $scope.evento)
+                .success(function(evento, status) {
+                    $scope.evento = getNovoEvento();
+                    window.location = '#/listaevento';
+                    toastr.success("Evento "+acao+" com sucesso!");
+                    console.log("evento salva = " + evento);
+                })
+                .error(function(data, status) {
+                    console.log("erro ao salvar evento", data);
+                    toastr.warning("Erro ao salvar evento!");
+                });
     };
 
     $scope.novo = function() {
         $scope.evento = getNovoEvento();
         window.location = '#/cadastroevento';
     };
+    
+    $scope.encerrar = function(){
+       $scope.evento.statusevento = false; 
+       $scope.salvar("Encerrado");
+    };
+    
+    $scope.reativar = function(){
+       $scope.evento.statusevento = true; 
+       $scope.salvar("Reativado");
+    };
 
     $scope.getTodos = function(numeroPagina) {
+        
+        $scope.selected = !$scope.selected;
 
         $http.get("./rest/eventoSource/listar/pag/" + numeroPagina)
                 .success(function(listaEventos, status) {
-                    $scope.eventos = listaEventos.list;
+                    $scope.eventos = listaEventos;
                 })
                 .error(function(data, status) {
                     console.log('erro ao buscar eventos' + data);
                 });
-    };
-           
+    };   
+    
     $scope.carregarEvento = function() {
-        if (!$routeParams.eventoId) {            
+        if (!$routeParams.eventoId) {
             $scope.evento = {};
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
-                    .success(function(ev) {
-                        $scope.evento = ev;
-                        return;
-                    });
+                .success(function(ev) {
+                    $scope.evento = ev;
+                    return;
+                });
     };
-       
+
     $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data) {
         $scope.idCurso = indice;
         $scope.tituloCurso = titulo;
@@ -139,10 +169,41 @@
         return {};
     }
     ;
-}
 
+
+    $scope.voltar = function() {
+        $scope.evento = {};
+        window.location = '#/listaevento';
+    };
+    
+    $scope.mensageEventoListado = function(){
+        if($scope.selected){
+            return 'em Aberto';
+        }else{
+            return 'Encerrados';
+        }
+    };
+    
+     $scope.getTipoEvento = function(tipo){
+        switch(tipo) {
+            case "1": 
+                return 'CURSO';
+                break;
+            case "2":
+                return 'PALESTRA';
+                break;
+            case "3":
+                return 'REUNIAO';
+                break;   
+            default:
+                return 'CURSO';
+                break;
+        }
+    };
+}
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);
 }
+
 
 

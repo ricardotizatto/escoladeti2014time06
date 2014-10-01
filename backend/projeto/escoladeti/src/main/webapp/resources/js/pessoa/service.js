@@ -29,6 +29,12 @@ function PessoaFactory($resource) {
                 busca : $resource("busca")
             }
         },
+        buscarPessoa: {
+            method: 'GET',
+            params: {
+                acao: 'buscarPessoa'
+            }
+        },
         buscarAluno: {
             method: 'GET',
             params: {
@@ -57,6 +63,10 @@ function PessoaFactory($resource) {
             params: {
                 acao: 'fisicas'
             }
+        },
+        paginar : {
+            method : 'GET',
+            isArray : true
         }
                 
     });

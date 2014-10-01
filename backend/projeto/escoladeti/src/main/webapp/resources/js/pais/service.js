@@ -29,7 +29,7 @@ function PaisService($http) {
 			return $http.get('./rest/paisSource/listar/pag/' + nrPagina);
 		},
 		buscarTodos: function () {
-			return $http.get('./rest/paisSource/listar');
+			return $http.get('./rest/paisSource/pais');
 		}
 	};
 }

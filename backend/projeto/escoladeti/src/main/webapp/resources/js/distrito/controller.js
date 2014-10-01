@@ -23,7 +23,7 @@ function DistritoController($scope, $routeParams, distritoService, cidadeService
 				+ distrito.nome + '</b>?', function(result) {
 			if (result) {
 				distritoService.deletar(distrito).success(function(data, status) {
-					$scope.getTodos(1);
+					$scope.getTodos($scope.pageNumber);
 					console.log('Distrito deletada!');
 					toastr.success('Distrito ' + distrito.cidade.nome + ' deletada.');
 				}).error(function(data, status) {

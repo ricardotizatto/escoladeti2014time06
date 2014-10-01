@@ -5,7 +5,7 @@ import br.unicesumar.escoladeti.enums.Sexo;
 import br.unicesumar.escoladeti.util.data.DateUtil;
 import br.unicesumar.escoladeti.util.string.StringUtils;
 import br.unicesumar.escoladeti.util.validacao.Validar;
-import java.text.SimpleDateFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,16 +30,17 @@ public abstract class Pessoa extends Entidade {
     private String email;
     private String tipo;
 
-    @NotEmpty(message = "deve ser cadastrado ao menos um telefone")
+    @NotEmpty(message = "Deve ser cadastrado ao menos um Telefone!")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "pessoa")
     private Set<Telefone> telefones;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonManagedReference
-//    private Set<Endereco> enderecos;
-    
+    @NotEmpty(message = "Deve ser cadastrado ao menos um Endereço!")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Endereco> enderecos;
+
     public Pessoa() {
         this.telefones = new HashSet<Telefone>();
+        this.enderecos = new HashSet<Endereco>();
     }
 
     public Set<Telefone> getTelefones() {
@@ -50,13 +51,13 @@ public abstract class Pessoa extends Entidade {
         this.telefones = telefones;
     }
 
-//    public Set<Endereco> getEnderecos() {
-//        return enderecos;
-//    }
-//
-//    public void setEnderecos(Set<Endereco> enderecos) {
-//        this.enderecos = enderecos;
-//    }
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 
     public String getNome() {
         return nome;
@@ -115,9 +116,11 @@ public abstract class Pessoa extends Entidade {
         private String razaoSocial;
 
         private Date dataCriacao;
-        
+
         private Set<Telefone> telefones;
-        
+
+        private Set<Endereco> enderecos;
+
         public PessoaBuilder nome(String nome) {
             this.nome = nome;
             return this;
@@ -187,40 +190,45 @@ public abstract class Pessoa extends Entidade {
             this.dataCriacao = dataCriacao;
             return this;
         }
-        
-         public PessoaBuilder telefones(Set<Telefone> telefones) {
+
+        public PessoaBuilder telefones(Set<Telefone> telefones) {
             this.telefones = telefones;
             return this;
         }
-        
+
+        public PessoaBuilder enderecos(Set<Endereco> enderecos) {
+            this.enderecos = enderecos;
+            return this;
+        }
+
         public PessoaFisica buildPessoaFisica() {
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
-            if(!StringUtils.onlyLetters(this.nome)){
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome), "Nome é obrigatório");
+            if (!StringUtils.onlyLetters(this.nome)) {
                 throw new RuntimeException("Nome inválido");
             }
-            if(this.email != ""){
-                Preconditions.checkArgument(Validar.validaEmail(this.email),"Email inválido!");
+            if (this.email != "") {
+                Preconditions.checkArgument(Validar.validaEmail(this.email), "Email inválido!");
             }
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
-            
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo), "Tipo é obrigatório");
+
             Preconditions.checkNotNull(this.aluno);
             if (!this.aluno) {
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg),"RG é obrigatório");
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf),"CPF é obrigatório");
+                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg), "RG é obrigatório");
+                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf), "CPF é obrigatório");
             }
-            Preconditions.checkNotNull(this.dataNascimento,"Data é obrigatória");
-            if(DateUtil.validDate(this.dataNascimento)){
+            Preconditions.checkNotNull(this.dataNascimento, "Data é obrigatória");
+            if (DateUtil.validDate(this.dataNascimento)) {
                 throw new RuntimeException("Data inválida");
             }
-            
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome),"Sobrenome é obrigatório");
-            if(!StringUtils.onlyLetters(this.sobrenome)){
+
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.sobrenome), "Sobrenome é obrigatório");
+            if (!StringUtils.onlyLetters(this.sobrenome)) {
                 throw new RuntimeException("Sobrenome inválido");
             }
             Preconditions.checkNotNull(this.sexo);
 
             PessoaFisica pessoa = new PessoaFisica();
-            
+
             pessoa.setTipo(this.tipo);
             pessoa.setNome(this.nome);
             pessoa.setEmail(this.email);
@@ -231,29 +239,33 @@ public abstract class Pessoa extends Entidade {
             pessoa.setSexo(this.sexo);
             pessoa.setAluno(this.aluno);
             pessoa.setTelefones(this.telefones);
-            for (Telefone telefone : pessoa.getTelefones() ) {
+            pessoa.setEnderecos(this.enderecos);
+            for (Telefone telefone : pessoa.getTelefones()) {
                 telefone.setPessoa(pessoa);
+            }
+            for (Endereco end : pessoa.getEnderecos()) {
+                end.setPessoa(pessoa);
             }
             return pessoa;
         }
 
         public PessoaJuridica buildPessoaJuridica() {
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome),"Nome é obrigatório");
-            if(this.email != ""){
-                Preconditions.checkArgument(Validar.validaEmail(this.email),"Email inválido!");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.nome), "Nome é obrigatório");
+            if (this.email != "") {
+                Preconditions.checkArgument(Validar.validaEmail(this.email), "Email inválido!");
             }
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.cnpj),"CNPJ é obrigatório");
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo),"Tipo é obrigatório");
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal),"Inscrição Municipal é obrigatório");
-            Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial),"Razão Social é obrigatório");
-            if(this.dataCriacao != null){
-                if(DateUtil.validDate(this.dataCriacao)){
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.cnpj), "CNPJ é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo), "Tipo é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.inscricaoMunicipal), "Inscrição Municipal é obrigatório");
+            Preconditions.checkArgument(StringUtils.isNotEmpty(this.razaoSocial), "Razão Social é obrigatório");
+            if (this.dataCriacao != null) {
+                if (DateUtil.validDate(this.dataCriacao)) {
                     throw new RuntimeException("Data inválida");
                 }
             }
-            
+
             PessoaJuridica pessoa = new PessoaJuridica();
-            
+
             pessoa.setTipo(this.tipo);
             pessoa.setNome(this.nome);
             pessoa.setEmail(this.email);
@@ -263,13 +275,17 @@ public abstract class Pessoa extends Entidade {
             pessoa.setRazaoSocial(this.razaoSocial);
             pessoa.setDataCriacao(this.dataCriacao);
             pessoa.setTelefones(this.telefones);
+            pessoa.setEnderecos(this.enderecos);
             for (Telefone telefone : pessoa.getTelefones()) {
                 telefone.setPessoa(pessoa);
             }
-            return pessoa;   
-            	
+            for (Endereco end : pessoa.getEnderecos()) {
+                end.setPessoa(pessoa);
+            }
+            return pessoa;
+
         }
-        
+
         public PessoaBuilder adicionarTelefones(
                 Set<ComandoSalvarTelefone> telefone) {
             return null;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet author="Jhonatan (generated)" id="1404066940885-1">
@@ -17,19 +17,19 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="cidadeid" type="INT8" />
-        </createTable>
-    </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940885-3">
-        <createTable tableName="bairro_faixacep">
-            <column name="id_faixacep" type="INT8">
-                <constraints nullable="false" />
-            </column>
-            <column name="id_bairro" type="INT8">
-                <constraints nullable="false" />
-            </column>
-        </createTable>
-    </changeSet>
+			<column name="cidadeid" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Jhonatan (generated)" id="1404066940885-3">
+		<createTable tableName="bairro_faixacep">
+			<column name="id_faixacep" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_bairro" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
     <changeSet author="Jhonatan (generated)" id="1404066940885-4">
         <createTable tableName="cidade">
             <column name="id" type="INT8">
@@ -69,7 +69,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="Walber (generated)" id="7404066940885-7">
+    <changeSet author="Walber (generated)" id="7404066940889-7">
         <createTable tableName="endereco">
             <column name="id" type="INT8">
                 <constraints nullable="false" />
@@ -84,11 +84,11 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="principal" type="VARCHAR(1)">
+            <column name="principal" type="CHAR(1)">
                 <constraints nullable="false" />
             </column>
 
-            <column name="tipoendereco" type="VARCHAR(30)"/>	
+            <column name="tipo" type="VARCHAR(30)"/>	
             <column name="pessoaid" type="INT8">
                 <constraints nullable="false" />
             </column>
@@ -126,10 +126,10 @@
             <column name="iniciocep" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940897-9">
+    <changeSet author="Jhonatan (generated)" id="1404066940885-9">
         <createTable tableName="itemacesso">
             <column name="id" type="INT8">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="itemacesso_pkey"/>
+                <constraints nullable="false" />
             </column>
             <column name="nome" type="VARCHAR(255)">
                 <constraints nullable="false" />
@@ -176,10 +176,9 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940885-14">
+    <changeSet author="Jhonatan (generated)" id="1404066940886-14">
         <createTable tableName="pais">
             <column name="id" type="INT8">
-                <constraints nullable="false" />
             </column>
             <column name="codigo" type="INT4">
                 <constraints nullable="false" />
@@ -229,10 +228,10 @@
             <column name="telefone" type="VARCHAR(255)" />
         </createTable>
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940888-17">
+    <changeSet author="Jhonatan (generated)" id="1404066940885-17">
         <createTable tableName="perfilacesso">
             <column name="id" type="INT8">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="perfilacesso_pkey"/>
+                <constraints nullable="false" />
             </column>
             <column name="nome" type="VARCHAR(255)">
                 <constraints nullable="false" />
@@ -449,10 +448,6 @@
             <column name="id_usuario" type="INT8" />
         </createTable>
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940889-43">
-        <addPrimaryKey columnNames="id" constraintName="pais_pkey"
-                       tableName="pais" />
-    </changeSet>
     <changeSet author="Jhonatan (generated)" id="1404066940885-32">
         <addPrimaryKey columnNames="id" constraintName="bairro_pkey"
                        tableName="bairro" />
@@ -477,10 +472,10 @@
         <addPrimaryKey columnNames="id" constraintName="faixacep_pkey"
                        tableName="faixacep" />
     </changeSet>
-    <!--    <changeSet author="Jhonatan (generated)" id="1404066940885-38">
+    <changeSet author="Jhonatan (generated)" id="1404066940885-38">
         <addPrimaryKey columnNames="id" constraintName="itemacesso_pkey"
                        tableName="itemacesso" />
-    </changeSet>-->
+    </changeSet>
     <changeSet author="Jhonatan (generated)" id="1404066940885-39">
         <addPrimaryKey columnNames="id" constraintName="livro_pkey"
                        tableName="livro" />
@@ -496,6 +491,10 @@
     <changeSet author="Jhonatan (generated)" id="1404066940885-42">
         <addPrimaryKey columnNames="id" constraintName="pagamento_pkey"
                        tableName="pagamento" />
+    </changeSet>
+    <changeSet author="Jhonatan (generated)" id="1404066940885-43">
+        <addPrimaryKey columnNames="id" constraintName="pais_pkey"
+                       tableName="pais" />
     </changeSet>
     <changeSet author="Jhonatan (generated)" id="1404066940885-44">
         <addPrimaryKey columnNames="id" constraintName="partematerial_pkey"
@@ -521,6 +520,7 @@
         <addPrimaryKey columnNames="id" constraintName="pessoafisica_pkey"
                        tableName="pessoafisica" />
     </changeSet>
+    
     <changeSet author="Jhonatan (generated)" id="1404066940885-50">
         <addPrimaryKey columnNames="id" constraintName="pessoajuridica_pkey"
                        tableName="pessoajuridica" />
@@ -606,6 +606,7 @@
                                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="solicitacaoitem" />
     </changeSet>
     <changeSet author="Jhonatan (generated)" id="1404066940885-67">
+
         <addForeignKeyConstraint baseColumnNames="unidadefederativaid"
                                  baseTableName="cidade" constraintName="fk_8a1ipvfv1kvgd7wpq02b1i5n9"
                                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
@@ -705,12 +706,12 @@
                                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
                                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940887-82">
+<!--    <changeSet author="Jhonatan (generated)" id="1404066940885-82">
         <addForeignKeyConstraint baseColumnNames="paisid"
-                                 baseTableName="unidadefederativa" constraintName="fk_estado_paisid"
+                                 baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy"
                                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
                                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais" />
-    </changeSet>
+    </changeSet>-->
     <changeSet author="Jhonatan (generated)" id="1404066940885-83">
         <addForeignKeyConstraint baseColumnNames="solicitacao_id"
                                  baseTableName="solicitacao_alunos" constraintName="fk_pap9cabe1luaxos2myl3sufle"
@@ -923,8 +924,8 @@
     </changeSet>-->
         
     <changeSet id="ali001" author="Alisson Molinari">
-        <dropNotNullConstraint tableName="participante" columnName="cpf" />
-        <dropColumn tableName="participante" columnName="cpf" />
+         <dropNotNullConstraint tableName="participante" columnName="cpf" />
+         <dropColumn tableName="participante" columnName="cpf" />
     </changeSet>
     <changeSet id="est010" author="Lorhan">
         <dropTable tableName="usuarioitemacesso"></dropTable>
@@ -936,5 +937,8 @@
                                  constraintName="FK_PARTICIPANTE_EVENTO" 
                                  referencedTableName="evento" 
                                  referencedColumnNames="id" />
+    </changeSet>
+    <changeSet id="walber001" author="Walber">
+        <dropColumn tableName="cidade" columnName="fundacao"/>
     </changeSet>
 </databaseChangeLog>

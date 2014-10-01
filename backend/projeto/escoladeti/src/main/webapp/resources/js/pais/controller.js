@@ -10,7 +10,7 @@ function PaisController($scope, $routeParams, paisService) {
             if (result) {
                paisService.deletar(pais)
                		.success(function (data, status) {
-                        $scope.getTodos(1);
+                        $scope.getTodos($scope.pageNumber);
                         console.log('pais deletado');
                         toastr.success(pais.nome+" deletado com sucesso.");                       
                     })

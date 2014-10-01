@@ -19,9 +19,6 @@ public class EventoService {
         return eventoRepository.save(evento);
     }
 
-//    public List<Evento> getTodos() {
-//        return eventoRepository.findAll();
-//    }
      public List<Evento> listarTodosEventos() {
 	return eventoRepository.findAll();
     }

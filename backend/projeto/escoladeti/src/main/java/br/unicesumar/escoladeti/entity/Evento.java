@@ -1,10 +1,12 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.util.data.DateUtil;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,23 +24,20 @@ public class Evento extends Entidade {
     private String ministrante;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idevento", referencedColumnName = "id")
+    @JoinColumn(name = "idevento", referencedColumnName = "id",updatable = false)
     private List<Participante> participante;
     private String organizacao;
     private String titulo;
     private String descricao;
     private double valor;
-
-    @ManyToOne
-    @JoinColumn(name = "id_pagamento", nullable = true)
-    private Pagamento pagamento;
+    private boolean statusevento;
 
     public Date getData() {
         return data;
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.data = data;           
     }
 
         public String getOrganizacao() {
@@ -46,15 +45,7 @@ public class Evento extends Entidade {
     }
 
     public void setOrganizacao(String organizacao) {
-        this.organizacao = organizacao;
-    }
-
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
+        this.organizacao = organizacao.toUpperCase();
     }
 
     public String getTitulo() {
@@ -62,7 +53,7 @@ public class Evento extends Entidade {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        this.titulo = titulo.toUpperCase();
     }
 
     public String getDescricao() {
@@ -70,7 +61,7 @@ public class Evento extends Entidade {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toUpperCase();
     }
 
     public String getInicio() {
@@ -86,7 +77,7 @@ public class Evento extends Entidade {
     }
 
     public void setTipoEvento(String tipoEvento) {
-        this.tipoEvento = tipoEvento;
+        this.tipoEvento = tipoEvento.toUpperCase();
     }
 
     public String getLocal() {
@@ -94,7 +85,7 @@ public class Evento extends Entidade {
     }
 
     public void setLocal(String local) {
-        this.local = local;
+        this.local = local.toUpperCase();
     }
     
     public double getValor() {
@@ -118,6 +109,19 @@ public class Evento extends Entidade {
     }
 
     public void setMinistrante(String ministrante) {
-        this.ministrante = ministrante;
+        this.ministrante = ministrante.toUpperCase();
     }
+    
+    public boolean validaData(){
+        return DateUtil.validBeforeDate(this.data);
+    }
+
+    public boolean getStatusevento() {
+        return statusevento;
+    }
+
+    public void setStatusevento(boolean statusevento) {
+        this.statusevento = statusevento;
+    }
+
 }

@@ -12,6 +12,15 @@ public class Participante extends Entidade {
     private String deficiente;
     private String pagamento;
     private String necessidade;
+    private boolean presente;
+
+    public boolean isPresente() {
+        return presente;
+    }
+
+    public void setPresente(boolean presente) {
+        this.presente = presente;
+    }
     
     public String getPagamento() {
         return pagamento;
@@ -30,7 +39,7 @@ public class Participante extends Entidade {
     }
 
     public String getNecessidade() {
-        return necessidade;
+        return necessidade.toUpperCase();
     }
 
     public void setNecessidade(String necessidade) {
@@ -42,7 +51,7 @@ public class Participante extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getEmail() {
@@ -50,7 +59,7 @@ public class Participante extends Entidade {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toUpperCase();
     }
 
     public String getTelefone() {
@@ -66,6 +75,6 @@ public class Participante extends Entidade {
     }
 
     public void setDeficiente(String deficiente) {
-        this.deficiente = deficiente;
+        this.deficiente = deficiente.toUpperCase();
     }
 }

@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@page  pageEncoding="utf-8" %>
+
 <html lang="pt-br" ng-app="app">
     <head>
         <meta charset="UTF-8">
@@ -21,19 +22,21 @@
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
         <script type="text/javascript" src="./resources/libs/funcoes.js"></script>		
         <script type="text/javascript" src="./resources/libs/toastr.js"></script>
-        <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script>
+        <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script> 
+        <script type="text/javascript" src="./resources/libs/jquery.maskMoney.min.js" ></script>
 
-        <script type="text/javascript" src="./resources/libs/angular.min.js"></script>        
-        <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>        
-        <script type="text/javascript" src="./resources/libs/ui-bootstrap-tpls-0.11.0.min.js"></script>        
-        <script type="text/javascript" src="./resources/libs/angular-ui.js"></script>        
+        <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/ui-bootstrap-tpls-0.11.0.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/angular-ui.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>  
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>        
         <script type="text/javascript" src="./resources/js/directives.js"></script>
+        <script type="text/javascript" src="./resources/js/buscacep/service.js"></script>
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
         <script type="text/javascript" src="./resources/js/estado/controller.js" ></script>
@@ -46,8 +49,16 @@
         <script type="text/javascript" src="./resources/js/solicitacao/service.js" ></script>           
         <script type="text/javascript" src="./resources/js/pessoa/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/estoque/ProdutoController.js" ></script>
+        <script type="text/javascript" src="./resources/js/estoque/MovimentoController.js" ></script>
+        
+        <script type="text/javascript" src="./resources/js/ordemProducao/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/ordemProducao/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/volume/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/volume/controller.js" ></script>
 
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
+        <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/service.js" ></script>
 
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
@@ -60,9 +71,8 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/CepController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
-        <script type="text/javascript" src="./resources/js/OrdemProducaoController.js" ></script>
+
 
         <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
         <link  href="./resources/vendor/css/jquery.sidr.light.css">
@@ -75,6 +85,7 @@
 
         <script type="text/javascript" src="./resources/vendor/js/breakpoints.js"></script>
         <script type="text/javascript" src="./resources/vendor/js/core.js"></script>        
+        <script type="text/javascript" src="./resources/vendor/js/moment.js"></script>
         <script type="text/javascript" src="./resources	/vendor/js/jquery.sidr.min.js"></script>
 
     </head>
@@ -140,7 +151,7 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-location-arrow"></i>
-                            <span class="title">Localidade</span>
+                            <span class="title">LOCALIDADE</span>
                         </a>
                         <ul class="sub-menu">
                             <li><a href="#/listapais">Pais</a></li>
@@ -152,15 +163,16 @@
                     <li>
                         <a href="#/listalivro">
                             <i class="fa fa-book"></i>
-                            <span class="title">Livros</span>
+                            <span class="title">LIVROS</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <i class="fa fa-user"></i>
-                            <span class="title">Usu·rios</span>
+                            <span class="title">USU√ÅRIOS</span>
                         </a>
                         <ul class="sub-menu">
+                            <li><a href="#/listausuario">Usu√°rio</a></li>
                             <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                             <li><a href="#/listaitemacesso">Item de acesso</a></li>
                         </ul>
@@ -168,7 +180,7 @@
                     <li>
                         <a href="#/listapessoa">
                             <i class="fa fa-male"></i>
-                            <span class="title">Pessoas</span>
+                            <span class="title">PESSOAS</span>
                         </a>
                     </li>
                     <li>
@@ -185,12 +197,11 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-cog"></i>
-                            <span class="title">PRODU«√O</span>
+                            <span class="title">PRODU√á√ÉO</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">SolicitaÁ„o</a></li>
-                            <li><a href="#/acompanhamento">Acompanhamento de SolicitaÁ„o</a></li>
-                            <li><a href="#/listaordemproducao">Ordem de ProduÁ„o</a></li>
+                            <li><a href="#/listasolicitacoes">Solicita√ß√£oo</a></li>
+                            <li><a href="#/acompanhamento">Acompanhamento de Solicita√ß√£o</a></li>
                         </ul>
                     </li>
                     <li>
@@ -202,6 +213,17 @@
                             <li><a href="#/listalivro">Livro</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dropbox"></i>
+                            <span class="title">Estoque</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#/listaproduto">Produto</a></li>
+                            <li><a href="#/listamovimento">Movimento</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
 
