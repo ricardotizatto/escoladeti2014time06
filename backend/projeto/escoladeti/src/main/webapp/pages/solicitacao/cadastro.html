@@ -89,7 +89,7 @@
                 <div class="row">
                     <div class="col-md-3 form-group {{solicitacaoForm.cep.$error.required? 'has-error' : 'has-success' }} has-feedback">
                         <label class="control-label">CEP *</label>
-                        <input type="text" class="form-control" ng-model="solicitacao.cep" id="cep" name="cep" required>
+                        <input type="text" class="form-control" ng-model="solicitacao.cep" ui-mask="99.999-999" name="cep" required>
                     </div>
                     <div class="col-md-3 form-group {{solicitacaoForm.municipio.$error.required? 'has-error' : 'has-success' }} has-feedback">
                         <label class="control-label">Município *</label>
