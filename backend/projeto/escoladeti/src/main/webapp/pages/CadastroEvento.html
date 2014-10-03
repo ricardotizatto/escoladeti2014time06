@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="eventoController" ng-init="carregarEvento()">
+<div class="container" ng-controller="eventoController" ng-init="carregarEvento()">
     <fieldset>
         <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
         <div class="row">
@@ -8,7 +8,7 @@
         </div>
         <form action="" novalidate method="POST" role="form" name="formEvento" ng-submit="salvar('salvo')">	
             <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-4">
                     <div class="form-group {{formEvento.titulo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Titulo *</strong></label>
                         <input type="text" name="titulo" title="Titulo do Evento deve ser maisculo" class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/"
@@ -17,19 +17,16 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <div class="form-group {{formEvento.tipo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <div class="form-group {{formEvento.tipo.$error.required ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Tipo *</strong></label>
                         <select name="tipo" class="form-control" ng-model="evento.tipoEvento" required>
                             <option value="1">CURSO</option>
                             <option value="2">PALESTRA</option>
                             <option value="3">REUNIÃO</option>
                         </select>
-                        <span class="help-block" ng-show="formEvento.tipo.$error.required">Selecione o tipo do evento</span>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-4">
                     <div class="form-group {{formEvento.organizacao.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Realização *</strong></label>
                         <input type="text" name="organizacao" title="Realizacao do Evento deve ser maisculo" class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/"
@@ -47,7 +44,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-5">
                     <div class="form-group {{formEvento.ministrante.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Ministrante *</strong></label>
                         <input type="text" name="ministrante" class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/"
@@ -55,12 +52,10 @@
                         <span class="help-block" ng-show="formEvento.ministrante.$error.pattern">Apenas letras e no mínimo 3.</span>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-7">
                     <div class="form-group {{formEvento.descricao.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Descrição do Evento *</strong></label>
-                        <textarea name="descricao" class="form-control" rows="5" cols="5" ng-pattern="/[a-zA-Z\s]{3,200}/"
+                        <textarea name="descricao" class="form-control" rows="1" cols="5" ng-pattern="/[a-zA-Z\s]{3,200}/"
                                   required ng-model="evento.descricao" placeholder="Digite uma descrição para o evento..."></textarea>
                         <span class="help-block" ng-show="formEvento.descricao.$error.pattern">Apenas letras e no mínimo 3.</span>
                         <div class="required-icon">
@@ -69,6 +64,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="form-group col-sm-6">
                     <div class="form-group {{formEvento.local.$invalid ? 'has-error' : 'has-success'}} has-feedback">
@@ -77,10 +73,51 @@
                                ng-model="evento.local" required placeholder="Local do evento"/>
                         <span class="help-block" ng-show="formEvento.local.$error.pattern">Apenas letras e no mínimo 3.</span>
                     </div>
-                </div>   
-            </div>            
-            <div class="row">
-                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="row" >
+                            <div class="col-sm-6"> 
+                                <legend>
+                                    <span class="fa fa-calendar"></span> <strong class="control-label" > Data * </strong>
+                                    <button type="submit" class="btn btn-primary btn-sm"
+                                            data-toggle="modal" data-target="#modalData" ng-click="novaData()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </legend>
+                            </div>    
+                        </div>
+                        <div class="row" >  
+                            <div class="col-sm-12"> 
+                                <table class="table table-hover table-striped">
+                                    <tr>
+                                        <th class="col-sm-3">Data</th>
+                                        <th class="col-sm-3">Início</th>
+                                        <th class="col-sm-3">Fim</th>
+                                        <th class="col-sm-3">Ações</th>
+                                    </tr>
+                                    <tr ng-repeat="periodo in ev.periodos">
+                                        <td ng-bind="ev.data"></td>
+                                        <td ng-bind="ev.inicio"></td>
+                                        <td ng-bind="ev.fim"></td>
+                                        <td>
+                                            <button class='btn btn-warning btn-sm'
+                                                    ng-click="editarTelefone($index)" data-toggle="modal"
+                                                    data-target="#modalData">
+                                                <span class='glyphicon glyphicon-edit'></span>
+                                            </button>
+                                            <button class='btn btn-danger btn-sm'
+                                                    ng-click="delTelefone($index)">
+                                                <span class='glyphicon glyphicon-remove-circle'></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>    
+                        </div> 
+                    </div>
+                </div>
+               <!-- <div class="col-sm-2">
                     <div class="form-group {{formEvento.data.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Data *</strong></label>
                         <input name="data" type="date" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.data" required placeholder="dd/mm/aaaa" />
@@ -100,38 +137,90 @@
                         <input name="termino" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.fim" required="" placeholder="00:00" />
                         <span class="help-block" ng-show="formEvento.termino.$error.pattern">Apenas números.</span>
                     </div>
-                </div>
-            </div>
+                </div>   -->
+            </div>            
             <div class="row">
                 <div class="col-sm-1"></div>
 
-                <div class="col-sm-9">
-                    <span class="pull-right">	
-                        <a class="btn btn-primary btn-padrao" ng-click="voltar()">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span>&nbsp;Voltar
-                        </a>
-                         &nbsp;&nbsp; 
+                <div class="col-sm-12">
+                    <span class="pull-right">
                         <a class="btn btn-primary btn-danger" ng-show="evento.statusevento == true" ng-click="encerrar()">
-                            <span class="glyphicon glyphicon-remove-circle" ></span>&nbsp;Fechar
+                            <span class="fa fa-lock" ></span> Finalizar
                         </a>
-                         &nbsp;&nbsp; 
                         <a class="btn btn-primary btn-padrao" ng-show="evento.statusevento == false" ng-click="reativar()">
-                            <span class="glyphicon glyphicon-circle-arrow-right" ></span>&nbsp;Ativar
+                            <span class="glyphicon glyphicon-circle-arrow-right" ></span> Ativar
                         </a>
-                        &nbsp;&nbsp; 
                         <a class="btn btn-primary btn-danger" ng-show="evento.id > 0" ng-click="deletar(evento)">
-                            <span class="glyphicon glyphicon-remove-circle" ></span>&nbsp;Excluir
+                            <span class="glyphicon glyphicon-remove-circle" ></span> Excluir
                         </a>
-                        &nbsp;&nbsp; 
+                        <a class="btn btn-primary btn-padrao" ng-click="voltar()">
+                            <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+                        </a>
                         <button type="submit" class="btn btn-success btn-padrao" ng-disabled="formEvento.$invalid">
-                            <span class="glyphicon glyphicon-ok"  ></span>&nbsp;Salvar
+                            <span class="glyphicon glyphicon-ok" ></span> Salvar
                         </button>
                     </span>		
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12"><hr></div>
-            </div>			
+            </div>
+            <!-- Modal data/periodo-->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form action="" novalidade name="formData" method="POST" role="form" ng-submit="salvarData()">
+                            <div class="modal fade in" id="modalData" tabindex="-1" role="dialog" aria-labelledby="modalDataLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="modalDataLabel">
+                                                <span class="glyphicon glyphicon-time"></span> Cadastro de periodos
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group {{formEvento.data.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                            <label class="control-label"><strong>Data *</strong></label>
+                                                            <input name="data" type="date" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.data" required placeholder="dd/mm/aaaa"/>
+                                                            <span class="help-block" ng-show="formEvento.data.$error.pattern">Apenas números.</span>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                                <div class="col-sm-4">
+                                                   <div class="form-group {{formEvento.inicio.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                       <label class="control-label"><strong>Início *</strong></label>
+                                                       <input name="inicio" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.inicio" required="" placeholder="00:00" />
+                                                       <span class="help-block" ng-show="formEvento.inicio.$error.pattern">Apenas números.</span>
+                                                   </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group {{formEvento.termino.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                        <label class="control-label"><strong>Término *</strong></label>
+                                                        <input name="termino" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.fim" required="" placeholder="00:00" />
+                                                        <span class="help-block" ng-show="formEvento.termino.$error.pattern">Apenas números.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <span class="pull-right">
+                                                <button class="btn btn-danger btn-padrao" data-dismiss="modal">
+                                                    <span class="glyphicon glyphicon-remove"></span> Sair
+                                                </button>
+                                                <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()" ng-disabled="formData.$invalid" >
+                                                    <span class="glyphicon glyphicon-ok"></span> Salvar
+                                                </button> 
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>    
+                </div><!--//modal data/periodo -->			
         </form>
     </fieldset>
 </div>
