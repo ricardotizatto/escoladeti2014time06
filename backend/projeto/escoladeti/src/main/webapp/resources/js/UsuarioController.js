@@ -27,10 +27,14 @@ function UsuarioController($scope, $http, $routeParams) {
         console.log('Editar usuario');
         window.location = '#/cadastrousuario/' + usuario.id;
     };
+    $scope.voltar = function () {
+        window.location = '#/listausuario';
+    };
     $scope.getTodos = function() {
         $http.get("./rest/usuarioSource/usuario")
                 .success(function(usuarios, status) {
-            $scope.usuarios = usuarios;
+            console.log('$scope.pagina ' + $scope.pagina);
+                $scope.pagina = usuarios;
         })
                 .error(function(data, status) {
             console.log('erro ao buscar usuarios');
@@ -145,13 +149,16 @@ function UsuarioController($scope, $http, $routeParams) {
         }
 
         if (resultado < 40) {
-            $scope.myStyle = {'background-color': '#ff0000'};
+            $scope.myStyle = {'background-color': '#ff0000', 'color': '#fff'};
+            $scope.statusSenha = 'Senha Fraca';
         } else {
             if (resultado >= 40 && resultado < 80) {
-                $scope.myStyle = {'background-color': '#ffff00'};
+                $scope.myStyle = {'background-color': '#ffff00', 'color': '#000'};
+                $scope.statusSenha = 'Senha Média';
             } else {
                 if (resultado >= 80) {
-                    $scope.myStyle = {'background-color': '#66ff00'};
+                    $scope.myStyle = {'background-color': '#66ff00', 'color': '#000'};
+                    $scope.statusSenha = 'Senha Forte';
                 }
             }
         }
