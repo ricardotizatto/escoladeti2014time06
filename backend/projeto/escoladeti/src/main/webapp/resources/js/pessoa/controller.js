@@ -85,17 +85,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
     $scope.getTodos = function (numeroPagina) {
-        if ($scope.tipoPessoa === 'J') {
-            $scope.filtroPessoaJuridica(numeroPagina);
-        } else if ($scope.tipoPessoa === 'A') {
-            $scope.filtroAluno(numeroPagina);
-        } else {
             $scope.filtroPessoaFisica(numeroPagina);
-        }
-
-        Pessoa.get(function (pessoas) {
-            $scope.totalItems = pessoas.length;
-        });
     };
 
 
@@ -166,12 +156,12 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                 Pessoa.delete({id: pessoa.id, tipo: pessoa.tipo}, function () {
                     toastr.success(pessoa.nome + ' deletada com sucesso');
                     if ($scope.tipoPessoa === 'J') {
-                        $scope.filtroPessoaJuridica(1);
+                        $scope.filtroPessoaJuridica($scope.pageNumber);
                     } else {
                         if ($scope.tipoPessoa === 'A') {
-                            $scope.filtroAluno(1);
+                            $scope.filtroAluno($scope.pageNumber);
                         } else {
-                            $scope.filtroPessoaFisica(1);
+                            $scope.filtroPessoaFisica($scope.pageNumber);
                         }
                     }
                 });

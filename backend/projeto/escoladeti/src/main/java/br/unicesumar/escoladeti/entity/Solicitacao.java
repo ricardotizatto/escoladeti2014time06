@@ -3,17 +3,9 @@ package br.unicesumar.escoladeti.entity;
 import static org.parboiled.common.Preconditions.checkNotNull;
 import static org.parboiled.common.Preconditions.checkArgument;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -27,8 +19,8 @@ import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
 public class Solicitacao extends Entidade {
 
     private static final long serialVersionUID = 1L;
-    @NotNull(message="Aluno é obrigatorio")
-    @ManyToOne(fetch=FetchType.EAGER)
+
+    @ManyToOne
     @JoinColumn(name="id_aluno")
     private PessoaFisica aluno;
     
@@ -46,8 +38,6 @@ public class Solicitacao extends Entidade {
     
     private String endereco;
     
-    @Min(value=0, message="Informe um endereço válido")
-    @Max(value=9999, message="Informe um endereço válido")
     private Integer numeroEndereco;
     
     private String serie;
@@ -55,17 +45,17 @@ public class Solicitacao extends Entidade {
     private String ensino;
     
 
+    @ManyToOne
     @JoinColumn(name = "id_responsavel")
     private PessoaFisica responsavel;
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy="solicitacao")
-    private List<SolicitacaoItem> itensSolicitacao;
+    private Set<SolicitacaoItem> itensSolicitacao = new HashSet();
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataChegada;
 
     public Solicitacao() {
-    	this.itensSolicitacao = new ArrayList<SolicitacaoItem>();
     }
 
     public Solicitacao(PessoaFisica responsavel, Date dataChegada) {
@@ -149,11 +139,11 @@ public class Solicitacao extends Entidade {
 		this.responsavel = responsavel;
 	}
 
-	public List<SolicitacaoItem> getItensSolicitacao() {
+	public Set<SolicitacaoItem> getItensSolicitacao() {
 		return itensSolicitacao;
 	}
 
-	public void setItensSolicitacao(List<SolicitacaoItem> itensSolicitacao) {
+	public void setItensSolicitacao(Set<SolicitacaoItem> itensSolicitacao) {
 		this.itensSolicitacao = itensSolicitacao;
 	}
 

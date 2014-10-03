@@ -31,6 +31,7 @@ public class PessoaFisica extends Pessoa {
     private Sexo sexo;
 
     private boolean aluno = false;
+    private String nomeCompleto;
 
     public PessoaFisica() {
     }
@@ -96,5 +97,9 @@ public class PessoaFisica extends Pessoa {
 
     public static PessoaFisica of(Long id) {
         return new PessoaFisica(id);
+    }
+
+    public String getNomeCompleto() {
+        return  getNome()+ " " + sobrenome;
     }
 }

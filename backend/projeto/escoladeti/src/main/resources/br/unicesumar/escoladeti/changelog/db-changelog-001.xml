@@ -706,12 +706,12 @@
                                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
                                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
     </changeSet>
-    <changeSet author="Jhonatan (generated)" id="1404066940885-82">
+<!--    <changeSet author="Jhonatan (generated)" id="1404066940885-82">
         <addForeignKeyConstraint baseColumnNames="paisid"
                                  baseTableName="unidadefederativa" constraintName="fk_ltgxlk9h65fbfi03txf43avhy"
                                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
                                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais" />
-    </changeSet>
+    </changeSet>-->
     <changeSet author="Jhonatan (generated)" id="1404066940885-83">
         <addForeignKeyConstraint baseColumnNames="solicitacao_id"
                                  baseTableName="solicitacao_alunos" constraintName="fk_pap9cabe1luaxos2myl3sufle"

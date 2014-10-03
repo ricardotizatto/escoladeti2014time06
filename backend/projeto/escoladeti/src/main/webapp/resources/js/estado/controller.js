@@ -23,7 +23,7 @@ function EstadoController($scope, $routeParams, paisService, estadoService) {
             if (result) {
                 estadoService.deletar(unidadeFederativa)
                         .success(function (data, status) {
-                            $scope.getTodos(1);
+                        	$scope.getTodos($scope.pageNumber);
                             console.log('Estado deletado!');
                             toastr.success('Estado ' + unidadeFederativa.nome + ' deletado.');
                         })
@@ -110,10 +110,6 @@ function EstadoController($scope, $routeParams, paisService, estadoService) {
                 .success(function (listaUnidadesFederativas) {
                     console.log(listaUnidadesFederativas);
                     $scope.unidadesFederativas = listaUnidadesFederativas;
-                    estadoService.buscarTodos()
-                            .success(function(todos) {
-                                $scope.totalItems = todos.length;
-                            });
                         })
                         .error(function (data) {
                             console.log('erro ao buscar Estados ' + data.developerMessage);

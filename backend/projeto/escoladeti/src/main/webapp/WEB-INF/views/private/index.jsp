@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@page  pageEncoding="utf-8" %>
+
 <html lang="pt-br" ng-app="app">
     <head>
         <meta charset="UTF-8">
@@ -84,6 +85,7 @@
 
         <script type="text/javascript" src="./resources/vendor/js/breakpoints.js"></script>
         <script type="text/javascript" src="./resources/vendor/js/core.js"></script>        
+        <script type="text/javascript" src="./resources/vendor/js/moment.js"></script>
         <script type="text/javascript" src="./resources	/vendor/js/jquery.sidr.min.js"></script>
 
     </head>
@@ -167,10 +169,10 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-user"></i>
-                            <span class="title">USU¡RIOS</span>
+                            <span class="title">USU√ÅRIOS</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listausuario">Usu·rio</a></li>
+                            <li><a href="#/listausuario">Usu√°rio</a></li>
                             <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
                             <li><a href="#/listaitemacesso">Item de acesso</a></li>
                         </ul>
@@ -195,11 +197,11 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-cog"></i>
-                            <span class="title">PRODU«√O</span>
+                            <span class="title">PRODU√á√ÉO</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">SolicitaÁ„o</a></li>
-                            <li><a href="#/acompanhamento">Acompanhamento de SolicitaÁ„o</a></li>
+                            <li><a href="#/listasolicitacoes">Solicita√ß√£oo</a></li>
+                            <li><a href="#/acompanhamento">Acompanhamento de Solicita√ß√£o</a></li>
                         </ul>
                     </li>
                     <li>

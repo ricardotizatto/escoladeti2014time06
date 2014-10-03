@@ -88,8 +88,8 @@
 		<dropView viewName="viewAcompanhamentoSolicitacao" />
 	</changeSet>
         -->
-	<changeSet author="martinho" id="mart013">
-		<createView viewName="viewAcompanhamentoSolicitacao"
+	<changeSet author="martinho" id="mart0132">
+		<createView viewName="viewacompanhamentosolicitacao"
                     replaceIfExists="true" schemaName="public">
                     SELECT T1.ID AS SOLICITACAOID,
                     T2.STATUS AS STATUS,
@@ -109,7 +109,49 @@
                     ORDER BY T1.DATACHEGADA
             </createView>
 	</changeSet>
+	
+	<changeSet id="w201409212348" author="Walber">
+	<addUniqueConstraint columnNames="nome,codigo,sigla" tableName="pais"/>
+	</changeSet>
 
+    <changeSet author="catabriga" id="32465632">
+        <dropView viewName="viewacompanhamentosolicitacao"></dropView>
+        <createView viewName="viewacompanhamentosolicitacao" replaceIfExists="true" schemaName="public">
+            SELECT T1.ID AS SOLICITACAOID,
+            T2.STATUS AS STATUS,
+            T1.DATACHEGADA,
+            T2.TRADUCAOMATERIAL,
+            T2.OUTRO AS OUTRATRADUCAO,
+            T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
+            T7.NOME AS MATERIAL
+            FROM SOLICITACAO T1
+            JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
+            LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
+            LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
+            LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
+            ORDER BY T1.DATACHEGADA
+        </createView>
+    </changeSet>
+
+    <changeSet id="46516354631" author="catabriga">
+        <dropView viewName="viewacompanhamentosolicitacao"></dropView>
+        <createView viewName="viewacompanhamentosolicitacao" replaceIfExists="true" schemaName="public">
+            SELECT T1.ID AS SOLICITACAOID,
+            T2.ID,
+            T2.STATUS AS STATUS,
+            T1.DATACHEGADA,
+            T2.TRADUCAOMATERIAL,
+            T2.OUTRO AS OUTRATRADUCAO,
+            T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
+            T7.NOME AS MATERIAL
+            FROM SOLICITACAO T1
+            JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
+            LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
+            LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
+            LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
+            ORDER BY T1.DATACHEGADA
+        </createView>
+    </changeSet>
 
 </databaseChangeLog>
 

@@ -4,11 +4,13 @@ angular.module('controllers')
         '$routeParams',
         '$http',
         'VolumeFactory',
+        'OrdemProducaoFactory',
         VolumeController]);
 
-function VolumeController($routeParams, $http, Volume) {
+function VolumeController($routeParams, $http, Volume, OrdemProducao) {
     this.routeParams = $routeParams;
     this.Volume = Volume;
+    this.OrdemProducao = OrdemProducao;
     this.http = $http;
     this.iniciar();
 }
@@ -54,14 +56,32 @@ VolumeController.prototype = {
         if (this.volume.responsavel) {
             this.volume.responsavel = this.volume.responsavel.id;
         }
+
+        if (this.volume.dataImpressao) {
+            this.volume.dataImpressao = moment(this.volume.dataImpressao).format('YYYY-MM-DD');
+        }
+
+        if (this.volume.dataRevisao) {
+            this.volume.dataRevisao = moment(this.volume.dataRevisao).format('YYYY-MM-DD');
+        }
+
+        if (this.volume.dataEnviado) {
+            this.volume.dataEnviado = moment(this.volume.dataEnviado).format('YYYY-MM-DD');
+        }
     },
 
     novoVolume: function () {
         var self = this;
 
+        var idSolicitacaoItem = this.routeParams.idOrdemProducao;
+
         this.volume = new this.Volume({
             status: "ANDAMENTO",
-            idSolicitacaoItem: this.routeParams.idOrdemProducao
+            idSolicitacaoItem: idSolicitacaoItem
+        });
+
+        this.OrdemProducao.sugerir({id : idSolicitacaoItem}, function (sugestao) {
+            self.volume.paginaInicio = sugestao.pagina;
         });
 
         console.log(this.volume);
@@ -83,5 +103,84 @@ VolumeController.prototype = {
         }
 
         this.volume.$save(mensagemSucesso);
+    },
+
+
+    rejeitar: function () {
+        var self = this;
+        $('#modalImpressao').modal('show');
+
+        this.aoAlterarStatus = function () {
+            self.volume.$rejeitar(function () {
+                self.ajustarVolume();
+                $('#modalImpressao').modal('hide');
+                toastr.success('Volume rejeitado');
+            });
+
+        };
+    },
+
+    marcarComoImpresso: function () {
+        var self = this;
+        $('#modalImpressao').modal('show');
+
+        this.aoAlterarStatus = function () {
+            self.volume.$marcarComoImpresso(function () {
+                self.ajustarVolume();
+                $('#modalImpressao').modal('hide');
+
+                toastr.success('Volume marcado como impresso');
+            });
+        }
+
+    },
+
+    marcarComoRevisado: function () {
+        var self = this;
+        $('#modalImpressao').modal('show');
+
+        this.aoAlterarStatus = function () {
+            self.volume.$marcarComoRevisado(function () {
+                self.ajustarVolume();
+                $('#modalImpressao').modal('hide');
+
+                toastr.success('Volume marcado como impresso');
+            });
+        }
+
+    },
+
+    marcarComoEnviado: function () {
+        var self = this;
+        $('#modalImpressao').modal('show');
+
+        this.aoAlterarStatus = function () {
+
+            self.volume.$marcarComoEnviado(function () {
+                self.ajustarVolume();
+                $('#modalImpressao').modal('hide');
+
+                toastr.success('Volume marcado como enviado');
+            });
+
+        }
+
+    },
+
+    reativar: function () {
+        var self = this;
+
+        this.volume.$reativar(function () {
+            self.ajustarVolume();
+            $('#modalImpressao').modal('hide');
+
+            toastr.success('Volume reativado');
+        });
+    },
+
+
+    alterarStatus: function () {
+        var self = this;
+        this.aoAlterarStatus && this.aoAlterarStatus();
     }
 }

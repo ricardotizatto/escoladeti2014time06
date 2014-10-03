@@ -10,7 +10,7 @@ function PaisController($scope, $routeParams, paisService) {
             if (result) {
                paisService.deletar(pais)
                		.success(function (data, status) {
-                        $scope.getTodos(1);
+                        $scope.getTodos($scope.pageNumber);
                         console.log('pais deletado');
                         toastr.success(pais.nome+" deletado com sucesso.");                       
                     })
@@ -78,10 +78,6 @@ function PaisController($scope, $routeParams, paisService) {
                         delete pais.info; 
                 });
                 $scope.paises = listaPaises;
-                paisService.buscarTodos()
-                        .success(function(lista){
-                            $scope.totalItems = lista.length;
-                });
             })
             .error(function(data, status) {
                 console.log('erro ao buscar paises ' + data);

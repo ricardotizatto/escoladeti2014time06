@@ -79,7 +79,7 @@
             </ul>
         </div>
     </div>-->
-    <pagination boundary-links="true" num-pages="pagina.pageCount" total-items="totalItems" items-per-page="pagina.maxRows"
+    <pagination boundary-links="true" num-pages="pagina.pageCount" total-items="pagina.pageCount*pagina.maxRows" items-per-page="pagina.maxRows"
                 ng-model="pageNumber" ng-change="buscarPagina(pageNumber)" class="pagination-sm" max-size="pagina.maxPagesToShow"
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </pagination>

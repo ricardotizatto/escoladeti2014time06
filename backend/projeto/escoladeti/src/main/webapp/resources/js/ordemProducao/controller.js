@@ -24,6 +24,9 @@ OrdemProducaoController.prototype = {
 
         this.OrdemProducao.get(param, function (item) {
             self.item = item;
+            if (self.item.outro) {
+                self.item.traducaoMaterial += ' - '+item.outro;
+            }
         });
 
     },
