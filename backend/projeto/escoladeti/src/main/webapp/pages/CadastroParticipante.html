@@ -39,7 +39,7 @@
 
                 <div class="form-group {{formParticipante.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong>Nome *</strong></label>
-                    <input class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/" 
+                    <input class="form-control" ng-pattern="/^[a-zA-Z\s]{3,200}$/" 
                            type="text" name="nome"  id="nome" placeholder="Nome" ng-model="participante.nome" required >
                     <span class="help-block" ng-show="formParticipante.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
                 </div>    
