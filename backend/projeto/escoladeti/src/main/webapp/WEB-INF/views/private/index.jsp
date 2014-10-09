@@ -189,7 +189,7 @@
                             <span class="title">EVENTOS</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/cadastroparticipante">Participante</a></li>
+                            <li><a href="#/cadastroparticipante">Inscrições</a></li>
                             <!--<li><a href="#/cadastroevento">Evento</a></li>-->
                             <li><a href="#/listaevento">Eventos</a></li>
                         </ul>

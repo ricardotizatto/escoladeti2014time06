@@ -178,9 +178,9 @@ function eventoController($scope, $http, $routeParams) {
     
     $scope.mensageEventoListado = function(){
         if($scope.selected){
-            return 'em Aberto';
+            return 'Abertos';
         }else{
-            return 'Encerrados';
+            return 'Finalizados';
         }
     };
     
