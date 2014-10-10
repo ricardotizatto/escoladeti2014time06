@@ -86,7 +86,7 @@
 		expectedResult="t">select exists(select * from information_schema.views b 
 		where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions> 
 		<dropView viewName="viewAcompanhamentoSolicitacao" /> </changeSet> -->
-	<changeSet author="martinho" id="mart0132">
+	<changeSet author="martinho" id="mart201410100054">
 		<createView viewName="viewacompanhamentosolicitacao"
 			replaceIfExists="true" schemaName="public">
                     SELECT T1.ID AS SOLICITACAOID,
