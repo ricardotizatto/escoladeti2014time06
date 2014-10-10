@@ -60,9 +60,9 @@
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/service.js" ></script>
 
+        <script type="text/javascript" src="./resources/js/usuario/controller.js" ></script>       
         <script type="text/javascript" src="./resources/js/ItemAcessoController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoController.js" ></script>
-        <script type="text/javascript" src="./resources/js/UsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/PerfilAcessoUsuarioController.js"></script>
         <script type="text/javascript" src="./resources/js/ListaUsuarioController.js" ></script>
         <script type="text/javascript" src="./resources/js/CadastroBairroController.js" ></script>

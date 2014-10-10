@@ -152,6 +152,12 @@
             ORDER BY T1.DATACHEGADA
         </createView>
     </changeSet>
+    
+    <changeSet id="mart011" author="martinho">
+        <addColumn tableName="usuario">
+            <column name="perfilacessousuarioid" type="INT8"></column>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>
 

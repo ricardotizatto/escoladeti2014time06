@@ -1,10 +1,5 @@
 function UsuarioController($scope, $http, $routeParams) {
     console.log('Usuario Controller');
-    $scope.nome;
-    $scope.login;
-    $scope.senha;
-    $scope.email;
-    $scope.ativo;
 
     var tamanho = 0;
     var temMaiuscula = 0;
@@ -19,7 +14,7 @@ function UsuarioController($scope, $http, $routeParams) {
             $scope.carregarUsuario();
         } else {
             $scope.usuario = getNovoUsuario();
-            console.log(angular.toJson($scope.usuario, true));
+           // console.log(angular.toJson($scope.usuario, true));
             window.location = '#/cadastrousuario';
         }
     };
@@ -33,7 +28,7 @@ function UsuarioController($scope, $http, $routeParams) {
     $scope.getTodos = function() {
         $http.get("./rest/usuarioSource/usuario")
                 .success(function(usuarios, status) {
-            console.log('$scope.pagina ' + $scope.pagina);
+           // console.log('$scope.pagina ' + $scope.pagina);
                 $scope.pagina = usuarios;
         })
                 .error(function(data, status) {
@@ -58,19 +53,39 @@ function UsuarioController($scope, $http, $routeParams) {
             console.log('senha ' + $scope.usuario.senha + ' confirmarSenha ' + $scope.confirmaSenha);
         } else {
             $http.post("./rest/usuarioSource/usuario", $scope.usuario)
-                    .success(function(usuario, status) {
-                toastr.success("Usuário cadastrado com sucesso!");
-                setTimeout(function() {
-                    window.location = "#/cadastroperfilacessousuario/"+usuario.id;
-                }, 500);
+                .success(function(usuario) {
+                toastr.success("Usuário cadastrado com sucesso!");    
                 console.log("usuario salvo = " + usuario);
-            })
-                    .error(function(data, status) {
+                
+                console.log("meuPerfilAcesso: " + $scope.meuPerfilAcesso.id);    
+                $scope.perfilAcessoUsuario = {
+                    inicioVigencia: $scope.inicioVigencia,
+                    fimVigencia: $scope.fimVigencia,
+                    perfilAcesso: {id: $scope.meuPerfilAcesso.id},
+                    usuario: {id: usuario.id}
+                };
+               // console.log(angular.toJson($scope.perfilAcessoUsuario, true) + ' aqui');
+//                $http.post("./rest/perfilAcessoUsuarioSource/perfilAcessoUsuario", $scope.perfilAcessoUsuario)
+//                    .success(function(perfilAcessoUsuario, status) {
+//                        toastr.success("Usuário cadastrado com sucesso!");
+//                        setTimeout(function() {
+//                            window.location = "#/listausuario";
+//                        }, 500);
+//                        console.log("PerfilAcessoUsuario salvo = " + perfilAcessoUsuario);
+//                    })
+//                    .error(function(data, status) {
+//                        console.log(angular.toJson($scope.meuPerfilAcesso, true) + ' aqui');
+//                        console.log("Erro ao salvar PerfilAcessoUsuario", data);
+//                        toastr.warning("Erro ao salvar Perfil de Acesso do Usuario!");
+//                    });
+                
+            }).error(function(data, status) {
                 console.log("erro ao salvar usuario", data);
                 toastr.warning("Erro ao salvar usuário!");
             });
         }
     };
+
     $scope.deletar = function(usuario) {
         $http({
             method: 'DELETE',
@@ -98,9 +113,9 @@ function UsuarioController($scope, $http, $routeParams) {
 
     $scope.getPerfisDeAcesso = function() {
         $http.get("./rest/perfilAcessoSource/perfilAcesso")
-                .success(function(perfils, status) {
+            .success(function(perfils, status) {
             $scope.perfisAcesso = perfils;
-            console.log(angular.toJson($scope.perfisAcesso, true));
+            //console.log(angular.toJson($scope.perfisAcesso, true));
         }).error(function(data, status) {
             console.log('Erro ao carregar perfis de acesso! ' + data);
         });

@@ -1,6 +1,8 @@
 package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import static liquibase.util.MD5Util.computeMD5;
 
 @Entity
@@ -11,6 +13,10 @@ public class Usuario extends Entidade {
     private String senha;
     private String email;
     private Boolean ativo;
+    
+    @ManyToOne
+    @JoinColumn(name = "perfilacessousuarioid", nullable = false)
+    private PerfilAcessoUsuario perfilAcessoUsuario;
 
     public Usuario() {
     }
@@ -65,7 +71,14 @@ public class Usuario extends Entidade {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
+    
+    public PerfilAcessoUsuario getPerfilAcessoUsuario() {
+        return perfilAcessoUsuario;
+    }
 
+    public void setPerfilAcessoUsuario(PerfilAcessoUsuario perfilAcessoUsuario) {
+        this.perfilAcessoUsuario = perfilAcessoUsuario;
+    }
 
     public static Usuario of(Long id) {
         return new Usuario(id);

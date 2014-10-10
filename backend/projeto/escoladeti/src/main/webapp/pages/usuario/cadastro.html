@@ -46,7 +46,7 @@
                 <div class="form-group {{formUsuario.confirmarsenha.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                 <label class="control-label"><strong>Confirmar Senha *</strong></label>
                 <input  class="form-control" name="confirmarsenha" type="password" ng-model="confirmarSenha" placeholder="Confirmar senha" required />
-                 <span class="help-block" ng-show="formUsuario.confirmarsenha.$error.pattern">Confirme a senha!</span>
+                <span class="help-block" ng-show="formUsuario.confirmarsenha.$error.pattern">Confirme a senha!</span>
                 </div>
             </div>    
         </div>
@@ -56,17 +56,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-sm-4">
-                <label>Perfil</label>
-                <select ng-model="meuPerfilDeAcesso" ng-options="perfilDeAcesso.nome for perfilDeAcesso in perfisAcesso"></select>
+            <div class="col-sm-4">
+                <div class="form-group {{formUsuario.meuPerfilAcesso.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"> <strong>Perfil * </strong> </label>
+                    <select type="text" ui-select2 name="meuPerfilAcesso" class="input-default" ng-model="usuario.perfilAcesso" required >
+                        <option ng-repeat="perfilAcesso in perfisAcesso" value="{{perfilAcesso.id}}">{{perfilAcesso.nome}}</option>
+                        
+                    </select>
+                </div>
             </div>
-            <div class="form-group col-sm-4">
-                <label class="control-label"><strong>Início da Vigencia</strong></label>
-                <input class="form-control" name="inicioVigencia" type="date" ng-model="inicioVigencia" />
+            <div class="col-sm-4">
+                <div class="form-group {{formUsuario.inicioVigencia.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"> <strong>Início da Vigencia * </strong> </label>
+                    <input class="form-control" name="inicioVigencia" type="date" ng-model="inicioVigencia" required />
+                </div>
             </div>
-            <div class="form-group col-sm-4">
-                <label class="control-label"><strong>Fim da Vigencia</strong></label>
-                <input class="form-control" name="fimVigencia" type="date" ng-model="fimVigencia" />
+            <div class="col-sm-4">
+                <div class="form-group {{formUsuario.fimVigencia.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"> <strong>Fim da Vigencia * </strong> </label>
+                    <input class="form-control" name="fimVigencia" type="date" ng-model="fimVigencia" required />
+                </div>
             </div>
         </div>
         <div class="row">
