@@ -40,7 +40,7 @@
                 <div class="col-sm-2">
                     <div class="form-group {{formEvento.valor.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Valor R$ *</strong></label>
-                        <input type="text" name="valor" title="Substituir (,) por (.)" class="form-control" ng-pattern="/^(\d{1,3}(\.\d{3})*|(\d+))(\.\d{2})?$/"
+                        <input type="text" name="valor" title="Substituir (,) por (.)" class="form-control" ui-mask="" ng-pattern="/^(\d{1,3}(\.\d{3})*|(\d+))(\.\d{2})?$/"
                                ng-model="evento.valor" required placeholder="00.00"/>
                         <span class="help-block" ng-show="formEvento.valor.$error.pattern">Ex: 15.00</span>
                     </div>

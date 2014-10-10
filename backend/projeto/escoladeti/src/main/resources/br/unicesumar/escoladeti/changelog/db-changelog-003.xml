@@ -36,10 +36,14 @@
 		<addDefaultValue defaultValueBoolean="true"
 			columnDataType="boolean" columnName="presente" tableName="participante" />
 	</changeSet>
-	<changeSet id="w201409151639" author=" Walber "> <dropUniqueConstraint 
-		tableName="pessoafisica" constraintName="uk_795p7d8b4isbwwye0rd3je0cw" /> 
-		</changeSet> <changeSet id="w201409161308" author="Walber"> <dropNotNullConstraint 
-		tableName="pessoajuridica" columnName="inscricaoestadual"/> </changeSet>
+	<changeSet id="w201409151639" author=" Walber ">
+		<dropUniqueConstraint tableName="pessoafisica"
+			constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
+	</changeSet>
+	<changeSet id="w201409161308" author="Walber">
+		<dropNotNullConstraint tableName="pessoajuridica"
+			columnName="inscricaoestadual" />
+	</changeSet>
 	<changeSet id="40246" author="Catabriga">
 		<dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
 		<dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>
@@ -74,23 +78,17 @@
 
 
 	</changeSet>
-        <!--
-	<changeSet id="w201409181739" author="Walber">
-		<preConditions onFail="CONTINUE">
-			<sqlCheck expectedResult="t">select exists(select * from information_schema.tables where table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck>
-		</preConditions>
-		<dropTable tableName="viewAcompanhamentoSolicitacao" />
-	</changeSet>
-		<changeSet id="w201409181806" author="Walber">
-		<preConditions onFail="CONTINUE">
-			<sqlCheck expectedResult="t">select exists(select * from information_schema.views b  where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck>
-		</preConditions>
-		<dropView viewName="viewAcompanhamentoSolicitacao" />
-	</changeSet>
-        -->
+	<!-- <changeSet id="w201409181739" author="Walber"> <preConditions onFail="CONTINUE"> 
+		<sqlCheck expectedResult="t">select exists(select * from information_schema.tables 
+		where table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions> 
+		<dropTable tableName="viewAcompanhamentoSolicitacao" /> </changeSet> <changeSet 
+		id="w201409181806" author="Walber"> <preConditions onFail="CONTINUE"> <sqlCheck 
+		expectedResult="t">select exists(select * from information_schema.views b 
+		where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions> 
+		<dropView viewName="viewAcompanhamentoSolicitacao" /> </changeSet> -->
 	<changeSet author="martinho" id="mart0132">
 		<createView viewName="viewacompanhamentosolicitacao"
-                    replaceIfExists="true" schemaName="public">
+			replaceIfExists="true" schemaName="public">
                     SELECT T1.ID AS SOLICITACAOID,
                     T2.STATUS AS STATUS,
                     T1.DATACHEGADA,
@@ -109,14 +107,16 @@
                     ORDER BY T1.DATACHEGADA
             </createView>
 	</changeSet>
-	
+
 	<changeSet id="w201409212348" author="Walber">
-	<addUniqueConstraint columnNames="nome,codigo,sigla" tableName="pais"/>
+		<addUniqueConstraint columnNames="nome,codigo,sigla"
+			tableName="pais" />
 	</changeSet>
 
-    <changeSet author="catabriga" id="32465632">
-        <dropView viewName="viewacompanhamentosolicitacao"></dropView>
-        <createView viewName="viewacompanhamentosolicitacao" replaceIfExists="true" schemaName="public">
+	<changeSet author="catabriga" id="32465632">
+		<dropView viewName="viewacompanhamentosolicitacao"></dropView>
+		<createView viewName="viewacompanhamentosolicitacao"
+			replaceIfExists="true" schemaName="public">
             SELECT T1.ID AS SOLICITACAOID,
             T2.STATUS AS STATUS,
             T1.DATACHEGADA,
@@ -131,11 +131,12 @@
             LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
             ORDER BY T1.DATACHEGADA
         </createView>
-    </changeSet>
+	</changeSet>
 
-    <changeSet id="46516354631" author="catabriga">
-        <dropView viewName="viewacompanhamentosolicitacao"></dropView>
-        <createView viewName="viewacompanhamentosolicitacao" replaceIfExists="true" schemaName="public">
+	<changeSet id="46516354631" author="catabriga">
+		<dropView viewName="viewacompanhamentosolicitacao"></dropView>
+		<createView viewName="viewacompanhamentosolicitacao"
+			replaceIfExists="true" schemaName="public">
             SELECT T1.ID AS SOLICITACAOID,
             T2.ID,
             T2.STATUS AS STATUS,
@@ -151,7 +152,56 @@
             LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
             ORDER BY T1.DATACHEGADA
         </createView>
-    </changeSet>
+	</changeSet>
+
+	<changeSet id="10201410022131" author="Walber">
+		<createTable tableName="caracteristica">
+			<column name="id" type="INT8">
+				<constraints primaryKeyName="caracteristicaPkId"
+					primaryKey="true" />
+			</column>
+			<column name="descricao" type="VARCHAR(30)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="10201410022220" author="Walber">
+		<createTable tableName="pessoacaracteristica">
+			<column name="id" type="INT8">
+				<constraints primaryKeyName="pessoaCaracteristicaPkId"
+					primaryKey="true" />
+			</column>
+			<column name="pessoaId" type="INT8">
+				<constraints foreignKeyName="pessoaCaracteristicaFkIdPessoa"
+					referencedTableName="pessoa" referencedColumnNames="id" nullable="false" />
+			</column>
+			<column name="caracteristicaId" type="INT8">
+				<constraints foreignKeyName="pessoaCaracteristicaFkIdCaracteristica"
+					referencedTableName="caracteristica" referencedColumnNames="id"
+					nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="10201410022234" author="Walber">
+		<delete tableName="caracteristica"></delete>
+	</changeSet>
+
+	<changeSet id="10201410022235" author="Walber">
+		<insert tableName="caracteristica">
+			<column name="id" type="INT8" value="1"></column>
+			<column name="descricao" type="VARCHAR(30)" value="ALUNO"></column>
+		</insert>
+		<insert tableName="caracteristica">
+			<column name="id" type="INT8" value="2"></column>
+			<column name="descricao" type="VARCHAR(30)" value="ASSOCIADO"></column>
+		</insert>
+		<insert tableName="caracteristica">
+			<column name="id" type="INT8" value="3"></column>
+			<column name="descricao" type="VARCHAR(30)" value="PROFESSOR"></column>
+		</insert>
+	</changeSet>
 
 </databaseChangeLog>
 
