@@ -1,4 +1,4 @@
-<div class="container" ng-controller="UsuarioController" ng-init="getTodos()">
+<div class="container" ng-controller="UsuarioController" ng-init="getTodos(1)">
     <div class="row">
         <div class="form-group col-sm-12">
             <legend> <span class="glyphicon glyphicon-list-alt"></span> Usuário</legend>
@@ -10,7 +10,7 @@
                 <span class="input-group-addon"> 
                     <span class="glyphicon glyphicon-search"></span>
                 </span> 
-                <input class="form-control" name="busca" type="text" ng-model="buscaUsuario" ng-change="buscarUsuario()"  placeholder="Busca por Nome do Usuario"/>
+                <input class="form-control" name="busca" type="text" ng-model="busca" ng-change="buscaUsuariosContendoNome()"  placeholder="Busca por Nome, Perfil ou Email"/>
             </div>
         </div>
         <div class="form-group col-sm-7">
@@ -28,16 +28,16 @@
         <div class="col-sm-12 table-responsive">
             <table class="table table-striped table-hover">
                     <tr>
-                        <th class="col-md-3">Nome</th>
+                        <th class="col-md-2">Nome</th>
                         <th class="col-md-2">Perfil</th>
-                        <th class="col-md-3">Email</th>
-                        <th class="col-md-1">Início Vigência</th>
-                        <th class="col-md-1">Fim Vigência</th>
+                        <th class="col-md-2">Email</th>
+                        <th class="col-md-2">Início Vigência</th>
+                        <th class="col-md-2">Fim Vigência</th>
                         <th class="col-md-2"><span class="pull-right">Ações</span></th>
                     </tr>
-                    <tr ng-repeat="usuario in pagina">
+                    <tr ng-repeat="usuario in pagina.list">
                         <td>{{usuario.nome}}</td>
-                        <td>{{usuario.perfilDeAcesso}}</td>
+                        <td>{{usuario.perfil}}</td>
                         <td>{{usuario.email}}</td>
                         <td>{{usuario.inicioVigencia| date: 'dd-MM-yyyy'}}</td>
                         <td>{{usuario.fimVigencia| date: 'dd-MM-yyyy'}}</td>
@@ -56,7 +56,7 @@
         </div>
     </div>
     <pagination boundary-links="true" num-pages="pagina.pageCount" total-items="pagina.pageCount*pagina.maxRows" items-per-page="pagina.maxRows"
-                ng-model="pageNumber" ng-change="buscarPagina(pageNumber)" class="pagination-sm" max-size="pagina.maxPagesToShow"
+                ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="pagina.maxPagesToShow"
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </pagination>
 </div>

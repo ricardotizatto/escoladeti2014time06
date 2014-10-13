@@ -1,8 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import static liquibase.util.MD5Util.computeMD5;
 
 @Entity
@@ -12,19 +10,15 @@ public class Usuario extends Entidade {
     private String login;
     private String senha;
     private String email;
-    private Boolean ativo;
+    private boolean ativo;
     
-    @ManyToOne
-    @JoinColumn(name = "perfilacessousuarioid", nullable = false)
-    private PerfilAcessoUsuario perfilAcessoUsuario;
-
     public Usuario() {
     }
 
     public Usuario(String nome, String senha, String login, String email) {
         this.login = login;
-        this.nome = nome;
-        this.email = email;
+        this.nome = nome.toUpperCase();
+        this.email = email.toUpperCase();
         setSenha(senha);
     }
 
@@ -53,7 +47,7 @@ public class Usuario extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getEmail() {
@@ -61,25 +55,17 @@ public class Usuario extends Entidade {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toUpperCase();
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
     
-    public PerfilAcessoUsuario getPerfilAcessoUsuario() {
-        return perfilAcessoUsuario;
-    }
-
-    public void setPerfilAcessoUsuario(PerfilAcessoUsuario perfilAcessoUsuario) {
-        this.perfilAcessoUsuario = perfilAcessoUsuario;
-    }
-
     public static Usuario of(Long id) {
         return new Usuario(id);
     }

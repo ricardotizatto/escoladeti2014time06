@@ -3,17 +3,29 @@
         <div class="form-group col-sm-12">
             <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Usuário </legend>
         </div>
-    </div>
-    <form action="" novalidade method="POST" name="formUsuario" role="form" ng-submit="salvar()">		
+    </div>{{usuario}}
+    <form action="" novalidade method="POST" name="formUsuario" role="form" ng-submit="salvar()">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="form-group col-sm-2">
+                <label><strong>Ativo</strong></label>
+                <div>
+                    <div class="btn-group">
+                        <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="usuario.ativo" value="true" type="radio" name="ativo" /> SIM
+                        </label> <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="usuario.ativo" value="false" type="radio" name="ativo"/> NÃO
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
                 <div class="form-group {{formUsuario.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong> Nome *</strong></label> 
                     <input class="form-control" name="nome" type="text" ng-model="usuario.nome" placeholder="Nome"  maxlength="50" title="Nome"  ng-pattern="/^[a-zA-Z\s]{2,50}$/" title="Nome do Usuario" required />
                     <span class="help-block" ng-show="formUsuario.nome.$error.pattern">Apenas letras e no mínimo 2.</span>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <div class="form-group {{formUsuario.email.$invalid ? 'has-error' : 'has-success'}} has-feedback" >
                     <label class="control-label"><strong>Email *</strong></label>
                     <div class="input-group">
@@ -38,14 +50,14 @@
                 <div class="form-group {{formUsuario.senha.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong>Senha *</strong></label>
                     <input  class="form-control" name="senha" type="password" ng-model="usuario.senha" placeholder="Senha" ng-change="pontuarSenha()" required />
-                    <div name="forcasenha" type="text" ng-model="forcasenha" ng-style="myStyle" style="background-color: #fff;min-height: 10px;"><span class="classe-forca-senha" >{{statusSenha}}</span></div>
+                    <div name="forcasenha" type="text" ng-model="forcasenha" ng-style="myStyle" style="background-color: #fff;min-height: 10px; border: #000 solid 1px; margin-top: 4px;"><span class="classe-forca-senha" >{{statusSenha}}</span></div>
                     <span class="help-block" ng-show="formUsuario.senha.$error.pattern">Informe a senha!</span>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group {{formUsuario.confirmarsenha.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                 <label class="control-label"><strong>Confirmar Senha *</strong></label>
-                <input  class="form-control" name="confirmarsenha" type="password" ng-model="confirmarSenha" placeholder="Confirmar senha" required />
+                <input  class="form-control" name="confirmarsenha" type="password" ng-model="confirmaSenha" placeholder="Confirmar senha" required />
                 <span class="help-block" ng-show="formUsuario.confirmarsenha.$error.pattern">Confirme a senha!</span>
                 </div>
             </div>    
@@ -57,9 +69,9 @@
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <div class="form-group {{formUsuario.meuPerfilAcesso.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                    <label class="control-label"> <strong>Perfil * </strong> </label>
-                    <select type="text" ui-select2 name="meuPerfilAcesso" class="input-default" ng-model="usuario.perfilAcesso" required >
+                <div class="form-group {{formUsuario.perfilAcesso.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"> <strong>Nome do Perfil * </strong> </label>
+                    <select type="text" ui-select2 name="perfilAcesso" class="input-default" ng-model="usuario.perfilAcessoId" required >
                         <option ng-repeat="perfilAcesso in perfisAcesso" value="{{perfilAcesso.id}}">{{perfilAcesso.nome}}</option>
                         
                     </select>
@@ -68,13 +80,13 @@
             <div class="col-sm-4">
                 <div class="form-group {{formUsuario.inicioVigencia.$error.required ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"> <strong>Início da Vigencia * </strong> </label>
-                    <input class="form-control" name="inicioVigencia" type="date" ng-model="inicioVigencia" required />
+                    <input class="form-control" name="inicioVigencia" type="date" ng-model="usuario.inicioVigencia" required />
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group {{formUsuario.fimVigencia.$error.required ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"> <strong>Fim da Vigencia * </strong> </label>
-                    <input class="form-control" name="fimVigencia" type="date" ng-model="fimVigencia" required />
+                    <input class="form-control" name="fimVigencia" type="date" ng-model="usuario.fimVigencia" required />
                 </div>
             </div>
         </div>

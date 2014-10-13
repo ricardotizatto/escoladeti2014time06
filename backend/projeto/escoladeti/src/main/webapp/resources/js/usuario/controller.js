@@ -25,61 +25,58 @@ function UsuarioController($scope, $http, $routeParams) {
     $scope.voltar = function () {
         window.location = '#/listausuario';
     };
-    $scope.getTodos = function() {
-        $http.get("./rest/usuarioSource/usuario")
-                .success(function(usuarios, status) {
-           // console.log('$scope.pagina ' + $scope.pagina);
+    
+    $scope.getTodos = function(numeroPagina) {
+        console.log(numeroPagina);
+        $http.get('./rest/usuarioSource/listar/pag/' + numeroPagina)
+            .success(function(usuarios) {
                 $scope.pagina = usuarios;
-        })
-                .error(function(data, status) {
-            console.log('erro ao buscar usuarios');
-        });
+                console.log('usuarios ' + usuarios);
+            }).error(function(data) {
+                console.log('erro ao buscar usuarios ' + data);
+            });
     };
+    
+    $scope.buscaUsuariosContendoNome = function() {
+        console.log($scope.busca);
+        if(!$scope.busca.empty){
+        $http.get('./rest/usuarioSource/usuarios?q=' + $scope.busca.toUpperCase())
+            .then(function(usuarios) {
+                console.log(usuarios.data.list);
+                $scope.pagina = usuarios.data;
+            });
+        }else{
+            $scope.getTodos($scope.pageNumber);
+        }    
+    };
+    
     $scope.salvar = function() {
         console.log(angular.toJson($scope.usuario, true));
-        $scope.usuario.ativo = true;
         if ($scope.usuario.nome === undefined)
             return toastr.warning('Preencha o campo nome');
         if ($scope.usuario.login === undefined)
             return toastr.warning('Preencha o campo login');
         if ($scope.usuario.senha === undefined)
             return toastr.warning('Preencha o campo senha');
-        if ($scope.usuario.email === undefined) {
+        if ($scope.usuario.email === undefined) 
             return toastr.warning('Preencha o campo email');
-        }
+        if ($scope.usuario.inicioVigencia === undefined) 
+            return toastr.warning('Preencha o campo data inicio Vigencia');
+        if ($scope.usuario.fimVigencia === undefined) 
+            return toastr.warning('Preencha o campo data fim da Vigencia');
+        if($scope.usuario.inicioVigencia > $scope.usuario.fimVigencia)
+            return toastr.warning('Data fim da Vigencia deve ser menor que a de inicio!');
 
-        if (!$scope.usuario.senha === $scope.confirmaSenha) {
+        if (!($scope.usuario.senha === $scope.confirmaSenha)) {
             toastr.warning('As senhas devem ser iguais!');
-            console.log('senha ' + $scope.usuario.senha + ' confirmarSenha ' + $scope.confirmaSenha);
         } else {
+            console.log("Salvar usuario perfilDeAcessoUsuarioId: " + $scope.usuario.perfilDeAcessoUsuarioId);
             $http.post("./rest/usuarioSource/usuario", $scope.usuario)
                 .success(function(usuario) {
-                toastr.success("Usuário cadastrado com sucesso!");    
                 console.log("usuario salvo = " + usuario);
-                
-                console.log("meuPerfilAcesso: " + $scope.meuPerfilAcesso.id);    
-                $scope.perfilAcessoUsuario = {
-                    inicioVigencia: $scope.inicioVigencia,
-                    fimVigencia: $scope.fimVigencia,
-                    perfilAcesso: {id: $scope.meuPerfilAcesso.id},
-                    usuario: {id: usuario.id}
-                };
-               // console.log(angular.toJson($scope.perfilAcessoUsuario, true) + ' aqui');
-//                $http.post("./rest/perfilAcessoUsuarioSource/perfilAcessoUsuario", $scope.perfilAcessoUsuario)
-//                    .success(function(perfilAcessoUsuario, status) {
-//                        toastr.success("Usuário cadastrado com sucesso!");
-//                        setTimeout(function() {
-//                            window.location = "#/listausuario";
-//                        }, 500);
-//                        console.log("PerfilAcessoUsuario salvo = " + perfilAcessoUsuario);
-//                    })
-//                    .error(function(data, status) {
-//                        console.log(angular.toJson($scope.meuPerfilAcesso, true) + ' aqui');
-//                        console.log("Erro ao salvar PerfilAcessoUsuario", data);
-//                        toastr.warning("Erro ao salvar Perfil de Acesso do Usuario!");
-//                    });
-                
-            }).error(function(data, status) {
+                toastr.success("Usuário "+ $scope.usuario.nome +" cadastrado com sucesso!"); 
+                window.location = "#/listausuario";
+            }).error(function(data) {
                 console.log("erro ao salvar usuario", data);
                 toastr.warning("Erro ao salvar usuário!");
             });
@@ -92,21 +89,21 @@ function UsuarioController($scope, $http, $routeParams) {
             data: usuario,
             url: './rest/usuarioSource/usuario',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-                .success(function(data) {
-            console.log("usuario deletado");
+        }).success(function(data) {
+            console.log("usuario deletado" + data);
             toastr.success("Usuario deletado com sucesso!");
-            $scope.getTodos();
+            $scope.getTodos(1);
         }).error(function(data) {
-            console.log("erro ao deletar usuario ");
+            console.log("erro ao deletar usuario " + data);
             toastr.warning("Erro ao deletar usuário!");
         });
     };
     $scope.carregarUsuario = function() {
         if ($routeParams.usuarioId) {
             $http.get('./rest/usuarioSource/usuario/' + $routeParams.usuarioId)
-                    .success(function(usuario) {
+                .success(function(usuario) {
                 $scope.usuario = usuario;
+                $scope.usuario.ativo = String(usuario.ativo);
             });
         }
     };
@@ -180,7 +177,7 @@ function UsuarioController($scope, $http, $routeParams) {
     };
     function getNovoUsuario() {
         console.log('novo usuario');
-        return {};
+        return {ativo: 'true'};
     }
     ;
 }
