@@ -1,5 +1,5 @@
 function eventoController($scope, $http, $routeParams) {
-
+    
     $scope.idCurso;
     $scope.tituloCurso;
     $scope.descricao;
@@ -12,7 +12,6 @@ function eventoController($scope, $http, $routeParams) {
     $scope.tipoEvento;
     $scope.valor;
     $scope.selected;
-    
 
     $scope.editar = function(evento) {
         console.log(evento);
@@ -200,6 +199,7 @@ function eventoController($scope, $http, $routeParams) {
                 break;
         }
     };
+    
 }
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);
