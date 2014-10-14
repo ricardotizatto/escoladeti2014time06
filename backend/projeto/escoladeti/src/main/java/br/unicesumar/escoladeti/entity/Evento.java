@@ -15,32 +15,25 @@ import javax.persistence.Temporal;
 @Entity
 public class Evento extends Entidade {
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date data;
-    private String inicio;
-    private String fim;
     private String tipoEvento;
     private String local;
     private String ministrante;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idevento", referencedColumnName = "id",updatable = false)
+    @JoinColumn(name = "idevento", referencedColumnName = "id", updatable = false)
     private List<Participante> participante;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idevento", referencedColumnName = "id", updatable = false)
+    private List<Periodo> periodos;    
+    
     private String organizacao;
     private String titulo;
     private String descricao;
     private double valor;
     private boolean statusevento;
 
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;           
-    }
-
-        public String getOrganizacao() {
+    public String getOrganizacao() {
         return organizacao;
     }
 
@@ -64,14 +57,6 @@ public class Evento extends Entidade {
         this.descricao = descricao.toUpperCase();
     }
 
-    public String getInicio() {
-        return inicio;
-    }
-
-    public void setInicio(String inicio) {
-        this.inicio = inicio;
-    }
-
     public String getTipoEvento() {
         return tipoEvento;
     }
@@ -87,7 +72,7 @@ public class Evento extends Entidade {
     public void setLocal(String local) {
         this.local = local.toUpperCase();
     }
-    
+
     public double getValor() {
         return valor;
     }
@@ -95,25 +80,13 @@ public class Evento extends Entidade {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
-    public String getFim() {
-        return fim;
-    }
 
-    public void setFim(String fim) {
-        this.fim = fim;
-    }
-    
     public String getMinistrante() {
         return ministrante;
     }
 
     public void setMinistrante(String ministrante) {
         this.ministrante = ministrante.toUpperCase();
-    }
-    
-    public boolean validaData(){
-        return DateUtil.validBeforeDate(this.data);
     }
 
     public boolean getStatusevento() {
