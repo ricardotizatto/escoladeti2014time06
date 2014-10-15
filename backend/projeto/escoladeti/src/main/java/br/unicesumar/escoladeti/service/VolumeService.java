@@ -114,6 +114,7 @@ public class VolumeService {
         volume.setId(id);
         volume.setStatus(volumeSalvo.getStatus());
         volume.setDataEnviado(volumeSalvo.getDataEnviado());
+        volume.setCaminhoAnexo(volumeSalvo.getCaminhoAnexo());
         volume.setDataImpressao(volume.getDataImpressao());
         volume.setDataEnviado(volumeSalvo.getDataEnviado());
         return volumeRepository.save(volume);
