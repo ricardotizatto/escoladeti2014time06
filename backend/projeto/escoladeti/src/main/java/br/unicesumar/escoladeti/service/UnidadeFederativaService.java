@@ -10,13 +10,24 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UnidadeFederativaService {
     @Autowired
     private UnidadeFederativaRepository federativaRepository;
-
+    
+    @Transactional
     public UnidadeFederativa salvar(UnidadeFederativa unidadeFederativa) {
+        UnidadeFederativa ufTemp = new UnidadeFederativa();
+        ufTemp = this.federativaRepository.findByNome(unidadeFederativa.getNome());
+        
+        if(ufTemp != null){
+            if(ufTemp.getId() != unidadeFederativa.getId()){
+                throw new RuntimeException("O estado " + unidadeFederativa.getNome() + " já está cadastrado!");
+            }
+        }
+        
             return this.federativaRepository.save(unidadeFederativa);
     }
     
