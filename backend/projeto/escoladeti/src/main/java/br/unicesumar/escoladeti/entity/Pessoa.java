@@ -5,17 +5,25 @@ import br.unicesumar.escoladeti.enums.Sexo;
 import br.unicesumar.escoladeti.util.data.DateUtil;
 import br.unicesumar.escoladeti.util.string.StringUtils;
 import br.unicesumar.escoladeti.util.validacao.Validar;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.parboiled.common.Preconditions;
 
@@ -37,13 +45,29 @@ public abstract class Pessoa extends Entidade {
     @NotEmpty(message = "Deve ser cadastrado ao menos um Endereço!")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Endereco> enderecos;
+    
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER, targetEntity = Caracteristica.class)
+    @JoinTable(name = "pessoacaracteristica",joinColumns = @JoinColumn(name = "pessoaid"),
+    			inverseJoinColumns = @JoinColumn(name = "caracteristicaid",updatable = true))
+    @JsonManagedReference
+    private Set<Caracteristica> caracteristicas = new HashSet<Caracteristica>();
 
     public Pessoa() {
         this.telefones = new HashSet<Telefone>();
         this.enderecos = new HashSet<Endereco>();
+        this.caracteristicas = new HashSet<Caracteristica>();
     }
+    
+    public Set<Caracteristica> getCaracteristicas() {
+		return caracteristicas;
+	}
 
-    public Set<Telefone> getTelefones() {
+	public void setCaracteristicas(Set<Caracteristica> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+
+
+	public Set<Telefone> getTelefones() {
         return telefones;
     }
 
@@ -120,6 +144,13 @@ public abstract class Pessoa extends Entidade {
         private Set<Telefone> telefones;
 
         private Set<Endereco> enderecos;
+        
+        private Set<Caracteristica> caracteristicas;
+        
+        public PessoaBuilder caracteristicas(Set<Caracteristica> caracteristicas){
+        	this.caracteristicas = caracteristicas;
+        	return this;
+        }
 
         public PessoaBuilder nome(String nome) {
             this.nome = nome;
@@ -240,6 +271,7 @@ public abstract class Pessoa extends Entidade {
             pessoa.setAluno(this.aluno);
             pessoa.setTelefones(this.telefones);
             pessoa.setEnderecos(this.enderecos);
+            pessoa.setCaracteristicas(this.caracteristicas);
             for (Telefone telefone : pessoa.getTelefones()) {
                 telefone.setPessoa(pessoa);
             }

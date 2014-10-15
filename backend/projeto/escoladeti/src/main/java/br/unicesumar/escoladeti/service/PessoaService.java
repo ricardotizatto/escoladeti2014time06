@@ -3,19 +3,24 @@ package br.unicesumar.escoladeti.service;
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
 import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
+import br.unicesumar.escoladeti.entity.Caracteristica;
 import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
+import br.unicesumar.escoladeti.repository.CaracteristicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaJuridicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
 import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class PessoaService {
@@ -28,6 +33,9 @@ public class PessoaService {
 
     @Autowired
     private PessoaFisicaJuridicaRepository pessoaFisicaJuridicaRepository;
+    
+    @Autowired
+    private CaracteristicaRepository caracteristicaRepository;
 
     public DataPage<PessoaFisica> paginarFisica(Integer pagina) {
         return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
@@ -75,7 +83,15 @@ public class PessoaService {
                 }
             }
 
-            if (id != null || comando.getAluno() || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null) {
+            if (id != null || comando.getCaracteristicas().contains(1) || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null) {
+            	Set<Caracteristica> caracteristicas = new HashSet<Caracteristica>();
+            	
+            	for (Long idCaracteristica : comando.getCaracteristicas()) {
+            		Caracteristica c = this.caracteristicaRepository.findOne(idCaracteristica);
+            		caracteristicas.add(c);
+            		System.out.println(c.getDescricao());
+				} 
+            	
                 PessoaFisica pessoaFisica = Pessoa.builder()
                         .telefones(comando.getTelefones())
                         .enderecos(comando.getEnderecos())
@@ -88,6 +104,7 @@ public class PessoaService {
                         .sobrenome(comando.getSobrenome())
                         .sexo(comando.getSexo())
                         .aluno(comando.getAluno())
+                        .caracteristicas(caracteristicas)
                         .buildPessoaFisica();
 
                 if (id != null) {
@@ -98,7 +115,7 @@ public class PessoaService {
 
                 return pessoaFisica;
             }
-            throw new RuntimeException("JÃ¡ existe uma pessoa com o cpf " + comando.getCpf() + " cadastrada no sistema");
+            throw new RuntimeException("Já existe uma pessoa com o cpf " + comando.getCpf() + " cadastrada no sistema");
 
         } else if (comando.getTipo().equals("J")) {
             PessoaJuridica pj = pessoaJuridicaRepository.findByCnpj(comando.getCnpj());

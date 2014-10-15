@@ -26,8 +26,17 @@ public class ComandoSalvarPessoa {
     private Date dataCriacao;
     private Set<Telefone> telefones;
     private Set<Endereco> enderecos;
+    private Set<Long> caracteristicas;
 
-    public Set<Telefone> getTelefones() {
+    public Set<Long> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public void setCaracteristicas(Set<Long> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+
+	public Set<Telefone> getTelefones() {
         return telefones;
     }
 

@@ -166,17 +166,17 @@
 		</createTable>
 	</changeSet>
 
-	<changeSet id="10201410022220" author="Walber">
+	<changeSet id="201410132300" author="Walber">
 		<createTable tableName="pessoacaracteristica">
 			<column name="id" type="INT8">
 				<constraints primaryKeyName="pessoaCaracteristicaPkId"
 					primaryKey="true" />
 			</column>
-			<column name="pessoaId" type="INT8">
+			<column name="pessoaid" type="INT8">
 				<constraints foreignKeyName="pessoaCaracteristicaFkIdPessoa"
 					referencedTableName="pessoa" referencedColumnNames="id" nullable="false" />
 			</column>
-			<column name="caracteristicaId" type="INT8">
+			<column name="caracteristicaid" type="INT8">
 				<constraints foreignKeyName="pessoaCaracteristicaFkIdCaracteristica"
 					referencedTableName="caracteristica" referencedColumnNames="id"
 					nullable="false" />
@@ -202,6 +202,8 @@
 			<column name="descricao" type="VARCHAR(30)" value="PROFESSOR"></column>
 		</insert>
 	</changeSet>
+	
+		
 
 </databaseChangeLog>
 

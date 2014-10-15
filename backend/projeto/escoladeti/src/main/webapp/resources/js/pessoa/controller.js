@@ -1,14 +1,13 @@
 var controllers = angular.module('controllers');
 
-function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, BuscaCep, PaisService, EstadoService, CidadeService) {
+function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, BuscaCep, PaisService, EstadoService, CidadeService, CaracteristicaService) {
 
     $scope.mask = '999.999.999-99';
 
     $scope.select2 = 'one';
-    console.log('Carregando controller');
 
     $scope.init = function () {
-        //$scope.tipoPessoa = 'F';
+        // $scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica(1);
         $scope.focusCpf = false;
         $scope.enderecoPrincipal = false;
@@ -24,20 +23,25 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
     $scope.validaCpf = function (cpf) {
-        if(!cpf)
-            return;
-        $scope.focusCpf = !ValidarCPF(cpf);
-        if ($scope.focusCpf && cpf) {
-            toastr.warning("CPF inválido!");
-            $scope.pessoa.cpf = undefined;
-        }
+    	if(cpf){
+	        $scope.focusCpf = !ValidarCPF(cpf);
+	        if ($scope.focusCpf && cpf) {
+	            toastr.warning("CPF inválido!");
+	            $scope.pessoa.cpf = undefined;
+	        } else {
+	        	$scope.maskCpf = '999.999.999-99';
+	        }
+    	} else {
+    		$scope.maskCpf = undefined;
+    	}
+    	
     };
 
     $scope.validaCnpj = function (cnpj) {
         if(!cnpj)
             return;
         $scope.focusCnpj = !ValidarCNPJ(cnpj);
-        if ($scope.focusCnpj && $scope.pessoa.aluno !== 'true') {
+        if ($scope.focusCnpj) {
             toastr.warning("CNPJ inválido!");
             $scope.pessoa.cnpj = undefined;
         }
@@ -56,6 +60,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
     $scope.carregarPessoa = function () {
         console.log('carregando pessoa:');
+        
+        $scope.caracteristicas = buscaCaracteristicas();
 
         if (!$routeParams.pessoaId) {
             $scope.novaPessoa("F");
@@ -65,13 +71,17 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
         $log.debug('buscando pessoa');
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function (pessoa) {
-
             $scope.pessoa = pessoa;
-            if (pessoa.tipo !== 'J') {
-                $scope.pessoa.aluno = String(pessoa.aluno);
-            }
+            $scope.maskCpf = '999.999.999-99';
         });
     };
+    
+     function buscaCaracteristicas(){    	
+    	return CaracteristicaService.query(function(data){
+    		console.log(data);
+    		return data;
+    	});
+    }
 
     $scope.editar = function (p) {
         window.location = '#/pessoa/' + p.id + '/' + p.tipo;
@@ -118,16 +128,17 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                 tipo: "J",
                 email: "",
                 telefones: [],
-                enderecos: []
+                enderecos: [],
+                caracteristicas : []
             });
         } else {
             $scope.pessoa = new Pessoa({
                 tipo: "F",
                 email: "",
-                aluno: "false",
                 sexo: "MASCULINO",
                 telefones: [],
-                enderecos: []
+                enderecos: [],
+                caracteristicas : []
             });
         }
     };
@@ -177,7 +188,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         window.location = '#/listapessoa';
     };
 
-//Novo telefone
+// Novo telefone
 
     $scope.novoTelefone = function () {
         $scope.telefone = getNovoTelefone();
@@ -191,7 +202,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         $scope.pessoa.telefones.push($scope.telefone);
         console.log($scope.telefones);
         toastr.success("Telefone adicionado " + $scope.telefone.numero + " !");
-        //$scope.telefone = getNovoTelefone();
+        // $scope.telefone = getNovoTelefone();
         $scope.indiceTelefone = {};
     };
 
@@ -209,7 +220,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
 
-// Endereco    
+// Endereco
 
     $scope.modificarCidade = function (cidadeId) {
         if (!cidadeId)
@@ -344,13 +355,13 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     
     jQuery(function ($) {
         $.mask.definitions['~'] = '[+-]';
-        //$("#numeroDdd").mask("99");
+        // $("#numeroDdd").mask("99");
         $("#telefone").mask("9999-9999?9");
         $("#ramal").mask("9?");
         $("#cep").mask("99.999-999");
         $("#cpf").mask("999.999.999-99");
-        //$("#rg").mask("9.999.999-*");
-        //$("#cnpj").mask("99.999.999/9999-99");
+        // $("#rg").mask("9.999.999-*");
+        // $("#cnpj").mask("99.999.999/9999-99");
     });
     
     $scope.mascaraTelefone = function(numero){
@@ -370,5 +381,6 @@ controllers.controller('PessoaController',
             'paisService',
             'estadoService',
             'cidadeService',
+            'CaracteristicaFactory',
             PessoaController
         ]);
