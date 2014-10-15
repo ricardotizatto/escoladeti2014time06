@@ -26,10 +26,8 @@ public class UnidadeFederativaController implements Serializable{
     @RequestMapping(value="/unidadeFederativa", method= RequestMethod.POST)
     @ResponseBody
     public UnidadeFederativa salvar(@RequestBody UnidadeFederativa unidadeFederativa) throws Exception {
-             if (!unidadeFederativa.equals(federativaService.buscarUnidadeFederativaPorNomeSigla(unidadeFederativa))) {
-            return this.federativaService.salvar(unidadeFederativa); 
-             }
-             throw new Exception("O Estado " + unidadeFederativa.getNome() + " já está cadastrado!");
+              return this.federativaService.salvar(unidadeFederativa); 
+             
     }
 
     @RequestMapping(value="/unidadeFederativa", method= RequestMethod.DELETE)

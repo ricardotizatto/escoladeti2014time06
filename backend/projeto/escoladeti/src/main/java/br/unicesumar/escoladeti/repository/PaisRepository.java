@@ -13,6 +13,8 @@ public interface PaisRepository extends JpaRepository<Pais, Long> {
 
     public Pais findById(Long id);
     
+    public Pais findByNome(String nome);
+    
     public Pais findByNomeAndSiglaAndCodigo(
             String nome, String Sigla, String Codigo);
     
