@@ -34,7 +34,9 @@
         <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>  
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
 
-        <script type="text/javascript" src="./resources/js/app.js"></script>        
+        <script type="text/javascript" src="./resources/js/app.js"></script>
+        <script type="text/javascript" src="./resources/js/upload/directives.js"></script>
+        <script type="text/javascript" src="./resources/js/upload/service.js"></script>
         <script type="text/javascript" src="./resources/js/directives.js"></script>
         <script type="text/javascript" src="./resources/js/buscacep/service.js"></script>
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
