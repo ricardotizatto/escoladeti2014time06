@@ -12,6 +12,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         $scope.focusCpf = false;
         $scope.enderecoPrincipal = false;
     };
+    
+    function isEditing() {
+    	return angular.isDefined($scope.pessoa.id);
+    }
 
     $scope.modificarPais = function (paisId) {
         if (!paisId || paisId === null)
@@ -68,13 +72,17 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             $log.debug('criando pessoa');
             return;
         }
-
+        
+        
+        
         $log.debug('buscando pessoa');
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function (pessoa) {
             $scope.pessoa = pessoa;
             var caracs = pessoa.caracteristicas.map(function(item,index){
             	return item.id;
             });
+            $scope.estaEditando = isEditing();
+            console.log($scope.editando);
             $scope.pessoa.caracteristicas = caracs;
             $scope.maskCpf = '999.999.999-99';
         });
@@ -309,6 +317,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         angular.forEach($scope.pessoa.enderecos,function(value, key){
             if(value.principal === 'S' && value.principal === principal){
                 contem = true;
+                return contem;
             }
                 
         });
