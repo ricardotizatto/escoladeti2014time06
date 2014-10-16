@@ -113,7 +113,27 @@ function eventoController($scope, $http, $routeParams) {
                     toastr.warning("Erro ao salvar evento!");
                 });
     };
-
+     $scope.salvarPeriodo = function () {
+         
+         $scope.evento.periodos.push($scope.periodo);
+//        if ($scope.indicePeriodo >= 0) {
+//            $scope.ev.periodos.splice($scope.indicePeriodo, 1);
+//        }
+//        
+//        $scope.ev.periodos.push($scope.evento);
+//        console.log($scope.periodos);
+//        toastr.success("Periodo adicionado!");
+//        $scope.indicePeriodo = {};
+//        
+    };
+    
+    $scope.novoPeriodo = function () {
+        $scope.evento.periodos = getNovoPeriodo();
+    };
+    
+    $scope.getNovoPeriodo = function(){
+       $scope.evento.periodos = [];         
+    };
     $scope.novo = function() {
         $scope.evento = getNovoEvento();
         window.location = '#/cadastroevento';
@@ -145,6 +165,7 @@ function eventoController($scope, $http, $routeParams) {
     $scope.carregarEvento = function() {
         if (!$routeParams.eventoId) {
             $scope.evento = {};
+            $scope.evento.periodos = [];
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
@@ -168,7 +189,7 @@ function eventoController($scope, $http, $routeParams) {
         return {};
     }
     ;
-
+    
 
     $scope.voltar = function() {
         $scope.evento = {};

@@ -96,10 +96,10 @@
                                         <th class="col-sm-3">Fim</th>
                                         <th class="col-sm-3">Ações</th>
                                     </tr>
-                                    <tr ng-repeat="periodo in ev.periodos">
-                                        <td ng-bind="ev.data"></td>
-                                        <td ng-bind="ev.inicio"></td>
-                                        <td ng-bind="ev.fim"></td>
+                                    <tr ng-repeat="periodo in periodos">
+                                        <td ng-bind="periodo.data"></td>
+                                        <td ng-bind="periodo.inicio"></td>
+                                        <td ng-bind="periodo.fim"></td>
                                         <td>
                                             <button class='btn btn-warning btn-sm'
                                                     ng-click="editarTelefone($index)" data-toggle="modal"
@@ -168,7 +168,7 @@
             <!-- Modal data/periodo-->
                 <div class="row">
                     <div class="col-sm-12">
-                        <form action="" novalidade name="formData" method="POST" role="form" ng-submit="salvarData()">
+                        <form action="" novalidade name="formData" method="POST" role="form" ng-submit="salvarPeriodo()">
                             <div class="modal fade in" id="modalData" tabindex="-1" role="dialog" aria-labelledby="modalDataLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -184,7 +184,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group {{formEvento.data.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                             <label class="control-label"><strong>Data *</strong></label>
-                                                            <input name="data" type="date" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.data" required placeholder="dd/mm/aaaa"/>
+                                                            <input name="data" type="date" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.data" required placeholder="dd/mm/aaaa"/>
                                                             <span class="help-block" ng-show="formEvento.data.$error.pattern">Apenas números.</span>
                                                         </div>
                                                     </div>  
@@ -192,14 +192,14 @@
                                                 <div class="col-sm-4">
                                                    <div class="form-group {{formEvento.inicio.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                        <label class="control-label"><strong>Início *</strong></label>
-                                                       <input name="inicio" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.inicio" required="" placeholder="00:00" />
+                                                       <input name="inicio" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.inicio" required="" placeholder="00:00" />
                                                        <span class="help-block" ng-show="formEvento.inicio.$error.pattern">Apenas números.</span>
                                                    </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group {{formEvento.termino.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                         <label class="control-label"><strong>Término *</strong></label>
-                                                        <input name="termino" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="evento.fim" required="" placeholder="00:00" />
+                                                        <input name="termino" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.fim" required="" placeholder="00:00" />
                                                         <span class="help-block" ng-show="formEvento.termino.$error.pattern">Apenas números.</span>
                                                     </div>
                                                 </div>
@@ -210,7 +210,7 @@
                                                 <button class="btn btn-danger btn-padrao" data-dismiss="modal">
                                                     <span class="glyphicon glyphicon-remove"></span> Sair
                                                 </button>
-                                                <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarTelefone()" ng-disabled="formData.$invalid" >
+                                                <button type="submit" class="btn btn-success btn-padrao" data-dismiss="modal" ng-click="salvarPeriodo()" ng-disabled="formData.$invalid" >
                                                     <span class="glyphicon glyphicon-ok"></span> Salvar
                                                 </button> 
                                             </span>
@@ -220,6 +220,8 @@
                             </div>
                         </form>
                     </div>    
+                    {{evento}}
+                    {{periodos.data}}
                 </div><!--//modal data/periodo -->			
         </form>
     </fieldset>
