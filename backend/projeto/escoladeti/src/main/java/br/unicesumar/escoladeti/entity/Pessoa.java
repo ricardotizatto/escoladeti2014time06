@@ -46,16 +46,15 @@ public abstract class Pessoa extends Entidade {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Endereco> enderecos;
     
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER, targetEntity = Caracteristica.class)
-    @JoinTable(name = "pessoacaracteristica",joinColumns = @JoinColumn(name = "pessoaid"),
-    			inverseJoinColumns = @JoinColumn(name = "caracteristicaid",updatable = true))
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, fetch=FetchType.EAGER, targetEntity = Caracteristica.class)
+    @JoinTable(name = "pessoacaracteristica",joinColumns = @JoinColumn(name = "pessoaId"),
+    			inverseJoinColumns = @JoinColumn(name = "caracteristicaId",updatable = true))
     @JsonManagedReference
     private Set<Caracteristica> caracteristicas = new HashSet<Caracteristica>();
 
     public Pessoa() {
         this.telefones = new HashSet<Telefone>();
         this.enderecos = new HashSet<Endereco>();
-        this.caracteristicas = new HashSet<Caracteristica>();
     }
     
     public Set<Caracteristica> getCaracteristicas() {

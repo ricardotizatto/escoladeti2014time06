@@ -166,9 +166,14 @@
 		</createTable>
 	</changeSet>
 
-	<changeSet id="201410132300" author="Walber">
+	<changeSet id="201410152144" author="Walber">
+		<preConditions onFail="CONTINUE" onError="HALT">
+			<not>
+				<tableExists tableName="pessoacaracteristica"/>
+			</not>
+		</preConditions>
 		<createTable tableName="pessoacaracteristica">
-			<column name="id" type="INT8">
+			<column name="id" type="INT8" defaultValueSequenceNext="hibernate_sequence" >
 				<constraints primaryKeyName="pessoaCaracteristicaPkId"
 					primaryKey="true" />
 			</column>
@@ -183,12 +188,17 @@
 			</column>
 		</createTable>
 	</changeSet>
-	
+
 	<changeSet id="10201410022234" author="Walber">
 		<delete tableName="caracteristica"></delete>
 	</changeSet>
 
 	<changeSet id="10201410022235" author="Walber">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="caracteristica" />
+			</not>
+		</preConditions>
 		<insert tableName="caracteristica">
 			<column name="id" type="INT8" value="1"></column>
 			<column name="descricao" type="VARCHAR(30)" value="ALUNO"></column>
@@ -202,8 +212,8 @@
 			<column name="descricao" type="VARCHAR(30)" value="PROFESSOR"></column>
 		</insert>
 	</changeSet>
-	
-		
+
+
 
 </databaseChangeLog>
 

@@ -14,16 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Caracteristica extends Entidade implements Serializable{
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column
 	private String descricao;
 	
-	@ManyToMany(mappedBy = "caracteristicas",targetEntity = Pessoa.class)
+	@ManyToMany(mappedBy = "caracteristicas")
 	@JsonBackReference
 	private Set<Pessoa> pessoas = new HashSet<Pessoa>();
 	

@@ -5802,6 +5802,17 @@ border-bottom-left-radius: 2px;
 	border:1px solid #dae0e4;
 	border-radius: 2px;
 }
+.has-error .select2-container-multi .select2-choices{
+	background-image:none;
+	border: 1px solid #b94a48;
+	border-radius: 2px;
+}
+
+.has-success .select2-container-multi .select2-choices{
+	background-image:none;
+	border: 1px solid #468847;
+	border-radius: 2px;
+}
 
 .select2-container-multi.select2-container-active .select2-choices{
 	border:1px solid #dae0e4;
@@ -5823,7 +5834,7 @@ border-bottom-left-radius: 2px;
 .select2-search-choice-close{
 	background:none;
 	top: 4px;
-	right:0;
+	right: auto;
 }
 .select2-search-choice-close:hover{
 	text-decoration:none;

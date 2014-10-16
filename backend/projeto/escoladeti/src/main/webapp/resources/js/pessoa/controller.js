@@ -72,6 +72,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         $log.debug('buscando pessoa');
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function (pessoa) {
             $scope.pessoa = pessoa;
+            var caracs = pessoa.caracteristicas.map(function(item,index){
+            	return item.id;
+            });
+            $scope.pessoa.caracteristicas = caracs;
             $scope.maskCpf = '999.999.999-99';
         });
     };

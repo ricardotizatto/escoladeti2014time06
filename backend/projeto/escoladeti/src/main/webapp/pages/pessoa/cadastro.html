@@ -67,9 +67,9 @@
 							letras e no mínimo 2.</span>
 					</div>
 				</div>
-				<div class="form-group col-sm-2">
-					<label class="control-label"><strong>Sexo</strong></label>
-					<div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="control-label"><strong>Sexo</strong></label>
 						<div class="btn-group">
 							<!--data-toggle="buttons" verificar uso-->
 							<label class="btn btn-primary btn-radio-amacapa"> <input
@@ -82,11 +82,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
-					<div class="form-group {{formPessoa.caracteristicas.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong>Caracteristicas *</strong></label>
-						<select type="text" name="caracteristicas" ui-select2="select2Options" multiple class="input-default" ng-model="pessoa.caracteristicas"
-							required>
+				<div class="col-sm-3">
+					<div
+						class="form-group {{formPessoa.caracteristicas.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+						<label class="control-label"><strong>Caracteristicas
+								*</strong></label> <select type="text" name="caracteristicas"
+							ui-select2="select2Options" multiple class="input-default"
+							ng-model="pessoa.caracteristicas" required>
 							<option ng-repeat="c in caracteristicas" value="{{c.id}}">{{c.descricao}}</option>
 						</select>
 					</div>
@@ -161,8 +163,8 @@
 				<div class="col-sm-5">
 					<div
 						class="form-group {{formPessoa.razaoSocialJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong>Razão Social
-								*</strong></label> <input class="form-control" name="razaoSocialJuridica"
+						<label class="control-label"><strong>Razão
+								Social *</strong></label> <input class="form-control" name="razaoSocialJuridica"
 							type="text" ng-pattern="/^[a-zA-Z\s]{2,50}$/"
 							ng-model="pessoa.razaoSocial" placeholder="Razao Social"
 							maxlength="50" title="Razão Social"
@@ -210,9 +212,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label class="control-label"><strong>Data de
-								Criação</strong> </label> <input class="form-control" name="dataCriacaoJuridica"
-							type="date" ng-model="pessoa.dataCriacao"
-							placeholder="dd/mm/aaaa" />
+								Criação</strong> </label> <input class="form-control"
+							name="dataCriacaoJuridica" type="date"
+							ng-model="pessoa.dataCriacao" placeholder="dd/mm/aaaa" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
