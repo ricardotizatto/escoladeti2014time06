@@ -152,6 +152,12 @@
             ORDER BY T1.DATACHEGADA
         </createView>
     </changeSet>
+
+    <changeSet id="1231234" author="catabriga">
+        <addColumn tableName="volume">
+            <column name="caminho_anexo" type="varchar(150)"></column>
+        </addColumn>
+    </changeSet>
     
     <changeSet author="martinho" id="mart0134droptable">
         <dropTable cascadeConstraints="true" tableName="usuarioperfilacesso"></dropTable>

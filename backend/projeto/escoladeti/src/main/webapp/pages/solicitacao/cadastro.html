@@ -65,7 +65,7 @@
                         <select ui-select2="select2Options" class="input-default" data-ng-change="buscarEndereco()"
                                 ng-model="solicitacao.responsavel" name="responsavel" required="required">
                             <option value=""></option>
-                            <option ng-repeat="p in pessoasFisicas" value="{{p.id}}">{{p.nome}}</option>
+                            <option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
                         </select>
                         <div class="input-group-btn">
                             <a href="#/pessoa" class="btn btn-primary" target="_blank">

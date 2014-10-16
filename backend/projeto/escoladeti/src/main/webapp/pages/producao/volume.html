@@ -48,22 +48,31 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <label>Enviar Arquivo</label>
+                        <label>Arquivo</label>
                         <div class="input-group">
-                            <span class="input-group-btn">
-                                <span class="btn btn-primary btn-file" required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">
-                                     <span class="glyphicon glyphicon-search " ></span> Procurar <input type="file" >
-                                </span>
-                            </span>
-                            <input type="text" class="form-control" readonly>
-                            <span class="input-group-btn">
-                                <span class="btn btn-primary btn-file">
+                            <!--<span class="input-group-btn">-->
+                                <!--&lt;!&ndash;<span class="btn btn-primary btn-file" required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">&ndash;&gt;-->
+                                     <!--&lt;!&ndash;<span class="glyphicon glyphicon-search " ></span> Procurar <input type="file" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--<button type="file" class="form-control btn btn-success">teste</button>-->
+                            <!--</span>-->
+                            <input type="text" class="form-control" data-ng-model="ctrl.volume.nomeArquivo" disabled>
+                            <span class="input-group-btn" >
+                                <a class="btn btn-primary btn-file" href="./rest/upload/{{ctrl.volume.id}}"
+                                      data-ng-disabled="!ctrl.volume.caminhoAnexo">
                                     <span class="glyphicon glyphicon-download " ></span> Download
-                                </span>
+                                </a>
                             </span>
                         </div>
                     </div>
 
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="">Arquivo à enviar</label>
+                        <input type="file" class="form-control " file-model="ctrl.arquivo"
+                               data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">
+                    </div>
                 </div>
 
                 <div class="row">

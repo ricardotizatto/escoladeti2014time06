@@ -114,5 +114,15 @@ public class PessoaController implements Serializable {
     public List<PessoaFisica> listarPessoasfisicas() {
         return pessoaService.listarPessoasFisicas();
     }
+    
+    /**
+     * @author Lorhan // metodo para listar todas pessoas alunos ou não
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "todasPessoas")
+    @ResponseBody
+    public List<PessoaFisica> listarTodasPessoas(){
+        return pessoaService.listarTodasPessoas();
+    }
+    
 
 }

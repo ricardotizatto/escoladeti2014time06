@@ -4,8 +4,10 @@ import javax.persistence.*;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
+import br.unicesumar.escoladeti.util.string.StringUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Objects;
 
@@ -32,7 +34,8 @@ public class Volume  {
     @Column(name = "id_solicitacao_item")
     private Long idSolicitacaoItem;
 
-
+    @Column(name = "caminho_anexo")
+    private String caminhoAnexo;
 
     @ManyToOne
     @JoinColumn(name = "id_responsavelrevisao")
@@ -140,6 +143,21 @@ public class Volume  {
         this.id = id;
     }
 
+    public String getCaminhoAnexo() {
+        return caminhoAnexo;
+    }
+
+    public String getNomeArquivo() {
+        if (StringUtils.isNotEmpty(caminhoAnexo))
+            return new File(getCaminhoAnexo()).getName();
+
+        return "";
+    }
+
+    public void setCaminhoAnexo(String caminhoAnexo) {
+        this.caminhoAnexo = caminhoAnexo;
+    }
+
     public void rejeitar(Date data, Long revisor, String observacao) {
         if (data == null) {
             throw  new RuntimeException("Data da rejeição deve ser informada.");
@@ -230,6 +248,10 @@ public class Volume  {
     }
 
     public void marcarComoImprimido(ComandoSalvarVolume comandoSalvarVolume) {
+
+        if(caminhoAnexo == null) {
+            throw new RuntimeException("Arquivo é obrigatório para marcar como impresso");
+        }
 
         if (!getStatus().equals(VolumeStatus.ANDAMENTO)) {
             throw new RuntimeException("Sómente volume em Andamento pode ser marcado como impresso.");
