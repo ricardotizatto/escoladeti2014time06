@@ -124,7 +124,7 @@ function eventoController($scope, $http, $routeParams) {
 //        console.log($scope.periodos);
 //        toastr.success("Periodo adicionado!");
 //        $scope.indicePeriodo = {};
-//        
+        
     };
     
     $scope.novoPeriodo = function () {
