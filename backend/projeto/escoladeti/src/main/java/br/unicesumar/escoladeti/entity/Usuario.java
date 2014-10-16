@@ -5,6 +5,8 @@ import static liquibase.util.MD5Util.computeMD5;
 
 @Entity
 public class Usuario extends Entidade {
+    
+    private static final long serialVersionUID = 1L;
 
     private String nome;
     private String login;

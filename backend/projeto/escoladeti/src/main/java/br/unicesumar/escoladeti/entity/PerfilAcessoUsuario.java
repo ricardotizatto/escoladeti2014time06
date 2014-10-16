@@ -1,8 +1,9 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -12,6 +13,8 @@ import javax.persistence.TemporalType;
 @Entity
 public class PerfilAcessoUsuario extends Entidade {
 
+    private static final long serialVersionUID = 1L;
+    
     @Temporal(TemporalType.DATE)
     private Date inicioVigencia;
     
@@ -20,11 +23,21 @@ public class PerfilAcessoUsuario extends Entidade {
     
     @ManyToOne
     @JoinColumn(name = "id_perfilacesso", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "perfilacessousuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private PerfilAcesso perfilAcesso;
     
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "perfilacessousuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Usuario usuario;
+    
+    public PerfilAcessoUsuario(Long id, Date inicioVigencia, Date fimVigencia, PerfilAcesso perfilAcesso, Usuario usuario) {
+        this.id = id;
+        this.inicioVigencia = inicioVigencia;
+        this.fimVigencia = fimVigencia;
+        this.perfilAcesso = perfilAcesso;
+        this.usuario = usuario;
+    }
 
     public PerfilAcessoUsuario(Date inicioVigencia, Date fimVigencia, PerfilAcesso perfilAcesso, Usuario usuario) {
         this.inicioVigencia = inicioVigencia;

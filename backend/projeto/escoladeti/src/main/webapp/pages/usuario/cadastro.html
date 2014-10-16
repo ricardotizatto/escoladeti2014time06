@@ -3,7 +3,7 @@
         <div class="form-group col-sm-12">
             <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Usuário </legend>
         </div>
-    </div>{{usuario}}
+    </div>
     <form action="" novalidade method="POST" name="formUsuario" role="form" ng-submit="salvar()">
         <div class="row">
             <div class="form-group col-sm-2">
@@ -70,7 +70,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group {{formUsuario.perfilAcesso.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-                    <label class="control-label"> <strong>Nome do Perfil * </strong> </label>
+                    <label class="control-label"> <strong>Perfil * </strong> </label>
                     <select type="text" ui-select2 name="perfilAcesso" class="input-default" ng-model="usuario.perfilAcessoId" required >
                         <option ng-repeat="perfilAcesso in perfisAcesso" value="{{perfilAcesso.id}}">{{perfilAcesso.nome}}</option>
                         

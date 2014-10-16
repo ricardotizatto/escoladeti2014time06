@@ -73,7 +73,7 @@ public class UsuarioService {
         
         PerfilAcesso pa = new PerfilAcesso();
         pa.setId(usuarioDTO.getPerfilAcessoId());
-        pa.setNome(usuarioDTO.getPerfil());
+        pa.setNome("");
         usuarioperfilacesso.setPerfilAcesso(pa);
         
         this.perfilAcessoUsuarioRepository.save(usuarioperfilacesso);

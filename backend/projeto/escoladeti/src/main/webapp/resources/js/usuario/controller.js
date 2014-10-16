@@ -91,7 +91,7 @@ function UsuarioController($scope, $http, $routeParams) {
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function(data) {
             console.log("usuario deletado" + data);
-            toastr.success("Usuario deletado com sucesso!");
+            toastr.success("Usuario "+ usuario.nome +" deletado com sucesso!");
             $scope.getTodos(1);
         }).error(function(data) {
             console.log("erro ao deletar usuario " + data);
