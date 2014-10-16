@@ -100,7 +100,7 @@ function EstadoController($scope, $routeParams, paisService, estadoService) {
                 })
                 .error(function (data) {
                     console.log("erro ao salvar unidadeFederativa" + data);
-                    toastr.warning(data.message);
+                    
                 });
     };
 

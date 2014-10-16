@@ -5,20 +5,22 @@ import static liquibase.util.MD5Util.computeMD5;
 
 @Entity
 public class Usuario extends Entidade {
+    
+    private static final long serialVersionUID = 1L;
 
     private String nome;
     private String login;
     private String senha;
     private String email;
-    private Boolean ativo;
-
+    private boolean ativo;
+    
     public Usuario() {
     }
 
     public Usuario(String nome, String senha, String login, String email) {
         this.login = login;
-        this.nome = nome;
-        this.email = email;
+        this.nome = nome.toUpperCase();
+        this.email = email.toUpperCase();
         setSenha(senha);
     }
 
@@ -47,7 +49,7 @@ public class Usuario extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getEmail() {
@@ -55,18 +57,17 @@ public class Usuario extends Entidade {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toUpperCase();
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-
-
+    
     public static Usuario of(Long id) {
         return new Usuario(id);
     }
