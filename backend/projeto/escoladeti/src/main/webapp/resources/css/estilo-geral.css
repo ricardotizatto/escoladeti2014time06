@@ -285,3 +285,5 @@ select.select2 {
 .tabela-filtro td{ margin: 0px; padding: 0px; text-align: center;}
 .campos-filtro{ margin: 0px; padding: 0px; text-align: center;}
 .data-filtro{ color: #0090d9; }
+
+.classe-forca-senha{ padding: 10px; margin-left: 5px; font-weight: bold;}

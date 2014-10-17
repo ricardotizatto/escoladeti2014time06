@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-sm-3 form-group ">
                 <a  class='btn btn-primary form-control' href="#/ordem-producao/{{ctrl.item.id}}/volume"
-                    data-ng-disabled="ctrl.item.status == 'CANCELADO' || ctrl.item.status == 'FINALIZADO'">
+                    data-ng-disabled="ctrl.item.status == 'CANCELADO' || ctrl.item.status == 'FINALIZADO' ">
                     <span class='glyphicon glyphicon-plus-sign' title="Novo volume"></span> Novo Volume
                 </a>
             </div>
@@ -55,8 +55,9 @@
                                 <td>{{volume.paginaInicio}}/{{volume.paginaFim}}</td>
                                 <td>{{volume.status}}</td>
                             <td>
-                                <a class='btn btn-primary btn-file btn-sm'  name='metodo' value='download' ng-click="" title="Download">
-                                    <span class='glyphicon glyphicon-download'><input type="file"></span>
+                                <a class='btn btn-primary btn-file btn-sm'  value='download' ng-click="" title="Download"
+                                        data-ng-disabled="!volume.caminhoAnexo" href="./rest/upload/{{volume.id}}">
+                                    <span class='glyphicon glyphicon-download'></span>
                                 </a>
                                 <a class='btn btn-warning btn-sm' ng-click="ctrl.editarVolume(volume.id)" title="Editar">
                                     <span class='glyphicon glyphicon-edit' ></span>

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PaisService implements Serializable{
@@ -15,7 +16,15 @@ public class PaisService implements Serializable{
 	@Autowired
 	private PaisRepository paisRepository;
 	
+        @Transactional
 	public Pais salvar(Pais pais) {
+            Pais paisTemp = new Pais();
+            paisTemp = paisRepository.findByNome(pais.getNome());
+            if(paisTemp != null){
+                if(paisTemp.getId() != pais.getId()){
+                    throw new RuntimeException("O país " + pais.getNome() + " já está cadastrado!");
+                }
+            }
 		return paisRepository.save(pais);
 	}
         
