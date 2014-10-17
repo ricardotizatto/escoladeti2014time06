@@ -6,6 +6,7 @@
                 <legend> Cadastro de Evento  </legend>
             </div>
         </div>
+        {{evento}}
         <form action="" novalidate method="POST" role="form" name="formEvento" ng-submit="salvar('salvo')">	
             <div class="row">
                 <div class="col-sm-4">
@@ -81,7 +82,7 @@
                                 <legend>
                                     <span class="fa fa-calendar"></span> <strong class="control-label" > Data * </strong>
                                     <button type="submit" class="btn btn-primary btn-sm"
-                                            data-toggle="modal" data-target="#modalData" ng-click="novaData()">
+                                            data-toggle="modal" data-target="#modalData" ng-click="novoPeriodo()">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </legend>
