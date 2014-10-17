@@ -30,9 +30,6 @@ public class PessoaFisica extends Pessoa {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    private boolean aluno = false;
-    private String nomeCompleto;
-
     public PessoaFisica() {
     }
 
@@ -85,14 +82,6 @@ public class PessoaFisica extends Pessoa {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
-    }
-
-    public boolean getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(boolean aluno) {
-        this.aluno = aluno;
     }
 
     public static PessoaFisica of(Long id) {

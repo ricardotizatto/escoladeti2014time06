@@ -72,18 +72,6 @@ public class PessoaController implements Serializable {
         return pessoaService.buscarPessoa(pagina, busca);
     }
 
-    @RequestMapping(value = {"/paginarAluno/{pagina}"}, method = RequestMethod.GET)
-    @ResponseBody
-    public DataPage<PessoaFisica> paginarAluno(@PathVariable Integer pagina) {
-        return pessoaService.paginarAluno(pagina);
-    }
-
-    @RequestMapping(value = {"/buscarAluno/{pagina}"}, params = "busca", method = RequestMethod.GET)
-    @ResponseBody
-    public DataPage<PessoaFisica> buscarAluno(@PathVariable Integer pagina, @RequestParam String busca) {
-        return pessoaService.buscarAluno(pagina, busca);
-    }
-
     @RequestMapping(value = {"/paginarJuridica/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<PessoaJuridica> paginarJuridica(@PathVariable Integer pagina) {
@@ -94,25 +82,6 @@ public class PessoaController implements Serializable {
     @ResponseBody
     public DataPage<PessoaJuridica> buscarJuridica(@PathVariable Integer pagina, @RequestParam String busca) {
         return pessoaService.buscarJuridica(pagina, busca);
-    }
-
-    /**
-     * @author Catabriga Metodos para retornar uma lista com todos alunos.
-     * @return List de pessoas fisicas que são alunos
-     */
-    @RequestMapping(method = RequestMethod.GET, value = "/alunos")
-    @ResponseBody
-    public List<PessoaFisica> listarAlunos() {
-        return pessoaService.listarAlunos();
-    }
-
-    /**
-     * @author Catabriga Metodon para listar pessoas fisicas que não são alunos
-     */
-    @RequestMapping(method = RequestMethod.GET, value = "/fisicas")
-    @ResponseBody
-    public List<PessoaFisica> listarPessoasfisicas() {
-        return pessoaService.listarPessoasFisicas();
     }
     
     /**

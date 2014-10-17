@@ -18,7 +18,6 @@ public class ComandoSalvarPessoa {
     private Date dataNascimento;
     private String sobrenome;
     private Sexo sexo;
-    private boolean aluno;
     private String cnpj;
     private String inscricaoEstadual;
     private String inscricaoMunicipal;
@@ -118,14 +117,6 @@ public class ComandoSalvarPessoa {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
-    }
-
-    public boolean getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(boolean aluno) {
-        this.aluno = aluno;
     }
 
     public String getCnpj() {

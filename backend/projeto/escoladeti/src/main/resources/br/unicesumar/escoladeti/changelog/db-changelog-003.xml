@@ -165,15 +165,14 @@
 			</column>
 		</createTable>
 	</changeSet>
-
 	<changeSet id="201410152144" author="Walber">
 		<preConditions onFail="CONTINUE" onError="HALT">
 			<not>
-				<tableExists tableName="pessoacaracteristica"/>
+				<tableExists tableName="pessoacaracteristica" />
 			</not>
 		</preConditions>
 		<createTable tableName="pessoacaracteristica">
-			<column name="id" type="INT8" defaultValueSequenceNext="hibernate_sequence" >
+			<column name="id" type="INT8" defaultValueSequenceNext="hibernate_sequence">
 				<constraints primaryKeyName="pessoaCaracteristicaPkId"
 					primaryKey="true" />
 			</column>
@@ -211,6 +210,28 @@
 			<column name="id" type="INT8" value="3"></column>
 			<column name="descricao" type="VARCHAR(30)" value="PROFESSOR"></column>
 		</insert>
+	</changeSet>
+
+	<changeSet id="201410161950" author="Walber">
+		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+			<columnExists tableName="pessoafisica" columnName="aluno" />
+		</preConditions>
+		<dropColumn tableName="pessoafisica" columnName="aluno" />
+	</changeSet>
+
+	<changeSet id="201410162225" author="Walber">
+		<createTable tableName="vigenciaassociado">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" primaryKeyName="vigenciaassociado_pkey" />
+			</column>
+			<column name="vigencia" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="caracteristicapessoaid" type="INT8">
+				<constraints foreignKeyName="vigenciaassociado_fk1"
+					referencedTableName="pessoacaracteristica" referencedColumnNames="id" />
+			</column>
+		</createTable>
 	</changeSet>
 
 

@@ -34,9 +34,6 @@ public class PessoaFisicaJuridica extends Entidade implements Serializable{
     @Column(name = "nascimento_criacao")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date nascimentoCriacao;
-    
-    
-    private Boolean aluno;
 
     public String getNome() {
         return nome;
@@ -84,14 +81,6 @@ public class PessoaFisicaJuridica extends Entidade implements Serializable{
 
     public void setNascimentoCriacao(Date nascimentoCriacao) {
         this.nascimentoCriacao = nascimentoCriacao;
-    }
-
-    public Boolean getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(Boolean aluno) {
-        this.aluno = aluno;
     }
     
 }

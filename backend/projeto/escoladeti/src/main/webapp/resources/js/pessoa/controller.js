@@ -7,7 +7,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     $scope.select2 = 'one';
 
     $scope.init = function () {
-        // $scope.tipoPessoa = 'F';
         $scope.filtroPessoaFisica(1);
         $scope.focusCpf = false;
         $scope.enderecoPrincipal = false;
@@ -25,6 +24,30 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                     $scope.unidadesFederativas = data;
                 });
     };
+    
+    $scope.temAssociado = function(){
+    	$scope.associado = false;    	
+    	if($scope.pessoa.caracteristicas){
+	    	var caracs = $scope.pessoa.caracteristicas;
+	    	var associado = 2;
+	    	caracs.forEach(function(item){
+	    		console.log(item);
+	    		if(item == associado)
+	    			$scope.associado = true;
+	    	});
+    	}
+    }
+    $scope.temAluno = function(){
+    	$scope.aluno = false;
+    	if($scope.pessoa.caracteristicas){
+	    	var caracs = $scope.pessoa.caracteristicas;
+	    	var aluno = 1;
+	    	caracs.forEach(function(item){
+	    		if(item == aluno)
+	    			$scope.aluno = true;
+	    	});
+    	}
+    }
 
     $scope.validaCpf = function (cpf) {
     	if(cpf){
@@ -58,39 +81,36 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
 
     $scope.novo = function () {
-        console.log('Nova Pessoa');
         window.location = '#/pessoa';
     };
 
     $scope.carregarPessoa = function () {
-        console.log('carregando pessoa:');
+    	$scope.aluno = false;
+    	
+    	console.log($scope.aluno);
         
         $scope.caracteristicas = buscaCaracteristicas();
 
         if (!$routeParams.pessoaId) {
             $scope.novaPessoa("F");
-            $log.debug('criando pessoa');
             return;
         }
         
-        
-        
-        $log.debug('buscando pessoa');
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function (pessoa) {
             $scope.pessoa = pessoa;
             var caracs = pessoa.caracteristicas.map(function(item,index){
             	return item.id;
             });
             $scope.estaEditando = isEditing();
-            console.log($scope.editando);
             $scope.pessoa.caracteristicas = caracs;
             $scope.maskCpf = '999.999.999-99';
+            $scope.temAluno();
+            $scope.temAssociado();            
         });
     };
     
      function buscaCaracteristicas(){    	
     	return CaracteristicaService.query(function(data){
-    		console.log(data);
     		return data;
     	});
     }
@@ -120,7 +140,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     $scope.filtroPessoaFisica = function (numeroPagina) {
         Pessoa.get({pagina: numeroPagina},
         function (pagina) {
-            console.log(pagina);
             $scope.pagina = pagina;
         },
                 function (erro) {
@@ -212,7 +231,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         }
         
         $scope.pessoa.telefones.push($scope.telefone);
-        console.log($scope.telefones);
         toastr.success("Telefone adicionado " + $scope.telefone.numero + " !");
         // $scope.telefone = getNovoTelefone();
         $scope.indiceTelefone = {};
@@ -245,7 +263,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
     $scope.salvarEndereco = function () {      
         if(contemEnderecoPrincipal($scope.endereco.principal)){
-            console.log('Entrou aqui!');
             toastr.warning('Endereço principal já informado!');
             return;
         }
@@ -271,8 +288,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         $scope.indiceEndereco = indice;
 
         $scope.endereco = angular.copy($scope.pessoa.enderecos[indice]);
-
-        console.log($scope.endereco);
 
         $scope.modificarPais($scope.endereco.cidade.unidadeFederativa.pais.id);
 
@@ -311,7 +326,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     function contemEnderecoPrincipal(principal){
         var contem = false;
         if(angular.isUndefined($scope.pessoa.enderecos)){
-            console.log('Undefined!');
             return contem;
         }
         angular.forEach($scope.pessoa.enderecos,function(value, key){
@@ -346,7 +360,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             $scope.endereco.id = null;
             $scope.endereco.principal = 'S';
 
-            console.log($scope.endereco);
         }, function (mesage) {
             console.log(mesage);
         });

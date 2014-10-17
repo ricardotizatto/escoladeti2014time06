@@ -45,14 +45,6 @@ public class PessoaService {
         return new DataPage<>(pessoaFisicaRepository.findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(busca, busca, busca, pageRequestForAsc(pagina, "nome")));
     }
 
-    public DataPage<PessoaFisica> paginarAluno(Integer pagina) {
-        return new DataPage<>(pessoaFisicaRepository.findByAlunoTrue(pageRequestForAsc(pagina, "nome")));
-    }
-
-    public DataPage<PessoaFisica> buscarAluno(Integer pagina, String busca) {
-        return new DataPage<>(pessoaFisicaRepository.findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrueOrCpfContainingAndAlunoTrue(busca, busca, busca, pageRequestForAsc(pagina, "nome")));
-    }
-
     public DataPage<PessoaJuridica> paginarJuridica(Integer pagina) {
         return new DataPage<>(pessoaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
@@ -103,7 +95,6 @@ public class PessoaService {
                         .dataNascimento(comando.getDataNascimento())
                         .sobrenome(comando.getSobrenome())
                         .sexo(comando.getSexo())
-                        .aluno(comando.getAluno())
                         .caracteristicas(caracteristicas)
                         .buildPessoaFisica();
 
@@ -159,14 +150,6 @@ public class PessoaService {
         } else {
             throw new RuntimeException("Tipo de pessoa invÃ¡lido");
         }
-    }
-
-    public List<PessoaFisica> listarAlunos() {
-        return pessoaFisicaRepository.findByAlunoTrue();
-    }
-
-    public List<PessoaFisica> listarPessoasFisicas() {
-        return pessoaFisicaRepository.findByAlunoFalse();
     }
     
     public List<PessoaFisica> listarTodasPessoas(){

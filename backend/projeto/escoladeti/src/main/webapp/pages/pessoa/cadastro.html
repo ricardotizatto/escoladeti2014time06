@@ -7,126 +7,135 @@
 			</legend>
 		</div>
 	</div>
-	<div class="row">
-		<div class="form-group col-sm-12">
-			<label class="control-label">Tipo</label>
-			<div>
-				<div class="btn-group">
-					<label class="btn btn-primary btn-radio-amacapa"> <input
-						ng-model="pessoa.tipo" ng-disabled="estaEditando" value="F"
-						type="radio" /> Física
-					</label> <label class="btn btn-primary btn-radio-amacapa"> <input
-						ng-model="pessoa.tipo" ng-disabled="estaEditando" value="J"
-						type="radio" /> Jurídica
-					</label>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr>
 	<form action="" novalidade method="POST" name="formPessoa" role="form"
 		ng-submit="salvar()">
-		<!-- Inicio Pessoa Fisica -->
-		<div class="pessoaFisica" ng-show=" pessoa.tipo === 'F'">
-			<div class="col-sm-3">
-				<div
-					class="form-group {{formPessoa.nomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-					<label class="control-label"><strong> Nome *</strong></label> <input
-						class="form-control" name="nomeFisica" type="text"
-						ng-model="pessoa.nome" placeholder="Nome" maxlength="50"
-						title="Nome" ng-required="pessoa.tipo === 'F'"
-						ng-pattern="/^[a-zA-Z\s]{2,50}$/" title="Nome da pessoa" /> <span
-						class="help-block" ng-show="formPessoa.nomeFisica.$error.pattern">Apenas
-						letras e no mínimo 2.</span>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div
-					class="form-group {{formPessoa.sobrenomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-					<label class="control-label"><strong>Sobrenome *</strong> </label>
-					<input class="form-control" name="sobrenomeFisica"
-						ng-pattern="/^[a-zA-Z\s]{2,50}$/" type="text"
-						ng-model="pessoa.sobrenome" placeholder="Sobrenome" maxlength="50"
-						title="Sobrenome" ng-required="pessoa.tipo === 'F'" /> <span
-						class="help-block"
-						ng-show="formPessoa.sobrenomeFisica.$error.pattern">Apenas
-						letras e no mínimo 2.</span>
-				</div>
-			</div>
-			<div class="col-sm-3 text-center">
+		<div class="row">
+			<div class="col-sm-6">
 				<div class="form-group">
-					<label class="control-label"><strong>Sexo</strong></label>
+					<label class="control-label">Tipo</label>
 					<div class="btn-group">
-						<!--data-toggle="buttons" verificar uso-->
 						<label class="btn btn-primary btn-radio-amacapa"> <input
-							ng-model="pessoa.sexo" value="MASCULINO" type="radio" />
-							Masculino
+							ng-model="pessoa.tipo" ng-disabled="estaEditando" value="F"
+							type="radio" /> Física
 						</label> <label class="btn btn-primary btn-radio-amacapa"> <input
-							ng-model="pessoa.sexo" value="FEMININO" type="radio" /> Feminino
+							ng-model="pessoa.tipo" ng-disabled="estaEditando" value="J"
+							type="radio" /> Jurídica
 						</label>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3">
-				<div
-					class="form-group {{formPessoa.dataNascimentoFisica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-					<label class="control-label"><strong>Nascimento *</strong>
-					</label> <input class="form-control maskNascimento"
-						name="dataNascimentoFisica" type="date"
-						ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa"
-						ng-required="pessoa.tipo == 'F'" />
-				</div>
-			</div>			
-
-			<div class="col-sm-3">
-				<div
-					class="form-group {{formPessoa.rgFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-					<label class="control-label"><strong> RG *</strong></label> <input
-						class="form-control" name="rgFisica" ng-pattern="/^[0-9]{5,12}$/"
-						type="text" id="rg" ng-model="pessoa.rg" title="Número do R.G."
-						maxlength="12" placeholder="Número do R.G."
-						ng-required="pessoa.tipo == 'F'" /> <span class="help-block"
-						ng-show="formPessoa.rgFisica.$error.pattern">Apenas números
-						e mínimo 5 dígitos.</span>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div
-					class="form-group {{formPessoa.cpfFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-					<label class="control-label"> <strong>CPF *</strong>
-					</label> <input class="form-control" ui-mask="{{maskCpf}}"
-						ng-focus="maskCpf = '999.999.999-99'" ng-pattern="/(\w|\W)/"
-						type="text" name="cpfFisica" ng-model="pessoa.cpf"
-						title="Número do CPF" my-blur="validaCpf(pessoa.cpf)"
-						my-focus="focusCpf" maxlength="14"
-						ng-required="pessoa.tipo === 'F'">
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="form-group">
-					<label class="control-label"><strong>Email </strong></label>
-					<div class="input-group">
-						<span class="input-group-addon"> <span
-							class="glyphicon glyphicon-envelope"></span>
-						</span> <input class="form-control" name="emailFisica" type="email"
-							maxlength="50" ng-model="pessoa.email"
-							placeholder="Endereço de email"
-							ng-pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.)+[a-zA-Z]{2,7}$/">
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-6">
 				<div
 					class="form-group {{formPessoa.caracteristicas.$error.required ? 'has-error' : 'has-success'}} has-feedback">
 					<label class="control-label"><strong>Caracteristicas
 							*</strong></label> <select type="text" name="caracteristicas"
-						ui-select2="select2Options" multiple class="input-default"
-						ng-model="pessoa.caracteristicas" required>
+						ng-change="temAssociado();temAluno()" ui-select2="select2Options"
+						multiple class="input-default" ng-model="pessoa.caracteristicas"
+						required>
 						<option ng-repeat="c in caracteristicas" value="{{c.id}}">{{c.descricao}}</option>
 					</select>
 				</div>
-			</div>			
+			</div>
+		</div>
+		<hr>
+		<!-- Inicio Pessoa Fisica -->
+		<div class="pessoaFisica" ng-show=" pessoa.tipo === 'F'">
+			<div class="row">
+				<div class="col-sm-3">
+					<div
+						class="form-group {{formPessoa.nomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+						<label class="control-label"><strong> Nome *</strong></label> <input
+							class="form-control" name="nomeFisica" type="text"
+							ng-model="pessoa.nome" placeholder="Nome" maxlength="50"
+							title="Nome" ng-required="pessoa.tipo === 'F'"
+							ng-pattern="/^[a-zA-Z\s]{2,50}$/" title="Nome da pessoa" /> <span
+							class="help-block" ng-show="formPessoa.nomeFisica.$error.pattern">Apenas
+							letras e no mínimo 2.</span>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div
+						class="form-group {{formPessoa.sobrenomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+						<label class="control-label"><strong>Sobrenome *</strong>
+						</label> <input class="form-control" name="sobrenomeFisica"
+							ng-pattern="/^[a-zA-Z\s]{2,50}$/" type="text"
+							ng-model="pessoa.sobrenome" placeholder="Sobrenome"
+							maxlength="50" title="Sobrenome"
+							ng-required="pessoa.tipo === 'F'" /> <span class="help-block"
+							ng-show="formPessoa.sobrenomeFisica.$error.pattern">Apenas
+							letras e no mínimo 2.</span>
+					</div>
+				</div>
+				<div class="col-sm-3 text-center">
+					<div class="form-group">
+						<label class="control-label"><strong>Sexo</strong></label>
+						<div class="btn-group">
+							<!--data-toggle="buttons" verificar uso-->
+							<label class="btn btn-primary btn-radio-amacapa"> <input
+								ng-model="pessoa.sexo" value="MASCULINO" type="radio" />
+								Masculino
+							</label> <label class="btn btn-primary btn-radio-amacapa"> <input
+								ng-model="pessoa.sexo" value="FEMININO" type="radio" />
+								Feminino
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div
+						class="form-group {{formPessoa.dataNascimentoFisica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+						<label class="control-label"><strong>Nascimento *</strong>
+						</label> <input class="form-control maskNascimento"
+							name="dataNascimentoFisica" type="date"
+							ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa"
+							ng-required="pessoa.tipo == 'F'" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<div
+						class="form-group {{formPessoa.rgFisica.$error.required || formPessoa.rgFisica.$error.pattern || aluno === 'false' ? 'has-error' : 'has-success'}} has-feedback">
+						<label class="control-label"><strong> RG *</strong></label> <input
+							class="form-control" name="rgFisica" ng-pattern="/^[0-9]{5,12}$/"
+							type="text" id="rg" ng-model="pessoa.rg" title="Número do R.G."
+							maxlength="12" placeholder="Número do R.G."
+							ng-required="pessoa.tipo == 'F' && !aluno" /> <span
+							class="help-block" ng-show="formPessoa.rgFisica.$error.pattern">Apenas
+							números e mínimo 5 dígitos.</span>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div
+						class="form-group {{formPessoa.cpfFisica.$invalid || aluno === 'false' ? 'has-error' : 'has-success'}} has-feedback">
+						<label class="control-label"> <strong>CPF *</strong>
+						</label> <input class="form-control" ui-mask="{{maskCpf}}"
+							ng-focus="maskCpf = '999.999.999-99'" ng-pattern="/(\w|\W)/"
+							type="text" name="cpfFisica" ng-model="pessoa.cpf"
+							title="Número do CPF" my-blur="validaCpf(pessoa.cpf)"
+							my-focus="focusCpf" maxlength="14"
+							ng-required="pessoa.tipo === 'F' && !aluno">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label class="control-label"><strong>Email </strong></label>
+						<div class="input-group">
+							<span class="input-group-addon"> <span
+								class="glyphicon glyphicon-envelope"></span>
+							</span> <input class="form-control" name="emailFisica" type="email"
+								maxlength="50" ng-model="pessoa.email"
+								placeholder="Endereço de email"
+								ng-pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.)+[a-zA-Z]{2,7}$/">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6" ng-show="associado">
+					<button class="btn btn-success">Aqui</button>
+				</div>
+			</div>
 		</div>
 		<!-- Fim Pessoa Fisica -->
 		<!-- Inicio Pessoa Jurídica -->
@@ -233,9 +242,9 @@
 						<tr>
 							<th class="col-sm-1">Principal</th>
 							<th class="col-sm-1">Tipo</th>
-							<th class="col-sm-4">Logradouro - Bairro</th>
-							<th class="col-sm-4">Cidade - Estado</th>
-							<th class="col-sm-2">Ações</th>
+							<th class="col-sm-4">Logradouro</th>
+							<th class="col-sm-3">Cidade - UF</th>
+							<th class="col-sm-3">Ações</th>
 						</tr>
 						<tr ng-repeat="endereco in pessoa.enderecos">
 							<td ng-bind="endereco.principal === 'S' ? 'SIM' : 'NÃO'"></td>
@@ -276,12 +285,12 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<table class="table table-hover table-striped">
-								<tr>
+								<thead>
 									<th class="col-sm-2">Tipo</th>
 									<th class="col-sm-2">DDD</th>
-									<th class="col-sm-6">Número</th>
-									<th class="col-sm-2">Ações</th>
-								</tr>
+									<th class="col-sm-5">Número</th>
+									<th class="col-sm-3">Açoes</th>
+								</thead>
 								<tr ng-repeat="telefone in pessoa.telefones">
 									<td>{{telefone.tipo}}</td>
 									<td>{{telefone.ddd}}</td>
