@@ -2,7 +2,9 @@ package br.unicesumar.escoladeti.entity;
 
 import br.unicesumar.escoladeti.util.data.DateUtil;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Evento extends Entidade {
@@ -23,15 +26,29 @@ public class Evento extends Entidade {
     @JoinColumn(name = "idevento", referencedColumnName = "id", updatable = false)
     private List<Participante> participante;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idevento", referencedColumnName = "id", updatable = false)
-    private List<Periodo> periodos;    
+    /*@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idevento", referencedColumnName = "id", updatable = false)*/
+    @NotEmpty(message = "Deve ser cadastrado ao menos um Endereço!")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)    
+    private Set<Periodo> periodos;    
     
     private String organizacao;
     private String titulo;
     private String descricao;
     private double valor;
     private boolean statusevento;
+
+    public Evento() {
+        this.periodos = new HashSet<Periodo>();
+    }
+
+    public Set<Periodo> getPeriodos() {
+        return periodos;
+    }
+
+    public void setPeriodos(Set<Periodo> periodos) {
+        this.periodos = periodos;
+    }
 
     public String getOrganizacao() {
         return organizacao;

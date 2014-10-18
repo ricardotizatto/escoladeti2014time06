@@ -12,7 +12,8 @@ function eventoController($scope, $http, $routeParams) {
     $scope.tipoEvento;
     $scope.valor;
     $scope.selected;
-
+    $scope.indicePeriodo = {};
+    
     $scope.editar = function(evento) {
         console.log(evento);
         window.location = '#/cadastroevento/' + evento.id;
@@ -103,7 +104,7 @@ function eventoController($scope, $http, $routeParams) {
         }
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function(evento, status) {
-                    $scope.evento = getNovoEvento();
+                    carregarEvento();
                     window.location = '#/listaevento';
                     toastr.success("Evento "+acao+" com sucesso!");
                     console.log("evento salva = " + evento);
@@ -113,29 +114,9 @@ function eventoController($scope, $http, $routeParams) {
                     toastr.warning("Erro ao salvar evento!");
                 });
     };
-     $scope.salvarPeriodo = function () {
-         console.log("entro no salvar periodo");
-         //$scope.periodos.push($scope.periodo);
-//        if ($scope.indicePeriodo >= 0) {
-//            $scope.periodos.splice($scope.indicePeriodo, 1);
-//        }
-        
-        $scope.periodos.push($scope.periodo);
-        console.log($scope.periodos);
-        toastr.success("Periodo adicionado!");
-        $scope.indicePeriodo = {};
-        
-    };
-     
-    $scope.novoPeriodo = function () {
-        $scope.periodo = [];
-    };
     
-//    $scope.getNovoPeriodo = function(){
-//       $scope.periodo = [];         
-//    };
     $scope.novo = function() {
-        $scope.evento = getNovoEvento();
+       // carregarEvento();
         window.location = '#/cadastroevento';
     };
     
@@ -164,8 +145,8 @@ function eventoController($scope, $http, $routeParams) {
     
     $scope.carregarEvento = function() {
         if (!$routeParams.eventoId) {
-            $scope.periodos = [];
             $scope.evento = {};
+            $scope.evento.periodos = [];
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
@@ -183,13 +164,6 @@ function eventoController($scope, $http, $routeParams) {
         $scope.dataCurso = data;
     };
 
-
-    function getNovoEvento() {
-        console.log('novo evento');
-        return {};
-    }
-    ;
-    
 
     $scope.voltar = function() {
         $scope.evento = {};
@@ -220,6 +194,37 @@ function eventoController($scope, $http, $routeParams) {
                 break;
         }
     };
+    
+    
+//Novo periodo
+
+    $scope.novoPeriodo = function () {
+        $scope.periodo = {};
+    };
+
+    $scope.salvarPeriodo = function () {
+        if ($scope.indicePeriodo >= 0) {
+            $scope.evento.periodos.splice($scope.indicePeriodo, 1);
+        }
+        
+        $scope.evento.periodos.push($scope.periodo);
+        console.log($scope.evento.periodos);
+        toastr.success("Periodo adicionado " + $scope.periodo.data + " !");
+        $scope.indicePeriodo = {};
+    };
+
+    $scope.editarPeriodo = function (indice) {
+        $scope.indicePeriodo = indice;
+        $scope.periodo = angular.copy($scope.evento.periodos[indice]);
+    };
+
+    $scope.delPeriodo = function (index) {
+        toastr.warning("Periodo removido  " + $scope.evento.periodos[index].numero + "!");
+        $scope.evento.periodos.splice(index, 1);
+        if ($scope.pessoa.periodos.length === 0) {
+            $scope.periodo = {};
+        }
+    };    
     
 }
 function Ctrl($scope) {

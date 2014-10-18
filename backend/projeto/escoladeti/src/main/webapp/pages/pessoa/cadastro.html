@@ -1,4 +1,5 @@
 <div class="container" ng-controller="PessoaController" ng-init="carregarPessoa()">
+    {{pessoa}}
     <div class="row">
         <div class="form-group col-sm-12">
             <legend> <span class="glyphicon glyphicon-user"></span> Cadastro de Pessoa </legend>
@@ -468,3 +469,7 @@
         //$("#cnpj").mask("99.999.999/9999-99");
     });
 </script>
+
+{{pessoa.enderecos}}
+---------
+{{pessoa.telefones}}
