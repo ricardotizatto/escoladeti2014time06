@@ -102,12 +102,14 @@ function eventoController($scope, $http, $routeParams) {
         if(!($scope.evento.id >0)){
             $scope.evento.statusevento = true;
         }
+        
+        console.log("evento antes do post = " + $scope.evento.periodos.length);
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function(evento, status) {
-                    carregarEvento();
+                    //carregarEvento();
                     window.location = '#/listaevento';
                     toastr.success("Evento "+acao+" com sucesso!");
-                    console.log("evento salva = " + evento);
+                    console.log("evento salva = " + $scope.evento);
                 })
                 .error(function(data, status) {
                     console.log("erro ao salvar evento", data);
@@ -221,7 +223,7 @@ function eventoController($scope, $http, $routeParams) {
     $scope.delPeriodo = function (index) {
         toastr.warning("Periodo removido  " + $scope.evento.periodos[index].numero + "!");
         $scope.evento.periodos.splice(index, 1);
-        if ($scope.pessoa.periodos.length === 0) {
+        if ($scope.evento.periodos.length === 0) {
             $scope.periodo = {};
         }
     };    

@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.service;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarEvento;
 import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Evento;
@@ -36,5 +37,32 @@ public class EventoService {
 
     public DataPage<Evento> getByName(String titulo) {
         return new DataPage<Evento>(eventoRepository.findByTituloContainingOrderByTituloAsc(titulo, pageRequestForAsc(1, "titulo")));
+    }
+    
+    public Evento persistirEvento(ComandoSalvarEvento comando, Long id) {
+        if (id == null) {
+                Evento evento = Evento.builder()
+                        .periodos(comando.getPeriodos())
+                        .descricao(comando.getDescricao())
+                        .local(comando.getLocal())
+                        .participante(null)
+                        .ministrante(comando.getMinistrante())
+                        .organizacao(comando.getOrganizacao())
+                        .statusevento(comando.isStatusevento())
+                        .tipoEvento(comando.getTipoEvento())
+                        .titulo(comando.getTitulo())
+                        .valor(comando.getValor())
+                        .buildEvento();
+
+                if (id != null) {
+                    evento.setId(id);
+                }
+
+                eventoRepository.save(evento);
+
+                return evento;
+            }
+            throw new RuntimeException("Erro ao gravar");
+        
     }
 }
