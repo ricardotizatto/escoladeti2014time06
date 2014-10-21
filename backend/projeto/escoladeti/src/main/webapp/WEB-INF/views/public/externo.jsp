@@ -120,10 +120,5 @@
         <script src="./resources/externo/assets/prettyPhoto/js/jquery.prettyPhoto.js"></script>
         <script src="./resources/externo/assets/js/scripts.js"></script>
     
-        
-    <h1>{{ctrl.nome}}</h1>
-    <input data-ng-model="nome">teste{{2+2}} {{ctrl.eventos}}
-
-    
     </body>
 </html>

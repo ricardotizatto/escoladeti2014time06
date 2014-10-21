@@ -17,6 +17,7 @@ AppCtrontroller.prototype = {
 
     iniciar: function () {
         var self = this;
+        this.getMateriais();
 
         this.http.get('./public/rest/eventos')
             .success(function (eventos) {
@@ -26,8 +27,30 @@ AppCtrontroller.prototype = {
     paginaAtiva: function (pagina) {
         var self = this;        
         self.ativa = 'home';
+    },
+    getMateriais: function (){
+        var self = this;
+        console.log('materiais');
+        this.http({
+            method: 'GET',
+            url: './public/rest/materiais'
+        }).success(function (materiais) {
+            console.log('materiais', materiais);
+            self.materiais = materiais;
+        });
+    },
+    buscaMateriaisContendoNome: function (){
+        var self = this;
+        console.log('busca materiais'+ self.busca);
+        this.http({
+            method: 'GET',
+            url: './public/rest/materiais/' + self.busca
+        }).success(function (materiais) {
+            console.log('materiais', materiais);
+            self.materiais = materiais;
+        });
     }
-            
+                
 };
 
 angular.module('controllers', ['services']);

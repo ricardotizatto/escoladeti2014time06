@@ -18,7 +18,7 @@
             <form method="post" action="">
                 <div class="span6">
                     <label for="name" class="nameLabel">Buscar Material Transcrito</label>
-                    <input id="name" type="text" name="name" placeholder="Buscar Material Transcrito">
+                    <input id="name" type="text" name="name" placeholder="Buscar Material Transcrito" data-ng-model="busca" data-ng-change="buscaMateriaisContendoNome()">
                     <span class="pull-right"> 
                         <button class="btn-transcricao" type="submit">Buscar</button>
                     </span>
@@ -27,55 +27,13 @@
         </div>  
         <div class="span12 lista-transcricao">
             <ul>
-                <li>
+                <li ng-repeat="material in ctrl.materiais">
                     <div class="material-transcricao">
-                        <h4>Nome do Livro 1</h4>
-                        <p>Nome do Autor do Livro - Editora do Livro - Discplina do Livro - Ano 2014</p>
+                        <h4>{{material.nome}}</h4>
+                        <p>{{material.autor + " - " + material.editora + " - " + material.disciplina + " - " + material.anoEdicao}}</p>
                         <hr>
                     </div>
-                </li>
-                <li>
-                    <div class="material-transcricao">
-                        <h4>Nome do Livro 2</h4>
-                        <p>Nome do Autor do Livro - Editora do Livro - Discplina do Livro - Ano 2014</p>
-                        <hr>
-                    </div>
-                </li>
-                <li>
-                    <div class="material-transcricao">
-                        <h4>Nome do Livro 3</h4>
-                        <p>Nome do Autor do Livro - Editora do Livro - Discplina do Livro - Ano 2014</p>
-                        <hr>
-                    </div>
-                </li>
-                <li>
-                    <div class="material-transcricao">
-                        <h4>Nome do Livro 4</h4>
-                        <p>Nome do Autor do Livro - Editora do Livro - Discplina do Livro - Ano 2014</p>
-                        <hr>
-                    </div>
-                </li>
-                <li>
-                    <div class="material-transcricao">
-                        <h4>Nome do Livro 5</h4>
-                        <p>Nome do Autor do Livro - Editora do Livro - Discplina do Livro - Ano 2014</p>
-                        <hr>
-                    </div>
-                </li>
-                <li>
-                    <div class="material-transcricao">
-                        <h4>Nome do Livro 6</h4>
-                        <p>Nome do Autor do Livro - Editora do Livro - Discplina do Livro - Ano 2014</p>
-                        <hr>
-                    </div>
-                </li>
-                <li>
-                    <div class="material-transcricao">
-                        <h4>Nome do Livro 7</h4>
-                        <p>Nome do Autor do Livro - Editora do Livro - Discplina do Livro - Ano 2014</p>
-                        <hr>
-                    </div>
-                </li>
+                </li>  
             </ul>
         </div>
     </div>
