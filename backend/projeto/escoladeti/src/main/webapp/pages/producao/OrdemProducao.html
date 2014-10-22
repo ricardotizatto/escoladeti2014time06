@@ -45,9 +45,9 @@
                         <tr>
                             <th class="col-md-2">Volume</th>
                             <th class="col-md-3">Responsável</th>
-                            <th class="col-md-3">Paginas</th>
+                            <th class="col-md-2">Paginas</th>
                             <th class="col-md-2">Status</th>
-                            <th class="col-md-2">Ação</th>
+                            <th class="col-md-3"></th>
                         </tr>
                         <tr ng-repeat="volume in ctrl.item.volumes | orderBy : 'paginaInicio'">
                                 <td>{{volume.id}}</td>
@@ -66,6 +66,9 @@
                                    data-ng-disabled="ctrl.item.status == 'CANCELADO'"
                                    data-ng-show="volume.status != 'ENVIADO'">
                                     <span class='glyphicon glyphicon-remove-circle'></span>
+                                </a>
+                                <a class="btn btn-success" title="enviado">
+                                    <span class="fa fa-mail-forward"></span>
                                 </a>
                             </td>
                         </tr>

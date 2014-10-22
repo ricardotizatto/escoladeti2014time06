@@ -37,9 +37,7 @@ public class SolicitacaoItem extends Entidade{
     @Enumerated(EnumType.STRING)
     private StatusItem status;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_solicitacao_item", insertable = false, updatable = false, referencedColumnName = "id")
-    private Set<Volume> volumes = new HashSet<>();
+
 
     private SolicitacaoItem(Long id) {
         this.id = id;
