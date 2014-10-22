@@ -17,7 +17,7 @@ AppCtrontroller.prototype = {
 
     iniciar: function () {
         var self = this;
-        this.getMateriais();
+        this.getMateriaisProduzidos();
 
         this.http.get('./public/rest/eventos')
             .success(function (eventos) {
@@ -28,28 +28,28 @@ AppCtrontroller.prototype = {
         var self = this;        
         self.ativa = 'home';
     },
-    getMateriais: function (){
+    getMateriaisProduzidos: function (){
         var self = this;
-        console.log('materiais');
+        console.log('materiaisProduzidos');
         this.http({
             method: 'GET',
-            url: './public/rest/materiais'
-        }).success(function (materiais) {
-            console.log('materiais', materiais);
-            self.materiais = materiais;
-        });
-    },
-    buscaMateriaisContendoNome: function (){
-        var self = this;
-        console.log('busca materiais'+ self.busca);
-        this.http({
-            method: 'GET',
-            url: './public/rest/materiais/' + self.busca
-        }).success(function (materiais) {
-            console.log('materiais', materiais);
-            self.materiais = materiais;
+            url: './public/rest/materiaisproduzidos'
+        }).success(function (materiaisProduzidos) {
+            console.log('materiaisProduzidos', materiaisProduzidos);
+            self.materiaisProduzidos = materiaisProduzidos;
         });
     }
+//    buscaMateriaisContendoNome: function (){
+//        var self = this;
+//        console.log('busca materiais'+ self.busca);
+//        this.http({
+//            method: 'GET',
+//            url: './public/rest/materiais/' + self.busca
+//        }).success(function (materiais) {
+//            console.log('materiais', materiais);
+//            self.materiais = materiais;
+//        });
+//    }
                 
 };
 

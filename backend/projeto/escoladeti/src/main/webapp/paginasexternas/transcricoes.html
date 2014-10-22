@@ -25,12 +25,17 @@
                 </div>   
             </form>
         </div>  
-        <div class="span12 lista-transcricao">
+        <div class="span12 lista-transcricao">{{materiaisProduzidos}}
             <ul>
-                <li ng-repeat="material in ctrl.materiais">
+                <li ng-repeat="materialProduzido in ctrl.materiaisProduzidos">
                     <div class="material-transcricao">
-                        <h4>{{material.nome}}</h4>
-                        <p>{{material.autor + " - " + material.editora + " - " + material.disciplina + " - " + material.anoEdicao}}</p>
+                        <h4>{{materialProduzido.nome}}</h4>
+                        <p>
+                            <b>TRANSCRIÇÃO: </b> {{materialProduzido.transcricao != 'OUTRO' ? materialProduzido.transcricao : materialProduzido.outraTranscricao}} 
+                            <b> - AUTOR: </b>{{materialProduzido.autor}}
+                            <b> - EDITORA: </b>{{materialProduzido.editora}}
+                            <b> - DISCIPLINA: </b>{{materialProduzido.disciplina}}
+                            <b> - ANO DE EDIÇÃO: </b>{{materialProduzido.anoEdicao}}</p>
                         <hr>
                     </div>
                 </li>  
