@@ -14,20 +14,21 @@
 <div class="contact-us container">
     <div class="row">
         <div class="span12">
-            <h4>Lista de Materiais Transcritos</h4>
             <form method="post" action="">
-                <div class="span6">
-                    <label for="name" class="nameLabel">Buscar Material Transcrito</label>
-                    <input id="name" type="text" name="name" placeholder="Buscar Material Transcrito" data-ng-model="busca" data-ng-change="buscaMateriaisContendoNome()">
-                    <span class="pull-right"> 
-                        <button class="btn-transcricao" type="submit">Buscar</button>
-                    </span>
+                <div class="span12">
+                    <label for="name" class="nameLabel"><b>Buscar Material Transcrito</b></label>
+                    <input id="name" type="text" name="name" placeholder="Buscar Material Transcrito" ng-model="ctrl.busca" ng-change="ctrl.buscaMateriaisContendoNome()">
                 </div>   
+<!--                <div class="span2 busca-transcricao">
+                    <span class="pull-right" >
+                        <button class="btn-transcricao" >Buscar</button>
+                    </span>    
+                </div>-->
             </form>
-        </div>  
-        <div class="span12 lista-transcricao">{{materiaisProduzidos}}
+        </div> 
+        <div class="span12 lista-transcricao">
             <ul>
-                <li ng-repeat="materialProduzido in ctrl.materiaisProduzidos">
+                <li ng-repeat="materialProduzido in ctrl.materiaisProduzidos.list">
                     <div class="material-transcricao">
                         <h4>{{materialProduzido.nome}}</h4>
                         <p>
@@ -40,6 +41,10 @@
                     </div>
                 </li>  
             </ul>
+            <pagination boundary-links="true" num-pages="ctrl.materiaisProduzidos.pageCount" total-items="ctrl.materiaisProduzidos.pageCount*ctrl.materiaisProduzidos.maxRows" items-per-page="ctrl.materiaisProduzidos.maxRows"
+                        ng-model="ctrl.pageNumber" ng-change="ctrl.buscarPagina(ctrl.pageNumber)" class="pagination-sm" max-size="ctrl.materiaisProduzidos.maxPagesToShow"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </pagination>
         </div>
     </div>
 </div>

@@ -9,7 +9,6 @@ function AppCtrontroller($routeParams,$http) {
     this.routeParams = $routeParams;
     this.http = $http;
     this.iniciar();
-    
     this.ativa = "home";
 }
 
@@ -30,27 +29,28 @@ AppCtrontroller.prototype = {
     },
     getMateriaisProduzidos: function (){
         var self = this;
-        console.log('materiaisProduzidos');
         this.http({
             method: 'GET',
             url: './public/rest/materiaisproduzidos'
         }).success(function (materiaisProduzidos) {
-            console.log('materiaisProduzidos', materiaisProduzidos);
             self.materiaisProduzidos = materiaisProduzidos;
         });
-    }
-//    buscaMateriaisContendoNome: function (){
-//        var self = this;
-//        console.log('busca materiais'+ self.busca);
-//        this.http({
-//            method: 'GET',
-//            url: './public/rest/materiais/' + self.busca
-//        }).success(function (materiais) {
-//            console.log('materiais', materiais);
-//            self.materiais = materiais;
-//        });
-//    }
-                
+    },
+    buscaMateriaisContendoNome: function (){
+        var self = this;
+        console.log('busca materiais: '+ self.busca);
+        if (!self.busca.empty){
+            this.http({
+                method: 'GET',
+                url: './public/rest/buscamateriaisproduzidos?q=' + self.busca.toUpperCase()
+            }).success(function (materiaisProduzidos) {
+                console.log('busca materiaisProduzidos', materiaisProduzidos);
+                self.materiaisProduzidos = materiaisProduzidos;
+            });
+        }else{
+           this. getMateriaisProduzidos(); 
+        }    
+    }    
 };
 
 angular.module('controllers', ['services']);
