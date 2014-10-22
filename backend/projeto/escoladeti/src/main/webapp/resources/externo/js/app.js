@@ -8,8 +8,7 @@ angular.module('appExterno', [])
 function AppCtrontroller($routeParams,$http) {
     this.routeParams = $routeParams;
     this.http = $http;
-    this.iniciar();
-    this.ativa = "home";
+    this.iniciar(); 
 }
 
 AppCtrontroller.prototype = {
@@ -17,15 +16,21 @@ AppCtrontroller.prototype = {
     iniciar: function () {
         var self = this;
         this.getMateriaisProduzidos();
-
+        this.ativaBotao('home');
         this.http.get('./public/rest/eventos')
             .success(function (eventos) {
                self.eventos = eventos;
             });
     }, 
-    paginaAtiva: function (pagina) {
-        var self = this;        
-        self.ativa = 'home';
+    ativaBotao: function (pagina) {
+        var self = this; 
+        console.log('pagina: '+ pagina);
+        if(!pagina){
+            self.ativa = 'home';
+        }else{
+            self.ativa = pagina;   
+        }
+        
     },
     getMateriaisProduzidos: function (){
         var self = this;

@@ -39,19 +39,19 @@
                             </h1>
                             <div class="nav-collapse collapse">
                                 <ul class="nav pull-right">
-                                    <li class="current-page">
+                                    <li class="{{ ctrl.ativa == 'home' ? 'current-page' : '' }}"  ng-click="ctrl.ativaBotao('home')" >
                                         <a href="#/externo"><i class="icon-home"></i><br />Home</a>
                                     </li>
-                                    <li class="{{ ctrl.ativa == 'eventos' ? 'current-page' : '' }}" ng-click="{{ ctrl.ativa = 'eventos' }}">
+                                    <li class="{{ ctrl.ativa == 'eventos' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('eventos')" >
                                         <a href="#/eventos"><i class="icon-camera"></i><br />Eventos</a>
                                     </li>
-                                    <li class="{{ ctrl.ativa == 'transcricoes' ? 'current-page' : '' }}" ng-click="{{ ctrl.ativa = 'transcricoes' }}">
+                                    <li class="{{ ctrl.ativa == 'transcricoes' ? 'current-page' : '' }}"  ng-click="ctrl.ativaBotao('transcricoes')" >
                                         <a href="#/transcricoes"><i class="icon-book"></i><br />Transcrições</a>
                                     </li>
-                                    <li class="{{ ctrl.ativa == 'sobre' ? 'current-page' : '' }}" ng-click="{{ ctrl.ativa = 'sobre' }}">
+                                    <li class="{{ ctrl.ativa == 'sobre' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('sobre')" >
                                         <a href="#/sobre"><i class="icon-group"></i><br />Sobre</a>
                                     </li>
-                                    <li class="{{ ctrl.ativa == 'localizacao' ? 'current-page' : '' }}" ng-click="{{ ctrl.ativa = 'localizacao' }}">
+                                    <li class="{{ ctrl.ativa == 'localizacao' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('localizacao')" >
                                         <a href="#/localizacao"><i class="icon-map-marker"></i><br />Localização</a>
                                     </li>
                                 </ul>
