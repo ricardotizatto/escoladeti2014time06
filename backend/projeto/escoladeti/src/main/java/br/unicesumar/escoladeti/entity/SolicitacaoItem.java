@@ -1,18 +1,14 @@
 package br.unicesumar.escoladeti.entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
+import br.unicesumar.escoladeti.enums.StatusItem;
+import br.unicesumar.escoladeti.enums.TraducaoMaterial;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.repository.VolumeRepository;
 import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.unicesumar.escoladeti.enums.StatusItem;
-import br.unicesumar.escoladeti.enums.TraducaoMaterial;
-
-import java.util.HashSet;
-import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -37,9 +33,8 @@ public class SolicitacaoItem extends Entidade{
     @Enumerated(EnumType.STRING)
     private StatusItem status;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_solicitacao_item", insertable = false, updatable = false, referencedColumnName = "id")
-    private Set<Volume> volumes = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "solicitacaoItem")
+    private Set<SolicitacaoVolume> solicitacaoVolumes;
 
     private SolicitacaoItem(Long id) {
         this.id = id;
@@ -88,13 +83,7 @@ public class SolicitacaoItem extends Entidade{
         return status;
     }
 
-    public Set<Volume> getVolumes() {
-        return volumes;
-    }
 
-    public void setVolumes(Set<Volume> volumes) {
-        this.volumes = volumes;
-    }
 
     public Long getNumeroSolicitacao() {
         return this.solicitacao.getId();
@@ -106,16 +95,13 @@ public class SolicitacaoItem extends Entidade{
 
     public void cancelar(VolumeRepository volumeRepository) {
         this.setStatus(StatusItem.CANCELADO);
-
-        for (Volume volume : this.volumes) {
-            volume.setStatus(VolumeStatus.CANCELADO);
-            volumeRepository.save(volume);
-        }
-
     }
 
+
     public void validarPaginas(Integer paginaInicio, Integer paginafinal) {
-        for (Volume volume : volumes) {
+
+        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
+            Volume volume = solicitacaoVolume.getVolume();
             if (paginaInicio >= volume.getPaginaInicio()  && paginaInicio <=volume.getPaginaFim()
                     || paginafinal >= volume.getPaginaInicio() && paginafinal <= volume.getPaginaFim()) {
                 throw new RuntimeException(
@@ -129,7 +115,8 @@ public class SolicitacaoItem extends Entidade{
     public Integer getMaiorPagina() {
         Integer maior = 0;
 
-        for (Volume volume : volumes) {
+        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
+            Volume volume = solicitacaoVolume.getVolume();
             if (volume.getPaginaFim() > maior) {
                 maior = volume.getPaginaFim();
             }
@@ -233,17 +220,26 @@ public class SolicitacaoItem extends Entidade{
     }
 
     public void finalizar() {
-        if (volumes.size() == 0) {
+        if (solicitacaoVolumes.size() == 0) {
             throw new RuntimeException("Só é possível finalizar ordem com volumes.");
         }
 
-        for (Volume volume : volumes) {
-            if (!volume.getStatus().equals(VolumeStatus.ENVIADO)) {
-                throw new RuntimeException("Todos volumes precisam estar enviados para finalizar a ordem");
+        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
+            if (!solicitacaoVolume.getVolume().getStatus().equals(VolumeStatus.REVISADO)
+                    || !solicitacaoVolume.estaEnviado()) {
+                throw new RuntimeException("Todos volumes precisam estar revisados e enviados para finalizar a ordem");
             }
         }
 
         setStatus(StatusItem.FINALIZADO);
+    }
+
+    public Set<SolicitacaoVolume> getSolicitacaoVolumes() {
+        return solicitacaoVolumes;
+    }
+
+    public void setSolicitacaoVolumes(Set<SolicitacaoVolume> solicitacaoVolumes) {
+        this.solicitacaoVolumes = solicitacaoVolumes;
     }
 
     @Override

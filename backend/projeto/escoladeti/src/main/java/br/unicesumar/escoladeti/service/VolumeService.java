@@ -3,12 +3,10 @@ package br.unicesumar.escoladeti.service;
 import br.unicesumar.escoladeti.comando.ComandoAlterarData;
 import br.unicesumar.escoladeti.comando.ComandoMarcarRevisado;
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
-import br.unicesumar.escoladeti.entity.PessoaFisica;
-import br.unicesumar.escoladeti.entity.SolicitacaoItem;
-import br.unicesumar.escoladeti.entity.Usuario;
-import br.unicesumar.escoladeti.entity.Volume;
+import br.unicesumar.escoladeti.entity.*;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
+import br.unicesumar.escoladeti.repository.SolicitacaoVolumeRepository;
 import br.unicesumar.escoladeti.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,11 +28,14 @@ public class VolumeService {
     @Autowired
     private SolicitacaoItemRepository solicitacaoItemRepository;
 
+    @Autowired
+    private SolicitacaoVolumeRepository solicitacaoVolumeRepository;
+
     public void deletar(Long id) {
         Volume volume = volumeRepository.findOne(id);
 
-        if (volume.getStatus().equals(VolumeStatus.ENVIADO)) {
-            throw new RuntimeException("Volume enviado não pode ser deletado");
+        if (volume.getStatus().equals(VolumeStatus.REVISADO)) {
+            throw new RuntimeException("Volume revisado não pode ser deletado");
         }
         volumeRepository.delete(id);
     }
@@ -52,13 +53,6 @@ public class VolumeService {
         Volume volume = volumeRepository.findOne(id);
 
         volume.marcarComoRevisado(comando.getDataAsDate(), comando.getRevisor(), comando.getObservacao());
-        return volumeRepository.save(volume);
-    }
-
-    @Transactional
-    public Volume marcarComoEnviado(Long id, ComandoSalvarVolume comando) {
-        Volume volume = volumeRepository.findOne(id);
-        volume.marcarComoEnviado(comando.getDataAsDate(), comando.getObservacao());
         return volumeRepository.save(volume);
     }
 
@@ -88,17 +82,23 @@ public class VolumeService {
             throw new RuntimeException("Página inicial deve ser maior que 0");
         }
 
-        SolicitacaoItem solicitacaoItem = solicitacaoItemRepository.findOne(volume.getIdSolicitacaoItem());
+        SolicitacaoItem solicitacaoItem = solicitacaoItemRepository.findOne(comandoSalvarVolume.getIdSolicitacaoItem());
 
         solicitacaoItem.validarPaginas(comandoSalvarVolume.getPaginaInicio(), comandoSalvarVolume.getPaginaFim());
 
         volume.setStatus(VolumeStatus.ANDAMENTO);
-        return  volumeRepository.save(volume);
+        volumeRepository.save(volume);
+
+        SolicitacaoVolume solicitacaoVolume = new SolicitacaoVolume();
+        solicitacaoVolume.setIdSolicitacaoItem(comandoSalvarVolume.getIdSolicitacaoItem());
+        solicitacaoVolume.setVolume(volume);
+        solicitacaoVolumeRepository.save(solicitacaoVolume);
+
+        return volume;
     }
 
     private Volume montarVolume(ComandoSalvarVolume comandoSalvarVolume) {
         Volume volume = new Volume();
-        volume.setIdSolicitacaoItem(comandoSalvarVolume.getIdSolicitacaoItem());
         volume.setObservacao(comandoSalvarVolume.getObservacao());
         volume.setPaginaFim(comandoSalvarVolume.getPaginaFim());
         volume.setPaginaInicio(comandoSalvarVolume.getPaginaInicio());
