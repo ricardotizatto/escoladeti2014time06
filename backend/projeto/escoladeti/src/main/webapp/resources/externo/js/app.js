@@ -15,13 +15,10 @@ function AppCtrontroller($routeParams,$http) {
 AppCtrontroller.prototype = {
 
     iniciar: function () {
-        var self = this;
-        this.getMateriaisProduzidos();
-        this.ativaBotao('home');
+
     }, 
     ativaBotao: function (pagina) {
         var self = this; 
-        console.log('pagina: '+ pagina);
         if(!pagina){
             self.ativa = '';
         }else{
