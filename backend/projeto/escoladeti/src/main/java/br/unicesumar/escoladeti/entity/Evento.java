@@ -191,7 +191,7 @@ public class Evento extends Entidade {
             
             for (Periodo per: evento.getPeriodos()) {
               if (per.getId() != null){
-                per.setEvento(null);  
+                per.setEvento(evento);  
               }else{
                per.setEvento(evento);
                System.out.println("total =" + evento.periodos.size());
