@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -25,10 +26,10 @@ public class ExternoController {
         return new ModelAndView("public/externo");
     }
     
-    @RequestMapping(value = "public/rest/materiaisproduzidos", method = RequestMethod.GET)
+    @RequestMapping(value = {"public/rest/materiaisproduzidos/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<ViewMaterialProduzido> listarMateriaisProduzidos() {
-        return this.materialStatusService.listarMateriaisProduzidos();
+    public DataPage<ViewMaterialProduzido> listarMateriaisProduzidos(@PathVariable Integer pagina) {
+        return this.materialStatusService.listarMateriaisProduzidos(pagina);
     }
        
     @RequestMapping(value = "public/rest/buscamateriaisproduzidos", params = {"q"}, method = RequestMethod.GET)

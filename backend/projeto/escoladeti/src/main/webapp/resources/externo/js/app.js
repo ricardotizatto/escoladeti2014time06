@@ -17,10 +17,6 @@ AppCtrontroller.prototype = {
         var self = this;
         this.getMateriaisProduzidos();
         this.ativaBotao('home');
-        this.http.get('./public/rest/eventos')
-            .success(function (eventos) {
-               self.eventos = eventos;
-            });
     }, 
     ativaBotao: function (pagina) {
         var self = this; 
@@ -32,11 +28,11 @@ AppCtrontroller.prototype = {
         }
         
     },
-    getMateriaisProduzidos: function (){
+    getMateriaisProduzidos: function (pageNumber){
         var self = this;
         this.http({
             method: 'GET',
-            url: './public/rest/materiaisproduzidos'
+            url: './public/rest/materiaisproduzidos/pag/' + pageNumber
         }).success(function (materiaisProduzidos) {
             self.materiaisProduzidos = materiaisProduzidos;
         });

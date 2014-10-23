@@ -1,5 +1,5 @@
  <!-- Page Title -->
-<div class="page-title">
+ <div class="page-title" ng-init="ctrl.getMateriaisProduzidos(1)">
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -41,10 +41,35 @@
                     </div>
                 </li>  
             </ul>
-            <pagination boundary-links="true" num-pages="ctrl.materiaisProduzidos.pageCount" total-items="ctrl.materiaisProduzidos.pageCount*ctrl.materiaisProduzidos.maxRows" items-per-page="ctrl.materiaisProduzidos.maxRows"
-                        ng-model="ctrl.pageNumber" ng-change="ctrl.buscarPagina(ctrl.pageNumber)" class="pagination-sm" max-size="ctrl.materiaisProduzidos.maxPagesToShow"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-            </pagination>
+        </div>
+        <div class="row">
+            <div class="pagination pagination-sm pagination-centered">
+              <ul>
+                <li>                        
+                    <a ng-click="ctrl.getMateriaisProduzidos(1)"> 
+                        <span class="glyphicon icon-step-backward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="ctrl.materiaisProduzidos.pageNumber <= 1 ? ctrl.getMateriaisProduzidos(1) : ctrl.getMateriaisProduzidos(ctrl.materiaisProduzidos.pageNumber)"> 
+                        <span class="glyphicon  icon-fast-backward"></span>
+                    </a>
+                </li>
+                <li ng-repeat="numeroPagina in ctrl.materiaisProduzidos.pagesAround" class="{{numeroPagina == ctrl.materiaisProduzidos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="ctrl.getMateriaisProduzidos(numeroPagina)">{{numeroPagina}}</a>
+                </li>
+                <li>
+                    <a ng-click="ctrl.materiaisProduzidos.pageNumber === ctrl.materiaisProduzidos.pageCount ? ctrl.getMateriaisProduzidos(ctrl.materiaisProduzidos.pageCount) : ctrl.getMateriaisProduzidos(ctrl.materiaisProduzidos.pageNumber + 1)"> 
+                        <span class="glyphicon icon-fast-forward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="ctrl.materiaisProduzidos.pageCount == 0 ? ctrl.getMateriaisProduzidos(1) : ctrl.getMateriaisProduzidos(ctrl.materiaisProduzidos.pageCount)"> 
+                        <span class="glyphicon icon-step-forward"></span>
+                    </a>
+                </li>
+              </ul>
+            </div>
         </div>
     </div>
 </div>
