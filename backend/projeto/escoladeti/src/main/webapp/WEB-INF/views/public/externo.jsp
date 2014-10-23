@@ -109,6 +109,8 @@
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>
         <script src="./resources/externo/js/app.js"></script>
+        <script src="./resources/externo/js/EventoController.js"></script>
+        <script src="./resources/externo/js/EventoService.js"></script>
         <script src="./resources/externo/assets/js/jquery-1.8.2.min.js"></script>
         <script src="./resources/externo/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="./resources/externo/assets/js/jquery.flexslider.js"></script>

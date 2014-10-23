@@ -1,9 +1,10 @@
 angular.module('appExterno', [])
-    .controller('AppCtrontroller', 
+    .controller('AppCtrontroller',
+                [ 
                 '$routeParams',
                 '$http',
                 'AppFactory',
-                AppCtrontroller);
+                AppCtrontroller]);
 
 function AppCtrontroller($routeParams,$http) {
     this.routeParams = $routeParams;
@@ -51,7 +52,7 @@ AppCtrontroller.prototype = {
         }else{
            this. getMateriaisProduzidos(); 
         }    
-    }    
+    }
 };
 
 angular.module('controllers', ['services']);
@@ -72,7 +73,7 @@ appExterno.config(['$routeProvider',
             })
             .when('/eventos', {
                 templateUrl: './paginasexternas/eventos.html',
-                //controller: 'ExternoController'
+                //controller: 'EventoController'
             })
             .when('/detalhes-evento/:eventoId', {
                 templateUrl: './paginasexternas/detalhes-evento.html',
