@@ -1,0 +1,55 @@
+ <!-- Page Title -->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <i class="icon-book page-title-icon"></i>
+                <h2>Detalhes do Evento</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Us -->
+<div class="contact-us container">
+    <div class="row">
+        <div class="span6">
+            <h4>Titulo</h4>
+            <p>Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento</p>
+            <p>
+                <b>Local do evento:</b> bloco 7 Lab 13 - Unicesumar <br>
+                <b>Data:</b> 12/12/2014 <br>
+                <b>Horário do evento:</b> 10:00 as 12:00
+            </p>     
+        </div>
+        <div class="span6">
+            <div class="contact-form">
+                <h4>Inscrição</h4>
+                <form method="post" action="assets/sendmail.php">
+
+                    <label for="necessidades" class="messageLabel">Possui necessidades especiais?</label>
+                    <label class="btn"> 
+                        <input name="deficiente" value="S" type="radio" /> Sim
+                    </label> 
+                    <label class="btn"> 
+                        <input  name="deficiente" value="N" type="radio" /> Não
+                    </label>
+                    <div ng-show="participante.deficiente === 'S'">
+                        <label for="necessidades" class="messageLabel">Quais Necessidades?</label>
+                        <input class="form-control" type="text" name="necessidade" placeholder="quais" ng-model="participante.necessidade"  >
+                    </div>    
+                    <label for="nome" class="nameLabel">Nome</label>
+                      <input id="name" type="text" name="name" placeholder="Informe seu nome">
+                    <label for="email" class="emailLabel">Email</label>
+                      <input id="email" type="text" name="email" placeholder="Informe seu email">
+                    <label for="telefone">Telefone</label>
+                      <input id="telefone" type="text" name="subject" placeholder="Informe seu telefone">
+
+                    <span class="pull-right">  
+                        <button class="btn-transcricao" type="submit">Increver</button>
+                    </span>    
+                </form>
+            </div>
+        </div>        
+    </div>
+</div>
