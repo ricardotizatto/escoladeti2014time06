@@ -19,6 +19,7 @@
                 <div class="form-group {{formCidade.uf.$error.required ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"> <strong>Estado * </strong> </label>
                     <select type="text" ui-select2 name="uf" class="input-default" ng-model="cidade.idUnidadeFederativa" required>
+                        <option value=""></option>
                         <option ng-repeat="uf in unidadesFederativas" value="{{uf.id}}">{{uf.nome}}</option>
                     </select>
                 </div>

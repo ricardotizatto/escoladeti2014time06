@@ -1,0 +1,50 @@
+ <!-- Page Title -->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <i class="icon-book page-title-icon"></i>
+                <h2>Materiais Transcritos pela AMACAP</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Us -->
+<div class="contact-us container">
+    <div class="row">
+        <div class="span12">
+            <form method="post" action="">
+                <div class="span12">
+                    <label for="name" class="nameLabel"><b>Buscar Material Transcrito</b></label>
+                    <input id="name" type="text" name="name" placeholder="Buscar Material Transcrito" ng-model="ctrl.busca" ng-change="ctrl.buscaMateriaisContendoNome()">
+                </div>   
+<!--                <div class="span2 busca-transcricao">
+                    <span class="pull-right" >
+                        <button class="btn-transcricao" >Buscar</button>
+                    </span>    
+                </div>-->
+            </form>
+        </div> 
+        <div class="span12 lista-transcricao">
+            <ul>
+                <li ng-repeat="materialProduzido in ctrl.materiaisProduzidos.list">
+                    <div class="material-transcricao">
+                        <h4>{{materialProduzido.nome}}</h4>
+                        <p>
+                            <b>TRANSCRIÇÃO: </b> {{materialProduzido.transcricao != 'OUTRO' ? materialProduzido.transcricao : materialProduzido.outraTranscricao}} 
+                            <b> - AUTOR: </b>{{materialProduzido.autor}}
+                            <b> - EDITORA: </b>{{materialProduzido.editora}}
+                            <b> - DISCIPLINA: </b>{{materialProduzido.disciplina}}
+                            <b> - ANO DE EDIÇÃO: </b>{{materialProduzido.anoEdicao}}</p>
+                        <hr>
+                    </div>
+                </li>  
+            </ul>
+            <pagination boundary-links="true" num-pages="ctrl.materiaisProduzidos.pageCount" total-items="ctrl.materiaisProduzidos.pageCount*ctrl.materiaisProduzidos.maxRows" items-per-page="ctrl.materiaisProduzidos.maxRows"
+                        ng-model="ctrl.pageNumber" ng-change="ctrl.buscarPagina(ctrl.pageNumber)" class="pagination-sm" max-size="ctrl.materiaisProduzidos.maxPagesToShow"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </pagination>
+        </div>
+    </div>
+</div>

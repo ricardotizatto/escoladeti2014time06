@@ -300,6 +300,15 @@
             ORDER BY T1.NOME 
         </createView>
     </changeSet>
+
+    <changeSet author="martinho" id="mart0141createview">
+        <createView viewName="viewmaterialproduzido" replaceIfExists="true" schemaName="public">
+            SELECT T2.ID, T1.NOME, T1.AUTOR, T1.EDITORA, T1.ANOEDICAO, T1.DISCIPLINA, 
+            T2.TRADUCAOMATERIAL AS TRANSCRICAO, T2.OUTRO AS OUTRATRANSCRICAO, T2.STATUS
+            FROM LIVRO T1 JOIN SOLICITACAOITEM T2 ON T2.ID_MATERIAL = T1.ID
+            ORDER BY T1.NOME 
+        </createView>
+    </changeSet>
     
 </databaseChangeLog>
 
