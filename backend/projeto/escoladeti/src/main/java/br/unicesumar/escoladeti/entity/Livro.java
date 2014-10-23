@@ -27,7 +27,7 @@ public class Livro extends Entidade {
     private Long anoEdicao;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_volume")
+    @JoinColumn(name = "id_livro")
     private Set<Volume> volumes = new HashSet<>();
     
     public Livro() {
