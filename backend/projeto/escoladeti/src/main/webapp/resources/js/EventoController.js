@@ -1,5 +1,5 @@
 function eventoController($scope, $http, $routeParams) {
-    
+
     $scope.idCurso;
     $scope.tituloCurso;
     $scope.descricao;
@@ -13,16 +13,16 @@ function eventoController($scope, $http, $routeParams) {
     $scope.valor;
     $scope.selected;
     $scope.indicePeriodo = {};
-    
-    $scope.editar = function(evento) {
+
+    $scope.editar = function (evento) {
         console.log(evento);
         window.location = '#/cadastroevento/' + evento.id;
     };
 
-    $scope.deletar = function(evento) {
+    $scope.deletar = function (evento) {
         console.log('deletando evento ' + JSON.stringify(evento));
 
-        BootstrapDialog.confirm('Deseja realmente deletar o Evento: <b>' + evento.titulo + '</b>?', function(result) {
+        BootstrapDialog.confirm('Deseja realmente deletar o Evento: <b>' + evento.titulo + '</b>?', function (result) {
             if (result) {
                 $http({
                     method: 'DELETE',
@@ -30,7 +30,7 @@ function eventoController($scope, $http, $routeParams) {
                     url: './rest/eventoSource/evento',
                     headers: {'Content-Type': 'application/json; charset=UTF-8'}
                 })
-                        .success(function(data, status) {
+                        .success(function (data, status) {
                             $scope.getTodos(1);
                             console.log('evento deletado');
                             BootstrapDialog.show({
@@ -43,14 +43,14 @@ function eventoController($scope, $http, $routeParams) {
                                         label: ' OK',
                                         cssClass: 'btn-success btn-padrao',
                                         autospin: false,
-                                        action: function(dialogRef) {
+                                        action: function (dialogRef) {
                                             dialogRef.close();
                                         }
                                     }]
                             });
                             $scope.voltar();
                         })
-                        .error(function(data, status) {
+                        .error(function (data, status) {
                             console.log('erro ao deletar evento ' + data);
                             BootstrapDialog.show({
                                 title: 'Notifica&ccedil;&atilde;o',
@@ -62,7 +62,7 @@ function eventoController($scope, $http, $routeParams) {
                                         label: ' OK',
                                         cssClass: 'btn-success btn-padrao',
                                         autospin: false,
-                                        action: function(dialogRef) {
+                                        action: function (dialogRef) {
                                             dialogRef.close();
                                         }
                                     }]
@@ -75,90 +75,90 @@ function eventoController($scope, $http, $routeParams) {
     };
 
 
-    $scope.listarParticipantes = function(evento) {
+    $scope.listarParticipantes = function (evento) {
         window.location = '#/listaparticipantes/' + evento.id;
     };
 
-    $scope.getTotalParticipantes = function(id) {
+    $scope.getTotalParticipantes = function (id) {
         var total;
-         if (id) {
+        if (id) {
             $http.get("./rest/participanteSource/listaparticipantes/total/" + id)
-                    .success(function(total, status) {
-                total = total;
-            })
-                    .error(function(data, status) {
-                console.log('erro ao buscar eventos');
-            });
+                    .success(function (total, status) {
+                        total = total;
+                    })
+                    .error(function (data, status) {
+                        console.log('erro ao buscar eventos');
+                    });
         }
-        if(total > 0){
+        if (total > 0) {
             return total;
-        }else{
+        } else {
             return 0;
         }
     };
-    
-    $scope.salvar = function(acao) {
+
+    $scope.salvar = function (acao) {
         console.log(angular.toJson($scope.evento, true));
-        if(!($scope.evento.id >0)){
+        if (!($scope.evento.id > 0)) {
             $scope.evento.statusevento = true;
         }
-        
+
         console.log("evento antes do post = " + $scope.evento.periodos.length);
         $http.post("./rest/eventoSource/evento", $scope.evento)
-                .success(function(evento, status) {
+                .success(function (evento, status) {
                     //carregarEvento();
                     window.location = '#/listaevento';
-                    toastr.success("Evento "+acao+" com sucesso!");
+                    toastr.success("Evento " + acao + " com sucesso!");
                     console.log("evento salva = " + $scope.evento);
                 })
-                .error(function(data, status) {
+                .error(function (data, status) {
                     console.log("erro ao salvar evento", data);
                     toastr.warning("Erro ao salvar evento!");
                 });
     };
-    
-    $scope.novo = function() {
-       // carregarEvento();
+
+    $scope.novo = function () {
+        // carregarEvento();
         window.location = '#/cadastroevento';
     };
-    
-    $scope.encerrar = function(){
-       $scope.evento.statusevento = false; 
-       $scope.salvar("Encerrado");
-    };
-    
-    $scope.reativar = function(){
-       $scope.evento.statusevento = true; 
-       $scope.salvar("Reativado");
+
+    $scope.encerrar = function () {
+        $scope.evento.statusevento = false;
+        $scope.salvar("Encerrado");
     };
 
-    $scope.getTodos = function(numeroPagina) {
-        
+    $scope.reativar = function () {
+        $scope.evento.statusevento = true;
+        $scope.salvar("Reativado");
+    };
+
+    $scope.getTodos = function (numeroPagina) {
+
         $scope.selected = !$scope.selected;
 
         $http.get("./rest/eventoSource/listar/pag/" + numeroPagina)
-                .success(function(listaEventos, status) {
+                .success(function (listaEventos, status) {
                     $scope.eventos = listaEventos;
                 })
-                .error(function(data, status) {
+                .error(function (data, status) {
                     console.log('erro ao buscar eventos' + data);
                 });
-    };   
-    
-    $scope.carregarEvento = function() {
+    };
+
+    $scope.carregarEvento = function () {
         if (!$routeParams.eventoId) {
             $scope.evento = {};
             $scope.evento.periodos = [];
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
-                .success(function(ev) {
+                .success(function (ev) {
                     $scope.evento = ev;
                     return;
                 });
     };
 
-    $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data) {
+    $scope.carregarEventoDetalhes = function (indice, titulo, detalhes, local, data) {
         $scope.idCurso = indice;
         $scope.tituloCurso = titulo;
         $scope.DetalhesCurso = detalhes;
@@ -167,22 +167,22 @@ function eventoController($scope, $http, $routeParams) {
     };
 
 
-    $scope.voltar = function() {
+    $scope.voltar = function () {
         $scope.evento = {};
         window.location = '#/listaevento';
     };
-    
-    $scope.mensageEventoListado = function(){
-        if($scope.selected){
+
+    $scope.mensageEventoListado = function () {
+        if ($scope.selected) {
             return 'Abertos';
-        }else{
+        } else {
             return 'Finalizados';
         }
     };
-    
-     $scope.getTipoEvento = function(tipo){
-        switch(tipo) {
-            case "1": 
+
+    $scope.getTipoEvento = function (tipo) {
+        switch (tipo) {
+            case "1":
                 return 'CURSO';
                 break;
             case "2":
@@ -190,14 +190,14 @@ function eventoController($scope, $http, $routeParams) {
                 break;
             case "3":
                 return 'REUNIAO';
-                break;   
+                break;
             default:
                 return 'CURSO';
                 break;
         }
     };
-    
-    
+
+
 //Novo periodo
 
     $scope.novoPeriodo = function () {
@@ -208,7 +208,7 @@ function eventoController($scope, $http, $routeParams) {
         if ($scope.indicePeriodo >= 0) {
             $scope.evento.periodos.splice($scope.indicePeriodo, 1);
         }
-        
+
         $scope.evento.periodos.push($scope.periodo);
         console.log($scope.evento.periodos);
         toastr.success("Periodo adicionado " + $scope.periodo.data + " !");
@@ -221,13 +221,15 @@ function eventoController($scope, $http, $routeParams) {
     };
 
     $scope.delPeriodo = function (index) {
-        toastr.warning("Periodo removido  " + $scope.evento.periodos[index].numero + "!");
+
+        toastr.warning("Periodo removido  " + $scope.evento.periodos[index].data + "!");
         $scope.evento.periodos.splice(index, 1);
         if ($scope.evento.periodos.length === 0) {
             $scope.periodo = {};
         }
-    };    
-    
+
+    };
+
 }
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);

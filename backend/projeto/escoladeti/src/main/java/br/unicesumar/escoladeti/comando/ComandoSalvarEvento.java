@@ -1,18 +1,15 @@
 package br.unicesumar.escoladeti.comando;
 
-import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.entity.Periodo;
-import br.unicesumar.escoladeti.entity.Telefone;
-import br.unicesumar.escoladeti.enums.Sexo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarEvento {
     
+    private Long id;
     private String tipoEvento;
     private String local;
     private String ministrante;
@@ -103,11 +100,17 @@ public class ComandoSalvarEvento {
         this.statusevento = statusevento;
     }
 
-    @Override
-    public String toString() {
-        return "ComandoSalvarEvento{" + "tipoEvento=" + tipoEvento + ", local=" + local + ", ministrante=" + ministrante + ", participante=" + participante + ", periodos=" + periodos + ", organizacao=" + organizacao + ", titulo=" + titulo + ", descricao=" + descricao + ", valor=" + valor + ", statusevento=" + statusevento + '}';
+    public Long getId() {
+        return id;
     }
 
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    @Override
+    public String toString() {
+        return "ComandoSalvarEvento{" + "id=" + id + ", tipoEvento=" + tipoEvento + ", local=" + local + ", ministrante=" + ministrante + ", periodos=" + periodos + ", organizacao=" + organizacao + ", titulo=" + titulo + ", descricao=" + descricao + ", valor=" + valor + ", statusevento=" + statusevento + '}';
+    }
+    
 }

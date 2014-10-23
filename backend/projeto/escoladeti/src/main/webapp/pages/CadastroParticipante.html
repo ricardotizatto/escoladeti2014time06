@@ -23,7 +23,7 @@
                         <td ng-show="evento.statusevento == true">{{evento.titulo}}</td>
                         <td ng-show="evento.statusevento == true">{{evento.descricao.substring(0, 180)}}</td>
                         <td ng-show="evento.statusevento == true">
-                            <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento.id, evento.titulo, evento.descricao, evento.local, evento.data, evento.inicio, evento.fim, evento.ministrante)" data-toggle="modal" data-target="#modalDetalhes">
+                            <button type="submit" class="btn btn-blog pull-right marginBottom10" ng-click="carregarEventoDetalhes(evento)" data-toggle="modal" data-target="#modalDetalhes">
                                 <b>+ Detalhes</b>
                             </button>
                         </td>
@@ -96,24 +96,31 @@
                         <div class="modal-body">
                             <div class="row" style="width: 560px; margin-left: 9px;">
                                 <div class="blogShort">
-                                    <h1>{{tituloCurso}}</h1>
-                                    
-                                    <article><p>
-                                            {{DetalhesCurso}}
-                                        </p></article>
+                                    <h1>{{evento.titulo}}</h1>
+                                    <article>
+                                        <p>{{evento.descricao}}</p>
+                                    </article>
+                                    <article>
+                                        <p>
+                                            <b>MINISTRANTE: </b> {{evento.ministrante}}
+                                        </p>
+                                    </article>
 
-                                    <article><p>
-                                            <b>MINISTRANTE: </b> {{ministranteCurso}}
-                                        </p></article>
-
-                                    <article><p>
-                                            <b>DATA:</b> {{dataCurso}}
-                                        </p></article>
-                                    <article><p>
+                                    <article>
+                                        <ul ng-repeat="p in evento.periodos">
+                                            <li>{{p.data}} - {{p.inicio}} - {{p.fim}}</li>
+                                        </ul>
+                                        <p>
+                                            <b>DATA:</b> {{evento.periodos.data}}
+                                        </p>
+                                    </article>
+                                    <article>
+                                        <p>
                                             <b>HORÁRIO: </b> {{inicioCurso}} às {{fimCurso}}
                                         </p></article>
-                                    <article><p>
-                                            <b>LOCAL:</b> {{localCurso}}
+                                    <article>
+                                        <p>
+                                            <b>LOCAL:</b> {{evento.local}}
                                         </p></article>
                                 </div>
                             </div>
