@@ -10,6 +10,7 @@ import br.unicesumar.escoladeti.repository.PerfilAcessoUsuarioRepository;
 import br.unicesumar.escoladeti.repository.PerfilDeAcessoUsuarioViewRepository;
 import br.unicesumar.escoladeti.repository.UsuarioRepository;
 import br.unicesumar.escoladeti.view.ViewPerfilDeAcessoUsuario;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +105,10 @@ public class UsuarioService {
 
         this.perfilAcessoUsuarioRepository.deleteByUsuario(usuario);
         this.usuarioRepository.delete(usuario);
+    }
+    
+    public List<Usuario> getTodos(){
+        return usuarioRepository.findAll();
     }
    
 }
