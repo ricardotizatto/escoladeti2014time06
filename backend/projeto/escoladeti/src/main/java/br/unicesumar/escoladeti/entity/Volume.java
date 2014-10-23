@@ -136,6 +136,14 @@ public class Volume  {
         return caminhoAnexo;
     }
 
+    public Long getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(Long idLivro) {
+        this.idLivro = idLivro;
+    }
+
     public String getNomeArquivo() {
         if (StringUtils.isNotEmpty(caminhoAnexo))
             return new File(getCaminhoAnexo()).getName();

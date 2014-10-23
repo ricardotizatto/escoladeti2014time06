@@ -87,6 +87,7 @@ public class VolumeService {
         solicitacaoItem.validarPaginas(comandoSalvarVolume.getPaginaInicio(), comandoSalvarVolume.getPaginaFim());
 
         volume.setStatus(VolumeStatus.ANDAMENTO);
+        volume.setIdLivro(solicitacaoItem.getLivro().getId());
         volumeRepository.save(volume);
 
         SolicitacaoVolume solicitacaoVolume = new SolicitacaoVolume();
