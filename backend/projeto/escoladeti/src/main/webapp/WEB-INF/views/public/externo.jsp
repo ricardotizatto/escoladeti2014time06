@@ -88,17 +88,11 @@
                 </div>
                 <div class="footer-border"></div>
                 <div class="row">
-                    <div class="copyright span5">
-                        <p>Copyright 2014 Amacap - Todos os direitos reservados.</p>
-                    </div>
-                    <div class="social span7">
-                        <p>Sistema desenvolvido pelos alunos da Escola de T.I. 2014 - Unicesumar - Time 6</p>
-                        <!--
-                        <a class="facebook" href=""></a>
-                        <a class="dribbble" href=""></a>
-                        <a class="twitter" href=""></a>
-                        <a class="pinterest" href=""></a>
-                        -->
+                    <div class="copyright span12">
+                        Copyright 2014 Amacap - Todos os direitos reservados.
+                        <span class="pull-right" >
+                            <a class="link-credito" href="#/creditos" ng-click="ctrl.ativaBotao('')">Sistema desenvolvido pelos alunos da Escola de T.I. 2014 - Unicesumar - Time 6</a>
+                        </span>
                     </div>
                 </div>
             </div>

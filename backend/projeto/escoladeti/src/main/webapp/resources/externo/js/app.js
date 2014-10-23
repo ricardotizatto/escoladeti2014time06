@@ -15,29 +15,22 @@ function AppCtrontroller($routeParams,$http) {
 AppCtrontroller.prototype = {
 
     iniciar: function () {
-        var self = this;
-        this.getMateriaisProduzidos();
-        this.ativaBotao('home');
-        this.http.get('./public/rest/eventos')
-            .success(function (eventos) {
-               self.eventos = eventos;
-            });
+
     }, 
     ativaBotao: function (pagina) {
         var self = this; 
-        console.log('pagina: '+ pagina);
         if(!pagina){
-            self.ativa = 'home';
+            self.ativa = '';
         }else{
             self.ativa = pagina;   
         }
         
     },
-    getMateriaisProduzidos: function (){
+    getMateriaisProduzidos: function (pageNumber){
         var self = this;
         this.http({
             method: 'GET',
-            url: './public/rest/materiaisproduzidos'
+            url: './public/rest/materiaisproduzidos/pag/' + pageNumber
         }).success(function (materiaisProduzidos) {
             self.materiaisProduzidos = materiaisProduzidos;
         });
@@ -105,6 +98,10 @@ appExterno.config(['$routeProvider',
             })
             .when('/localizacao', {
                 templateUrl: './paginasexternas/localizacao.html',
+                //controller: 'ExternoController'
+            })
+            .when('/creditos', {
+                templateUrl: './paginasexternas/creditos.html',
                 //controller: 'ExternoController'
             })
             .otherwise({redirectTo: '/principal'
