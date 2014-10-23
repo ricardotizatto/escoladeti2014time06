@@ -69,12 +69,6 @@ public class VolumeController {
         return volumeService.marcarComoRevisado(idVolume, comando);
     }
 
-    @RequestMapping(value = "/{id}/enviado", method = RequestMethod.PUT)
-    public @ResponseBody Volume marcarComoEnviado(
-            @PathVariable("id") Long idVolume,
-            @RequestBody ComandoSalvarVolume comando) {
-        return volumeService.marcarComoEnviado(idVolume, comando);
-    }
 
     @RequestMapping(value = "/{id}/andamento", method = RequestMethod.PUT)
     public @ResponseBody Volume reativar(

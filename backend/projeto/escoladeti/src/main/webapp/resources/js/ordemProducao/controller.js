@@ -43,9 +43,29 @@ OrdemProducaoController.prototype = {
             if (result) {
                 self.Volume.delete(item, function () {
                     toastr.success('Volume deletado com sucesso');
-                    self.item.volumes.splice(self.item.volumes.indexOf(item), 1);
+                    self.item.volumes.splice(self.item.solicitacaoVolumes.indexOf(item), 1);
                 });
             }
         });
+    },
+
+    apresentarModalEnvio: function (solicitacaoVolume) {
+        var self = this;
+
+        this.marcarComoEnviado = function () {
+            var alterarData = {
+                data: self.dataEnvio
+            };
+
+            self.OrdemProducao.enviarVolume({idVolume: solicitacaoVolume.id}, alterarData, function () {
+                $('#modalEnvio').modal('hide');
+                self.iniciar();
+            });
+        };
+        $('#modalEnvio').modal('show');
+    },
+    
+    marcarComoEnviado: function () {
+
     }
 };

@@ -3,9 +3,16 @@ package br.unicesumar.escoladeti.entity;
 import br.unicesumar.escoladeti.util.data.DateUtil;
 import br.unicesumar.escoladeti.util.number.NumberUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import org.parboiled.common.Preconditions;
 
 @Entity
@@ -18,6 +25,10 @@ public class Livro extends Entidade {
     private String autor;
     private String editora;
     private Long anoEdicao;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_volume")
+    private Set<Volume> volumes = new HashSet<>();
     
     public Livro() {
 	}
@@ -66,7 +77,13 @@ public class Livro extends Entidade {
         this.anoEdicao = anoEdicao;
     }
 
+    public Set<Volume> getVolumes() {
+        return volumes;
+    }
 
+    public void setVolumes(Set<Volume> volumes) {
+        this.volumes = volumes;
+    }
 
     @Override
     public int hashCode() {
