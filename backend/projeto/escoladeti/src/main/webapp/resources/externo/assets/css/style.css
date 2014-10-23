@@ -1156,3 +1156,9 @@ ul.portfolio-img li {
 .material-transcricao input{
     float: left;
 }
+.desc-transcricao{
+    color: #9d426b;
+}
+
+.link-credito{ font-size: 12px; color: #888; }
+.link-credito:hover{ color: #9d426b; }

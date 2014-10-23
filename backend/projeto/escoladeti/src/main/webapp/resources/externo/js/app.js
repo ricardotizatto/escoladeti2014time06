@@ -23,7 +23,7 @@ AppCtrontroller.prototype = {
         var self = this; 
         console.log('pagina: '+ pagina);
         if(!pagina){
-            self.ativa = 'home';
+            self.ativa = '';
         }else{
             self.ativa = pagina;   
         }
@@ -101,6 +101,10 @@ appExterno.config(['$routeProvider',
             })
             .when('/localizacao', {
                 templateUrl: './paginasexternas/localizacao.html',
+                //controller: 'ExternoController'
+            })
+            .when('/creditos', {
+                templateUrl: './paginasexternas/creditos.html',
                 //controller: 'ExternoController'
             })
             .otherwise({redirectTo: '/principal'

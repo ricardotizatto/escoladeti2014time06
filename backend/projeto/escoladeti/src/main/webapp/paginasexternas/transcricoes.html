@@ -16,8 +16,8 @@
         <div class="span12">
             <form method="post" action="">
                 <div class="span12">
-                    <label for="name" class="nameLabel"><b>Buscar Material Transcrito</b></label>
-                    <input id="name" type="text" name="name" placeholder="Buscar Material Transcrito" ng-model="ctrl.busca" ng-change="ctrl.buscaMateriaisContendoNome()">
+                    <label for="name" class="nameLabel"><h3>Pesquisar Material Transcrito</h3></label>
+                    <input id="name" type="text" name="name" placeholder="Pesquisar Material Transcrito" ng-model="ctrl.busca" ng-change="ctrl.buscaMateriaisContendoNome()">
                 </div>   
 <!--                <div class="span2 busca-transcricao">
                     <span class="pull-right" >
@@ -32,11 +32,11 @@
                     <div class="material-transcricao">
                         <h4>{{materialProduzido.nome}}</h4>
                         <p>
-                            <b>TRANSCRIÇÃO: </b> {{materialProduzido.transcricao != 'OUTRO' ? materialProduzido.transcricao : materialProduzido.outraTranscricao}} 
-                            <b> - AUTOR: </b>{{materialProduzido.autor}}
-                            <b> - EDITORA: </b>{{materialProduzido.editora}}
-                            <b> - DISCIPLINA: </b>{{materialProduzido.disciplina}}
-                            <b> - ANO DE EDIÇÃO: </b>{{materialProduzido.anoEdicao}}</p>
+                            <b>TRANSCRIÇÃO: </b><span class="desc-transcricao"> {{materialProduzido.transcricao != 'OUTRO' ? materialProduzido.transcricao : materialProduzido.outraTranscricao}} </span>
+                            <b> - AUTOR: </b><span class="desc-transcricao"> {{materialProduzido.autor}}</span>
+                            <b> - EDITORA: </b><span class="desc-transcricao">{{materialProduzido.editora}}</span>
+                            <b> - DISCIPLINA: </b><span class="desc-transcricao">{{materialProduzido.disciplina}}</span>
+                            <b> - ANO DE EDIÇÃO: </b><span class="desc-transcricao">{{materialProduzido.anoEdicao}}</span></p>
                         <hr>
                     </div>
                 </li>  
