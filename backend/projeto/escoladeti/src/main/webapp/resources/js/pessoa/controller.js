@@ -27,11 +27,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     
     $scope.temAssociado = function(){
     	$scope.associado = false;    	
-    	if($scope.pessoa.caracteristicas){
-	    	var caracs = $scope.pessoa.caracteristicas;
+    	if($scope.pessoaCaracteristica.caracteristicas){
+	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
 	    	var associado = 2;
 	    	caracs.forEach(function(item){
-	    		console.log(item);
 	    		if(item == associado)
 	    			$scope.associado = true;
 	    	});
@@ -39,8 +38,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     }
     $scope.temAluno = function(){
     	$scope.aluno = false;
-    	if($scope.pessoa.caracteristicas){
-	    	var caracs = $scope.pessoa.caracteristicas;
+    	if($scope.pessoaCaracteristica.caracteristicas){
+	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
 	    	var aluno = 1;
 	    	caracs.forEach(function(item){
 	    		if(item == aluno)
@@ -86,8 +85,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
     $scope.carregarPessoa = function () {
     	$scope.aluno = false;
-    	
-    	console.log($scope.aluno);
         
         $scope.caracteristicas = buscaCaracteristicas();
 
@@ -98,11 +95,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
         
         Pessoa.get({id: $routeParams.pessoaId, tipo: $routeParams.pessoaTipo}, function (pessoa) {
             $scope.pessoa = pessoa;
-            var caracs = pessoa.caracteristicas.map(function(item,index){
-            	return item.id;
-            });
             $scope.estaEditando = isEditing();
-            $scope.pessoa.caracteristicas = caracs;
             $scope.maskCpf = '999.999.999-99';
             $scope.temAluno();
             $scope.temAssociado();            
@@ -159,8 +152,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                 tipo: "J",
                 email: "",
                 telefones: [],
-                enderecos: [],
-                caracteristicas : []
+                enderecos: []
             });
         } else {
             $scope.pessoa = new Pessoa({
@@ -168,8 +160,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
                 email: "",
                 sexo: "MASCULINO",
                 telefones: [],
-                enderecos: [],
-                caracteristicas : []
+                enderecos: []
             });
         }
     };
@@ -183,6 +174,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             });
             return;
         }
+        $scope.pessoa.caracteristicas = $scope.pessoaCaracteristica.caracteristicas;
+        
         $scope.pessoa.$save(function () {
             toastr.success($scope.pessoa.nome + ' salvo com sucesso');
             $scope.novaPessoa($scope.pessoa.tipo);

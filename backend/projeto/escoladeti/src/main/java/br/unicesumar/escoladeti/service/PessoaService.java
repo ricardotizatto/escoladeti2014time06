@@ -1,10 +1,15 @@
 package br.unicesumar.escoladeti.service;
 
+import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
+
+import java.util.List;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
 import br.unicesumar.escoladeti.controller.DataPage;
-import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
-import br.unicesumar.escoladeti.entity.Caracteristica;
-import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
@@ -13,14 +18,6 @@ import br.unicesumar.escoladeti.repository.PessoaFisicaJuridicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
 import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Service
 public class PessoaService {
@@ -75,14 +72,7 @@ public class PessoaService {
                 }
             }
 
-            if (id != null || comando.getCaracteristicas().contains(1) || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null) {
-            	Set<Caracteristica> caracteristicas = new HashSet<Caracteristica>();
-            	
-            	for (Long idCaracteristica : comando.getCaracteristicas()) {
-            		Caracteristica c = this.caracteristicaRepository.findOne(idCaracteristica);
-            		caracteristicas.add(c);
-            		System.out.println(c.getDescricao());
-				} 
+            if (id != null || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null) {
             	
                 PessoaFisica pessoaFisica = Pessoa.builder()
                         .telefones(comando.getTelefones())
@@ -95,7 +85,6 @@ public class PessoaService {
                         .dataNascimento(comando.getDataNascimento())
                         .sobrenome(comando.getSobrenome())
                         .sexo(comando.getSexo())
-                        .caracteristicas(caracteristicas)
                         .buildPessoaFisica();
 
                 if (id != null) {
@@ -152,8 +141,8 @@ public class PessoaService {
         }
     }
     
-    public List<PessoaFisica> listarTodasPessoas(){
-        return pessoaFisicaRepository.findAll();
+    public List<PessoaFisicaJuridica> listarTodasPessoas(){
+        return this.pessoaFisicaJuridicaRepository.findAll();
     }
 
     public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(Integer pagina) {

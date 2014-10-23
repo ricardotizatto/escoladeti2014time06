@@ -44,7 +44,6 @@ public abstract class Pessoa extends Entidade {
 //    @JoinTable(name = "pessoacaracteristica",joinColumns = @JoinColumn(name = "pessoaId"),
 //    			inverseJoinColumns = @JoinColumn(name = "caracteristicaId",updatable = true))
 //    @JsonManagedReference
-    @NotEmpty(message = "Deve ser cadastrado ao menos uma Caracteristica!")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PessoaCaracteristica> pessoaCaracteristica = new HashSet<PessoaCaracteristica>();
 
@@ -129,9 +128,9 @@ public abstract class Pessoa extends Entidade {
 
         private Set<Endereco> enderecos;
         
-        private Set<Caracteristica> caracteristicas;
+        private Set<PessoaCaracteristica> caracteristicas;
         
-        public PessoaBuilder caracteristicas(Set<Caracteristica> caracteristicas){
+        public PessoaBuilder caracteristicas(Set<PessoaCaracteristica> caracteristicas){
         	this.caracteristicas = caracteristicas;
         	return this;
         }
@@ -221,15 +220,15 @@ public abstract class Pessoa extends Entidade {
             }
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo), "Tipo é obrigatório");
 
-            Boolean aluno = false;
-            for (Caracteristica caracteristica : this.caracteristicas) {
-				if(caracteristica.getId() == 1L)
-					aluno = true;
-			}
-            if (!aluno) {
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg), "RG é obrigatório");
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf), "CPF é obrigatório");
-            }
+//            Boolean aluno = false;
+//            for (Caracteristica caracteristica : this.caracteristicas) {
+//				if(caracteristica.getId() == 1L)
+//					aluno = true;
+//			}
+//            if (!aluno) {
+//                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg), "RG é obrigatório");
+//                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf), "CPF é obrigatório");
+//            }
             Preconditions.checkNotNull(this.dataNascimento, "Data é obrigatória");
             if (DateUtil.validDate(this.dataNascimento)) {
                 throw new RuntimeException("Data inválida");

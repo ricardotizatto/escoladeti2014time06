@@ -1,5 +1,7 @@
 <div class="container" ng-controller="PessoaController"
 	ng-init="carregarPessoa()">
+	{{pessoa}}
+	{{pessoaCaracteristica.caracteristicas}}
 	<div class="row">
 		<div class="form-group col-sm-12">
 			<legend>
@@ -30,7 +32,7 @@
 					<label class="control-label"><strong>Caracteristicas
 							*</strong></label> <select type="text" name="caracteristicas"
 						ng-change="temAssociado();temAluno()" ui-select2="select2Options"
-						multiple class="input-default" ng-model="pessoa.caracteristicas"
+						multiple class="input-default" ng-model="pessoaCaracteristica.caracteristicas"
 						required>
 						<option ng-repeat="c in caracteristicas" value="{{c.id}}">{{c.descricao}}</option>
 					</select>

@@ -3,8 +3,11 @@ package br.unicesumar.escoladeti.comando;
 import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Telefone;
 import br.unicesumar.escoladeti.enums.Sexo;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -25,13 +28,13 @@ public class ComandoSalvarPessoa {
     private Date dataCriacao;
     private Set<Telefone> telefones;
     private Set<Endereco> enderecos;
-    private Set<Long> caracteristicas;
+    private List<Long> caracteristicas;
 
-    public Set<Long> getCaracteristicas() {
+	public List<Long> getCaracteristicas() {
 		return caracteristicas;
 	}
 
-	public void setCaracteristicas(Set<Long> caracteristicas) {
+	public void setCaracteristicas(List<Long> caracteristicas) {
 		this.caracteristicas = caracteristicas;
 	}
 
