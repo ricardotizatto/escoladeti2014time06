@@ -154,6 +154,7 @@ function eventoController($scope, $http, $routeParams) {
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
                 .success(function (ev) {
                     $scope.evento = ev;
+                    $scope.periodo = ev.periodos[0];
                     return;
                 });
     };
