@@ -1,20 +1,16 @@
-var services = angular.module('services');
+angular.module('services')
+        .factory("EventoFactory", ["$resource" ,EventoFactory ]);
 
-function EstadoService($http) {
-    return {
-        buscar: function(eventoId) {
-            return $http.get('./public/rest/evento' + eventoId);
-        },
-        buscarPorNome: function(filtro) {
-            return $http.get('./public/rest/evento?q=' + filtro.toUpperCase());
-        },
-        listar: function(nrPagina) {
-            return $http.get('./public/rest/evento/' + nrPagina);
-        },
-        buscarTodos: function () {
-			return $http.get('./public/rest/evento');
-		},        
+function EventoFactory($resource) {
+    return $resource("./rest/eventoSource/:id/:acao/:pagina/:tipo", {id: '@id'},{
+		
+        update: {method: 'PUT'},
+        buscaEventos: {
+                method: 'GET',
+                params: {
+                        acao: 'evento'
+                }
+        }
         
-    }
-    
+    });   
 }

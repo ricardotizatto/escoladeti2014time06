@@ -25,8 +25,7 @@ AppCtrontroller.prototype = {
             self.ativa = pagina;   
         }
         
-    },
-    getMateriaisProduzidos: function (pageNumber){
+    },getMateriaisProduzidos: function (pageNumber){
         var self = this;
         this.http({
             method: 'GET',
@@ -70,7 +69,7 @@ appExterno.config(['$routeProvider',
             })
             .when('/eventos', {
                 templateUrl: './paginasexternas/eventos.html',
-                //controller: 'EventoController'
+                controller: 'EventoController'
             })
             .when('/detalhes-evento/:eventoId', {
                 templateUrl: './paginasexternas/detalhes-evento.html',

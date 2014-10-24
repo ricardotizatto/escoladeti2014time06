@@ -1,5 +1,5 @@
 <!-- Page Title -->
-<div class="page-title" ng-init="ctrl.ativaBotao('eventos')">
+<div class="page-title" ng-controller="EventoController" ng-init="getTodos(1)">  <!--<div class="container" ng-controller="EventoController" ng-init="getTodos(1)"> -->
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -14,18 +14,13 @@
 <div class="what-we-do container">
     <div class="portfolio-title">
         <h3>Próximos Eventos</h3>
-    </div>
-    <div class="container" ng-controller="EventoController" ng-init="getTodos(1)">
+    </div>    
     <div class="row">
-        <div class="service span3">
+       <div class="service span3" >
             <img src="./resources/externo/assets/img/portfolio/work5.jpg" alt="">
-            <h4 ng-repeat="evento in crtl.eventos"> {{crtl.eventos}} </h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
+            <h4 ng-repeat="evento in eventos" > {{ evento.tituloCurso }} </h4>
+            <p ng-repeat="evento in eventos"> {{ evento.detalhes }} </p>
             <a href="#/detalhes-evento" >Detalhes</a>
-            <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="eventos.pageCount*ctrl.eventos.maxRows" items-per-page="eventos.maxRows"
-                        ng-model="ctrl.pageNumber" ng-change="ctrl.buscarPagina(ctrl.pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-        </pagination>
         </div>
         <div class="service span3">
             <img src="./resources/externo/assets/img/portfolio/work6.jpg" alt="">
@@ -44,13 +39,8 @@
             <h4>High Res Prints</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
             <a href="#/detalhes-evento" >Detalhes</a>
-        </div>
-        <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="eventos.pageCount*ctrl.eventos.maxRows" items-per-page="eventos.maxRows"
-                        ng-model="ctrl.pageNumber" ng-change="ctrl.buscarPagina(ctrl.pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-        </pagination>
+        </div>        
     </div>
-</div>
 </div>
 
 <!-- Services -->
@@ -84,4 +74,8 @@
             <a href="#/evento-realizado" >Detalhes</a>
         </div>
     </div>
+    <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="eventos.pageCount*eventos.maxRows" items-per-page="eventos.maxRows"
+                        ng-model="pageNumber" ng-change="buscarPagina(pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+    </pagination>
 </div>

@@ -1,14 +1,7 @@
-angular.module('appExterno')
-    .controller( 'EventoController',
-                [ 
-                '$scope',
-                '$routeParams',
-                'eventoService',
-                EventoController]);
+var controllers = angular.module('controllers');
             
             
-function EventoController($scope, $routeParams, eventoService) {
-    $scope.select2 = 'one';
+function EventoController($scope ,$routeParams, Evento) {    
     console.log('Carregando controller');
     $scope.info = {};
     
@@ -22,7 +15,7 @@ function EventoController($scope, $routeParams, eventoService) {
             
         }
 
-        eventoService.buscar($routeParams.eventoId)
+        EventoService.buscar($routeParams.eventoId)
                 .success(function (evento, status) {
                     console.log(evento);                    
                     $scope.evento = evento;
@@ -32,27 +25,27 @@ function EventoController($scope, $routeParams, eventoService) {
     
     $scope.buscaEventosContendoNome = function () {
         console.log($scope.busca);
-        eventoService.buscarPorNome($scope.busca)
+        EventoService.buscarPorNome($scope.busca)
                 .then(function (retorno) {
                     console.log(retorno.data);
                     $scope.eventos = retorno.data;
                 });
     };
     
-    
-    $scope.getTodos = function () {
-        console.log(1);
-        eventoService.listar(1)
-                .success(function (listaEventos) {
-                    console.log(eventos);
-                    $scope.eventos = listaEventos;
-                        })
-                        .error(function (data) {
-                            console.log('erro ao buscar Evento ' + data.developerMessage);
-                        });
-            };
+  
+         $scope.getTodos = function (numeroPagina) {
+             console.log('Carregando eventos ');
+        Evento.buscaEventos({pagina: numeroPagina}, function (eventos) {
+            $scope.eventos = eventos;
+        });
+    };
             
 
 }
 
- controllers.controller('EventoController', ['$scope', '$routeParams', 'eventoService', EventoController]);
+controllers.controller( 'EventoController',
+                [ 
+                '$scope',
+                '$routeParams',
+                'EventoFactory',
+                EventoController]);
