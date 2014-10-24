@@ -1,9 +1,11 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.dto.UsuarioDTO;
+import br.unicesumar.escoladeti.entity.Usuario;
 import br.unicesumar.escoladeti.service.UsuarioService;
 import br.unicesumar.escoladeti.view.ViewPerfilDeAcessoUsuario;
 import java.io.Serializable;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,5 +52,12 @@ public class UsuarioController implements Serializable {
     public String deletar(@RequestBody UsuarioDTO usuarioDTO) {
         this.usuarioService.deletar(usuarioDTO);
         return "deleted";
+    }
+    
+    @RequestMapping(value = "/usuario", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Usuario> getTodos() {
+        return this.usuarioService.getTodos();
+        
     }
 }

@@ -1,11 +1,14 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.comando.ComandoAlterarData;
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
+import br.unicesumar.escoladeti.entity.SolicitacaoVolume;
 import br.unicesumar.escoladeti.entity.Volume;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
 import br.unicesumar.escoladeti.service.AcompanhamentoSolicitacaoService;
 import br.unicesumar.escoladeti.service.SolicitacaoItemService;
+import br.unicesumar.escoladeti.service.SolicitacaoVolumeService;
 import br.unicesumar.escoladeti.service.VolumeService;
 import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,8 @@ public class SolicitacaoItemController {
     @Autowired
     private SolicitacaoItemService solicitacaoItemService;
 
+    @Autowired
+    private SolicitacaoVolumeService solicitacaoVolumeService;
 
     @RequestMapping(value = "/{id}/produzir", method = RequestMethod.POST)
     public @ResponseBody ViewAcompanhamentoSolicitacao produzir(@PathVariable("id") Long id) {
@@ -43,6 +48,13 @@ public class SolicitacaoItemController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody SolicitacaoItem buscar(@PathVariable("id") Long id) {
         return solicitacaoItemService.buscarItem(id);
+    }
+
+    @RequestMapping(value = "/solicitacao-volume/{id}", method = RequestMethod.PUT)
+    public @ResponseBody SolicitacaoVolume marcarComoEnviado(
+            @PathVariable("id") Long id,
+            @RequestBody ComandoAlterarData comandoAlterarData) {
+        return solicitacaoVolumeService.marcarComoEnviado(id, comandoAlterarData);
     }
 
     @RequestMapping(method = RequestMethod.GET)
