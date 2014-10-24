@@ -37,6 +37,9 @@ public class VolumeService {
         if (volume.getStatus().equals(VolumeStatus.REVISADO)) {
             throw new RuntimeException("Volume revisado não pode ser deletado");
         }
+        SolicitacaoVolume solicitacaoVolume = solicitacaoVolumeRepository.findByVolumeId(volume.getId());
+
+        solicitacaoVolumeRepository.delete(solicitacaoVolume);
         volumeRepository.delete(id);
     }
 

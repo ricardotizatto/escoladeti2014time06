@@ -52,6 +52,7 @@ public class Volume  {
     @Column(name = "id_livro")
     private Long idLivro;
 
+
     public Usuario getResponsavel() {
         return responsavel;
     }

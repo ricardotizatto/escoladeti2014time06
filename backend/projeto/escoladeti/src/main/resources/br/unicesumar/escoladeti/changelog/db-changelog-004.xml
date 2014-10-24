@@ -26,7 +26,7 @@
                                  referencedTableName="VOLUME"
                                  referencedColumnNames="id"/>
     </changeSet>
-    
+
     <changeSet id="2" author="catabriga">
         <addColumn tableName="solicitacaovolume">
             <column name="id_solicitacaoitem" type="int8"/>
@@ -39,7 +39,11 @@
     </changeSet>
 
     <changeSet id="3" author="catabriga">
-        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_volume" constraintName="livro_volume"
+        <addColumn tableName="volume">
+            <column name="id_livro" type="int8"></column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_livro" constraintName="livro_volume"
                                  referencedTableName="livro"
                                  referencedColumnNames="id"/>
     </changeSet>
