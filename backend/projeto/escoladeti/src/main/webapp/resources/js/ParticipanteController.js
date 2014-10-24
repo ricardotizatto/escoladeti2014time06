@@ -73,7 +73,7 @@
             
         }else{         
             $scope.participante.pagamento = "PENDENTE";
-            $scope.participante.presente = true;
+            //$scope.participante.presente = true;
             $http.post("./rest/participanteSource/participante", $scope.participante)
                     .success(function(participante, status) {
                 console.log("participante salva = " + participante.nome);
