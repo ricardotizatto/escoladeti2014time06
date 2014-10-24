@@ -1,5 +1,5 @@
 <!-- Page Title -->
-<div class="page-title" ng-controller="EventoController" ng-init="getTodos(1)">  <!--<div class="container" ng-controller="EventoController" ng-init="getTodos(1)"> -->
+<div class="page-title" ng-controller="EventoController" ng-init="getTodos()">  <!--<div class="container" ng-controller="EventoController" ng-init="getTodos(1)"> -->
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -15,11 +15,11 @@
     <div class="portfolio-title">
         <h3>Próximos Eventos</h3>
     </div>    
-    <div class="row">
+    <div class="row">{{eventos}}
        <div class="service span3" >
             <img src="./resources/externo/assets/img/portfolio/work5.jpg" alt="">
-            <h4 ng-repeat="evento in eventos" > {{ evento.tituloCurso }} </h4>
-            <p ng-repeat="evento in eventos"> {{ evento.detalhes }} </p>
+            <h4  > </h4>
+            <p> </p>
             <a href="#/detalhes-evento" >Detalhes</a>
         </div>
         <div class="service span3">
