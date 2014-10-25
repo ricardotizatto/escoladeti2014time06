@@ -149,6 +149,7 @@ function eventoController($scope, $http, $routeParams) {
         if (!$routeParams.eventoId) {
             $scope.evento = {};
             $scope.evento.periodos = [];
+            $scope.periodosModal = [];
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
@@ -158,6 +159,15 @@ function eventoController($scope, $http, $routeParams) {
                     return;
                 });
     };
+    
+    $scope.carregaPeriodoModal = function(id){
+        console.log("carregando periodos para evento do id = " + id);
+        $http.get('./rest/eventoSource/evento/' + id)
+                .success(function (ev) {
+                    $scope.periodosModal = ev.periodos;
+                    return;
+                });
+    }
 
     $scope.carregarEventoDetalhes = function (indice, titulo, detalhes, local, data) {
         $scope.idCurso = indice;
