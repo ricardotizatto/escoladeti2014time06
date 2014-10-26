@@ -189,6 +189,10 @@ app.config(['$routeProvider',
                 templateUrl: './pages/chamada/lista.html',
                 controller: 'chamadaController'
             })
+            .when('/listaperiodos/:idevento', {
+                templateUrl: './pages/ListaPeriodos.html',
+                controller: 'eventoController'
+            })
             .when('/cadastroevento/:eventoId', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'

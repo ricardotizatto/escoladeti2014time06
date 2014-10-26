@@ -56,8 +56,6 @@
         <script type="text/javascript" src="./resources/js/ordemProducao/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/controller.js" ></script>
-        <script type="text/javascript" src="./resources/js/chamada/controller.js" ></script>
-        <script type="text/javascript" src="./resources/js/chamada/service.js" ></script>
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/service.js" ></script>
 
@@ -72,6 +70,7 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+		<script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         
 

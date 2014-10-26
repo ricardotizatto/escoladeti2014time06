@@ -18,6 +18,10 @@ function eventoController($scope, $http, $routeParams) {
         console.log(evento);
         window.location = '#/cadastroevento/' + evento.id;
     };
+    $scope.chamadaPeriodo = function (id) {
+        window.location = '#/chamada/' + id;
+    };
+    
 
     $scope.deletar = function (evento) {
         console.log('deletando evento ' + JSON.stringify(evento));
@@ -118,9 +122,13 @@ function eventoController($scope, $http, $routeParams) {
     };
 
     $scope.novo = function () {
-        // carregarEvento();
         window.location = '#/cadastroevento';
     };
+    
+    $scope.telaPeriodo = function (id) {
+        window.location = '#/listaperiodos/'+id;
+    };
+
 
     $scope.encerrar = function () {
         $scope.evento.statusevento = false;
@@ -160,9 +168,9 @@ function eventoController($scope, $http, $routeParams) {
                 });
     };
     
-    $scope.carregaPeriodoModal = function(id){
-        console.log("carregando periodos para evento do id = " + id);
-        $http.get('./rest/eventoSource/evento/' + id)
+    $scope.carregaPeriodo = function(){
+        console.log("carregando periodos para evento do id = " + $routeParams.idevento);
+        $http.get('./rest/eventoSource/evento/' + $routeParams.idevento)
                 .success(function (ev) {
                     $scope.periodosModal = ev.periodos;
                     return;
@@ -201,6 +209,9 @@ function eventoController($scope, $http, $routeParams) {
                 break;
             case "3":
                 return 'REUNIAO';
+                break;
+			case "4":
+                return 'OUTROS';
                 break;
             default:
                 return 'CURSO';

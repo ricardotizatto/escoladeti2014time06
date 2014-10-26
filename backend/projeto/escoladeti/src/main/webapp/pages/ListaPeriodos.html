@@ -1,0 +1,28 @@
+﻿<div class="container" ng-controller="eventoController" ng-init="carregaPeriodo()">
+    <fieldset>
+        <legend> <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp; Dias de realização do Evento 
+        </legend>
+        <table class="table table-hover table-striped">
+            <tr>
+                <th class="col-sm-3">Dia</th>
+                <th class="col-sm-3">Início</th>
+                <th class="col-sm-3">Fim</th>
+                <th class="col-sm-3">Lista de Presença</th>
+            </tr>
+            <tr ng-repeat="p in periodosModal">
+                <td ng-bind="p.data"></td>
+                <td ng-bind="p.inicio"></td>
+                <td ng-bind="p.fim"></td>
+                <td>
+                    <button class='btn btn-info btn-sm' data-dismiss="modal" ng-click="chamadaPeriodo(p.id)">
+                        <span class='glyphicon glyphicon-check'></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <a class="btn btn-primary btn-padrao" ng-click="voltar()">
+                            <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+        </a>
+    </fieldset>
+    <hr>
+</div>
