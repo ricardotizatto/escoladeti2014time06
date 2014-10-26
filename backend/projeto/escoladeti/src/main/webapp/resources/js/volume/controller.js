@@ -55,6 +55,9 @@ VolumeController.prototype = {
     },
 
     ajustarVolume: function () {
+        var idSolicitacaoItem = this.routeParams.idOrdemProducao;
+
+        this.volume.idSolicitacaoItem = idSolicitacaoItem;
 
         if (this.volume.responsavel) {
             this.volume.responsavel = this.volume.responsavel.id;

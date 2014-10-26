@@ -150,7 +150,7 @@
             </div>
         </div>    	
         <div class="page-container row">
-            <div class="page-sidebar" id="main-menu">
+            <div class="page-sidebar" id="main-menu" style="position: fixed">
                 <ul>
                     <li>
                         <a href="#">

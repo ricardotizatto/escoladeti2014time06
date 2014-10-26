@@ -1,15 +1,12 @@
 package br.unicesumar.escoladeti.entity;
 
-import javax.persistence.*;
-
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.util.string.StringUtils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 public class Volume  {
@@ -31,9 +28,6 @@ public class Volume  {
     @Enumerated(EnumType.STRING)
     private VolumeStatus status;
 
-    @Column(name = "id_solicitacao_item")
-    private Long idSolicitacaoItem;
-
     @Column(name = "caminho_anexo")
     private String caminhoAnexo;
 
@@ -54,6 +48,10 @@ public class Volume  {
     @Temporal(TemporalType.DATE)
     @Column(name = "data_enviado")
     private Date dataEnviado;
+
+    @Column(name = "id_livro")
+    private Long idLivro;
+
 
     public Usuario getResponsavel() {
         return responsavel;
@@ -85,14 +83,6 @@ public class Volume  {
 
     public void setStatus(VolumeStatus status) {
         this.status = status;
-    }
-
-    public Long getIdSolicitacaoItem() {
-        return idSolicitacaoItem;
-    }
-
-    public void setIdSolicitacaoItem(Long idSolicitacaoItem) {
-        this.idSolicitacaoItem = idSolicitacaoItem;
     }
 
     public Usuario getResponsavelRevisao() {
@@ -147,6 +137,14 @@ public class Volume  {
         return caminhoAnexo;
     }
 
+    public Long getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(Long idLivro) {
+        this.idLivro = idLivro;
+    }
+
     public String getNomeArquivo() {
         if (StringUtils.isNotEmpty(caminhoAnexo))
             return new File(getCaminhoAnexo()).getName();
@@ -187,37 +185,14 @@ public class Volume  {
     public void reativar() {
 
         if (this.getStatus().equals(VolumeStatus.CANCELADO)
-                || this.getStatus().equals(VolumeStatus.ENVIADO)) {
-            throw new RuntimeException("Sómente volume rejeitado, revisado ou impresso podem ser reativados.");
+                || this.getStatus().equals(VolumeStatus.REVISADO)) {
+            throw new RuntimeException("Sómente volume rejeitado, ou impresso podem ser reativados.");
         }
 
         this.setStatus(VolumeStatus.ANDAMENTO);
         this.dataImpressao = null;
         this.dataRevisao = null;
         this.responsavelRevisao = null;
-    }
-
-    public void marcarComoEnviado(Date data, String observacao) {
-        if (!getStatus().equals(VolumeStatus.REVISADO)) {
-            throw new RuntimeException("Sómente volume revisado pode ser marcado como enviado.");
-        }
-
-        if (data == null) {
-            throw new RuntimeException("Informe data de envio.");
-        }
-
-        if (data.after(new Date())) {
-            throw new RuntimeException("Data deve ser menor ou igual a hoje.");
-        }
-
-        if (data.before(this.dataRevisao)) {
-            throw new RuntimeException("Data de Envio deve ser maior ou igual a data de revisão");
-        }
-
-        setStatus(VolumeStatus.ENVIADO);
-        setObservacao(observacao);
-        setDataEnviado(data);
-
     }
 
     public void marcarComoRevisado(Date data, Long revisor, String observacao) {

@@ -47,6 +47,7 @@
     <property name="logico" value="java.sql.Types.BOOLEAN" dbms="postgresql"/>
 
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-001.xml" />
-        <include file="br/unicesumar/escoladeti/changelog/db-changelog-002.xml" />
-        <include file="br/unicesumar/escoladeti/changelog/db-changelog-003.xml" />
-</databaseChangeLog> 
+    <include file="br/unicesumar/escoladeti/changelog/db-changelog-002.xml" />
+    <include file="br/unicesumar/escoladeti/changelog/db-changelog-003.xml" />
+    <include file="br/unicesumar/escoladeti/changelog/db-changelog-004.xml" />
+</databaseChangeLog>

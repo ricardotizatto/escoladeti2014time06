@@ -2,7 +2,7 @@ angular.module('services')
     .factory('OrdemProducaoFactory', ['$resource', OrdemProducaoFactory]);
 
 function OrdemProducaoFactory($resource) {
-    return $resource('./rest/solicitacao-itens/:id/:acao', {id: '@id'}, {
+    return $resource('./rest/solicitacao-itens/:id/:acao/:idVolume', {id: '@id'}, {
         produzir: {
             method: "POST",
             params: {
@@ -25,6 +25,13 @@ function OrdemProducaoFactory($resource) {
             method: 'GET',
             params: {
                 acao: 'sugestao'
+            }
+        },
+
+        enviarVolume: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume'
             }
         }
     });
