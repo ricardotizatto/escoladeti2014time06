@@ -1,7 +1,9 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,21 +35,26 @@ public abstract class Pessoa extends Entidade {
     private String tipo;
 
     @NotEmpty(message = "Deve ser cadastrado ao menos um Telefone!")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "pessoa")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true )
     private Set<Telefone> telefones;
 
     @NotEmpty(message = "Deve ser cadastrado ao menos um Endereço!")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Endereco> enderecos;
     
-//    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, fetch=FetchType.EAGER, targetEntity = Caracteristica.class)
-//    @JoinTable(name = "pessoacaracteristica",joinColumns = @JoinColumn(name = "pessoaId"),
-//    			inverseJoinColumns = @JoinColumn(name = "caracteristicaId",updatable = true))
-//    @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PessoaCaracteristica> pessoaCaracteristica = new HashSet<PessoaCaracteristica>();
+    private List<PessoaCaracteristica> pessoaCaracteristica = new ArrayList<PessoaCaracteristica>();
 
-    public Pessoa() {
+    public List<PessoaCaracteristica> getPessoaCaracteristica() {
+		return pessoaCaracteristica;
+	}
+
+	public void setPessoaCaracteristica(
+			List<PessoaCaracteristica> pessoaCaracteristica) {
+		this.pessoaCaracteristica = pessoaCaracteristica;
+	}
+
+	public Pessoa() {
         this.telefones = new HashSet<Telefone>();
         this.enderecos = new HashSet<Endereco>();
     }
@@ -128,9 +135,9 @@ public abstract class Pessoa extends Entidade {
 
         private Set<Endereco> enderecos;
         
-        private Set<PessoaCaracteristica> caracteristicas;
+        private Set<Long> caracteristicas;
         
-        public PessoaBuilder caracteristicas(Set<PessoaCaracteristica> caracteristicas){
+        public PessoaBuilder caracteristicas(Set<Long> caracteristicas){
         	this.caracteristicas = caracteristicas;
         	return this;
         }
@@ -221,8 +228,8 @@ public abstract class Pessoa extends Entidade {
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo), "Tipo é obrigatório");
 
 //            Boolean aluno = false;
-//            for (Caracteristica caracteristica : this.caracteristicas) {
-//				if(caracteristica.getId() == 1L)
+//            for (Long caracteristica : this.caracteristicas) {
+//				if(caracteristica == 1L)
 //					aluno = true;
 //			}
 //            if (!aluno) {

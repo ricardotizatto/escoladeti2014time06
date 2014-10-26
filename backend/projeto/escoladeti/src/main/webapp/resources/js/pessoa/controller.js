@@ -27,7 +27,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     
     $scope.temAssociado = function(){
     	$scope.associado = false;    	
-    	if($scope.pessoaCaracteristica.caracteristicas){
+    	if(angular.isDefined($scope.pessoaCaracteristica && $scope.pessoaCaracteristica.caracteristicas.length > 0)){
 	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
 	    	var associado = 2;
 	    	caracs.forEach(function(item){
@@ -38,7 +38,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     }
     $scope.temAluno = function(){
     	$scope.aluno = false;
-    	if($scope.pessoaCaracteristica.caracteristicas){
+    	if(angular.isDefined($scope.pessoaCaracteristica) && $scope.pessoaCaracteristica.caracteristicas.length > 0){
 	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
 	    	var aluno = 1;
 	    	caracs.forEach(function(item){
@@ -97,6 +97,17 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             $scope.pessoa = pessoa;
             $scope.estaEditando = isEditing();
             $scope.maskCpf = '999.999.999-99';
+            
+            if(pessoa.tipo === 'F'){
+            	var cars = $scope.pessoa.pessoaCaracteristica;
+            	var caracteristicas = [];
+            	cars.forEach(function(item,index){
+            		caracteristicas.push(item.caracteristica.id);
+            	});
+            	console.log(caracteristicas);
+            	$scope.pessoaCaracteristica = {};
+            	$scope.pessoaCaracteristica.caracteristicas = caracteristicas;
+            }
             $scope.temAluno();
             $scope.temAssociado();            
         });
@@ -166,6 +177,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
     $scope.salvar = function () {
+        $scope.pessoa.caracteristicas = $scope.pessoaCaracteristica.caracteristicas;    	
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function () {
                 toastr.success($scope.pessoa.nome + ' atualizado com sucesso');
@@ -174,7 +186,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             });
             return;
         }
-        $scope.pessoa.caracteristicas = $scope.pessoaCaracteristica.caracteristicas;
+        
+        console.log($scope.pessoa.caracteristicas);
         
         $scope.pessoa.$save(function () {
             toastr.success($scope.pessoa.nome + ' salvo com sucesso');

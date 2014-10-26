@@ -2,7 +2,10 @@ package br.unicesumar.escoladeti.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -14,14 +17,15 @@ public class PessoaCaracteristica extends Entidade {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
+	@JoinColumn(name = "pessoa_id",referencedColumnName = "id")
 	@JsonBackReference
 	private Pessoa pessoa;
 
 	@ManyToOne
-	@JsonBackReference
+	@JoinColumn(name = "caracteristica_id",referencedColumnName = "id")
 	private Caracteristica caracteristica;
 
-	@OneToMany(mappedBy = "pessoaCaracteristica")
+	@OneToMany(mappedBy = "pessoaCaracteristica",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Set<VigenciaAssociado> vigenciaAssociados;
 

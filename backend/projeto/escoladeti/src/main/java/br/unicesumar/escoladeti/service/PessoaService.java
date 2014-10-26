@@ -2,15 +2,19 @@ package br.unicesumar.escoladeti.service;
 
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
 import br.unicesumar.escoladeti.controller.DataPage;
+import br.unicesumar.escoladeti.entity.Caracteristica;
 import br.unicesumar.escoladeti.entity.Pessoa;
+import br.unicesumar.escoladeti.entity.PessoaCaracteristica;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.repository.CaracteristicaRepository;
@@ -61,36 +65,32 @@ public class PessoaService {
 
     }
 
+    @Transactional
     public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id) {
 
         if (comando.getTipo().equals("F")) {
             PessoaFisica pf = pessoaFisicaRepository.findByCpf(comando.getCpf());
             
-            if (pf != null) {
-                if (id == null || !Objects.equals(pf.getId(), id)) {
-                    throw new RuntimeException("CPF já cadastrado.");
-                }
-            }
+            cpfExiste(id, pf);
 
             if (id != null || pessoaFisicaRepository.findByCpf(comando.getCpf()) == null) {
-            	
-                PessoaFisica pessoaFisica = Pessoa.builder()
-                        .telefones(comando.getTelefones())
-                        .enderecos(comando.getEnderecos())
-                        .nome(comando.getNome())
-                        .email(comando.getEmail())
-                        .tipo(comando.getTipo())
-                        .rg(comando.getRg())
-                        .cpf(comando.getCpf())
-                        .dataNascimento(comando.getDataNascimento())
-                        .sobrenome(comando.getSobrenome())
-                        .sexo(comando.getSexo())
-                        .buildPessoaFisica();
+                PessoaFisica pessoaFisica = buildPessoaFisica(comando);                
 
                 if (id != null) {
                     pessoaFisica.setId(id);
                 }
-
+            	List<Long> ids = comando.getCaracteristicas();
+            	List<PessoaCaracteristica> pcs = new ArrayList<PessoaCaracteristica>();
+            	for (int i = 0; i < ids.size(); i++) {
+					PessoaCaracteristica pc = new PessoaCaracteristica();
+					pc.setPessoa(pf);
+					Caracteristica c = this.caracteristicaRepository.findOne(ids.get(i));
+					pc.setCaracteristica(c);
+					pc.setPessoa(pessoaFisica);
+					pcs.add(pc);
+				}
+            	
+            	pessoaFisica.setPessoaCaracteristica(pcs);
                 pessoaFisicaRepository.save(pessoaFisica);
 
                 return pessoaFisica;
@@ -130,6 +130,29 @@ public class PessoaService {
         }
         throw new RuntimeException("Tipo de pessoa invÃ¡lido");
     }
+
+	private PessoaFisica buildPessoaFisica(ComandoSalvarPessoa comando) {
+		return Pessoa.builder()
+		        .telefones(comando.getTelefones())
+		        .enderecos(comando.getEnderecos())
+		        .nome(comando.getNome())
+		        .email(comando.getEmail())
+		        .tipo(comando.getTipo())
+		        .rg(comando.getRg())
+		        .cpf(comando.getCpf())
+		        .dataNascimento(comando.getDataNascimento())
+		        .sobrenome(comando.getSobrenome())
+		        .sexo(comando.getSexo())
+		        .buildPessoaFisica();
+	}
+
+	private void cpfExiste(Long id, PessoaFisica pf) {
+		if (pf != null) {
+		    if (id == null || !Objects.equals(pf.getId(), id)) {
+		        throw new RuntimeException("CPF já cadastrado.");
+		    }
+		}
+	}
 
     public void deletarPessoa(Long id, String tipo) {
         if (tipo.equals("J")) {

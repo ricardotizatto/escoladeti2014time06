@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Caracteristica extends Entidade implements Serializable{
@@ -14,8 +16,7 @@ public class Caracteristica extends Entidade implements Serializable{
 
 	private String descricao;
 	
-	@OneToMany(mappedBy = "caracteristica")
-	@JsonBackReference
+	@OneToMany(mappedBy = "caracteristica",fetch = FetchType.EAGER)
 	private Set<PessoaCaracteristica> pessoaCaracteristicas;
 	
 	public String getDescricao() {

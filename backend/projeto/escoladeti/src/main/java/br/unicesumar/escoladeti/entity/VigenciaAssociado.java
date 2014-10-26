@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,6 +18,7 @@ public class VigenciaAssociado extends Entidade{
 	private Date vigencia;
 	
 	@ManyToOne
+	@JoinColumn(name = "pessoacaracteristica_id",referencedColumnName = "id")
 	@JsonBackReference
 	private PessoaCaracteristica pessoaCaracteristica;
 
