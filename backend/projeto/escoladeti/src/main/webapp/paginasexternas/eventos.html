@@ -1,5 +1,5 @@
 <!-- Page Title -->
-<div class="page-title" ng-controller="EventoController" ng-init="getTodos()">  <!--<div class="container" ng-controller="EventoController" ng-init="getTodos(1)"> -->
+<div class="page-title" ng-init="ctrl.getEventos(1);ativaBotao('eventos')">  <!--<div class="container" ng-controller="EventoController" ng-init="getTodos(1)"> -->
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -15,31 +15,13 @@
     <div class="portfolio-title">
         <h3>Próximos Eventos</h3>
     </div>    
-    <div class="row">{{eventos}}
-       <div class="service span3" >
+    <div class="row">
+       <div class="service span3" ng-repeat="proximoEvento in ctrl.proximosEventos.list" >
             <img src="./resources/externo/assets/img/portfolio/work5.jpg" alt="">
-            <h4  > </h4>
-            <p> </p>
-            <a href="#/detalhes-evento" >Detalhes</a>
-        </div>
-        <div class="service span3">
-            <img src="./resources/externo/assets/img/portfolio/work6.jpg" alt="">
-            <h4>Responsive Layout</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-            <a href="#/detalhes-evento" >Detalhes</a>
-        </div>
-        <div class="service span3">
-           <img src="./resources/externo/assets/img/portfolio/work7.jpg" alt="">
-            <h4>Awesome Logos</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-            <a href="#/detalhes-evento" >Detalhes</a>
-        </div>
-        <div class="service span3">
-            <img src="./resources/externo/assets/img/portfolio/work8.jpg" alt="">
-            <h4>High Res Prints</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-            <a href="#/detalhes-evento" >Detalhes</a>
-        </div>        
+            <h4>{{proximoEvento.titulo}}</h4>
+            <p>{{proximoEvento.descricao}}</p>
+            <a href="" ng-click="ctrl.detalhesEvento(proximoEvento.id)" >Detalhes</a>
+        </div>       
     </div>
 </div>
 
@@ -49,33 +31,11 @@
         <h3>Últimos Eventos</h3>
     </div>
     <div class="row">
-        <div class="service span3">
+        <div class="service span3" ng-repeat="ultimoEvento in ctrl.ultimosEventos.list" >
             <img src="./resources/externo/assets/img/portfolio/work1.jpg" alt="">
-            <h4>Beautiful Websites</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-            <a href="#/evento-realizado" >Detalhes</a>
-        </div>
-        <div class="service span3">
-            <img src="./resources/externo/assets/img/portfolio/work2.jpg" alt="">
-            <h4>Responsive Layout</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-            <a href="#/evento-realizado" >Detalhes</a>
-        </div>
-        <div class="service span3">
-           <img src="./resources/externo/assets/img/portfolio/work3.jpg" alt="">
-            <h4>Awesome Logos</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-            <a href="#/evento-realizado" >Detalhes</a>
-        </div>
-        <div class="service span3">
-            <img src="./resources/externo/assets/img/portfolio/work4.jpg" alt="">
-            <h4>High Res Prints</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
+            <h4>{{ultimoEvento.titulo}}</h4>
+            <p>{{ultimoEvento.descricao}}</p>
             <a href="#/evento-realizado" >Detalhes</a>
         </div>
     </div>
-    <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="eventos.pageCount*eventos.maxRows" items-per-page="eventos.maxRows"
-                        ng-model="pageNumber" ng-change="buscarPagina(pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-    </pagination>
 </div>

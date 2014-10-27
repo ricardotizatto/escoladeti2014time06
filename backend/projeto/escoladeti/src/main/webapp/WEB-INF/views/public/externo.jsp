@@ -102,11 +102,6 @@
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>
-        <script src="./resources/externo/js/app.js"></script>
-        <script src="./resources/externo/js/EventoController.js"></script>
-        <script src="./resources/externo/js/EventoService.js"></script>
-        <script src="./resources/externo/js/MaterialController.js"></script>
-        <script src="./resources/externo/js/MaterialService.js"></script>
         <script src="./resources/externo/assets/js/jquery-1.8.2.min.js"></script>
         <script src="./resources/externo/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="./resources/externo/assets/js/jquery.flexslider.js"></script>
@@ -117,6 +112,11 @@
         <script src="./resources/externo/assets/js/jquery.quicksand.js"></script>
         <script src="./resources/externo/assets/prettyPhoto/js/jquery.prettyPhoto.js"></script>
         <script src="./resources/externo/assets/js/scripts.js"></script>
+        <script src="./resources/externo/js/app.js"></script>
+<!--        <script src="./resources/externo/js/EventoController.js"></script>
+        <script src="./resources/externo/js/EventoService.js"></script>
+        <script src="./resources/externo/js/MaterialController.js"></script>
+        <script src="./resources/externo/js/MaterialService.js"></script>-->
     
     </body>
 </html>

@@ -4,8 +4,8 @@ import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.service.MaterialStatusService;
 import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
+import java.io.Serializable;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ExternoController {
+public class ExternoController implements Serializable{
     
     @Autowired
     private MaterialStatusService materialStatusService;
@@ -31,7 +31,7 @@ public class ExternoController {
         return new ModelAndView("public/externo");
     }
     
-    @RequestMapping(value = {"public/rest/materiaisproduzidos/{pagina}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"public/rest/materiaisproduzidos/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<ViewMaterialProduzido> listarMateriaisProduzidos(@PathVariable Integer pagina) {
         return this.materialStatusService.listarMateriaisProduzidos(pagina);
@@ -43,10 +43,28 @@ public class ExternoController {
         return this.materialStatusService.buscaMateriaisProduzidos(q);
     }
     
-    @RequestMapping(value = "public/rest/evento/{pagina}", method = RequestMethod.GET)
+    @RequestMapping(value = "public/rest/eventos/pag/{pagina}", method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Evento> getTodos(@PathVariable Integer pagina) {
         return eventoService.getTodos(pagina);
+    }
+    
+    @RequestMapping(value = "public/rest/proximoseventos", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Evento> getProxomosEventos() {
+        return eventoService.getProxomosEventos();
+    }
+    
+    @RequestMapping(value = "public/rest/ultimoseventos", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Evento> getUltimosEventos() {
+        return eventoService.getUltimosEventos();
+    }
+    
+    @RequestMapping(value = "public/rest/evento/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Evento getEvento(@PathVariable Long id) {
+         return eventoService.getById(id);
     }
 
 }

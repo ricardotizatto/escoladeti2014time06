@@ -4,12 +4,14 @@ var controllers = angular.module('controllers');
 function MaterialController($scope, Material) {    
     console.log('Carregando MaterialController'); 
     
+    $scope.teste = 'teste acesso';
+    
     $scope.getMateriaisProduzidos = function (pageNumber){
         
         console.log('Carregando MaterialController ');
         Material.buscaMateriaisProduzidos({pagina: pageNumber}, function(materiaisProduzidos) {
-            $scope.materiaisProduzidos = materiaisProduzidos;
-            console.log('MaterialController ' + materiaisProduzidos);
+            $scope.materiaisProduzidos = JSON.stringify(materiaisProduzidos);
+            console.log('MaterialController $scope: ' + $scope.materiaisProduzidos);
         });
     }            
 

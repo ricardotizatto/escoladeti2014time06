@@ -1,5 +1,5 @@
  <!-- Page Title -->
-<div class="page-title" ng-init="ctrl.ativaBotao('eventos')">
+<div class="page-title" ng-init="ctrl.carregaEvento();ctrl.ativaBotao('eventos')">
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -14,36 +14,39 @@
 <div class="contact-us container">
     <div class="row">
         <div class="span6">
-            <h4>Titulo</h4>
-            <p>Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento</p>
+            <h4>{{ctrl.evento.titulo}}</h4>
+            <p>{{ctrl.evento.descricao}} </p>
             <p>
-                <b>Local do evento:</b> bloco 7 Lab 13 - Unicesumar <br>
-                <b>Data:</b> 12/12/2014 <br>
-                <b>Horário do evento:</b> 10:00 as 12:00
+                <b>Ministrante: </b> {{ctrl.evento.ministrante}} <br>
+                <b>Organização: </b> {{ctrl.evento.organizacao}} <br>
+                <b>Local do evento: </b> {{ctrl.evento.local}} <br>
+                <b>Data: </b> {{ctrl.evento.data | date: 'dd-MM-yyyy'}} <br>
+                <b>Horário do evento: </b> {{ctrl.evento.inicio}} as {{ctrl.evento.fim}} <br>
+                <b>Valor: </b> {{ctrl.evento.valor}} 
             </p>     
         </div>
         <div class="span6">
             <div class="contact-form">
                 <h4>Inscrição</h4>
-                <form method="post" action="assets/sendmail.php">
+                <form method="post" action=""> {{crtl.participante}}
 
                     <label for="necessidades" class="messageLabel">Possui necessidades especiais?</label>
                     <label class="btn"> 
-                        <input name="deficiente" value="S" type="radio" /> Sim
+                        <input ng-model="crtl.participante.deficiente" name="deficiente" value="S" type="radio" /> Sim
                     </label> 
                     <label class="btn"> 
-                        <input  name="deficiente" value="N" type="radio" /> Não
+                        <input  ng-model="crtl.participante.deficiente" name="deficiente" value="N" type="radio" /> Não
                     </label>
-                    <div ng-show="participante.deficiente === 'S'">
+                    <div ng-show="crtl.participante.deficiente === 'S'">
                         <label for="necessidades" class="messageLabel">Quais Necessidades?</label>
-                        <input class="form-control" type="text" name="necessidade" placeholder="quais" ng-model="participante.necessidade"  >
+                        <input class="form-control" type="text" name="necessidade" placeholder="quais" ng-model="crtl.participante.necessidade"  >
                     </div>    
                     <label for="nome" class="nameLabel">Nome</label>
-                      <input id="name" type="text" name="name" placeholder="Informe seu nome">
+                      <input id="name" type="text" name="name" ng-model="crtl.participante.nome" placeholder="Informe seu nome">
                     <label for="email" class="emailLabel">Email</label>
-                      <input id="email" type="text" name="email" placeholder="Informe seu email">
+                      <input id="email" type="text" name="email" ng-model="crtl.participante.email" placeholder="Informe seu email">
                     <label for="telefone">Telefone</label>
-                      <input id="telefone" type="text" name="subject" placeholder="Informe seu telefone">
+                      <input id="telefone" type="text" name="subject" ng-model="crtl.participante.telefone" placeholder="Informe seu telefone">
 
                     <span class="pull-right">  
                         <button class="btn-transcricao" type="submit">Increver</button>
