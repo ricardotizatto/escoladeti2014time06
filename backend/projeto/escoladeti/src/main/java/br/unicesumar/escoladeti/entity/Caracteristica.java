@@ -17,6 +17,7 @@ public class Caracteristica extends Entidade implements Serializable{
 	private String descricao;
 	
 	@OneToMany(mappedBy = "caracteristica",fetch = FetchType.EAGER)
+	@JsonBackReference
 	private Set<PessoaCaracteristica> pessoaCaracteristicas;
 	
 	public String getDescricao() {

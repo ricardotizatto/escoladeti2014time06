@@ -19,7 +19,6 @@ public class VigenciaAssociado extends Entidade{
 	
 	@ManyToOne
 	@JoinColumn(name = "pessoacaracteristica_id",referencedColumnName = "id")
-	@JsonBackReference
 	private PessoaCaracteristica pessoaCaracteristica;
 
 	public Date getVigencia() {
