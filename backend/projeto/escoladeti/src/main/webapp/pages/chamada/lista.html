@@ -1,4 +1,4 @@
-<div modalChamada class="container" ng-controller="chamadaController" ng-init="getTodos(1)">
+<div class="container" ng-controller="chamadaController" ng-init="getTodos(1)">
     <fieldset>
         <legend> <span class="glyphicon glyphicon-list-alt"></span> Lista de Presença </legend>
         <table class="table table-striped table-hover" >
@@ -13,10 +13,13 @@
                 <td><input type="checkbox" id="presensa{{pp.id}}" name="presensa{{pp.id}}" ng-checked="{{pp.presente}}" ng-click="salvar(pp)"></td>
             </tr>
         </table>
-        
-        <a class="btn btn-primary btn-padrao" ng-click="voltar()">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
-        </a>
+        <div class="col-sm-12">
+            <span class="pull-right">
+                <a class="btn btn-primary btn-padrao" ng-click="voltar()">
+                    <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+                </a>  
+            </span>
+        </div>
     </fieldset>
     <hr>
 </div>

@@ -1,6 +1,6 @@
 ﻿<div class="container" ng-controller="eventoController" ng-init="carregaPeriodo()">
     <fieldset>
-        <legend> <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp; Dias de realização do Evento 
+        <legend> <span class="glyphicon glyphicon-list-alt"></span> Dias de realização do Evento 
         </legend>
         <table class="table table-hover table-striped">
             <tr>
@@ -20,9 +20,13 @@
                 </td>
             </tr>
         </table>
-        <a class="btn btn-primary btn-padrao" ng-click="voltar()">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
-        </a>
+        <div class="col-sm-12">
+            <span class="pull-right">
+              <a class="btn btn-primary btn-padrao" ng-click="voltar()">
+                <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+              </a>  
+            </span>
+        </div>
     </fieldset>
     <hr>
 </div>
