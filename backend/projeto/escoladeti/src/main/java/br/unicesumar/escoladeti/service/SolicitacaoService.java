@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SolicitacaoService {
@@ -50,6 +51,7 @@ public class SolicitacaoService {
         return solicitacaoRepository.findOne(id);
     }
 
+    @Transactional
     public Solicitacao salvar(ComandoSalvarSolicitacao comando) {
         Solicitacao solicitacao = Solicitacao
                 .builder()

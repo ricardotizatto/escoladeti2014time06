@@ -12,15 +12,6 @@ public class Participante extends Entidade {
     private String deficiente;
     private String pagamento;
     private String necessidade;
-    private boolean presente;
-
-    public boolean isPresente() {
-        return presente;
-    }
-
-    public void setPresente(boolean presente) {
-        this.presente = presente;
-    }
     
     public String getPagamento() {
         return pagamento;

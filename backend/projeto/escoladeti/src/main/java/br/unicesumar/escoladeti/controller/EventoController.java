@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarEvento;
 import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.util.data.DateUtil;
@@ -22,8 +23,10 @@ public class EventoController implements Serializable {
 
     @RequestMapping(value = "/evento", method = RequestMethod.POST)
     @ResponseBody
-    public Evento salvar(@RequestBody Evento evento) throws Exception {
-        return this.eventoService.salvar(evento);
+    public Evento salvar(@RequestBody ComandoSalvarEvento comando) throws Exception {
+        System.out.println("comand: total size --> " + comando.getPeriodos().size());
+        System.out.println(comando.toString());
+        return this.eventoService.persistirEvento(comando,null);
     }
 
     @RequestMapping(value = "/evento/{id}", method = RequestMethod.GET)
