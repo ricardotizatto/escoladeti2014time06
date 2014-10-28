@@ -46,11 +46,11 @@ public class EventoService {
     }
 
     public DataPage<Evento> getProxomosEventos() {
-        return new DataPage<>(eventoRepository.findByStatuseventoTrueOrderByDataAsc( new PageRequest(0, 4)));
+        return new DataPage<>(eventoRepository.findByStatuseventoTrue( new PageRequest(0, 4)));
     }
     
     public DataPage<Evento> getUltimosEventos() {
-        return new DataPage<>(eventoRepository.findByStatuseventoFalseOrderByDataDesc(new PageRequest(0, 4)));
+        return new DataPage<>(eventoRepository.findByStatuseventoFalse(new PageRequest(0, 4)));
     }
     
     public Evento persistirEvento(ComandoSalvarEvento comando, Long id) {

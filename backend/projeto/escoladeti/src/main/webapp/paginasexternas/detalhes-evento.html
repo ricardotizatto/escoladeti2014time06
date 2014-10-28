@@ -20,26 +20,29 @@
                 <b>Ministrante: </b> {{ctrl.evento.ministrante}} <br>
                 <b>Organização: </b> {{ctrl.evento.organizacao}} <br>
                 <b>Local do evento: </b> {{ctrl.evento.local}} <br>
-                <b>Data: </b> {{ctrl.evento.data | date: 'dd-MM-yyyy'}} <br>
-                <b>Horário do evento: </b> {{ctrl.evento.inicio}} as {{ctrl.evento.fim}} <br>
-                <b>Valor: </b> {{ctrl.evento.valor}} 
+                <b>Datas:</b> <br>
+                <span ng-repeat="periodo in ctrl.evento.periodos | orderBy:'data'">
+                    <b>Dia: </b>{{periodo.data | date: 'dd-MM-yyyy'}} - <b>Horário: </b> {{periodo.inicio}} as {{periodo.fim}} <br>
+                </span>
+                <br>
+                <b>Valor: </b> {{ctrl.evento.valor === 0 ? 'Entrada Livre' : ctrl.evento.valor}} 
             </p>     
         </div>
         <div class="span6">
             <div class="contact-form">
                 <h4>Inscrição</h4>
-                <form action="" name="formParticipante" > {{crtl.participante}}
+                <form action="" name="formParticipante" > {{crtl.participante}} <br> {{crtl.validacao}}
 
                     <label for="necessidades" class="messageLabel">Possui necessidades especiais?</label>
                     <label class="btn"> 
                         <input ng-model="crtl.participante.deficiente" name="deficiente" value="S" type="radio" /> Sim
                     </label> 
                     <label class="btn"> 
-                        <input  ng-model="crtl.participante.deficiente" name="deficiente" value="N" type="radio" /> Não
+                        <input  ng-model="crtl.participante.deficiente" name="deficiente" value="N" type="radio" ng-checked="!crtl.participante.deficiente" /> Não
                     </label>
                     <div ng-show="crtl.participante.deficiente === 'S'">
                         <label for="necessidades" class="messageLabel">Quais Necessidades?</label>
-                        <input class="form-control" type="text" name="necessidade" placeholder="Quais ?" ng-model="crtl.participante.necessidade"  >
+                        <input class="form-control" type="text" name="necessidade" placeholder="Informe as necessidades" ng-model="crtl.participante.necessidade"  >
                     </div>    
                     <label for="nome" class="nameLabel">Nome</label>
                       <input id="name" type="text" name="name" ng-model="crtl.participante.nome" placeholder="Informe seu nome">

@@ -19,7 +19,11 @@
        <div class="service span3" ng-repeat="proximoEvento in ctrl.proximosEventos.list" >
             <h4>{{proximoEvento.titulo}}</h4>
             <p>{{proximoEvento.descricao}}</p>
-            <p><b>Data:</b> {{proximoEvento.data | date: 'dd-MM-yyyy'}}</p>
+            <p><b>Data:</b> <br>
+                <span ng-repeat="periodo in proximoEvento.periodos | orderBy:'data'">
+                    {{periodo.data | date: 'dd-MM-yyyy'}} <br>
+                </span>
+            </p>
             <a href="" ng-click="ctrl.detalhesEvento(proximoEvento.id)" >Detalhes</a>
         </div>       
     </div>
@@ -35,6 +39,11 @@
             <img src="./resources/externo/assets/img/portfolio/work1.jpg" alt="">
             <h4>{{ultimoEvento.titulo}}</h4>
             <p>{{ultimoEvento.descricao}}</p>
+            <p><b>Data:</b> <br>
+                <span ng-repeat="periodo in ultimoEvento.periodos | orderBy:'data'">
+                    {{periodo.data | date: 'dd-MM-yyyy'}} <br>
+                </span>
+            </p>
             <a href="#/evento-realizado" >Detalhes</a>
         </div>
     </div>

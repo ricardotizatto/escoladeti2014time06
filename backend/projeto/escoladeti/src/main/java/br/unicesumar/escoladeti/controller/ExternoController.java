@@ -1,8 +1,10 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.Evento;
+import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.service.MaterialStatusService;
+import br.unicesumar.escoladeti.service.ParticipanteService;
 import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
 import java.io.Serializable;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,11 +27,20 @@ public class ExternoController implements Serializable{
     
     @Autowired
     private EventoService eventoService;
+    
+    @Autowired
+    private ParticipanteService participanteService;
 
     @RequestMapping(value = "/externo", method = {RequestMethod.GET})
     @Transactional
     public ModelAndView login() {
         return new ModelAndView("public/externo");
+    }
+
+    @RequestMapping(value = {"public/rest/salvarparticipante/"}, method = RequestMethod.POST)
+    @ResponseBody
+    public Participante salvarParticipante(@RequestBody Participante participante) {
+        return this.participanteService.salvar(participante);
     }
     
     @RequestMapping(value = {"public/rest/materiaisproduzidos/pag/{pagina}"}, method = RequestMethod.GET)

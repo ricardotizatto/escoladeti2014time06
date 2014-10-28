@@ -4,8 +4,11 @@ angular.module('appExterno', [])
                 '$routeParams',
                 '$http',
                 '$routeParams',
+                'ParticipanteFactory',
                 'AppFactory',
                 AppCtrontroller]);
+
+
 
 function AppCtrontroller( $routeParams, $http) {
     this.routeParams = $routeParams;
@@ -76,6 +79,7 @@ AppCtrontroller.prototype = {
     carregaEvento: function (){
         console.log('Carrega Evento id :', this.routeParams.eventoId);
         var self = this;
+//        self.novoParticipante();
         if(this.routeParams.eventoId){
             this.http({
                 method: 'GET',
@@ -83,23 +87,37 @@ AppCtrontroller.prototype = {
             }).success(function (evento) {
                 console.log('Detalhes Evento: ', evento);
                 self.evento = evento;
+//                this.novoParticipante();
+                
             });
         }else{
             window.location = '#/eventos';
         }    
     },
     salvarParticipante: function(participante, eventoId) {
-        console.log('Participante Salvo: ', participante.necessidade + ' id: ' + eventoId);
-//        $http.post('./rest/salvarparticoapante/', self.participante)
-//        .success(function(participante) {
-//            self.participante = novoParticipante();
-//            console.log('Participante Salvo: ' + participante);
-//        })
-//        .error(function(data) {
-//            console.log('Erro ao salvar Participante: ' + data);
-//        });
+        var self = this;
+        self.participante = participante;
+        self.participante.idevento = eventoId;
+        self.participante.pagamento = "PENDENTE";
+        
+        if(self.participante.deficiente === 'N' || self.participante.deficiente === undefined){
+            self.participante.deficiente = 'N';
+            self.participante.necessidade = 'N/P';
+        }
+        
+        if(self.participante.nome === undefined )
+            self.validacao.nome = 'Preencha o Nome';
+                    
+        console.log('self.participante salvo: ', self.participante);
+        
+        this.http.post('./public/rest/salvarparticipante/', self.participante)
+        .success(function(participante) {
+            console.log('Participante Salvo: ' + participante);
+        })
+        .error(function(data) {
+            console.log('Erro ao salvar Participante: ' + data);
+        });
     }
-
 };
 
 angular.module('controllers', ['services']);
