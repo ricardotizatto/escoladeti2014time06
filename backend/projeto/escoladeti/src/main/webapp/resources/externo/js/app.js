@@ -48,7 +48,7 @@ AppCtrontroller.prototype = {
                 self.materiaisProduzidos = materiaisProduzidos;
             });
         }else{
-           this. getMateriaisProduzidos(); 
+           this.getMateriaisProduzidos(); 
         }    
     },
     getEventos: function (pageNumber){
@@ -87,7 +87,19 @@ AppCtrontroller.prototype = {
         }else{
             window.location = '#/eventos';
         }    
+    },
+    salvarParticipante: function(participante, eventoId) {
+        console.log('Participante Salvo: ', participante.necessidade + ' id: ' + eventoId);
+//        $http.post('./rest/salvarparticoapante/', self.participante)
+//        .success(function(participante) {
+//            self.participante = novoParticipante();
+//            console.log('Participante Salvo: ' + participante);
+//        })
+//        .error(function(data) {
+//            console.log('Erro ao salvar Participante: ' + data);
+//        });
     }
+
 };
 
 angular.module('controllers', ['services']);

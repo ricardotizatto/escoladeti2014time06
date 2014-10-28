@@ -28,7 +28,7 @@
         <div class="span6">
             <div class="contact-form">
                 <h4>Inscrição</h4>
-                <form method="post" action=""> {{crtl.participante}}
+                <form action="" name="formParticipante" > {{crtl.participante}}
 
                     <label for="necessidades" class="messageLabel">Possui necessidades especiais?</label>
                     <label class="btn"> 
@@ -39,7 +39,7 @@
                     </label>
                     <div ng-show="crtl.participante.deficiente === 'S'">
                         <label for="necessidades" class="messageLabel">Quais Necessidades?</label>
-                        <input class="form-control" type="text" name="necessidade" placeholder="quais" ng-model="crtl.participante.necessidade"  >
+                        <input class="form-control" type="text" name="necessidade" placeholder="Quais ?" ng-model="crtl.participante.necessidade"  >
                     </div>    
                     <label for="nome" class="nameLabel">Nome</label>
                       <input id="name" type="text" name="name" ng-model="crtl.participante.nome" placeholder="Informe seu nome">
@@ -49,7 +49,7 @@
                       <input id="telefone" type="text" name="subject" ng-model="crtl.participante.telefone" placeholder="Informe seu telefone">
 
                     <span class="pull-right">  
-                        <button class="btn-transcricao" type="submit">Increver</button>
+                        <button class="btn-transcricao"  data-ng-click="ctrl.salvarParticipante(crtl.participante, ctrl.evento.id)">Increver</button>
                     </span>    
                 </form>
             </div>
