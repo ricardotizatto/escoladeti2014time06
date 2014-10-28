@@ -17,9 +17,9 @@
     </div>    
     <div class="row">
        <div class="service span3" ng-repeat="proximoEvento in ctrl.proximosEventos.list" >
-            <img src="./resources/externo/assets/img/portfolio/work5.jpg" alt="">
             <h4>{{proximoEvento.titulo}}</h4>
             <p>{{proximoEvento.descricao}}</p>
+            <p><b>Data:</b> {{proximoEvento.data | date: 'dd-MM-yyyy'}}</p>
             <a href="" ng-click="ctrl.detalhesEvento(proximoEvento.id)" >Detalhes</a>
         </div>       
     </div>
