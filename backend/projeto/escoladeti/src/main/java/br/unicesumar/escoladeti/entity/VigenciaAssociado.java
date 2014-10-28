@@ -2,9 +2,11 @@ package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -12,13 +14,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class VigenciaAssociado extends Entidade{
-	private static final long serialVersionUID = 1L;
 	
+	@Column(name = "vigencia")
 	@Temporal(TemporalType.DATE)
 	private Date vigencia;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "pessoacaracteristica_id",referencedColumnName = "id")
+	@JsonBackReference
 	private PessoaCaracteristica pessoaCaracteristica;
 
 	public Date getVigencia() {
@@ -29,6 +32,15 @@ public class VigenciaAssociado extends Entidade{
 		this.vigencia = vigencia;
 	}
 	
+	
+	public PessoaCaracteristica getPessoaCaracteristica() {
+		return pessoaCaracteristica;
+	}
+
+	public void setPessoaCaracteristica(PessoaCaracteristica pessoaCaracteristica) {
+		this.pessoaCaracteristica = pessoaCaracteristica;
+	}
+
 	public VigenciaAssociado(){
 	}
 }

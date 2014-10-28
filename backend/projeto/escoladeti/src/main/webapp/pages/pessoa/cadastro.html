@@ -1,7 +1,6 @@
 
 <div class="container" ng-controller="PessoaController"
 	ng-init="carregarPessoa()">
-	{{pessoa}}
 	<div class="row">
 		<div class="form-group col-sm-12">
 			<legend>
@@ -12,7 +11,7 @@
 	<form action="" novalidade method="POST" name="formPessoa" role="form"
 		ng-submit="salvar()">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-3">
 				<div class="form-group">
 					<label class="control-label">Tipo</label>
 					<div class="btn-group">
@@ -28,14 +27,21 @@
 			</div>
 			<div class="col-sm-6">
 				<div
-					class="form-group {{formPessoa.caracteristicas.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+					class="form-group {{formPessoa.caracteristicas.$error.required ? 'has-error' : 'has-success'}} has-feedback" ng-show="pessoa.tipo === 'F'">
 					<label class="control-label"><strong>Caracteristicas
 							*</strong></label> <select type="text" name="caracteristicas"
 						ng-change="temAssociado();temAluno()" ui-select2="select2Options"
-						multiple class="input-default" ng-model="pessoaCaracteristica.caracteristicas"
-						required>
+						multiple class="input-default"
+						ng-model="pessoaCaracteristica.caracteristicas" ng-required="pessoa.tipo === 'F'">
 						<option ng-repeat="c in caracteristicas" value="{{c.id}}">{{c.descricao}}</option>
 					</select>
+				</div>
+			</div>
+			<div class="col-sm-3" ng-show="associado">
+				<div class="form-group {{formPessoa.vigenciaAssociado.$error.required ? 'has-error' : 'has-success' }} has-feedback">
+					<label class="control-label"><strong>Vigência Associado</strong></label> <input
+						type="date" name="vigenciaAssociado" class="form-control"
+						ng-model="pessoa.vigenciaAssociado" ng-required="associado">
 				</div>
 			</div>
 		</div>
@@ -120,22 +126,19 @@
 					</div>
 				</div>
 				<div class="col-sm-6">
-					<div class="form-group">
+					<div class="form-group {{formPessoa.emailFisica.$error.email ? 'has-error' : ''}} has-feedback">
 						<label class="control-label"><strong>Email </strong></label>
 						<div class="input-group">
 							<span class="input-group-addon"> <span
 								class="glyphicon glyphicon-envelope"></span>
 							</span> <input class="form-control" name="emailFisica" type="email"
 								maxlength="50" ng-model="pessoa.email"
-								placeholder="Endereço de email"
-								ng-pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.)+[a-zA-Z]{2,7}$/">
+								placeholder="Endereço de email">
+								<!-- ng-pattern="/^([a-zA-Z0-9\.]+)@([a-zA-Z]{2,}\.)||([a-zA-Z]{2,})||\.([a-zA-Z]{2,})$/"-->								
+								<!--ng-pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.)+[a-zA-Z]{2,7}$/"-->
 						</div>
+						<span class="help-block" ng-show="formPessoa.emailFisica.$error.email">Email inválido.</span>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6" ng-show="associado">
-					<button class="btn btn-success">Aqui</button>
 				</div>
 			</div>
 		</div>
@@ -502,7 +505,7 @@
 										</div>
 									</div>
 
-                                                               
+
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,9 +26,9 @@ public class PessoaCaracteristica extends Entidade {
 	@JoinColumn(name = "caracteristica_id",referencedColumnName = "id")
 	private Caracteristica caracteristica;
 
-	@OneToMany(mappedBy = "pessoaCaracteristica",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "pessoaCaracteristica",cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE}, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JsonManagedReference
-	private Set<VigenciaAssociado> vigenciaAssociados;
+	private VigenciaAssociado vigenciaAssociado;
 
 	public Long getId() {
 		return id;
@@ -37,12 +38,12 @@ public class PessoaCaracteristica extends Entidade {
 		this.id = id;
 	}
 
-	public Set<VigenciaAssociado> getVigenciaAssociados() {
-		return vigenciaAssociados;
+	public VigenciaAssociado getVigenciaAssociado() {
+		return vigenciaAssociado;
 	}
 
-	public void setVigenciaAssociados(Set<VigenciaAssociado> vigenciaAssociados) {
-		this.vigenciaAssociados = vigenciaAssociados;
+	public void setVigenciaAssociado(VigenciaAssociado vigenciaAssociado) {
+		this.vigenciaAssociado = vigenciaAssociado;
 	}
 
 	public Caracteristica getCaracteristica() {

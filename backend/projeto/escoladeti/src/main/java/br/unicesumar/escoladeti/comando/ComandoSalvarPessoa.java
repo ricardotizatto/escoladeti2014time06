@@ -29,6 +29,15 @@ public class ComandoSalvarPessoa {
     private Set<Telefone> telefones;
     private Set<Endereco> enderecos;
     private List<Long> caracteristicas;
+    private Date vigenciaAssociado;
+    
+	public Date getVigenciaAssociado() {
+		return vigenciaAssociado;
+	}
+
+	public void setVigenciaAssociado(Date vigenciaAssociado) {
+		this.vigenciaAssociado = vigenciaAssociado;
+	}
 
 	public List<Long> getCaracteristicas() {
 		return caracteristicas;

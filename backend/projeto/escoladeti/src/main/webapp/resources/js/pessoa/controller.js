@@ -1,7 +1,7 @@
 var controllers = angular.module('controllers');
 
-function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, BuscaCep, PaisService, EstadoService, CidadeService, CaracteristicaService) {
-
+function PessoaController($scope, $location, $log, $routeParams, $http, $timeout, Pessoa, BuscaCep, PaisService, EstadoService, CidadeService, CaracteristicaService) {
+	
     $scope.mask = '999.999.999-99';
 
     $scope.select2 = 'one';
@@ -31,8 +31,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
 	    	var associado = 2;
 	    	caracs.forEach(function(item){
-	    		if(item == associado)
+	    		if(item == associado){
 	    			$scope.associado = true;
+	    		}
 	    	});
     	}
     }
@@ -87,6 +88,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     	$scope.aluno = false;
         
         $scope.caracteristicas = buscaCaracteristicas();
+        
+        $timeout(function(){
 
         if (!$routeParams.pessoaId) {
             $scope.novaPessoa("F");
@@ -97,20 +100,22 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             $scope.pessoa = pessoa;
             $scope.estaEditando = isEditing();
             $scope.maskCpf = '999.999.999-99';
+        	$scope.pessoaCaracteristica = {};
+        	$scope.pessoaCaracteristica.caracteristicas = [];
             
             if(pessoa.tipo === 'F'){
             	var cars = $scope.pessoa.pessoaCaracteristica;
-            	var caracteristicas = [];
             	cars.forEach(function(item,index){
-            		caracteristicas.push(item.caracteristica.id);
+            		$scope.pessoaCaracteristica.caracteristicas.push(item.caracteristica.id);
+            		if(item.caracteristica.id == 2)
+            			$scope.pessoa.vigenciaAssociado = item.vigenciaAssociado.vigencia;
             	});
-            	console.log(caracteristicas);
-            	$scope.pessoaCaracteristica = {};
-            	$scope.pessoaCaracteristica.caracteristicas = caracteristicas;
             }
-            $scope.temAluno();
-            $scope.temAssociado();            
+
+                $scope.temAluno();
+                $scope.temAssociado();            	            
         });
+        },100);
     };
     
      function buscaCaracteristicas(){    	
@@ -125,13 +130,15 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
 
     $scope.buscaPessoaContendoNome = function () {
         $scope.busca = $scope.busca.toUpperCase();
-        Pessoa.buscarPessoa({pagina: 1, busca: $scope.busca}, function (pagina) {
-            $scope.pagina = pagina;
-        });
+        $timeout(function(){
+            Pessoa.buscarPessoa({pagina: 1, busca: $scope.busca}, function (pagina) {
+                $scope.pagina = pagina;
+            });
+        }, 100);
     };
 
     $scope.getTodos = function (numeroPagina) {
-            $scope.filtroPessoaFisica(numeroPagina);
+    	$scope.filtroPessoaFisica(numeroPagina);
     };
 
 
@@ -177,7 +184,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     };
 
     $scope.salvar = function () {
-        $scope.pessoa.caracteristicas = $scope.pessoaCaracteristica.caracteristicas;    	
+    	if($scope.pessoa.tipo === 'F')
+    		$scope.pessoa.caracteristicas = $scope.pessoaCaracteristica.caracteristicas;    	
         if ($scope.pessoa.id) {
             $scope.pessoa.$update(function () {
                 toastr.success($scope.pessoa.nome + ' atualizado com sucesso');
@@ -186,8 +194,6 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             });
             return;
         }
-        
-        console.log($scope.pessoa.caracteristicas);
         
         $scope.pessoa.$save(function () {
             toastr.success($scope.pessoa.nome + ' salvo com sucesso');
@@ -203,15 +209,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
             if (result) {
                 Pessoa.delete({id: pessoa.id, tipo: pessoa.tipo}, function () {
                     toastr.success(pessoa.nome + ' deletada com sucesso');
-                    if ($scope.tipoPessoa === 'J') {
-                        $scope.filtroPessoaJuridica($scope.pageNumber);
-                    } else {
-                        if ($scope.tipoPessoa === 'A') {
-                            $scope.filtroAluno($scope.pageNumber);
-                        } else {
-                            $scope.filtroPessoaFisica($scope.pageNumber);
-                        }
-                    }
+                    $scope.filtroPessoaFisica($scope.pageNumber);
                 });
             }
             return;
@@ -352,23 +350,24 @@ function PessoaController($scope, $location, $log, $routeParams, $http, Pessoa, 
     }
 
     $scope.buscaCep = function (c) {
-        if (!c) {
-            return;
+        if (c) {
+        	$timeout(function(){
+    	        BuscaCep.get({cep: c},
+    	    	        function (cep) {
+    	    	            if (!cep.cidade) {
+    	    	                return;
+    	    	            }
+    	    	            $scope.endereco = cep;
+    	    	            $scope.modificarPais(cep.cidade.unidadeFederativa.pais.id);
+    	    	            $scope.modificarEstado(cep.cidade.unidadeFederativa.id);
+    	    	            $scope.endereco.id = null;
+    	    	            $scope.endereco.principal = 'S';
+    	    	
+    	    	        }, function (mesage) {
+    	    	            console.log(mesage);
+    	    	        });        		
+        	},100);
         }
-        BuscaCep.get({cep: c},
-        function (cep) {
-            if (!cep.cidade) {
-                return;
-            }
-            $scope.endereco = cep;
-            $scope.modificarPais(cep.cidade.unidadeFederativa.pais.id);
-            $scope.modificarEstado(cep.cidade.unidadeFederativa.id);
-            $scope.endereco.id = null;
-            $scope.endereco.principal = 'S';
-
-        }, function (mesage) {
-            console.log(mesage);
-        });
     };
 
     function getNovoTelefone() {
@@ -408,6 +407,7 @@ controllers.controller('PessoaController',
             '$log',
             '$routeParams',
             '$http',
+            '$timeout',
             'PessoaFactory',
             'BuscaCepFactory',
             'paisService',
