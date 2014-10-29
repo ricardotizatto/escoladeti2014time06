@@ -88,17 +88,11 @@
                 </div>
                 <div class="footer-border"></div>
                 <div class="row">
-                    <div class="copyright span5">
-                        <p>Copyright 2014 Amacap - Todos os direitos reservados.</p>
-                    </div>
-                    <div class="social span7">
-                        <p>Sistema desenvolvido pelos alunos da Escola de T.I. 2014 - Unicesumar - Time 6</p>
-                        <!--
-                        <a class="facebook" href=""></a>
-                        <a class="dribbble" href=""></a>
-                        <a class="twitter" href=""></a>
-                        <a class="pinterest" href=""></a>
-                        -->
+                    <div class="copyright span12">
+                        Copyright 2014 Amacap - Todos os direitos reservados.
+                        <span class="pull-right" >
+                            <a class="link-credito" href="#/creditos" ng-click="ctrl.ativaBotao('')">Sistema desenvolvido pelos alunos da Escola de T.I. 2014 - Unicesumar - Time 6</a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -108,9 +102,7 @@
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>
-        <script src="./resources/externo/js/app.js"></script>
-        <script src="./resources/externo/js/EventoController.js"></script>
-        <script src="./resources/externo/js/EventoService.js"></script>
+        <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script> 
         <script src="./resources/externo/assets/js/jquery-1.8.2.min.js"></script>
         <script src="./resources/externo/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="./resources/externo/assets/js/jquery.flexslider.js"></script>
@@ -121,6 +113,11 @@
         <script src="./resources/externo/assets/js/jquery.quicksand.js"></script>
         <script src="./resources/externo/assets/prettyPhoto/js/jquery.prettyPhoto.js"></script>
         <script src="./resources/externo/assets/js/scripts.js"></script>
+        <script src="./resources/externo/js/app.js"></script>
+<!--        <script src="./resources/externo/js/EventoController.js"></script>
+        <script src="./resources/externo/js/EventoService.js"></script>
+        <script src="./resources/externo/js/MaterialController.js"></script>
+        <script src="./resources/externo/js/MaterialService.js"></script>-->
     
     </body>
 </html>
