@@ -14,8 +14,8 @@ public class MaterialStatusService {
     @Autowired
     private MaterialStatusRepository  materialStatusRepository;
 
-    public DataPage<ViewMaterialProduzido> listarMateriaisProduzidos() {
-        return new DataPage<>(this.materialStatusRepository.findByStatusContainingOrderByNomeAsc("FINALIZADO", pageRequestForAsc(1, "nome")));
+    public DataPage<ViewMaterialProduzido> listarMateriaisProduzidos(Integer pagina) {
+        return new DataPage<>(this.materialStatusRepository.findByStatusContainingOrderByNomeAsc("FINALIZADO", pageRequestForAsc(pagina, "nome")));
     }
     
     public DataPage<ViewMaterialProduzido> buscaMateriaisProduzidos(String nomeParcial) {
