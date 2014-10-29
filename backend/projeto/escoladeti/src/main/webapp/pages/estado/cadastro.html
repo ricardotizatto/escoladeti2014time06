@@ -26,6 +26,7 @@
             <div class="form-group {{formEstado.pais.$error.required ? 'has-error' : 'has-success'}} has-feedback">
                 <label class="control-label"><strong>Pais *</strong></label>
                 <select type="text" name="pais" ui-select2="select2Options" class="input-default" ng-model="unidadeFederativa.idPais" required>
+                    <option value=""></option>
                     <option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nome}}</option>
                 </select>
 
@@ -41,9 +42,11 @@
                 </button>
             </div>		
         </div>
-        <div class="row"><div class="col-sm-12"><hr></div></div>			
+        <div class="row"><div class="col-sm-12"><hr></div></div>
+        
+        <label>{{unidadeFederativa.idPais}}</label>
     </form>
 
 
-
 </div>
+

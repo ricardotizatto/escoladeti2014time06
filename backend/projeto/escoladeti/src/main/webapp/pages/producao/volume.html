@@ -1,9 +1,13 @@
 <div class="container" ng-controller="VolumeController as ctrl" >
-    <label> &nbsp; </label>
     <fieldset>
         <div class="row">
-            <div class="form-group col-sm-12">
-                <legend> <span class="glyphicon glyphicon-file">Volume</span></legend>
+            <legend> <span class="glyphicon glyphicon-file">Volume</span></legend>
+        </div>
+        <div class="row" data-ng-show="ctrl.volume.status == 'REVISADO'">
+            <div class="col-xs-12">
+                <div class="alert alert-success">
+                    Este volume está concluido
+                </div>
             </div>
         </div>
         <form role="form" name="opForm" role="form">
@@ -48,36 +52,41 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <label>Enviar Arquivo</label>
+                        <label>Arquivo</label>
                         <div class="input-group">
-                            <span class="input-group-btn">
-                                <span class="btn btn-primary btn-file" required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">
-                                     <span class="glyphicon glyphicon-search " ></span> Procurar <input type="file" >
-                                </span>
-                            </span>
-                            <input type="text" class="form-control" readonly>
-                            <span class="input-group-btn">
-                                <span class="btn btn-primary btn-file">
+                            <!--<span class="input-group-btn">-->
+                                <!--&lt;!&ndash;<span class="btn btn-primary btn-file" required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">&ndash;&gt;-->
+                                     <!--&lt;!&ndash;<span class="glyphicon glyphicon-search " ></span> Procurar <input type="file" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--<button type="file" class="form-control btn btn-success">teste</button>-->
+                            <!--</span>-->
+                            <input type="text" class="form-control" data-ng-model="ctrl.volume.nomeArquivo" disabled>
+                            <span class="input-group-btn" >
+                                <a class="btn btn-primary btn-file" href="./rest/upload/{{ctrl.volume.id}}"
+                                      data-ng-disabled="!ctrl.volume.caminhoAnexo">
                                     <span class="glyphicon glyphicon-download " ></span> Download
-                                </span>
+                                </a>
                             </span>
                         </div>
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="">Arquivo à enviar</label>
+                        <input type="file" class="form-control " file-model="ctrl.arquivo"
+                               data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">
+                    </div>
+                </div>
 
                 <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-6 form-group">
                         <label class="control-label">Data Impressão </label>
                         <input class="form-control" type="date" data-ng-model="ctrl.volume.dataImpressao" disabled>
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-6 form-group">
                         <label class="control-label">Data Revisão</label>
                         <input  class="form-control" type="date" data-ng-model="ctrl.volume.dataRevisao" disabled>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label class="control-label">Data Envio</label>
-                        <input class="form-control" type="date" data-ng-model="ctrl.volume.dataEnviado" disabled>
                     </div>
                 </div>
 
@@ -85,7 +94,7 @@
                 <div class="row">
                     <div class="col-sm-12 form-group">
                         <label> Observação</label>
-                        <textarea class="form-control" data-ng-model="ctrl.volume.observacao" data-ng-disabled="ctrl.volume.status == 'ENVIADO'"
+                        <textarea class="form-control" data-ng-model="ctrl.volume.observacao" data-ng-disabled="ctrl.volume.status == 'REVISADO'"
                                   data-ng-disabled="(ctrl.volume.status == 'CANCELADO')"></textarea>
                         <div class="required-icon">
                             <div class="text"></div>
@@ -112,12 +121,8 @@
                             <span class="fa fa-thumbs-o-down" ></span> &nbsp;Rejeitado
                         </button>
                     </div>
-                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'REVISADO'">
-                        <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.marcarComoEnviado()" >
-                            <span class="fa fa-share" ></span> &nbsp;Enviado
-                        </button>
-                    </div>
-                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status != 'CANCELADO' && ctrl.volume.status != 'ENVIADO'
+
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status != 'CANCELADO' && ctrl.volume.status != 'REVISADO'
                         && ctrl.volume.status != 'ANDAMENTO' ">
                         <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.reativar()" >
                             <span class="fa fa-refresh" ></span>&nbsp; Reativar

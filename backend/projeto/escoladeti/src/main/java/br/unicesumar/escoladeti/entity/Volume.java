@@ -1,13 +1,12 @@
 package br.unicesumar.escoladeti.entity;
 
-import javax.persistence.*;
-
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.unicesumar.escoladeti.util.string.StringUtils;
 
+import javax.persistence.*;
+import java.io.File;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 public class Volume  {
@@ -29,10 +28,8 @@ public class Volume  {
     @Enumerated(EnumType.STRING)
     private VolumeStatus status;
 
-    @Column(name = "id_solicitacao_item")
-    private Long idSolicitacaoItem;
-
-
+    @Column(name = "caminho_anexo")
+    private String caminhoAnexo;
 
     @ManyToOne
     @JoinColumn(name = "id_responsavelrevisao")
@@ -51,6 +48,10 @@ public class Volume  {
     @Temporal(TemporalType.DATE)
     @Column(name = "data_enviado")
     private Date dataEnviado;
+
+    @Column(name = "id_livro")
+    private Long idLivro;
+
 
     public Usuario getResponsavel() {
         return responsavel;
@@ -82,14 +83,6 @@ public class Volume  {
 
     public void setStatus(VolumeStatus status) {
         this.status = status;
-    }
-
-    public Long getIdSolicitacaoItem() {
-        return idSolicitacaoItem;
-    }
-
-    public void setIdSolicitacaoItem(Long idSolicitacaoItem) {
-        this.idSolicitacaoItem = idSolicitacaoItem;
     }
 
     public Usuario getResponsavelRevisao() {
@@ -140,6 +133,29 @@ public class Volume  {
         this.id = id;
     }
 
+    public String getCaminhoAnexo() {
+        return caminhoAnexo;
+    }
+
+    public Long getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(Long idLivro) {
+        this.idLivro = idLivro;
+    }
+
+    public String getNomeArquivo() {
+        if (StringUtils.isNotEmpty(caminhoAnexo))
+            return new File(getCaminhoAnexo()).getName();
+
+        return "";
+    }
+
+    public void setCaminhoAnexo(String caminhoAnexo) {
+        this.caminhoAnexo = caminhoAnexo;
+    }
+
     public void rejeitar(Date data, Long revisor, String observacao) {
         if (data == null) {
             throw  new RuntimeException("Data da rejeição deve ser informada.");
@@ -169,37 +185,14 @@ public class Volume  {
     public void reativar() {
 
         if (this.getStatus().equals(VolumeStatus.CANCELADO)
-                || this.getStatus().equals(VolumeStatus.ENVIADO)) {
-            throw new RuntimeException("Sómente volume rejeitado, revisado ou impresso podem ser reativados.");
+                || this.getStatus().equals(VolumeStatus.REVISADO)) {
+            throw new RuntimeException("Sómente volume rejeitado, ou impresso podem ser reativados.");
         }
 
         this.setStatus(VolumeStatus.ANDAMENTO);
         this.dataImpressao = null;
         this.dataRevisao = null;
         this.responsavelRevisao = null;
-    }
-
-    public void marcarComoEnviado(Date data, String observacao) {
-        if (!getStatus().equals(VolumeStatus.REVISADO)) {
-            throw new RuntimeException("Sómente volume revisado pode ser marcado como enviado.");
-        }
-
-        if (data == null) {
-            throw new RuntimeException("Informe data de envio.");
-        }
-
-        if (data.after(new Date())) {
-            throw new RuntimeException("Data deve ser menor ou igual a hoje.");
-        }
-
-        if (data.before(this.dataRevisao)) {
-            throw new RuntimeException("Data de Envio deve ser maior ou igual a data de revisão");
-        }
-
-        setStatus(VolumeStatus.ENVIADO);
-        setObservacao(observacao);
-        setDataEnviado(data);
-
     }
 
     public void marcarComoRevisado(Date data, Long revisor, String observacao) {
@@ -230,6 +223,10 @@ public class Volume  {
     }
 
     public void marcarComoImprimido(ComandoSalvarVolume comandoSalvarVolume) {
+
+        if(caminhoAnexo == null) {
+            throw new RuntimeException("Arquivo é obrigatório para marcar como impresso");
+        }
 
         if (!getStatus().equals(VolumeStatus.ANDAMENTO)) {
             throw new RuntimeException("Sómente volume em Andamento pode ser marcado como impresso.");

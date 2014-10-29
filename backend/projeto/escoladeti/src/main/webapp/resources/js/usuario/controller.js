@@ -1,10 +1,5 @@
 function UsuarioController($scope, $http, $routeParams) {
     console.log('Usuario Controller');
-    $scope.nome;
-    $scope.login;
-    $scope.senha;
-    $scope.email;
-    $scope.ativo;
 
     var tamanho = 0;
     var temMaiuscula = 0;
@@ -19,7 +14,7 @@ function UsuarioController($scope, $http, $routeParams) {
             $scope.carregarUsuario();
         } else {
             $scope.usuario = getNovoUsuario();
-            console.log(angular.toJson($scope.usuario, true));
+           // console.log(angular.toJson($scope.usuario, true));
             window.location = '#/cadastrousuario';
         }
     };
@@ -27,76 +22,97 @@ function UsuarioController($scope, $http, $routeParams) {
         console.log('Editar usuario');
         window.location = '#/cadastrousuario/' + usuario.id;
     };
-    $scope.getTodos = function() {
-        $http.get("./rest/usuarioSource/usuario")
-                .success(function(usuarios, status) {
-            $scope.usuarios = usuarios;
-        })
-                .error(function(data, status) {
-            console.log('erro ao buscar usuarios');
-        });
+    $scope.voltar = function () {
+        window.location = '#/listausuario';
     };
+    
+    $scope.getTodos = function(numeroPagina) {
+        console.log(numeroPagina);
+        $http.get('./rest/usuarioSource/listar/pag/' + numeroPagina)
+            .success(function(usuarios) {
+                $scope.pagina = usuarios;
+                console.log('usuarios ' + usuarios);
+            }).error(function(data) {
+                console.log('erro ao buscar usuarios ' + data);
+            });
+    };
+    
+    $scope.buscaUsuariosContendoNome = function() {
+        console.log($scope.busca);
+        if(!$scope.busca.empty){
+        $http.get('./rest/usuarioSource/usuarios?q=' + $scope.busca.toUpperCase())
+            .then(function(usuarios) {
+                console.log(usuarios.data.list);
+                $scope.pagina = usuarios.data;
+            });
+        }else{
+            $scope.getTodos($scope.pageNumber);
+        }    
+    };
+    
     $scope.salvar = function() {
         console.log(angular.toJson($scope.usuario, true));
-        $scope.usuario.ativo = true;
         if ($scope.usuario.nome === undefined)
             return toastr.warning('Preencha o campo nome');
         if ($scope.usuario.login === undefined)
             return toastr.warning('Preencha o campo login');
         if ($scope.usuario.senha === undefined)
             return toastr.warning('Preencha o campo senha');
-        if ($scope.usuario.email === undefined) {
+        if ($scope.usuario.email === undefined) 
             return toastr.warning('Preencha o campo email');
-        }
+        if ($scope.usuario.inicioVigencia === undefined) 
+            return toastr.warning('Preencha o campo data inicio Vigencia');
+        if ($scope.usuario.fimVigencia === undefined) 
+            return toastr.warning('Preencha o campo data fim da Vigencia');
+        if($scope.usuario.inicioVigencia > $scope.usuario.fimVigencia)
+            return toastr.warning('Data fim da Vigencia deve ser menor que a de inicio!');
 
-        if (!$scope.usuario.senha === $scope.confirmaSenha) {
+        if (!($scope.usuario.senha === $scope.confirmaSenha)) {
             toastr.warning('As senhas devem ser iguais!');
-            console.log('senha ' + $scope.usuario.senha + ' confirmarSenha ' + $scope.confirmaSenha);
         } else {
+            console.log("Salvar usuario perfilDeAcessoUsuarioId: " + $scope.usuario.perfilDeAcessoUsuarioId);
             $http.post("./rest/usuarioSource/usuario", $scope.usuario)
-                    .success(function(usuario, status) {
-                toastr.success("Usuário cadastrado com sucesso!");
-                setTimeout(function() {
-                    window.location = "#/cadastroperfilacessousuario/"+usuario.id;
-                }, 500);
+                .success(function(usuario) {
                 console.log("usuario salvo = " + usuario);
-            })
-                    .error(function(data, status) {
+                toastr.success("Usuário "+ $scope.usuario.nome +" cadastrado com sucesso!"); 
+                window.location = "#/listausuario";
+            }).error(function(data) {
                 console.log("erro ao salvar usuario", data);
                 toastr.warning("Erro ao salvar usuário!");
             });
         }
     };
+
     $scope.deletar = function(usuario) {
         $http({
             method: 'DELETE',
             data: usuario,
             url: './rest/usuarioSource/usuario',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
-        })
-                .success(function(data) {
-            console.log("usuario deletado");
-            toastr.success("Usuario deletado com sucesso!");
-            $scope.getTodos();
+        }).success(function(data) {
+            console.log("usuario deletado" + data);
+            toastr.success("Usuario "+ usuario.nome +" deletado com sucesso!");
+            $scope.getTodos(1);
         }).error(function(data) {
-            console.log("erro ao deletar usuario ");
+            console.log("erro ao deletar usuario " + data);
             toastr.warning("Erro ao deletar usuário!");
         });
     };
     $scope.carregarUsuario = function() {
         if ($routeParams.usuarioId) {
             $http.get('./rest/usuarioSource/usuario/' + $routeParams.usuarioId)
-                    .success(function(usuario) {
+                .success(function(usuario) {
                 $scope.usuario = usuario;
+                $scope.usuario.ativo = String(usuario.ativo);
             });
         }
     };
 
     $scope.getPerfisDeAcesso = function() {
         $http.get("./rest/perfilAcessoSource/perfilAcesso")
-                .success(function(perfils, status) {
+            .success(function(perfils, status) {
             $scope.perfisAcesso = perfils;
-            console.log(angular.toJson($scope.perfisAcesso, true));
+            //console.log(angular.toJson($scope.perfisAcesso, true));
         }).error(function(data, status) {
             console.log('Erro ao carregar perfis de acesso! ' + data);
         });
@@ -145,20 +161,23 @@ function UsuarioController($scope, $http, $routeParams) {
         }
 
         if (resultado < 40) {
-            $scope.myStyle = {'background-color': '#ff0000'};
+            $scope.myStyle = {'background-color': '#ff0000', 'color': '#fff'};
+            $scope.statusSenha = 'Senha Fraca';
         } else {
             if (resultado >= 40 && resultado < 80) {
-                $scope.myStyle = {'background-color': '#ffff00'};
+                $scope.myStyle = {'background-color': '#ffff00', 'color': '#000'};
+                $scope.statusSenha = 'Senha Média';
             } else {
                 if (resultado >= 80) {
-                    $scope.myStyle = {'background-color': '#66ff00'};
+                    $scope.myStyle = {'background-color': '#66ff00', 'color': '#000'};
+                    $scope.statusSenha = 'Senha Forte';
                 }
             }
         }
     };
     function getNovoUsuario() {
         console.log('novo usuario');
-        return {};
+        return {ativo: 'true'};
     }
     ;
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="1" author="catabriga">
+        <dropColumn tableName="volume" columnName="id_solicitacao_item"></dropColumn>
+        
+        <createTable tableName="SOLICITACAOVOLUME">
+            <column name="id" type="int8">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+
+            <column name="data_envio" type="date">
+            </column>
+            
+            <column name="id_volume" type="int8">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="SOLICITACAOVOLUME" baseColumnNames="id_volume"
+                                 constraintName="solitem_volume"
+                                 referencedTableName="VOLUME"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2" author="catabriga">
+        <addColumn tableName="solicitacaovolume">
+            <column name="id_solicitacaoitem" type="int8"/>
+        </addColumn>
+
+        <addForeignKeyConstraint baseTableName="solicitacaovolume" baseColumnNames="id_solicitacaoitem"
+                                 constraintName="solitem_solvolume"
+                                 referencedTableName="solicitacaoitem"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="3" author="catabriga">
+        <addColumn tableName="volume">
+            <column name="id_livro" type="int8"></column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_livro" constraintName="livro_volume"
+                                 referencedTableName="livro"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
+

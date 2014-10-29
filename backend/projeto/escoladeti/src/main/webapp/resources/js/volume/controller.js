@@ -5,18 +5,21 @@ angular.module('controllers')
         '$http',
         'VolumeFactory',
         'OrdemProducaoFactory',
+        'fileUpload',
         VolumeController]);
 
-function VolumeController($routeParams, $http, Volume, OrdemProducao) {
+function VolumeController($routeParams, $http, Volume, OrdemProducao, fileUpload) {
     this.routeParams = $routeParams;
     this.Volume = Volume;
     this.OrdemProducao = OrdemProducao;
     this.http = $http;
+    this.fileUpload = fileUpload;
     this.iniciar();
 }
 
 VolumeController.prototype = {
     iniciar: function () {
+
         this.buscarUsuarios();
 
         if (this.routeParams.id) {
@@ -52,6 +55,9 @@ VolumeController.prototype = {
     },
 
     ajustarVolume: function () {
+        var idSolicitacaoItem = this.routeParams.idOrdemProducao;
+
+        this.volume.idSolicitacaoItem = idSolicitacaoItem;
 
         if (this.volume.responsavel) {
             this.volume.responsavel = this.volume.responsavel.id;
@@ -87,12 +93,22 @@ VolumeController.prototype = {
         console.log(this.volume);
     },
 
+    enviarArquivo: function () {
+
+    },
+
     salvarVolume: function () {
         var self = this;
 
         var mensagemSucesso = function () {
             self.ajustarVolume();
             toastr.success('Volume salvo com sucesso');
+            var promise = self.fileUpload.uploadFileToUrl(self.arquivo, './rest/upload/'+self.volume.id);
+
+            promise && promise.success(function () {
+                    delete self.arquivo;
+                    self.buscarVolume(self.volume.id);
+                });
         };
 
         this.volume.responsavel = + this.volume.responsavel;
@@ -103,6 +119,19 @@ VolumeController.prototype = {
         }
 
         this.volume.$save(mensagemSucesso);
+    },
+
+    downloadArquivo: function () {
+        var id = this.volume.id;
+
+        if (!id) return;
+
+        console.log(this.http);
+
+        this.http({
+            url: './rest/upload/'+id,
+            method: 'GET'
+        });
     },
 
 

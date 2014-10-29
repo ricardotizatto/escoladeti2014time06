@@ -153,5 +153,79 @@
         </createView>
     </changeSet>
 
+    <changeSet id="1231234" author="catabriga">
+        <addColumn tableName="volume">
+            <column name="caminho_anexo" type="varchar(150)"></column>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet author="martinho" id="mart0134droptable">
+        <dropTable cascadeConstraints="true" tableName="usuarioperfilacesso"></dropTable>
+    </changeSet>
+    <!--
+    <changeSet author="martinho" id="mart0135droptable">
+        <dropTable cascadeConstraints="true" tableName="perfilacessousuario"></dropTable>
+    </changeSet>
+    -->
+    <changeSet author="martinho" id="mart0135createtable">
+        <createTable tableName="perfilacessousuario">
+            <column name="id" type="INT8">
+                <constraints nullable="false" />
+            </column>
+            <column name="fimvigencia" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="iniciovigencia" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="id_perfilacesso" type="INT8" />
+            <column name="id_usuario" type="INT8" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="martinho" id="mart0136keytable">
+        <addPrimaryKey columnNames="id" constraintName="perfilacessousuario_pkey"
+                       tableName="perfilacessousuario" />
+    </changeSet>
+    
+    <changeSet author="martinho" id="mart0137fktable">
+        <addForeignKeyConstraint baseColumnNames="id_perfilacesso"
+                                 baseTableName="perfilacessousuario" constraintName="fk_femy7nyxqlij7xjdkr32mju5w"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilacesso" />
+    </changeSet>
+    
+    <changeSet author="martinho" id="mart0138fktable">
+        <addForeignKeyConstraint baseColumnNames="id_usuario"
+                                 baseTableName="perfilacessousuario" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
+    </changeSet>
+    
+    <!--
+    <changeSet author="martinho" id="mart0139droptable">
+        <dropTable cascadeConstraints="true" tableName="viewperfildeacessousuario"></dropTable>
+    </changeSet>
+    -->
+    <changeSet author="martinho" id="mart0140createview">
+        <createView viewName="viewperfildeacessousuario" replaceIfExists="true" schemaName="public">
+            SELECT T1.ID, T1.ATIVO, T1.EMAIL, T1.LOGIN, T1.NOME, T2.ID AS PERFILDEACESSOUSUARIOID, 
+            T2.FIMVIGENCIA, T2.INICIOVIGENCIA, T2.ID_PERFILACESSO AS PERFILACESSOID, T3.NOME AS PERFIL
+            FROM USUARIO T1 
+            LEFT JOIN PERFILACESSOUSUARIO T2 ON T1.ID = T2.ID_USUARIO
+            LEFT JOIN PERFILACESSO T3 ON T3.ID = T2.ID_PERFILACESSO
+            ORDER BY T1.NOME 
+        </createView>
+    </changeSet>
+
+    <changeSet author="martinho" id="mart0141createview">
+        <createView viewName="viewmaterialproduzido" replaceIfExists="true" schemaName="public">
+            SELECT T2.ID, T1.NOME, T1.AUTOR, T1.EDITORA, T1.ANOEDICAO, T1.DISCIPLINA, 
+            T2.TRADUCAOMATERIAL AS TRANSCRICAO, T2.OUTRO AS OUTRATRANSCRICAO, T2.STATUS
+            FROM LIVRO T1 JOIN SOLICITACAOITEM T2 ON T2.ID_MATERIAL = T1.ID
+            ORDER BY T1.NOME 
+        </createView>
+    </changeSet>
+    
 </databaseChangeLog>
 

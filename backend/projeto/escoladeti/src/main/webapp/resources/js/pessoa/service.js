@@ -64,6 +64,15 @@ function PessoaFactory($resource) {
                 acao: 'fisicas'
             }
         },
+        
+        listarTodasPessoas:{
+            method: 'GET',
+            isArray: true,
+            params: {
+                acao: 'todasPessoas'
+            }
+        },
+        
         paginar : {
             method : 'GET',
             isArray : true
