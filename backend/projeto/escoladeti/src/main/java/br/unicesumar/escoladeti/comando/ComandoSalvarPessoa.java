@@ -3,8 +3,11 @@ package br.unicesumar.escoladeti.comando;
 import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Telefone;
 import br.unicesumar.escoladeti.enums.Sexo;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -18,7 +21,6 @@ public class ComandoSalvarPessoa {
     private Date dataNascimento;
     private String sobrenome;
     private Sexo sexo;
-    private boolean aluno;
     private String cnpj;
     private String inscricaoEstadual;
     private String inscricaoMunicipal;
@@ -26,8 +28,26 @@ public class ComandoSalvarPessoa {
     private Date dataCriacao;
     private Set<Telefone> telefones;
     private Set<Endereco> enderecos;
+    private List<Long> caracteristicas;
+    private Date vigenciaAssociado;
+    
+	public Date getVigenciaAssociado() {
+		return vigenciaAssociado;
+	}
 
-    public Set<Telefone> getTelefones() {
+	public void setVigenciaAssociado(Date vigenciaAssociado) {
+		this.vigenciaAssociado = vigenciaAssociado;
+	}
+
+	public List<Long> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public void setCaracteristicas(List<Long> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+
+	public Set<Telefone> getTelefones() {
         return telefones;
     }
 
@@ -109,14 +129,6 @@ public class ComandoSalvarPessoa {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
-    }
-
-    public boolean getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(boolean aluno) {
-        this.aluno = aluno;
     }
 
     public String getCnpj() {

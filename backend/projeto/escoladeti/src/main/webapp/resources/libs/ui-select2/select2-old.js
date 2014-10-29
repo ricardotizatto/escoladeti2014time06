@@ -22,7 +22,7 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
 
       // Enable watching of the options dataset if in use
       if (tElm.is('select')) {
-        repeatOption = tElm.find( 'optgroup[ng-repeat], optgroup[data-ng-repeat], option[ng-repeat], option[data-ng-repeat]');
+        repeatOption = tElm.find('option[ng-repeat], option[data-ng-repeat]');
 
         if (repeatOption.length) {
           repeatAttr = repeatOption.attr('ng-repeat') || repeatOption.attr('data-ng-repeat');
@@ -96,27 +96,12 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
               elm.select2('val', controller.$viewValue);
             } else {
               if (opts.multiple) {
-                controller.$isEmpty = function (value) {
-                  return !value || value.length === 0;
-                };
                 var viewValue = controller.$viewValue;
                 if (angular.isString(viewValue)) {
                   viewValue = viewValue.split(',');
                 }
                 elm.select2(
                   'data', convertToSelect2Model(viewValue));
-                if (opts.sortable) {
-                  elm.select2("container").find("ul.select2-choices").sortable({
-                    containment: 'parent',
-                    start: function () {
-                      elm.select2("onSortStart");
-                    },
-                    update: function () {
-                      elm.select2("onSortEnd");
-                      elm.trigger('change');
-                    }
-                  });
-                }                  
               } else {
                 if (angular.isObject(controller.$viewValue)) {
                   elm.select2('data', controller.$viewValue);
@@ -139,7 +124,7 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
               $timeout(function () {
                 elm.select2('val', controller.$viewValue);
                 // Refresh angular to remove the superfluous option
-                controller.$render();
+                elm.trigger('change');
                 if(newVal && !oldVal && controller.$setPristine) {
                   controller.$setPristine(true);
                 }
@@ -178,13 +163,8 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
               var initSelection = opts.initSelection;
               opts.initSelection = function (element, callback) {
                 initSelection(element, function (value) {
-                  var isPristine = controller.$pristine;
                   controller.$setViewValue(convertToAngularModel(value));
                   callback(value);
-                  if (isPristine) {
-                    controller.$setPristine();
-                  }
-                  elm.prev().toggleClass('ng-pristine', controller.$pristine);
                 });
               };
             }
@@ -215,21 +195,15 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
           elm.select2(opts);
 
           // Set initial value - I'm not sure about this but it seems to need to be there
-          elm.select2('data', controller.$modelValue);
+          elm.val(controller.$viewValue);
           // important!
           controller.$render();
 
           // Not sure if I should just check for !isSelect OR if I should check for 'tags' key
           if (!opts.initSelection && !isSelect) {
-              var isPristine = controller.$pristine;
-              controller.$pristine = false;
-              controller.$setViewValue(
-                  convertToAngularModel(elm.select2('data'))
-              );
-              if (isPristine) {
-                  controller.$setPristine();
-              }
-            elm.prev().toggleClass('ng-pristine', controller.$pristine);
+            controller.$setViewValue(
+              convertToAngularModel(elm.select2('data'))
+            );
           }
         });
       };

@@ -1,60 +1,60 @@
 <div class="container" ng-controller="CidadeController"
-     ng-init="getTodos(pageNumber)">
-    <div class="row">
-        <div class="form-group col-sm-12">
-            <legend>
-                <span class="glyphicon glyphicon-list-alt"></span> Cidade
-            </legend>
-        </div>
-    </div>
-    <div class="alert alert-{{info.status}}" ng-show="info.message">{{info.message}}</div>
-    <div class="row">
-        <div class="form-group col-sm-5">
-            <div class="input-group">
-                <span class="input-group-addon"> <span
-                        class="glyphicon glyphicon-search"></span>
-                </span> <input class="form-control" name="busca" type="text"
-                               onkeydown="toUpper(this)" ng-model="busca"
-                               ng-change="buscaCidadesContendoNome()"
-                               placeholder="Busca por nome da cidade" />
-            </div>
-        </div>
-        <div class="form-group col-sm-7">
-            <div>
-                <span class="pull-right">
-                    <button type='submit' class='btn btn-primary btn-padrao'
-                            value='novo' ng-click="novo()">
-                        <span class='glyphicon glyphicon-plus-sign'></span> Novo
-                    </button>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 table-responsive">
-            <table width="100%" border="0"
-                   class="table table-striped table-hover">
-                <tr>
-                    <th class="col-md-6">Nome</th>
-                    <th class="col-md-4">Estado</th>
-                    <th class="col-md-2">Ações</th>
-                </tr>
-                <tr ng-repeat="cidade in cidades.list">
-                    <td>{{cidade.nome}}</td>
-                    <td>{{cidade.unidadeFederativa.nome}}</td>
-                    <td>
-                        <button class='btn btn-warning btn-sm' ng-click="editar(cidade)">
-                            <span class='glyphicon glyphicon-edit'></span>
-                        </button>
-                        <button class='btn btn-danger btn-sm' ng-click="deletar(cidade)">
-                            <span class='glyphicon glyphicon-remove-circle'></span>
-                        </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <!--    <div class="row ">
+	ng-init="getTodos(pageNumber)">
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<legend>
+				<span class="glyphicon glyphicon-list-alt"></span> Cidade
+			</legend>
+		</div>
+	</div>
+	<div class="alert alert-{{info.status}}" ng-show="info.message">{{info.message}}</div>
+	<div class="row">
+		<div class="form-group col-sm-5">
+			<div class="input-group">
+				<span class="input-group-addon"> <span
+					class="glyphicon glyphicon-search"></span>
+				</span> <input class="form-control" name="busca" type="text"
+					onkeydown="toUpper(this)" ng-model="busca"
+					ng-change="buscaCidadesContendoNome()"
+					placeholder="Busca por nome da cidade" />
+			</div>
+		</div>
+		<div class="form-group col-sm-7">
+			<div>
+				<span class="pull-right">
+					<button type='submit' class='btn btn-primary btn-padrao'
+						value='novo' ng-click="novo()">
+						<span class='glyphicon glyphicon-plus-sign'></span> Novo
+					</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 table-responsive">
+			<table width="100%" border="0"
+				class="table table-striped table-hover">
+				<tr>
+					<th class="col-md-6">Nome</th>
+					<th class="col-md-4">Estado</th>
+					<th class="col-md-2">Ações</th>
+				</tr>
+				<tr ng-repeat="cidade in cidades.list">
+					<td>{{cidade.nome}}</td>
+					<td>{{cidade.unidadeFederativa.nome}}</td>
+					<td>
+						<button class='btn btn-warning btn-sm' ng-click="editar(cidade)">
+							<span class='glyphicon glyphicon-edit'></span>
+						</button>
+						<button class='btn btn-danger btn-sm' ng-click="deletar(cidade)">
+							<span class='glyphicon glyphicon-remove-circle'></span>
+						</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--    <div class="row ">
             <div class="col-sm-12">
                 <ul class="pagination">
                     <li>
@@ -83,9 +83,13 @@
                 </ul>
             </div>
         </div>-->
-    
-    <pagination boundary-links="true" num-pages="cidades.pageCount" total-items="cidades.pageCount*cidades.maxRows" items-per-page="cidades.maxRows"
-                ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="cidades.maxPagesToShow"
-                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-    </pagination>
+	<div class="text-center">
+		<pagination boundary-links="true" num-pages="cidades.pageCount"
+			total-items="cidades.pageCount*cidades.maxRows"
+			items-per-page="cidades.maxRows" ng-model="pageNumber"
+			ng-change="getTodos(pageNumber)" class="pagination-sm"
+			max-size="cidades.maxPagesToShow" previous-text="&lsaquo;"
+			next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+		</pagination>
+	</div>
 </div>

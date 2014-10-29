@@ -240,6 +240,14 @@ a.navbar-brand{ padding: 10px }
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+.has-error .select2-dropdown-open [class^="select2-choice"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.has-success .select2-dropdown-open [class^="select2-choice"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 .select2-dropdown-open.select2-drop-above [class^="select2-choice"] {
     border-top-left-radius: 0;

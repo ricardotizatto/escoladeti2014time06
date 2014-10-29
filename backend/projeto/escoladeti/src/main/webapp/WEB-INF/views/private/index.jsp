@@ -16,7 +16,6 @@
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
 
         <script type="text/javascript" src="./resources/libs/jquery.min.js"></script>
-        <script type="text/javascript" src="./resources/libs/select2.js"></script>
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
@@ -31,13 +30,15 @@
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
-        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>  
+        <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>
+        <script type="text/javascript" src="./resources/libs/select2.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>
         <script type="text/javascript" src="./resources/js/upload/directives.js"></script>
         <script type="text/javascript" src="./resources/js/upload/service.js"></script>
         <script type="text/javascript" src="./resources/js/directives.js"></script>
+        <script type="text/javascript" src="./resources/js/filters.js"></script>
         <script type="text/javascript" src="./resources/js/buscacep/service.js"></script>
         <script type="text/javascript" src="./resources/js/pais/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pais/service.js" ></script>
@@ -51,6 +52,7 @@
         <script type="text/javascript" src="./resources/js/solicitacao/service.js" ></script>           
         <script type="text/javascript" src="./resources/js/pessoa/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/pessoa/service.js" ></script>
+        <script type="text/javascript" src="./resources/js/caracteristica/service.js" ></script>        
         <script type="text/javascript" src="./resources/js/estoque/ProdutoController.js" ></script>
         <script type="text/javascript" src="./resources/js/estoque/MovimentoController.js" ></script>
         

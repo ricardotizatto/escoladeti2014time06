@@ -1,14 +1,11 @@
 package br.unicesumar.escoladeti.entity;
 
-import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
-import br.unicesumar.escoladeti.enums.Sexo;
-import br.unicesumar.escoladeti.util.data.DateUtil;
-import br.unicesumar.escoladeti.util.string.StringUtils;
-import br.unicesumar.escoladeti.util.validacao.Validar;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -16,8 +13,15 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.parboiled.common.Preconditions;
+
+import br.unicesumar.escoladeti.comando.ComandoSalvarTelefone;
+import br.unicesumar.escoladeti.enums.Sexo;
+import br.unicesumar.escoladeti.util.data.DateUtil;
+import br.unicesumar.escoladeti.util.string.StringUtils;
+import br.unicesumar.escoladeti.util.validacao.Validar;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -31,19 +35,31 @@ public abstract class Pessoa extends Entidade {
     private String tipo;
 
     @NotEmpty(message = "Deve ser cadastrado ao menos um Telefone!")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "pessoa")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true )
     private Set<Telefone> telefones;
 
     @NotEmpty(message = "Deve ser cadastrado ao menos um Endereço!")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Endereco> enderecos;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PessoaCaracteristica> pessoaCaracteristica = new ArrayList<PessoaCaracteristica>();
 
-    public Pessoa() {
+    public List<PessoaCaracteristica> getPessoaCaracteristica() {
+		return pessoaCaracteristica;
+	}
+
+	public void setPessoaCaracteristica(
+			List<PessoaCaracteristica> pessoaCaracteristica) {
+		this.pessoaCaracteristica = pessoaCaracteristica;
+	}
+
+	public Pessoa() {
         this.telefones = new HashSet<Telefone>();
         this.enderecos = new HashSet<Endereco>();
     }
 
-    public Set<Telefone> getTelefones() {
+	public Set<Telefone> getTelefones() {
         return telefones;
     }
 
@@ -105,8 +121,6 @@ public abstract class Pessoa extends Entidade {
 
         private Sexo sexo;
 
-        private boolean aluno;
-
         private String cnpj;
 
         private String inscricaoEstadual;
@@ -120,6 +134,13 @@ public abstract class Pessoa extends Entidade {
         private Set<Telefone> telefones;
 
         private Set<Endereco> enderecos;
+        
+        private Set<Long> caracteristicas;
+        
+        public PessoaBuilder caracteristicas(Set<Long> caracteristicas){
+        	this.caracteristicas = caracteristicas;
+        	return this;
+        }
 
         public PessoaBuilder nome(String nome) {
             this.nome = nome;
@@ -158,11 +179,6 @@ public abstract class Pessoa extends Entidade {
 
         public PessoaBuilder sexo(Sexo sexo) {
             this.sexo = sexo;
-            return this;
-        }
-
-        public PessoaBuilder aluno(boolean aluno) {
-            this.aluno = aluno;
             return this;
         }
 
@@ -211,11 +227,15 @@ public abstract class Pessoa extends Entidade {
             }
             Preconditions.checkArgument(StringUtils.isNotEmpty(this.tipo), "Tipo é obrigatório");
 
-            Preconditions.checkNotNull(this.aluno);
-            if (!this.aluno) {
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg), "RG é obrigatório");
-                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf), "CPF é obrigatório");
-            }
+//            Boolean aluno = false;
+//            for (Long caracteristica : this.caracteristicas) {
+//				if(caracteristica == 1L)
+//					aluno = true;
+//			}
+//            if (!aluno) {
+//                Preconditions.checkArgument(StringUtils.isNotEmpty(this.rg), "RG é obrigatório");
+//                Preconditions.checkArgument(StringUtils.isNotEmpty(this.cpf), "CPF é obrigatório");
+//            }
             Preconditions.checkNotNull(this.dataNascimento, "Data é obrigatória");
             if (DateUtil.validDate(this.dataNascimento)) {
                 throw new RuntimeException("Data inválida");
@@ -237,7 +257,6 @@ public abstract class Pessoa extends Entidade {
             pessoa.setDataNascimento(this.dataNascimento);
             pessoa.setSobrenome(this.sobrenome);
             pessoa.setSexo(this.sexo);
-            pessoa.setAluno(this.aluno);
             pessoa.setTelefones(this.telefones);
             pessoa.setEnderecos(this.enderecos);
             for (Telefone telefone : pessoa.getTelefones()) {
