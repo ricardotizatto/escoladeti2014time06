@@ -176,6 +176,10 @@ app.config(['$routeProvider',
                 templateUrl: './pages/ListaParticipantes.html',
                 controller: 'participanteController'
             })
+            .when('/chamada/', {
+                templateUrl: './pages/chamada/lista.html',
+                controller: 'chamdaController'
+            })
             .when('/cadastroevento', {
                 templateUrl: './pages/CadastroEvento.html',
                 controller: 'eventoController'
@@ -183,6 +187,14 @@ app.config(['$routeProvider',
             .when('/listaparticipantes/:idevento', {
                 templateUrl: './pages/ListaParticipantes.html',
                 controller: 'participanteController'
+            })
+            .when('/chamada/:idperiodo', {
+                templateUrl: './pages/chamada/lista.html',
+                controller: 'chamadaController'
+            })
+            .when('/listaperiodos/:idevento', {
+                templateUrl: './pages/ListaPeriodos.html',
+                controller: 'eventoController'
             })
             .when('/cadastroevento/:eventoId', {
                 templateUrl: './pages/CadastroEvento.html',

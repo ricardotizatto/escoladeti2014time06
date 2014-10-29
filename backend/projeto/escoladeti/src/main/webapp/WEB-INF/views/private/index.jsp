@@ -60,7 +60,6 @@
         <script type="text/javascript" src="./resources/js/ordemProducao/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/controller.js" ></script>
-
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/acompanhamentoSolicitacao/service.js" ></script>
 
@@ -75,8 +74,9 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
+		<script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
-
+        
 
         <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
         <link  href="./resources/vendor/css/jquery.sidr.light.css">
@@ -193,7 +193,7 @@
                             <span class="title">EVENTOS</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/cadastroparticipante">Participante</a></li>
+                            <li><a href="#/cadastroparticipante">Inscrições</a></li>
                             <!--<li><a href="#/cadastroevento">Evento</a></li>-->
                             <li><a href="#/listaevento">Eventos</a></li>
                         </ul>
