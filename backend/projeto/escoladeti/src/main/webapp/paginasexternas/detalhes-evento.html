@@ -29,9 +29,15 @@
             </p>     
         </div>
         <div class="span6">
-            <div class="contact-form">
+            <div class="contact-form">{{info}}{{crtl.info}}
                 <h4>Inscrição</h4>
-                <form action="" name="formParticipante" > {{crtl.participante}} <br> {{crtl.validacao}}
+                <form action="" name="form" >
+                    <div class="alert alert-warning" ng-show="form.$invalid">
+                        <strong>Atenção!</strong>
+                        <li ng-show="form.nome.$error.required">Campo <strong>Nome</strong> é obrigatório.</li>
+                        <li ng-show="form.email.$error.required">Campo <strong>Email</strong> é obrigatório.</li>
+                        <li ng-show="form.telefone.$error.required">Campo <strong>Telefone</strong> é obrigatório.</li>
+                    </div>
 
                     <label for="necessidades" class="messageLabel">Possui necessidades especiais?</label>
                     <label class="btn"> 
@@ -45,14 +51,14 @@
                         <input class="form-control" type="text" name="necessidade" placeholder="Informe as necessidades" ng-model="crtl.participante.necessidade"  >
                     </div>    
                     <label for="nome" class="nameLabel">Nome</label>
-                      <input id="name" type="text" name="name" ng-model="crtl.participante.nome" placeholder="Informe seu nome">
+                      <input id="name" type="text" name="nome" ng-model="crtl.participante.nome" placeholder="Informe seu nome" required>
                     <label for="email" class="emailLabel">Email</label>
-                      <input id="email" type="text" name="email" ng-model="crtl.participante.email" placeholder="Informe seu email">
+                      <input id="email" type="text" name="email" ng-model="crtl.participante.email" placeholder="Informe seu email" required>
                     <label for="telefone">Telefone</label>
-                      <input id="telefone" type="text" name="subject" ng-model="crtl.participante.telefone" placeholder="Informe seu telefone">
+                      <input id="telefone" type="text" name="telefone" ng-model="crtl.participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required>
 
                     <span class="pull-right">  
-                        <button class="btn-transcricao"  data-ng-click="ctrl.salvarParticipante(crtl.participante, ctrl.evento.id)">Increver</button>
+                        <button class="btn-transcricao"  data-ng-click="ctrl.salvarParticipante(crtl.participante, ctrl.evento.id)" ng-disabled="form.$invalid" >Increver</button>
                     </span>    
                 </form>
             </div>

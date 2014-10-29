@@ -13,13 +13,12 @@ angular.module('appExterno', [])
 function AppCtrontroller( $routeParams, $http) {
     this.routeParams = $routeParams;
     this.http = $http;
-    this.iniciar(); 
+    this.iniciar();
 }
 
 AppCtrontroller.prototype = {
 
     iniciar: function () {
-
     }, 
     ativaBotao: function (pagina) {
         var self = this; 
@@ -79,16 +78,13 @@ AppCtrontroller.prototype = {
     carregaEvento: function (){
         console.log('Carrega Evento id :', this.routeParams.eventoId);
         var self = this;
-//        self.novoParticipante();
         if(this.routeParams.eventoId){
             this.http({
                 method: 'GET',
                 url: './public/rest/evento/' + this.routeParams.eventoId
             }).success(function (evento) {
                 console.log('Detalhes Evento: ', evento);
-                self.evento = evento;
-//                this.novoParticipante();
-                
+                self.evento = evento;               
             });
         }else{
             window.location = '#/eventos';
@@ -96,6 +92,7 @@ AppCtrontroller.prototype = {
     },
     salvarParticipante: function(participante, eventoId) {
         var self = this;
+        var info;
         self.participante = participante;
         self.participante.idevento = eventoId;
         self.participante.pagamento = "PENDENTE";
@@ -104,17 +101,19 @@ AppCtrontroller.prototype = {
             self.participante.deficiente = 'N';
             self.participante.necessidade = 'N/P';
         }
-        
-        if(self.participante.nome === undefined )
-            self.validacao.nome = 'Preencha o Nome';
-                    
+                           
         console.log('self.participante salvo: ', self.participante);
         
         this.http.post('./public/rest/salvarparticipante/', self.participante)
         .success(function(participante) {
             console.log('Participante Salvo: ' + participante);
-        })
-        .error(function(data) {
+            self.participante.deficiente = '';
+            self.participante.necessidade = '';
+            self.participante.nome = '';
+            self.participante.email = '';
+            self.participante.telefone = '';
+
+        }).error(function(data) {
             console.log('Erro ao salvar Participante: ' + data);
         });
     }
@@ -126,6 +125,7 @@ angular.module('services', []);
 var appExterno = angular.module('appExterno',
         ['ngRoute',
         'ngResource',
+        'ui.utils',
         'controllers']); 
 
 appExterno.config(['$routeProvider',
