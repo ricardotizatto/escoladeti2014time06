@@ -210,4 +210,8 @@ public class PessoaService {
 						.findByNomeContainingOrCpfCnpjContainingOrderByNomeAsc(
 								busca, busca, pageRequestForAsc(pagina, "nome")));
 	}
+
+	public DataPage<PessoaFisicaJuridica> listarTodos(Integer pagina) {
+		return new DataPage<>(this.pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
+	}
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,6 +103,12 @@ public class PessoaController implements Serializable {
 	@ResponseBody
 	public List<PessoaFisicaJuridica> listarTodasPessoas() {
 		return pessoaService.listarTodasPessoas();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/listarTodas/{pagina}")
+	@ResponseBody
+	public DataPage<PessoaFisicaJuridica> listarTodos(@PathVariable Integer pagina) {
+		return pessoaService.listarTodos(pagina);
 	}
 
 }

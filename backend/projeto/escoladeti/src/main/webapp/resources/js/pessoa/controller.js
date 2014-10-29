@@ -7,7 +7,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
     $scope.select2 = 'one';
 
     $scope.init = function () {
-        $scope.filtroPessoaFisica(1);
+        $scope.listarTodasPessoas(1);
         $scope.focusCpf = false;
         $scope.enderecoPrincipal = false;
     };
@@ -27,25 +27,30 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
     
     $scope.temAssociado = function(){
     	$scope.associado = false;    	
-    	if(angular.isDefined($scope.pessoaCaracteristica && $scope.pessoaCaracteristica.caracteristicas.length > 0)){
-	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
-	    	var associado = 2;
-	    	caracs.forEach(function(item){
-	    		if(item == associado){
-	    			$scope.associado = true;
-	    		}
-	    	});
+    	if(angular.isDefined($scope.pessoaCaracteristica) && angular.isDefined($scope.pessoaCaracteristica.caracteristicas)){
+    		
+    		if($scope.pessoaCaracteristica.caracteristicas.length > 0){
+    	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
+    	    	var associado = 2;
+    	    	caracs.forEach(function(item){
+    	    		if(item == associado){
+    	    			$scope.associado = true;
+    	    		}
+    	    	});	
+    		}
     	}
     }
     $scope.temAluno = function(){
     	$scope.aluno = false;
-    	if(angular.isDefined($scope.pessoaCaracteristica) && $scope.pessoaCaracteristica.caracteristicas.length > 0){
-	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
-	    	var aluno = 1;
-	    	caracs.forEach(function(item){
-	    		if(item == aluno)
-	    			$scope.aluno = true;
-	    	});
+    	if(angular.isDefined($scope.pessoaCaracteristica) && angular.isDefined($scope.pessoaCaracteristica.caracteristicas)){    		
+    		if($scope.pessoaCaracteristica.caracteristicas.length > 0){
+    	    	var caracs = $scope.pessoaCaracteristica.caracteristicas;
+    	    	var aluno = 1;
+    	    	caracs.forEach(function(item){
+    	    		if(item == aluno)
+    	    			$scope.aluno = true;
+    	    	});	
+    		}
     	}
     }
 
@@ -138,7 +143,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
     };
 
     $scope.getTodos = function (numeroPagina) {
-    	$scope.filtroPessoaFisica(numeroPagina);
+    	$scope.listarTodasPessoas(numeroPagina);
     };
 
 
@@ -148,8 +153,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
         });
     };
 
-    $scope.filtroPessoaFisica = function (numeroPagina) {
-        Pessoa.get({pagina: numeroPagina},
+    $scope.listarTodasPessoas = function (numeroPagina) {
+        Pessoa.get({pagina: numeroPagina},{acao : 'listarTodas'},
         function (pagina) {
             $scope.pagina = pagina;
         },
@@ -197,7 +202,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
         
         $scope.pessoa.$save(function () {
             toastr.success($scope.pessoa.nome + ' salvo com sucesso');
-            $scope.novaPessoa($scope.pessoa.tipo);
+            //$scope.novaPessoa($scope.pessoa.tipo);
             window.location = '#/listapessoa';
         });
 
@@ -208,11 +213,10 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
         BootstrapDialog.confirm('Deseja realmente deletar a Pessoa: <b>' + pessoa.nome + '</b>?', function (result) {
             if (result) {
                 Pessoa.delete({id: pessoa.id, tipo: pessoa.tipo}, function () {
-                    toastr.success(pessoa.nome + ' deletada com sucesso');
-                    $scope.filtroPessoaFisica($scope.pageNumber);
+                	toastr.success(pessoa.nome + ' deletada com sucesso');                	
                 });
+                //$scope.listarTodasPessoas($scope.pageNumber);
             }
-            return;
         });
     };
 
