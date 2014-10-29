@@ -9,7 +9,7 @@
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-search"></span>
                     </span>
-                    <input  class="form-control" name="busca" type="text" ng-model="busca"/>
+                    <input  class="form-control" name="busca" type="text" placeholder="BUSCA POR TÍTULO/DESCRIÇÃO" ng-model="busca"/>
                 </div>
             </div>
             <div class="form-group col-sm-4">
@@ -17,7 +17,7 @@
                 <div class="btn-group">
                     <div ng-switch on="selected">
                         <button class='btn btn-primary btn-padrao' ng-switch-when='true' ng-click='getTodos(1)'>
-                            Fechados
+                            Finalizado
                         </button>
                         <button class='btn btn-primary btn-padrao' ng-switch-when='false' ng-click='getTodos(1)'>
                             Abertos
@@ -42,17 +42,23 @@
                 <th class="col-md-3">Titulo</th>
                 <th class="col-md-3">Descrição</th>
                 <th class="col-md-1">Tipo</th>
-                <th class="col-md-1">Participantes</th>
-                <th class="col-md-1">Editar</th>
+                <th class="col-md-2">Participantes</th>
+                <th class="col-md-2">Ações</th>
             </tr>
             <tr ng-repeat="ev in eventos.list| filter : busca">
                 <td ng-show="ev.statusevento == selected">
-                    <button type='button' class='btn btn-success btn-sm' ng-show="ev.statusevento == true">
-                        <span class='glyphicon glyphicon-folder-open'></span>
-                    </button>
-                    <button type='button' class='btn btn-danger btn-sm' ng-show="ev.statusevento == false">
-                        <span class='glyphicon glyphicon-folder-close'></span>
-                    </button>
+                    <!--                    <button type='button' class='btn btn-success btn-sm' ng-show="ev.statusevento == true">
+                                            <span class='glyphicon glyphicon-folder-open'></span>
+                                        </button>
+                                        <button type='button' class='btn btn-danger btn-sm' ng-show="ev.statusevento == false">
+                                            <span class='glyphicon glyphicon-folder-close'></span>
+                                        </button>-->
+                    <div ng-show="ev.statusevento == true">
+                        ABERTO
+                    </div>
+                    <div ng-show="ev.statusevento == false">
+                        FINALIZADO
+                    </div>
                 </td>
                 <td ng-show="ev.statusevento == selected">{{ev.titulo}}</td>
                 <td ng-show="ev.statusevento == selected" >{{ev.descricao.substring(0, 180)}}</td>
@@ -66,10 +72,15 @@
                     <button type='button' class='btn btn-warning btn-sm' ng-click="editar(ev)">
                         <span class='glyphicon glyphicon-edit'></span>
                     </button>
+                    <button type='button' class='btn btn-danger btn-sm' ng-click="deletar(ev)">
+                        <span class='glyphicon glyphicon-trash'></span>
+                    </button>
+                    <button type='button' class='btn btn-info btn-sm' title="Chamada" ng-click="telaPeriodo(ev.id)">
+                        <span class='glyphicon glyphicon-list'></span>
+                    </button>
                 </td>
             </tr>
         </table>
-
         <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="eventos.pageCount*eventos.maxRows" items-per-page="eventos.maxRows"
                     ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"
                     previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">

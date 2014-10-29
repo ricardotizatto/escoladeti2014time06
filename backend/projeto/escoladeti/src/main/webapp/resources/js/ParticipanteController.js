@@ -23,6 +23,7 @@
     $scope.valor;
     $scope.presencaaux;
     $scope.idevento;
+    $scope.periodos = [];
 
     $scope.editar = function(participante) {
         console.log(participante);
@@ -72,7 +73,7 @@
             
         }else{         
             $scope.participante.pagamento = "PENDENTE";
-            $scope.participante.presente = true;
+            //$scope.participante.presente = true;
             $http.post("./rest/participanteSource/participante", $scope.participante)
                     .success(function(participante, status) {
                 console.log("participante salva = " + participante.nome);
@@ -246,15 +247,16 @@
         }
     };
     
-    $scope.carregarEventoDetalhes = function(indice, titulo, detalhes, local, data, inicio, fim, ministrante) {
-        $scope.idCurso = indice;
-        $scope.tituloCurso = titulo;
-        $scope.DetalhesCurso = detalhes;
-        $scope.localCurso = local;
-        $scope.dataCurso = data;
-        $scope.inicioCurso = inicio;
-        $scope.fimCurso = fim;
-        $scope.ministranteCurso = ministrante;
+    $scope.carregarEventoDetalhes = function(evento) {
+        $scope.evento = evento;
+//        $scope.tituloCurso = titulo;
+//        $scope.DetalhesCurso = detalhes;
+//        $scope.localCurso = local;
+//        $scope.dataCurso = data;
+//        $scope.inicioCurso = inicio;
+//        $scope.fimCurso = fim;
+//        $scope.ministranteCurso = ministrante;
+//        $scope.periodos = periodos;
     };
     
     $scope.voltar = function() {
