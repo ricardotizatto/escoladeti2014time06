@@ -1,7 +1,5 @@
 package br.unicesumar.escoladeti.service;
 
-import br.unicesumar.escoladeti.comando.ComandoAlterarData;
-import br.unicesumar.escoladeti.comando.ComandoMarcarRevisado;
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.entity.*;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
@@ -11,10 +9,6 @@ import br.unicesumar.escoladeti.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Jhonatan on 16/09/2014.
@@ -46,7 +40,7 @@ public class VolumeService {
     @Transactional
     public Volume marcarComoImprimido(Long id, ComandoSalvarVolume comandoSalvarVolume) {
         Volume volume = volumeRepository.findOne(id);
-        volume.marcarComoImprimido(comandoSalvarVolume);
+        volume.marcarComoImpresso(comandoSalvarVolume);
         Volume volumeSalvo = volumeRepository.save(volume);
         return volumeSalvo;
     }
@@ -86,9 +80,13 @@ public class VolumeService {
         }
 
         SolicitacaoItem solicitacaoItem = solicitacaoItemRepository.findOne(comandoSalvarVolume.getIdSolicitacaoItem());
+        Livro livro = solicitacaoItem.getLivro();
 
-        solicitacaoItem.validarPaginas(comandoSalvarVolume.getPaginaInicio(), comandoSalvarVolume.getPaginaFim());
+        livro.validarPaginas(comandoSalvarVolume.getPaginaInicio(),
+                comandoSalvarVolume.getPaginaFim(),
+                solicitacaoItem.getTraducaoMaterial());
 
+        volume.setTranscricao(solicitacaoItem.getTraducaoMaterial());
         volume.setStatus(VolumeStatus.ANDAMENTO);
         volume.setIdLivro(solicitacaoItem.getLivro().getId());
         volumeRepository.save(volume);
@@ -97,6 +95,9 @@ public class VolumeService {
         solicitacaoVolume.setIdSolicitacaoItem(comandoSalvarVolume.getIdSolicitacaoItem());
         solicitacaoVolume.setVolume(volume);
         solicitacaoVolumeRepository.save(solicitacaoVolume);
+
+
+
 
         return volume;
     }

@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
+import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.util.string.StringUtils;
 
@@ -14,6 +15,10 @@ public class Volume  {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transcricao")
+    private Transcricao transcricao;
 
     @ManyToOne
     @JoinColumn(name = "id_responsavel")
@@ -152,6 +157,14 @@ public class Volume  {
         return "";
     }
 
+    public Transcricao getTranscricao() {
+        return transcricao;
+    }
+
+    public void setTranscricao(Transcricao transcricao) {
+        this.transcricao = transcricao;
+    }
+
     public void setCaminhoAnexo(String caminhoAnexo) {
         this.caminhoAnexo = caminhoAnexo;
     }
@@ -204,8 +217,8 @@ public class Volume  {
             throw new RuntimeException("Informe data da revisão");
         }
 
-        if (!getStatus().equals(VolumeStatus.IMPRESSO)) {
-            throw new RuntimeException("Sómente volume impresso pode ser marcado como revisado.");
+        if (!getStatus().equals(VolumeStatus.CONCLUIDO)) {
+            throw new RuntimeException("Sómente volume Concluido pode ser marcado como revisado.");
         }
 
         if (data.before(this.dataImpressao)) {
@@ -222,14 +235,14 @@ public class Volume  {
         setStatus(VolumeStatus.REVISADO);
     }
 
-    public void marcarComoImprimido(ComandoSalvarVolume comandoSalvarVolume) {
+    public void marcarComoImpresso(ComandoSalvarVolume comandoSalvarVolume) {
 
         if(caminhoAnexo == null) {
             throw new RuntimeException("Arquivo é obrigatório para marcar como impresso");
         }
 
-        if (!getStatus().equals(VolumeStatus.ANDAMENTO)) {
-            throw new RuntimeException("Sómente volume em Andamento pode ser marcado como impresso.");
+        if (!getStatus().equals(VolumeStatus.CONCLUIDO)) {
+            throw new RuntimeException("Sómente volume Concluido pode ser marcado como impresso.");
         }
 
         if (comandoSalvarVolume.getDataAsDate() == null) {

@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.util.data.DateUtil;
 import br.unicesumar.escoladeti.util.number.NumberUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -109,5 +110,22 @@ public class Livro extends Entidade {
 	public static Livro of(Long id) {
 		return new Livro(id);
 	}
-    
+
+
+    public void validarPaginas(Integer paginaInicio, Integer paginafinal, Transcricao transcricao) {
+
+        for (Volume volume : volumes) {
+            if (!volume.getTranscricao().equals(transcricao)) {
+                continue;
+            }
+
+            if (paginaInicio >= volume.getPaginaInicio()  && paginaInicio <=volume.getPaginaFim()
+                    || paginafinal >= volume.getPaginaInicio() && paginafinal <= volume.getPaginaFim()) {
+                throw new RuntimeException(
+                        String.format("Página inicial ou final esta dentro do intervalo %d a %d . Volume: %d.<br>" +
+                                " Insira paginás que não estejam nesse intervalo.", volume.getPaginaInicio(), volume.getPaginaFim(), volume.getId()));
+            }
+        }
+
+    }
 }

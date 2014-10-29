@@ -27,21 +27,21 @@ public class SolicitacaoItemService {
     @Autowired
     private VolumeRepository volumeRepository;
 
-    public ViewAcompanhamentoSolicitacao enviarParaProducao(Long id) {
-        SolicitacaoItem solicitacaoItem = solicitacaoItemRepository.findOne(id);
-        solicitacaoItem.setStatus(StatusItem.PRODUCAO);
-
-        SolicitacaoItem solicitacaoItemSalva = solicitacaoItemRepository.save(solicitacaoItem);
-
-        return solicitacaoItemSalva.montarItemAcompanhamento();
-    }
+//    public ViewAcompanhamentoSolicitacao enviarParaProducao(Long id) {
+//        SolicitacaoItem solicitacaoItem = solicitacaoItemRepository.findOne(id);
+//        solicitacaoItem.setStatus(StatusItem.PRODUCAO);
+//
+//        SolicitacaoItem solicitacaoItemSalva = solicitacaoItemRepository.save(solicitacaoItem);
+//
+//        return solicitacaoItemSalva.montarItemAcompanhamento();
+//    }
 
 
 
     @Transactional
     public ViewAcompanhamentoSolicitacao cancelarItem(Long id) {
         SolicitacaoItem solicitacaoItem = solicitacaoItemRepository.findOne(id);
-        solicitacaoItem.cancelar(volumeRepository);
+        solicitacaoItem.cancelar();
 
         return solicitacaoItemRepository.save(solicitacaoItem).montarItemAcompanhamento();
     }
