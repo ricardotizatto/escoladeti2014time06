@@ -70,6 +70,13 @@ function UsuarioController($scope, $http, $routeParams) {
         if (!($scope.usuario.senha === $scope.confirmaSenha)) {
             toastr.warning('As senhas devem ser iguais!');
         } else {
+            
+            var inicioVigencia = removeFusoHorarioData($scope.usuario.inicioVigencia);
+            $scope.usuario.inicioVigencia = inicioVigencia;
+            
+            var fimVigencia = removeFusoHorarioData($scope.usuario.fimVigencia);
+            $scope.usuario.fimVigencia = fimVigencia;
+            
             console.log("Salvar usuario perfilDeAcessoUsuarioId: " + $scope.usuario.perfilDeAcessoUsuarioId);
             $http.post("./rest/usuarioSource/usuario", $scope.usuario)
                 .success(function(usuario) {
@@ -184,4 +191,14 @@ function UsuarioController($scope, $http, $routeParams) {
 
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);
+}
+
+
+function removeFusoHorarioData(dataTemp){
+    var data = new Date(dataTemp);
+    var novaData = new Date(data.getTime() + data.getTimezoneOffset()*60000);
+    
+    return novaData;
+    
+    
 }

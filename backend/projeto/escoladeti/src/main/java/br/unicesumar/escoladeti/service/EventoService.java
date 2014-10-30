@@ -9,6 +9,7 @@ import br.unicesumar.escoladeti.repository.EventoRepository;
 import br.unicesumar.escoladeti.repository.PeriodoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,6 +45,14 @@ public class EventoService {
         return new DataPage<Evento>(eventoRepository.findByTituloContainingOrderByTituloAsc(titulo, pageRequestForAsc(1, "titulo")));
     }
 
+    public DataPage<Evento> getProxomosEventos() {
+        return new DataPage<>(eventoRepository.findByStatuseventoTrue( new PageRequest(0, 4)));
+    }
+    
+    public DataPage<Evento> getUltimosEventos() {
+        return new DataPage<>(eventoRepository.findByStatuseventoFalse(new PageRequest(0, 4)));
+    }
+    
     public Evento persistirEvento(ComandoSalvarEvento comando, Long id) {
         
         Evento evento = Evento.builder()

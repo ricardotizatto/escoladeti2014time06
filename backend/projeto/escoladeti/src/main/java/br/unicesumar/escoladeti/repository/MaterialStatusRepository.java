@@ -1,7 +1,6 @@
 package br.unicesumar.escoladeti.repository;
 
 import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,43 +1,39 @@
 angular.module('appExterno', [])
     .controller('AppCtrontroller',
-                [ 
+                [    
                 '$routeParams',
                 '$http',
+                '$routeParams',
+                'ParticipanteFactory',
                 'AppFactory',
                 AppCtrontroller]);
 
-function AppCtrontroller($routeParams,$http) {
+
+
+function AppCtrontroller( $routeParams, $http) {
     this.routeParams = $routeParams;
     this.http = $http;
-    this.iniciar(); 
+    this.iniciar();
 }
 
 AppCtrontroller.prototype = {
 
     iniciar: function () {
-        var self = this;
-        this.getMateriaisProduzidos();
-        this.ativaBotao('home');
-        this.http.get('./public/rest/eventos')
-            .success(function (eventos) {
-               self.eventos = eventos;
-            });
     }, 
     ativaBotao: function (pagina) {
         var self = this; 
-        console.log('pagina: '+ pagina);
         if(!pagina){
-            self.ativa = 'home';
+            self.ativa = '';
         }else{
             self.ativa = pagina;   
         }
         
     },
-    getMateriaisProduzidos: function (){
+    getMateriaisProduzidos: function (pageNumber){
         var self = this;
         this.http({
             method: 'GET',
-            url: './public/rest/materiaisproduzidos'
+            url: './public/rest/materiaisproduzidos/pag/' + pageNumber
         }).success(function (materiaisProduzidos) {
             self.materiaisProduzidos = materiaisProduzidos;
         });
@@ -54,8 +50,72 @@ AppCtrontroller.prototype = {
                 self.materiaisProduzidos = materiaisProduzidos;
             });
         }else{
-           this. getMateriaisProduzidos(); 
+           this.getMateriaisProduzidos(); 
         }    
+    },
+    getEventos: function (pageNumber){
+        console.log('getEventos pag: ', pageNumber);
+        var self = this;
+        this.http({
+            method: 'GET',
+            url: './public/rest/proximoseventos'
+        }).success(function (proximosEventos) {
+            console.log('Proximos Eventos: ', proximosEventos);
+            self.proximosEventos = proximosEventos;
+        });
+        this.http({
+            method: 'GET',
+            url: './public/rest/ultimoseventos'
+        }).success(function (ultimosEventos) {
+            console.log('Ultimos Eventos: ', ultimosEventos);
+            self.ultimosEventos = ultimosEventos;
+        });
+    },
+    detalhesEvento: function (eventoId){
+        console.log('Detalhes Evento id :', eventoId);
+        window.location = '#/detalhes-evento/' + eventoId;
+    },
+    carregaEvento: function (){
+        console.log('Carrega Evento id :', this.routeParams.eventoId);
+        var self = this;
+        if(this.routeParams.eventoId){
+            this.http({
+                method: 'GET',
+                url: './public/rest/evento/' + this.routeParams.eventoId
+            }).success(function (evento) {
+                console.log('Detalhes Evento: ', evento);
+                self.evento = evento;               
+            });
+        }else{
+            window.location = '#/eventos';
+        }    
+    },
+    salvarParticipante: function(participante, eventoId) {
+        var self = this;
+        var info;
+        self.participante = participante;
+        self.participante.idevento = eventoId;
+        self.participante.pagamento = "PENDENTE";
+        
+        if(self.participante.deficiente === 'N' || self.participante.deficiente === undefined){
+            self.participante.deficiente = 'N';
+            self.participante.necessidade = 'N/P';
+        }
+                           
+        console.log('self.participante salvo: ', self.participante);
+        
+        this.http.post('./public/rest/salvarparticipante/', self.participante)
+        .success(function(participante) {
+            console.log('Participante Salvo: ' + participante);
+            self.participante.deficiente = '';
+            self.participante.necessidade = '';
+            self.participante.nome = '';
+            self.participante.email = '';
+            self.participante.telefone = '';
+
+        }).error(function(data) {
+            console.log('Erro ao salvar Participante: ' + data);
+        });
     }
 };
 
@@ -65,6 +125,7 @@ angular.module('services', []);
 var appExterno = angular.module('appExterno',
         ['ngRoute',
         'ngResource',
+        'ui.utils',
         'controllers']); 
 
 appExterno.config(['$routeProvider',
@@ -97,7 +158,7 @@ appExterno.config(['$routeProvider',
             })
             .when('/transcricoes', {
                 templateUrl: './paginasexternas/transcricoes.html',
-                //controller: 'ExternoController'
+                //controller: 'MaterialController'
             })
             .when('/sobre', {
                 templateUrl: './paginasexternas/sobre.html',
@@ -105,6 +166,10 @@ appExterno.config(['$routeProvider',
             })
             .when('/localizacao', {
                 templateUrl: './paginasexternas/localizacao.html',
+                //controller: 'ExternoController'
+            })
+            .when('/creditos', {
+                templateUrl: './paginasexternas/creditos.html',
                 //controller: 'ExternoController'
             })
             .otherwise({redirectTo: '/principal'
