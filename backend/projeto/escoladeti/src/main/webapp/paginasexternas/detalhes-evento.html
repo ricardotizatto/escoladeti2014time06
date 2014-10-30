@@ -32,21 +32,20 @@
             <div class="contact-form">
                 <h4>Inscrição</h4>
                 <form action="" name="form" >
-<!--                    <div class="alert alert-warning" ng-show="form.$invalid">
-                        <strong>Atenção! </strong><br>
-                        * Campos não preechidos ou de maneira incorreta
-                    </div>-->
-                    Possui necessidades especiais?
-                    <label class="btn btn-small"> 
-                        <input ng-model="participante.deficiente" name="deficiente" value="S" type="radio" /> Sim
-                    </label> 
-                    <label class="btn btn-small"> 
-                        <input  ng-model="participante.deficiente" name="deficiente" value="N" type="radio" ng-checked="!participante.deficiente" /> Não
-                    </label>
+                    <div class="alert alert-{{info.status}} alert-dismissable alert-feedback" ng-show="info.message">{{info.message}}</div>
+                    <div class="form-group">
+                        <label>Possui necessidades especiais?</label>
+                        <label class="btn btn-small"> 
+                            <input ng-model="participante.deficiente" name="deficiente" value="S" type="radio" /> Sim
+                        </label> 
+                        <label class="btn btn-small"> 
+                            <input  ng-model="participante.deficiente" name="deficiente" value="N" type="radio" /> Não
+                        </label>
+                    </div>    
                     <div ng-show="participante.deficiente === 'S'">
-                        <label for="necessidades" class="messageLabel">Quais Necessidades?</label>
-                        <input id="necessidade" type="text" name="necessidade" ng-model="participante.necessidade" placeholder="Informe as necessidades" ng-pattern="/^[a-zA-Z\s]{3,200}$/" {{ participante.necessidade === 'S' ? 'required' : '' }} >
-                        <span class="alert alert-warning" ng-show="form.necessidade.$error.pattern">Apenas letras e no mínimo 3.</span>
+                        <label for="necessidade" class="messageLabel">* Quais Necessidades?</label>
+                        <input id="necessidade" type="text" name="necessidade" ng-model="participante.necessidade" placeholder="Informe as necessidades" ng-required="{{participante.deficiente === 'S'}}" >
+                        <span class="alert alert-warning" ng-show="form.necessidade.$error.required">Apenas letras e no mínimo 3.</span>
                     </div>    
                     
                     <label for="nome" class="nameLabel">* Nome Completo</label>

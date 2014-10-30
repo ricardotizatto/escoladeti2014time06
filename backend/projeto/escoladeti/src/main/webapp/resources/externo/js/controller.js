@@ -2,9 +2,7 @@ var controllers = angular.module('controllers');
 
 function ExternoController($scope, $http, $routeParams) {
     console.log('carregando controller externo');
-    
-    $scope.participante = {};
-    
+        
     $scope.ativaBotao = function (pagina) {
         if(!pagina){
             $scope.ativa = '';
@@ -58,6 +56,8 @@ function ExternoController($scope, $http, $routeParams) {
     },
     $scope.carregaEvento = function (){
         console.log('Carrega Evento id :', $routeParams.eventoId);
+        $scope.info = {};
+        $scope.novoParticipante();
         if($routeParams.eventoId){
         $http({
                 method: 'GET',
@@ -72,26 +72,32 @@ function ExternoController($scope, $http, $routeParams) {
     };
     $scope.salvarParticipante = function(eventoId) {
         console.log('Salvar Participante : eventoId: ' + eventoId);
-
+        $scope.info = {};
         $scope.participante.idevento = eventoId;
-        $scope.participante.pagamento = "PENDENTE";
         
-        if($scope.participante.deficiente === 'N' || $scope.participante.deficiente === undefined){
-            $scope.participante.deficiente = 'N';
+        if($scope.participante.deficiente === 'S' && ( $scope.participante.necessidade === '' || $scope.participante.necessidade === undefined )){
+            $scope.info.status = 'danger';
+            $scope.info.message = 'Não foi preenchido o campo Quais Necessidades?';
+            return;
+        }
+        if($scope.participante.deficiente === 'N'){
             $scope.participante.necessidade = 'N/P';
         }
-                           
-        console.log('$scope.participante salvo: ', $scope.participante);
-        
+        $scope.info = {};
         $http.post('./public/rest/salvarparticipante/', $scope.participante)
-        .success(function(participante) {
-            console.log('Participante Salvo: ' + participante);
-            $scope.participante = {};
-            $scope.message = "Participante "+ participante.nome +" Cadastrado para o Evento";
-        }).error(function(data) {
-            console.log('Erro ao salvar Participante: ' + data.messageDeveloper );
-            $scope.message = data.message;
+            .success(function (participante) {
+                console.log('Participante Salvo: ' + participante);
+                $scope.novoParticipante();
+                $scope.info.status = 'success';
+                $scope.info.message = participante.nome + " Cadastro efetuado com sucesso!";
+            }).error(function (data) {
+                console.log('Erro ao salvar Participante: ' + data.messageDeveloper);
+                $scope.info.status = 'danger';
+                $scope.message = data.message;
         });
+    };
+    $scope.novoParticipante = function (){
+        $scope.participante = { deficiente: 'N', pagamento: "PENDENTE" };    
     };
 };
 
