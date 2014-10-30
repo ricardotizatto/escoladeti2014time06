@@ -1,5 +1,5 @@
 <!-- Page Title -->
-<div class="page-title" ng-init="ctrl.getEventos(1);ativaBotao('eventos')">  <!--<div class="container" ng-controller="EventoController" ng-init="getTodos(1)"> -->
+<div class="page-title" ng-init="getEventos(1);ativaBotao('eventos')">  <!--<div class="container" ng-controller="EventoController" ng-init="getTodos(1)"> -->
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -16,15 +16,15 @@
         <h3>Próximos Eventos</h3>
     </div>    
     <div class="row">
-       <div class="service span3" ng-repeat="proximoEvento in ctrl.proximosEventos.list" >
+       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
             <h4>{{proximoEvento.titulo}}</h4>
             <p>{{proximoEvento.descricao}}</p>
-            <p><b>Data:</b> <br>
+            <p><b>Data:</b>
                 <span ng-repeat="periodo in proximoEvento.periodos | orderBy:'data'">
                     {{periodo.data | date: 'dd-MM-yyyy'}} <br>
                 </span>
             </p>
-            <a href="" ng-click="ctrl.detalhesEvento(proximoEvento.id)" >Detalhes</a>
+            <a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a>
         </div>       
     </div>
 </div>
@@ -35,7 +35,7 @@
         <h3>Últimos Eventos</h3>
     </div>
     <div class="row">
-        <div class="service span3" ng-repeat="ultimoEvento in ctrl.ultimosEventos.list" >
+        <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
             <img src="./resources/externo/assets/img/portfolio/work1.jpg" alt="">
             <h4>{{ultimoEvento.titulo}}</h4>
             <p>{{ultimoEvento.descricao}}</p>

@@ -1,5 +1,5 @@
  <!-- Page Title -->
-<div class="page-title" ng-init="ctrl.carregaEvento();ctrl.ativaBotao('eventos')">
+ <div class="page-title" ng-init="carregaEvento();ativaBotao('eventos')">
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -14,54 +14,54 @@
 <div class="contact-us container">
     <div class="row">
         <div class="span6">
-            <h4>{{ctrl.evento.titulo}}</h4>
-            <p>{{ctrl.evento.descricao}} </p>
+            <h4>{{evento.titulo}}</h4>
+            <p>{{evento.descricao}} </p>
             <p>
-                <b>Ministrante: </b> {{ctrl.evento.ministrante}} <br>
-                <b>Organização: </b> {{ctrl.evento.organizacao}} <br>
-                <b>Local do evento: </b> {{ctrl.evento.local}} <br>
+                <b>Ministrante: </b> {{evento.ministrante}} <br>
+                <b>Organização: </b> {{evento.organizacao}} <br>
+                <b>Local do evento: </b> {{evento.local}} <br>
                 <b>Datas:</b> <br>
-                <span ng-repeat="periodo in ctrl.evento.periodos | orderBy:'data'">
+                <span ng-repeat="periodo in evento.periodos | orderBy:'data'">
                     <b>Dia: </b>{{periodo.data | date: 'dd-MM-yyyy'}} - <b>Horário: </b> {{periodo.inicio}} as {{periodo.fim}} <br>
                 </span>
                 <br>
-                <b>Valor: </b> {{ctrl.evento.valor === 0 ? 'Entrada Livre' : 'R$ ' + ctrl.evento.valor}} 
+                <b>Valor: </b> {{evento.valor === 0 ? 'Entrada Livre' : 'R$ ' + evento.valor}} 
             </p>     
         </div>
         <div class="span6">
             <div class="contact-form">
                 <h4>Inscrição</h4>
-                <form action="" name="form" >{{crtl.info}}
+                <form action="" name="form" >
 <!--                    <div class="alert alert-warning" ng-show="form.$invalid">
                         <strong>Atenção! </strong><br>
                         * Campos não preechidos ou de maneira incorreta
                     </div>-->
                     Possui necessidades especiais?
                     <label class="btn btn-small"> 
-                        <input ng-model="crtl.participante.deficiente" name="deficiente" value="S" type="radio" /> Sim
+                        <input ng-model="participante.deficiente" name="deficiente" value="S" type="radio" /> Sim
                     </label> 
                     <label class="btn btn-small"> 
-                        <input  ng-model="crtl.participante.deficiente" name="deficiente" value="N" type="radio" ng-checked="!crtl.participante.deficiente" /> Não
+                        <input  ng-model="participante.deficiente" name="deficiente" value="N" type="radio" ng-checked="!participante.deficiente" /> Não
                     </label>
-                    <div ng-show="crtl.participante.deficiente === 'S'">
+                    <div ng-show="participante.deficiente === 'S'">
                         <label for="necessidades" class="messageLabel">Quais Necessidades?</label>
-                        <input id="necessidade" type="text" name="necessidade" ng-model="crtl.participante.necessidade" placeholder="Informe as necessidades" ng-pattern="/^[a-zA-Z\s]{3,200}$/" {{ crtl.participante.necessidade === 'S' ? 'required' : '' }} >
+                        <input id="necessidade" type="text" name="necessidade" ng-model="participante.necessidade" placeholder="Informe as necessidades" ng-pattern="/^[a-zA-Z\s]{3,200}$/" {{ participante.necessidade === 'S' ? 'required' : '' }} >
                         <span class="alert alert-warning" ng-show="form.necessidade.$error.pattern">Apenas letras e no mínimo 3.</span>
                     </div>    
                     
                     <label for="nome" class="nameLabel">* Nome Completo</label>
-                      <input id="name" type="text" name="nome" ng-model="crtl.participante.nome" placeholder="ex: Nome Sobrenome" ng-pattern="/^[a-zA-Z\s]{3,200}$/" required>
+                      <input id="name" type="text" name="nome" ng-model="participante.nome" placeholder="ex: Nome Sobrenome" ng-pattern="/^[a-zA-Z\s]{3,200}$/" required>
                       <span class="alert alert-warning" ng-show="form.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
                     
                     <label for="email" class="emailLabel">* Email</label>
-                      <input id="email" type="text" name="email" ng-model="crtl.participante.email" placeholder="ex: contato@email.com" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
+                      <input id="email" type="text" name="email" ng-model="participante.email" placeholder="ex: contato@email.com" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
                       <span class="alert alert-warning" ng-show="form.email.$error.pattern">Dígite um email válido. Ex email@gmail.com</span>
                     
                       <label for="telefone">* Telefone  &nbsp;&nbsp;<span class="help-input" > Ex:(99)9999-9999</span> </label>
-                      <input id="telefone" name="telefone" type="text" ng-model="crtl.participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required >
+                      <input id="telefone" name="telefone" type="text" ng-model="participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required >
                     
                     <span class="pull-right">  
-                        <button class="btn-transcricao {{form.$invalid ? 'btn-invalido' : ''}}"  data-ng-click="ctrl.salvarParticipante(crtl.participante, ctrl.evento.id)" ng-disabled="form.$invalid" >Inscrever</button>
+                        <button class="btn-transcricao {{form.$invalid ? 'btn-invalido' : ''}}"  ng-click="salvarParticipante(evento.id)" ng-disabled="form.$invalid" >Inscrever</button>
                     </span>    
                 </form>
             </div>
