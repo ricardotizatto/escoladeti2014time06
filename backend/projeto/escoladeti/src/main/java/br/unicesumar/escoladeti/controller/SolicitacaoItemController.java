@@ -35,10 +35,6 @@ public class SolicitacaoItemController {
     @Autowired
     private SolicitacaoVolumeService solicitacaoVolumeService;
 
-    @RequestMapping(value = "/{id}/produzir", method = RequestMethod.POST)
-    public @ResponseBody ViewAcompanhamentoSolicitacao produzir(@PathVariable("id") Long id) {
-        return solicitacaoItemService.enviarParaProducao(id);
-    }
 
     @RequestMapping(value = "/{id}/cancelar", method = RequestMethod.POST)
     public @ResponseBody ViewAcompanhamentoSolicitacao cancelar(@PathVariable("id") Long id) {

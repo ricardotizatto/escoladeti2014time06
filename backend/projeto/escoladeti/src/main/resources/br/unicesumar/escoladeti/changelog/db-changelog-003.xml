@@ -194,9 +194,9 @@
 
 	<changeSet id="10201410022235" author="Walber">
 		<preConditions onFail="MARK_RAN">
-			<not>
+
 				<tableExists tableName="caracteristica" />
-			</not>
+
 		</preConditions>
 		<insert tableName="caracteristica">
 			<column name="id" type="INT8" value="1"></column>
