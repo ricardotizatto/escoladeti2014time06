@@ -47,5 +47,13 @@
                                  referencedTableName="livro"
                                  referencedColumnNames="id"/>
     </changeSet>
+
+    <changeSet id="4" author="catabriga">
+        <addColumn tableName="volume">
+            <column name="transcricao" type="varchar(60)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
 

@@ -77,7 +77,7 @@ public class SolicitacaoService {
                     .livro(Livro.of(comandoItem.getLivro()))
                     .outro(comandoItem.getOutro())
                     .traducaoMaterial(comandoItem.getTraducaoMaterial())
-                    .status(StatusItem.AGUARDANDO)
+                    .status(StatusItem.ANDAMENTO)
                     .solicitacao(solicitacao)
                     .build();
 
@@ -111,7 +111,9 @@ public class SolicitacaoService {
 
         for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
 
-            if (!StatusItem.of(comandoItem.getStatus()).equals(StatusItem.AGUARDANDO)) {
+            SolicitacaoItem solicitacaoItemEncontrado = solicitacaoItemRepository.findOne(comandoItem.getId());
+
+            if (solicitacaoItemEncontrado.possuiSolicitavaoVolumes()) {
                 continue;
             }
 
@@ -120,7 +122,7 @@ public class SolicitacaoService {
                     .id(comandoItem.getId())
                     .livro(Livro.of(comandoItem.getLivro()))
                     .outro(comandoItem.getOutro())
-                    .status(StatusItem.AGUARDANDO)
+                    .status(StatusItem.ANDAMENTO)
                     .traducaoMaterial(comandoItem.getTraducaoMaterial())
                     .solicitacao(solicitacaoSalva)
                     .build();
@@ -134,7 +136,7 @@ public class SolicitacaoService {
 
     private void limparItens(Solicitacao solicitacao) {
         for (SolicitacaoItem item : solicitacao.getItensSolicitacao()) {
-            if (item.getStatus().equals(StatusItem.AGUARDANDO)) {
+            if (!item.possuiSolicitavaoVolumes()) {
                 solicitacaoItemRepository.delete(item);
             }
         }

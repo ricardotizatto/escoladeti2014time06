@@ -1,7 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
 import br.unicesumar.escoladeti.enums.StatusItem;
-import br.unicesumar.escoladeti.enums.TraducaoMaterial;
+import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.repository.VolumeRepository;
 import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
@@ -19,7 +19,7 @@ public class SolicitacaoItem extends Entidade{
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private TraducaoMaterial traducaoMaterial;
+    private Transcricao traducaoMaterial;
 
     @ManyToOne
     @JoinColumn(name="id_material")
@@ -47,11 +47,11 @@ public class SolicitacaoItem extends Entidade{
         return solicitacao;
     }
 
-    public TraducaoMaterial getTraducaoMaterial() {
+    public Transcricao getTraducaoMaterial() {
         return traducaoMaterial;
     }
 
-    public void setTraducaoMaterial(TraducaoMaterial traducaoMaterial) {
+    public void setTraducaoMaterial(Transcricao traducaoMaterial) {
         this.traducaoMaterial = traducaoMaterial;
     }
 
@@ -93,24 +93,31 @@ public class SolicitacaoItem extends Entidade{
         return new SolicitacaoItem(id);
     }
 
-    public void cancelar(VolumeRepository volumeRepository) {
+    public void cancelar() {
+
+        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
+            if (solicitacaoVolume.getDataEnvio() != null) {
+                throw new RuntimeException("Item da solicitação possui volume enviado e não pode ser excluido.<br> Este Item pode ser finalizado");
+            }
+        }
+
         this.setStatus(StatusItem.CANCELADO);
     }
 
 
-    public void validarPaginas(Integer paginaInicio, Integer paginafinal) {
-
-        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
-            Volume volume = solicitacaoVolume.getVolume();
-            if (paginaInicio >= volume.getPaginaInicio()  && paginaInicio <=volume.getPaginaFim()
-                    || paginafinal >= volume.getPaginaInicio() && paginafinal <= volume.getPaginaFim()) {
-                throw new RuntimeException(
-                        String.format("Página inicial ou final esta dentro do intervalo %d a %d . Volume: %d.<br>" +
-                                " Insira paginás que não estejam nesse intervalo.", volume.getPaginaInicio(), volume.getPaginaFim(), volume.getId()));
-            }
-        }
-
-    }
+//    public void validarPaginas(Integer paginaInicio, Integer paginafinal) {
+//
+//        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
+//            Volume volume = solicitacaoVolume.getVolume();
+//            if (paginaInicio >= volume.getPaginaInicio()  && paginaInicio <=volume.getPaginaFim()
+//                    || paginafinal >= volume.getPaginaInicio() && paginafinal <= volume.getPaginaFim()) {
+//                throw new RuntimeException(
+//                        String.format("Página inicial ou final esta dentro do intervalo %d a %d . Volume: %d.<br>" +
+//                                " Insira paginás que não estejam nesse intervalo.", volume.getPaginaInicio(), volume.getPaginaFim(), volume.getId()));
+//            }
+//        }
+//
+//    }
 
     public Integer getMaiorPagina() {
         Integer maior = 0;
@@ -123,6 +130,10 @@ public class SolicitacaoItem extends Entidade{
         }
 
         return maior;
+    }
+
+    public boolean possuiSolicitavaoVolumes() {
+        return getSolicitacaoVolumes().size() <= 0;
     }
 
     public static class SolicitacaoItemBuilder {
@@ -156,13 +167,13 @@ public class SolicitacaoItem extends Entidade{
         public SolicitacaoItem build() {
             SolicitacaoItem solicitacaoItem = new SolicitacaoItem();
             solicitacaoItem.setLivro(livro);
-            solicitacaoItem.setTraducaoMaterial(TraducaoMaterial.of(this.traducaoMaterial));
+            solicitacaoItem.setTraducaoMaterial(Transcricao.of(this.traducaoMaterial));
             solicitacaoItem.setOutro(this.outro);
             solicitacaoItem.setId(this.id);
             solicitacaoItem.setSolicitacao(this.solicitacao);
             solicitacaoItem.setStatus(StatusItem.of(this.status));
 
-            if(solicitacaoItem.getTraducaoMaterial().equals(TraducaoMaterial.OUTRO)
+            if(solicitacaoItem.getTraducaoMaterial().equals(Transcricao.OUTRO)
                     && (solicitacaoItem.getOutro() == null || solicitacaoItem.getOutro().isEmpty() ) ) {
                 throw new RuntimeException("Para tradução do material do tipo 'OUTRO'"
                         + " é obrigatório informar o campo 'OUTRO' ");
@@ -202,7 +213,7 @@ public class SolicitacaoItem extends Entidade{
         return id.equals(outroItem.id)
                 || outroItem.livro.equals(this.livro)
                 && outroItem.traducaoMaterial.equals(this.traducaoMaterial)
-                && !outroItem.traducaoMaterial.equals(TraducaoMaterial.OUTRO);
+                && !outroItem.traducaoMaterial.equals(Transcricao.OUTRO);
     }
 
     public ViewAcompanhamentoSolicitacao montarItemAcompanhamento() {

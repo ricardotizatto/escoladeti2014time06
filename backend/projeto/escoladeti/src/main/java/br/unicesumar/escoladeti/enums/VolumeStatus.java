@@ -1,6 +1,6 @@
 package br.unicesumar.escoladeti.enums;
 
 public enum VolumeStatus {
-	ANDAMENTO, REJEITADO, IMPRESSO, REVISADO, CANCELADO
+	ANDAMENTO, CONCLUIDO, REJEITADO, IMPRESSO, REVISADO, CANCELADO
 }
 	
