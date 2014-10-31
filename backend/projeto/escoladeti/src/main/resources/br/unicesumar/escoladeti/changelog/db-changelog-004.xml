@@ -47,6 +47,41 @@
                                  referencedTableName="livro"
                                  referencedColumnNames="id"/>
     </changeSet>
+    
+    <changeSet author="martinho" id="mart0142dropcolum" >		
+        <dropColumn tableName="evento" columnName="data"/>
+        <dropColumn tableName="evento" columnName="inicio"/>
+        <dropColumn tableName="evento" columnName="fim"/>
+    </changeSet>
+    
+    <changeSet author="martinho" id="mart0143createtable">
+        <createTable tableName="periodo">
+            <column name="id" type="INT8">
+                <constraints nullable="false" />
+            </column>
+            <column name="data" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="inicio" type="varchar(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="fim" type="varchar(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="tituloperiodo" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="eventoid" type="INT8" />
+        </createTable>
+                
+        <addForeignKeyConstraint baseColumnNames="eventoid"
+                  baseTableName="periodo" constraintName="fk_femy7nyxqlij7xjdkr32mju5we"
+                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento" />
+        
+        
+    </changeSet>
+        
     <!--
     <changeSet author="martinho" id="mart0142createview">
         <createView viewName="viewperiodoevento" replaceIfExists="true" schemaName="public">

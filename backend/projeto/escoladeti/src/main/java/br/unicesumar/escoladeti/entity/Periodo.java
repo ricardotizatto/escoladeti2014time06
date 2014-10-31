@@ -19,6 +19,7 @@ public class Periodo extends Entidade{
 
     private String inicio;
     private String fim;
+    private String tituloperiodo;
     
     @ManyToOne
     @JoinColumn(name = "eventoid", referencedColumnName = "id")
@@ -56,18 +57,27 @@ public class Periodo extends Entidade{
     public void setFim(String fim) {
         this.fim = fim;
     }
+    
+    public String getTituloperiodo() {
+        return tituloperiodo;
+    }
+
+    public void setTituloperiodo(String tituloperiodo) {
+        this.tituloperiodo = tituloperiodo;
+    }
 
     public boolean validaData() {
         return DateUtil.validBeforeDate(this.data);
     }
-
+    
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.data);
-        hash = 37 * hash + Objects.hashCode(this.inicio);
-        hash = 37 * hash + Objects.hashCode(this.fim);
-        hash = 37 * hash + Objects.hashCode(this.evento);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.data);
+        hash = 29 * hash + Objects.hashCode(this.inicio);
+        hash = 29 * hash + Objects.hashCode(this.fim);
+        hash = 29 * hash + Objects.hashCode(this.tituloperiodo);
+        hash = 29 * hash + Objects.hashCode(this.evento);
         return hash;
     }
 
@@ -87,6 +97,9 @@ public class Periodo extends Entidade{
             return false;
         }
         if (!Objects.equals(this.fim, other.fim)) {
+            return false;
+        }
+        if (!Objects.equals(this.tituloperiodo, other.tituloperiodo)) {
             return false;
         }
         if (!Objects.equals(this.evento, other.evento)) {
