@@ -99,11 +99,18 @@ public class PessoaController implements Serializable {
 	/**
 	 * @author Lorhan // metodo para listar todas pessoas alunos ou não
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "todasPessoas")
+	@RequestMapping(method = RequestMethod.GET, value = "/todasPessoas")
 	@ResponseBody
 	public List<PessoaFisicaJuridica> listarTodasPessoas() {
 		return pessoaService.listarTodasPessoas();
 	}
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/todasPessoasfisicas")
+    @ResponseBody
+    public List<PessoaFisica> listarTodasPessoasFisicas() {
+        return pessoaService.lsitarPessoasFisicas();
+    }
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/listarTodas/{pagina}")
 	@ResponseBody

@@ -176,7 +176,7 @@
 				<constraints primaryKeyName="pessoaCaracteristicaPkId"
 					primaryKey="true" />
 			</column>
-			<column name="pessoaid" type="INT8">
+			<column name="pessoa_id" type="INT8">
 				<constraints foreignKeyName="pessoaCaracteristicaFkIdPessoa"
 					referencedTableName="pessoa" referencedColumnNames="id" nullable="false" />
 			</column>
@@ -194,9 +194,9 @@
 
 	<changeSet id="10201410022235" author="Walber">
 		<preConditions onFail="MARK_RAN">
-			<not>
+
 				<tableExists tableName="caracteristica" />
-			</not>
+
 		</preConditions>
 		<insert tableName="caracteristica">
 			<column name="id" type="INT8" value="1"></column>
