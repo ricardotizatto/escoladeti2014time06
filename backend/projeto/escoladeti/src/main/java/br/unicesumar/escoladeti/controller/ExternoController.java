@@ -2,9 +2,11 @@ package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.entity.Participante;
+import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.service.MaterialStatusService;
 import br.unicesumar.escoladeti.service.ParticipanteService;
+import br.unicesumar.escoladeti.service.PeriodoService;
 import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
 import java.io.Serializable;
 
@@ -27,6 +29,9 @@ public class ExternoController implements Serializable{
     
     @Autowired
     private EventoService eventoService;
+    
+    @Autowired
+    private PeriodoService periodoService;
     
     @Autowired
     private ParticipanteService participanteService;
@@ -71,6 +76,12 @@ public class ExternoController implements Serializable{
     @ResponseBody
     public DataPage<Evento> getUltimosEventos() {
         return eventoService.getUltimosEventos();
+    }
+    
+    @RequestMapping(value = "public/rest/ultimosperiodos", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Periodo> listarUltimosPeriodos() {
+        return periodoService.listarUltimosPeriodos();
     }
     
     @RequestMapping(value = "public/rest/evento/{id}", method = RequestMethod.GET)

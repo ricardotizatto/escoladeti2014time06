@@ -47,5 +47,15 @@
                                  referencedTableName="livro"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <!--
+    <changeSet author="martinho" id="mart0142createview">
+        <createView viewName="viewperiodoevento" replaceIfExists="true" schemaName="public">
+            SELECT A.ID, A.TITULO, A.DESCRICAO, A.LOCAL AS LOCALEVENTO, A.STATUSEVENTO,
+            (SELECT MIN(B.DATA) FROM PERIODO B WHERE B.EVENTOID = A.ID ) AS DATAINICIO 
+            FROM EVENTO A ORDER BY DATAINICIO ASC
+        </createView>
+    </changeSet>
+    -->
+    
 </databaseChangeLog>
 
