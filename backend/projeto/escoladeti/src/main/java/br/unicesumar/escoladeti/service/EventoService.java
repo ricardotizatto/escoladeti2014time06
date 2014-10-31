@@ -6,6 +6,7 @@ import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.repository.EventoRepository;
+import br.unicesumar.escoladeti.repository.ParticipanteRepository;
 import br.unicesumar.escoladeti.repository.PeriodoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class EventoService {
     private EventoRepository eventoRepository;
     
     @Autowired
+    private ParticipanteRepository participanteRepository;
+
+    @Autowired
     private PeriodoRepository periodoRepository;
 
     public Evento salvar(Evento evento) {
@@ -29,8 +33,14 @@ public class EventoService {
         return eventoRepository.findAll();
     }
 
-    public void deletar(Evento evento) {
-        eventoRepository.delete(evento);
+    public void deletar(Evento evento) {        
+        try {
+            if (participanteRepository.findByIdevento(evento.getId()).isEmpty() ) {
+                eventoRepository.delete(evento);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }   
     }
 
     public Evento getById(Long id) {
