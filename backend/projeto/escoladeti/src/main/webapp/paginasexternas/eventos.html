@@ -9,7 +9,11 @@
         </div>
     </div>
 </div>
-
+<ul>
+    <li ng-repeat="periodo in ultimosPeriodos.list" >
+        {{periodo.data | date: 'dd-MM-yyyy'}}
+    </li>
+</ul>
 <!-- Services -->
 <div class="what-we-do container">
     <div class="portfolio-title">

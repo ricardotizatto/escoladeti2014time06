@@ -49,6 +49,13 @@ function ExternoController($scope, $http, $routeParams) {
             console.log('Ultimos Eventos: ', ultimosEventos);
             $scope.ultimosEventos = ultimosEventos;
         });
+        $http({
+            method: 'GET',
+            url: './public/rest/ultimosperiodos'
+        }).success(function (ultimosPeriodos) {
+            console.log('Ultimos Periodos: ', ultimosPeriodos);
+            $scope.ultimosPeriodos = ultimosPeriodos;
+        });
     },
     $scope.detalhesEvento = function (eventoId){
         console.log('Detalhes Evento id :', eventoId);

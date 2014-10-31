@@ -1,5 +1,7 @@
 package br.unicesumar.escoladeti.service;
 
+import br.unicesumar.escoladeti.controller.DataPage;
+import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.repository.PeriodoRepository;
 import java.util.List;
@@ -25,5 +27,9 @@ public class PeriodoService {
 
     public Periodo getById(Long id) {
         return periodoRepository.findById(id);
+    }
+    
+    public DataPage<Periodo> listarUltimosPeriodos() {
+        return new DataPage<>(periodoRepository.findAll(pageRequestForAsc(1, "data")));
     }
 }
