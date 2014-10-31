@@ -7,9 +7,9 @@
     <form method="POST" role="form" name="formEstado" ng-submit="salvar()">							
         <div class="col-sm-6">
             <div class="form-group {{formEstado.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                <label class="control-label"> <strong>Nome * </strong> </label>
+                <label class="control-label"> <strong>Nome * </strong> </label> 
                 <input type="text" class="form-control" name="nome" title="Nome do estado"  
-                       ng-model="unidadeFederativa.nome" ng-pattern="/^[A-Za-z\s]{3,40}$/" required placeholder="Nome do Estado" maxlength="40" required>
+                       ng-model="unidadeFederativa.nome" ng-pattern="/[a-zA-Z\s]{3,40}/" required placeholder="Nome do Estado" maxlength="40" required>
                 <span class="help-block" ng-show="formEstado.nome.$error.pattern">Apenas letras e mínimo de 3.</span>
             </div>
         </div>
