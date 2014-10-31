@@ -168,8 +168,10 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	});
 	
     $log.debug('listar pessoas');
-    Pessoa.listarTodas(function (alunos) {
-        $scope.pessoas = alunos.map(function (pessoa) {
+    Pessoa.listarTodasPessoaFisicas(function (pessoas) {
+        $scope.pessoasOriginal = pessoas;
+
+            $scope.pessoas = pessoas.map(function (pessoa) {
             return {
                 nome: pessoa.nome + ' ' + pessoa.sobrenome,
                 id: pessoa.id

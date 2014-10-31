@@ -104,6 +104,13 @@ public class PessoaController implements Serializable {
 	public List<PessoaFisicaJuridica> listarTodasPessoas() {
 		return pessoaService.listarTodasPessoas();
 	}
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/todasPessoasfisicas")
+    @ResponseBody
+    public List<PessoaFisica> listarTodasPessoasFisicas() {
+        return pessoaService.lsitarPessoasFisicas();
+    }
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/listarTodas/{pagina}")
 	@ResponseBody

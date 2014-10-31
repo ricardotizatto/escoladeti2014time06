@@ -176,7 +176,7 @@
 				<constraints primaryKeyName="pessoaCaracteristicaPkId"
 					primaryKey="true" />
 			</column>
-			<column name="pessoaid" type="INT8">
+			<column name="pessoa_id" type="INT8">
 				<constraints foreignKeyName="pessoaCaracteristicaFkIdPessoa"
 					referencedTableName="pessoa" referencedColumnNames="id" nullable="false" />
 			</column>

@@ -55,5 +55,20 @@
             </column>
         </addColumn>
     </changeSet>
+
+    <changeSet id="5" author="catabriga">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="pessoacaracteristica" columnName="pessoaid"></columnExists>
+        </preConditions>
+        <renameColumn tableName="pessoacaracteristica" oldColumnName="pessoaid" newColumnName="pessoa_id"></renameColumn>
+
+    </changeSet>
+
+    <changeSet id="6" author="catabriga">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="pessoacaracteristica" columnName="caracteristicaid"></columnExists>
+        </preConditions>
+        <renameColumn tableName="pessoacaracteristica" oldColumnName="caracteristicaid" newColumnName="caracteristica_id"></renameColumn>
+    </changeSet>
 </databaseChangeLog>
 

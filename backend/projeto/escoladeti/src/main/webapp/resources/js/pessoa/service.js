@@ -12,11 +12,11 @@ function PessoaFactory($resource) {
             }
         },
         
-        listarTodas:{
+        listarTodasPessoaFisicas:{
             method: 'GET',
             isArray: true,
             params: {
-                acao: 'todasPessoas'
+                acao: 'todasPessoasfisicas'
             }
         },
         
