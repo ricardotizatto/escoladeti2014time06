@@ -1,4 +1,4 @@
-<div class="slider" ng-init="ctrl.getEventos(1);ctrl.ativaBotao('home')">
+<div class="slider" ng-init="getEventos(1);ativaBotao('home')">
     <div class="container">
         <div>
             <img src="./resources/externo/assets/img/banner-braille.jpg">
@@ -12,7 +12,7 @@
         <h3>Próximos Eventos</h3>
     </div>
     <div class="row">
-       <div class="service span3" ng-repeat="proximoEvento in ctrl.proximosEventos.list" >
+       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
             <h4>{{proximoEvento.titulo}}</h4>
             <p>{{proximoEvento.descricao}}</p>
             <p><b>Data:</b> <br>
@@ -20,7 +20,7 @@
                     {{periodo.data | date: 'dd-MM-yyyy'}} <br>
                 </span>
             </p>
-            <a href="" ng-click="ctrl.detalhesEvento(proximoEvento.id)" >Detalhes</a>
+            <a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a>
         </div>       
     </div>
 </div>
