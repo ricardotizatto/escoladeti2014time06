@@ -227,14 +227,19 @@ function eventoController($scope, $http, $routeParams) {
     };
 
     $scope.salvarPeriodo = function () {
+        var dataAtual = dataHoje();
         if ($scope.indicePeriodo >= 0) {
             $scope.evento.periodos.splice($scope.indicePeriodo, 1);
         }
-
-        $scope.evento.periodos.push($scope.periodo);
-        console.log($scope.evento.periodos);
-        toastr.success("Periodo adicionado " + $scope.periodo.data + " !");
-        $scope.indicePeriodo = {};
+        
+        if($scope.periodo.inicio >= $scope.periodo.fim || $scope.periodo.data < dataAtual){
+            toastr.warning("Periodo inválido");
+        }else{
+            $scope.evento.periodos.push($scope.periodo);
+            console.log($scope.evento.periodos);
+            toastr.success("Periodo adicionado " + $scope.periodo.data + " !");
+            $scope.indicePeriodo = {};   
+        }
     };
 
     $scope.editarPeriodo = function (indice) {
@@ -251,6 +256,14 @@ function eventoController($scope, $http, $routeParams) {
         }
 
     };
+    
+    function dataHoje() {
+        var data = new Date();
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+        var ano = data.getFullYear();
+        return [ano, mes, dia].join('-');
+    }
 
 }
 function Ctrl($scope) {

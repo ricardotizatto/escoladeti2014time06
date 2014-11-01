@@ -33,14 +33,12 @@ public class EventoService {
         return eventoRepository.findAll();
     }
 
-    public void deletar(Evento evento) {        
-        try {
-            if (participanteRepository.findByIdevento(evento.getId()).isEmpty() ) {
-                eventoRepository.delete(evento);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }   
+    public void deletar(Evento evento) throws Exception{
+        if (participanteRepository.findByIdevento(evento.getId()).isEmpty()) {
+            eventoRepository.delete(evento);
+        }else{
+            throw new RuntimeException("Evento " + evento.getDescricao() + " não pode ser deletado, pois possuí participante inscrito");
+        }
     }
 
     public Evento getById(Long id) {

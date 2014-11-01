@@ -11,9 +11,9 @@
                 <div class="col-sm-4">
                     <div class="form-group {{formEvento.titulo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Titulo *</strong></label>
-                        <input type="text" name="titulo" title="Titulo do Evento deve ser maisculo" class="form-control" ng-pattern="/^[a-zA-Z\s]{3,200}$/"
+                        <input type="text" name="titulo" title="Titulo do Evento" class="form-control"
                                ng-model="evento.titulo" required placeholder="Titulo"/>
-                        <span class="help-block" ng-show="formEvento.titulo.$error.pattern">Apenas letras e no mínimo 3.</span>
+                        <!--<span class="help-block" ng-show="formEvento.titulo.$error.required">Apenas letras e no mínimo 3.</span>-->
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -30,9 +30,9 @@
                 <div class="col-sm-4">
                     <div class="form-group {{formEvento.organizacao.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Realização *</strong></label>
-                        <input type="text" name="organizacao" title="Realizacao do Evento deve ser maisculo" class="form-control" ng-pattern="/^[a-zA-Z\s]{3,200}$/"
+                        <input type="text" name="organizacao" title="Realizacao do Evento deve ser maisculo" class="form-control"
                                ng-model="evento.organizacao" required placeholder="Organização responsavel"/>
-                        <span class="help-block" ng-show="formEvento.organizacao.$error.pattern">Apenas letras e no mínimo 3.</span>
+                        <!--<span class="help-block" ng-show="formEvento.organizacao.$error.pattern">Apenas letras e no mínimo 3.</span>-->
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -56,9 +56,9 @@
                 <div class="col-sm-7">
                     <div class="form-group {{formEvento.descricao.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Descrição do Evento *</strong></label>
-                        <textarea name="descricao" class="form-control" rows="1" cols="5" ng-pattern="/^[a-zA-Z\s]{3,200}$/"
+                        <textarea name="descricao" class="form-control" rows="1" cols="5" 
                                   required ng-model="evento.descricao" placeholder="Digite uma descrição para o evento..."></textarea>
-                        <span class="help-block" ng-show="formEvento.descricao.$error.pattern">Apenas letras e no mínimo 3.</span>
+                        <!--<span class="help-block" ng-show="formEvento.descricao.$error.pattern">Apenas letras e no mínimo 3.</span>-->
                         <div class="required-icon">
                             <div class="text"></div>
                         </div>
@@ -70,9 +70,9 @@
                 <div class="form-group col-sm-6">
                     <div class="form-group {{formEvento.local.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Local *</strong></label>
-                        <input class="form-control" name="local" type="text" ng-pattern="/^[a-zA-Z\s]{3,200}$/"
+                        <input class="form-control" name="local" type="text" 
                                ng-model="evento.local" required placeholder="Local do evento"/>
-                        <span class="help-block" ng-show="formEvento.local.$error.pattern">Apenas letras e no mínimo 3.</span>
+                        <!--<span class="help-block" ng-show="formEvento.local.$error.pattern">Apenas letras e no mínimo 3.</span>-->
                     </div>
                 </div>
                 <div class="col-sm-6">
