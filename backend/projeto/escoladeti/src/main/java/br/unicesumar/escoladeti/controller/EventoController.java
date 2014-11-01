@@ -49,7 +49,7 @@ public class EventoController implements Serializable {
 
     @RequestMapping(value = "/evento", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deletar(@RequestBody Evento evento) {
+    public String deletar(@RequestBody Evento evento) throws Exception {
         eventoService.deletar(evento);
         return "deleted";
     }

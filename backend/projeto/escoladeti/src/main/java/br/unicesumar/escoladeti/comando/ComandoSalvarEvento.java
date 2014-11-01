@@ -20,12 +20,11 @@ public class ComandoSalvarEvento {
     private String descricao;
     private double valor;
     private boolean statusevento;
+    private Integer limite;
 
     public ComandoSalvarEvento() {
     }
-    
-    
-
+ 
     public String getTipoEvento() {
         return tipoEvento;
     }
@@ -106,6 +105,14 @@ public class ComandoSalvarEvento {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public Integer getLimite() {
+        return limite;
+    }
+
+    public void setLimite(Integer limite) {
+        this.limite = limite;
     }
 
     @Override

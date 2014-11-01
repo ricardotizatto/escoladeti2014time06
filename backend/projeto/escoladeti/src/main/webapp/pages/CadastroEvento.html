@@ -53,7 +53,7 @@
                         <span class="help-block" ng-show="formEvento.ministrante.$error.pattern">Apenas letras e no mínimo 3.</span>
                     </div>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-5">
                     <div class="form-group {{formEvento.descricao.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Descrição do Evento *</strong></label>
                         <textarea name="descricao" class="form-control" rows="1" cols="5" 
@@ -62,6 +62,14 @@
                         <div class="required-icon">
                             <div class="text"></div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group {{formEvento.limite.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Limite de vagas *</strong></label>
+                        <input type="text" name="limite" title="Quantidade de vagas" class="form-control" ng-pattern="/^[0-9]+$/"
+                               ng-model="evento.limite" required />
+                        <span class="help-block" ng-show="formEvento.limite.$error.pattern">Apenas números</span>
                     </div>
                 </div>
             </div>

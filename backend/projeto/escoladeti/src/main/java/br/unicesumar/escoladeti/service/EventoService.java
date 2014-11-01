@@ -74,6 +74,7 @@ public class EventoService {
                 .tipoEvento(comando.getTipoEvento())
                 .titulo(comando.getTitulo())
                 .valor(comando.getValor())
+                .limite(comando.getLimite())
                 .buildEvento();
         
         if (comando.getId() != null) {
