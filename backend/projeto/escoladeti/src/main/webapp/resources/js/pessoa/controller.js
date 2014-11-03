@@ -187,10 +187,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
   };
 
   $scope.salvar = function () {
-    if ($scope.pessoa.tipo === 'F')
-      $scope.pessoa.caracteristicas = $scope.pessoaCaracteristica.caracteristicas;
+    $scope.pessoa.caracteristicas = $scope.pessoaCaracteristica.caracteristicas;
     if ($scope.pessoa.id) {
-      $scope.pessoa.$update(function () {
+        $scope.pessoa.$update(function () {
         toastr.success($scope.pessoa.nome + ' atualizado com sucesso');
         $scope.novaPessoa($scope.pessoa.tipo);
         window.location = '#/listapessoa';
