@@ -199,8 +199,8 @@
 			</not>
 		</preConditions>
 		<insert tableName="caracteristica">
-			<column name="id" type="INT8" value="1"></column>
-			<column name="descricao" type="VARCHAR(30)" value="ALUNO"></column>
+			<column name="id" type="INT8" value="1"/>
+			<column name="descricao" type="VARCHAR(30)" value="ALUNO"/>
 		</insert>
 		<insert tableName="caracteristica">
 			<column name="id" type="INT8" value="2"></column>
@@ -308,6 +308,18 @@
             ORDER BY T1.NOME 
         </createView>
 	</changeSet>
+        
+        <changeSet author="Walber" id="201410302127">
+          <preConditions onError="MARK_RAN" onFail="MARK_RAN">
+            <not>
+              <columnExists tableName="caracteristica" columnName="tipo"/>
+            </not>
+          </preConditions>
+          <addColumn tableName="caracteristica">
+            <column name="tipo" type="CHAR">
+              </column>
+           </addColumn>          
+        </changeSet>
 
 </databaseChangeLog>
 
