@@ -13,7 +13,7 @@ appExterno.config(['$routeProvider',
     function ($routeProvider) {
 
         $routeProvider
-            .when('/principal', {
+            .when('/home', {
                 templateUrl: './paginasexternas/principal.html',
                 //controller: 'ExternoController'
             })

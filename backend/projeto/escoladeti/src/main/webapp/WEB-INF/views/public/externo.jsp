@@ -35,12 +35,12 @@
                                 <span class="icon-bar"></span>
                             </a>
                             <h1>
-                                <a href="#/externo"> <img src="./resources/externo/assets/img/logo-amacap.png"></a>
+                                <a href="#/home"> <img src="./resources/externo/assets/img/logo-amacap.png"></a>
                             </h1>
                             <div class="nav-collapse collapse">
                                 <ul class="nav pull-right">
                                     <li class="{{ ativa == 'home' ? 'current-page' : '' }}"  ng-click="ativaBotao('home')" >
-                                        <a href="#/externo"><i class="icon-home"></i><br />Home</a>
+                                        <a href="#/home"><i class="icon-home"></i><br />Home</a>
                                     </li>
                                     <li class="{{ ativa == 'eventos' ? 'current-page' : '' }}" ng-click="ativaBotao('eventos')" >
                                         <a href="#/eventos"><i class="icon-camera"></i><br />Eventos</a>

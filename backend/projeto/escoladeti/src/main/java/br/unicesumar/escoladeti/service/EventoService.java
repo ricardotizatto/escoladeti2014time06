@@ -45,12 +45,12 @@ public class EventoService {
         return new DataPage<Evento>(eventoRepository.findByTituloContainingOrderByTituloAsc(titulo, pageRequestForAsc(1, "titulo")));
     }
 
-    public DataPage<Evento> getProxomosEventos() {
-        return new DataPage<>(eventoRepository.findByStatuseventoTrue( new PageRequest(0, 4)));
+    public DataPage<Evento> getProximosEventos(Integer pagina) {
+        return new DataPage<>(eventoRepository.findByStatuseventoTrue(new PageRequest( pagina, 4 )));
     }
     
-    public DataPage<Evento> getUltimosEventos() {
-        return new DataPage<>(eventoRepository.findByStatuseventoFalse(new PageRequest(0, 4)));
+    public DataPage<Evento> getUltimosEventos(Integer pagina) {
+        return new DataPage<>(eventoRepository.findByStatuseventoFalse(new PageRequest( pagina, 4 )));
     }
     
     public Evento persistirEvento(ComandoSalvarEvento comando, Long id) {

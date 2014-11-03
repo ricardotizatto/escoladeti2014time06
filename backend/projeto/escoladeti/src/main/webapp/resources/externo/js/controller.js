@@ -34,21 +34,6 @@ function ExternoController($scope, $http, $routeParams) {
     },
     $scope.getEventos = function (pageNumber){
         console.log('getEventos pag: ', pageNumber);
-
-        $http({
-            method: 'GET',
-            url: './public/rest/proximoseventos'
-        }).success(function (proximosEventos) {
-            console.log('Proximos Eventos: ', proximosEventos);
-            $scope.proximosEventos = proximosEventos;
-        });
-        $http({
-            method: 'GET',
-            url: './public/rest/ultimoseventos'
-        }).success(function (ultimosEventos) {
-            console.log('Ultimos Eventos: ', ultimosEventos);
-            $scope.ultimosEventos = ultimosEventos;
-        });
         $http({
             method: 'GET',
             url: './public/rest/ultimosperiodos'
@@ -57,6 +42,28 @@ function ExternoController($scope, $http, $routeParams) {
             $scope.ultimosPeriodos = ultimosPeriodos;
         });
     },
+    $scope.paginarProximosEventos = function (pageNumber) {
+        console.log('paginarEventos pag: ', pageNumber);
+        pageNumber = pageNumber - 1;
+        $http({
+            method: 'GET',
+            url: './public/rest/proximoseventos/' + pageNumber
+        }).success(function (proximosEventos) {
+            console.log('Proximos Eventos: ', proximosEventos);
+            $scope.proximosEventos = proximosEventos;
+        });
+    },
+    $scope.paginarUltimosEventos = function (pageNumber) {
+        console.log('paginarEventos pag: ', pageNumber);
+        pageNumber = pageNumber - 1;
+        $http({
+            method: 'GET',
+            url: './public/rest/ultimoseventos/' + pageNumber
+        }).success(function (ultimosEventos) {
+            console.log('Ultimos Eventos: ', ultimosEventos);
+            $scope.ultimosEventos = ultimosEventos;
+        });
+    },        
     $scope.detalhesEvento = function (eventoId){
         console.log('Detalhes Evento id :', eventoId);
         window.location = '#/detalhes-evento/' + eventoId;

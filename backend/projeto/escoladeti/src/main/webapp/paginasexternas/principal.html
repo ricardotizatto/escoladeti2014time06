@@ -1,4 +1,4 @@
-<div class="slider" ng-init="getEventos(1);ativaBotao('home')">
+<div class="slider" ng-init="getEventos(1);paginarProximosEventos(1);ativaBotao('home')">
     <div class="container">
         <div>
             <img src="./resources/externo/assets/img/banner-braille.jpg">
@@ -7,20 +7,49 @@
 </div>        
 
 <!-- Services -->
-<div class="what-we-do container">
+<div ng-show="proximosEventos.list" class="what-we-do container">
     <div class="portfolio-title">
         <h3>Próximos Eventos</h3>
-    </div>
+    </div>    
     <div class="row">
        <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
             <h4>{{proximoEvento.titulo}}</h4>
             <p>{{proximoEvento.descricao}}</p>
-            <p><b>Data:</b> <br>
+            <p><b>Data:</b>
                 <span ng-repeat="periodo in proximoEvento.periodos | orderBy:'data'">
                     {{periodo.data | date: 'dd-MM-yyyy'}} <br>
                 </span>
             </p>
             <a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a>
         </div>       
+    </div>
+    <div class="row" > 
+        <div class="pagination pagination-sm pagination-centered">
+            <ul>
+                <li>                        
+                    <a ng-click="paginarProximosEventos(1)"> 
+                        <span class="glyphicon  icon-fast-backward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="proximosEventos.pageCount <= 1 ? paginarProximosEventos(1) : paginarProximosEventos(proximosEventos.pageNumber - 1)"> 
+                        <span class="glyphicon icon-step-backward"></span>
+                    </a>
+                </li>
+                <li ng-repeat="numeroPagina in proximosEventos.pagesAround" class="{{numeroPagina == proximosEventos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="paginarProximosEventos(numeroPagina)">{{numeroPagina}}</a>
+                </li>
+                <li>
+                    <a ng-click="proximosEventos.pageNumber === proximosEventos.pageCount ? paginarProximosEventos(proximosEventos.pageCount) : paginarProximosEventos(proximosEventos.pageNumber + 1)"> 
+                        <span class="glyphicon icon-step-forward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="proximosEventos.pageCount == 0 ? paginarProximosEventos(1) : paginarProximosEventos(proximosEventos.pageCount)"> 
+                        <span class="glyphicon icon-fast-forward"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

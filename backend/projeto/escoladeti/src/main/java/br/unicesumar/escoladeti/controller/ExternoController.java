@@ -66,16 +66,17 @@ public class ExternoController implements Serializable{
         return eventoService.getTodos(pagina);
     }
     
-    @RequestMapping(value = "public/rest/proximoseventos", method = RequestMethod.GET)
+    
+    @RequestMapping(value = "public/rest/proximoseventos/{pagina}", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Evento> getProxomosEventos() {
-        return eventoService.getProxomosEventos();
+    public DataPage<Evento> getProximosEventos(@PathVariable Integer pagina) {
+        return eventoService.getProximosEventos(pagina);
     }
     
-    @RequestMapping(value = "public/rest/ultimoseventos", method = RequestMethod.GET)
+    @RequestMapping(value = "public/rest/ultimoseventos/{pagina}", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Evento> getUltimosEventos() {
-        return eventoService.getUltimosEventos();
+    public DataPage<Evento> getUltimosEventos(@PathVariable Integer pagina) {
+        return eventoService.getUltimosEventos(pagina);
     }
     
     @RequestMapping(value = "public/rest/ultimosperiodos", method = RequestMethod.GET)
