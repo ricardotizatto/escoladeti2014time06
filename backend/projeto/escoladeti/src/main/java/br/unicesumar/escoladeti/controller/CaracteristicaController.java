@@ -29,12 +29,12 @@ public class CaracteristicaController implements Serializable {
   @RequestMapping(method = RequestMethod.GET, value = {"/{tipo}"})
   @ResponseBody
   public List<Caracteristica> getCaracteristicaPorTipo(@PathVariable Tipo tipo) {
-    return this.caracteristicaService.findCaracteristicaPorTipo(tipo);
+    return this.caracteristicaService.findCaracteristicaPorTipo(tipo, Tipo.A);
   }
 
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public List<Caracteristica> getTodas(){
-		return this.caracteristicaService.findAll();
-	}
+  @RequestMapping(method = RequestMethod.GET)
+  @ResponseBody
+  public List<Caracteristica> getTodas() {
+    return this.caracteristicaService.findAll();
+  }
 }

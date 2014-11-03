@@ -21,8 +21,8 @@ public class CaracteristicaService {
 		return this.caracteristicaRepository.findAll();
 	}
 
-  public List<Caracteristica> findCaracteristicaPorTipo(Tipo tipo) {
-    return this.caracteristicaRepository.findByTipoOrderByDescricaoAsc(tipo);
+  public List<Caracteristica> findCaracteristicaPorTipo(Tipo tipo, Tipo ambos) {
+    return this.caracteristicaRepository.findByTipoOrTipoOrderByDescricaoAsc(tipo, ambos);
   }
 
 }

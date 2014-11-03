@@ -16,10 +16,10 @@
           <label class="control-label">Tipo</label>
           <div class="btn-group">
             <label class="btn btn-primary btn-radio-amacapa"> <input
-                ng-model="pessoa.tipo" ng-disabled="estaEditando" value="F" ng-change="verificaCaracteristica()"
+                ng-model="pessoa.tipo" ng-disabled="estaEditando" value="F" ng-change="verificaCaracteristica(pessoa.tipo)"
                 type="radio" /> Física
             </label> <label class="btn btn-primary btn-radio-amacapa"> <input
-                ng-model="pessoa.tipo" ng-disabled="estaEditando" value="J" ng-change="verificaCaracteristica()"
+                ng-model="pessoa.tipo" ng-disabled="estaEditando" value="J" ng-change="verificaCaracteristica(pessoa.tipo)"
                 type="radio" /> Jurídica
             </label>
           </div>
@@ -32,7 +32,8 @@
               *</strong></label> <select type="text" name="caracteristicas"
                                      ui-select2="select2Options"
                                      multiple class="input-default"
-                                     ng-model="pessoaCaracteristica.caracteristicas" ng-required="pessoa.tipo === 'F'">
+                                     ng-model="pessoaCaracteristica.caracteristicas" ng-required="pessoa.tipo === 'F'"
+                                     ng-change="validaCaracteristicas(pessoaCaracteristica.caracteristicas)">
             <option ng-repeat="c in caracteristicas" value="{{c.id}}">{{c.descricao}}</option>
           </select>
         </div>

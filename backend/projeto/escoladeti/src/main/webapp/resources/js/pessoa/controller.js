@@ -5,11 +5,13 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
   $scope.mask = '999.999.999-99';
 
   $scope.select2 = 'one';
+  
 
   $scope.init = function () {
     $scope.listarTodasPessoas(1);
     $scope.focusCpf = false;
     $scope.enderecoPrincipal = false;
+    $scope.verificaCaracteristica('F');
   };
 
   function isEditing() {
@@ -40,16 +42,37 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
 
   };
   
-  $scope.verificaCaracteristica = function(){
+  $scope.verificaCaracteristica = function(tipo){
     $scope.caracteristicas = undefined;
-    buscaCaracteristicas(function(caract){
-      $scope.caracteristicas = caract;
-      $scope.caracteristicas.forEach(function(item,index){
-      console.log(item);
-    });
-    });
-    console.log($scope.caracteristicas);
+    CaracteristicaService.query({tipo : tipo}
+      ,function(data){
+        $scope.caracteristicas = data;
+      }
+    );
   };
+  
+  function temAssociado(caracteristicas){
+    if(caracteristicas){
+      var associado;
+      caracteristicas.forEach(function(item,index){
+        if(item == 2)
+          associado =  true;
+      });
+      return associado;
+    }
+    return false;
+  }
+  function temAluno(caracteristicas){
+    if(caracteristicas){
+      var aluno;
+      caracteristicas.forEach(function(item,index){
+        if(item == 1)
+          aluno = true;
+      });
+      return aluno;
+    }
+    return false;
+  }  
 
   $scope.validaCnpj = function (cnpj) {
     if (!cnpj)
@@ -78,7 +101,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
 
       if (!$routeParams.pessoaId) {
         $scope.novaPessoa("F");
-        //$scope.caracteristicas = buscaCaracteristicas('F');
+        $scope.verificaCaracteristica('F');
         return;
       }
 
@@ -87,17 +110,22 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
         $scope.estaEditando = isEditing();
         $scope.maskCpf = '999.999.999-99';
         $scope.pessoaCaracteristica = {};
-        //$scope.caracteristicas = buscaCaracteristicas(pessoa.tipo);
         $scope.pessoaCaracteristica.caracteristicas = [];
+        $scope.verificaCaracteristica(pessoa.tipo);
+        $scope.pessoa.pessoaCaracteristica.forEach(function(item,index){
+          $scope.pessoaCaracteristica.caracteristicas.push(item.caracteristica.id);
+          if(item.caracteristica.id == 2)
+            $scope.pessoa.vigenciaAssociado = item.vigenciaAssociado.vigencia;
+        });
+        $scope.validaCaracteristicas($scope.pessoaCaracteristica.caracteristicas);
       });
     }, 100);
   };
-
-  function buscaCaracteristicas(cb) {
-    return CaracteristicaService.query(function(data){
-      cb(data);
-    });
-  }
+  
+  $scope.validaCaracteristicas = function(caracteristicas){
+    $scope.aluno = temAluno(caracteristicas);
+    $scope.associado = temAssociado(caracteristicas);
+  };
 
   $scope.editar = function (p) {
     window.location = '#/pessoa/' + p.id + '/' + p.tipo;
