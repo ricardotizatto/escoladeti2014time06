@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.unicesumar.escoladeti.entity.Caracteristica;
+import br.unicesumar.escoladeti.enums.Tipo;
 import br.unicesumar.escoladeti.repository.CaracteristicaRepository;
 
 
@@ -19,5 +20,9 @@ public class CaracteristicaService {
 	public List<Caracteristica> findAll(){
 		return this.caracteristicaRepository.findAll();
 	}
+
+  public List<Caracteristica> findCaracteristicaPorTipo(Tipo tipo, Tipo ambos) {
+    return this.caracteristicaRepository.findByTipoOrTipoOrderByDescricaoAsc(tipo, ambos);
+  }
 
 }

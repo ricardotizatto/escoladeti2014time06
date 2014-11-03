@@ -43,7 +43,7 @@ public abstract class Pessoa extends Entidade {
     private Set<Endereco> enderecos;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PessoaCaracteristica> pessoaCaracteristica = new ArrayList<PessoaCaracteristica>();
+    private List<PessoaCaracteristica> pessoaCaracteristica;
 
     public List<PessoaCaracteristica> getPessoaCaracteristica() {
 		return pessoaCaracteristica;
@@ -55,8 +55,6 @@ public abstract class Pessoa extends Entidade {
 	}
 
 	public Pessoa() {
-        this.telefones = new HashSet<Telefone>();
-        this.enderecos = new HashSet<Endereco>();
     }
 
 	public Set<Telefone> getTelefones() {
