@@ -104,16 +104,28 @@
         
         
     </changeSet>
-        
-    <!--
+    
+    <!--        
     <changeSet author="martinho" id="mart0142createview">
         <createView viewName="viewperiodoevento" replaceIfExists="true" schemaName="public">
-            SELECT A.ID, A.TITULO, A.DESCRICAO, A.LOCAL AS LOCALEVENTO, A.STATUSEVENTO,
-            (SELECT MIN(B.DATA) FROM PERIODO B WHERE B.EVENTOID = A.ID ) AS DATAINICIO 
-            FROM EVENTO A ORDER BY DATAINICIO ASC
+            SELECT T2.ID, T1.ID AS EVENTOID, T2.DATA AS DATAINICIO, T2.INICIO AS PERIODOINICIO,  
+            T2.TITULOPERIODO, T1.TITULO, T1.DESCRICAO, T1.LOCAL, T1.STATUSEVENTO
+            FROM EVENTO AS T1, PERIODO AS T2 WHERE T1.ID = T2.EVENTOID 
+            ORDER BY DATAINICIO, PERIODOINICIO
         </createView>
     </changeSet>
     -->
+    
+    <changeSet author="martinho" id="mart0142createview">
+        <createView viewName="viewperiodoevento" replaceIfExists="true" schemaName="public">
+            SELECT A.ID, A.TITULO, A.DESCRICAO, A.LOCAL, A.STATUSEVENTO,
+            (SELECT MIN(B.DATA )
+            FROM PERIODO B
+            WHERE B.EVENTOID = A.ID ) AS DATAINICIO 
+            FROM EVENTO A
+            ORDER BY DATAINICIO ASC
+        </createView>
+    </changeSet>
     
 </databaseChangeLog>
 

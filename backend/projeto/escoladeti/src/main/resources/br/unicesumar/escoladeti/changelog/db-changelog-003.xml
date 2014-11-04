@@ -153,7 +153,7 @@
             ORDER BY T1.DATACHEGADA
         </createView>
 	</changeSet>
-
+<!--
 	<changeSet id="10201410022131" author="Walber">
 		<createTable tableName="caracteristica">
 			<column name="id" type="INT8">
@@ -242,7 +242,7 @@
 			</column>
 		</createTable>
 	</changeSet>
-
+-->
 
 
 	<changeSet id="1231234" author="catabriga">
@@ -317,7 +317,7 @@
             ORDER BY T1.NOME 
         </createView>
 	</changeSet>
-        
+        <!--
         <changeSet author="Walber" id="201410302127">
           <preConditions onError="MARK_RAN" onFail="MARK_RAN">
             <not>
@@ -329,6 +329,6 @@
               </column>
            </addColumn>          
         </changeSet>
-
+-->
 </databaseChangeLog>
 

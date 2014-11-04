@@ -4,7 +4,8 @@
             <img src="./resources/externo/assets/img/banner-braille-orange.jpg">
         </div>
     </div>
-</div>        
+</div>    
+
 <!-- Services -->
 <div ng-show="proximosEventos.list" class="what-we-do container">
     <div class="portfolio-title">
@@ -14,11 +15,15 @@
        <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
             <h4>{{proximoEvento.titulo}}</h4>
             <p>{{proximoEvento.descricao}}</p>
-            <p><b>Data:</b>
+            <p>
+                <b>Início: </b> {{proximoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
+                <b>Local: </b> {{proximoEvento.local}}
+            </p>
+<!--            <p><b>Data:</b>
                 <span ng-repeat="periodo in proximoEvento.periodos | orderBy:'data'">
                     {{periodo.data | date: 'dd-MM-yyyy'}} <br>
                 </span>
-            </p>
+            </p>-->
             <a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a>
         </div>       
     </div>

@@ -1171,3 +1171,7 @@ ul.portfolio-img li {
 .btn-invalido{ opacity: 0.2; }
 .btn-invalido:hover{ opacity: 0.2; }
 .alert-feedback{ margin-right: 40px; }
+.col-periodo{ float: left; }
+.titulo-evento{ color: #ff7f66; padding: 10px; }
+.evento-desc-periodo{ float: left; padding: 30px;}
+.evento-data{ float: left; /* margin-top: 10px; */ background-color: #ff7f66; color: #fff; /* width: 66px; */ /* height: 74px; */ text-align: center; padding: 8px;}

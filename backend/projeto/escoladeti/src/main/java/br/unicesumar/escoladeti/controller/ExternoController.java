@@ -6,8 +6,10 @@ import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.service.MaterialStatusService;
 import br.unicesumar.escoladeti.service.ParticipanteService;
+import br.unicesumar.escoladeti.service.PeriodoEventoService;
 import br.unicesumar.escoladeti.service.PeriodoService;
 import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
+import br.unicesumar.escoladeti.view.ViewPeriodoEvento;
 import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class ExternoController implements Serializable{
     
     @Autowired
     private PeriodoService periodoService;
+    
+    @Autowired
+    private PeriodoEventoService periodoeventoService;
     
     @Autowired
     private ParticipanteService participanteService;
@@ -69,8 +74,8 @@ public class ExternoController implements Serializable{
     
     @RequestMapping(value = "public/rest/proximoseventos/{pagina}", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Evento> getProximosEventos(@PathVariable Integer pagina) {
-        return eventoService.getProximosEventos(pagina);
+    public DataPage<ViewPeriodoEvento> getProximosEventos(@PathVariable Integer pagina) {
+        return periodoeventoService.getProximosEventos(pagina);
     }
     
     @RequestMapping(value = "public/rest/ultimoseventos/{pagina}", method = RequestMethod.GET)
