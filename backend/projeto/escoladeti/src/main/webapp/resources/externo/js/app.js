@@ -14,7 +14,7 @@ appExterno.config(['$routeProvider',
 
         $routeProvider
             .when('/home', {
-                templateUrl: './paginasexternas/principal.html'
+                templateUrl: './paginasexternas/home.html'
                 //controller: 'ExternoController'
             })
 //            .when('/eventos', {
@@ -53,7 +53,7 @@ appExterno.config(['$routeProvider',
                 templateUrl: './paginasexternas/creditos.html'
                 //controller: 'ExternoController'
             })
-            .otherwise({redirectTo: '/principal'
+            .otherwise({redirectTo: '/home'
             });
     }
 ]);
