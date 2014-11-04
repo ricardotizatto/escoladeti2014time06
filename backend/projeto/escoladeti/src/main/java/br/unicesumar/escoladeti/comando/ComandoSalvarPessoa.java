@@ -3,160 +3,172 @@ package br.unicesumar.escoladeti.comando;
 import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Telefone;
 import br.unicesumar.escoladeti.enums.Sexo;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarPessoa {
 
-    private String nome;
-    private String email;
-    private String tipo;
-    private String rg;
-    private String cpf;
-    private Date dataNascimento;
-    private String sobrenome;
-    private Sexo sexo;
-    private boolean aluno;
-    private String cnpj;
-    private String inscricaoEstadual;
-    private String inscricaoMunicipal;
-    private String razaoSocial;
-    private Date dataCriacao;
-    private Set<Telefone> telefones;
-    private Set<Endereco> enderecos;
+  private String nome;
+  private String email;
+  private String tipo;
+  private String rg;
+  private String cpf;
+  private Date dataNascimento;
+  private String sobrenome;
+  private Sexo sexo;
+  private String cnpj;
+  private String inscricaoEstadual;
+  private String inscricaoMunicipal;
+  private String razaoSocial;
+  private Date dataCriacao;
+  private Set<Telefone> telefones;
+  private Set<Endereco> enderecos;
+  private List<Long> caracteristicas;
+  private Date vigenciaAssociado;
 
-    public Set<Telefone> getTelefones() {
-        return telefones;
-    }
+  public Date getVigenciaAssociado() {
+    return vigenciaAssociado;
+  }
 
-    public void setTelefones(Set<Telefone> telefones) {
-        this.telefones = telefones;
-    }
-    
-    public Set<Endereco> getEnderecos() {
-        return enderecos;
-    }
+  public void setVigenciaAssociado(Date vigenciaAssociado) {
+    this.vigenciaAssociado = vigenciaAssociado;
+  }
 
-    public void setEnderecos(Set<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
-    
-    public ComandoSalvarPessoa() {
+  public List<Long> getCaracteristicas() {
+    return caracteristicas;
+  }
 
-    }
+  public void setCaracteristicas(List<Long> caracteristicas) {
+    this.caracteristicas = caracteristicas;
+  }
 
-    public String getNome() {
-        return nome;
-    }
+  public Set<Telefone> getTelefones() {
+    return telefones;
+  }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  public void setTelefones(Set<Telefone> telefones) {
+    this.telefones = telefones;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public Set<Endereco> getEnderecos() {
+    return enderecos;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setEnderecos(Set<Endereco> enderecos) {
+    this.enderecos = enderecos;
+  }
 
-    public String getTipo() {
-        return tipo;
-    }
+  public ComandoSalvarPessoa() {
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+  }
 
-    public String getRg() {
-        return rg;
-    }
+  public String getNome() {
+    return nome;
+  }
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
 
-    public String getCpf() {
-        return cpf;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
+  public String getTipo() {
+    return tipo;
+  }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+  public void setTipo(String tipo) {
+    this.tipo = tipo;
+  }
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
+  public String getRg() {
+    return rg;
+  }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
+  public void setRg(String rg) {
+    this.rg = rg;
+  }
 
-    public Sexo getSexo() {
-        return sexo;
-    }
+  public String getCpf() {
+    return cpf;
+  }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
+  }
 
-    public boolean getAluno() {
-        return aluno;
-    }
+  public Date getDataNascimento() {
+    return dataNascimento;
+  }
 
-    public void setAluno(boolean aluno) {
-        this.aluno = aluno;
-    }
+  public void setDataNascimento(Date dataNascimento) {
+    this.dataNascimento = dataNascimento;
+  }
 
-    public String getCnpj() {
-        return cnpj;
-    }
+  public String getSobrenome() {
+    return sobrenome;
+  }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+  public void setSobrenome(String sobrenome) {
+    this.sobrenome = sobrenome;
+  }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
-    }
+  public Sexo getSexo() {
+    return sexo;
+  }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
-    }
+  public void setSexo(Sexo sexo) {
+    this.sexo = sexo;
+  }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
-    }
+  public String getCnpj() {
+    return cnpj;
+  }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
-    }
+  public void setCnpj(String cnpj) {
+    this.cnpj = cnpj;
+  }
 
-    public String getRazaoSocial() {
-        return razaoSocial;
-    }
+  public String getInscricaoEstadual() {
+    return inscricaoEstadual;
+  }
 
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
+  public void setInscricaoEstadual(String inscricaoEstadual) {
+    this.inscricaoEstadual = inscricaoEstadual;
+  }
 
-    public Date getDataCriacao() {
-        return dataCriacao;
-    }
+  public String getInscricaoMunicipal() {
+    return inscricaoMunicipal;
+  }
 
-    public void setDataCriacao(Date dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-    
+  public void setInscricaoMunicipal(String inscricaoMunicipal) {
+    this.inscricaoMunicipal = inscricaoMunicipal;
+  }
+
+  public String getRazaoSocial() {
+    return razaoSocial;
+  }
+
+  public void setRazaoSocial(String razaoSocial) {
+    this.razaoSocial = razaoSocial;
+  }
+
+  public Date getDataCriacao() {
+    return dataCriacao;
+  }
+
+  public void setDataCriacao(Date dataCriacao) {
+    this.dataCriacao = dataCriacao;
+  }
+
 }

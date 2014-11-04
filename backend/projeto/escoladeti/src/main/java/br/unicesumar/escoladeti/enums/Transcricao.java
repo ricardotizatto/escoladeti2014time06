@@ -1,12 +1,12 @@
 package br.unicesumar.escoladeti.enums;
 
-public enum TraducaoMaterial {
+public enum Transcricao {
 	BRAILLE,
 	MECDAISY,
 	DOSVOX,
 	OUTRO;
 
-	public static TraducaoMaterial of(String traducaoMaterial) {
+	public static Transcricao of(String traducaoMaterial) {
 		try {
 			return valueOf(traducaoMaterial);
 

@@ -12,17 +12,9 @@ import java.util.List;
 public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long> {
 
     public Page<PessoaFisica> findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(String nome,String sobrenomenome, String cpf, Pageable pageable);
-    
-    public Page<PessoaFisica> findByNomeContainingAndAlunoTrueOrSobrenomeContainingAndAlunoTrueOrCpfContainingAndAlunoTrue(String nome,String sobrenomenome, String cpf, Pageable pageable);
-    
-    public Page<PessoaFisica> findByAlunoTrue(Pageable pageable);
 
     public PessoaFisica findById(Long id);
 
     public PessoaFisica findByCpf(String cpf);
-
-    public List<PessoaFisica> findByAlunoTrue();
-
-    public List<PessoaFisica> findByAlunoFalse();
 
 }

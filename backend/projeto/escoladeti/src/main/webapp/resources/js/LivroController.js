@@ -83,7 +83,7 @@ function livroController($scope, $http, $routeParams) {
 
                 $scope.voltar();
 
-                setTimeout(function(){window.location="#/listalivro"}, 5000);
+                window.location="#/listalivro";
 
             })
             .error(function(data, status) {

@@ -1,119 +1,124 @@
 <div class="container" ng-controller="PessoaController" ng-init="init()">
-    <div class="row">
-        <div class="form-group col-sm-12">
-            <legend><span class="glyphicon glyphicon-list-alt"></span> Pessoa </legend>
-        </div>
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <legend>
+        <span class="glyphicon glyphicon-list-alt"></span> Pessoa
+      </legend>
     </div>
-    <div class="row">
-        <div class="form-group col-sm-5">
-            <div class="input-group">
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-search"></span>
-                </span> 
-                <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaPessoaContendoNome()"  placeholder="Busca por Nome/Nome Fantasia ou CPF/CNPJ"/>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-5">
+      <div class="input-group">
+        <span class="input-group-addon"> <span
+            class="glyphicon glyphicon-search"></span>
+        </span> <input class="form-control" name="busca" type="text"
+                       onkeydown="toUpper(this)" ng-model="busca"
+                       ng-change="buscaPessoaContendoNome()"
+                       placeholder="Busca por Nome/Nome Fantasia ou CPF/CNPJ" />
+      </div>
+    </div>
+    <!--        <div class="form-group col-sm-4">
+        <div>
+            <div class="btn-group">
+                <label class="btn btn-primary btn-radio-amacapa">
+                    <input ng-model="tipoPessoa" value="J" type="radio" ng-click="filtroPessoaJuridica(1)" /> Jurídica
+                </label> 
+                <label class="btn btn-primary btn-radio-amacapa">
+                    <input ng-model="tipoPessoa" value="F" type="radio" ng-click="filtroPessoaFisica(1)" /> Física
+                </label>
+                <label class="btn btn-primary btn-radio-amacapa">
+                    <input ng-model="tipoPessoa" value="A" type="radio" ng-click="filtroAluno(1)" /> Aluno
+                </label>
             </div>
         </div>
-        <!--        <div class="form-group col-sm-4">
-                    <div>
-                        <div class="btn-group">
-                            <label class="btn btn-primary btn-radio-amacapa">
-                                <input ng-model="tipoPessoa" value="J" type="radio" ng-click="filtroPessoaJuridica(1)" /> Jurídica
-                            </label> 
-                            <label class="btn btn-primary btn-radio-amacapa">
-                                <input ng-model="tipoPessoa" value="F" type="radio" ng-click="filtroPessoaFisica(1)" /> Física
-                            </label>
-                            <label class="btn btn-primary btn-radio-amacapa">
-                                <input ng-model="tipoPessoa" value="A" type="radio" ng-click="filtroAluno(1)" /> Aluno
-                            </label>
-                        </div>
-                    </div>
-                </div>-->
-        <div class="form-group col-sm-7">
-            <span class="pull-right">
-                <button type='submit' class='btn btn-primary btn-padrao' value='novo' ng-click="novo()">
-                    <span class='glyphicon glyphicon-plus-sign'></span> Novo
-                </button>
-            </span> 
-        </div>
+    </div>-->
+    <div class="form-group col-sm-7">
+      <span class="pull-right">
+        <button type='submit' class='btn btn-primary btn-padrao'
+                value='novo' ng-click="novo()">
+          <span class='glyphicon glyphicon-plus-sign'></span> Novo
+        </button>
+      </span>
     </div>
-    <div class="row">
-        <div class="col-sm-12 table-responsive">
+  </div>
+  <div class="row">
+    <div class="col-sm-12 table-responsive">
 
-            <table class="table table-striped table-hover">
-                <tr>
-                    <th class="col-md-3">Nome / Nome Fantasia</th>
-                    <th class="col-md-1">Tipo</th>
-                    <th class="col-md-1">Aluno</th>
-                    <th class="col-md-2">CPF / CNPJ</th>
-                    <th class="col-md-2">Nasc. / Criação</th>
-                    <th class="col-md-2">Email</th>
-                    <th class="col-md-2"><span class="pull-right">Ações</span></th>
-                </tr>
-                <tr ng-repeat="pessoa in pagina.list" >
-                    <td>{{pessoa.nome}}</td>
-                    <td>{{pessoa.tipo === 'F' ? 'FISICA' : 'JURIDICA'}}</td>
-                    <td>{{pessoa.aluno === true ? 'SIM' : 'NAO'}}</td>
-<!--                    <td>{{pessoa.cpfCnpj}}</td>-->
-                    <td mascarar-Pessoacpfcnpj></td>
-                    <td>{{pessoa.nascimentoCriacao| date: 'dd-MM-yyyy' }}</td>
-                    <td>{{pessoa.email}}</td>
-                    <td>
-                        <span class="pull-right">
-                            <button class='btn btn-warning btn-sm' ng-click="editar(pessoa)">
-                                <span class='glyphicon glyphicon-edit'></span>
-                            </button>
-                            <button class='btn btn-danger btn-sm' ng-click="deletar(pessoa)">
-                                <span class='glyphicon glyphicon-remove-circle'></span>
-                            </button>
-                        </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>    
-    <!--    <div class="row ">
-            <div class="col-sm-12">
-                <ul class="pagination">
-                    <li>
-                        <a ng-click="getTodos(1)"> 
-                            <span class="glyphicon glyphicon-fast-backward"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a ng-click="pagina.pageNumber <= 1 ? getTodos(1) : getTodos(pagina.pageNumber)"> 
-                            <span class="glyphicon glyphicon-step-backward"></span>
-                        </a>
-                    </li>
-                    <li ng-repeat="numeroPagina in pagina.pagesAround" class="{{numeroPagina == pagina.pageNumber ? 'active' : ''}}">
-                        <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
-                    </li>
-                    <li>
-                        <a ng-click="pagina.pageNumber === pagina.pageCount ? getTodos(pagina.pageCount) : getTodos(pagina.pageNumber + 1)"> 
-                            <span class="glyphicon glyphicon-step-forward"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a ng-click="pagina.pageCount == 0 ? getTodos(1) : getTodos(pagina.pageCount)"> 
-                            <span class="glyphicon glyphicon-fast-forward"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>-->
-    <pagination boundary-links="true" num-pages="pagina.pageCount" total-items="pagina.pageCount*pagina.maxRows" items-per-page="pagina.maxRows"
-                ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="pagina.maxPagesToShow"
-                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+      <table class="table table-striped table-hover">
+        <tr>
+          <th class="col-md-3">Nome / Nome Fantasia</th>
+          <th class="col-md-1">Tipo</th>
+          <th class="col-md-2">CPF / CNPJ</th>
+          <th class="col-md-2">Nasc. / Criação</th>
+          <th class="col-md-2">Email</th>
+          <th class="col-md-2"><span class="pull-right">Ações</span></th>
+        </tr>
+        <tr ng-repeat="pessoa in pagina.list">
+          <td>{{pessoa.nome}}</td>
+          <td>{{pessoa.tipo === 'F' ? 'FISICA' : 'JURIDICA'}}</td>
+          <td>{{pessoa.cpfCnpj| mascaraCpfNaLista}}</td>
+          <td>{{pessoa.nascimentoCriacao| date: 'dd-MM-yyyy' }}</td>
+          <td>{{pessoa.email}}</td>
+          <td><span class="pull-right">
+              <button class='btn btn-warning btn-sm' ng-click="editar(pessoa)">
+                <span class='glyphicon glyphicon-edit'></span>
+              </button>
+              <button class='btn btn-danger btn-sm' ng-click="deletar(pessoa)">
+                <span class='glyphicon glyphicon-remove-circle'></span>
+              </button>
+            </span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!--    <div class="row ">
+      <div class="col-sm-12">
+          <ul class="pagination">
+              <li>
+                  <a ng-click="getTodos(1)"> 
+                      <span class="glyphicon glyphicon-fast-backward"></span>
+                  </a>
+              </li>
+              <li>
+                  <a ng-click="pagina.pageNumber <= 1 ? getTodos(1) : getTodos(pagina.pageNumber)"> 
+                      <span class="glyphicon glyphicon-step-backward"></span>
+                  </a>
+              </li>
+              <li ng-repeat="numeroPagina in pagina.pagesAround" class="{{numeroPagina == pagina.pageNumber ? 'active' : ''}}">
+                  <a ng-click="getTodos(numeroPagina)">{{numeroPagina}}</a>
+              </li>
+              <li>
+                  <a ng-click="pagina.pageNumber === pagina.pageCount ? getTodos(pagina.pageCount) : getTodos(pagina.pageNumber + 1)"> 
+                      <span class="glyphicon glyphicon-step-forward"></span>
+                  </a>
+              </li>
+              <li>
+                  <a ng-click="pagina.pageCount == 0 ? getTodos(1) : getTodos(pagina.pageCount)"> 
+                      <span class="glyphicon glyphicon-fast-forward"></span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>-->
+  <div class="text-center">
+    <pagination boundary-links="true" num-pages="pagina.pageCount"
+                total-items="pagina.pageCount*pagina.maxRows"
+                items-per-page="pagina.maxRows" ng-model="pageNumber"
+                ng-change="getTodos(pageNumber)" class="pagination-sm"
+                max-size="pagina.maxPagesToShow" previous-text="&lsaquo;"
+                next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </pagination>
-</div>    
+  </div>
+</div>
 <script>
-    jQuery(function ($) {
-        $.mask.definitions['~'] = '[+-]';
-        //$("#numeroDdd").mask("99");
-        $("#telefone").mask("9999-9999?9");
-        $("#ramal").mask("9?");
-        $("#cep").mask("99.999-999");
-        $("#cpf").mask("999.999.999-99");
-        //$("#rg").mask("9.999.999-*");
-        //$("#cnpj").mask("99.999.999/9999-99");
-    });
+  jQuery(function ($) {
+    $.mask.definitions['~'] = '[+-]';
+    //$("#numeroDdd").mask("99");
+    $("#telefone").mask("9999-9999?9");
+    $("#ramal").mask("9?");
+    $("#cep").mask("99.999-999");
+    $("#cpf").mask("999.999.999-99");
+    //$("#rg").mask("9.999.999-*");
+    //$("#cnpj").mask("99.999.999/9999-99");
+  });
 </script>

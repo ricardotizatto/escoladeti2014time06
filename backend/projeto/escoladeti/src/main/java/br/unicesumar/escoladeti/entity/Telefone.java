@@ -9,8 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import br.unicesumar.escoladeti.enums.TipoTelefone;
-import br.unicesumar.escoladeti.mask.Mascara;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity

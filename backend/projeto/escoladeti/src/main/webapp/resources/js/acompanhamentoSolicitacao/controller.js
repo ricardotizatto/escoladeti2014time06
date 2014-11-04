@@ -112,7 +112,7 @@ function AcompanhamentoSolicitacaoController($scope, $location, $log, OrdemProdu
     
     $scope.getIcone = function(status) {
         switch (status) {
-            case "AGUARDANDO":
+            case "ANDAMENTO":
                 return "fa fa-spinner";
                 break;
             case "PRODUCAO":
