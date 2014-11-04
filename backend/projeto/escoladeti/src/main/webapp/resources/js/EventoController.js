@@ -232,14 +232,20 @@ function eventoController($scope, $http, $routeParams) {
             $scope.evento.periodos.splice($scope.indicePeriodo, 1);
         }
         
-        if($scope.periodo.inicio >= $scope.periodo.fim || $scope.periodo.data < dataAtual){
-            toastr.warning("Periodo inválido");
+        if($scope.periodo.inicio >= $scope.periodo.fim){
+            toastr.warning("Horário inválido");
         }else{
             $scope.evento.periodos.push($scope.periodo);
             console.log($scope.evento.periodos);
             toastr.success("Periodo adicionado " + $scope.periodo.data + " !");
             $scope.indicePeriodo = {};   
         }
+//        valida se a data e menor que a data atual mas a funcao atual tras 2014-11-3
+//        else if($scope.periodo.data < dataAtual){
+//            console.log("data sis: " + $scope.periodo.data + "data atual " + dataAtual );
+//            toastr.warning("Data inválida" + $scope.periodo.data);
+//        }
+        
     };
 
     $scope.editarPeriodo = function (indice) {
