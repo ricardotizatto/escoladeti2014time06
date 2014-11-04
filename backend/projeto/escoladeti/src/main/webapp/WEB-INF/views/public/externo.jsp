@@ -42,9 +42,9 @@
                                     <li class="{{ ativa == 'home' ? 'current-page' : '' }}"  ng-click="ativaBotao('home')" >
                                         <a href="#/home"><i class="icon-home"></i><br />Home</a>
                                     </li>
-                                    <li class="{{ ativa == 'eventos' ? 'current-page' : '' }}" ng-click="ativaBotao('eventos')" >
+<!--                                    <li class="{{ ativa == 'eventos' ? 'current-page' : '' }}" ng-click="ativaBotao('eventos')" >
                                         <a href="#/eventos"><i class="icon-camera"></i><br />Eventos</a>
-                                    </li>
+                                    </li>-->
                                     <li class="{{ ativa == 'transcricoes' ? 'current-page' : '' }}"  ng-click="ativaBotao('transcricoes')" >
                                         <a href="#/transcricoes"><i class="icon-book"></i><br />Transcrições</a>
                                     </li>

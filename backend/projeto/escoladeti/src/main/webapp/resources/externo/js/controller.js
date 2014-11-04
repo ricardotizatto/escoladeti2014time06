@@ -32,8 +32,8 @@ function ExternoController($scope, $http, $routeParams) {
            $scope.getMateriaisProduzidos(); 
         }    
     },
-    $scope.getEventos = function (pageNumber){
-        console.log('getEventos pag: ', pageNumber);
+    $scope.getEventos = function (){
+        console.log('getEventos');
         $http({
             method: 'GET',
             url: './public/rest/ultimosperiodos'
@@ -41,6 +41,8 @@ function ExternoController($scope, $http, $routeParams) {
             console.log('Ultimos Periodos: ', ultimosPeriodos);
             $scope.ultimosPeriodos = ultimosPeriodos;
         });
+        $scope.paginarProximosEventos(1);
+        $scope.paginarUltimosEventos(1);
     },
     $scope.paginarProximosEventos = function (pageNumber) {
         console.log('paginarEventos pag: ', pageNumber);
@@ -103,7 +105,7 @@ function ExternoController($scope, $http, $routeParams) {
                 console.log('Participante Salvo: ' + participante);
                 $scope.novoParticipante();
                 $scope.info.status = 'success';
-                $scope.info.message = participante.nome + " Cadastro efetuado com sucesso!";
+                $scope.info.message = participante.nome + " inscrição realizada com sucesso!";
             }).error(function (data) {
                 console.log('Erro ao salvar Participante: ' + data.messageDeveloper);
                 $scope.info.status = 'danger';
