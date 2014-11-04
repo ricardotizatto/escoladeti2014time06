@@ -87,6 +87,7 @@ public class SolicitacaoService {
         return solicitacaoRepository.findOne(solicitacaoSalva.getId());
     }
 
+    @Transactional
     public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) throws Exception {
         Solicitacao solicitacaoEncontrada = solicitacaoRepository.findOne(id);
         limparItens(solicitacaoEncontrada);
@@ -111,10 +112,12 @@ public class SolicitacaoService {
 
         for (ComandoSalvarSolicitacaoItem comandoItem: comando.getItensSolicitacao()) {
 
-            SolicitacaoItem solicitacaoItemEncontrado = solicitacaoItemRepository.findOne(comandoItem.getId());
+            if (comandoItem.getId() != null) {
+                SolicitacaoItem solicitacaoItemEncontrado = solicitacaoItemRepository.findOne(comandoItem.getId());
 
-            if (solicitacaoItemEncontrado.possuiSolicitavaoVolumes()) {
-                continue;
+                if (solicitacaoItemEncontrado != null && solicitacaoItemEncontrado.possuiSolicitavaoVolumes()) {
+                    continue;
+                }
             }
 
             SolicitacaoItem solicitacaoItem = SolicitacaoItem

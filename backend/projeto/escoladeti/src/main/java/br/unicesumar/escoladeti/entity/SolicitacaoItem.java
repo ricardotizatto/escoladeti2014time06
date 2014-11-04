@@ -133,7 +133,7 @@ public class SolicitacaoItem extends Entidade{
     }
 
     public boolean possuiSolicitavaoVolumes() {
-        return getSolicitacaoVolumes().size() <= 0;
+        return getSolicitacaoVolumes().size() > 0;
     }
 
     public static class SolicitacaoItemBuilder {
