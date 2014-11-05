@@ -154,7 +154,7 @@
         </createView>
 	</changeSet>
 
-	<changeSet id="10201410022131" author="Walber">
+<!--	<changeSet id="10201410022131" author="Walber">
 		<createTable tableName="caracteristica">
 			<column name="id" type="INT8">
 				<constraints primaryKeyName="caracteristicaPkId"
@@ -241,7 +241,7 @@
 					referencedTableName="pessoacaracteristica" referencedColumnNames="id" />
 			</column>
 		</createTable>
-	</changeSet>
+	</changeSet>-->
 
 
 
@@ -318,7 +318,7 @@
         </createView>
 	</changeSet>
         
-        <changeSet author="Walber" id="201410302127">
+<!--        <changeSet author="Walber" id="201410302127">
           <preConditions onError="MARK_RAN" onFail="MARK_RAN">
             <not>
               <columnExists tableName="caracteristica" columnName="tipo"/>
@@ -328,7 +328,7 @@
             <column name="tipo" type="CHAR">
               </column>
            </addColumn>          
-        </changeSet>
+        </changeSet>-->
 
 </databaseChangeLog>
 
