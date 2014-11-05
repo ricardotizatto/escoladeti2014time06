@@ -21,7 +21,7 @@
         <link href="./resources/externo/assets/img/icone-amacap.png" rel="shortcut icon">
 
     </head>
-    <body data-ng-controller="AppCtrontroller as ctrl">
+    <body ng-controller="ExternoController">
         
         <!-- Header -->
         <div class="container">
@@ -35,23 +35,23 @@
                                 <span class="icon-bar"></span>
                             </a>
                             <h1>
-                                <a href="#/externo"> <img src="./resources/externo/assets/img/logo-amacap.png"></a>
+                                <a href="#/home"> <img src="./resources/externo/assets/img/logo-amacap.png"></a>
                             </h1>
                             <div class="nav-collapse collapse">
                                 <ul class="nav pull-right">
-                                    <li class="{{ ctrl.ativa == 'home' ? 'current-page' : '' }}"  ng-click="ctrl.ativaBotao('home')" >
-                                        <a href="#/externo"><i class="icon-home"></i><br />Home</a>
+                                    <li class="{{ ativa == 'home' ? 'current-page' : '' }}"  ng-click="ativaBotao('home')" >
+                                        <a href="#/home"><i class="icon-home"></i><br />Home</a>
                                     </li>
-                                    <li class="{{ ctrl.ativa == 'eventos' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('eventos')" >
+<!--                                    <li class="{{ ativa == 'eventos' ? 'current-page' : '' }}" ng-click="ativaBotao('eventos')" >
                                         <a href="#/eventos"><i class="icon-camera"></i><br />Eventos</a>
-                                    </li>
-                                    <li class="{{ ctrl.ativa == 'transcricoes' ? 'current-page' : '' }}"  ng-click="ctrl.ativaBotao('transcricoes')" >
+                                    </li>-->
+                                    <li class="{{ ativa == 'transcricoes' ? 'current-page' : '' }}"  ng-click="ativaBotao('transcricoes')" >
                                         <a href="#/transcricoes"><i class="icon-book"></i><br />Transcrições</a>
                                     </li>
-                                    <li class="{{ ctrl.ativa == 'sobre' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('sobre')" >
+                                    <li class="{{ ativa == 'sobre' ? 'current-page' : '' }}" ng-click="ativaBotao('sobre')" >
                                         <a href="#/sobre"><i class="icon-group"></i><br />Sobre</a>
                                     </li>
-                                    <li class="{{ ctrl.ativa == 'localizacao' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('localizacao')" >
+                                    <li class="{{ ativa == 'localizacao' ? 'current-page' : '' }}" ng-click="ativaBotao('localizacao')" >
                                         <a href="#/localizacao"><i class="icon-map-marker"></i><br />Localização</a>
                                     </li>
                                 </ul>
@@ -91,7 +91,7 @@
                     <div class="copyright span12">
                         Copyright 2014 Amacap - Todos os direitos reservados.
                         <span class="pull-right" >
-                            <a class="link-credito" href="#/creditos" ng-click="ctrl.ativaBotao('')">Sistema desenvolvido pelos alunos da Escola de T.I. 2014 - Unicesumar - Time 6</a>
+                            <a class="link-credito" href="#/creditos" ng-click="ativaBotao('')">Sistema desenvolvido pelos alunos da Escola de T.I. 2014 - Unicesumar - Time 6</a>
                         </span>
                     </div>
                 </div>
@@ -114,10 +114,7 @@
         <script src="./resources/externo/assets/prettyPhoto/js/jquery.prettyPhoto.js"></script>
         <script src="./resources/externo/assets/js/scripts.js"></script>
         <script src="./resources/externo/js/app.js"></script>
-<!--        <script src="./resources/externo/js/EventoController.js"></script>
-        <script src="./resources/externo/js/EventoService.js"></script>
-        <script src="./resources/externo/js/MaterialController.js"></script>
-        <script src="./resources/externo/js/MaterialService.js"></script>-->
+        <script src="./resources/externo/js/controller.js"></script>
     
     </body>
 </html>

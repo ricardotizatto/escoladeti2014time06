@@ -82,8 +82,8 @@
                 <table class="table table-responsive tabela-filtro">
                     <tr>
                         <td class="col-md-12">
-                            <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('AGUARDANDO')" ><img src="./resources/imagens/btn-aguardando.png" alt="botão Aguardando"/><br>aguardando</a> 
-                            <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('PRODUCAO')" ><img src="./resources/imagens/btn-producao.png" alt="botão procução"/><br>produção</a>
+                            <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('ANDAMENTO')" ><img src="./resources/imagens/btn-aguardando.png" alt="botão Aguardando"/><br>andamento</a>
+                            <!--<a class="btn-status" href="" ng-click="getPesquisaSolicitacao('PRODUCAO')" ><img src="./resources/imagens/btn-producao.png" alt="botão procução"/><br>produção</a>-->
                             <!--<a class="btn-status" href="" ng-click="getPesquisaSolicitacao('PRODUZIDO')" ><img src="./resources/imagens/btn-produzido.png" alt="botão produzido"/><br>produzido</a>-->
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('FINALIZADO')" ><img src="./resources/imagens/btn-finalizado.png" alt="botão finalizado"/><br>finalizado</a>
                             <a class="btn-status" href="" ng-click="getPesquisaSolicitacao('CANCELADO')" ><img src="./resources/imagens/btn-cancelado.png" alt="botão cancelado"/><br>cancelado</a>
@@ -145,14 +145,13 @@
                                                 data-ng-click="cancelar(solicitacaoItem)"><i class="glyphicon glyphicon-remove" ></i> Cancelar
                                         </button>
                                     </div>
-                                    <div class="col-md-12 form-group" data-ng-show="solicitacaoItem.status == 'AGUARDANDO' ">
-                                        <button class="btn btn-success btn-small input-default" style="width: 100%"
-                                                data-ng-click="produzir(solicitacaoItem)" >
-                                            <i class="fa fa-cogs"></i> Produzir
-                                        </button>
-                                    </div>
-                                    <div class="col-md-12 form-group"
-                                         data-ng-show="solicitacaoItem.status == 'CANCELADO' || solicitacaoItem.status =='PRODUCAO' || solicitacaoItem.status =='FINALIZADO' ">
+                                    <!--<div class="col-md-12 form-group" data-ng-show="solicitacaoItem.status == 'AGUARDANDO' ">-->
+                                        <!--<button class="btn btn-success btn-small input-default" style="width: 100%"-->
+                                                <!--data-ng-click="produzir(solicitacaoItem)" >-->
+                                            <!--<i class="fa fa-cogs"></i> Produzir-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                    <div class="col-md-12 form-group">
                                         <a  class="btn btn-primary btn-small input-default" href="#/ordem-producao/{{solicitacaoItem.id}}" style="width: 100%">
                                             <i class="fa fa-arrows-alt" ></i> Expandir
                                         </a>

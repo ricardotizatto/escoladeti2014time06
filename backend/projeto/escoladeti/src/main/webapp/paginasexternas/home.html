@@ -1,25 +1,15 @@
-<!-- Page Title -->
-<div class="page-title" ng-init="getEventos(1);paginarProximosEventos(1);paginarUltimosEventos(1);ativaBotao('eventos')">  
+<div class="slider" ng-init="getEventos();ativaBotao('home')">
     <div class="container">
-        <div class="row">
-            <div class="span12">
-                <i class="icon-camera page-title-icon"></i>
-                <h2>Eventos</h2>
-            </div>
+        <div>
+            <img src="./resources/externo/assets/img/banner-braille-orange.jpg">
         </div>
     </div>
-</div>
-<!--<ul>
-    <li ng-repeat="periodo in ultimosPeriodos.list" >
-        {{periodo.data | date: 'dd-MM-yyyy'}}
-    </li>
-</ul>-->
-
+</div>        
 <!-- Services -->
 <div ng-show="proximosEventos.list" class="what-we-do container">
     <div class="portfolio-title">
         <h3>Próximos Eventos</h3>
-    </div>    
+    </div>
     <div class="row">
        <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
             <h4>{{proximoEvento.titulo}}</h4>
@@ -32,7 +22,7 @@
             <a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a>
         </div>       
     </div>
-    <div class="row">
+    <div class="row" ng-show="proximosEventos.pagesAround.length > 1" > 
         <div class="pagination pagination-sm pagination-centered">
             <ul>
                 <li>                        
@@ -63,11 +53,10 @@
     </div>
 </div>
 
-
 <!-- Services -->
 <div ng-show="ultimosEventos.list" class="what-we-do container">
     <div class="portfolio-title">
-        <h3>Últimos Eventos</h3>
+        <h3>Eventos Realizados</h3>
     </div>
     <div class="row">
         <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
@@ -82,7 +71,7 @@
             <a href="#/evento-realizado" >Detalhes</a>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="ultimosEventos.pagesAround.length > 1" > 
         <div class="pagination pagination-sm pagination-centered">
             <ul>
                 <li>                        

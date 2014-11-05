@@ -21,7 +21,7 @@
             <div class="col-sm-5">
                 <div class="form-group {{formUsuario.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong> Nome *</strong></label> 
-                    <input class="form-control" name="nome" type="text" ng-model="usuario.nome" placeholder="Nome"  maxlength="50" title="Nome"  ng-pattern="/^[a-zA-Z\s]{2,50}$/" title="Nome do Usuario" required />
+                    <input class="form-control" name="nome" type="text" ng-model="usuario.nome" placeholder="Nome"  maxlength="50" title="Nome"  ng-pattern="/^[A-Za-z0-9 \u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]{2,50}$/" title="Nome do Usuario" required />
                     <span class="help-block" ng-show="formUsuario.nome.$error.pattern">Apenas letras e no mínimo 2.</span>
                 </div>
             </div>

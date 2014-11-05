@@ -1,607 +1,608 @@
 
 <div class="container" ng-controller="PessoaController"
-	ng-init="carregarPessoa()">
-	<div class="row">
-		<div class="form-group col-sm-12">
-			<legend>
-				<span class="glyphicon glyphicon-user"></span> Cadastro de Pessoa
-			</legend>
-		</div>
-	</div>
-	<form action="" novalidade method="POST" name="formPessoa" role="form"
-		ng-submit="salvar()">
-		<div class="row">
-			<div class="col-sm-3">
-				<div class="form-group">
-					<label class="control-label">Tipo</label>
-					<div class="btn-group">
-						<label class="btn btn-primary btn-radio-amacapa"> <input
-							ng-model="pessoa.tipo" ng-disabled="estaEditando" value="F"
-							type="radio" /> Física
-						</label> <label class="btn btn-primary btn-radio-amacapa"> <input
-							ng-model="pessoa.tipo" ng-disabled="estaEditando" value="J"
-							type="radio" /> Jurídica
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div
-					class="form-group {{formPessoa.caracteristicas.$error.required ? 'has-error' : 'has-success'}} has-feedback" ng-show="pessoa.tipo === 'F'">
-					<label class="control-label"><strong>Caracteristicas
-							*</strong></label> <select type="text" name="caracteristicas"
-						ng-change="temAssociado();temAluno()" ui-select2="select2Options"
-						multiple class="input-default"
-						ng-model="pessoaCaracteristica.caracteristicas" ng-required="pessoa.tipo === 'F'">
-						<option ng-repeat="c in caracteristicas" value="{{c.id}}">{{c.descricao}}</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-sm-3" ng-show="associado">
-				<div class="form-group {{formPessoa.vigenciaAssociado.$error.required ? 'has-error' : 'has-success' }} has-feedback">
-					<label class="control-label"><strong>Vigência Associado</strong></label> <input
-						type="date" name="vigenciaAssociado" class="form-control"
-						ng-model="pessoa.vigenciaAssociado" ng-required="associado">
-				</div>
-			</div>
-		</div>
-		<hr>
-		<!-- Inicio Pessoa Fisica -->
-		<div class="pessoaFisica" ng-show=" pessoa.tipo === 'F'">
-			<div class="row">
-				<div class="col-sm-3">
-					<div
-						class="form-group {{formPessoa.nomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong> Nome *</strong></label> <input
-							class="form-control" name="nomeFisica" type="text"
-							ng-model="pessoa.nome" placeholder="Nome" maxlength="50"
-							title="Nome" ng-required="pessoa.tipo === 'F'"
-							ng-pattern="/^[a-zA-Z\s]{2,50}$/" title="Nome da pessoa" /> <span
-							class="help-block" ng-show="formPessoa.nomeFisica.$error.pattern">Apenas
-							letras e no mínimo 2.</span>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div
-						class="form-group {{formPessoa.sobrenomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong>Sobrenome *</strong>
-						</label> <input class="form-control" name="sobrenomeFisica"
-							ng-pattern="/^[a-zA-Z\s]{2,50}$/" type="text"
-							ng-model="pessoa.sobrenome" placeholder="Sobrenome"
-							maxlength="50" title="Sobrenome"
-							ng-required="pessoa.tipo === 'F'" /> <span class="help-block"
-							ng-show="formPessoa.sobrenomeFisica.$error.pattern">Apenas
-							letras e no mínimo 2.</span>
-					</div>
-				</div>
-				<div class="col-sm-3 text-center">
-					<div class="form-group">
-						<label class="control-label"><strong>Sexo</strong></label>
-						<div class="btn-group">
-							<!--data-toggle="buttons" verificar uso-->
-							<label class="btn btn-primary btn-radio-amacapa"> <input
-								ng-model="pessoa.sexo" value="MASCULINO" type="radio" />
-								Masculino
-							</label> <label class="btn btn-primary btn-radio-amacapa"> <input
-								ng-model="pessoa.sexo" value="FEMININO" type="radio" />
-								Feminino
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div
-						class="form-group {{formPessoa.dataNascimentoFisica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong>Nascimento *</strong>
-						</label> <input class="form-control maskNascimento"
-							name="dataNascimentoFisica" type="date"
-							ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa"
-							ng-required="pessoa.tipo == 'F'" />
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-3">
-					<div
-						class="form-group {{formPessoa.rgFisica.$error.required || formPessoa.rgFisica.$error.pattern || aluno === 'false' ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong> RG *</strong></label> <input
-							class="form-control" name="rgFisica" ng-pattern="/^[0-9]{5,12}$/"
-							type="text" id="rg" ng-model="pessoa.rg" title="Número do R.G."
-							maxlength="12" placeholder="Número do R.G."
-							ng-required="pessoa.tipo == 'F' && !aluno" /> <span
-							class="help-block" ng-show="formPessoa.rgFisica.$error.pattern">Apenas
-							números e mínimo 5 dígitos.</span>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div
-						class="form-group {{formPessoa.cpfFisica.$invalid || aluno === 'false' ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"> <strong>CPF *</strong>
-						</label> <input class="form-control" ui-mask="{{maskCpf}}"
-							ng-focus="maskCpf = '999.999.999-99'" ng-pattern="/(\w|\W)/"
-							type="text" name="cpfFisica" ng-model="pessoa.cpf"
-							title="Número do CPF" my-blur="validaCpf(pessoa.cpf)"
-							my-focus="focusCpf" maxlength="14"
-							ng-required="pessoa.tipo === 'F' && !aluno">
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="form-group {{formPessoa.emailFisica.$error.email ? 'has-error' : ''}} has-feedback">
-						<label class="control-label"><strong>Email </strong></label>
-						<div class="input-group">
-							<span class="input-group-addon"> <span
-								class="glyphicon glyphicon-envelope"></span>
-							</span> <input class="form-control" name="emailFisica" type="email"
-								maxlength="50" ng-model="pessoa.email"
-								placeholder="Endereço de email">
-								<!-- ng-pattern="/^([a-zA-Z0-9\.]+)@([a-zA-Z]{2,}\.)||([a-zA-Z]{2,})||\.([a-zA-Z]{2,})$/"-->								
-								<!--ng-pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.)+[a-zA-Z]{2,7}$/"-->
-						</div>
-						<span class="help-block" ng-show="formPessoa.emailFisica.$error.email">Email inválido.</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Fim Pessoa Fisica -->
-		<!-- Inicio Pessoa Jurídica -->
-		<div class="pessoaJuridica" ng-show=" pessoa.tipo === 'J'">
-			<div class="row ">
-				<div class="col-sm-4">
-					<div
-						class="form-group {{formPessoa.nomeJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"> <strong>Nome
-								Fantasia *</strong></label> <input class="form-control" name="nomeJuridica"
-							type="text" ng-model="pessoa.nome" placeholder="Nome Fantasia"
-							maxlength="50" title="Nome" ng-required="pessoa.tipo == 'J'"
-							ng-pattern="/^[a-zA-Z\s]{2,50}$/" /> <span class="help-block"
-							ng-show="formPessoa.nomeJuridica.$error.pattern">Apenas
-							letras e no mínimo 2.</span>
-					</div>
-				</div>
-				<div class="col-sm-5">
-					<div
-						class="form-group {{formPessoa.razaoSocialJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong>Razão Social
-								*</strong></label> <input class="form-control" name="razaoSocialJuridica"
-							type="text" ng-pattern="/^[a-zA-Z\s]{2,50}$/"
-							ng-model="pessoa.razaoSocial" placeholder="Razao Social"
-							maxlength="50" title="Razão Social"
-							ng-required="pessoa.tipo == 'J'" /> <span class="help-block"
-							ng-show="formPessoa.razaoSocialJuridica.$error.pattern">Apenas
-							letras e no mínimo 2.</span>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div
-						class="form-group {{formPessoa.cnpjJuridica.$invalid|| pessoa.focusCnpj ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong> CNPJ *</strong> </label> <input
-							class="form-control" ui-mask="99.999.999/9999-99"
-							name="cnpjJuridica" type="text" title="11.222.333/9999-22"
-							my-blur="validaCnpj(pessoa.cnpj)" my-focus="focusCnpj"
-							ng-model="pessoa.cnpj" ng-required="pessoa.tipo == 'J'" /> <span
-							class="help-block"
-							ng-show="formPessoa.cnpjJuridica.$error.pattern">Apenas
-							números e 14 digitos.</span>
-					</div>
-				</div>
-			</div>
-			<div class="row ">
-				<div class="col-sm-3">
-					<div
-						class="form-group {{formPessoa.inscMunicipalJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-						<label class="control-label"><strong> Inscrição
-								Municipal *</strong></label> <input class="form-control"
-							name="inscMunicipalJuridica" type="text" maxlength="15"
-							ng-pattern="/^[0-9]{4,15}$/" title="Apenas numeros"
-							ng-model="pessoa.inscricaoMunicipal"
-							placeholder="Número Inscrição Municipal"
-							ng-required="pessoa.tipo == 'J'" /> <span class="help-block"
-							ng-show="formPessoa.inscMunicipalJuridica.$error.pattern">Apenas
-							números e no mínimo 4.</span>
-					</div>
-				</div>
-				<div class="form-group col-sm-3">
-					<label class="control-label"> <strong>Inscrição
-							Estadual </strong></label> <input class="form-control" name="dataCriacao"
-						type="text" maxlength="12" ng-pattern="/^[0-9]+$/"
-						title="Apenas numeros" ng-model="pessoa.inscricaoEstadual"
-						placeholder="Número Inscrição Estadual" />
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label class="control-label"><strong>Data de
-								Criação</strong> </label> <input class="form-control" name="dataCriacaoJuridica"
-							type="date" ng-model="pessoa.dataCriacao"
-							placeholder="dd/mm/aaaa" />
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group form-group {{formPessoa.emailJuridica.$error.email ? 'has-error' : ''}} has-feedback">
-						<label class="control-label"> <strong>Email </strong></label>
-						<div class="input-group">
-							<span class="input-group-addon"> <span
-								class="glyphicon glyphicon-envelope"></span>
-							</span> <input class="form-control" name="emailJuridica" type="email"
-								maxlength="50" ng-model="pessoa.email"
-								placeholder="Endereço de email">
-						</div>
-						<span class="help-block" ng-show="formPessoa.emailJuridica.$error.email">Email inválido.</span>						
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Fim Pessoa Jurídica -->
-		<label> &nbsp; </label>
-		<div class="row">
-			<div class="col-sm-6">
-				<div
-					class="form-group {{pessoa.enderecos.length < 1 ? 'has-error' : 'has-success'}} has-feedback">
-					<legend>
-						<span class="glyphicon glyphicon-home"></span> <strong
-							class="control-label">Endereço *</strong>
-						<button type="submit" class="btn btn-primary btn-sm"
-							data-toggle="modal" data-target="#modalEndereco"
-							ng-click="novoEndereco()">
-							<span class="glyphicon glyphicon-plus"></span>
-						</button>
-					</legend>
-					<table class="table table-hover table-striped">
-						<tr>
-							<th class="col-sm-1">Principal</th>
-							<th class="col-sm-1">Tipo</th>
-							<th class="col-sm-4">Logradouro</th>
-							<th class="col-sm-3">Cidade - UF</th>
-							<th class="col-sm-3">Ações</th>
-						</tr>
-						<tr ng-repeat="endereco in pessoa.enderecos">
-							<td ng-bind="endereco.principal === 'S' ? 'SIM' : 'NÃO'"></td>
-							<td ng-bind="endereco.tipo"></td>
-							<td
-								ng-bind="endereco.logradouro + ', ' + endereco.numero + ' - ' + endereco.bairro"></td>
-							<td
-								ng-bind="endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla"></td>
-							<td>
-								<button class='btn btn-warning btn-sm'
-									ng-click="editarEndereco($index)" data-toggle="modal"
-									data-target="#modalEndereco">
-									<span class='glyphicon glyphicon-edit'></span>
-								</button>
-								<button class='btn btn-danger btn-sm'
-									ng-click="delEndereco($index)">
-									<span class='glyphicon glyphicon-remove-circle'></span>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div
-					class="form-group {{pessoa.telefones.length < 1 ? 'has-error' : 'has-success'}} has-feedback">
-					<div class="row">
-						<legend>
-							<span class="glyphicon glyphicon-phone-alt"></span> <strong
-								class="control-label"> Telefone * </strong>
-							<button type="submit" class="btn btn-primary btn-sm"
-								data-toggle="modal" data-target="#modalTelefone"
-								ng-click="novoTelefone()">
-								<span class="glyphicon glyphicon-plus"></span>
-							</button>
-						</legend>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<table class="table table-hover table-striped">
-								<thead>
-									<th class="col-sm-2">Tipo</th>
-									<th class="col-sm-2">DDD</th>
-									<th class="col-sm-5">Número</th>
-									<th class="col-sm-3">Açoes</th>
-								</thead>
-								<tr ng-repeat="telefone in pessoa.telefones">
-									<td>{{telefone.tipo}}</td>
-									<td>{{telefone.ddd}}</td>
-									<td>{{telefone.numero | mascaraTelefoneNaListaPessoa}}</td>
-									<td>
-										<button class='btn btn-warning btn-sm'
-											ng-click="editarTelefone($index)" data-toggle="modal"
-											data-target="#modalTelefone">
-											<span class='glyphicon glyphicon-edit'></span>
-										</button>
-										<button class='btn btn-danger btn-sm'
-											ng-click="delTelefone($index)">
-											<span class='glyphicon glyphicon-remove-circle'></span>
-										</button>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<span class="pull-right"> <a
-					class="btn btn-primary btn-padrao" ng-click="voltar()"> <i
-						class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
-				</a>
-					<button type="submit" class="btn btn-success btn-padrao"
-						ng-disabled="formPessoa.$invalid || pessoa.enderecos.length < 1 || pessoa.telefones.length < 1">
-						<span class="glyphicon glyphicon-ok"></span> Salvar
-					</button>
-				</span>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<hr>
-			</div>
-		</div>
-	</form>
-	<!-- Modal contato-->
-	<div class="row">
-		<div class="col-sm-12">
-			<form action="" novalidade name="formTelefone" method="POST"
-				role="form" ng-submit="salvarTelefone()">
-				<div class="modal fade in" id="modalTelefone" tabindex="-1"
-					role="dialog" aria-labelledby="modalTelefoneLabel"
-					aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="modalTelefoneLabel">
-									<span class="glyphicon glyphicon-phone-alt"></span> Cadastro de
-									telefone
-								</h4>
-							</div>
-							<div class="modal-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label class="control-label"> <strong>Telefone
-													*</strong></label>
-											<div class="input-group">
-												<span class="input-group-addon"> <span
-													class="glyphicon glyphicon-phone-alt"></span>
-												</span> <select class="selectpicker show-tick form-control"
-													name="tipoTelefone" ng-init="telefone.tipo = 'CELULAR'"
-													ng-model="telefone.tipo" data-live-search="true">
-													<option value="CELULAR">Celular</option>
-													<option value="COMERCIAL">Comercial</option>
-													<option value="RESIDENCIAL">Residencial</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-2">
-										<div
-											class="form-group {{formTelefone.dddTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-											<label class="control-label"><strong>DDD *</strong></label> <input
-												class="form-control" id="numeroDdd" name="dddTelefone"
-												type="text" ng-model="telefone.ddd" maxlength="2"
-												ng-pattern="/^[0-9]{2}$/" required="required"> <span
-												class="help-block"
-												ng-show="formTelefone.dddTelefone.$error.pattern">Apenas
-												números e 2 digitos.</span>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div
-											class="form-group {{formTelefone.numeroTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-											<label class="control-label"><strong>Número
-													*</strong></label> <input class="form-control" name="numeroTelefone"
-												ui-mask="9999-9999?9" type="text" ng-model="telefone.numero"
-												ng-pattern="/[0-9]{4}-[0-9]{4,5}/" maxlength="15"
-												required="required"> <span class="help-block"
-												ng-show="formTelefone.numeroTelefone.$error.pattern">Apenas
-												números e no mínimo 8 digitos.</span>
-										</div>
-									</div>
-									<div class="col-sm-2">
-										<div class="form-group">
-											<label class="control-label"><strong>Ramal </strong></label>
-											<input class="form-control" name="ramalTelefone"
-												type="number" ng-model="telefone.ramal" placeholder="ramal"
-												maxlength="5">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<span class="pull-right">
-									<button class="btn btn-danger btn-padrao" data-dismiss="modal">
-										<span class="glyphicon glyphicon-remove"></span> Sair
-									</button>
-									<button type="submit" class="btn btn-success btn-padrao"
-										data-dismiss="modal" ng-click="salvarTelefone()"
-										ng-disabled="formTelefone.$invalid">
-										<span class="glyphicon glyphicon-ok"></span> Salvar
-									</button>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+     ng-init="carregarPessoa()">
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <legend>
+        <span class="glyphicon glyphicon-user"></span> Cadastro de Pessoa
+      </legend>
+    </div>
+  </div>
+  <form action="" novalidade method="POST" name="formPessoa" role="form"
+        ng-submit="salvar()">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label class="control-label">Tipo</label>
+          <div class="btn-group">
+            <label class="btn btn-primary btn-radio-amacapa"> <input
+                ng-model="pessoa.tipo" ng-disabled="estaEditando" value="F" ng-change="verificaCaracteristica(pessoa.tipo)"
+                type="radio" /> Física
+            </label> <label class="btn btn-primary btn-radio-amacapa"> <input
+                ng-model="pessoa.tipo" ng-disabled="estaEditando" value="J" ng-change="verificaCaracteristica(pessoa.tipo)"
+                type="radio" /> Jurídica
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div
+          class="form-group {{formPessoa.caracteristicas.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+          <label class="control-label"><strong>Caracteristicas
+              *</strong></label> <select type="text" name="caracteristicas"
+                                     ui-select2="select2Options"
+                                     multiple class="input-default"
+                                     ng-model="pessoaCaracteristica.caracteristicas" ng-required="true"
+                                     ng-change="validaCaracteristicas(pessoaCaracteristica.caracteristicas)">
+            <option ng-repeat="c in caracteristicas" value="{{c.id}}">{{c.descricao}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-3" ng-show="associado">
+        <div class="form-group {{formPessoa.vigenciaAssociado.$error.required ? 'has-error' : 'has-success' }} has-feedback">
+          <label class="control-label"><strong>Vigência Associado</strong></label> <input
+            type="date" name="vigenciaAssociado" class="form-control"
+            ng-model="pessoa.vigenciaAssociado" ng-required="associado">
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!-- Inicio Pessoa Fisica -->
+    <div class="pessoaFisica" ng-show=" pessoa.tipo === 'F'">
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="form-group {{formPessoa.nomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"><strong> Nome *</strong></label> <input
+              class="form-control" name="nomeFisica" type="text"
+              ng-model="pessoa.nome" placeholder="Nome" maxlength="50"
+              title="Nome" ng-required="pessoa.tipo === 'F'"
+              ng-pattern="/^[a-zA-Z\s]{2,50}$/" title="Nome da pessoa" /> <span
+              class="help-block" ng-show="formPessoa.nomeFisica.$error.pattern">Apenas
+              letras e no mínimo 2.</span>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div
+            class="form-group {{formPessoa.sobrenomeFisica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"><strong>Sobrenome *</strong>
+            </label> <input class="form-control" name="sobrenomeFisica"
+                            ng-pattern="/^[a-zA-Z\s]{2,50}$/" type="text"
+                            ng-model="pessoa.sobrenome" placeholder="Sobrenome"
+                            maxlength="50" title="Sobrenome"
+                            ng-required="pessoa.tipo === 'F'" /> <span class="help-block"
+                            ng-show="formPessoa.sobrenomeFisica.$error.pattern">Apenas
+              letras e no mínimo 2.</span>
+          </div>
+        </div>
+        <div class="col-sm-3 text-center">
+          <div class="form-group">
+            <label class="control-label"><strong>Sexo</strong></label>
+            <div class="btn-group">
+              <!--data-toggle="buttons" verificar uso-->
+              <label class="btn btn-primary btn-radio-amacapa"> <input
+                  ng-model="pessoa.sexo" value="MASCULINO" type="radio" />
+                Masculino
+              </label> <label class="btn btn-primary btn-radio-amacapa"> <input
+                  ng-model="pessoa.sexo" value="FEMININO" type="radio" />
+                Feminino
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div
+            class="form-group {{formPessoa.dataNascimentoFisica.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"><strong>Nascimento *</strong>
+            </label> <input class="form-control maskNascimento"
+                            name="dataNascimentoFisica" type="date"
+                            ng-model="pessoa.dataNascimento" placeholder="dd/mm/aaaa"
+                            ng-required="pessoa.tipo == 'F'" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div
+            class="form-group {{formPessoa.rgFisica.$error.required|| formPessoa.rgFisica.$error.pattern || aluno === 'false' ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"><strong> RG *</strong></label> <input
+              class="form-control" name="rgFisica" ng-pattern="/^[0-9]{5,12}$/"
+              type="text" id="rg" ng-model="pessoa.rg" title="Número do R.G."
+              maxlength="12" placeholder="Número do R.G."
+              ng-required="pessoa.tipo == 'F' && !aluno" /> <span
+              class="help-block" ng-show="formPessoa.rgFisica.$error.pattern">Apenas
+              números e mínimo 5 dígitos.</span>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div
+            class="form-group {{formPessoa.cpfFisica.$invalid|| aluno === 'false' ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"> <strong>CPF *</strong>
+            </label> <input class="form-control" ui-mask="{{maskCpf}}"
+                            ng-focus="maskCpf = '999.999.999-99'" ng-pattern="/(\w|\W)/"
+                            type="text" name="cpfFisica" ng-model="pessoa.cpf"
+                            title="Número do CPF" my-blur="validaCpf(pessoa.cpf)"
+                            my-focus="focusCpf" maxlength="14"
+                            ng-required="pessoa.tipo === 'F' && !aluno">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group {{formPessoa.emailFisica.$error.email ? 'has-error' : ''}} has-feedback">
+            <label class="control-label"><strong>Email </strong></label>
+            <div class="input-group">
+              <span class="input-group-addon"> <span
+                  class="glyphicon glyphicon-envelope"></span>
+              </span> <input class="form-control" name="emailFisica" type="email"
+                             maxlength="50" ng-model="pessoa.email"
+                             placeholder="Endereço de email">
+              <!-- ng-pattern="/^([a-zA-Z0-9\.]+)@([a-zA-Z]{2,}\.)||([a-zA-Z]{2,})||\.([a-zA-Z]{2,})$/"-->								
+              <!--ng-pattern="/^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.)+[a-zA-Z]{2,7}$/"-->
+            </div>
+            <span class="help-block" ng-show="formPessoa.emailFisica.$error.email">Email inválido.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fim Pessoa Fisica -->
+    <!-- Inicio Pessoa Jurídica -->
+    <div class="pessoaJuridica" ng-show=" pessoa.tipo === 'J'">
+      <div class="row ">
+        <div class="col-sm-4">
+          <div
+            class="form-group {{formPessoa.nomeJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"> <strong>Nome
+                Fantasia *</strong></label> <input class="form-control" name="nomeJuridica"
+                                               type="text" ng-model="pessoa.nome" placeholder="Nome Fantasia"
+                                               maxlength="50" title="Nome" ng-required="pessoa.tipo == 'J'"
+                                               ng-pattern="/^[a-zA-Z\s]{2,50}$/" /> <span class="help-block"
+                                               ng-show="formPessoa.nomeJuridica.$error.pattern">Apenas
+              letras e no mínimo 2.</span>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div
+            class="form-group {{formPessoa.razaoSocialJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"><strong>Razão Social
+                *</strong></label> <input class="form-control" name="razaoSocialJuridica"
+                                      type="text" ng-pattern="/^[a-zA-Z\s]{2,50}$/"
+                                      ng-model="pessoa.razaoSocial" placeholder="Razao Social"
+                                      maxlength="50" title="Razão Social"
+                                      ng-required="pessoa.tipo == 'J'" /> <span class="help-block"
+                                      ng-show="formPessoa.razaoSocialJuridica.$error.pattern">Apenas
+              letras e no mínimo 2.</span>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div
+            class="form-group {{formPessoa.cnpjJuridica.$invalid|| pessoa.focusCnpj ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"><strong> CNPJ *</strong> </label> <input
+              class="form-control" ui-mask="99.999.999/9999-99"
+              name="cnpjJuridica" type="text" title="11.222.333/9999-22"
+              my-blur="validaCnpj(pessoa.cnpj)" my-focus="focusCnpj"
+              ng-model="pessoa.cnpj" ng-required="pessoa.tipo == 'J'" /> <span
+              class="help-block"
+              ng-show="formPessoa.cnpjJuridica.$error.pattern">Apenas
+              números e 14 digitos.</span>
+          </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-sm-3">
+          <div
+            class="form-group {{formPessoa.inscMunicipalJuridica.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+            <label class="control-label"><strong> Inscrição
+                Municipal *</strong></label> <input class="form-control"
+                                                name="inscMunicipalJuridica" type="text" maxlength="15"
+                                                ng-pattern="/^[0-9]{4,15}$/" title="Apenas numeros"
+                                                ng-model="pessoa.inscricaoMunicipal"
+                                                placeholder="Número Inscrição Municipal"
+                                                ng-required="pessoa.tipo == 'J'" /> <span class="help-block"
+                                                ng-show="formPessoa.inscMunicipalJuridica.$error.pattern">Apenas
+              números e no mínimo 4.</span>
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label"> <strong>Inscrição
+              Estadual </strong></label> <input class="form-control" name="dataCriacao"
+                                            type="text" maxlength="12" ng-pattern="/^[0-9]+$/"
+                                            title="Apenas numeros" ng-model="pessoa.inscricaoEstadual"
+                                            placeholder="Número Inscrição Estadual" />
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label class="control-label"><strong>Data de
+                Criação</strong> </label> <input class="form-control" name="dataCriacaoJuridica"
+                                             type="date" ng-model="pessoa.dataCriacao"
+                                             placeholder="dd/mm/aaaa" />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group form-group {{formPessoa.emailJuridica.$error.email ? 'has-error' : ''}} has-feedback">
+            <label class="control-label"> <strong>Email </strong></label>
+            <div class="input-group">
+              <span class="input-group-addon"> <span
+                  class="glyphicon glyphicon-envelope"></span>
+              </span> <input class="form-control" name="emailJuridica" type="email"
+                             maxlength="50" ng-model="pessoa.email"
+                             placeholder="Endereço de email">
+            </div>
+            <span class="help-block" ng-show="formPessoa.emailJuridica.$error.email">Email inválido.</span>						
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fim Pessoa Jurídica -->
+    <label> &nbsp; </label>
+    <div class="row">
+      <div class="col-sm-6">
+        <div
+          class="form-group {{pessoa.enderecos.length < 1 ? 'has-error' : 'has-success'}} has-feedback">
+          <legend>
+            <span class="glyphicon glyphicon-home"></span> <strong
+              class="control-label">Endereço *</strong>
+            <button type="submit" class="btn btn-primary btn-sm"
+                    data-toggle="modal" data-target="#modalEndereco"
+                    ng-click="novoEndereco()">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </legend>
+          <table class="table table-hover table-striped">
+            <tr>
+              <th class="col-sm-1">Principal</th>
+              <th class="col-sm-1">Tipo</th>
+              <th class="col-sm-4">Logradouro</th>
+              <th class="col-sm-3">Cidade - UF</th>
+              <th class="col-sm-3">Ações</th>
+            </tr>
+            <tr ng-repeat="endereco in pessoa.enderecos">
+              <td ng-bind="endereco.principal === 'S' ? 'SIM' : 'NÃO'"></td>
+              <td ng-bind="endereco.tipo"></td>
+              <td
+                ng-bind="endereco.logradouro + ', ' + endereco.numero + ' - ' + endereco.bairro"></td>
+              <td
+                ng-bind="endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla"></td>
+              <td>
+                <button class='btn btn-warning btn-sm'
+                        ng-click="editarEndereco($index)" data-toggle="modal"
+                        data-target="#modalEndereco">
+                  <span class='glyphicon glyphicon-edit'></span>
+                </button>
+                <button class='btn btn-danger btn-sm'
+                        ng-click="delEndereco($index)">
+                  <span class='glyphicon glyphicon-remove-circle'></span>
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div
+          class="form-group {{pessoa.telefones.length < 1 ? 'has-error' : 'has-success'}} has-feedback">
+          <div class="row">
+            <legend>
+              <span class="glyphicon glyphicon-phone-alt"></span> <strong
+                class="control-label"> Telefone * </strong>
+              <button type="submit" class="btn btn-primary btn-sm"
+                      data-toggle="modal" data-target="#modalTelefone"
+                      ng-click="novoTelefone()">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </legend>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <table class="table table-hover table-striped">
+                <thead>
+                <th class="col-sm-2">Tipo</th>
+                <th class="col-sm-2">DDD</th>
+                <th class="col-sm-5">Número</th>
+                <th class="col-sm-3">Açoes</th>
+                </thead>
+                <tr ng-repeat="telefone in pessoa.telefones">
+                  <td>{{telefone.tipo}}</td>
+                  <td>{{telefone.ddd}}</td>
+                  <td>{{telefone.numero| mascaraTelefoneNaListaPessoa}}</td>
+                  <td>
+                    <button class='btn btn-warning btn-sm'
+                            ng-click="editarTelefone($index)" data-toggle="modal"
+                            data-target="#modalTelefone">
+                      <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                    <button class='btn btn-danger btn-sm'
+                            ng-click="delTelefone($index)">
+                      <span class='glyphicon glyphicon-remove-circle'></span>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <span class="pull-right"> <a
+            class="btn btn-primary btn-padrao" ng-click="voltar()"> <i
+              class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
+          </a>
+          <button type="submit" class="btn btn-success btn-padrao"
+                  ng-disabled="formPessoa.$invalid || pessoa.enderecos.length < 1 || pessoa.telefones.length < 1">
+            <span class="glyphicon glyphicon-ok"></span> Salvar
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <hr>
+      </div>
+    </div>
+  </form>
+  <!-- Modal contato-->
+  <div class="row">
+    <div class="col-sm-12">
+      <form action="" novalidade name="formTelefone" method="POST"
+            role="form" ng-submit="salvarTelefone()">
+        <div class="modal fade in" id="modalTelefone" tabindex="-1"
+             role="dialog" aria-labelledby="modalTelefoneLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modalTelefoneLabel">
+                  <span class="glyphicon glyphicon-phone-alt"></span> Cadastro de
+                  telefone
+                </h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="control-label"> <strong>Telefone
+                          *</strong></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"> <span
+                            class="glyphicon glyphicon-phone-alt"></span>
+                        </span> <select class="selectpicker show-tick form-control"
+                                        name="tipoTelefone" ng-init="telefone.tipo = 'CELULAR'"
+                                        ng-model="telefone.tipo" data-live-search="true">
+                          <option value="CELULAR">Celular</option>
+                          <option value="COMERCIAL">Comercial</option>
+                          <option value="RESIDENCIAL">Residencial</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <div
+                      class="form-group {{formTelefone.dddTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                      <label class="control-label"><strong>DDD *</strong></label> <input
+                        class="form-control" id="numeroDdd" name="dddTelefone"
+                        type="text" ng-model="telefone.ddd" maxlength="2"
+                        ng-pattern="/^[0-9]{2}$/" required="required"> <span
+                        class="help-block"
+                        ng-show="formTelefone.dddTelefone.$error.pattern">Apenas
+                        números e 2 digitos.</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div
+                      class="form-group {{formTelefone.numeroTelefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                      <label class="control-label"><strong>Número
+                          *</strong></label> <input class="form-control" name="numeroTelefone"
+                                                ui-mask="9999-9999?9" type="text" ng-model="telefone.numero"
+                                                ng-pattern="/[0-9]{4}-[0-9]{4,5}/" maxlength="15"
+                                                required="required"> <span class="help-block"
+                                                ng-show="formTelefone.numeroTelefone.$error.pattern">Apenas
+                        números e no mínimo 8 digitos.</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="form-group">
+                      <label class="control-label"><strong>Ramal </strong></label>
+                      <input class="form-control" name="ramalTelefone"
+                             type="number" ng-model="telefone.ramal" placeholder="ramal"
+                             maxlength="5">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <span class="pull-right">
+                  <button class="btn btn-danger btn-padrao" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Sair
+                  </button>
+                  <button type="submit" class="btn btn-success btn-padrao"
+                          data-dismiss="modal" ng-click="salvarTelefone()"
+                          ng-disabled="formTelefone.$invalid">
+                    <span class="glyphicon glyphicon-ok"></span> Salvar
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
-	<!-- Modal endereço-->
-	<div class="row">
-		<div class="col-sm-12">
-			<form name="formEndereco" role="form" ng-submit="salvarEndereco()">
-				<div class="modal fade" id="modalEndereco" tabindex="-1"
-					role="dialog" aria-labelledby="modalEnderecoLabel"
-					aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="modalEnderecoLabel">
-									<span class="glyphicon glyphicon-home"></span> Cadastro de
-									Endereço
-								</h4>
-							</div>
-							<div class="modal-body">
-								<div class=container>
-									<div class="row">
-										<div class="col-sm-6">
-											<div
-												class="form-group {{formEndereco.cep.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-												<label class="control-label"><strong>Cep *</strong></label>
-												<input class="form-control" ui-mask="99.999-999" name="cep"
-													type="text" ng-model="endereco.cep"
-													ng-blur="buscaCep(endereco.cep)" ng-pattern="/[0-9]/"
-													required="required" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-6">
-											<div
-												class="form-group {{formEndereco.pais.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-												<label class="control-label"><strong> Pais
-														*</strong></label> <select type="text" ui-select2="select2Options"
-													name="pais" class="input-default"
-													ng-model="endereco.cidade.unidadeFederativa.pais.id"
-													ng-change="modificarPais(endereco.cidade.unidadeFederativa.pais.id)"
-													ng-value="endereco.cidade.unidadeFederativa.pais.id"
-													required>
-													<option ng-repeat="p in paises" value="{{p.id}}">{{p.nome}}</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div
-												class="form-group {{formEndereco.unidadeFederativa.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-												<label class="control-label"><strong>
-														Estado * </strong></label> <select type="text" ui-select2
-													class="input-default" name="unidadeFederativa"
-													ng-model="endereco.cidade.unidadeFederativa.id"
-													ng-change="modificarEstado(endereco.cidade.unidadeFederativa.id)"
-													ng-value="endereco.cidade.unidadeFederativa.id" required>
-													<option ng-repeat="uf in unidadesFederativas"
-														value="{{uf.id}}">{{uf.nome}}</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div
-												class="form-group {{formEndereco.cidade.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-												<label class="control-label"><strong>
-														Cidade * </strong></label> <select type="text" ui-select2="select2Options"
-													name="cidade" style="width: 100%"
-													ng-model="endereco.cidade.id"
-													ng-change="modificarCidade(endereco.cidade.id)"
-													ng-value="endereco.cidade.id" required>
-													<option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
-												</select>
-											</div>
-										</div>
-									</div>
+  <!-- Modal endereço-->
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="formEndereco" role="form" ng-submit="salvarEndereco()">
+        <div class="modal fade" id="modalEndereco" tabindex="-1"
+             role="dialog" aria-labelledby="modalEnderecoLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modalEnderecoLabel">
+                  <span class="glyphicon glyphicon-home"></span> Cadastro de
+                  Endereço
+                </h4>
+              </div>
+              <div class="modal-body">
+                <div class=container>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div
+                        class="form-group {{formEndereco.cep.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Cep *</strong></label>
+                        <input class="form-control" ui-mask="99.999-999" name="cep"
+                               type="text" ng-model="endereco.cep"
+                               ng-blur="buscaCep(endereco.cep)" ng-pattern="/[0-9]/"
+                               required="required" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div
+                        class="form-group {{formEndereco.pais.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong> Pais
+                            *</strong></label> <select type="text" ui-select2="select2Options"
+                                                   name="pais" class="input-default"
+                                                   ng-model="endereco.cidade.unidadeFederativa.pais.id"
+                                                   ng-change="modificarPais(endereco.cidade.unidadeFederativa.pais.id)"
+                                                   ng-value="endereco.cidade.unidadeFederativa.pais.id"
+                                                   required>
+                          <option ng-repeat="p in paises" value="{{p.id}}">{{p.nome}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div
+                        class="form-group {{formEndereco.unidadeFederativa.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>
+                            Estado * </strong></label> <select type="text" ui-select2
+                                                           class="input-default" name="unidadeFederativa"
+                                                           ng-model="endereco.cidade.unidadeFederativa.id"
+                                                           ng-change="modificarEstado(endereco.cidade.unidadeFederativa.id)"
+                                                           ng-value="endereco.cidade.unidadeFederativa.id" required>
+                          <option ng-repeat="uf in unidadesFederativas"
+                                  value="{{uf.id}}">{{uf.nome}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div
+                        class="form-group {{formEndereco.cidade.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>
+                            Cidade * </strong></label> <select type="text" ui-select2="select2Options"
+                                                           name="cidade" style="width: 100%"
+                                                           ng-model="endereco.cidade.id"
+                                                           ng-change="modificarCidade(endereco.cidade.id)"
+                                                           ng-value="endereco.cidade.id" required>
+                          <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
 
 
-									<div class="row">
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label class="control-label"><strong>Principal</strong></label>
-												<div class="btn-group">
-													<label class="btn btn-primary btn-radio-amacapa"> <input
-														ng-model="endereco.principal" name="principal" value="S"
-														type="radio" /> Sim
-													</label> <label class="btn btn-primary btn-radio-amacapa">
-														<input ng-model="endereco.principal" name="principal"
-														value="N" type="radio" /> Não
-													</label>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div
-												class="form-group {{formEndereco.tipo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-												<label class="control-label"><strong>Tipo *</strong></label>
-												<select class="selectpicker show-tick form-control"
-													name="tipo" ng-model="endereco.tipo"
-													data-live-search="true" required>
-													<option value="ALAMEDA">Alameda</option>
-													<option value="AVENIDA">Avenida</option>
-													<option value="RUA" selected>Rua</option>
-													<option value="ESTRADA">Estrada</option>
-													<option value="LADEIRA">Ladeira</option>
-													<option value="PRACA">Praça</option>
-													<option value="TRAVESSA">Travessa</option>
-													<option value="RODOVIA">Rodovia</option>
-													<option value="OUTROS">Outros</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div
-												class="form-group {{formEndereco.logradouro.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-												<label class="control-label"><strong>Logradouro
-														*</strong></label> <input class="form-control" name="logradouro"
-													type="text" ng-model="endereco.logradouro"
-													placeholder="Logradouro" maxlength="40" required>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-3">
-											<div
-												class="form-group {{formEndereco.numero.$invalid ? 'has-error' : ''}} has-feedback">
-												<label class="control-label"><strong>Número
-												</strong></label> <input class="form-control" name="numero" type="number"
-													ng-model="endereco.numero" placeholder="N°" min="0">
-											</div>
-										</div>
-										<div class="col-sm-9">
-											<div
-												class="form-group {{formEndereco.bairro.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-												<label class="control-label"><strong>Bairro
-														*</strong></label> <input class="form-control" name="bairro" type="text"
-													ng-model="endereco.bairro" placeholder="Bairro"
-													maxlength="40" required>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group col-sm-12">
-											<label class="control-label"><strong>Complemento
-											</strong></label> <input class="form-control" name="complemento" type="text"
-												ng-model="endereco.complemento" placeholder="Complemento"
-												maxlength="40">
-										</div>
-									</div>
-									<div class="row">
-										<div class="modal-footer">
-											<span class="pull-right">
-												<button class="btn btn-danger btn-padrao"
-													ng-click="novoEndereco()" data-dismiss="modal">
-													<span class="glyphicon glyphicon-remove"></span> Sair
-												</button>
-												<button type="submit" class="btn btn-success btn-padrao"
-													ng-disabled="formEndereco.$invalid">
-													<span class="glyphicon glyphicon-ok"></span> Salvar
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label class="control-label"><strong>Principal</strong></label>
+                        <div class="btn-group">
+                          <label class="btn btn-primary btn-radio-amacapa"> <input
+                              ng-model="endereco.principal" name="principal" value="S"
+                              type="radio" /> Sim
+                          </label> <label class="btn btn-primary btn-radio-amacapa">
+                            <input ng-model="endereco.principal" name="principal"
+                                   value="N" type="radio" /> Não
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div
+                        class="form-group {{formEndereco.tipo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Tipo *</strong></label>
+                        <select class="selectpicker show-tick form-control"
+                                name="tipo" ng-model="endereco.tipo"
+                                data-live-search="true" required>
+                          <option value="ALAMEDA">Alameda</option>
+                          <option value="AVENIDA">Avenida</option>
+                          <option value="RUA" selected>Rua</option>
+                          <option value="ESTRADA">Estrada</option>
+                          <option value="LADEIRA">Ladeira</option>
+                          <option value="PRACA">Praça</option>
+                          <option value="TRAVESSA">Travessa</option>
+                          <option value="RODOVIA">Rodovia</option>
+                          <option value="OUTROS">Outros</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div
+                        class="form-group {{formEndereco.logradouro.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Logradouro
+                            *</strong></label> <input class="form-control" name="logradouro"
+                                                  type="text" ng-model="endereco.logradouro"
+                                                  placeholder="Logradouro" maxlength="40" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div
+                        class="form-group {{formEndereco.numero.$invalid ? 'has-error' : ''}} has-feedback">
+                        <label class="control-label"><strong>Número
+                          </strong></label> <input class="form-control" name="numero" type="number"
+                                                 ng-model="endereco.numero" placeholder="N°" min="0">
+                      </div>
+                    </div>
+                    <div class="col-sm-9">
+                      <div
+                        class="form-group {{formEndereco.bairro.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"><strong>Bairro
+                            *</strong></label> <input class="form-control" name="bairro" type="text"
+                                                  ng-model="endereco.bairro" placeholder="Bairro"
+                                                  maxlength="40" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-12">
+                      <label class="control-label"><strong>Complemento
+                        </strong></label> <input class="form-control" name="complemento" type="text"
+                                               ng-model="endereco.complemento" placeholder="Complemento"
+                                               maxlength="40">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="modal-footer">
+                      <span class="pull-right">
+                        <button class="btn btn-danger btn-padrao"
+                                ng-click="novoEndereco()" data-dismiss="modal">
+                          <span class="glyphicon glyphicon-remove"></span> Sair
+                        </button>
+                        <button type="submit" class="btn btn-success btn-padrao"
+                                ng-disabled="formEndereco.$invalid">
+                          <span class="glyphicon glyphicon-ok"></span> Salvar
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <script type="text/javascript">
 </script>

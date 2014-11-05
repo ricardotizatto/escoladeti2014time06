@@ -21,7 +21,7 @@ public class TesteRelatorioEvento {
 
     private static final String URL_REPORT = "src/main/resources/br/unicesumar/escoladeti/reports/";
 
-    @Test
+//    @Test
     public void testarImpressaoRelatorioEvento() {
         JasperReport jasperReport;
         JasperPrint jasperPrint;

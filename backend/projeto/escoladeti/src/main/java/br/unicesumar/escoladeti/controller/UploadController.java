@@ -48,7 +48,7 @@ public class UploadController {
         Volume volume = volumeRepository.findOne(volumeId);
         String name = file.getOriginalFilename();
         String rootPath = System.getProperty("catalina.home");
-        String finalDir = rootPath + File.separator + "uploads";
+        String finalDir = rootPath + File.separator + "uploads"+ File.separator + volumeId;
         File dir = new File(finalDir);
 
         if (!dir.exists()) {
