@@ -176,7 +176,7 @@
 				<constraints primaryKeyName="pessoaCaracteristicaPkId"
 					primaryKey="true" />
 			</column>
-			<column name="pessoaid" type="INT8">
+			<column name="pessoa_id" type="INT8">
 				<constraints foreignKeyName="pessoaCaracteristicaFkIdPessoa"
 					referencedTableName="pessoa" referencedColumnNames="id" nullable="false" />
 			</column>
@@ -192,24 +192,33 @@
 		<delete tableName="caracteristica"></delete>
 	</changeSet>
 
-	<changeSet id="10201410022235" author="Walber">
+
+	<changeSet id="11201411031320" author="Walber">
 		<preConditions onFail="MARK_RAN">
-			<not>
-				<tableExists tableName="caracteristica" />
-			</not>
+
+                  <sqlCheck expectedResult="0">SELECT COUNT(*) FROM CARACTERISTICA</sqlCheck>
 		</preConditions>
 		<insert tableName="caracteristica">
-			<column name="id" type="INT8" value="1"></column>
-			<column name="descricao" type="VARCHAR(30)" value="ALUNO"></column>
+
+			<column name="id" type="INT8" value="1"/>
+			<column name="descricao" type="VARCHAR(30)" value="ALUNO"/>
+            <column name="tipo" type="CHAR" value="F"></column>
 		</insert>
 		<insert tableName="caracteristica">
 			<column name="id" type="INT8" value="2"></column>
 			<column name="descricao" type="VARCHAR(30)" value="ASSOCIADO"></column>
+            <column name="tipo" type="CHAR" value="A"></column>
 		</insert>
 		<insert tableName="caracteristica">
 			<column name="id" type="INT8" value="3"></column>
 			<column name="descricao" type="VARCHAR(30)" value="PROFESSOR"></column>
+            <column name="tipo" type="CHAR" value="F"></column>
 		</insert>
+		<insert tableName="caracteristica">
+			<column name="id" type="INT8" value="4"></column>
+			<column name="descricao" type="VARCHAR(30)" value="EMPRESA"></column>
+            <column name="tipo" type="CHAR" value="J"></column>
+		</insert>                
 	</changeSet>
 
 	<changeSet id="201410161950" author="Walber">
@@ -308,6 +317,18 @@
             ORDER BY T1.NOME 
         </createView>
 	</changeSet>
+        
+        <changeSet author="Walber" id="201410302127">
+          <preConditions onError="MARK_RAN" onFail="MARK_RAN">
+            <not>
+              <columnExists tableName="caracteristica" columnName="tipo"/>
+            </not>
+          </preConditions>
+          <addColumn tableName="caracteristica">
+            <column name="tipo" type="CHAR">
+              </column>
+           </addColumn>          
+        </changeSet>
 
 </databaseChangeLog>
 

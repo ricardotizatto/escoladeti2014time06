@@ -10,7 +10,7 @@
                 <div class="form-group {{formCidade.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"> <strong>Nome * </strong> </label>
                     <input class="form-control" type="text" name="nome" title="Nome da cidade. Campo só deve conter letras" 
-                           ng-model="cidade.nome" ng-pattern="/^[A-Za-z\s]{3,40}$/" maxlength="40" required placeholder="Nome da cidade" >
+                           ng-model="cidade.nome" ng-pattern="/[a-zA-Z\s]{3,40}/" maxlength="40" required placeholder="Nome da cidade" >
                     <span class="help-block" ng-show="formCidade.nome.$error.pattern">Apenas letras e mínimo de 3.</span>
                     <span class="glyphicon {{formCidade.nome.$invalid  ? 'glyphicon-remove' : 'glyphicon-ok'}} form-control-feedback"></span>                    
                 </div>            

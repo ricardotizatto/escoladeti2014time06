@@ -2,9 +2,11 @@ package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.entity.Participante;
+import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.service.MaterialStatusService;
 import br.unicesumar.escoladeti.service.ParticipanteService;
+import br.unicesumar.escoladeti.service.PeriodoService;
 import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
 import java.io.Serializable;
 
@@ -27,6 +29,9 @@ public class ExternoController implements Serializable{
     
     @Autowired
     private EventoService eventoService;
+    
+    @Autowired
+    private PeriodoService periodoService;
     
     @Autowired
     private ParticipanteService participanteService;
@@ -61,16 +66,23 @@ public class ExternoController implements Serializable{
         return eventoService.getTodos(pagina);
     }
     
-    @RequestMapping(value = "public/rest/proximoseventos", method = RequestMethod.GET)
+    
+    @RequestMapping(value = "public/rest/proximoseventos/{pagina}", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Evento> getProxomosEventos() {
-        return eventoService.getProxomosEventos();
+    public DataPage<Evento> getProximosEventos(@PathVariable Integer pagina) {
+        return eventoService.getProximosEventos(pagina);
     }
     
-    @RequestMapping(value = "public/rest/ultimoseventos", method = RequestMethod.GET)
+    @RequestMapping(value = "public/rest/ultimoseventos/{pagina}", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Evento> getUltimosEventos() {
-        return eventoService.getUltimosEventos();
+    public DataPage<Evento> getUltimosEventos(@PathVariable Integer pagina) {
+        return eventoService.getUltimosEventos(pagina);
+    }
+    
+    @RequestMapping(value = "public/rest/ultimosperiodos", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Periodo> listarUltimosPeriodos() {
+        return periodoService.listarUltimosPeriodos();
     }
     
     @RequestMapping(value = "public/rest/evento/{id}", method = RequestMethod.GET)

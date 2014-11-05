@@ -1,19 +1,26 @@
 package br.unicesumar.escoladeti.controller;
 
-import br.unicesumar.escoladeti.comando.ComandoUpload;
-import br.unicesumar.escoladeti.entity.Volume;
-import br.unicesumar.escoladeti.repository.VolumeRepository;
-import com.sun.org.apache.xerces.internal.impl.io.ASCIIReader;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
-import java.awt.geom.RectangularShape;
-import java.io.*;
+
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import br.unicesumar.escoladeti.entity.Volume;
+import br.unicesumar.escoladeti.repository.VolumeRepository;
+
+import com.sun.org.apache.xerces.internal.impl.io.ASCIIReader;
 
 /**
  * Created by Jhonatan on 02/10/2014.
@@ -41,7 +48,7 @@ public class UploadController {
         Volume volume = volumeRepository.findOne(volumeId);
         String name = file.getOriginalFilename();
         String rootPath = System.getProperty("catalina.home");
-        String finalDir = rootPath + File.separator + "uploads";
+        String finalDir = rootPath + File.separator + "uploads"+ File.separator + volumeId;
         File dir = new File(finalDir);
 
         if (!dir.exists()) {

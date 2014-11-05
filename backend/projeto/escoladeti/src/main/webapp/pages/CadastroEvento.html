@@ -100,12 +100,14 @@
                             <div class="col-sm-12"> 
                                 <table class="table table-hover table-striped">
                                     <tr>
-                                        <th class="col-sm-3">Data</th>
-                                        <th class="col-sm-3">Início</th>
-                                        <th class="col-sm-3">Termino</th>
+                                        <th class="col-sm-3">Título</th>
+                                        <th class="col-sm-2">Data</th>
+                                        <th class="col-sm-2">Início</th>
+                                        <th class="col-sm-2">Termino</th>
                                         <th class="col-sm-3">Ações</th>
                                     </tr>
                                     <tr ng-repeat="periodo in evento.periodos">
+                                        <td ng-bind="periodo.tituloperiodo"></td>
                                         <td ng-bind="periodo.data | date: 'dd-MM-yyyy' "></td>
                                         <td ng-bind="periodo.inicio"></td>
                                         <td ng-bind="periodo.fim"></td>
@@ -165,7 +167,15 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group {{formEvento.tituloperiodo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                        <label class="control-label"><strong>Titulo *</strong></label>
+                                                        <input type="text" name="tituloperiodo" title="Titulo do Periodo deve ser maisculo" class="form-control" ng-pattern="/^[a-zA-Z\s]{3,200}$/"
+                                                               ng-model="periodo.tituloperiodo" required placeholder="Titulo"/>
+                                                        <span class="help-block" ng-show="formEvento.tituloperiodo.$error.pattern">Apenas letras e no mínimo 3.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <div class="form-group {{formEvento.data.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                             <label class="control-label"><strong>Data *</strong></label>
@@ -174,14 +184,16 @@
                                                         </div>
                                                     </div>  
                                                 </div>
-                                                <div class="col-sm-4">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
                                                    <div class="form-group {{formEvento.inicio.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                        <label class="control-label"><strong>Início *</strong></label>
                                                        <input name="inicio" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.inicio" required="" placeholder="00:00" />
                                                        <span class="help-block" ng-show="formEvento.inicio.$error.pattern">Apenas números.</span>
                                                    </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-6">
                                                     <div class="form-group {{formEvento.termino.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                         <label class="control-label"><strong>Término *</strong></label>
                                                         <input name="termino" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.fim" required="" placeholder="00:00" />
