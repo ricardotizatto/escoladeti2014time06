@@ -108,12 +108,12 @@ public class PessoaService {
 				if (comando.getVigenciaAssociado() != null && ids.get(i) == 2) {
 					VigenciaAssociado va = new VigenciaAssociado();
 					va.setVigencia(comando.getVigenciaAssociado());
-
-					Date dt = new Date();
-
-					if (dt.after(va.getVigencia()))
-						throw new RuntimeException(
-								"Vigência não pode ser menor que hoje!");
+//
+//					Date dt = new Date();
+//
+//					if (dt.after(va.getVigencia()))
+//						throw new RuntimeException(
+//								"Vigência não pode ser menor que hoje!");
 
 					va.setPessoaCaracteristica(pc);
 					pc.setVigenciaAssociado(va);
