@@ -40,6 +40,13 @@ function VolumeFactory($resource) {
             params: {
                 acao: 'andamento'
             }
+        },
+
+        concluir: {
+            method: 'PUT',
+            params: {
+                acao: 'conclusao'
+            }
         }
 
     });

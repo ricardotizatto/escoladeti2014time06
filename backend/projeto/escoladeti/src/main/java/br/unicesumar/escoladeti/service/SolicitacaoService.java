@@ -3,19 +3,13 @@ package br.unicesumar.escoladeti.service;
 import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacao;
 import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacaoItem;
 import br.unicesumar.escoladeti.controller.DataPage;
-import br.unicesumar.escoladeti.entity.Livro;
-import br.unicesumar.escoladeti.entity.Solicitacao;
-import br.unicesumar.escoladeti.entity.Solicitacao.SolicitacaoBuilder;
-import br.unicesumar.escoladeti.entity.SolicitacaoItem;
+import br.unicesumar.escoladeti.entity.*;
 import br.unicesumar.escoladeti.enums.StatusItem;
-import br.unicesumar.escoladeti.repository.LivroRepository;
-import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
-import br.unicesumar.escoladeti.repository.SolicitacaoRepository;
+import br.unicesumar.escoladeti.repository.*;
 import br.unicesumar.escoladeti.util.number.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
@@ -30,9 +24,14 @@ public class SolicitacaoService {
     @Autowired
     private SolicitacaoItemRepository solicitacaoItemRepository;
 
+    @Autowired
+    private VolumeRepository volumeRepository;
 
     @Autowired
     private LivroRepository livroRepository;
+
+    @Autowired
+    private SolicitacaoVolumeRepository solicitacaoVolumeRepository;
 
     public void deletar(Long id) {
         solicitacaoRepository.delete(id);
@@ -82,6 +81,7 @@ public class SolicitacaoService {
                     .build();
 
             solicitacaoItemRepository.save(solicitacaoItem);
+            atualizarSolicitacaoVolumes(solicitacaoItem);
         }
 
         return solicitacaoRepository.findOne(solicitacaoSalva.getId());
@@ -90,7 +90,7 @@ public class SolicitacaoService {
     @Transactional
     public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) throws Exception {
         Solicitacao solicitacaoEncontrada = solicitacaoRepository.findOne(id);
-        limparItens(solicitacaoEncontrada);
+//        limparItens(solicitacaoEncontrada);
 
          Solicitacao solicitacao = Solicitacao
                 .builder()
@@ -115,9 +115,14 @@ public class SolicitacaoService {
             if (comandoItem.getId() != null) {
                 SolicitacaoItem solicitacaoItemEncontrado = solicitacaoItemRepository.findOne(comandoItem.getId());
 
-                if (solicitacaoItemEncontrado != null && solicitacaoItemEncontrado.possuiSolicitavaoVolumes()) {
+
+                if (solicitacaoItemEncontrado != null
+                        && (solicitacaoItemEncontrado.possuiSolicitavaoVolumes()
+                        || solicitacaoItemEncontrado.getStatus().equals(StatusItem.CANCELADO))) {
                     continue;
                 }
+
+                solicitacaoItemRepository.delete(solicitacaoItemEncontrado);
             }
 
             SolicitacaoItem solicitacaoItem = SolicitacaoItem
@@ -131,19 +136,23 @@ public class SolicitacaoService {
                     .build();
 
             solicitacaoItemRepository.save(solicitacaoItem);
+            atualizarSolicitacaoVolumes(solicitacaoItem);
         }
 
 
         return solicitacaoRepository.findOne(id);
     }
 
-    private void limparItens(Solicitacao solicitacao) {
-        for (SolicitacaoItem item : solicitacao.getItensSolicitacao()) {
-            if (!item.possuiSolicitavaoVolumes()) {
-                solicitacaoItemRepository.delete(item);
-            }
+    private void atualizarSolicitacaoVolumes(SolicitacaoItem solicitacaoItem) {
+        List<Volume> volumes = volumeRepository.findByTranscricaoAndIdLivro(solicitacaoItem.getTraducaoMaterial(),
+                solicitacaoItem.getLivro().getId());
+
+        for (Volume volume : volumes) {
+            SolicitacaoVolume solicitacaoVolume = solicitacaoItem.gerarSolicitacaoVolume(volume);
+            solicitacaoVolumeRepository.save(solicitacaoVolume);
         }
     }
+
 
     private void validarDuplicados(List<SolicitacaoItem> itens, SolicitacaoItem solicitacaoItem) throws Exception {
         for (SolicitacaoItem item : itens) {

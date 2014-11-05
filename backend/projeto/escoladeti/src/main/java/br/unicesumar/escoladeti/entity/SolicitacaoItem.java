@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -97,7 +98,7 @@ public class SolicitacaoItem extends Entidade{
 
         for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
             if (solicitacaoVolume.getDataEnvio() != null) {
-                throw new RuntimeException("Item da solicitação possui volume enviado e não pode ser excluido.<br> Este Item pode ser finalizado");
+                throw new RuntimeException("Item da solicitação possui volume enviado e não pode ser Cancelado.<br> Este Item pode ser finalizado");
             }
         }
 
@@ -134,6 +135,13 @@ public class SolicitacaoItem extends Entidade{
 
     public boolean possuiSolicitavaoVolumes() {
         return getSolicitacaoVolumes().size() > 0;
+    }
+
+    public SolicitacaoVolume gerarSolicitacaoVolume(Volume volume) {
+        SolicitacaoVolume solicitacaoVolume = new SolicitacaoVolume();
+        solicitacaoVolume.setVolume(volume);
+        solicitacaoVolume.setIdSolicitacaoItem(getId());
+        return solicitacaoVolume;
     }
 
     public static class SolicitacaoItemBuilder {
@@ -235,11 +243,16 @@ public class SolicitacaoItem extends Entidade{
             throw new RuntimeException("Só é possível finalizar ordem com volumes.");
         }
 
+        Short quantidadeEnviado = 0;
         for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
-            if (!solicitacaoVolume.getVolume().getStatus().equals(VolumeStatus.REVISADO)
-                    || !solicitacaoVolume.estaEnviado()) {
-                throw new RuntimeException("Todos volumes precisam estar revisados e enviados para finalizar a ordem");
+            if (!solicitacaoVolume.estaEnviado()) {
+                quantidadeEnviado++;
+                break;
             }
+        }
+
+        if (quantidadeEnviado <= 0) {
+            throw new RuntimeException("É nescessário ter ao menos um volume enviado para finalizar este item");
         }
 
         setStatus(StatusItem.FINALIZADO);
