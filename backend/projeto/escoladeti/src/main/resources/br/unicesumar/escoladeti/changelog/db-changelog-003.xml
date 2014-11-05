@@ -165,7 +165,7 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet id="201410152144" author="Walber">
+	<changeSet id="201411052028" author="Walber">
 		<preConditions onFail="CONTINUE" onError="HALT">
 			<not>
 				<tableExists tableName="pessoacaracteristica" />
