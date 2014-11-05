@@ -235,6 +235,8 @@ function eventoController($scope, $http, $routeParams) {
         if($scope.periodo.inicio >= $scope.periodo.fim){
             toastr.warning("Horário inválido");
         }else{
+            var periodo = removeFusoHorarioData($scope.periodo.data);
+            $scope.periodo.data = periodo;
             $scope.evento.periodos.push($scope.periodo);
             console.log($scope.evento.periodos);
             toastr.success("Periodo adicionado " + $scope.periodo.data + " !");
@@ -278,3 +280,11 @@ function Ctrl($scope) {
 
 
 
+function removeFusoHorarioData(dataTemp){
+    var data = new Date(dataTemp);
+    var novaData = new Date(data.getTime() + data.getTimezoneOffset()*60000);
+    
+    return novaData;
+    
+    
+}
