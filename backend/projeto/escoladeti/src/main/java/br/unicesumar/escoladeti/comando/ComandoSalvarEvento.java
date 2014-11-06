@@ -21,6 +21,15 @@ public class ComandoSalvarEvento {
     private double valor;
     private boolean statusevento;
     private Integer limite;
+    private Integer disponivel;
+
+    public Integer getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(Integer disponivel) {
+        this.disponivel = disponivel;
+    }
 
     public ComandoSalvarEvento() {
     }

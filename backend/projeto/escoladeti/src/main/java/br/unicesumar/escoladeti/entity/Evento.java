@@ -33,6 +33,15 @@ public class Evento extends Entidade {
     private double valor;
     private boolean statusevento;
     private Integer limite;
+    private Integer disponivel;
+
+    public Integer getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(Integer disponivel) {
+        this.disponivel = disponivel;
+    }
 
     public Evento() {
         this.periodos = new HashSet<Periodo>();
@@ -134,6 +143,7 @@ public class Evento extends Entidade {
         private double valor;
         private boolean statusevento;
         private Integer limite;
+        private Integer disponivel;
         
         public EventoBuilder tipoEvento(String tipoEvento){
             this.tipoEvento = tipoEvento;
@@ -189,7 +199,10 @@ public class Evento extends Entidade {
             this.limite = limite;
             return this;
         }
-        
+        public EventoBuilder disponivel (Integer disponivel){
+            this.disponivel = disponivel;
+            return this;
+        }
         public Evento buildEvento(){
             System.out.println("no build evento");
             Evento evento = new Evento();
@@ -204,6 +217,7 @@ public class Evento extends Entidade {
             evento.setValor(this.valor);
             evento.setStatusevento(this.statusevento);
             evento.setLimite(this.limite);
+            evento.setDisponivel(this.disponivel);
             
             for (Periodo per: evento.getPeriodos()) {
               if (per.getId() != null){

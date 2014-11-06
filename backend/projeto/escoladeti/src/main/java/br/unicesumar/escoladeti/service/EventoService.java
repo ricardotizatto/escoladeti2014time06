@@ -40,7 +40,7 @@ public class EventoService {
             throw new RuntimeException("Evento " + evento.getDescricao() + " não pode ser deletado, pois possuí participante inscrito");
         }
     }
-
+    
     public Evento getById(Long id) {
         return eventoRepository.findById(id);
     }
@@ -75,6 +75,7 @@ public class EventoService {
                 .titulo(comando.getTitulo())
                 .valor(comando.getValor())
                 .limite(comando.getLimite())
+                .disponivel(comando.getDisponivel())
                 .buildEvento();
         
         if (comando.getId() != null) {

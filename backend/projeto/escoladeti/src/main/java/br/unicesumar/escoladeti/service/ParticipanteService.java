@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.service;
 
+import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.entity.ParticipantePeriodo;
 import br.unicesumar.escoladeti.entity.Periodo;
@@ -27,9 +28,14 @@ public class ParticipanteService {
     private EventoRepository eventoRepository;
 
     public Participante salvar(Participante participante) {
-        
+         
         Participante  p = participanteRepository.save(participante);
-        
+        System.out.println("Entrou no cadastro participante");
+        Evento  ev  = eventoRepository.findById(participante.getIdevento());
+        if (ev.getDisponivel() > 0){
+          ev.setDisponivel(ev.getDisponivel() - 1);
+          eventoRepository.save(ev);
+        }
         for(Periodo period : periodoRepository.findByEvento(eventoRepository.findById(participante.getIdevento()))){
             ParticipantePeriodo pp = new ParticipantePeriodo();
             pp.setParticipante(participante);
@@ -37,6 +43,7 @@ public class ParticipanteService {
             pp.setPresente(false);
             participantePeriodoRepository.save(pp);
         }
+        System.out.println("Finalizou  cadastro participante");
         return p;
     }
 

@@ -106,7 +106,7 @@ function eventoController($scope, $http, $routeParams) {
         if (!($scope.evento.id > 0)) {
             $scope.evento.statusevento = true;
         }
-
+        $scope.evento.disponivel = $scope.evento.limite;
         console.log("evento antes do post = " + $scope.evento.periodos.length);
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function (evento, status) {
@@ -239,7 +239,7 @@ function eventoController($scope, $http, $routeParams) {
             $scope.periodo.data = periodo;
             $scope.evento.periodos.push($scope.periodo);
             console.log($scope.evento.periodos);
-            toastr.success("Periodo adicionado " + $scope.periodo.data + " !");
+            toastr.success("Periodo adicionado com sucesso.");
             $scope.indicePeriodo = {};   
         }
 //        valida se a data e menor que a data atual mas a funcao atual tras 2014-11-3

@@ -14,4 +14,5 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     public Page<Evento> findByStatuseventoTrue(Pageable pageable);
 
     public Page<Evento> findByStatuseventoFalse(Pageable pageable);
+
 }
