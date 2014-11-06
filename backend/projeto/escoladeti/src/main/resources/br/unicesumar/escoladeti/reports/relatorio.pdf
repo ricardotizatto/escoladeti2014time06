@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 %PDF-1.4
 %âãÏÓ
 3 0 obj
@@ -46,3 +47,53 @@ trailer
 startxref
 1245
 %%EOF
+=======
+%PDF-1.4
+%âãÏÓ
+3 0 obj
+<</Filter/FlateDecode/Length 390>>stream
+xœ­ĞMKÃ@€áûşŠ9ÖK:;ÙìUm‚µBnâ!´µTH«mğ÷Û,ø±`g‘	„™}—ç]]·ªvĞ ƒv­f­zTwã_x~ÆwcÚ^Mç4Bû¢&Wíë8û3‚°ê/i•÷àƒ«Ü×.™qãÄq«&Ëî8ìV»·n?lN°>Àìc³ãÙÛ?Îz>×ñ~—Ë„à½¯¬ÿ¾2¥ÙÅ¡ß6j«3‘›å¼°aœÏ4n»¡ƒEwZíz!7‡Ú‹n÷3ÀR92t¡2ÖTCeKs‘ÍNÑNuµ€ŸÑ9?-áÇf¿Ò\ôcs¤ıˆr~$áÇf¿Ò\ôcsD‚~XçüJ+ÑÍ$~¥¹èÇæ¨–ósÉù?>“ø•æF?>GFĞÏÙœŸ•ğc3‰_i.ú±9²‚~Æåüœ„›IüJsÑÍ‘ô#Ÿóó~l&ñ+ÍE?6G^Ğ›œ_#áÇf¿Ò\ôcsÔÈùÙ&äü‚€ŸIüJs£Ÿ£ğ/¿OV³ÙŞ
+endstream
+endobj
+1 0 obj
+<</Group<</S/Transparency/Type/Group/CS/DeviceRGB>>/Contents 3 0 R/Type/Page/Resources<</ColorSpace<</CS/DeviceRGB>>/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]/Font<</F1 2 0 R>>>>/Parent 4 0 R/MediaBox[0 0 595 842]>>
+endobj
+5 0 obj
+[1 0 R/XYZ 0 852 0]
+endobj
+2 0 obj
+<</Subtype/Type1/Type/Font/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
+endobj
+4 0 obj
+<</Kids[1 0 R]/Type/Pages/Count 1/ITXT(2.1.7)>>
+endobj
+6 0 obj
+<</Names[(JR_PAGE_ANCHOR_0_1) 5 0 R]>>
+endobj
+7 0 obj
+<</Dests 6 0 R>>
+endobj
+8 0 obj
+<</Names 7 0 R/Type/Catalog/Pages 4 0 R/ViewerPreferences<</PrintScaling/AppDefault>>>>
+endobj
+9 0 obj
+<</ModDate(D:20141103132054-02'00')/Creator(JasperReports \(relatorioTeste\))/CreationDate(D:20141103132054-02'00')/Producer(iText 2.1.7 by 1T3XT)>>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000472 00000 n 
+0000000741 00000 n 
+0000000015 00000 n 
+0000000829 00000 n 
+0000000706 00000 n 
+0000000892 00000 n 
+0000000946 00000 n 
+0000000978 00000 n 
+0000001081 00000 n 
+trailer
+<</Info 9 0 R/ID [<28885ead0b02785b6333d968270c19a3><1fdbdff3728b2425a0aa6cd491c35639>]/Root 8 0 R/Size 10>>
+startxref
+1245
+%%EOF
+>>>>>>> develop
