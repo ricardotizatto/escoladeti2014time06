@@ -3,9 +3,9 @@ var controllers = angular.module('controllers');
 function ExternoController($scope, $http, $routeParams) {
     console.log('carregando controller externo');
     
-    $scope.tituloLimit = 60;    
-    $scope.descricaoLimit = 100;    
-    $scope.localLimit = 50;    
+    $scope.tituloLimit = 50;    
+    $scope.descricaoLimit = 90;    
+    $scope.localLimit = 40;    
     
     $scope.ativaBotao = function (pagina) {
         if(!pagina){
