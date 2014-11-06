@@ -13,6 +13,6 @@ public class NumberUtils {
     }
 
     public static boolean isNumber(String termo) {
-        return termo.matches("\\d");
+        return termo.matches("\\d+");
     }
 }

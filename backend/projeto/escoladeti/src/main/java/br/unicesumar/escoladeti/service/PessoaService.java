@@ -4,10 +4,8 @@ import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,12 +27,11 @@ import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
 
 @Service
 public class PessoaService {
+	@Autowired
+	private PessoaFisicaRepository pessoaFisicaRepository;
 
 	@Autowired
 	private PessoaJuridicaRepository pessoaJuridicaRepository;
-
-	@Autowired
-	private PessoaFisicaRepository pessoaFisicaRepository;
 
 	@Autowired
 	private PessoaFisicaJuridicaRepository pessoaFisicaJuridicaRepository;
@@ -76,27 +73,22 @@ public class PessoaService {
 		} else {
 			throw new RuntimeException("Tipo de pessoa inválido");
 		}
-
 	}
 
 	@Transactional
 	public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id) {
-
 		if (comando.getTipo().equals("F")) {
-
 			if (comando.getCpf() != null && !comando.getCpf().isEmpty()) {
 				PessoaFisica pf = pessoaFisicaRepository.findByCpf(comando
 						.getCpf());
 				cpfExiste(pf, id);
 			}
 			PessoaFisica pessoaFisica = buildPessoaFisica(comando);
-
 			if (id != null) {
 				pessoaFisica.setId(id);
 			}
 			List<Long> ids = comando.getCaracteristicas();
 			List<PessoaCaracteristica> pcs = new ArrayList<PessoaCaracteristica>();
-
 			for (int i = 0; i < ids.size(); i++) {
 				PessoaCaracteristica pc = new PessoaCaracteristica();
 				pc.setPessoa(pessoaFisica);
@@ -104,17 +96,9 @@ public class PessoaService {
 						.get(i));
 				pc.setCaracteristica(c);
 				pc.setPessoa(pessoaFisica);
-
 				if (comando.getVigenciaAssociado() != null && ids.get(i) == 2) {
 					VigenciaAssociado va = new VigenciaAssociado();
 					va.setVigencia(comando.getVigenciaAssociado());
-
-					Date dt = new Date();
-
-					if (dt.after(va.getVigencia()))
-						throw new RuntimeException(
-								"Vigência não pode ser menor que hoje!");
-
 					va.setPessoaCaracteristica(pc);
 					pc.setVigenciaAssociado(va);
 				}
@@ -124,9 +108,7 @@ public class PessoaService {
 
 			pessoaFisica.setPessoaCaracteristica(pcs);
 			pessoaFisicaRepository.save(pessoaFisica);
-
 			return pessoaFisica;
-
 		} else if (comando.getTipo().equals("J")) {
 			PessoaJuridica pj = pessoaJuridicaRepository.findByCnpj(comando
 					.getCnpj());
@@ -148,11 +130,32 @@ public class PessoaService {
 						.razaoSocial(comando.getRazaoSocial())
 						.dataCriacao(comando.getDataCriacao())
 						.buildPessoaJuridica();
-
 				if (id != null) {
 					pessoaJuridica.setId(id);
 				}
 
+				List<Long> ids = comando.getCaracteristicas();
+				List<PessoaCaracteristica> pcs = new ArrayList<PessoaCaracteristica>();
+
+				for (int i = 0; i < ids.size(); i++) {
+					PessoaCaracteristica pc = new PessoaCaracteristica();
+					pc.setPessoa(pessoaJuridica);
+					Caracteristica c = this.caracteristicaRepository
+							.findOne(ids.get(i));
+					pc.setCaracteristica(c);
+					pc.setPessoa(pessoaJuridica);
+
+					if (comando.getVigenciaAssociado() != null
+							&& ids.get(i) == 2) {
+						VigenciaAssociado va = new VigenciaAssociado();
+						va.setVigencia(comando.getVigenciaAssociado());
+						va.setPessoaCaracteristica(pc);
+						pc.setVigenciaAssociado(va);
+					}
+
+					pcs.add(pc);
+				}
+				pessoaJuridica.setPessoaCaracteristica(pcs);
 				pessoaJuridicaRepository.save(pessoaJuridica);
 
 				return pessoaJuridica;
@@ -176,10 +179,10 @@ public class PessoaService {
 	private void cpfExiste(PessoaFisica pf, Long id) {
 		if (pf != null && id != null) {
 			if (this.pessoaFisicaRepository.findByCpf(pf.getCpf()) != null
-					&& !pf.getCpf().isEmpty() && !pf.getId().equals(id))
+					&& !pf.getCpf().isEmpty() && !pf.getId().equals(id)) {
 				throw new RuntimeException("CPF já cadastrado.");
+			}
 		}
-
 	}
 
 	public void deletarPessoa(Long id, String tipo) {
@@ -212,6 +215,8 @@ public class PessoaService {
 	}
 
 	public DataPage<PessoaFisicaJuridica> listarTodos(Integer pagina) {
-		return new DataPage<>(this.pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(pagina, "nome")));
+		return new DataPage<>(
+				this.pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(
+						pagina, "nome")));
 	}
 }

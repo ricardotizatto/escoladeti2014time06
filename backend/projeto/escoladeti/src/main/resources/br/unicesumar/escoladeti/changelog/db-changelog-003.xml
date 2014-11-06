@@ -1,122 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
-	<changeSet id="40241" author="leivid">
-		<addColumn tableName="evento">
-			<column name="statusevento" type="boolean">
-			</column>
-		</addColumn>
-	</changeSet>
+    <changeSet id="40241" author="leivid">
+        <addColumn tableName="evento">
+            <column name="statusevento" type="boolean">
+            </column>
+        </addColumn>
+    </changeSet>
 
-	<changeSet id="40242" author="leivid">
-		<addDefaultValue defaultValueBoolean="true"
-			columnDataType="boolean" columnName="statusevento" tableName="evento" />
-	</changeSet>
+    <changeSet id="40242" author="leivid">
+        <addDefaultValue defaultValueBoolean="true"
+                         columnDataType="boolean" columnName="statusevento" tableName="evento" />
+    </changeSet>
 
-	<changeSet id="40243" author="leivid">
-		<update tableName="evento">
-			<column name="statusevento" type="boolean" />
-		</update>
-	</changeSet>
+    <changeSet id="40243" author="leivid">
+        <update tableName="evento">
+            <column name="statusevento" type="boolean" />
+        </update>
+    </changeSet>
 
-	<changeSet id="40244" author="leivid">
-		<dropTable cascadeConstraints="true" tableName="pagamento"></dropTable>
-	</changeSet>
-
-
-	<changeSet id="40245" author="leivid">
-		<addColumn tableName="participante">
-			<column name="presente" type="boolean">
-			</column>
-		</addColumn>
-		<addDefaultValue defaultValueBoolean="true"
-			columnDataType="boolean" columnName="presente" tableName="participante" />
-	</changeSet>
-	<changeSet id="w201409151639" author=" Walber ">
-		<dropUniqueConstraint tableName="pessoafisica"
-			constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
-	</changeSet>
-	<changeSet id="w201409161308" author="Walber">
-		<dropNotNullConstraint tableName="pessoajuridica"
-			columnName="inscricaoestadual" />
-	</changeSet>
-	<changeSet id="40246" author="Catabriga">
-		<dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
-		<dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>
-
-		<createTable tableName="volume">
-			<column name="id" type="int8">
-				<constraints nullable="false" primaryKey="true"></constraints>
-			</column>
-			<column name="id_responsavel" type="int8"></column>
-			<column name="pagina_inicio" type="int4"></column>
-			<column name="pagina_fim" type="int4"></column>
-			<column name="status" type="varchar"></column>
-			<column name="id_solicitacao_item" type="int8">
-				<constraints nullable="false"></constraints>
-			</column>
-			<column name="id_responsavelrevisao" type="int8"></column>
-			<column name="observacao" type="varchar"></column>
-			<column name="data_impressao" type="date"></column>
-			<column name="data_revisao" type="date"></column>
-			<column name="data_enviado" type="date"></column>
-		</createTable>
-
-		<addForeignKeyConstraint baseTableName="volume"
-			baseColumnNames="id_responsavel" constraintName="fk_usuario_volumeresponsavel"
-			referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
-		<addForeignKeyConstraint baseTableName="volume"
-			baseColumnNames="id_responsavelrevisao" constraintName="usuario_volumeresprevisao"
-			referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
-		<addForeignKeyConstraint baseTableName="volume"
-			baseColumnNames="id_solicitacao_item" constraintName="solitem_volumesolitem"
-			referencedTableName="solicitacaoitem" referencedColumnNames="id"></addForeignKeyConstraint>
+    <changeSet id="40244" author="leivid">
+        <dropTable cascadeConstraints="true" tableName="pagamento"></dropTable>
+    </changeSet>
 
 
-	</changeSet>
-	<!-- <changeSet id="w201409181739" author="Walber"> <preConditions onFail="CONTINUE"> 
-		<sqlCheck expectedResult="t">select exists(select * from information_schema.tables 
-		where table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions> 
-		<dropTable tableName="viewAcompanhamentoSolicitacao" /> </changeSet> <changeSet 
-		id="w201409181806" author="Walber"> <preConditions onFail="CONTINUE"> <sqlCheck 
-		expectedResult="t">select exists(select * from information_schema.views b 
-		where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions> 
-		<dropView viewName="viewAcompanhamentoSolicitacao" /> </changeSet> -->
-	<changeSet author="martinho" id="mart201410100054">
-		<createView viewName="viewacompanhamentosolicitacao"
-			replaceIfExists="true" schemaName="public">
-                    SELECT T1.ID AS SOLICITACAOID,
-                    T2.STATUS AS STATUS,
-                    T1.DATACHEGADA,
-                    T2.TRADUCAOMATERIAL,
-                    T2.OUTRO AS OUTRATRADUCAO,
-                    T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
-                    T6.NOME AS REVISOR,
-                    T7.NOME AS MATERIAL
-                    FROM SOLICITACAO T1
-                    JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
-                    LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
-                    LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
-                    LEFT JOIN VOLUME T5 ON T2.ID = T5.ID_SOLICITACAO_ITEM
-                    LEFT JOIN PESSOA T6 ON T5.ID_RESPONSAVELREVISAO = T6.ID
-                    LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
-                    ORDER BY T1.DATACHEGADA
-            </createView>
-	</changeSet>
+    <changeSet id="40245" author="leivid">
+        <addColumn tableName="participante">
+            <column name="presente" type="boolean">
+            </column>
+        </addColumn>
+        <addDefaultValue defaultValueBoolean="true"
+                         columnDataType="boolean" columnName="presente" tableName="participante" />
+    </changeSet>
+    <changeSet id="w201409151639" author=" Walber ">
+        <dropUniqueConstraint tableName="pessoafisica"
+                              constraintName="uk_795p7d8b4isbwwye0rd3je0cw" />
+    </changeSet>
+    <changeSet id="w201409161308" author="Walber">
+        <dropNotNullConstraint tableName="pessoajuridica"
+                               columnName="inscricaoestadual" />
+    </changeSet>
+    <changeSet id="40246" author="Catabriga">
+        <dropTable tableName="partematerial" cascadeConstraints="true"></dropTable>
+        <dropTable tableName="ordemproducao" cascadeConstraints="true"></dropTable>
 
-	<changeSet id="w201409212348" author="Walber">
-		<addUniqueConstraint columnNames="nome,codigo,sigla"
-			tableName="pais" />
-	</changeSet>
+        <createTable tableName="volume">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="id_responsavel" type="int8"></column>
+            <column name="pagina_inicio" type="int4"></column>
+            <column name="pagina_fim" type="int4"></column>
+            <column name="status" type="varchar"></column>
+            <column name="id_solicitacao_item" type="int8">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="id_responsavelrevisao" type="int8"></column>
+            <column name="observacao" type="varchar"></column>
+            <column name="data_impressao" type="date"></column>
+            <column name="data_revisao" type="date"></column>
+            <column name="data_enviado" type="date"></column>
+        </createTable>
 
-	<changeSet author="catabriga" id="32465632">
-		<dropView viewName="viewacompanhamentosolicitacao"></dropView>
-		<createView viewName="viewacompanhamentosolicitacao"
-			replaceIfExists="true" schemaName="public">
+        <addForeignKeyConstraint baseTableName="volume"
+                                 baseColumnNames="id_responsavel" constraintName="fk_usuario_volumeresponsavel"
+                                 referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
+        <addForeignKeyConstraint baseTableName="volume"
+                                 baseColumnNames="id_responsavelrevisao" constraintName="usuario_volumeresprevisao"
+                                 referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
+        <addForeignKeyConstraint baseTableName="volume"
+                                 baseColumnNames="id_solicitacao_item" constraintName="solitem_volumesolitem"
+                                 referencedTableName="solicitacaoitem" referencedColumnNames="id"></addForeignKeyConstraint>
+
+
+    </changeSet>
+    <!-- <changeSet id="w201409181739" author="Walber"> <preConditions onFail="CONTINUE">
+        <sqlCheck expectedResult="t">select exists(select * from information_schema.tables
+        where table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions>
+        <dropTable tableName="viewAcompanhamentoSolicitacao" /> </changeSet> <changeSet
+        id="w201409181806" author="Walber"> <preConditions onFail="CONTINUE"> <sqlCheck
+        expectedResult="t">select exists(select * from information_schema.views b
+        where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions>
+        <dropView viewName="viewAcompanhamentoSolicitacao" /> </changeSet> -->
+    <changeSet author="martinho" id="mart201410100054">
+        <createView viewName="viewacompanhamentosolicitacao"
+                    replaceIfExists="true" schemaName="public">
+            SELECT T1.ID AS SOLICITACAOID,
+            T2.STATUS AS STATUS,
+            T1.DATACHEGADA,
+            T2.TRADUCAOMATERIAL,
+            T2.OUTRO AS OUTRATRADUCAO,
+            T4.NOME || ' ' || T3.SOBRENOME AS RESPONSAVEL,
+            T6.NOME AS REVISOR,
+            T7.NOME AS MATERIAL
+            FROM SOLICITACAO T1
+            JOIN SOLICITACAOITEM T2 ON T1.ID = T2.ID_SOLICITACAO
+            LEFT JOIN PESSOAFISICA T3 ON T1.ID_RESPONSAVEL = T3.ID
+            LEFT JOIN PESSOA T4 ON T3.ID = T4.ID
+            LEFT JOIN VOLUME T5 ON T2.ID = T5.ID_SOLICITACAO_ITEM
+            LEFT JOIN PESSOA T6 ON T5.ID_RESPONSAVELREVISAO = T6.ID
+            LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
+            ORDER BY T1.DATACHEGADA
+        </createView>
+    </changeSet>
+
+    <changeSet id="w201409212348" author="Walber">
+        <addUniqueConstraint columnNames="nome,codigo,sigla"
+                             tableName="pais" />
+    </changeSet>
+
+    <changeSet author="catabriga" id="32465632">
+        <dropView viewName="viewacompanhamentosolicitacao"></dropView>
+        <createView viewName="viewacompanhamentosolicitacao"
+                    replaceIfExists="true" schemaName="public">
             SELECT T1.ID AS SOLICITACAOID,
             T2.STATUS AS STATUS,
             T1.DATACHEGADA,
@@ -131,12 +131,12 @@
             LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
             ORDER BY T1.DATACHEGADA
         </createView>
-	</changeSet>
+    </changeSet>
 
-	<changeSet id="46516354631" author="catabriga">
-		<dropView viewName="viewacompanhamentosolicitacao"></dropView>
-		<createView viewName="viewacompanhamentosolicitacao"
-			replaceIfExists="true" schemaName="public">
+    <changeSet id="46516354631" author="catabriga">
+        <dropView viewName="viewacompanhamentosolicitacao"></dropView>
+        <createView viewName="viewacompanhamentosolicitacao"
+                    replaceIfExists="true" schemaName="public">
             SELECT T1.ID AS SOLICITACAOID,
             T2.ID,
             T2.STATUS AS STATUS,
@@ -152,162 +152,182 @@
             LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
             ORDER BY T1.DATACHEGADA
         </createView>
-	</changeSet>
+    </changeSet>
 
-	<changeSet id="10201410022131" author="Walber">
-		<createTable tableName="caracteristica">
-			<column name="id" type="INT8">
-				<constraints primaryKeyName="caracteristicaPkId"
-					primaryKey="true" />
-			</column>
-			<column name="descricao" type="VARCHAR(30)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-	</changeSet>
-	<changeSet id="201410152144" author="Walber">
-		<preConditions onFail="CONTINUE" onError="HALT">
-			<not>
-				<tableExists tableName="pessoacaracteristica" />
-			</not>
-		</preConditions>
-		<createTable tableName="pessoacaracteristica">
-			<column name="id" type="INT8" defaultValueSequenceNext="hibernate_sequence">
-				<constraints primaryKeyName="pessoaCaracteristicaPkId"
-					primaryKey="true" />
-			</column>
-			<column name="pessoaid" type="INT8">
-				<constraints foreignKeyName="pessoaCaracteristicaFkIdPessoa"
-					referencedTableName="pessoa" referencedColumnNames="id" nullable="false" />
-			</column>
-			<column name="caracteristicaid" type="INT8">
-				<constraints foreignKeyName="pessoaCaracteristicaFkIdCaracteristica"
-					referencedTableName="caracteristica" referencedColumnNames="id"
-					nullable="false" />
-			</column>
-		</createTable>
-	</changeSet>
+    <changeSet id="10201410022131" author="Walber">
+        <createTable tableName="caracteristica">
+            <column name="id" type="INT8">
+                <constraints primaryKeyName="caracteristicaPkId"
+                             primaryKey="true" />
+            </column>
+            <column name="descricao" type="VARCHAR(30)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="201411052028" author="Walber">
+        <preConditions onFail="CONTINUE" onError="HALT">
+            <not>
+                <tableExists tableName="pessoacaracteristica" />
+            </not>
+        </preConditions>
+        <createTable tableName="pessoacaracteristica">
+            <column name="id" type="INT8" defaultValueSequenceNext="hibernate_sequence">
+                <constraints primaryKeyName="pessoaCaracteristicaPkId"
+                             primaryKey="true" />
+            </column>
+            <column name="pessoa_id" type="INT8">
+                <constraints foreignKeyName="pessoaCaracteristicaFkIdPessoa"
+                             referencedTableName="pessoa" referencedColumnNames="id" nullable="false" />
+            </column>
+            <column name="caracteristicaid" type="INT8">
+                <constraints foreignKeyName="pessoaCaracteristicaFkIdCaracteristica"
+                             referencedTableName="caracteristica" referencedColumnNames="id"
+                             nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
 
-	<changeSet id="10201410022234" author="Walber">
-		<delete tableName="caracteristica"></delete>
-	</changeSet>
+    <changeSet id="10201410022234" author="Walber">
+        <delete tableName="caracteristica"></delete>
+    </changeSet>
 
-	<changeSet id="10201410022235" author="Walber">
-		<preConditions onFail="MARK_RAN">
-			<not>
-				<tableExists tableName="caracteristica" />
-			</not>
-		</preConditions>
-		<insert tableName="caracteristica">
-			<column name="id" type="INT8" value="1"></column>
-			<column name="descricao" type="VARCHAR(30)" value="ALUNO"></column>
-		</insert>
-		<insert tableName="caracteristica">
-			<column name="id" type="INT8" value="2"></column>
-			<column name="descricao" type="VARCHAR(30)" value="ASSOCIADO"></column>
-		</insert>
-		<insert tableName="caracteristica">
-			<column name="id" type="INT8" value="3"></column>
-			<column name="descricao" type="VARCHAR(30)" value="PROFESSOR"></column>
-		</insert>
-	</changeSet>
+    <changeSet author="Walber" id="201410302127">
+        <preConditions onError="MARK_RAN" onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="caracteristica" columnName="tipo"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="caracteristica">
+            <column name="tipo" type="CHAR">
+            </column>
+        </addColumn>
+    </changeSet>
 
-	<changeSet id="201410161950" author="Walber">
-		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
-			<columnExists tableName="pessoafisica" columnName="aluno" />
-		</preConditions>
-		<dropColumn tableName="pessoafisica" columnName="aluno" />
-	</changeSet>
+    <changeSet id="11201411031320" author="Walber">
+        <preConditions onFail="MARK_RAN">
 
-	<changeSet id="201410162225" author="Walber">
-		<createTable tableName="vigenciaassociado">
-			<column name="id" type="INT8">
-				<constraints primaryKey="true" primaryKeyName="vigenciaassociado_pkey" />
-			</column>
-			<column name="vigencia" type="date">
-				<constraints nullable="false" />
-			</column>
-			<column name="caracteristicapessoaid" type="INT8">
-				<constraints foreignKeyName="vigenciaassociado_fk1"
-					referencedTableName="pessoacaracteristica" referencedColumnNames="id" />
-			</column>
-		</createTable>
-	</changeSet>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM CARACTERISTICA</sqlCheck>
+        </preConditions>
+        <insert tableName="caracteristica">
+
+            <column name="id" type="INT8" value="1"/>
+            <column name="descricao" type="VARCHAR(30)" value="ALUNO"/>
+            <column name="tipo" type="CHAR" value="F"></column>
+        </insert>
+        <insert tableName="caracteristica">
+            <column name="id" type="INT8" value="2"></column>
+            <column name="descricao" type="VARCHAR(30)" value="ASSOCIADO"></column>
+            <column name="tipo" type="CHAR" value="A"></column>
+        </insert>
+        <insert tableName="caracteristica">
+            <column name="id" type="INT8" value="3"></column>
+            <column name="descricao" type="VARCHAR(30)" value="PROFESSOR"></column>
+            <column name="tipo" type="CHAR" value="F"></column>
+        </insert>
+        <insert tableName="caracteristica">
+            <column name="id" type="INT8" value="4"></column>
+            <column name="descricao" type="VARCHAR(30)" value="EMPRESA"></column>
+            <column name="tipo" type="CHAR" value="J"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="201410161950" author="Walber">
+        <preConditions onError="MARK_RAN" onFail="MARK_RAN">
+            <columnExists tableName="pessoafisica" columnName="aluno" />
+        </preConditions>
+        <dropColumn tableName="pessoafisica" columnName="aluno" />
+    </changeSet>
+
+    <changeSet id="201410162225" author="Walber">
+        <createTable tableName="vigenciaassociado">
+            <column name="id" type="INT8">
+                <constraints primaryKey="true" primaryKeyName="vigenciaassociado_pkey" />
+            </column>
+            <column name="vigencia" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="caracteristicapessoaid" type="INT8">
+                <constraints foreignKeyName="vigenciaassociado_fk1"
+                             referencedTableName="pessoacaracteristica" referencedColumnNames="id" />
+            </column>
+        </createTable>
+    </changeSet>
 
 
 
-	<changeSet id="1231234" author="catabriga">
-		<addColumn tableName="volume">
-			<column name="caminho_anexo" type="varchar(150)"></column>
-		</addColumn>
-	</changeSet>
+    <changeSet id="1231234" author="catabriga">
+        <addColumn tableName="volume">
+            <column name="caminho_anexo" type="varchar(150)"></column>
+        </addColumn>
+    </changeSet>
 
-	<changeSet author="martinho" id="mart0134droptable">
-		<preConditions onFail="MARK_RAN" onError="MARK_RAN">
-			<tableExists tableName="usuarioperfilacesso" />
-		</preConditions>
-		<dropTable cascadeConstraints="true" tableName="usuarioperfilacesso"></dropTable>
-	</changeSet>
-	<!-- <changeSet author="martinho" id="mart0135droptable"> <dropTable cascadeConstraints="true" 
-		tableName="perfilacessousuario"></dropTable> </changeSet> -->
-	<changeSet author="martinho" id="mart0135createtable">
-		<createTable tableName="perfilacessousuario">
-			<column name="id" type="INT8">
-				<constraints nullable="false" />
-			</column>
-			<column name="fimvigencia" type="date">
-				<constraints nullable="false" />
-			</column>
-			<column name="iniciovigencia" type="date">
-				<constraints nullable="false" />
-			</column>
-			<column name="id_perfilacesso" type="INT8" />
-			<column name="id_usuario" type="INT8" />
-		</createTable>
-	</changeSet>
+    <changeSet author="martinho" id="mart0134droptable">
+        <preConditions onFail="MARK_RAN" onError="MARK_RAN">
+            <tableExists tableName="usuarioperfilacesso" />
+        </preConditions>
+        <dropTable cascadeConstraints="true" tableName="usuarioperfilacesso"></dropTable>
+    </changeSet>
+    <!-- <changeSet author="martinho" id="mart0135droptable"> <dropTable cascadeConstraints="true"
+        tableName="perfilacessousuario"></dropTable> </changeSet> -->
+    <changeSet author="martinho" id="mart0135createtable">
+        <createTable tableName="perfilacessousuario">
+            <column name="id" type="INT8">
+                <constraints nullable="false" />
+            </column>
+            <column name="fimvigencia" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="iniciovigencia" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="id_perfilacesso" type="INT8" />
+            <column name="id_usuario" type="INT8" />
+        </createTable>
+    </changeSet>
 
-	<changeSet author="martinho" id="mart0136keytable">
-		<addPrimaryKey columnNames="id" constraintName="perfilacessousuario_pkey"
-			tableName="perfilacessousuario" />
-	</changeSet>
+    <changeSet author="martinho" id="mart0136keytable">
+        <addPrimaryKey columnNames="id" constraintName="perfilacessousuario_pkey"
+                       tableName="perfilacessousuario" />
+    </changeSet>
 
-	<changeSet author="martinho" id="mart0137fktable">
-		<addForeignKeyConstraint baseColumnNames="id_perfilacesso"
-			baseTableName="perfilacessousuario" constraintName="fk_femy7nyxqlij7xjdkr32mju5w"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilacesso" />
-	</changeSet>
+    <changeSet author="martinho" id="mart0137fktable">
+        <addForeignKeyConstraint baseColumnNames="id_perfilacesso"
+                                 baseTableName="perfilacessousuario" constraintName="fk_femy7nyxqlij7xjdkr32mju5w"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilacesso" />
+    </changeSet>
 
-	<changeSet author="martinho" id="mart0138fktable">
-		<addForeignKeyConstraint baseColumnNames="id_usuario"
-			baseTableName="perfilacessousuario" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m"
-			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
-	</changeSet>
+    <changeSet author="martinho" id="mart0138fktable">
+        <addForeignKeyConstraint baseColumnNames="id_usuario"
+                                 baseTableName="perfilacessousuario" constraintName="fk_qvqtp637m0wmyn4m6b52ax46m"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
+    </changeSet>
 
-	<!-- <changeSet author="martinho" id="mart0139droptable"> <dropTable cascadeConstraints="true" 
-		tableName="viewperfildeacessousuario"></dropTable> </changeSet> -->
-	<changeSet author="martinho" id="mart0140createview">
-		<createView viewName="viewperfildeacessousuario"
-			replaceIfExists="true" schemaName="public">
-            SELECT T1.ID, T1.ATIVO, T1.EMAIL, T1.LOGIN, T1.NOME, T2.ID AS PERFILDEACESSOUSUARIOID, 
+    <!-- <changeSet author="martinho" id="mart0139droptable"> <dropTable cascadeConstraints="true"
+        tableName="viewperfildeacessousuario"></dropTable> </changeSet> -->
+    <changeSet author="martinho" id="mart0140createview">
+        <createView viewName="viewperfildeacessousuario"
+                    replaceIfExists="true" schemaName="public">
+            SELECT T1.ID, T1.ATIVO, T1.EMAIL, T1.LOGIN, T1.NOME, T2.ID AS PERFILDEACESSOUSUARIOID,
             T2.FIMVIGENCIA, T2.INICIOVIGENCIA, T2.ID_PERFILACESSO AS PERFILACESSOID, T3.NOME AS PERFIL
-            FROM USUARIO T1 
+            FROM USUARIO T1
             LEFT JOIN PERFILACESSOUSUARIO T2 ON T1.ID = T2.ID_USUARIO
             LEFT JOIN PERFILACESSO T3 ON T3.ID = T2.ID_PERFILACESSO
-            ORDER BY T1.NOME 
+            ORDER BY T1.NOME
         </createView>
-	</changeSet>
+    </changeSet>
 
-	<changeSet author="martinho" id="mart0141createview">
-		<createView viewName="viewmaterialproduzido"
-			replaceIfExists="true" schemaName="public">
-            SELECT T2.ID, T1.NOME, T1.AUTOR, T1.EDITORA, T1.ANOEDICAO, T1.DISCIPLINA, 
+    <changeSet author="martinho" id="mart0141createview">
+        <createView viewName="viewmaterialproduzido"
+                    replaceIfExists="true" schemaName="public">
+            SELECT T2.ID, T1.NOME, T1.AUTOR, T1.EDITORA, T1.ANOEDICAO, T1.DISCIPLINA,
             T2.TRADUCAOMATERIAL AS TRANSCRICAO, T2.OUTRO AS OUTRATRANSCRICAO, T2.STATUS
             FROM LIVRO T1 JOIN SOLICITACAOITEM T2 ON T2.ID_MATERIAL = T1.ID
-            ORDER BY T1.NOME 
+            ORDER BY T1.NOME
         </createView>
-	</changeSet>
+    </changeSet>
 
 </databaseChangeLog>
 

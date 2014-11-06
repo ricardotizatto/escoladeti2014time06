@@ -4,7 +4,6 @@ function PessoaFactory($resource) {
     	save : {method : 'POST'},
 		
         update: {method: 'PUT'},
-        
 
         buscarPessoa: {
             method: 'GET',
@@ -13,9 +12,12 @@ function PessoaFactory($resource) {
             }
         },
         
-        listarTodas:{
+        listarTodasPessoaFisicas:{
             method: 'GET',
-            isArray: true
+            isArray: true,
+            params: {
+                acao: 'todasPessoasfisicas'
+            }
         },
         
         paginar : {

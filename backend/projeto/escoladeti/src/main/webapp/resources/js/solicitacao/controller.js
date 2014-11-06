@@ -167,27 +167,18 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		$scope.pagina = pagina;
 	});
 	
-    $log.debug('listar alunos');
-    Pessoa.listarTodasPessoas(function (alunos) {
-        $scope.alunos = alunos.map(function (aluno) {
+    $log.debug('listar pessoas');
+    Pessoa.listarTodasPessoaFisicas(function (pessoas) {
+        $scope.pessoasOriginal = pessoas;
+
+            $scope.pessoas = pessoas.map(function (pessoa) {
             return {
-                nome: aluno.nome + ' ' + aluno.sobrenome,
-                id: aluno.id
+                nome: pessoa.nome + ' ' + pessoa.sobrenome,
+                id: pessoa.id
             };
         });
     });
 
-
-    Pessoa.listarTodasPessoas(function (pessoas) {
-        $scope.pessoasOriginal = pessoas;
-
-        $scope.pessoas = pessoas.map(function (pessoa) {
-            return {
-                nome: pessoa.nome + ' ' + pessoa.sobrenome,
-                id: pessoa.id
-            }
-        });
-    });
 	
 	$http({
 		method: 'GET',
