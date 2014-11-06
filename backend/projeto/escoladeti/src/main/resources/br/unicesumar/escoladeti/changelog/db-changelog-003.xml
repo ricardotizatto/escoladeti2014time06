@@ -78,14 +78,17 @@
 
 
 	</changeSet>
-	<!-- <changeSet id="w201409181739" author="Walber"> <preConditions onFail="CONTINUE"> 
+        
+	<changeSet id="w201409181739" author="Walber"> <preConditions onFail="CONTINUE"> 
 		<sqlCheck expectedResult="t">select exists(select * from information_schema.tables 
 		where table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions> 
 		<dropTable tableName="viewAcompanhamentoSolicitacao" /> </changeSet> <changeSet 
 		id="w201409181806" author="Walber"> <preConditions onFail="CONTINUE"> <sqlCheck 
 		expectedResult="t">select exists(select * from information_schema.views b 
 		where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions> 
-		<dropView viewName="viewAcompanhamentoSolicitacao" /> </changeSet> -->
+		<dropView viewName="viewAcompanhamentoSolicitacao" /> 
+        </changeSet>
+        
 	<changeSet author="martinho" id="mart201410100054">
 		<createView viewName="viewacompanhamentosolicitacao"
 			replaceIfExists="true" schemaName="public">
@@ -153,7 +156,7 @@
             ORDER BY T1.DATACHEGADA
         </createView>
 	</changeSet>
-<!--
+
 	<changeSet id="10201410022131" author="Walber">
 		<createTable tableName="caracteristica">
 			<column name="id" type="INT8">
@@ -242,8 +245,6 @@
 			</column>
 		</createTable>
 	</changeSet>
--->
-
 
 	<changeSet id="1231234" author="catabriga">
 		<addColumn tableName="volume">
@@ -317,7 +318,7 @@
             ORDER BY T1.NOME 
         </createView>
 	</changeSet>
-        <!--
+        
         <changeSet author="Walber" id="201410302127">
           <preConditions onError="MARK_RAN" onFail="MARK_RAN">
             <not>
@@ -329,6 +330,6 @@
               </column>
            </addColumn>          
         </changeSet>
--->
+        
 </databaseChangeLog>
 
