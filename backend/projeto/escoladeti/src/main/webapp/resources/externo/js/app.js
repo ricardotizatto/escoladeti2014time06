@@ -164,10 +164,6 @@ appExterno.config(['$routeProvider',
                 templateUrl: './paginasexternas/sobre.html',
                 //controller: 'ExternoController'
             })
-            .when('/contato', {
-                templateUrl: './paginasexternas/contato.html',
-                //controller: 'ExternoController'
-            })
             .when('/localizacao', {
                 templateUrl: './paginasexternas/localizacao.html',
                 //controller: 'ExternoController'

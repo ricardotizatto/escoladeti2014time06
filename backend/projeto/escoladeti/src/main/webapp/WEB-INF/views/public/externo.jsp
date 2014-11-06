@@ -50,12 +50,9 @@
                                     </li>
                                     <li class="{{ ctrl.ativa == 'sobre' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('sobre')" >
                                         <a href="#/sobre"><i class="icon-group"></i><br />Sobre</a>
-                                    </li>
-                                    <li class="{{ ctrl.ativa == 'contato' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('contato')" >
-                                        <a href="#/contato"><i class="icon-envelope-alt"></i><br />Contato</a>
-                                    </li>
+                                    </li>                                    
                                     <li class="{{ ctrl.ativa == 'localizacao' ? 'current-page' : '' }}" ng-click="ctrl.ativaBotao('localizacao')" >
-                                        <a href="#/localizacao"><i class="icon-map-marker"></i><br />Localização</a>
+                                        <a href="#/localizacao"><i class="icon-envelope-alt"></i><br />Localização</a>
                                     </li>
                                 </ul>
                             </div>
