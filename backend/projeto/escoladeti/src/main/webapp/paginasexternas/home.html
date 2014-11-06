@@ -12,7 +12,7 @@
         <h3>Próximos Eventos</h3>
     </div>
     <div class="row">
-       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" style="overflow: auto; width: 300px; height: 200px; background-color:#ededed; border: 1px solid #9d426b;">
+       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" style="overflow: auto; width: 265px; height: 200px; background-color:#ededed; border: 1px solid #9d426b;">
             <h4>{{proximoEvento.titulo}}</h4>
             <p>{{proximoEvento.descricao}}</p>
             <p>
@@ -59,12 +59,12 @@
 </div>
 
 <!-- Services -->
-<div ng-show="ultimosEventos.list" class="what-we-do container">
+<div ng-show="ultimosEventos.list" class="what-we-do container" >
     <div class="portfolio-title">
         <h3>Eventos Realizados</h3>
     </div>
     <div class="row">
-        <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
+        <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" style="overflow: auto; width: 265px; height: 200px; background-color:#ededed; border: 1px solid #9d426b;" >
             <img src="./resources/externo/assets/img/portfolio/work1.jpg" alt="">
             <h4>{{ultimoEvento.titulo}}</h4>
             <p>{{ultimoEvento.descricao}}</p>
