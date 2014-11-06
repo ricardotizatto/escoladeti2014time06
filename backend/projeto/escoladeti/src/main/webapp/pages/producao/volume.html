@@ -6,7 +6,7 @@
         <div class="row" data-ng-show="ctrl.volume.status == 'REVISADO'">
             <div class="col-xs-12">
                 <div class="alert alert-success">
-                    Este volume está concluido
+                    Este volume está FINALIZADO
                 </div>
             </div>
         </div>
@@ -105,18 +105,25 @@
             <div class="col-lg-2 form-group">
                 <div class="row">
                     <div class="col-md-12"><label>&nbsp;</label></div>
+
                     <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'ANDAMENTO' && ctrl.volume.id">
+                        <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.concluirVolume()">
+                            <span class="fa fa-print" ></span> &nbsp; Concluir
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'CONCLUIDO' && ctrl.volume.id">
                         <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.marcarComoImpresso()"
                                 data-target="#modalImpressao" data-toggle="modal">
                             <span class="fa fa-print" ></span> &nbsp; Impresso
                         </button>
                     </div>
-                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'IMPRESSO'">
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'IMPRESSO' || ctrl.volume.status == 'CONCLUIDO'">
                         <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.marcarComoRevisado()" >
                             <span class="fa fa-thumbs-o-up" ></span> &nbsp;Revisado
                         </button>
                     </div>
-                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'IMPRESSO'">
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'IMPRESSO' || ctrl.volume.status == 'CONCLUIDO'">
                         <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.rejeitar()" >
                             <span class="fa fa-thumbs-o-down" ></span> &nbsp;Rejeitado
                         </button>
@@ -160,7 +167,7 @@
                             <h4>Alterar</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="row" data-ng-show="ctrl.volume.status == 'IMPRESSO'">
+                            <div class="row" data-ng-show="ctrl.aoAlterarStatus.revisar">
                                 <div class="col-md-12 control-label">
                                     <label class="control-label">Revisor</label>
                                     <select data-ui-select2="" data-ng-model="ctrl.volume.revisor" class="input-default">

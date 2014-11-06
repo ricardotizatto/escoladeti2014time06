@@ -76,5 +76,12 @@ public class VolumeController {
         return volumeService.reativar(idVolume);
     }
 
+    @RequestMapping(value = "/{id}/conclusao", method = RequestMethod.PUT)
+    public @ResponseBody Volume concluir(
+            @PathVariable("id") Long idVolume,
+            @RequestBody ComandoSalvarVolume comando) {
+        return volumeService.concluir(idVolume, comando);
+    }
+
 }
 
