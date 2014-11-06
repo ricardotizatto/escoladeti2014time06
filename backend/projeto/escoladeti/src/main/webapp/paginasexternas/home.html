@@ -12,19 +12,16 @@
         <h3>Próximos Eventos</h3>
     </div>
     <div class="row">
-       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" style="overflow: auto; width: 300px; height: 200px; background-color:#ededed; border: 1px solid #9d426b;">
-            <h4>{{proximoEvento.titulo | limitTo:tituloLimit }}</h4>
-            <p>{{proximoEvento.descricao | limitTo:descricaoLimit }}</p>
-            <p>
-                <b>Início: </b> {{proximoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
-                <b>Local: </b> {{proximoEvento.local | limitTo:localLimit}}
-            </p>
-<!--            <p><b>Data:</b>
-                <span ng-repeat="periodo in proximoEvento.periodos | orderBy:'data'">
-                    {{periodo.data | date: 'dd-MM-yyyy'}} <br>
-                </span>
-            </p>-->
-            <a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a>
+       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
+           <div class="bloco-evento">
+                <h4>{{proximoEvento.titulo | limitTo:tituloLimit }}{{ proximoEvento.titulo.length > 50 ? '...' : '' }}</h4>
+                <p>{{proximoEvento.descricao | limitTo:descricaoLimit }}{{ proximoEvento.descricao.length > 90 ? '...' : '' }}</p>
+                <p>
+                    <b>Início: </b> {{proximoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
+                    <b>Local: </b> {{proximoEvento.local | limitTo:localLimit}}{{ proximoEvento.local.length > 40 ? '...' : '' }}
+                </p>
+            </div>
+           <div><a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a></div>
         </div>       
     </div>
     <div class="row" ng-show="proximosEventos.pagesAround.length > 1" > 
@@ -64,16 +61,17 @@
         <h3>Eventos Realizados</h3>
     </div>
     <div class="row">
-        <div class="service span3 bloco-evento" ng-repeat="ultimoEvento in ultimosEventos.list" >
-            <img src="./resources/externo/assets/img/portfolio/work1.jpg" alt="">
-            <h4>{{ultimoEvento.titulo}}</h4>
-            <p>{{ultimoEvento.descricao}}</p>
-            <p><b>Data:</b> <br>
-                <span ng-repeat="periodo in ultimoEvento.periodos | orderBy:'data'">
-                    {{periodo.data | date: 'dd-MM-yyyy'}} <br>
-                </span>
-            </p>
-            <a href="#/evento-realizado" >Detalhes</a>
+        <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
+            <div><img src="./resources/externo/assets/img/amacapimagenotfound.png" alt=""></div>
+            <div class="bloco-evento">
+                <h4>{{ultimoEvento.titulo | limitTo:tituloLimit }}{{ ultimoEvento.titulo.length > 50 ? '...' : '' }}</h4>
+                <p>{{ultimoEvento.descricao | limitTo:descricaoLimit }}{{ ultimoEvento.descricao.length > 90 ? '...' : '' }}</p>
+                <p>
+                    <b>Início: </b> {{ultimoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
+                    <b>Local: </b> {{ultimoEvento.local | limitTo:localLimit}}{{ ultimoEvento.local.length > 40 ? '...' : '' }}
+                </p>
+            </div>
+            <div><a href="#/evento-realizado" >Detalhes</a></div>
         </div>
     </div>
     <div class="row" ng-show="ultimosEventos.pagesAround.length > 1" > 

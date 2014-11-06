@@ -80,8 +80,8 @@ public class ExternoController implements Serializable{
     
     @RequestMapping(value = "public/rest/ultimoseventos/{pagina}", method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Evento> getUltimosEventos(@PathVariable Integer pagina) {
-        return eventoService.getUltimosEventos(pagina);
+    public DataPage<ViewPeriodoEvento> getUltimosEventos(@PathVariable Integer pagina) {
+        return periodoeventoService.getUltimosEventos(pagina);
     }
     
     @RequestMapping(value = "public/rest/ultimosperiodos", method = RequestMethod.GET)
