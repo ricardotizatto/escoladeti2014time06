@@ -6,6 +6,8 @@ import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.repository.PeriodoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import static org.springframework.data.domain.Sort.Direction.ASC;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,4 +34,5 @@ public class PeriodoService {
     public DataPage<Periodo> listarUltimosPeriodos() {
         return new DataPage<>(periodoRepository.findAll(pageRequestForAsc(1, "data")));
     }
+    
 }

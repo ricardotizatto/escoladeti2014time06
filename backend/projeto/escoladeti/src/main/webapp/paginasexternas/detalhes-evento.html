@@ -14,21 +14,32 @@
 <div class="contact-us container">
     <div class="row">
         <div class="span6">
-            <h4>{{evento.titulo}}</h4>
+            <div class="titulo-evento">
+                <h3>{{evento.titulo}}</h3>
+            </div>
             <p>{{evento.descricao}} </p>
             <p>
                 <b>Ministrante: </b> {{evento.ministrante}} <br>
                 <b>Organização: </b> {{evento.organizacao}} <br>
                 <b>Local do evento: </b> {{evento.local}} <br>
-                <b>Datas:</b> <br>
-                <span ng-repeat="periodo in evento.periodos | orderBy:'data'">
-                    <b>Dia: </b>{{periodo.data | date: 'dd-MM-yyyy'}} - <b>Horário: </b> {{periodo.inicio}} as {{periodo.fim}} <br>
-                </span>
-                <br>
-                <b>Valor: </b> {{evento.valor === 0 ? 'Entrada Livre' : 'R$ ' + evento.valor}} 
+                <b>Valor: </b> {{evento.valor === 0 ? 'Entrada Livre' : 'R$ ' + evento.valor}}  
+            </p>
+            <p>
+                <div ng-repeat="periodo in evento.periodos | orderBy:'data'">
+                    <div class="col-periodo">
+                        <div class="evento-data" >
+                            <h2>{{periodo.data | date: 'dd'}}</h2>
+                            {{periodo.data | date: 'MMMM-yyyy'}}
+                        </div>
+                        <div class="evento-desc-periodo">
+                            <b> {{periodo.tituloperiodo}} </b><br>
+                            <b>Horário: </b> {{periodo.inicio}} as {{periodo.fim}}
+                        </div>
+                    </div> 
+                </div>    
             </p>     
         </div>
-        <div class="span6">
+        <div class="span5">
             <div class="contact-form">
                 <h4>Inscrição</h4>
                 <form action="" name="form" >

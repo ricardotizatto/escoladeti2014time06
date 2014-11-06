@@ -102,6 +102,7 @@
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script> 
         <script src="./resources/externo/assets/js/jquery-1.8.2.min.js"></script>
         <script src="./resources/externo/assets/bootstrap/js/bootstrap.min.js"></script>
