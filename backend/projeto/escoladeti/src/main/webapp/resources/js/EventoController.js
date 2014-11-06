@@ -234,20 +234,18 @@ function eventoController($scope, $http, $routeParams) {
         
         if($scope.periodo.inicio >= $scope.periodo.fim){
             toastr.warning("Horário inválido");
-        }else{
+        }else if($scope.periodo.data < dataAtual){
+            console.log("data sis: " + $scope.periodo.data + "data atual " + dataAtual );
+            toastr.warning("Data inválida!");
+        }
+        else{
             var periodo = removeFusoHorarioData($scope.periodo.data);
             $scope.periodo.data = periodo;
             $scope.evento.periodos.push($scope.periodo);
             console.log($scope.evento.periodos);
             toastr.success("Periodo adicionado com sucesso.");
             $scope.indicePeriodo = {};   
-        }
-//        valida se a data e menor que a data atual mas a funcao atual tras 2014-11-3
-//        else if($scope.periodo.data < dataAtual){
-//            console.log("data sis: " + $scope.periodo.data + "data atual " + dataAtual );
-//            toastr.warning("Data inválida" + $scope.periodo.data);
-//        }
-        
+        } 
     };
 
     $scope.editarPeriodo = function (indice) {
@@ -257,7 +255,7 @@ function eventoController($scope, $http, $routeParams) {
 
     $scope.delPeriodo = function (index) {
 
-        toastr.warning("Periodo removido  " + $scope.evento.periodos[index].data + "!");
+        toastr.warning("Periodo removido!");
         $scope.evento.periodos.splice(index, 1);
         if ($scope.evento.periodos.length === 0) {
             $scope.periodo = {};
@@ -270,6 +268,13 @@ function eventoController($scope, $http, $routeParams) {
         var dia = data.getDate();
         var mes = data.getMonth() + 1;
         var ano = data.getFullYear();
+        if (dia < 10){
+            dia = '0'+dia;
+        }
+        if(mes < 10){
+            mes = '0'+mes;
+        }
+        
         return [ano, mes, dia].join('-');
     }
 

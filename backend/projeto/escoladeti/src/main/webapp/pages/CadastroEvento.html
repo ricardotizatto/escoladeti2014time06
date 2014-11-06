@@ -152,6 +152,7 @@
             <div class="row">
                 <div class="col-sm-12"><hr></div>
             </div>
+        </form>
             <!-- Modal data/periodo-->
                 <div class="row">
                     <div class="col-sm-12">
@@ -168,36 +169,36 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <div class="form-group {{formEvento.tituloperiodo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                    <div class="form-group {{formData.tituloperiodo.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                         <label class="control-label"><strong>Titulo *</strong></label>
                                                         <input type="text" name="tituloperiodo" title="Titulo do Periodo deve ser maisculo" class="form-control"
                                                                ng-model="periodo.tituloperiodo" required placeholder="Titulo"/>
-                                                        <!--<span class="help-block" ng-show="formEvento.tituloperiodo.$error.pattern">Apenas letras e no mínimo 3.</span>-->
+                                                        <!--<span class="help-block" ng-show="formData.tituloperiodo.$error.pattern">Apenas letras e no mínimo 3.</span>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <div class="form-group {{formEvento.data.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                        <div class="form-group {{formData.data.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                             <label class="control-label"><strong>Data *</strong></label>
                                                             <input name="data" type="date" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.data" required placeholder="dd/mm/aaaa"/>
-                                                            <span class="help-block" ng-show="formEvento.data.$error.pattern">Apenas números.</span>
+                                                            <span class="help-block" ng-show="formData.data.$error.pattern">Apenas números.</span>
                                                         </div>
                                                     </div>  
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                   <div class="form-group {{formEvento.inicio.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                   <div class="form-group {{formData.inicio.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                        <label class="control-label"><strong>Início *</strong></label>
                                                        <input name="inicio" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.inicio" required="" placeholder="00:00" />
-                                                       <span class="help-block" ng-show="formEvento.inicio.$error.pattern">Apenas números.</span>
+                                                       <span class="help-block" ng-show="formData.inicio.$error.pattern">Apenas números.</span>
                                                    </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <div class="form-group {{formEvento.termino.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                                    <div class="form-group {{formData.termino.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                                                         <label class="control-label"><strong>Término *</strong></label>
                                                         <input name="termino" type="time" class="form-control" ng-pattern="/[0-9]/" ng-model="periodo.fim" required="" placeholder="00:00" />
-                                                        <span class="help-block" ng-show="formEvento.termino.$error.pattern">Apenas números.</span>
+                                                        <span class="help-block" ng-show="formData.termino.$error.pattern">Apenas números.</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -218,6 +219,5 @@
                         </form>
                     </div>    
                 </div><!--//modal data/periodo -->			
-        </form>
     </fieldset>
 </div>
