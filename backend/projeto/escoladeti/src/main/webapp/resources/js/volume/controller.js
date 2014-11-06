@@ -144,9 +144,11 @@ VolumeController.prototype = {
                 self.ajustarVolume();
                 $('#modalImpressao').modal('hide');
                 toastr.success('Volume rejeitado');
+                delete self.aoAlterarStatus;
             });
-
         };
+
+        this.aoAlterarStatus.revisar = true;
     },
 
     marcarComoImpresso: function () {
@@ -164,6 +166,15 @@ VolumeController.prototype = {
 
     },
 
+    concluirVolume: function () {
+        var self = this;
+
+        this.volume.$concluir(function () {
+            self.ajustarVolume();
+            toastr.success("Volume concluído com sucesso");
+        });
+    },
+
     marcarComoRevisado: function () {
         var self = this;
         $('#modalImpressao').modal('show');
@@ -174,8 +185,11 @@ VolumeController.prototype = {
                 $('#modalImpressao').modal('hide');
 
                 toastr.success('Volume marcado como impresso');
+                delete self.aoAlterarStatus;
             });
         }
+
+        this.aoAlterarStatus.revisar = true;
 
     },
 
