@@ -12,12 +12,12 @@
         <h3>Próximos Eventos</h3>
     </div>
     <div class="row">
-       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
-            <h4>{{proximoEvento.titulo}}</h4>
-            <p>{{proximoEvento.descricao}}</p>
+       <div class="service span3 bloco-evento" ng-repeat="proximoEvento in proximosEventos.list" >
+            <h4>{{proximoEvento.titulo | limitTo:tituloLimit }}</h4>
+            <p>{{proximoEvento.descricao | limitTo:descricaoLimit }}</p>
             <p>
                 <b>Início: </b> {{proximoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
-                <b>Local: </b> {{proximoEvento.local}}
+                <b>Local: </b> {{proximoEvento.local | limitTo:localLimit}}
             </p>
 <!--            <p><b>Data:</b>
                 <span ng-repeat="periodo in proximoEvento.periodos | orderBy:'data'">
@@ -64,7 +64,7 @@
         <h3>Eventos Realizados</h3>
     </div>
     <div class="row">
-        <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
+        <div class="service span3 bloco-evento" ng-repeat="ultimoEvento in ultimosEventos.list" >
             <img src="./resources/externo/assets/img/portfolio/work1.jpg" alt="">
             <h4>{{ultimoEvento.titulo}}</h4>
             <p>{{ultimoEvento.descricao}}</p>
