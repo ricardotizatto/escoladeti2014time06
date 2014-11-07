@@ -4,12 +4,14 @@ import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.util.string.StringUtils;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Volume  {
 
     @Id

@@ -48,6 +48,33 @@
                 </span>		
             </div>
         </div>
+        <br>
+        <div class="row">
+		<div class="col-sm-12 table-responsive">
+			<table class="table table-striped table-hover">
+				<tr>
+					<th class="col-md-1">Volume</th>
+					<th class="col-md-3">Responsável</th>
+					<th class="col-md-3">Paginas</th>
+					<th class="col-md-3">Status</th>
+					<th class="col-md-2">Enviado</th>
+                                        <th class="col-md-2">Transcrição</th>
+				</tr>
+
+				<tr ng-repeat="volume in livro.volumes | orderBy: ['+transcricao','+paginaInicio']">
+					<td>{{volume.id}}</td>
+					<td>{{volume.responsavel.nome}}</td>
+					<td>{{volume.paginaInicio}} / {{volume.paginaFim}}</td>
+                                        <td>{{volume.status}}</td>
+					<td>{{volume.dataEnviado | date:'dd/MM/yyyy'}}</td>
+					<td>{{volume.transcricao}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+        
         <div class="row"><div class="col-sm-12"><hr></div></div>			
     </form>
+    
+    
 </div>
