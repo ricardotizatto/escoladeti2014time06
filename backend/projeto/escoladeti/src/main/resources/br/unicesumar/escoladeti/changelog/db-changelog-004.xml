@@ -114,6 +114,22 @@
         </createView>
     </changeSet>
     -->
+    <changeSet id="201411062241" author="Walber">
+    	<createView viewName="viewpessoaassociado" replaceIfExists="true" schemaName="public">
+    		SELECT DISTINCT T1.* ,
+					T3.DESCRICAO,
+					CASE 
+	  				WHEN T4.VIGENCIA &lt; NOW() 
+	  				THEN 'PENDENTE'
+	  				ELSE 'PAGO'
+					END AS PAGO,
+					T4.VIGENCIA
+  			FROM VIEWPESSOA T1 JOIN PESSOACARACTERISTICA T2 ON T1.ID = T2.PESSOA_ID
+  			JOIN CARACTERISTICA T3 ON T2.CARACTERISTICA_ID = T3.ID
+  			JOIN VIGENCIAASSOCIADO T4 ON T2.ID = T4.PESSOACARACTERISTICA_ID
+				ORDER BY T1.NOME ASC
+    	</createView>
+    </changeSet>
     
 </databaseChangeLog>
 
