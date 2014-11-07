@@ -16,9 +16,9 @@ public class LivroService {
     private LivroRepository livroRepository;
 
     public Livro salvar(Livro livro) throws Exception {
-
+        Long id = livro.getId() == null ? -1 : livro.getId();
         if (NumberUtils.isYearValid(livro.getAnoEdicao())) {
-            if (!livro.equals(buscarLivroPorNomeAutorEditoraAnoEdicao(livro))) {
+            if (!livro.equals(buscarLivroPorNomeAutorEditoraAnoEdicao(livro, id))) {
                 return this.livroRepository.save(livro);
             }
             throw new Exception("O Livro " + livro.getNome() + " já está cadastrado!");
@@ -48,8 +48,8 @@ public DataPage<Livro> getTodos(Integer pagina){
     }
     
 
-    public Livro buscarLivroPorNomeAutorEditoraAnoEdicao(Livro livro) {
-        return this.livroRepository.findByNomeAndAutorAndEditoraAndAnoEdicao(
-                livro.getNome(), livro.getAutor(), livro.getEditora(), livro.getAnoEdicao());
+    public Livro buscarLivroPorNomeAutorEditoraAnoEdicao(Livro livro, Long id) {
+        return this.livroRepository.findByNomeAndAutorAndEditoraAndAnoEdicaoAndIdNot(
+                livro.getNome(), livro.getAutor(), livro.getEditora(), livro.getAnoEdicao(), id);
     }
 }
