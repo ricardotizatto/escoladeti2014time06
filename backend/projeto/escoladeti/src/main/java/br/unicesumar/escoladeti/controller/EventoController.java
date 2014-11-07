@@ -40,6 +40,18 @@ public class EventoController implements Serializable {
     public DataPage<Evento> getTodos() {
         return eventoService.getTodos(1);
     }
+    
+    @RequestMapping(value = "/listartodosabertos/pag/{pagina}", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Evento> getTodosAbertos(@PathVariable Integer pagina) {
+        return eventoService.getTodosAbertos(pagina);
+    }
+    
+    @RequestMapping(value = "/listartodosfechados/pag/{pagina}", method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Evento> getTodosFechados(@PathVariable Integer pagina) {
+        return eventoService.getTodosFechados(pagina);
+    }
 
     @RequestMapping(value = {"/listar/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody

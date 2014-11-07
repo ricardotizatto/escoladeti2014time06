@@ -11,9 +11,12 @@ function eventoController($scope, $http, $routeParams) {
     $scope.organizacao;
     $scope.tipoEvento;
     $scope.valor;
-    $scope.selected;
+//    $scope.selected;
     $scope.indicePeriodo = {};
-
+    $scope.inicializar = function(){
+        $scope.getTodosAbertos(1);
+        $scope.status = 'aberto';
+    };
     $scope.editar = function (evento) {
         console.log(evento);
         window.location = '#/cadastroevento/' + evento.id;
@@ -141,9 +144,7 @@ function eventoController($scope, $http, $routeParams) {
     };
 
     $scope.getTodos = function (numeroPagina) {
-
-        $scope.selected = !$scope.selected;
-
+        //$scope.selected = false;
         $http.get("./rest/eventoSource/listar/pag/" + numeroPagina)
                 .success(function (listaEventos, status) {
                     $scope.eventos = listaEventos;
@@ -152,7 +153,30 @@ function eventoController($scope, $http, $routeParams) {
                     console.log('erro ao buscar eventos' + data);
                 });
     };
-
+    
+    $scope.getTodosAbertos = function (numeroPagina) {
+        console.log("listando todos eventos abertos");
+        $http.get("./rest/eventoSource/listartodosabertos/pag/" + numeroPagina)
+                .success(function (listaEventos, status) {
+                    $scope.eventos = listaEventos;
+            console.log($scope.eventos.list);
+                })
+                .error(function (data, status) {
+                    console.log('erro ao buscar eventos' + data);
+                });
+    };
+    $scope.getTodosFechados = function (numeroPagina) {
+        console.log("listando todos eventos fechados");
+        $http.get("./rest/eventoSource/listartodosfechados/pag/" + numeroPagina)
+                .success(function (listaEventos, status) {
+                    $scope.eventos = listaEventos;
+            console.log($scope.eventos.list);
+                })
+                .error(function (data, status) {
+                    console.log('erro ao buscar eventos' + data);
+                });
+    };
+    
     $scope.carregarEvento = function () {
         if (!$routeParams.eventoId) {
             $scope.evento = {};
@@ -191,13 +215,13 @@ function eventoController($scope, $http, $routeParams) {
         window.location = '#/listaevento';
     };
 
-    $scope.mensageEventoListado = function () {
-        if ($scope.selected) {
-            return 'Abertos';
-        } else {
-            return 'Finalizados';
-        }
-    };
+//    $scope.mensageEventoListado = function () {
+//        if ($scope.selected) {
+//            return 'Abertos';
+//        } else {
+//            return 'Finalizados';
+//        }
+//    };
 
     $scope.getTipoEvento = function (tipo) {
         switch (tipo) {

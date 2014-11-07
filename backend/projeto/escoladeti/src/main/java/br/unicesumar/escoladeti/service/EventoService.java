@@ -48,6 +48,14 @@ public class EventoService {
     public DataPage<Evento> getTodos(Integer pagina) {
         return new DataPage<>(eventoRepository.findAll(pageRequestForAsc(pagina, "titulo")));
     }
+    
+    public DataPage<Evento> getTodosAbertos(Integer pagina) {
+        return new DataPage<>(eventoRepository.findByStatuseventoTrue(pageRequestForAsc(pagina, "titulo")));
+    }
+    
+     public DataPage<Evento> getTodosFechados(Integer pagina) {
+        return new DataPage<>(eventoRepository.findByStatuseventoFalse(pageRequestForAsc(pagina, "titulo")));
+    }
 
     public DataPage<Evento> getByName(String titulo) {
         return new DataPage<Evento>(eventoRepository.findByTituloContainingOrderByTituloAsc(titulo, pageRequestForAsc(1, "titulo")));
