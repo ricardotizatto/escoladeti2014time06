@@ -51,8 +51,8 @@
                                     <li class="{{ ativa == 'sobre' ? 'current-page' : '' }}" ng-click="ativaBotao('sobre')" >
                                         <a href="#/sobre"><i class="icon-group"></i><br />Sobre</a>
                                     </li>
-                                    <li class="{{ ativa == 'localizacao' ? 'current-page' : '' }}" ng-click="ativaBotao('localizacao')" >
-                                        <a href="#/localizacao"><i class="icon-map-marker"></i><br />Localização</a>
+                                    <li class="{{ ativa == 'contato' ? 'current-page' : '' }}" ng-click="ativaBotao('contato')" >
+                                        <a href="#/contato"><i class="icon-envelope-alt"></i><br />Contato</a>
                                     </li>
                                 </ul>
                             </div>
@@ -102,6 +102,7 @@
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-route.min.js"></script>
         <script type="text/javascript" src="./resources/libs/angular-resource.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/angular-locale_pt-br.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script> 
         <script src="./resources/externo/assets/js/jquery-1.8.2.min.js"></script>
         <script src="./resources/externo/assets/bootstrap/js/bootstrap.min.js"></script>

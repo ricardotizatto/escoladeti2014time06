@@ -17,10 +17,10 @@ body {
     font-size: 16px;
 }
 
-.violet { color: #fd694c; }
+.violet { color: #9d426b; }
 
 a {
-    color: #fd694c;
+    color: #9d426b;
     text-decoration: none;
     -o-transition: all .3s;
     -moz-transition: all .3s;
@@ -78,12 +78,12 @@ strong { font-weight: bold; }
 
 .header ul.nav li.current-page a {
     padding-top: 25px;
-    border-top: 5px solid #fd694c;
+    border-top: 5px solid #9d426b;
     background: #f8f8f8;
 }
 
 .header ul.nav li a:hover {
-    background: #fd694c;
+    background: #9d426b;
     color: #fff;
 }
 
@@ -173,7 +173,7 @@ strong { font-weight: bold; }
 .what-we-do .service {
     padding-bottom: 23px;
     background: #f8f8f8;
-    border-bottom: 2px solid #fd694c;
+    border-bottom: 2px solid #9d426b;
 }
 
 .what-we-do .service:hover {
@@ -210,7 +210,7 @@ strong { font-weight: bold; }
 
 .what-we-do .service a {
     padding: 5px 22px;
-    background: #fd694c;
+    background: #9d426b;
     color: #fff;
     font-style: italic;
     text-decoration: none;
@@ -268,7 +268,7 @@ strong { font-weight: bold; }
     margin-top: 40px;
     padding-bottom: 20px;
     background: #f8f8f8;
-    border-bottom: 2px solid #fd694c;
+    border-bottom: 2px solid #9d426b;
 }
 
 .portfolio .work:hover img {
@@ -299,7 +299,7 @@ strong { font-weight: bold; }
 .portfolio .work .icon-awesome a {
     display: inline-block;
     padding: 5px 9px;
-    background: #fd694c; 
+    background: #9d426b; 
     color: #fff;
     -moz-border-radius: 19px;
     -webkit-border-radius: 19px;
@@ -409,7 +409,7 @@ strong { font-weight: bold; }
 }
 
 .testimonial-list .nav-tabs li a:hover { border: 0; background: #ddd; }
-.testimonial-list .nav-tabs li.active a { background: #fd694c; }
+.testimonial-list .nav-tabs li.active a { background: #9d426b; }
 
 
 /* ----- Footer ----- */
@@ -631,7 +631,7 @@ footer .social a:hover { background-position: left top; }
     margin-top: 40px;
     padding-bottom: 20px;
     background: #f8f8f8;
-    border-bottom: 2px solid #fd694c;
+    border-bottom: 2px solid #9d426b;
 }
 
 .team-text:hover img {
@@ -763,7 +763,7 @@ button:hover{ opacity: 0.7; }
     width: 120px;
     height: 30px;
     margin-top: 15px;
-    background: #fd694c;
+    background: #9d426b;
     border: 0;
     font-family: Arial, sans-serif, Helvetica;
     font-size: 15px;
@@ -915,7 +915,7 @@ button:hover{ opacity: 0.7; }
 
 .call-to-action-text .ca-button a {
     padding: 5px 22px;
-    background: #fd694c;
+    background: #9d426b;
     color: #fff;
     text-decoration: none;
     -moz-box-shadow:
@@ -976,9 +976,9 @@ ul.portfolio-img li {
 }
 
 .filter-portfolio a { color: #5d5d5d; text-decoration: none; }
-.filter-portfolio a:hover { color: #fd694c; text-decoration: none; }
+.filter-portfolio a:hover { color: #9d426b; text-decoration: none; }
 
-.filter-portfolio a#active-imgs { color: #fd694c; }
+.filter-portfolio a#active-imgs { color: #9d426b; }
 .filter-portfolio a#active-imgs:hover { color: #5d5d5d; }
 
 
@@ -1161,13 +1161,19 @@ ul.portfolio-img li {
     float: left;
 }
 .desc-transcricao{
-    color: #fd694c;
+    color: #9d426b;
 }
 
 .link-credito{ font-size: 12px; color: #888; }
-.link-credito:hover{ color: #fd694c; }
+.link-credito:hover{ color: #9d426b; }
 
 .help-input{ font-size: 10px; font-style: italic; }
 .btn-invalido{ opacity: 0.2; }
 .btn-invalido:hover{ opacity: 0.2; }
 .alert-feedback{ margin-right: 40px; }
+.col-periodo{ float: left; }
+.titulo-evento{ color: #9d426b; padding: 10px; }
+.evento-desc-periodo{ float: left; padding: 30px 0px;}
+.evento-data{ float: left; width: 130px; height: 95px; background-color: #9d426b; color: #fff; text-align: center; padding: 8px 0px; margin-top: 5px; }
+.bloco-evento{ min-height: 300px; padding: 5px; }
+.bloco-evento a{ /* margin-bottom: 34px; */ }

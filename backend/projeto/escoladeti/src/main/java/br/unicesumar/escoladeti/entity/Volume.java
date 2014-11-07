@@ -4,12 +4,14 @@ import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.util.string.StringUtils;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Volume  {
 
     @Id
@@ -178,7 +180,7 @@ public class Volume  {
             throw  new RuntimeException("Revisor deve ser informado.");
         }
 
-        if (data.before(this.dataImpressao)) {
+        if (this.dataImpressao != null && data.before(this.dataImpressao)) {
             throw  new RuntimeException("Data de rejeição deve ser maior ou igual a data de impressão.");
         }
 
@@ -186,8 +188,8 @@ public class Volume  {
             throw  new RuntimeException("Data da rejeição deve ser menor ou igual a hoje.");
         }
 
-        if (!this.getStatus().equals(VolumeStatus.IMPRESSO)) {
-            throw new RuntimeException("Sómente volume impresso pode ser marcado como rejeitado.");
+        if (!this.getStatus().equals(VolumeStatus.CONCLUIDO) && !this.getStatus().equals(VolumeStatus.IMPRESSO)) {
+            throw new RuntimeException("Sómente volume concluido ou impresso pode ser marcado como rejeitado.");
         }
         setStatus(VolumeStatus.REJEITADO);
         setResponsavelRevisao(Usuario.of(revisor));
@@ -217,11 +219,11 @@ public class Volume  {
             throw new RuntimeException("Informe data da revisão");
         }
 
-        if (!getStatus().equals(VolumeStatus.CONCLUIDO)) {
-            throw new RuntimeException("Sómente volume Concluido pode ser marcado como revisado.");
+        if (!getStatus().equals(VolumeStatus.CONCLUIDO) && !getStatus().equals(VolumeStatus.IMPRESSO)) {
+            throw new RuntimeException("Sómente volume Concluido ou Impresso pode ser marcado como revisado.");
         }
 
-        if (data.before(this.dataImpressao)) {
+        if (dataImpressao != null && data.before(this.dataImpressao)) {
             throw  new RuntimeException("Data de revisão deve ser maior ou igual a data de impressão.");
         }
 
@@ -233,6 +235,18 @@ public class Volume  {
         setResponsavelRevisao(Usuario.of(revisor));
         setObservacao(observacao);
         setStatus(VolumeStatus.REVISADO);
+    }
+
+    public void concluir(ComandoSalvarVolume comandoSalvarVolume) {
+        if (!status.equals(VolumeStatus.ANDAMENTO)) {
+            throw new RuntimeException("Sómente volume em andamento pode ser concluido");
+        }
+
+        if(caminhoAnexo == null) {
+            throw new RuntimeException("Arquivo é obrigatório para concluir volume");
+        }
+
+        setStatus(VolumeStatus.CONCLUIDO);
     }
 
     public void marcarComoImpresso(ComandoSalvarVolume comandoSalvarVolume) {
