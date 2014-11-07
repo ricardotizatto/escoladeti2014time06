@@ -21,6 +21,7 @@ import br.unicesumar.escoladeti.entity.Volume;
 import br.unicesumar.escoladeti.repository.VolumeRepository;
 
 import com.sun.org.apache.xerces.internal.impl.io.ASCIIReader;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Jhonatan on 02/10/2014.
@@ -42,19 +43,24 @@ public class UploadController {
 
     @RequestMapping( value = "/{volumeId}",method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(
+            HttpServletRequest requisicao,
             @PathVariable Long volumeId,
             @RequestBody MultipartFile file){
+        
 
         Volume volume = volumeRepository.findOne(volumeId);
         String name = file.getOriginalFilename();
-        String rootPath = System.getProperty("catalina.home");
-        String finalDir = rootPath + File.separator + "uploads"+ File.separator + volumeId;
+        String rootPath = requisicao.getServletContext().getRealPath("/");
+        String finalDir = rootPath + File.separator + "uploads" + File.separator + volumeId;
         File dir = new File(finalDir);
 
         if (!dir.exists()) {
-            dir.mkdir();
+            dir.setWritable(true);
+            if (dir.mkdirs()) {
+                System.out.println("diretorio criado");
+            };      
         }
-
+       
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
