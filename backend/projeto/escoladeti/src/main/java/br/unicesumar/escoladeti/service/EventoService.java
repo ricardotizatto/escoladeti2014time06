@@ -57,8 +57,13 @@ public class EventoService {
         return new DataPage<>(eventoRepository.findByStatuseventoFalse(pageRequestForAsc(pagina, "titulo")));
     }
 
-    public DataPage<Evento> getByName(String titulo) {
-        return new DataPage<Evento>(eventoRepository.findByTituloContainingOrderByTituloAsc(titulo, pageRequestForAsc(1, "titulo")));
+    public DataPage<Evento> getEventoPorTitulo(String titulo, String status) {
+        if(status.equals("aberto")){
+            return new DataPage<Evento>(eventoRepository.findByTituloContainingAndStatuseventoTrueOrderByTituloAsc(titulo, pageRequestForAsc(1, "titulo")));
+        }else{
+            return new DataPage<Evento>(eventoRepository.findByTituloContainingAndStatuseventoFalseOrderByTituloAsc(titulo, pageRequestForAsc(1, "titulo")));
+        }
+        
     }
 
     public DataPage<Evento> getProximosEventos(Integer pagina) {

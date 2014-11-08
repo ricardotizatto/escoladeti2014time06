@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -39,6 +40,11 @@ public class EventoController implements Serializable {
     @ResponseBody
     public DataPage<Evento> getTodos() {
         return eventoService.getTodos(1);
+    }
+    @RequestMapping(value = "/evento/{status}", params = {"q"}, method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Evento> getEventoPorTitulo(@RequestParam String q, @PathVariable String status) {
+        return eventoService.getEventoPorTitulo(q, status);
     }
     
     @RequestMapping(value = "/listartodosabertos/pag/{pagina}", method = RequestMethod.GET)

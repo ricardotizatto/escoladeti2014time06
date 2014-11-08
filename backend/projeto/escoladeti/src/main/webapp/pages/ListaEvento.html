@@ -10,7 +10,7 @@
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-search"></span>
                     </span>
-                    <input  class="form-control" name="busca" type="text" placeholder="BUSCA POR TÍTULO/DESCRIÇÃO" ng-model="busca"/>
+                    <input  class="form-control" name="busca" type="text" placeholder="BUSCA POR TÍTULO" ng-model="busca" onkeydown="toUpper(this)" ng-change="buscaEventoContendoTitulo()"/>
                 </div>
             </div>
             <div class="col-sm-3">

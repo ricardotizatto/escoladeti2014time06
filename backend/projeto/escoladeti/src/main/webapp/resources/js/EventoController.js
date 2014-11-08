@@ -13,7 +13,7 @@ function eventoController($scope, $http, $routeParams) {
     $scope.valor;
 //    $scope.selected;
     $scope.indicePeriodo = {};
-    $scope.inicializar = function(){
+    $scope.inicializar = function () {
         $scope.getTodosAbertos(1);
         $scope.status = 'aberto';
     };
@@ -24,7 +24,7 @@ function eventoController($scope, $http, $routeParams) {
     $scope.chamadaPeriodo = function (id) {
         window.location = '#/chamada/' + id;
     };
-    
+
 
     $scope.deletar = function (evento) {
         console.log('deletando evento ' + JSON.stringify(evento));
@@ -81,6 +81,15 @@ function eventoController($scope, $http, $routeParams) {
         });
     };
 
+    $scope.buscaEventoContendoTitulo = function () {
+        console.log($scope.busca);
+        console.log($scope.status);
+        $http.get('./rest/eventoSource/evento/' + $scope.status + '?q=' + $scope.busca.toUpperCase())
+                .then(function (retorno) {
+                    $scope.eventos = retorno.data;
+                    });
+    };
+
 
     $scope.listarParticipantes = function (evento) {
         window.location = '#/listaparticipantes/' + evento.id;
@@ -127,9 +136,9 @@ function eventoController($scope, $http, $routeParams) {
     $scope.novo = function () {
         window.location = '#/cadastroevento';
     };
-    
+
     $scope.telaPeriodo = function (id) {
-        window.location = '#/listaperiodos/'+id;
+        window.location = '#/listaperiodos/' + id;
     };
 
 
@@ -153,13 +162,13 @@ function eventoController($scope, $http, $routeParams) {
                     console.log('erro ao buscar eventos' + data);
                 });
     };
-    
+
     $scope.getTodosAbertos = function (numeroPagina) {
         console.log("listando todos eventos abertos");
         $http.get("./rest/eventoSource/listartodosabertos/pag/" + numeroPagina)
                 .success(function (listaEventos, status) {
                     $scope.eventos = listaEventos;
-            console.log($scope.eventos.list);
+                    console.log($scope.eventos.list);
                 })
                 .error(function (data, status) {
                     console.log('erro ao buscar eventos' + data);
@@ -170,13 +179,13 @@ function eventoController($scope, $http, $routeParams) {
         $http.get("./rest/eventoSource/listartodosfechados/pag/" + numeroPagina)
                 .success(function (listaEventos, status) {
                     $scope.eventos = listaEventos;
-            console.log($scope.eventos.list);
+                    console.log($scope.eventos.list);
                 })
                 .error(function (data, status) {
                     console.log('erro ao buscar eventos' + data);
                 });
     };
-    
+
     $scope.carregarEvento = function () {
         if (!$routeParams.eventoId) {
             $scope.evento = {};
@@ -191,8 +200,8 @@ function eventoController($scope, $http, $routeParams) {
                     return;
                 });
     };
-    
-    $scope.carregaPeriodo = function(){
+
+    $scope.carregaPeriodo = function () {
         console.log("carregando periodos para evento do id = " + $routeParams.idevento);
         $http.get('./rest/eventoSource/evento/' + $routeParams.idevento)
                 .success(function (ev) {
@@ -234,7 +243,7 @@ function eventoController($scope, $http, $routeParams) {
             case "3":
                 return 'REUNIAO';
                 break;
-			case "4":
+            case "4":
                 return 'OUTROS';
                 break;
             default:
@@ -255,21 +264,21 @@ function eventoController($scope, $http, $routeParams) {
         if ($scope.indicePeriodo >= 0) {
             $scope.evento.periodos.splice($scope.indicePeriodo, 1);
         }
-        
-        if($scope.periodo.inicio >= $scope.periodo.fim){
+
+        if ($scope.periodo.inicio >= $scope.periodo.fim) {
             toastr.warning("Horário inválido");
-        }else if($scope.periodo.data < dataAtual){
-            console.log("data sis: " + $scope.periodo.data + "data atual " + dataAtual );
+        } else if ($scope.periodo.data < dataAtual) {
+            console.log("data sis: " + $scope.periodo.data + "data atual " + dataAtual);
             toastr.warning("Data inválida!");
         }
-        else{
+        else {
             var periodo = removeFusoHorarioData($scope.periodo.data);
             $scope.periodo.data = periodo;
             $scope.evento.periodos.push($scope.periodo);
             console.log($scope.evento.periodos);
             toastr.success("Periodo adicionado com sucesso.");
-            $scope.indicePeriodo = {};   
-        } 
+            $scope.indicePeriodo = {};
+        }
     };
 
     $scope.editarPeriodo = function (indice) {
@@ -286,19 +295,19 @@ function eventoController($scope, $http, $routeParams) {
         }
 
     };
-    
+
     function dataHoje() {
         var data = new Date();
         var dia = data.getDate();
         var mes = data.getMonth() + 1;
         var ano = data.getFullYear();
-        if (dia < 10){
-            dia = '0'+dia;
+        if (dia < 10) {
+            dia = '0' + dia;
         }
-        if(mes < 10){
-            mes = '0'+mes;
+        if (mes < 10) {
+            mes = '0' + mes;
         }
-        
+
         return [ano, mes, dia].join('-');
     }
 
@@ -309,11 +318,11 @@ function Ctrl($scope) {
 
 
 
-function removeFusoHorarioData(dataTemp){
+function removeFusoHorarioData(dataTemp) {
     var data = new Date(dataTemp);
-    var novaData = new Date(data.getTime() + data.getTimezoneOffset()*60000);
-    
+    var novaData = new Date(data.getTime() + data.getTimezoneOffset() * 60000);
+
     return novaData;
-    
-    
+
+
 }
