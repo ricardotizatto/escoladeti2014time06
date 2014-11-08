@@ -210,9 +210,9 @@
     };
 
     $scope.carregarEventos = function() {
-        $http.get("./rest/eventoSource/evento")
+        $http.get("./rest/eventoSource/listartodoseventos")
                 .success(function(eventos, status) {
-            $scope.eventos = eventos.list;
+            $scope.eventos = eventos;
             console.log("eventos carregados");
         })
                 .error(function(data, status) {

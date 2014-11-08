@@ -5,6 +5,7 @@ import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.util.data.DateUtil;
 import java.io.Serializable;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,12 @@ public class EventoController implements Serializable {
         return eventoService.getById(id);
     }
 
+    @RequestMapping(value = "/listartodoseventos", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Evento> listarTodosEventos() {
+        return eventoService.listarTodosEventos();
+    }
+    
     @RequestMapping(value = "/evento", method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Evento> getTodos() {
