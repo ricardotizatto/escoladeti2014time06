@@ -287,3 +287,6 @@ select.select2 {
 .data-filtro{ color: #0090d9; }
 
 .classe-forca-senha{ padding: 10px; margin-left: 5px; font-weight: bold;}
+input.bigCheckbox{
+    width: 20px; height: 20px;
+} 

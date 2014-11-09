@@ -9,9 +9,12 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     public Evento findById(Long id);
 
-    public Page<Evento> findByTituloContainingOrderByTituloAsc(String titulo, Pageable pageable);
-
+    public Page<Evento> findByTituloContainingAndStatuseventoTrueOrderByTituloAsc(String titulo, Pageable pageable);
+    
+    public Page<Evento> findByTituloContainingAndStatuseventoFalseOrderByTituloAsc(String titulo, Pageable pageable);
+    
     public Page<Evento> findByStatuseventoTrue(Pageable pageable);
 
     public Page<Evento> findByStatuseventoFalse(Pageable pageable);
+
 }

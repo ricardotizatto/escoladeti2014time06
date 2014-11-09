@@ -4,16 +4,18 @@
         </legend>
         <table class="table table-hover table-striped">
             <tr>
-                <th class="col-sm-3">Dia</th>
-                <th class="col-sm-3">Início</th>
-                <th class="col-sm-3">Termino</th>
-                <th class="col-sm-3">Lista de Presença</th>
+                <th class="col-sm-3 text-center">Título Período</th>
+                <th class="col-sm-3 text-center">Dia</th>
+                <th class="col-sm-3 text-center">Início</th>
+                <th class="col-sm-3 text-center">Termino</th>
+                <th class="col-sm-3 text-center">Lista de Presença</th>
             </tr>
             <tr ng-repeat="p in periodosModal">
-                <td ng-bind="p.data | date: 'dd-MM-yyyy' "></td>
-                <td ng-bind="p.inicio"></td>
-                <td ng-bind="p.fim"></td>
-                <td>
+                <td  class="text-center" ng-bind="p.tituloperiodo"></td>
+                <td  class="text-center" ng-bind="p.data | date: 'dd-MM-yyyy' "></td>
+                <td  class="text-center" ng-bind="p.inicio"></td>
+                <td  class="text-center" ng-bind="p.fim"></td>
+                <td class="text-center">
                     <button class='btn btn-info btn-sm' data-dismiss="modal" ng-click="chamadaPeriodo(p.id)">
                         <span class='glyphicon glyphicon-check'></span>
                     </button>
