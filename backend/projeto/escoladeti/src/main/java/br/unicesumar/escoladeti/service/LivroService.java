@@ -52,4 +52,8 @@ public DataPage<Livro> getTodos(Integer pagina){
         return this.livroRepository.findByNomeAndAutorAndEditoraAndAnoEdicaoAndIdNot(
                 livro.getNome(), livro.getAutor(), livro.getEditora(), livro.getAnoEdicao(), id);
     }
+
+    public DataPage<Livro> listarLivrosTranscritos(Integer pagina) {
+        return new DataPage<>(livroRepository.findAll(pageRequestForAsc(pagina, "nome")));
+    }
 }

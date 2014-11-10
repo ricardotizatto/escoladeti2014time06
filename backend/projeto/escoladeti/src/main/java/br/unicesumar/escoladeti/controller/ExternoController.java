@@ -1,9 +1,11 @@
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.Evento;
+import br.unicesumar.escoladeti.entity.Livro;
 import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.service.EventoService;
+import br.unicesumar.escoladeti.service.LivroService;
 import br.unicesumar.escoladeti.service.MaterialStatusService;
 import br.unicesumar.escoladeti.service.ParticipanteService;
 import br.unicesumar.escoladeti.service.PeriodoEventoService;
@@ -28,6 +30,9 @@ public class ExternoController implements Serializable{
     
     @Autowired
     private MaterialStatusService materialStatusService;
+    
+    @Autowired
+    private LivroService livroService;
     
     @Autowired
     private EventoService eventoService;
@@ -57,6 +62,12 @@ public class ExternoController implements Serializable{
     @ResponseBody
     public DataPage<ViewMaterialProduzido> listarMateriaisProduzidos(@PathVariable Integer pagina) {
         return this.materialStatusService.listarMateriaisProduzidos(pagina);
+    }
+    
+    @RequestMapping(value = {"public/rest/livrostranscritos/pag/{pagina}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Livro> listarLivrosTranscritos(@PathVariable Integer pagina) {
+        return this.livroService.listarLivrosTranscritos(pagina);
     }
        
     @RequestMapping(value = "public/rest/buscamateriaisproduzidos", params = {"q"}, method = RequestMethod.GET)

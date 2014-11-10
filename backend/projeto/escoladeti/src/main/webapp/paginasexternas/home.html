@@ -14,11 +14,11 @@
     <div class="row">
        <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
            <div class="bloco-evento">
-                <h4>{{proximoEvento.titulo | limitTo:tituloLimit }}{{ proximoEvento.titulo.length > 50 ? '...' : '' }}</h4>
-                <p>{{proximoEvento.descricao | limitTo:descricaoLimit }}{{ proximoEvento.descricao.length > 90 ? '...' : '' }}</p>
+                <h4>{{proximoEvento.titulo | limitTo:tituloLimit }}{{ proximoEvento.titulo.length > tituloLimit ? '...' : '' }}</h4>
+                <p>{{proximoEvento.descricao | limitTo:descricaoLimit }}{{ proximoEvento.descricao.length > descricaoLimit ? '...' : '' }}</p>
                 <p>
                     <b>Início: </b> {{proximoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
-                    <b>Local: </b> {{proximoEvento.local | limitTo:localLimit}}{{ proximoEvento.local.length > 40 ? '...' : '' }}
+                    <b>Local: </b> {{proximoEvento.local | limitTo:localLimit}}{{ proximoEvento.local.length > localLimit ? '...' : '' }}
                 </p>
             </div>
            <div><a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a></div>
@@ -64,11 +64,11 @@
         <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
             <div><img src="./resources/externo/assets/img/amacapimagenotfound.png" alt=""></div>
             <div class="bloco-evento">
-                <h4>{{ultimoEvento.titulo | limitTo:tituloLimit }}{{ ultimoEvento.titulo.length > 50 ? '...' : '' }}</h4>
-                <p>{{ultimoEvento.descricao | limitTo:descricaoLimit }}{{ ultimoEvento.descricao.length > 90 ? '...' : '' }}</p>
+                <h4>{{ultimoEvento.titulo | limitTo:tituloLimit }}{{ ultimoEvento.titulo.length > tituloLimit ? '...' : '' }}</h4>
+                <p>{{ultimoEvento.descricao | limitTo:descricaoLimit }}{{ ultimoEvento.descricao.length > descricaoLimit ? '...' : '' }}</p>
                 <p>
                     <b>Início: </b> {{ultimoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
-                    <b>Local: </b> {{ultimoEvento.local | limitTo:localLimit}}{{ ultimoEvento.local.length > 40 ? '...' : '' }}
+                    <b>Local: </b> {{ultimoEvento.local | limitTo:localLimit}}{{ ultimoEvento.local.length > localLimit ? '...' : '' }}
                 </p>
             </div>
             <div><a href="#/evento-realizado" >Detalhes</a></div>
