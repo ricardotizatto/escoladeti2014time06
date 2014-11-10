@@ -19,7 +19,7 @@
                         <th class="col-md-3" data-field="details"></th>
                     </tr>
                     <tr ng-repeat="evento in eventos" ng-click="chk{{evento.id}}">
-                        <td ng-show="evento.statusevento == true"><input type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
+                        <td ng-show="evento.statusevento == true"><input ng-show="(evento.disponivel > 0)" type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
                         <td ng-show="evento.statusevento == true">{{evento.titulo}}</td>
                         <td ng-show="evento.statusevento == true">{{evento.descricao.substring(0, 180)}}</td>
                         <td ng-show="evento.statusevento == true">
@@ -105,6 +105,10 @@
                                     </article>
                                     <article>
                                         <p><b>LOCAL: </b> {{evento.local}}</p>
+                                    </article>
+                                    
+                                    <article>
+                                        <p><b>TOTAL DE VAGAS: </b> {{evento.disponivel}}/{{evento.limite}}</p>
                                     </article>
                                     <article>
                                         <table class="table table-hover table-striped">
