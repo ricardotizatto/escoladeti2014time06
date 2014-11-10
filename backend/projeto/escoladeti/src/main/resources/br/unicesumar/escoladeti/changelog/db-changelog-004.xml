@@ -116,5 +116,14 @@
         </createView>
     </changeSet>
     
+    <changeSet author="martinho" id="mart0143createview">
+        <createView viewName="viewvolumelivro" replaceIfExists="true" schemaName="public">
+            SELECT V.ID, L.ID AS LIVROID, L.NOME, L.AUTOR, L.EDITORA, L.ANOEDICAO, L.DISCIPLINA,
+            V.TRANSCRICAO, V.STATUS, V.PAGINA_INICIO AS PAGINAINICIO, V.PAGINA_FIM AS PAGINAFIM
+            FROM LIVRO L JOIN VOLUME V ON L.ID = V.ID_LIVRO
+            ORDER BY L.NOME, V.TRANSCRICAO, V.PAGINA_INICIO
+        </createView>
+    </changeSet>
+    
 </databaseChangeLog>
 

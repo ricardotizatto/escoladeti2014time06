@@ -4,15 +4,21 @@ import br.unicesumar.escoladeti.entity.Evento;
 import br.unicesumar.escoladeti.entity.Livro;
 import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.entity.Periodo;
+import br.unicesumar.escoladeti.entity.Volume;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.service.LivroService;
 import br.unicesumar.escoladeti.service.MaterialStatusService;
 import br.unicesumar.escoladeti.service.ParticipanteService;
 import br.unicesumar.escoladeti.service.PeriodoEventoService;
 import br.unicesumar.escoladeti.service.PeriodoService;
+import br.unicesumar.escoladeti.service.VolumeLivroService;
+import br.unicesumar.escoladeti.service.VolumeService;
 import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
 import br.unicesumar.escoladeti.view.ViewPeriodoEvento;
+import br.unicesumar.escoladeti.view.ViewVolumeLivro;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +36,12 @@ public class ExternoController implements Serializable{
     
     @Autowired
     private MaterialStatusService materialStatusService;
+    
+    @Autowired
+    private VolumeLivroService volumelivroService;
+    
+    @Autowired
+    private VolumeService volumeService;
     
     @Autowired
     private LivroService livroService;
@@ -66,10 +78,10 @@ public class ExternoController implements Serializable{
     
     @RequestMapping(value = {"public/rest/livrostranscritos/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Livro> listarLivrosTranscritos(@PathVariable Integer pagina) {
-        return this.livroService.listarLivrosTranscritos(pagina);
+    public DataPage<ViewVolumeLivro> listarLivrosTranscritos(@PathVariable Integer pagina) {
+        return this.volumelivroService.listarLivrosTranscritos(pagina);
     }
-       
+           
     @RequestMapping(value = "public/rest/buscamateriaisproduzidos", params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<ViewMaterialProduzido> buscaMateriaisProduzidos(@RequestParam String q) {
