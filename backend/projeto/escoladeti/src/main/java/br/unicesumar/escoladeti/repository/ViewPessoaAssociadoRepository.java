@@ -12,13 +12,13 @@ public interface ViewPessoaAssociadoRepository extends JpaRepository<ViewPessoaA
 	
 	@Query(value = "from viewpessoaassociado a " +
 			"where a.vigencia between ?1 and ?2 " +
-			"and a.nome like '%' || CASE ?3 WHEN 'TODOS' THEN a.nome ELSE ?3 END || '%' " +
+			"and a.id = CASE ?3 WHEN 0 THEN a.id ELSE ?3 END " +
 			"and a.pago like '%' || CASE ?4 WHEN 'TODOS' THEN a.pago ELSE ?4 END || '%'"
 			,nativeQuery = false)
-	public List<ViewPessoaAssociado> findByVigenciaBetweenAndNomeContainingAndPagoContainingOrderByNome(
+	public List<ViewPessoaAssociado> findByVigenciaBetweenAndIdAndPagoContainingOrderByNome(
 			Date dataInicio,
 			Date dataFim,
-			String nome,
+			Long id,
 			String pago);
 
 }

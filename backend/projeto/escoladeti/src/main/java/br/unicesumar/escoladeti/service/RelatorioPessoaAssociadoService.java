@@ -40,45 +40,44 @@ public class RelatorioPessoaAssociadoService {
 		try {
 			response.setHeader("Content-Disposition",
 					"inline; filename=associados.pdf");
+			String nome = "TODOS";
+			if (comando.getId() != null && comando.getId() != 0L) {
+				nome = this.viewPessoaAssociadoRepository.findOne(
+						comando.getId()).getNome();
+			}
 
-			 Map<String, Object> params = new HashMap<String, Object>();
-			 params.put("filtroNome", comando.getNome());
-			 params.put("filtroPago", comando.getPago());
-			 params.put("filtroDataInicio", comando.getDataInicio());
-			 params.put("filtroDataFim", comando.getDataFim());
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("filtroNome", nome);
+			params.put("filtroPago", comando.getPago());
+			params.put("filtroDataInicio", comando.getDataInicio());
+			params.put("filtroDataFim", comando.getDataFim());
 
 			List<ViewPessoaAssociado> lista = this.viewPessoaAssociadoRepository
-					.findByVigenciaBetweenAndNomeContainingAndPagoContainingOrderByNome(
+					.findByVigenciaBetweenAndIdAndPagoContainingOrderByNome(
 							comando.getDataInicio(), comando.getDataFim(),
-							comando.getNome(), comando.getPago());
+							comando.getId(), comando.getPago());
+
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(
 					lista);
 
 			InputStream reportStream = new ClassPathResource(URL_REPORT
 					+ NOME_ORIGEM_RELATORIO).getInputStream();
-			JasperPrint jp = JasperFillManager.fillReport(reportStream, params, dataSource);
-			
+			JasperPrint jp = JasperFillManager.fillReport(reportStream, params,
+					dataSource);
+
 			OutputStream out = response.getOutputStream();
-			
+
 			JRPdfExporter exporter = new JRPdfExporter();
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
 			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
-			
+
 			exporter.exportReport();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public List<ViewPessoaAssociado> listar(
-			ComandoRelatorioPessoaAssociado comando) {
-		return this.viewPessoaAssociadoRepository
-				.findByVigenciaBetweenAndNomeContainingAndPagoContainingOrderByNome(
-						comando.getDataInicio(), comando.getDataFim(),
-						comando.getNome(), comando.getPago());
 	}
 
 }

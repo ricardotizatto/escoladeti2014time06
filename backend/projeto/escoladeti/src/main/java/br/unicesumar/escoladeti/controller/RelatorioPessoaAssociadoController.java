@@ -34,7 +34,7 @@ public class RelatorioPessoaAssociadoController {
 	public void imprimirRelatorio(
 			@RequestParam(value = "dataInicio") String dataInicio,
 			@RequestParam(value = "dataFim") String dataFim,
-			@RequestParam(value = "nome") String nome,
+			@RequestParam(value = "id") Long id,
 			@RequestParam(value = "pago") String pago,
 			HttpServletResponse response) throws IOException, JRException,
 			SQLException {
@@ -42,7 +42,7 @@ public class RelatorioPessoaAssociadoController {
 		ComandoRelatorioPessoaAssociado comando = new ComandoRelatorioPessoaAssociado();
 		comando.setDataFim(dataFim);
 		comando.setDataInicio(dataInicio);
-		comando.setNome(nome);
+		comando.setId(id);
 		comando.setPago(pago);
 		this.relatorioPessoaAssociadoService.imprimir(comando, response);
 	}

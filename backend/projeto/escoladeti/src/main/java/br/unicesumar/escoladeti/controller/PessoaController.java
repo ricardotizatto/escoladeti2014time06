@@ -20,6 +20,7 @@ import br.unicesumar.escoladeti.entity.PessoaFisica;
 import br.unicesumar.escoladeti.entity.PessoaJuridica;
 import br.unicesumar.escoladeti.service.PessoaService;
 import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
+import br.unicesumar.escoladeti.view.ViewPessoaAssociado;
 
 @Controller
 @RequestMapping("/rest/pessoas")
@@ -102,6 +103,12 @@ public class PessoaController implements Serializable {
   @ResponseBody
   public List<PessoaFisicaJuridica> listarTodasPessoas() {
     return pessoaService.listarTodasPessoas();
+  }
+  
+  @RequestMapping(method = RequestMethod.GET, value = "/todosAssociados")
+  @ResponseBody
+  public List<ViewPessoaAssociado> listarTodosAssociados(){
+	  return this.pessoaService.listaTodosAssociados();
   }
 
   @RequestMapping(method = RequestMethod.GET, value = "/listarTodas/{pagina}")

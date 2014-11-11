@@ -11,8 +11,9 @@ public class ComandoRelatorioPessoaAssociado {
 
 	private Date dataInicio;
 	private Date dataFim;
-	private String nome;
 	private String pago;
+	private String nome;
+	private Long id;
 
 	public Date getDataInicio() {
 		return dataInicio;
@@ -23,7 +24,7 @@ public class ComandoRelatorioPessoaAssociado {
 
 		try {
 			if (dataInicio == null || dataInicio.isEmpty()) {
-				this.dataInicio = sdf.parse("0001-01-31");
+				this.dataInicio = sdf.parse("0001-01-01");
 			} else {
 				this.dataInicio = sdf.parse(dataInicio);
 			}
@@ -50,17 +51,6 @@ public class ComandoRelatorioPessoaAssociado {
 		}
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		if (nome.equals(null) || nome.isEmpty())
-			this.nome = "TODOS";
-		else
-			this.nome = "TODOS";
-	}
-
 	public String getPago() {
 		return pago;
 	}
@@ -72,4 +62,22 @@ public class ComandoRelatorioPessoaAssociado {
 			this.pago = pago;
 	}
 
+	public void setId(Long id) {
+		
+		if(id == null)
+			this.id = 0L;
+		else
+			this.id = id;
+	}
+	public Long getId(){
+		return this.id;
+	}
+	
+	public void setNome(String nome){
+		this.nome = nome;
+	}
+	
+	public String getNome(){
+		return this.nome;
+	}
 }

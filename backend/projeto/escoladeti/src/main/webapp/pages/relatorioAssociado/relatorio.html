@@ -1,26 +1,49 @@
-<div class="container" ng-controller="RelatorioAssociadoController">
-	<div class="col-sm-2">
-		<label class="control-label">Nome</label> <input type="text"
-			ng-model="pesquisa.nome">
+<div class="container" ng-controller="RelatorioAssociadoController"
+	ng-init="buscaAssociados()">
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<legend>
+				<span class="glyphicon glyphicon-list-alt"></span> Relatório
+				Associado
+			</legend>
+		</div>
 	</div>
-	<div class="col-sm-2">
-		<label class="control-label">pago</label> <input type="text"
-			ng-model="pesquisa.pago">
-	</div>
+	<div class="panel panel-primary">
+	<div class="panel-heading"><strong>Filtros</strong></div>
+		<div class="panel-body">
+			<div class="col-sm-3 col-sm-offset-2">
+				<div class="form-group">
+					<label class="control-label">Associado</label> <select
+						data-ui-select2="select2Options" class="input-default"
+						data-ng-model="pesquisa.pessoa.id" ng-click="buscaAssociados()">
+						<option value=""></option>
+						<option data-ng-repeat="pessoa in pessoas" value="{{pessoa.id}}">{{pessoa.nome}}</option>
+					</select>
+				</div>
+			</div>
 			<div class="col-sm-2">
-		<label class="control-label">Data inicio</label> <input type="date"
-			ng-model="pesquisa.dataInicio">
+				<label class="control-label">Pago</label> <select
+					data-ng-model="pesquisa.pago" class="form-control">
+					<option value="TODOS">TODOS</option>
+					<option value="PAGO">PAGO</option>
+					<option value="PENDENTE">PENDENTE</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Data vigência inicial</label> <input type="date" class="form-control"
+					ng-model="pesquisa.dataInicio">
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Data vigência final</label> <input type="date" class="form-control"
+					ng-model="pesquisa.dataFim">
+			</div>
+		</div>
 	</div>
-	<div class="col-sm-2">
-		<label class="control-label">Data fim</label> <input type="date"
-			ng-model="pesquisa.dataFim">
-	</div>	
-	<div class="form-group col-sm-3">
-		<span class="pull-right"> <a
-			href="./relatorio/associados?nome={{pesquisa.nome}}&pago={{pesquisa.pago}}&dataInicio={{pesquisa.datainicio}}&dataFim={{pesquisa.dataFim}}"
-			class="btn btn-info" title="Imprimir formul�rio" target="_blank">
-				<span class="glyphicon glyphicon-print"></span>
+	<div class="form-group col-sm-12">
+		<a
+			href="./relatorio/associados?id={{pesquisa.pessoa.id}}&pago={{pesquisa.pago}}&dataInicio={{pesquisa.datainicio}}&dataFim={{pesquisa.dataFim}}"
+			class="btn btn-info pull-right" title="Imprimir formul�rio" target="_blank">Imprimir
+			<span class="glyphicon glyphicon-print"></span>
 		</a>
-		</span>
 	</div>
 </div>

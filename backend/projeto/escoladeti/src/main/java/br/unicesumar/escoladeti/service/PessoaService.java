@@ -3,7 +3,6 @@ package br.unicesumar.escoladeti.service;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +22,9 @@ import br.unicesumar.escoladeti.repository.CaracteristicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaJuridicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
+import br.unicesumar.escoladeti.repository.ViewPessoaAssociadoRepository;
 import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
+import br.unicesumar.escoladeti.view.ViewPessoaAssociado;
 
 @Service
 public class PessoaService {
@@ -38,6 +39,9 @@ public class PessoaService {
 
 	@Autowired
 	private CaracteristicaRepository caracteristicaRepository;
+	
+	@Autowired
+	private ViewPessoaAssociadoRepository viewPessoaAssociadoRepository;
 
 	public DataPage<PessoaFisica> paginarFisica(Integer pagina) {
 		return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(
@@ -79,9 +83,16 @@ public class PessoaService {
 	public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id) {
 		if (comando.getTipo().equals("F")) {
 			if (comando.getCpf() != null && !comando.getCpf().isEmpty()) {
-				PessoaFisica pf = pessoaFisicaRepository.findByCpf(comando
-						.getCpf());
-				cpfExiste(pf, id);
+				PessoaFisica pf = null;
+				if (id == null) {
+					pf = pessoaFisicaRepository.findByCpf(comando.getCpf());
+				} else {
+					pf = pessoaFisicaRepository.findByCpfAndIdNot(
+							comando.getCpf(), id);
+				}
+				if (pf != null) {
+					throw new RuntimeException("CPF já cadastrado.");
+				}
 			}
 			PessoaFisica pessoaFisica = buildPessoaFisica(comando);
 			if (id != null) {
@@ -176,15 +187,6 @@ public class PessoaService {
 				.buildPessoaFisica();
 	}
 
-	private void cpfExiste(PessoaFisica pf, Long id) {
-		if (pf != null && id != null) {
-			if (this.pessoaFisicaRepository.findByCpf(pf.getCpf()) != null
-					&& !pf.getCpf().isEmpty() && !pf.getId().equals(id)) {
-				throw new RuntimeException("CPF já cadastrado.");
-			}
-		}
-	}
-
 	public void deletarPessoa(Long id, String tipo) {
 		if (tipo.equals("J")) {
 			pessoaJuridicaRepository.delete(id);
@@ -218,5 +220,9 @@ public class PessoaService {
 		return new DataPage<>(
 				this.pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(
 						pagina, "nome")));
+	}
+
+	public List<ViewPessoaAssociado> listaTodosAssociados() {
+		return this.viewPessoaAssociadoRepository.findAll();
 	}
 }
