@@ -12,6 +12,10 @@ function RelatorioAssociadoController($scope, $location, PessoaFactory) {
 			});
 		});
 	}
+	
+	$scope.limparCampos = function(pesquisa){
+		$scope.pesquisa = {};
+	}
 }
 
 controllers.controller('RelatorioAssociadoController', [ '$scope', '$location',

@@ -28,8 +28,8 @@ import br.unicesumar.escoladeti.view.ViewPessoaAssociado;
 public class RelatorioPessoaAssociadoService {
 
 	private static final String URL_REPORT = "br/unicesumar/escoladeti/reports/";
-	private static final String NOME_ORIGEM_RELATORIO = "pessoaAssociado.jasper";
-	private static final String NOME_DESTINO_RELATORIO = "pessoaAssociado.pdf";
+	private static final String NOME_ORIGEM_RELATORIO = "relatorioAssociado.jasper";
+	private static final String NOME_DESTINO_RELATORIO = "relatorioAssociado.pdf";
 
 	@Autowired
 	private ViewPessoaAssociadoRepository viewPessoaAssociadoRepository;
