@@ -14,7 +14,13 @@ function PaisService($http) {
 		},
 		
 		buscarPorNome: function (filtro) {
-			return $http.get('./rest/paisSource/pais?q=' + filtro.toUpperCase());
+			return $http({
+				url : './rest/paisSource/pais',
+				method : 'GET',
+				params : {
+					q : filtro.toUpperCase()
+				}
+			});
 		},
 		
 		buscar: function (paisId) {
