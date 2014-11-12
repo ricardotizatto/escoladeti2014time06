@@ -17,7 +17,6 @@ function PaisController($scope, $routeParams, paisService) {
                     .error(function (data, status) {
                         console.log('erro ao deletar pais ' + data);
                         console.log(data.messageDeveloper);
-                        toastr.error(data.message);
                     });
             }
         });

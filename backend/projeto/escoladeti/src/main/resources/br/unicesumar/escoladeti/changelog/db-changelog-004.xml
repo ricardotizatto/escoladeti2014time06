@@ -5,108 +5,111 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
-    <changeSet id="1" author="catabriga">
-        <dropColumn tableName="volume" columnName="id_solicitacao_item"></dropColumn>
-        
-        <createTable tableName="SOLICITACAOVOLUME">
-            <column name="id" type="int8">
-                <constraints primaryKey="true" nullable="false"></constraints>
-            </column>
+	<changeSet id="1" author="catabriga">
+		<dropColumn tableName="volume" columnName="id_solicitacao_item"></dropColumn>
 
-            <column name="data_envio" type="date">
-            </column>
-            
-            <column name="id_volume" type="int8">
-                <constraints nullable="false"></constraints>
-            </column>
-        </createTable>
+		<createTable tableName="SOLICITACAOVOLUME">
+			<column name="id" type="int8">
+				<constraints primaryKey="true" nullable="false"></constraints>
+			</column>
 
-        <addForeignKeyConstraint baseTableName="SOLICITACAOVOLUME" baseColumnNames="id_volume"
-                                 constraintName="solitem_volume"
-                                 referencedTableName="VOLUME"
-                                 referencedColumnNames="id"/>
-    </changeSet>
+			<column name="data_envio" type="date">
+			</column>
 
-    <changeSet id="2" author="catabriga">
-        <addColumn tableName="solicitacaovolume">
-            <column name="id_solicitacaoitem" type="int8"/>
-        </addColumn>
+			<column name="id_volume" type="int8">
+				<constraints nullable="false"></constraints>
+			</column>
+		</createTable>
 
-        <addForeignKeyConstraint baseTableName="solicitacaovolume" baseColumnNames="id_solicitacaoitem"
-                                 constraintName="solitem_solvolume"
-                                 referencedTableName="solicitacaoitem"
-                                 referencedColumnNames="id"/>
-    </changeSet>
+		<addForeignKeyConstraint baseTableName="SOLICITACAOVOLUME"
+			baseColumnNames="id_volume" constraintName="solitem_volume"
+			referencedTableName="VOLUME" referencedColumnNames="id" />
+	</changeSet>
 
-    <changeSet id="3" author="catabriga">
-        <addColumn tableName="volume">
-            <column name="id_livro" type="int8"></column>
-        </addColumn>
+	<changeSet id="2" author="catabriga">
+		<addColumn tableName="solicitacaovolume">
+			<column name="id_solicitacaoitem" type="int8" />
+		</addColumn>
 
-        <addForeignKeyConstraint baseTableName="volume" baseColumnNames="id_livro" constraintName="livro_volume"
-                                 referencedTableName="livro"
-                                 referencedColumnNames="id"/>
-    </changeSet>
+		<addForeignKeyConstraint baseTableName="solicitacaovolume"
+			baseColumnNames="id_solicitacaoitem" constraintName="solitem_solvolume"
+			referencedTableName="solicitacaoitem" referencedColumnNames="id" />
+	</changeSet>
 
-    <changeSet id="4" author="catabriga">
-        <addColumn tableName="volume">
-            <column name="transcricao" type="varchar(60)">
-                <constraints nullable="false"></constraints>
-            </column>
-        </addColumn>
-    </changeSet>
+	<changeSet id="3" author="catabriga">
+		<addColumn tableName="volume">
+			<column name="id_livro" type="int8"></column>
+		</addColumn>
 
-    <changeSet id="5" author="catabriga">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="pessoacaracteristica" columnName="pessoaid"></columnExists>
-        </preConditions>
-        <renameColumn tableName="pessoacaracteristica" oldColumnName="pessoaid" newColumnName="pessoa_id"></renameColumn>
+		<addForeignKeyConstraint baseTableName="volume"
+			baseColumnNames="id_livro" constraintName="livro_volume"
+			referencedTableName="livro" referencedColumnNames="id" />
+	</changeSet>
 
-    </changeSet>
+	<changeSet id="4" author="catabriga">
+		<addColumn tableName="volume">
+			<column name="transcricao" type="varchar(60)">
+				<constraints nullable="false"></constraints>
+			</column>
+		</addColumn>
+	</changeSet>
 
-    <changeSet id="6" author="catabriga">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="pessoacaracteristica" columnName="caracteristicaid"></columnExists>
-        </preConditions>
-        <renameColumn tableName="pessoacaracteristica" oldColumnName="caracteristicaid" newColumnName="caracteristica_id"></renameColumn>
-    </changeSet>
-    
-    <changeSet author="martinho" id="mart0142dropcolum" >		
-        <dropColumn tableName="evento" columnName="data"/>
-        <dropColumn tableName="evento" columnName="inicio"/>
-        <dropColumn tableName="evento" columnName="fim"/>
-    </changeSet>
-    
-    <changeSet author="martinho" id="mart0143createtable">
-        <createTable tableName="periodo">
-            <column name="id" type="INT8">
-                <constraints nullable="false" />
-            </column>
-            <column name="data" type="date">
-                <constraints nullable="false" />
-            </column>
-            <column name="inicio" type="varchar(10)">
-                <constraints nullable="false" />
-            </column>
-            <column name="fim" type="varchar(10)">
-                <constraints nullable="false" />
-            </column>
-            <column name="tituloperiodo" type="varchar(50)">
-                <constraints nullable="false" />
-            </column>
-            <column name="eventoid" type="INT8" />
-        </createTable>
-                
-        <addForeignKeyConstraint baseColumnNames="eventoid"
-                  baseTableName="periodo" constraintName="fk_femy7nyxqlij7xjdkr32mju5we"
-                  deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-                  onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento" />
-        
-        
-    </changeSet>
-    
-    <changeSet author="martinho" id="mart0142createview">
-        <createView viewName="viewperiodoevento" replaceIfExists="true" schemaName="public">
+	<changeSet id="5" author="catabriga">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="pessoacaracteristica"
+				columnName="pessoaid"></columnExists>
+		</preConditions>
+		<renameColumn tableName="pessoacaracteristica"
+			oldColumnName="pessoaid" newColumnName="pessoa_id"></renameColumn>
+
+	</changeSet>
+
+	<changeSet id="6" author="catabriga">
+		<preConditions onFail="MARK_RAN">
+			<columnExists tableName="pessoacaracteristica"
+				columnName="caracteristicaid"></columnExists>
+		</preConditions>
+		<renameColumn tableName="pessoacaracteristica"
+			oldColumnName="caracteristicaid" newColumnName="caracteristica_id"></renameColumn>
+	</changeSet>
+
+	<changeSet author="martinho" id="mart0142dropcolum">
+		<dropColumn tableName="evento" columnName="data" />
+		<dropColumn tableName="evento" columnName="inicio" />
+		<dropColumn tableName="evento" columnName="fim" />
+	</changeSet>
+
+	<changeSet author="martinho" id="mart0143createtable">
+		<createTable tableName="periodo">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="data" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="inicio" type="varchar(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="fim" type="varchar(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="tituloperiodo" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="eventoid" type="INT8" />
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="eventoid"
+			baseTableName="periodo" constraintName="fk_femy7nyxqlij7xjdkr32mju5we"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="evento" />
+
+
+	</changeSet>
+
+	<changeSet author="martinho" id="mart0142createview">
+		<createView viewName="viewperiodoevento" replaceIfExists="true"
+			schemaName="public">
             SELECT A.ID, A.TITULO, A.DESCRICAO, A.LOCAL, A.STATUSEVENTO,
             (SELECT MIN(B.DATA )
             FROM PERIODO B
@@ -114,7 +117,51 @@
             FROM EVENTO A
             ORDER BY DATAINICIO ASC
         </createView>
-    </changeSet>
-    
+	</changeSet>
+
+	<changeSet id="201411081216" author="Walber">
+		<preConditions onFail="MARK_RAN" onError="MARK_RAN">
+			<columnExists tableName="vigenciaassociado" columnName="caracteristicapessoaid" />
+		</preConditions>
+		<dropColumn tableName="vigenciaassociado" columnName="caracteristicapessoaid"/>
+	</changeSet>
+	
+<!-- 	<changeSet id="201411081214" author="Walber">
+		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="vigenciaassociado" columnName="caracteristicapessoaid" />
+			</not>
+		</preConditions>
+		<addColumn tableName="vigenciaassociado">
+			<column name="pessoacaracteristica_id" type="INT8">
+				<constraints foreignKeyName="vigenciaassociado_fk1"
+					referencedTableName="pessoacaracteristica" referencedColumnNames="id" />
+			</column>
+		</addColumn>
+
+	</changeSet> -->
+	<changeSet id="201411062241" author="Walber">
+		<createView viewName="viewpessoaassociado" replaceIfExists="true"
+			schemaName="public">
+    		SELECT DISTINCT T1.* ,
+					T3.DESCRICAO,
+					CASE 
+	  				WHEN T4.VIGENCIA &lt; NOW() 
+	  				THEN 'PENDENTE'
+	  				ELSE 'PAGO'
+					END AS PAGO,
+					T4.VIGENCIA
+  			FROM VIEWPESSOA T1 JOIN PESSOACARACTERISTICA T2 ON T1.ID = T2.PESSOA_ID
+  			JOIN CARACTERISTICA T3 ON T2.CARACTERISTICA_ID = T3.ID
+  			JOIN VIGENCIAASSOCIADO T4 ON T2.ID = T4.PESSOACARACTERISTICA_ID
+				ORDER BY T1.NOME ASC
+    	</createView>
+	</changeSet>
+	
+	<changeSet id="201411081233" author="Walber">
+	<dropNotNullConstraint tableName="pessoafisica" columnName="rg"/>
+	<dropNotNullConstraint tableName="pessoafisica" columnName="cpf"/>
+	</changeSet>
+
 </databaseChangeLog>
 

@@ -16,47 +16,53 @@ import javax.swing.text.MaskFormatter;
  */
 public class Mascara {
 
-    public static String cpf(String valor) {
-        String pattern = "###.###.###-##";
-        MaskFormatter mask;
-        String mascarado = null;
-        try {
-            mask = new MaskFormatter(pattern);
-            mask.setValueContainsLiteralCharacters(false);
-            mascarado = mask.valueToString(valor);
-        } catch (ParseException ex) {
-            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return mascarado;
-    }
+	public static String cpf(String valor) {
+		String mascarado = "";
+		if (valor != null) {
+			String pattern = "###.###.###-##";
+			MaskFormatter mask;
+			try {
+				mask = new MaskFormatter(pattern);
+				mask.setValueContainsLiteralCharacters(false);
+				mascarado = mask.valueToString(valor);
+			} catch (ParseException ex) {
+				Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE,
+						null, ex);
+			}
+		}
+		return mascarado;
+	}
 
-    public static String cpnj(String valor) {
-        String pattern = "##.###.###/####-##";
-        MaskFormatter mask;
-        String mascarado = null;
-        try {
-            mask = new MaskFormatter(pattern);
-            mask.setValueContainsLiteralCharacters(false);
-            mascarado = mask.valueToString(valor);
-        } catch (ParseException ex) {
-            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return mascarado;
+	public static String cpnj(String valor) {
+		String mascarado = null;
+		if (valor != null) {
+			String pattern = "##.###.###/####-##";
+			MaskFormatter mask;
+			try {
+				mask = new MaskFormatter(pattern);
+				mask.setValueContainsLiteralCharacters(false);
+				mascarado = mask.valueToString(valor);
+			} catch (ParseException ex) {
+				Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE,
+						null, ex);
+			}
+		}
+		return mascarado;
+	}
 
-    }
-
-    public static String telefone(String valor) {
-        String pattern = "####-####?#";
-        MaskFormatter mask;
-        String mascarado = null;
-        try {
-            mask = new MaskFormatter(pattern);
-            mask.setValueContainsLiteralCharacters(false);
-            mascarado = mask.valueToString(valor);
-        } catch (ParseException ex) {
-            Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return mascarado;
-    }
+	public static String telefone(String valor) {
+		String pattern = "####-####?#";
+		MaskFormatter mask;
+		String mascarado = null;
+		try {
+			mask = new MaskFormatter(pattern);
+			mask.setValueContainsLiteralCharacters(false);
+			mascarado = mask.valueToString(valor);
+		} catch (ParseException ex) {
+			Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		return mascarado;
+	}
 
 }

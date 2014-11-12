@@ -23,6 +23,21 @@ function PessoaFactory($resource) {
         paginar : {
             method : 'GET',
             isArray : true
+        },
+        
+        listaTodasPessoas : {
+        	method : 'GET',
+        	isArray : true,
+        	params : {
+        		acao : 'todasPessoas'
+        	}
+        },
+        listaTodosAssociados : {
+        	method : 'GET',
+        	isArray : true,
+        	params : {
+        		acao : 'todosAssociados'
+        	}
         }
                 
     });
