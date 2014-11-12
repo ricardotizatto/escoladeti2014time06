@@ -131,7 +131,7 @@
         $scope.nomeModal = {};
         $scope.telefoneModal = {};
         $scope.pagamentoModal = {};
-        $scope.deficiente = {};
+        $scope.participante;
         $scope.participante = $scope.getNovoParticipante();
         console.log("novo");
     };
@@ -206,7 +206,9 @@
 
     $scope.getNovoParticipante = function() {
         console.log('novo participante');
-        return {};
+        return {
+            deficiente : 'N'
+        };
     };
 
     $scope.carregarEventos = function() {

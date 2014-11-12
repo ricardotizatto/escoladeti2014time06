@@ -64,24 +64,9 @@ function eventoController($scope, $http, $routeParams) {
                         })
                         .error(function (data, status) {
                             console.log('erro ao deletar evento ' + data);
-                            BootstrapDialog.show({
-                                title: 'Notifica&ccedil;&atilde;o',
-                                message: 'Ocorreu um erro ao deletar o Evento: <b>' + evento.titulo + '</b>',
-                                type: BootstrapDialog.TYPE_DANGER,
-                                buttons: [{
-                                        id: 'btn-ok',
-                                        icon: 'glyphicon glyphicon-ok',
-                                        label: ' OK',
-                                        cssClass: 'btn-success btn-padrao',
-                                        autospin: false,
-                                        action: function (dialogRef) {
-                                            dialogRef.close();
-                                        }
-                                    }]
-                            });
                         });
             } else {
-                $scope.getTodos(1);
+                return;
             }
         });
     };
