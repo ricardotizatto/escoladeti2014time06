@@ -222,6 +222,10 @@ public class PessoaService {
 						pagina, "nome")));
 	}
 
+    public List<PessoaFisica> listarTodasPessoasFisicas() {
+        return pessoaFisicaRepository.findAll();
+    }
+
 	public List<ViewPessoaAssociado> listaTodosAssociados() {
 		return this.viewPessoaAssociadoRepository.findAll();
 	}
