@@ -86,7 +86,7 @@
         expectedResult="t">select exists(select * from information_schema.views b
         where b.table_name = 'viewAcompanhamentoSolicitacao')</sqlCheck> </preConditions>
         <dropView viewName="viewAcompanhamentoSolicitacao" /> </changeSet> -->
-    <changeSet author="martinho" id="mart201410100054">
+<!--     <changeSet author="martinho" id="mart201410100055">
         <createView viewName="viewacompanhamentosolicitacao"
                     replaceIfExists="true" schemaName="public">
             SELECT T1.ID AS SOLICITACAOID,
@@ -106,7 +106,7 @@
             LEFT JOIN LIVRO T7 ON T2.ID_MATERIAL = T7.ID
             ORDER BY T1.DATACHEGADA
         </createView>
-    </changeSet>
+    </changeSet> -->
 
     <changeSet id="w201409212348" author="Walber">
         <addUniqueConstraint columnNames="nome,codigo,sigla"
@@ -305,7 +305,7 @@
 
     <!-- <changeSet author="martinho" id="mart0139droptable"> <dropTable cascadeConstraints="true"
         tableName="viewperfildeacessousuario"></dropTable> </changeSet> -->
-    <changeSet author="martinho" id="mart0140createview">
+    <changeSet author="martinho" id="mart01411createview">
         <createView viewName="viewperfildeacessousuario"
                     replaceIfExists="true" schemaName="public">
             SELECT T1.ID, T1.ATIVO, T1.EMAIL, T1.LOGIN, T1.NOME, T2.ID AS PERFILDEACESSOUSUARIOID,
@@ -317,7 +317,7 @@
         </createView>
     </changeSet>
 
-    <changeSet author="martinho" id="mart0141createview">
+    <changeSet author="martinho" id="mart014111createview">
         <createView viewName="viewmaterialproduzido"
                     replaceIfExists="true" schemaName="public">
             SELECT T2.ID, T1.NOME, T1.AUTOR, T1.EDITORA, T1.ANOEDICAO, T1.DISCIPLINA,

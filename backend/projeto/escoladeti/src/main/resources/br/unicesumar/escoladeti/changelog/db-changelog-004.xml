@@ -126,7 +126,7 @@
 		<dropColumn tableName="vigenciaassociado" columnName="caracteristicapessoaid"/>
 	</changeSet>
 	
-	<changeSet id="201411081214" author="Walber">
+<!-- 	<changeSet id="201411081214" author="Walber">
 		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="vigenciaassociado" columnName="caracteristicapessoaid" />
@@ -139,7 +139,7 @@
 			</column>
 		</addColumn>
 
-	</changeSet>
+	</changeSet> -->
 	<changeSet id="201411062241" author="Walber">
 		<createView viewName="viewpessoaassociado" replaceIfExists="true"
 			schemaName="public">

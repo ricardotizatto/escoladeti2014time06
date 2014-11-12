@@ -207,6 +207,22 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="65" y="23" width="37" height="20" uuid="84bbecf5-d3ec-4994-824c-874d8953626a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="23" width="63" height="20" uuid="72cb99b1-be93-4f1b-ad4f-40e3dd14af54"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Total:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="18" width="555" height="1" uuid="a2525af6-173f-47b3-b30b-eca5ba24554e"/>
+			</line>
+		</band>
 	</summary>
 </jasperReport>
