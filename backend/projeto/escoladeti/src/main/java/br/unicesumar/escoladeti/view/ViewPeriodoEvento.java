@@ -11,22 +11,33 @@ public class ViewPeriodoEvento implements Serializable{
 
     @Id
     private Long id;
+//    private Long eventoid;
     private String titulo;
     private String descricao;
-    private String localevento;
+    private String local;
     private boolean statusevento;
     @Temporal(TemporalType.DATE)
     private Date datainicio;
-    
+//    private String periodoinicio;
+//    private String tituloperiodo;
+
     public ViewPeriodoEvento(){
     }
-
+    
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
+
+//    public Long getEventoid() {
+//        return eventoid;
+//    }
+//    public void setEventoid(Long eventoid) {
+//        this.eventoid = eventoid;
+//    }
+    
     
     public String getTitulo() {
         return titulo;
@@ -42,11 +53,11 @@ public class ViewPeriodoEvento implements Serializable{
         this.descricao = descricao;
     }
 
-    public String getLocalEvento() {
-        return localevento;
+    public String getLocal() {
+        return local;
     }
-    public void setLocalEvento(String localevento) {
-        this.localevento = localevento;
+    public void setLocal(String local) {
+        this.local = local;
     }
 
     public boolean isStatusevento() {
@@ -56,11 +67,25 @@ public class ViewPeriodoEvento implements Serializable{
         this.statusevento = statusevento;
     }
 
-    public Date getDataInicio() {
+    public Date getDatainicio() {
         return datainicio;
     }
-    public void setDataInicio(Date datainicio) {
+    public void setDatainicio(Date datainicio) {
         this.datainicio = datainicio;
     }
+
+//    public String getPeriodoinicio() {
+//        return periodoinicio;
+//    }
+//    public void setPeriodoinicio(String periodoinicio) {
+//        this.periodoinicio = periodoinicio;
+//    }
+//
+//    public String getTituloperiodo() {
+//        return tituloperiodo;
+//    }
+//    public void setTituloperiodo(String tituloperiodo) {
+//        this.tituloperiodo = tituloperiodo;
+//    }
 
 }

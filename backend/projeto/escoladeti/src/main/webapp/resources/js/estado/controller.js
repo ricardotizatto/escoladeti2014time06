@@ -29,7 +29,6 @@ function EstadoController($scope, $routeParams, paisService, estadoService) {
                         })
                         .error(function (data, status) {
                             console.log('Estado não foi deletado', data);
-                            toastr.error(data.message);
                         });
             }
         });

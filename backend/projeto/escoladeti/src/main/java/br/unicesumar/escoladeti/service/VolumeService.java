@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.service;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.entity.*;
+import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
 import br.unicesumar.escoladeti.repository.SolicitacaoVolumeRepository;
@@ -9,6 +10,8 @@ import br.unicesumar.escoladeti.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by Jhonatan on 16/09/2014.
@@ -43,6 +46,15 @@ public class VolumeService {
         volume.marcarComoImpresso(comandoSalvarVolume);
         Volume volumeSalvo = volumeRepository.save(volume);
         return volumeSalvo;
+    }
+
+    @Transactional
+    public Volume concluir(Long id, ComandoSalvarVolume comandoSalvarVolume) {
+        atualizarVolume(id, comandoSalvarVolume);
+        Volume volume = volumeRepository.findOne(id);
+        volume.concluir(comandoSalvarVolume);
+        volumeRepository.save(volume);
+        return volume;
     }
 
     @Transactional
@@ -96,10 +108,24 @@ public class VolumeService {
         solicitacaoVolume.setVolume(volume);
         solicitacaoVolumeRepository.save(solicitacaoVolume);
 
-
-
+        atualizarSolicitacaoItens(livro.getId(), solicitacaoItem.getTraducaoMaterial(), volume, solicitacaoItem.getId());
 
         return volume;
+    }
+
+
+    private void atualizarSolicitacaoItens(Long idLivro, Transcricao transcricao, Volume volume, Long idSolicitacaoItem) {
+        List<SolicitacaoItem> solicitacaoItems = solicitacaoItemRepository.findByLivroIdAndTraducaoMaterial(idLivro, transcricao);
+
+        for (SolicitacaoItem solicitacaoItem : solicitacaoItems) {
+
+            if (solicitacaoItem.getId().equals(idSolicitacaoItem)) {
+                continue;
+            }
+
+            SolicitacaoVolume solicitacaoVolume = solicitacaoItem.gerarSolicitacaoVolume(volume);
+            solicitacaoVolumeRepository.save(solicitacaoVolume);
+        }
     }
 
     private Volume montarVolume(ComandoSalvarVolume comandoSalvarVolume) {
@@ -118,9 +144,10 @@ public class VolumeService {
         Volume volume = montarVolume(comandoSalvarVolume);
         volume.setId(id);
         volume.setStatus(volumeSalvo.getStatus());
+        volume.setIdLivro(volumeSalvo.getIdLivro());
         volume.setDataEnviado(volumeSalvo.getDataEnviado());
         volume.setCaminhoAnexo(volumeSalvo.getCaminhoAnexo());
-        volume.setDataImpressao(volume.getDataImpressao());
+        volume.setTranscricao(volumeSalvo.getTranscricao());
         volume.setDataEnviado(volumeSalvo.getDataEnviado());
         return volumeRepository.save(volume);
     }
