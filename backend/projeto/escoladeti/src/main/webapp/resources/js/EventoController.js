@@ -38,7 +38,12 @@ function eventoController($scope, $http, $routeParams) {
                     headers: {'Content-Type': 'application/json; charset=UTF-8'}
                 })
                         .success(function (data, status) {
-                            $scope.getTodos(1);
+                            console.log($scope.status);
+                            if($scope.status == 'aberto'){
+                             $scope.getTodosAbertos(1);   
+                            }else{
+                             $scope.getTodosFechados(1);      
+                            }
                             console.log('evento deletado');
                             BootstrapDialog.show({
                                 title: 'Notifica&ccedil;&atilde;o',
