@@ -162,7 +162,7 @@
                             <li><a href="#/listapais">Pais</a></li>
                             <li><a href="#/listaestado">Estado</a></li>
                             <li><a href="#/listacidade">Cidade</a></li>
-                            <li><a href="#/listadistrito">Distrito</a></li>
+<!--                             <li><a href="#/listadistrito">Distrito</a></li> -->
                         </ul>
                     </li>
                     <li>

@@ -114,7 +114,8 @@
     </changeSet>
 
     <changeSet author="catabriga" id="32465632">
-        <dropView viewName="viewacompanhamentosolicitacao"></dropView>
+    	
+
         <createView viewName="viewacompanhamentosolicitacao"
                     replaceIfExists="true" schemaName="public">
             SELECT T1.ID AS SOLICITACAOID,
