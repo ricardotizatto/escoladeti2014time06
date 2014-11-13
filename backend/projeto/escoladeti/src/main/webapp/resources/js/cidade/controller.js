@@ -28,7 +28,6 @@ function CidadeController($scope, $routeParams, cidadeService, estadoService) {
 					toastr.success('Cidade ' + cidade.nome + ' deletada.');
 				}).error(function(data, status) {
 					console.log('Cidade não foi deletado', data);
-					toastr.error(data.message);
 				});
 			}
 		});

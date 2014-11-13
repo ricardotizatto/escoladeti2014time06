@@ -31,7 +31,7 @@
 			<form name='f' action="j_spring_security_check" method='POST'>
 				<div class="row">
 					<div class="form-group col-md-4 col-md-offset-4">
-						<input type="text" class="form-control"placeholder="Usuï¿½rio"
+						<input type="text" class="form-control"placeholder="Usuário"
 							name="j_username" />
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 					<div class="row">
 						<div
 							class="col-md-4 col-md-offset-4 alert alert-danger text-center">
-							Falha na autenticaï¿½ï¿½o.</div>
+							Falha na autenticação.</div>
 					</div>
 				</c:if>
 			</form>
