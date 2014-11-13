@@ -45,21 +45,7 @@ function eventoController($scope, $http, $routeParams) {
                              $scope.getTodosFechados(1);      
                             }
                             console.log('evento deletado');
-                            BootstrapDialog.show({
-                                title: 'Notifica&ccedil;&atilde;o',
-                                message: 'Evento <b>' + evento.titulo + '</b> deletado com Sucesso!',
-                                type: BootstrapDialog.TYPE_SUCCESS,
-                                buttons: [{
-                                        id: 'btn-ok',
-                                        icon: 'glyphicon glyphicon-ok',
-                                        label: ' OK',
-                                        cssClass: 'btn-success btn-padrao',
-                                        autospin: false,
-                                        action: function (dialogRef) {
-                                            dialogRef.close();
-                                        }
-                                    }]
-                            });
+                            toastr.success("Evento deletado com sucesso");
                             $scope.voltar();
                         })
                         .error(function (data, status) {

@@ -162,6 +162,12 @@
 	<dropNotNullConstraint tableName="pessoafisica" columnName="rg"/>
 	<dropNotNullConstraint tableName="pessoafisica" columnName="cpf"/>
 	</changeSet>
-
+        
+        <changeSet id="wwr12112014" author="winicius">
+		<addColumn tableName="evento">
+			<column name="limite" type="int8"></column>
+                        <column name="disponivel" type="int8"></column>
+                </addColumn>
+	</changeSet>
 </databaseChangeLog>
 
