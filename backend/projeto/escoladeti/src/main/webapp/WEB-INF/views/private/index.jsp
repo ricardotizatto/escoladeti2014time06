@@ -209,7 +209,7 @@
                             <span class="title">PRODUÇÃO</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">Solicitaçãoo</a></li>
+                            <li><a href="#/listasolicitacoes">Solicitação</a></li>
                             <li><a href="#/acompanhamento">Acompanhamento de Solicitação</a></li>
                         </ul>
                     </li>
