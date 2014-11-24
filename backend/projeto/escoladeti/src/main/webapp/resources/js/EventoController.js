@@ -38,45 +38,21 @@ function eventoController($scope, $http, $routeParams) {
                     headers: {'Content-Type': 'application/json; charset=UTF-8'}
                 })
                         .success(function (data, status) {
-                            $scope.getTodos(1);
+                            console.log($scope.status);
+                            if($scope.status == 'aberto'){
+                             $scope.getTodosAbertos(1);   
+                            }else{
+                             $scope.getTodosFechados(1);      
+                            }
                             console.log('evento deletado');
-                            BootstrapDialog.show({
-                                title: 'Notifica&ccedil;&atilde;o',
-                                message: 'Evento <b>' + evento.titulo + '</b> deletado com Sucesso!',
-                                type: BootstrapDialog.TYPE_SUCCESS,
-                                buttons: [{
-                                        id: 'btn-ok',
-                                        icon: 'glyphicon glyphicon-ok',
-                                        label: ' OK',
-                                        cssClass: 'btn-success btn-padrao',
-                                        autospin: false,
-                                        action: function (dialogRef) {
-                                            dialogRef.close();
-                                        }
-                                    }]
-                            });
+                            toastr.success("Evento deletado com sucesso");
                             $scope.voltar();
                         })
                         .error(function (data, status) {
                             console.log('erro ao deletar evento ' + data);
-                            BootstrapDialog.show({
-                                title: 'Notifica&ccedil;&atilde;o',
-                                message: 'Ocorreu um erro ao deletar o Evento: <b>' + evento.titulo + '</b>',
-                                type: BootstrapDialog.TYPE_DANGER,
-                                buttons: [{
-                                        id: 'btn-ok',
-                                        icon: 'glyphicon glyphicon-ok',
-                                        label: ' OK',
-                                        cssClass: 'btn-success btn-padrao',
-                                        autospin: false,
-                                        action: function (dialogRef) {
-                                            dialogRef.close();
-                                        }
-                                    }]
-                            });
                         });
             } else {
-                $scope.getTodos(1);
+                return;
             }
         });
     };

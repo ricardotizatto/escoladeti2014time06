@@ -114,7 +114,7 @@
 
                     <ul class="nav pull-right notifcation-center">	
                         <li class="dropdown" > 
-                            <a href="./" class="dropdown-toggle active" data-toggle=""> 
+                            <a href="./" class="active">
                                 <div class="iconset top-home"></div> 
                             </a> 
                         </li>
@@ -209,7 +209,7 @@
                             <span class="title">PRODUÇÃO</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">Solicitaçãoo</a></li>
+                            <li><a href="#/listasolicitacoes">Solicitação</a></li>
                             <li><a href="#/acompanhamento">Acompanhamento de Solicitação</a></li>
                         </ul>
                     </li>

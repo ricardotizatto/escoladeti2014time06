@@ -38,7 +38,7 @@
                 <div class="col-sm-2">
                     <div class="form-group {{formEvento.valor.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Valor R$ *</strong></label>
-                        <input type="text" name="valor" title="Substituir (,) por (.)" class="form-control" ng-pattern="/^(\d{1,3}(\.\d{3})*|(\d+))(\.\d{2})?$/"
+                        <input type="text" name="valor" money title="Substituir (,) por (.)" class="form-control" ng-pattern="/^(\d{1,3}(\.\d{3})*|(\d+))(\.\d{2})?$/"
                                ng-model="evento.valor" required />
                         <span class="help-block" ng-show="formEvento.valor.$error.pattern">Ex: 15.00</span>
                     </div>
@@ -104,14 +104,14 @@
                                         <th class="col-sm-2">Data</th>
                                         <th class="col-sm-2">Início</th>
                                         <th class="col-sm-2">Termino</th>
-                                        <th class="col-sm-3">Ações</th>
+                                        <th class="col-sm-3 center-text">Ações</th>
                                     </tr>
                                     <tr ng-repeat="periodo in evento.periodos">
                                         <td ng-bind="periodo.tituloperiodo"></td>
                                         <td ng-bind="periodo.data | date: 'dd-MM-yyyy' "></td>
                                         <td ng-bind="periodo.inicio"></td>
                                         <td ng-bind="periodo.fim"></td>
-                                        <td>
+                                        <td class="center-text">
                                             <button class='btn btn-warning btn-sm'
                                                     ng-click="editarPeriodo($index)" data-toggle="modal"
                                                         data-target="#modalData">

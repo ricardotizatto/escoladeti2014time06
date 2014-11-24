@@ -25,12 +25,12 @@ public class LivroService {
         }
         throw new Exception("O Ano não pode ser maior que o atual");
 
-    //return this.livroRepository.save (livro);
-}
-public DataPage<Livro> getTodos(Integer pagina){
+        //return this.livroRepository.save (livro);
+    }
+    public DataPage<Livro> getTodos(Integer pagina){
         return new DataPage<>(livroRepository.findAll(pageRequestForAsc(pagina, "nome")));
     }
-    
+
     public List<Livro> getTodos(){
         return this.livroRepository.findAll();
     }
@@ -46,7 +46,6 @@ public DataPage<Livro> getTodos(Integer pagina){
     public Livro getById(Long id) {
         return this.livroRepository.findById(id);
     }
-    
 
     public Livro buscarLivroPorNomeAutorEditoraAnoEdicao(Livro livro, Long id) {
         return this.livroRepository.findByNomeAndAutorAndEditoraAndAnoEdicaoAndIdNot(
@@ -55,5 +54,9 @@ public DataPage<Livro> getTodos(Integer pagina){
 
     public DataPage<Livro> listarLivrosTranscritos(Integer pagina) {
         return new DataPage<>(livroRepository.findAll(pageRequestForAsc(pagina, "nome")));
+    }   
+    
+    public DataPage<Livro> getTodos(int i, String q) {
+        return new DataPage<>(livroRepository.findByNomeContainingOrderByNomeAsc(q, pageRequestForAsc(1, "nome")));
     }
 }

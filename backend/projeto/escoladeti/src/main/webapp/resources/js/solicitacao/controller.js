@@ -6,7 +6,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	var ItemCorrente = function () {
 		this.outro = "";
 		this.traducaoMaterial = "BRAILLE";
-		this.livro = {};	
+//		this.livro = {};
 		this.status = 'AGUARDANDO';
         this.BuscaCep = BuscaCep;
 	};	
@@ -91,6 +91,61 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 
 	};
 
+    $scope.select2Livro = {
+        allowClear: true,
+        placeholder: 'selecione',
+
+        ajax: {
+            url: './rest/livroSource/livro',
+
+            data: function (termo) {
+                var termoPesquisa;
+
+                if (termo)  {
+                    termoPesquisa = termo.toUpperCase();
+                }
+                return {
+                    q: termoPesquisa
+                };
+
+            },
+            results: function (data, page) {
+
+                var livros = data.list.map(function (livro) {
+                    return {
+                        text: livro.nome,
+                        id: livro.id
+                    };
+                });
+
+                $scope.livros = livros;
+
+                return {
+                    results: livros
+                };
+            }
+        },
+
+        initSelection: function(element, callback) {
+            var valor = element.val();
+
+            $http({
+                method: 'GET',
+                url: './rest/livroSource/livro/'+valor
+            }).success(function (livro) {
+
+                callback({
+                    text: livro.nome,
+                    id: livro.id
+                })
+
+            });
+
+        }
+
+
+    };
+
 
     Cidade.buscarTodos().success(function (cidades) {
         //console.log('cidades:',cidades);
@@ -99,6 +154,10 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
 	$scope.enviarSolicitacao = function () {
 		$log.debug('enviando solicitacao');
+
+        $scope.solicitacao.itensSolicitacao.forEach(function (item) {
+            item.livro = item.livro.id
+        });
 		
 		if ($scope.solicitacao.municipio) {
 			$scope.solicitacao.municipio = $scope.solicitacao.municipio.id;
@@ -156,9 +215,9 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 			$scope.solicitacao.municipio = solicitacao.municipio ? solicitacao.municipio.id : null;
 			$scope.solicitacao.responsavel = solicitacao.responsavel ? solicitacao.responsavel.id : null;
 			
-			solicitacao.itensSolicitacao.forEach(function (item) {
-				item.livro = item.livro.id; 
-			});
+//			solicitacao.itensSolicitacao.forEach(function (item) {
+//				item.livro = item.livro.id;
+//			});
 
 		});
 	};
@@ -182,17 +241,21 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	
 	$http({
 		method: 'GET',
-		url: './rest/livroSource/livros'			
+		url: './rest/livroSource/livros'
 	}).success(function (data) {
 		$scope.livros = data;
+
+        $scope.livros.forEach(function (livro) {
+            livro.text = livro.nome
+        })
 	});
-	
+
 	
 	$scope.getDescricaoMaterial = function (item) {		
-		var livro = buscarLivro(item.livro);
+		var livro = buscarLivro(item.livro.id);
 		
 		if (livro)
-			return livro.nome;
+			return livro.text;
 	};
 	
 	function buscarLivro(idLivro) {
@@ -212,13 +275,13 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 	};
 	
 	$scope.adicionarMaterial = function () {
-        var livroId  = $scope.itemCorrente.livro,
+        var livroId  = $scope.itemCorrente.livro.id,
             traducao = $scope.itemCorrente.traducaoMaterial,
             outro = $scope.itemCorrente.outro;
 
         $scope.solicitacao.itensSolicitacao.forEach(function (item) {
             console.log(item);
-            if (livroId === item.livro
+            if (livroId === item.livro.id
                 && traducao == item.traducaoMaterial) {
                 toastr.warning('Livro já adicionado para esta tradução.');
                 livroId = null;

@@ -55,9 +55,11 @@
             </table>
         </div>
     </div>
+    <div class="text-center">
     <pagination boundary-links="true" num-pages="pagina.pageCount" total-items="pagina.pageCount*pagina.maxRows" items-per-page="pagina.maxRows"
                 ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="pagina.maxPagesToShow"
                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </pagination>
+    </div>
 </div>
 
