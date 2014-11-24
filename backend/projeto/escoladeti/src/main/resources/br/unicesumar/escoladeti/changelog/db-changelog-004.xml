@@ -123,10 +123,10 @@
 		<preConditions onFail="MARK_RAN" onError="MARK_RAN">
 			<columnExists tableName="vigenciaassociado" columnName="caracteristicapessoaid" />
 		</preConditions>
-		<dropColumn tableName="vigenciaassociado" columnName="caracteristicapessoaid"/>
+		<dropColumn tableName="vigenciaassociado" columnName="caracteristicapessoaid" />
 	</changeSet>
-	
- 	<changeSet id="201411081214" author="Walber">
+
+	<changeSet id="201411081214" author="Walber">
 		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
 			<not>
 				<columnExists tableName="vigenciaassociado" columnName="caracteristicapessoaid" />
@@ -157,17 +157,24 @@
 				ORDER BY T1.NOME ASC
     	</createView>
 	</changeSet>
-	
+
 	<changeSet id="201411081233" author="Walber">
-	<dropNotNullConstraint tableName="pessoafisica" columnName="rg"/>
-	<dropNotNullConstraint tableName="pessoafisica" columnName="cpf"/>
+		<dropNotNullConstraint tableName="pessoafisica"
+			columnName="rg" />
+		<dropNotNullConstraint tableName="pessoafisica"
+			columnName="cpf" />
 	</changeSet>
-        
-        <changeSet id="wwr12112014" author="winicius">
+
+	<changeSet id="wwr12112014" author="winicius">
+		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+			<not>
+				<columnExists tableName="evento" columnName="limite" />
+			</not>
+		</preConditions>
 		<addColumn tableName="evento">
 			<column name="limite" type="int8"></column>
-                        <column name="disponivel" type="int8"></column>
-                </addColumn>
+			<column name="disponivel" type="int8"></column>
+		</addColumn>
 	</changeSet>
 </databaseChangeLog>
 
