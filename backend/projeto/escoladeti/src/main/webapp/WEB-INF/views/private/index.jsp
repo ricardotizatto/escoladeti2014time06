@@ -114,7 +114,7 @@
 
                     <ul class="nav pull-right notifcation-center">	
                         <li class="dropdown" > 
-                            <a href="./" class="dropdown-toggle active" data-toggle=""> 
+                            <a href="./" class="active">
                                 <div class="iconset top-home"></div> 
                             </a> 
                         </li>

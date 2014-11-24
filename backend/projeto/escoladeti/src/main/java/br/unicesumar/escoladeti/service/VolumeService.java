@@ -60,7 +60,7 @@ public class VolumeService {
     @Transactional
     public Volume marcarComoRevisado(Long id, ComandoSalvarVolume comando) {
         Volume volume = volumeRepository.findOne(id);
-
+        atualizarVolume(id, comando);
         volume.marcarComoRevisado(comando.getDataAsDate(), comando.getRevisor(), comando.getObservacao());
         return volumeRepository.save(volume);
     }

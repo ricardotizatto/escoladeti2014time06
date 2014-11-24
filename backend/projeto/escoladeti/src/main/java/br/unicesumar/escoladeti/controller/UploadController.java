@@ -65,6 +65,10 @@ public class UploadController {
             try {
                 byte[] bytes = file.getBytes();
                 String fileDir = dir.getAbsolutePath() + File.separator + name;
+                if (fileDir.length() > 255) {
+                    throw new RuntimeException("Nome do arquivo muito grande para upload");
+                }
+
                 BufferedOutputStream stream =
                         new BufferedOutputStream(new FileOutputStream(new File(fileDir)));
                 stream.write(bytes);

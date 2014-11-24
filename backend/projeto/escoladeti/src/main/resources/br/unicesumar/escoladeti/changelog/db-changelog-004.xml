@@ -169,5 +169,13 @@
                         <column name="disponivel" type="int8"></column>
                 </addColumn>
 	</changeSet>
+
+    <changeSet id="32321321" author="catabriga">
+        <dropColumn tableName="volume" columnName="caminho_anexo"></dropColumn>
+        <addColumn tableName="volume">
+            <column name="caminho_anexo" type="varchar(255)"></column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
 
