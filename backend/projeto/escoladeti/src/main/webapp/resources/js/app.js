@@ -204,6 +204,10 @@ app.config(['$routeProvider',
                 templateUrl: './pages/producao/volume.html',
                 controller: 'VolumeController'
             })
+            .when('/volume/:id', {
+                templateUrl: './pages/producao/volume.html',
+                controller: 'VolumeController'
+            })
             .when('/ordem-producao/:idOrdemProducao/volume/:id', {
                 templateUrl: './pages/producao/volume.html',
                 controller: 'VolumeController'
