@@ -6,6 +6,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
 
   $scope.select2 = 'one';
   
+  $scope.pageNumber = 1;
+  
 
   $scope.init = function () {
     $scope.listarTodasPessoas(1);
@@ -43,7 +45,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
   };
   
   $scope.verificaCaracteristica = function(tipo){
-    $scope.caracteristicas = undefined;
+	  $scope.pessoaCaracteristica = {};
+	  //$scope.caracteristicas = undefined;
     CaracteristicaService.query({tipo : tipo}
       ,function(data){
         $scope.caracteristicas = data;
@@ -109,9 +112,9 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
         $scope.pessoa = pessoa;
         $scope.estaEditando = isEditing();
         $scope.maskCpf = '999.999.999-99';
-        $scope.pessoaCaracteristica = {};
-        $scope.pessoaCaracteristica.caracteristicas = [];
         $scope.verificaCaracteristica(pessoa.tipo);
+        //$scope.pessoaCaracteristica = {};
+        $scope.pessoaCaracteristica.caracteristicas = [];
         $scope.pessoa.pessoaCaracteristica.forEach(function(item,index){
           $scope.pessoaCaracteristica.caracteristicas.push(item.caracteristica.id);
           if(item.caracteristica.id == 2)
@@ -199,7 +202,7 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
 
     $scope.pessoa.$save(function () {
       toastr.success($scope.pessoa.nome + ' salvo com sucesso');
-      //$scope.novaPessoa($scope.pessoa.tipo);
+      // $scope.novaPessoa($scope.pessoa.tipo);
       window.location = '#/listapessoa';
     });
 
@@ -211,8 +214,8 @@ function PessoaController($scope, $location, $log, $routeParams, $http, $timeout
       if (result) {
         Pessoa.delete({id: pessoa.id, tipo: pessoa.tipo}, function () {
           toastr.success(pessoa.nome + ' deletada com sucesso');
+          $scope.listarTodasPessoas(1);
         });
-        //$scope.listarTodasPessoas($scope.pageNumber);
       }
     });
   };

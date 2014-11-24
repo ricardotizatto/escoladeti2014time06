@@ -57,8 +57,7 @@
 					<th class="col-md-3">Responsável</th>
 					<th class="col-md-3">Paginas</th>
 					<th class="col-md-3">Status</th>
-					<th class="col-md-2">Enviado</th>
-                                        <th class="col-md-2">Transcrição</th>
+					<th class="col-md-2">Transcrição</th>
 				</tr>
 
 				<tr ng-repeat="volume in livro.volumes | orderBy: ['+transcricao','+paginaInicio']">
@@ -66,7 +65,6 @@
 					<td>{{volume.responsavel.nome}}</td>
 					<td>{{volume.paginaInicio}} / {{volume.paginaFim}}</td>
                                         <td>{{volume.status}}</td>
-					<td>{{volume.dataEnviado | date:'dd/MM/yyyy'}}</td>
 					<td>{{volume.transcricao}}</td>
 				</tr>
 			</table>

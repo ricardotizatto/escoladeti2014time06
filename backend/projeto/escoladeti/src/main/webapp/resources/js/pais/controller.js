@@ -17,7 +17,6 @@ function PaisController($scope, $routeParams, paisService) {
                     .error(function (data, status) {
                         console.log('erro ao deletar pais ' + data);
                         console.log(data.messageDeveloper);
-                        toastr.error(data.message);
                     });
             }
         });
@@ -47,12 +46,10 @@ function PaisController($scope, $routeParams, paisService) {
         window.location = '#/cadastropais/' + pais.id;
     };
     
-    $scope.buscaPaisContendoNome = function () {
-    	console.log($scope.busca);    	
-    	paisService.buscarPorNome($scope.busca)
-    		.then(function (retorno){
-    			console.log(retorno.data.list);
-    			$scope.paises = retorno.data;
+    $scope.buscaPaisContendoNome = function (busca) {
+    	paisService.buscarPorNome(busca)
+    		.success(function (retorno){
+    			$scope.paises = retorno;
     		});
     };   		
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
@@ -26,7 +27,9 @@ public class ExceptionController {
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public InfoError handleException(Exception e) {
             e.printStackTrace();
-		return new InfoError(e.getMessage(), e.getLocalizedMessage() );
+        String userMessage = e.getMessage();
+        String developerMessage = e.getLocalizedMessage();
+		return new InfoError(userMessage, developerMessage );
 	}
 
     @ExceptionHandler( RuntimeException.class)
@@ -34,7 +37,18 @@ public class ExceptionController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public InfoError handleException(RuntimeException e) {
         e.printStackTrace();
-        return new InfoError(e.getMessage(), e.getLocalizedMessage() );
+        String userMessage = e.getMessage();
+        String developerMessage = e.getLocalizedMessage();
+		return new InfoError(userMessage, developerMessage );
+    }
+    
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public InfoError handleDataIntegrityViolationException(DataIntegrityViolationException e){
+    	e.printStackTrace();
+    	
+    	return new InfoError(e.getCause().getCause().getMessage(), e.getCause().getCause().getLocalizedMessage());
     }
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)

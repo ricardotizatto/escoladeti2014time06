@@ -76,6 +76,7 @@
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
 		<script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
+        <script type="text/javascript" src="./resources/js/relatorioAssociado/RelatorioController.js" ></script>
         
 
         <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
@@ -161,7 +162,7 @@
                             <li><a href="#/listapais">Pais</a></li>
                             <li><a href="#/listaestado">Estado</a></li>
                             <li><a href="#/listacidade">Cidade</a></li>
-                            <li><a href="#/listadistrito">Distrito</a></li>
+<!--                             <li><a href="#/listadistrito">Distrito</a></li> -->
                         </ul>
                     </li>
                     <li>
@@ -182,10 +183,14 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#/listapessoa">
+                        <a href="#">
                             <i class="fa fa-male"></i>
                             <span class="title">PESSOAS</span>
                         </a>
+                        <ul class="sub-menu">
+                        <li><a href="#/listapessoa">Cadastro</a>
+                        <li><a href="#/relatorio/associados">Relatório Associado</a>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">
