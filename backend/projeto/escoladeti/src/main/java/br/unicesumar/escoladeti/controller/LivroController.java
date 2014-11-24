@@ -38,9 +38,16 @@ public class LivroController implements Serializable {
         return this.livroService.getById(id);
     }
 
-    @RequestMapping(value = "/livro", method = RequestMethod.GET)
+    @RequestMapping(value = "/livro", method = RequestMethod.GET, params = {"q"})
     @ResponseBody
-    public DataPage<Livro> getTodos() {
+    public DataPage<Livro> getTodos(
+            @RequestParam(required = false, value = "q", defaultValue = "") String q ) {
+        return this.livroService.getTodos(1, q);
+    }
+
+    @RequestMapping(value = "/livro")
+    @ResponseBody
+    public DataPage<Livro> getTodosLivroSemFiltro() {
         return this.livroService.getTodos(1);
     }
 
@@ -50,11 +57,11 @@ public class LivroController implements Serializable {
         return this.livroService.getTodos();
     }
 
-    @RequestMapping(value = "/livro", params = {"q"}, method = RequestMethod.GET)
-    @ResponseBody
-    public DataPage<Livro> getPorNome(@RequestParam String q) {
-        return livroService.getLivroPorNome(q);
-    }
+//    @RequestMapping(value = "/livro", params = {"q"}, method = RequestMethod.GET)
+//    @ResponseBody
+//    public DataPage<Livro> getPorNome(@RequestParam String q) {
+//        return livroService.getLivroPorNome(q);
+//    }
 
     @RequestMapping(value = {"/listar/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody

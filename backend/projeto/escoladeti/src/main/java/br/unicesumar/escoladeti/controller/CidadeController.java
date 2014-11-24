@@ -52,7 +52,7 @@ public class CidadeController implements Serializable {
     
     @RequestMapping(value = "/cidade",params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Cidade> getPorNome(@RequestParam String q){
+    public DataPage<Cidade> getPorNome(@RequestParam() String q){
         return cidadeService.getCidadePorNome(q);
     }
     
