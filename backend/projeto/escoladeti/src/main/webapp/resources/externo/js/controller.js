@@ -23,7 +23,7 @@ function ExternoController($scope, $http, $routeParams) {
         });
     },
     $scope.buscaMateriaisContendoNome = function (){
-//        console.log('busca materiais: ' + $scope.busca );
+        console.log('busca materiais: ' + $scope.busca );
         if (!$scope.busca.empty){
         $http({
                 method: 'GET',

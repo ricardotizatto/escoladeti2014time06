@@ -163,6 +163,10 @@
 	<dropNotNullConstraint tableName="pessoafisica" columnName="rg"/>
 	<dropNotNullConstraint tableName="pessoafisica" columnName="cpf"/>
 	</changeSet>
+        
+        <changeSet author="martinho" id="mart0143dropview"> 
+            <dropView  viewName="viewmaterialproduzido"></dropView> 
+        </changeSet>
 
 </databaseChangeLog>
 
