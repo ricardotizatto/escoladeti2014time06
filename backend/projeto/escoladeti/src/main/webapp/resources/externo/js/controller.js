@@ -17,13 +17,13 @@ function ExternoController($scope, $http, $routeParams) {
     $scope.getMateriaisProduzidos = function (pageNumber){
         $http({
             method: 'GET',
-            url: './public/rest/materiaisproduzidos/pag/' + pageNumber
+            url: './public/rest/livrostranscritos/pag/' + pageNumber
         }).success(function (materiaisProduzidos) {
             $scope.materiaisProduzidos = materiaisProduzidos;
         });
     },
     $scope.buscaMateriaisContendoNome = function (){
-        console.log('busca materiais: '+ $scope.busca);
+//        console.log('busca materiais: ' + $scope.busca );
         if (!$scope.busca.empty){
         $http({
                 method: 'GET',

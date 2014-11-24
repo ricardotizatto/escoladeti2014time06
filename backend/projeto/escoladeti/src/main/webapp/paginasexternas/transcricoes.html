@@ -4,7 +4,7 @@
         <div class="row">
             <div class="span12">
                 <i class="icon-book page-title-icon"></i>
-                <h2>Materiais Transcritos pela AMACAP</h2>
+                <h2>Livros Transcritos pela AMACAP</h2>
             </div>
         </div>
     </div>
@@ -16,22 +16,30 @@
         <div class="span12">
             <form method="post" action="">
                 <div class="span12">
-                    <label for="name" class="nameLabel"><h3>Pesquisar Material Transcrito</h3></label>
-                    <input id="name" type="text" name="name" placeholder="Pesquisar Material Transcrito" ng-model="busca" ng-change="buscaMateriaisContendoNome()">
+                    <label for="name" class="nameLabel"><h3>Pesquisar Livro Transcrito</h3></label>
+                    <input class="form-control" id="name" type="text" name="busca" placeholder="Pesquisar Livro Transcrito" ng-model="busca" ng-change="buscaMateriaisContendoNome()">
                 </div>   
             </form>
         </div>
         <div class="span12 lista-transcricao">
             <ul>
                 <li ng-repeat="materialProduzido in materiaisProduzidos.list">
-                    <div class="material-transcricao">
+                    <div ng-show="materialProduzido.volumes" class="material-transcricao">
                         <h4>{{materialProduzido.nome}}</h4>
                         <p>
-                            <b>TRANSCRIÇÃO: </b><span class="desc-transcricao"> {{materialProduzido.transcricao != 'OUTRO' ? materialProduzido.transcricao : materialProduzido.outraTranscricao}} </span>
-                            <b> - AUTOR: </b><span class="desc-transcricao"> {{materialProduzido.autor}}</span>
-                            <b> - EDITORA: </b><span class="desc-transcricao">{{materialProduzido.editora}}</span>
-                            <b> - DISCIPLINA: </b><span class="desc-transcricao">{{materialProduzido.disciplina}}</span>
-                            <b> - ANO DE EDIÇÃO: </b><span class="desc-transcricao">{{materialProduzido.anoEdicao}}</span></p>
+                            <!--<b>TRANSCRIÇÃO: </b><span class="desc-transcricao"> {{materialProduzido.transcricao != 'OUTRO' ? materialProduzido.transcricao : materialProduzido.outraTranscricao}} </span>-->
+                            <b>Autor: </b><span class="desc-transcricao"> {{materialProduzido.autor}}</span>
+                            <b> - Editora: </b><span class="desc-transcricao">{{materialProduzido.editora}}</span>
+                            <b> - Disciplina: </b><span class="desc-transcricao">{{materialProduzido.disciplina}}</span>
+                            <b> - Ano de Edição: </b><span class="desc-transcricao">{{materialProduzido.anoEdicao}}</span></p>
+                            <ul>
+                                <li ng-repeat="volume in materialProduzido.volumes | orderBy: ['+transcricao','+paginaInicio'] ">
+                                    <div ng-show="volume.status === 'REVISADO' " >
+                                        Transcrição: {{volume.transcricao}} - 
+                                        Páginas: De {{volume.paginaInicio}} à {{volume.paginaFim}} 
+                                    </div>
+                                </li>
+                            </ul>    
                         <hr>
                     </div>
                 </li>  

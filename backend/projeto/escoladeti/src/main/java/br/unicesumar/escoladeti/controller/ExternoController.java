@@ -78,8 +78,8 @@ public class ExternoController implements Serializable{
     
     @RequestMapping(value = {"public/rest/livrostranscritos/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<ViewVolumeLivro> listarLivrosTranscritos(@PathVariable Integer pagina) {
-        return this.volumelivroService.listarLivrosTranscritos(pagina);
+    public DataPage<Livro> listarLivrosTranscritos(@PathVariable Integer pagina) {
+        return this.livroService.listarLivrosTranscritos(pagina);
     }
            
     @RequestMapping(value = "public/rest/buscamateriaisproduzidos", params = {"q"}, method = RequestMethod.GET)
