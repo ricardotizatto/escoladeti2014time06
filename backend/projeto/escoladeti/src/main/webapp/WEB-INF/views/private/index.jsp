@@ -158,7 +158,7 @@
             </div>
         </div>    	
         <div class="page-container row">
-            <div class="page-sidebar" id="main-menu" style="position: fixed">
+            <div class="page-sidebar" id="main-menu" >
                 <ul>
                     <li data-ng-repeat="item in ctrl.menu">
                         <a href="#" >
