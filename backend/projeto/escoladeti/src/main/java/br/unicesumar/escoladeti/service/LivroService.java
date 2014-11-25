@@ -36,7 +36,8 @@ public class LivroService {
     }
 
     public DataPage<Livro> getLivroPorNome(String nomeParcial) {
-        return new DataPage<>(livroRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+        return new DataPage<>(livroRepository.findByNomeContainingOrEditoraContainingOrDisciplinaContainingOrderByNomeAsc
+        (nomeParcial, nomeParcial, nomeParcial, pageRequestForAsc(1, "nome")));
     }
 
     public void deletar(Livro livro) {
@@ -47,12 +48,15 @@ public class LivroService {
         return this.livroRepository.findById(id);
     }
 
-
     public Livro buscarLivroPorNomeAutorEditoraAnoEdicao(Livro livro, Long id) {
         return this.livroRepository.findByNomeAndAutorAndEditoraAndAnoEdicaoAndIdNot(
                 livro.getNome(), livro.getAutor(), livro.getEditora(), livro.getAnoEdicao(), id);
     }
 
+    public DataPage<Livro> listarLivrosTranscritos(Integer pagina) {
+        return new DataPage<>(livroRepository.findAll(pageRequestForAsc(pagina, "nome")));
+    }   
+    
     public DataPage<Livro> getTodos(int i, String q) {
         return new DataPage<>(livroRepository.findByNomeContainingOrderByNomeAsc(q, pageRequestForAsc(1, "nome")));
     }

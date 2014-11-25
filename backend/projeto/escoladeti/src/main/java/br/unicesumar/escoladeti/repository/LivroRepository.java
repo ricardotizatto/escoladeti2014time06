@@ -14,4 +14,6 @@ public interface LivroRepository extends JpaRepository<Livro, Long>{
     
     public Page<Livro> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
     
+    public Page<Livro> findByNomeContainingOrEditoraContainingOrDisciplinaContainingOrderByNomeAsc(String nome, String editora, String disciplina, Pageable pageable);
+    
 }

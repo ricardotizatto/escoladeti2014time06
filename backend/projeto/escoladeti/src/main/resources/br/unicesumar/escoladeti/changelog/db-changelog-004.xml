@@ -108,7 +108,7 @@
 	</changeSet>
 
 	<changeSet author="martinho" id="mart0142createview">
-		<createView viewName="viewperiodoevento" replaceIfExists="true"
+	<createView viewName="viewperiodoevento" replaceIfExists="true"
 			schemaName="public">
             SELECT A.ID, A.TITULO, A.DESCRICAO, A.LOCAL, A.STATUSEVENTO,
             (SELECT MIN(B.DATA )
@@ -117,6 +117,7 @@
             FROM EVENTO A
             ORDER BY DATAINICIO ASC
         </createView>
+
 	</changeSet>
 
 	<changeSet id="201411081216" author="Walber">
@@ -176,6 +177,10 @@
 			<column name="disponivel" type="int8"></column>
 		</addColumn>
 	</changeSet>
+        
+        <changeSet author="martinho" id="mart0143dropview"> 
+            <dropView  viewName="viewmaterialproduzido"></dropView> 
+        </changeSet>
 
     <changeSet id="32321321" author="catabriga">
         <dropColumn tableName="volume" columnName="caminho_anexo"></dropColumn>

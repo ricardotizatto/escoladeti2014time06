@@ -14,26 +14,26 @@ function ExternoController($scope, $http, $routeParams) {
             $scope.ativa = pagina;   
         }
     },
-    $scope.getMateriaisProduzidos = function (pageNumber){
+    $scope.getLivrosTranscritos = function (pageNumber){
         $http({
             method: 'GET',
-            url: './public/rest/materiaisproduzidos/pag/' + pageNumber
-        }).success(function (materiaisProduzidos) {
-            $scope.materiaisProduzidos = materiaisProduzidos;
+            url: './public/rest/livrostranscritos/pag/' + pageNumber
+        }).success(function (livrosTranscritos) {
+            $scope.livrosTranscritos = livrosTranscritos;
         });
     },
-    $scope.buscaMateriaisContendoNome = function (){
-        console.log('busca materiais: '+ $scope.busca);
-        if (!$scope.busca.empty){
+    $scope.buscaMateriaisContendoNome = function (busca){
+       console.log('busca materiais: ' + busca );
+        if (!busca.empty){
         $http({
                 method: 'GET',
-                url: './public/rest/buscamateriaisproduzidos?q=' + $scope.busca.toUpperCase()
-            }).success(function (materiaisProduzidos) {
-                console.log('busca materiaisProduzidos', materiaisProduzidos);
-                $scope.materiaisProduzidos = materiaisProduzidos;
+                url: './public/rest/buscalivrostranscritos?q=' + busca.toUpperCase()
+            }).success(function (livrosTranscritos) {
+                console.log('busca livros Transcritos', livrosTranscritos);
+                $scope.livrosTranscritos = livrosTranscritos;
             });
         }else{
-           $scope.getMateriaisProduzidos(); 
+           $scope.getLivrosTranscritos($scope.pageNumber); 
         }    
     },
     $scope.getEventos = function (){
