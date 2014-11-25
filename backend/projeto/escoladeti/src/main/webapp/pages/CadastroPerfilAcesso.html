@@ -13,6 +13,19 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label class="control-label"> <strong>Item de acesso</strong> </label>
+                        <select type="text"  ui-select2="select2Options" multiple name="itemAcesso" class="input-default" ng-model="perfilAcesso.itemAcesso" required >
+                            <option ng-repeat="itemAcesso in itensAcesso" value="{{itemAcesso.id}}">{{itemAcesso.nome}}</option>
+
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+		 
+           <div class="row">
                 <div class="col-sm-12">
                     <span class="pull-right">	
                         <a class="btn btn-danger btn-padrao" ng-click="cancelar()">

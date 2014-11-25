@@ -9,7 +9,7 @@ public class ItemAcesso extends Entidade {
    
     private String nome;
 
-    public ItemAcesso() {
+   public ItemAcesso() {
     }
 
     public String getNome() {
@@ -20,5 +20,4 @@ public class ItemAcesso extends Entidade {
         this.nome = nome;
     }
 
-    
 }
