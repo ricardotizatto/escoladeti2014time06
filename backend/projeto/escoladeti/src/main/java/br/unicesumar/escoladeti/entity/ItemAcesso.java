@@ -9,11 +9,7 @@ public class ItemAcesso extends Entidade {
    
     private String nome;
     
-    @OneToOne
-    @JoinColumn(name = "id_submenu")
-    private SubMenu subMenu;
-
-    public ItemAcesso() {
+   public ItemAcesso() {
     }
 
     public String getNome() {
@@ -24,12 +20,5 @@ public class ItemAcesso extends Entidade {
         this.nome = nome;
     }
 
-    public SubMenu getSubMenu() {
-        return subMenu;
-    }
-
-    public void setSubMenu(SubMenu subMenu) {
-        this.subMenu = subMenu;
-    }
-    
+       
 }
