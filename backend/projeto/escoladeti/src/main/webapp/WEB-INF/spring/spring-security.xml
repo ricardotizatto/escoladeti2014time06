@@ -33,8 +33,8 @@
                          select usu.login as username, it.nome  from usuario usu
                          join PerfilAcessoUsuario pus on(usu.id = pus.id_usuario)
                          join perfilacesso per on (per.id = pus.id_perfilacesso)
-                         join perfilitemacesso piac on (piac.perfilacesso_id = per.id)
-                         join itemacesso it on (it.id = piac.itemacesso_id)
+                         join perfilitemacesso piac on (piac.id_perfilacesso = per.id)
+                         join itemacesso it on (it.id = piac.id_itemacesso)
                          where usu.login = ?
                          "
 

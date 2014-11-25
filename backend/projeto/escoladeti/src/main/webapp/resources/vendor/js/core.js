@@ -127,7 +127,7 @@ $(document).ready(function() {
         });
     }
 
-    setTimeout(beginMainMenu, 100);
+    setTimeout(beginMainMenu, 1000);
 //**********************************END MAIN MENU********************************
 		
 //***********************************BEGIN Fixed Menu*****************************

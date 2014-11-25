@@ -194,5 +194,95 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="989" author="catabriga">
+        <dropTable tableName="perfilitemacesso"></dropTable>
+
+        <createTable tableName="perfilitemacesso">
+            <column name="id" type="int8" >
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+
+            <column name="id_perfilacesso" type="INT8">
+                <constraints nullable="false" foreignKeyName="fk_perfilacesso"
+                             referencedColumnNames="id" referencedTableName="perfilacesso"/>
+            </column>
+            <column name="id_itemacesso" type="INT8">
+                <constraints nullable="false" foreignKeyName="fk_itemacesso"
+                             referencedColumnNames="id" referencedTableName="itemacesso" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1000" author="catabriga">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM ITEMACESSO</sqlCheck>
+        </preConditions>
+
+        <insert tableName="itemacesso">
+            <column name="id" value="1" type="int8"></column>
+            <column name="nome" value="LOCALIDADE" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="2" type="int8"></column>
+            <column name="nome" value="SEGURANCA" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="3" type="int8"></column>
+            <column name="nome" value="CADASTRO_PESSOA" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="4" type="int8"></column>
+            <column name="nome" value="RELATORIO_ASSOCIADO" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="5" type="int8"></column>
+            <column name="nome" value="INCRICAO_EVENTOS" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="6" type="int8"></column>
+            <column name="nome" value="LISTA_EVENTOS" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="7" type="int8"></column>
+            <column name="nome" value="SOLICITACAO" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="8" type="int8"></column>
+            <column name="nome" value="ACOMPANHAMENTO_SOLICITACAO" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="9" type="int8"></column>
+            <column name="nome" value="CADASTRO_LIVRO" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="10" type="int8"></column>
+            <column name="nome" value="CADASTRO_PRODUTO" type="varchar"></column>
+        </insert>
+
+
+        <insert tableName="itemacesso">
+            <column name="id" value="11" type="int8"></column>
+            <column name="nome" value="MOVIMENTO" type="varchar"></column>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
 

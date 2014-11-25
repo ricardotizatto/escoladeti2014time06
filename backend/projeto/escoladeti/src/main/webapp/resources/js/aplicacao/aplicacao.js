@@ -5,10 +5,8 @@ function Appcontroller($http) {
     var vm = this,
         itens = [];
 
-    console.log('ap controllerasdfasdf');
 
     $http.get('/rest/sessao').success(function (userDetails) {
-        console.log('USUARIO DETALHES', userDetails);
         vm.user = userDetails;
         vm.menu = montarMenu(userDetails.authorities, itens);
     });
@@ -41,10 +39,9 @@ function Appcontroller($http) {
 
                 var grupo = {
                     grupo: item.grupo,
-                    telas: telas
+                    telas: telas,
+                    icone: item.icone
                 };
-
-                console.log(grupo);
 
                 return grupo;
             })
@@ -58,6 +55,7 @@ function Appcontroller($http) {
         {
             grupo: 'LOCALIDADE',
             auth: 'LOCALIDADE',
+            icone: 'fa-location-arrow',
 
             telas: [
                 {
@@ -80,6 +78,7 @@ function Appcontroller($http) {
         {
             grupo: 'USUÁRIOS',
             auth: 'SEGURANCA',
+            icone: 'fa-user',
 
             telas: [
                 {
@@ -100,6 +99,7 @@ function Appcontroller($http) {
         {
 
             grupo: 'PESSOAS',
+            icone: 'fa-male',
 
             telas: [
                 {
@@ -118,6 +118,7 @@ function Appcontroller($http) {
         {
 
             grupo: 'EVENTOS',
+            icone: 'fa-star-half-o',
 
             telas: [
                 {
@@ -136,6 +137,7 @@ function Appcontroller($http) {
         {
 
             grupo: 'PRODUÇÃO',
+            icone: 'fa-cog',
 
             telas: [
                 {
@@ -154,6 +156,7 @@ function Appcontroller($http) {
         {
 
             grupo: 'MATERIAIS',
+            icone: 'fa-folder',
 
             telas: [
                 {
@@ -167,6 +170,7 @@ function Appcontroller($http) {
         {
 
             grupo: 'ESTOQUE',
+            icone: 'fa-dropbox',
 
             telas: [
                 {

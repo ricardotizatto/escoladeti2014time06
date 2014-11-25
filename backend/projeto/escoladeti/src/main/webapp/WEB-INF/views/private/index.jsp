@@ -96,7 +96,7 @@
         <script type="text/javascript" src="./resources	/vendor/js/jquery.sidr.min.js"></script>
 
     </head>
-    <body data-ng-controller="Appcontroller as ctrl" data-ng-clock>
+    <body data-ng-controller="Appcontroller as ctrl" ng-cloak >
         <div class="header navbar navbar-inverse "> 
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="navbar-inner">
@@ -157,7 +157,7 @@
                 <ul>
                     <li data-ng-repeat="item in ctrl.menu">
                         <a href="#" >
-                            <i class="fa fa-location-arrow"></i>
+                            <i class="fa {{item.icone}}"></i>
                             <span class="title">{{item.grupo}}</span>
                         </a>
                         <ul class="sub-menu">

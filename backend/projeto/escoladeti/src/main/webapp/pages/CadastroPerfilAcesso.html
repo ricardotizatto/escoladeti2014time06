@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="perfilAcessoController" ng-init="carregarPerfil()" ng-init="getItensAcesso()">
+﻿<div class="container" ng-controller="perfilAcessoController" ng-init="carregarPerfil()" ng-init="getItensAcesso()" ng-cloak>
     <fieldset>
         <div class="row">
             <div class="form-group col-sm-12">
@@ -13,23 +13,22 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-8 ">
                     <div class="form-group">
-                        <label class="control-label"> <strong>Item de acesso</strong> </label>
-                        <select type="text"  ui-select2="select2Options" multiple name="itemAcesso" class="input-default" ng-model="perfilAcesso.itemAcesso" required >
+                        <label class="control-label"> <strong>Privilégios</strong> </label>
+                        <select type="text"  ui-select2="select2Options" multiple name="itemAcesso" class="input-default" ng-model="perfilAcesso.itens" required >
                             <option ng-repeat="itemAcesso in itensAcesso" value="{{itemAcesso.id}}">{{itemAcesso.nome}}</option>
-
                         </select>
                     </div>
                 </div>
                 
             </div>
 		 
-           <div class="row">
-                <div class="col-sm-12">
-                    <span class="pull-right">	
-                        <a class="btn btn-danger btn-padrao" ng-click="cancelar()">
-                            <span class="glyphicon glyphicon-remove" ></span> Cancelar 
+           <div class="row" style="margin-top: 150px">
+                <div class="col-sm-12 form-group">
+                    <span class="pull-right">
+                        <a class="btn btn-primary btn-padrao" ng-click="cancelar()"> <i
+                                class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
                         </a>
                         <button type="submit" class="btn btn-success btn-padrao" >
                             <span class="glyphicon glyphicon-ok" ></span> Salvar	
