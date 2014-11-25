@@ -96,11 +96,13 @@ $(document).ready(function() {
 //*********************************** END CHAT POPUP*****************************	
 	
 //**********************************BEGIN MAIN MENU********************************
-	jQuery('.page-sidebar li > a').on('click', function (e) {
+
+    function beginMainMenu() {
+        jQuery('.page-sidebar li > a').on('click', function (e) {
             if ($(this).next().hasClass('sub-menu') == false) {
                 return;
-	}
-     var parent = $(this).parent().parent();
+            }
+            var parent = $(this).parent().parent();
 
             parent.children('li.open').children('a').children('.arrow').removeClass('open');
             parent.children('li.open').children('.sub-menu').slideUp(200);
@@ -123,6 +125,9 @@ $(document).ready(function() {
 
             e.preventDefault();
         });
+    }
+
+    setTimeout(beginMainMenu, 100);
 //**********************************END MAIN MENU********************************
 		
 //***********************************BEGIN Fixed Menu*****************************

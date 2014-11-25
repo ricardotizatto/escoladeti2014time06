@@ -184,5 +184,15 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="987" author="catabriga">
+        <delete tableName="solicitacaovolume"></delete>
+        <delete tableName="volume"></delete>
+        <addColumn tableName="volume">
+            <column name="data_criacao" type="date">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
 

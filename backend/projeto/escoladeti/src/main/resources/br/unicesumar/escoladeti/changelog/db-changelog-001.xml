@@ -944,4 +944,8 @@
 	<changeSet id="walber001" author="Walber">
 		<dropColumn tableName="cidade" columnName="fundacao" />
 	</changeSet>
+
+    <changeSet id="988" author="catabriga">
+        <dropColumn tableName="itemacesso" columnName="id_submenu"></dropColumn>
+    </changeSet>
 </databaseChangeLog>
