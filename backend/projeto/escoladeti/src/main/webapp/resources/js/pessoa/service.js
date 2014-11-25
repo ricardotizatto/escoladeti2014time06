@@ -16,7 +16,7 @@ function PessoaFactory($resource) {
             method: 'GET',
             isArray: true,
             params: {
-                acao: 'todasPessoasfisicas'
+                acao: 'todasPessoas'
             }
         },
         

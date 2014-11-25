@@ -26,7 +26,6 @@ import br.unicesumar.escoladeti.view.ViewPessoaAssociado;
 @Controller
 @RequestMapping("/rest/pessoas")
 public class PessoaController implements Serializable {
-
   private static final long serialVersionUID = 1L;
 
   @Autowired
@@ -38,32 +37,27 @@ public class PessoaController implements Serializable {
     //throw new RuntimeException("Aqui : " + pessoaCaracteristica.getCaracteristicas().size());
     return pessoaService.persistirPessoa(comando, null);
   }
-
   @RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT)
   @ResponseBody
   public Pessoa atualizar(@Valid @RequestBody ComandoSalvarPessoa comando,
           @PathVariable("id") Long id) {
     return pessoaService.persistirPessoa(comando, id);
   }
-
   @RequestMapping(value = {"/{id}/{tipo}"}, method = RequestMethod.DELETE)
   @ResponseBody
   public void deletar(@PathVariable Long id, @PathVariable String tipo) {
     pessoaService.deletarPessoa(id, tipo);
   }
-
   @RequestMapping(value = {"/{id}/{tipo}"}, method = RequestMethod.GET)
   @ResponseBody
   public Pessoa getPessoa(@PathVariable Long id, @PathVariable String tipo) {
     return pessoaService.buscar(id, tipo);
   }
-
   @RequestMapping(value = {"/paginarFisica/{pagina}"}, method = RequestMethod.GET)
   @ResponseBody
   public DataPage<PessoaFisica> paginarFisica(@PathVariable Integer pagina) {
     return pessoaService.paginarFisica(pagina);
   }
-
   @RequestMapping(value = {"/{pagina}"}, method = RequestMethod.GET)
   @ResponseBody
   public DataPage<PessoaFisicaJuridica> paginar(@PathVariable Integer pagina) {
@@ -76,27 +70,23 @@ public class PessoaController implements Serializable {
           @RequestParam String busca) {
     return pessoaService.buscarFisica(pagina, busca);
   }
-
   @RequestMapping(value = {"/buscarPessoa/{pagina}"}, params = "busca", method = RequestMethod.GET)
   @ResponseBody
   public DataPage<PessoaFisicaJuridica> buscarPessoa(
           @PathVariable Integer pagina, @RequestParam String busca) {
     return pessoaService.buscarPessoa(pagina, busca);
   }
-
   @RequestMapping(value = {"/paginarJuridica/{pagina}"}, method = RequestMethod.GET)
   @ResponseBody
   public DataPage<PessoaJuridica> paginarJuridica(@PathVariable Integer pagina) {
     return pessoaService.paginarJuridica(pagina);
   }
-
   @RequestMapping(value = {"/buscarJuridica/{pagina}"}, params = "busca", method = RequestMethod.GET)
   @ResponseBody
   public DataPage<PessoaJuridica> buscarJuridica(
           @PathVariable Integer pagina, @RequestParam String busca) {
     return pessoaService.buscarJuridica(pagina, busca);
   }
-
   /**
    * @author Lorhan // metodo para listar todas pessoas alunos ou não
    */
@@ -111,24 +101,19 @@ public class PessoaController implements Serializable {
   public List<ViewPessoaAssociado> listarTodosAssociados(){
 	  return this.pessoaService.listaTodosAssociados();
   }
-  
   @RequestMapping(method = RequestMethod.GET, value = "/listarTodasAsEscolas")
   @ResponseBody
   public List<Map<String, Object>> listarTodasAsEscolas(){
 	  return this.pessoaService.listarTodasAsEscolas();
   }
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/todasPessoasfisicas")
-    @ResponseBody
-    public List<PessoaFisica> listarTodasPessoasFisicas() {
-        return pessoaService.listarTodasPessoasFisicas();
-    }
-
   @RequestMapping(method = RequestMethod.GET, value = "/listarTodas/{pagina}")
   @ResponseBody
   public DataPage<PessoaFisicaJuridica> listarTodos(@PathVariable Integer pagina) {
     return pessoaService.listarTodos(pagina);
   }
-
+    @RequestMapping(method = RequestMethod.GET, value = "/getTodos")
+    @ResponseBody
+    public List<Pessoa> getTodos() {
+        return pessoaService.getTodos();
+    }
 }

@@ -3,6 +3,7 @@ package br.unicesumar.escoladeti.service;
 import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.entity.Produto;
+import br.unicesumar.escoladeti.repository.EstoqueRepository;
 import br.unicesumar.escoladeti.repository.ProdutoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,20 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public Produto salvar(Produto produto) throws Exception {
+    @Autowired
+    private EstoqueRepository estoqueRepository;
 
+    public Produto salvar(Produto produto) throws Exception {
+        System.out.println("salvando service java");
+        produto.setEstoque(this.estoqueRepository.findById(Long.MIN_VALUE));
         if (!produto.equals(buscarProdutoPorNome(produto))) {
             return this.produtoRepository.save(produto);
         }
         throw new Exception("O Produto " + produto.getNome() + " já está cadastrado!");
+    }
+    
+    public Produto atualizar(Produto produto){
+        return this.produtoRepository.save(produto);
     }
 
     public DataPage<Produto> getTodos(Integer pagina) {
@@ -43,8 +52,7 @@ public class ProdutoService {
     }
 
     public Produto buscarProdutoPorNome(Produto produto) {
-        return this.produtoRepository.findByNome(
-                produto.getNome());
+        return this.produtoRepository.findByNome(produto.getNome());
     }
 
 }

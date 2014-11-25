@@ -61,7 +61,9 @@
 				</tr>
 
 				<tr ng-repeat="volume in livro.volumes | orderBy: ['+transcricao','+paginaInicio']">
-					<td>{{volume.id}}</td>
+					<td>
+                        <a href="./#/volume/{{volume.id}}" >{{volume.id}}</a>
+                    </td>
 					<td>{{volume.responsavel.nome}}</td>
 					<td>{{volume.paginaInicio}} / {{volume.paginaFim}}</td>
                                         <td>{{volume.status}}</td>

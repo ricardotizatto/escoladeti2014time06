@@ -24,10 +24,10 @@ import br.unicesumar.escoladeti.repository.CaracteristicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaJuridicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaFisicaRepository;
 import br.unicesumar.escoladeti.repository.PessoaJuridicaRepository;
+import br.unicesumar.escoladeti.repository.PessoaRepository;
 import br.unicesumar.escoladeti.repository.ViewPessoaAssociadoRepository;
 import br.unicesumar.escoladeti.view.PessoaFisicaJuridica;
 import br.unicesumar.escoladeti.view.ViewPessoaAssociado;
-
 @Service
 public class PessoaService {
 	@Autowired
@@ -45,32 +45,25 @@ public class PessoaService {
 	@Autowired
 	private ViewPessoaAssociadoRepository viewPessoaAssociadoRepository;
 
-	public DataPage<PessoaFisica> paginarFisica(Integer pagina) {
-		return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(
-				pagina, "nome")));
-	}
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
-	public DataPage<PessoaFisica> buscarFisica(Integer pagina, String busca) {
-		return new DataPage<>(
-				pessoaFisicaRepository
-						.findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(
-								busca, busca, busca,
-								pageRequestForAsc(pagina, "nome")));
-	}
 
 	public DataPage<PessoaJuridica> paginarJuridica(Integer pagina) {
 		return new DataPage<>(
 				pessoaJuridicaRepository.findAll(pageRequestForAsc(pagina,
 						"nome")));
 	}
-
 	public DataPage<PessoaJuridica> buscarJuridica(Integer pagina, String busca) {
 		return new DataPage<>(
 				pessoaJuridicaRepository
 						.findByNomeContainingOrCnpjContainingOrderByNomeAsc(
 								busca, busca, pageRequestForAsc(pagina, "nome")));
 	}
-
+    public DataPage<PessoaFisica> paginarFisica(Integer pagina) {
+        return new DataPage<>(pessoaFisicaRepository.findAll(pageRequestForAsc(
+                pagina, "nome")));
+    }
 	public Pessoa buscar(Long id, String tipo) {
 		if (tipo.equals("J")) {
 			return pessoaJuridicaRepository.findOne(id);
@@ -80,7 +73,13 @@ public class PessoaService {
 			throw new RuntimeException("Tipo de pessoa inválido");
 		}
 	}
-
+    public DataPage<PessoaFisica> buscarFisica(Integer pagina, String busca) {
+        return new DataPage<>(
+                pessoaFisicaRepository
+                .findByNomeContainingOrSobrenomeContainingOrCpfContainingOrderByNomeAsc(
+                        busca, busca, busca,
+                        pageRequestForAsc(pagina, "nome")));
+    }
 	@Transactional
 	public Pessoa persistirPessoa(ComandoSalvarPessoa comando, Long id) {
 		if (comando.getTipo().equals("F")) {
@@ -178,7 +177,6 @@ public class PessoaService {
 		}
 		throw new RuntimeException("Tipo de pessoa inválido");
 	}
-
 	private PessoaFisica buildPessoaFisica(ComandoSalvarPessoa comando) {
 		return Pessoa.builder().telefones(comando.getTelefones())
 				.enderecos(comando.getEnderecos()).nome(comando.getNome())
@@ -189,49 +187,47 @@ public class PessoaService {
 				.buildPessoaFisica();
 	}
 
-	public void deletarPessoa(Long id, String tipo) {
-		if (tipo.equals("J")) {
-			pessoaJuridicaRepository.delete(id);
-		} else if (tipo.equals("F")) {
-			pessoaFisicaRepository.delete(id);
-		} else {
-			throw new RuntimeException("Tipo de pessoa invÃ¡lido");
-		}
-	}
+    public void deletarPessoa(Long id, String tipo) {
+        if (tipo.equals("J")) {
+            pessoaJuridicaRepository.delete(id);
+        } else if (tipo.equals("F")) {
+            pessoaFisicaRepository.delete(id);
+        } else {
+            throw new RuntimeException("Tipo de pessoa invÃ¡lido");
+        }
+    }
 
-	public List<PessoaFisicaJuridica> listarTodasPessoas() {
-		return this.pessoaFisicaJuridicaRepository.findAll();
-	}
+    public List<Pessoa> getPessoas() {
+        return this.pessoaRepository.findAll();
+    }
+    public List<PessoaFisicaJuridica> listarTodasPessoas() {
+        return this.pessoaFisicaJuridicaRepository.findAll();
+    }
 
-	public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(
-			Integer pagina) {
-		return new DataPage<>(
-				pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(
-						pagina, "nome")));
-	}
-
-	public DataPage<PessoaFisicaJuridica> buscarPessoa(Integer pagina,
-			String busca) {
-		return new DataPage<>(
-				pessoaFisicaJuridicaRepository
-						.findByNomeContainingOrCpfCnpjContainingOrderByNomeAsc(
-								busca, busca, pageRequestForAsc(pagina, "nome")));
-	}
-
-	public DataPage<PessoaFisicaJuridica> listarTodos(Integer pagina) {
-		return new DataPage<>(
-				this.pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(
-						pagina, "nome")));
-	}
-
+    public DataPage<PessoaFisicaJuridica> paginarPessoaFisicaJuridica(
+            Integer pagina) {
+        return new DataPage<>(
+                pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(
+                                pagina, "nome")));
+    }
+    public DataPage<PessoaFisicaJuridica> buscarPessoa(Integer pagina,
+            String busca) {
+        return new DataPage<>(
+                pessoaFisicaJuridicaRepository
+                .findByNomeContainingOrCpfCnpjContainingOrderByNomeAsc(
+                        busca, busca, pageRequestForAsc(pagina, "nome")));
+    }
+    public DataPage<PessoaFisicaJuridica> listarTodos(Integer pagina) {
+        return new DataPage<>(
+                this.pessoaFisicaJuridicaRepository.findAll(pageRequestForAsc(
+                                pagina, "nome")));
+    }
     public List<PessoaFisica> listarTodasPessoasFisicas() {
         return pessoaFisicaRepository.findAll();
     }
-
-	public List<ViewPessoaAssociado> listaTodosAssociados() {
-		return this.viewPessoaAssociadoRepository.findAll();
-	}
-
+    public List<Pessoa> getTodos() {
+        return pessoaRepository.findAll();
+    }
 	public List<Map<String, Object>> listarTodasAsEscolas() {
 		List<Object[]> list = this.pessoaJuridicaRepository.findAllEscolas();
 		List<Map<String, Object>> lista = new ArrayList<>();
@@ -242,5 +238,8 @@ public class PessoaService {
 			lista.add(mapa);
 		}
 		return lista;
+	}
+	public List<ViewPessoaAssociado> listaTodosAssociados() {
+		return this.viewPessoaAssociadoRepository.findAll();
 	}
 }

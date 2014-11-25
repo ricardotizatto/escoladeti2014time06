@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarMovimentacao;
 import br.unicesumar.escoladeti.entity.Movimentacao;
 import br.unicesumar.escoladeti.service.MovimentacaoService;
 import java.io.Serializable;
@@ -10,47 +11,49 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/rest/movimentacaoSource")
-public class MovimentacaoController implements Serializable{
-    
+public class MovimentacaoController implements Serializable {
+
     @Autowired
     private MovimentacaoService movimentacaoService;
+
+    @RequestMapping(value = "/movimentacao", method = RequestMethod.POST)
+    @ResponseBody
+    public Movimentacao salvar(@RequestBody ComandoSalvarMovimentacao comando) throws Exception {
+        return this.movimentacaoService.salvar(comando);
+    }
     
-    @RequestMapping(value="/movimentacao", method= RequestMethod.POST)
+    @RequestMapping(value = "/extornar/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Movimentacao salvar(@RequestBody Movimentacao movimentacao) throws Exception {
-            System.out.println("ERRO "+movimentacao.getTipo());
-            System.out.println("ERRO "+movimentacao.getQuantidade());
-            System.out.println("ERRO "+movimentacao.getProduto().getNome());
-            return this.movimentacaoService.salvar(movimentacao);
+    public Movimentacao extornar(@PathVariable Long id) throws Exception {
+        return this.movimentacaoService.extornar(id);
     }
 
-    @RequestMapping(value="/movimentacao", method= RequestMethod.DELETE)
-    @ResponseBody
-    public String deletar(@RequestBody Movimentacao movimentacao) {
-        movimentacaoService.deletar(movimentacao);
-        return "arquivo deletado";		
-    }
-
-    @RequestMapping(value = {"/listar/pag/{pagina}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/paginar/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Movimentacao> listarMovimentacao(@PathVariable Integer pagina) {
         return movimentacaoService.getTodos(pagina);
     }
-    
+
     @RequestMapping(value = "/listar", method = RequestMethod.GET)
     @ResponseBody
     public List<Movimentacao> listaTodos() {
         return movimentacaoService.listaTodos();
     }
 
-    @RequestMapping(value= "/movimentacao/{id}", method= RequestMethod.GET)
+    @RequestMapping(value = "/movimentacao/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Movimentacao findById(@PathVariable Long id) {
         return this.movimentacaoService.getById(id);
     }
-    
+
+    @RequestMapping(value = "/movimentacao/", params = {"q"}, method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<Movimentacao> getPorNome(@RequestParam String q) {
+        return movimentacaoService.getPorNome(q);
+    }
 }
