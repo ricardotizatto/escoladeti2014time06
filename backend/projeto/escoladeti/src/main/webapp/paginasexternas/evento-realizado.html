@@ -1,46 +1,48 @@
  <!-- Page Title -->
- <div class="page-title" ng-init="ativaBotao('eventos')">
+ <div class="page-title" ng-init="carregaEvento();ativaBotao('eventos')">
     <div class="container">
         <div class="row">
             <div class="span12">
                 <i class="icon-camera page-title-icon"></i>
-                <h2>Titulo do Evento</h2>
+                <h2>Evento Realizado</h2>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Slider -->
-<div >
-    <div class="container">
-        <div class="row">
-            <div class="span10 offset1">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li data-thumb="./resources/externo/assets/img/slider/1.jpg">
-                            <img src="./resources/externo/assets/img/slider/1.jpg">
-                        </li>
-                        <li data-thumb="./resources/externo/assets/img/slider/2.jpg">
-                            <img src="./resources/externo/assets/img/slider/2.jpg">
-                        </li>
-                        <li data-thumb="./resources/externo/assets/img/slider/5.jpg">
-                            <img src="./resources/externo/assets/img/slider/5.jpg">
-                        </li>
-                        <li data-thumb="./resources/externo/assets/img/slider/6.jpg">
-                            <img src="./resources/externo/assets/img/slider/6.jpg">
-                        </li>
-                    </ul>
-                </div>
+<!-- Contact Us -->
+<div class="contact-us container">
+    <div class="row">
+        <div class="span6">
+            <div class="titulo-evento">
+                <h3>{{evento.titulo}}</h3>
             </div>
-            <div class="contact-us span12">
-                <h4>Titulo</h4>
-                <p>Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento - Descricao do evento</p>
-                <p>
-                    <b>Local do evento:</b> bloco 7 Lab 13 - Unicesumar <br>
-                    <b>Data:</b> 12/12/2014 <br>
-                    <b>Horário do evento:</b> 10:00 as 12:00
-                </p>     
-            </div>
+            <p>{{evento.descricao}} </p>
+            <p>
+                <b>Ministrante: </b> {{evento.ministrante}} <br>
+                <b>Organização: </b> {{evento.organizacao}} <br>
+                <b>Local do evento: </b> {{evento.local}} <br>
+                <b>Valor: </b> {{evento.valor === 0 ? 'Entrada Livre' : 'R$ ' + evento.valor}}  
+            </p>
+            <p>
+                <div ng-repeat="periodo in evento.periodos | orderBy:'data'">
+                    <div class="col-periodo">
+                        <div class="evento-data" >
+                            <h2>{{periodo.data | date: 'dd'}}</h2>
+                            {{periodo.data | date: 'MMMM-yyyy'}}
+                        </div>
+                        <div class="span4 evento-desc-periodo">
+                            <b> {{periodo.tituloperiodo}} </b><br><br>
+                            <b>Horário: </b> {{periodo.inicio}} as {{periodo.fim}}
+                        </div>
+                    </div> 
+                </div>    
+            </p>     
         </div>
+ 
+        <div class="span6">
+            <div class="contact-form">
+                <img src="./resources/externo/assets/img/slider/2.jpg">
+        </div>        
     </div>
 </div>

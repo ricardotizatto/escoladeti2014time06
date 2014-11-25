@@ -63,6 +63,7 @@
     <div class="row">
         <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
             <!--<div><img src="./resources/externo/assets/img/amacapimagenotfound.png" alt=""></div>-->
+            <div><img src="./resources/externo/assets/img/slider/2.jpg"></div>
             <div class="bloco-evento">
                 <h4>{{ultimoEvento.titulo | limitTo:tituloLimit }}{{ ultimoEvento.titulo.length > tituloLimit ? '...' : '' }}</h4>
                 <p>{{ultimoEvento.descricao | limitTo:descricaoLimit }}{{ ultimoEvento.descricao.length > descricaoLimit ? '...' : '' }}</p>
@@ -71,7 +72,7 @@
                     <b>Local: </b> {{ultimoEvento.local | limitTo:localLimit}}{{ ultimoEvento.local.length > localLimit ? '...' : '' }}
                 </p>
             </div>
-            <div><a href="#/evento-realizado" >Detalhes</a></div>
+            <div><a href="" ng-click="eventoRealizado(ultimoEvento.id)" >Detalhes</a></div>
         </div>
     </div>
     <div class="row" ng-show="ultimosEventos.pagesAround.length > 1" > 

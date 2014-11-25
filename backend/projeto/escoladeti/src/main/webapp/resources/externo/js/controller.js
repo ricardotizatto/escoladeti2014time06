@@ -74,6 +74,10 @@ function ExternoController($scope, $http, $routeParams) {
         console.log('Detalhes Evento id :', eventoId);
         window.location = '#/detalhes-evento/' + eventoId;
     },
+    $scope.eventoRealizado = function (eventoId) {
+        console.log('Detalhes Evento id :', eventoId);
+        window.location = '#/evento-realizado/' + eventoId;
+    },        
     $scope.carregaEvento = function (){
         console.log('Carrega Evento id :', $routeParams.eventoId);
         $scope.info = {};
