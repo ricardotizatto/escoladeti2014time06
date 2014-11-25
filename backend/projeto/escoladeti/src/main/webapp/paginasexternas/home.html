@@ -1,0 +1,106 @@
+<div class="slider" ng-init="getEventos();ativaBotao('home')">
+    <div class="container">
+        <div>
+            <img src="./resources/externo/assets/img/banner-braille.jpg">
+        </div>
+    </div>
+</div>    
+
+<!-- Services -->
+<div ng-show="proximosEventos.list" class="what-we-do container">
+    <div class="portfolio-title">
+        <h3>Próximos Eventos</h3>
+    </div>
+    <div class="row">
+       <div class="service span3" ng-repeat="proximoEvento in proximosEventos.list" >
+           <div class="bloco-evento">
+                <h4>{{proximoEvento.titulo | limitTo:tituloLimit }}{{ proximoEvento.titulo.length > tituloLimit ? '...' : '' }}</h4>
+                <p>{{proximoEvento.descricao | limitTo:descricaoLimit }}{{ proximoEvento.descricao.length > descricaoLimit ? '...' : '' }}</p>
+                <p>
+                    <b>Início: </b> {{proximoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
+                    <b>Local: </b> {{proximoEvento.local | limitTo:localLimit}}{{ proximoEvento.local.length > localLimit ? '...' : '' }}
+                </p>
+            </div>
+           <div><a href="" ng-click="detalhesEvento(proximoEvento.id)" >Detalhes</a></div>
+        </div>       
+    </div>
+    <div class="row" ng-show="proximosEventos.pagesAround.length > 1" > 
+        <div class="pagination pagination-sm pagination-centered">
+            <ul>
+                <li>                        
+                    <a ng-click="paginarProximosEventos(1)"> 
+                        <span class="glyphicon  icon-fast-backward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="proximosEventos.pageCount <= 1 ? paginarProximosEventos(1) : paginarProximosEventos(proximosEventos.pageNumber - 1)"> 
+                        <span class="glyphicon icon-step-backward"></span>
+                    </a>
+                </li>
+                <li ng-repeat="numeroPagina in proximosEventos.pagesAround" class="{{numeroPagina == proximosEventos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="paginarProximosEventos(numeroPagina)">{{numeroPagina}}</a>
+                </li>
+                <li>
+                    <a ng-click="proximosEventos.pageNumber === proximosEventos.pageCount ? paginarProximosEventos(proximosEventos.pageCount) : paginarProximosEventos(proximosEventos.pageNumber + 1)"> 
+                        <span class="glyphicon icon-step-forward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="proximosEventos.pageCount == 0 ? paginarProximosEventos(1) : paginarProximosEventos(proximosEventos.pageCount)"> 
+                        <span class="glyphicon icon-fast-forward"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Services -->
+<div ng-show="ultimosEventos.list" class="what-we-do container">
+    <div class="portfolio-title">
+        <h3>Eventos Realizados</h3>
+    </div>
+    <div class="row">
+        <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
+            <!--<div><img src="./resources/externo/assets/img/amacapimagenotfound.png" alt=""></div>-->
+            <div class="bloco-evento">
+                <h4>{{ultimoEvento.titulo | limitTo:tituloLimit }}{{ ultimoEvento.titulo.length > tituloLimit ? '...' : '' }}</h4>
+                <p>{{ultimoEvento.descricao | limitTo:descricaoLimit }}{{ ultimoEvento.descricao.length > descricaoLimit ? '...' : '' }}</p>
+                <p>
+                    <b>Início: </b> {{ultimoEvento.datainicio | date: 'dd-MM-yyyy' }} <br>
+                    <b>Local: </b> {{ultimoEvento.local | limitTo:localLimit}}{{ ultimoEvento.local.length > localLimit ? '...' : '' }}
+                </p>
+            </div>
+            <div><a href="#/evento-realizado" >Detalhes</a></div>
+        </div>
+    </div>
+    <div class="row" ng-show="ultimosEventos.pagesAround.length > 1" > 
+        <div class="pagination pagination-sm pagination-centered">
+            <ul>
+                <li>                        
+                    <a ng-click="paginarUltimosEventos(1)"> 
+                        <span class="glyphicon  icon-fast-backward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="ultimosEventos.pageCount <= 1 ? paginarUltimosEventos(1) : paginarUltimosEventos(ultimosEventos.pageNumber - 1)"> 
+                        <span class="glyphicon icon-step-backward"></span>
+                    </a>
+                </li>
+                <li ng-repeat="numeroPagina in ultimosEventos.pagesAround" class="{{numeroPagina == ultimosEventos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="paginarUltimosEventos(numeroPagina)">{{numeroPagina}}</a>
+                </li>
+                <li>
+                    <a ng-click="ultimosEventos.pageNumber === ultimosEventos.pageCount ? paginarUltimosEventos(ultimosEventos.pageCount) : paginarUltimosEventos(ultimosEventos.pageNumber + 1)"> 
+                        <span class="glyphicon icon-step-forward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="ultimosEventos.pageCount == 0 ? paginarUltimosEventos(1) : paginarUltimosEventos(ultimosEventos.pageCount)"> 
+                        <span class="glyphicon icon-fast-forward"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

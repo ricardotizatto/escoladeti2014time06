@@ -15,7 +15,7 @@
 
 		<div class="row ">
 			<div class="form-group col-sm-2">
-				<label>Início da Vigencia</label> <input class="form-control"
+				<label>Inï¿½cio da Vigencia</label> <input class="form-control"
 					name="fundacao" type="date" ng-model="distrito.inicioVigencia" />
 			</div>
 			<div class="form-group col-sm-2">
@@ -24,7 +24,7 @@
 			</div>
 			<div class="form-group col-sm-6">
 				<label> Cidade </label> <select type="text" ui-select2="select2Options" style="width: 100%"  ng-model="distrito.idCidade" >
-                    <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome}}</option>
+                    <option ng-repeat="cid in cidades" value="{{cid.id}}">{{cid.nome + ' - ' + cid.unidadeFederativa.sigla}}</option>
                 </select>
 			</div>
 		</div>

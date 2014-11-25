@@ -14,7 +14,13 @@ function PaisService($http) {
 		},
 		
 		buscarPorNome: function (filtro) {
-			return $http.get('./rest/paisSource/pais?q=' + filtro.toUpperCase());
+			return $http({
+				url : './rest/paisSource/pais',
+				method : 'GET',
+				params : {
+					q : filtro.toUpperCase()
+				}
+			});
 		},
 		
 		buscar: function (paisId) {
@@ -22,19 +28,14 @@ function PaisService($http) {
 		},
 		
 		salvar: function (pais) {
-			return $http.post('./rest/paisSource/pais', {
-				nome: pais.nome.toUpperCase(),
-				id: pais.id,
-				codigo: pais.codigo,
-				sigla: pais.sigla.toUpperCase()
-			});
+			return $http.post('./rest/paisSource/pais', pais);
 		},
 	
 		listar: function (nrPagina) {
 			return $http.get('./rest/paisSource/listar/pag/' + nrPagina);
 		},
 		buscarTodos: function () {
-			return $http.get('./rest/paisSource/listar');
+			return $http.get('./rest/paisSource/pais');
 		}
 	};
 }

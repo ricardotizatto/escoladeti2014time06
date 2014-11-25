@@ -24,7 +24,6 @@ function CidadeService($http) {
 		salvar: function (cidade) {
 			return $http.post('./rest/cidadeSource/cidade', {
 				nome: cidade.nome.toUpperCase(),
-				fundacao: cidade.fundacao,
 				unidadeFederativa: cidade.unidadeFederativa,
 				id: cidade.id
 			});
@@ -38,7 +37,7 @@ function CidadeService($http) {
 		},
 		buscaCidadesPorEstado : function(estadoId){
 			return $http.get('./rest/cidadeSource/listarPorEstado/' + estadoId);
-		}		
+		}
 	};
 }
 

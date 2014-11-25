@@ -1,39 +1,72 @@
 var controllers = angular.module('controllers');
 
-function acompanhamentoSolicitacaoController($scope, $location, $log, $http, $routeParams) {
-    var $this = this;
+function AcompanhamentoSolicitacaoController($scope, $location, $log, OrdemProducao){
 
-    $log.debug('carregando acomapanhamento solicitacao');
-    
-        $scope.solicitacoesDB = [
-            {id: 001, status: 'aguardando', dataChegada: '01/08/2014', material: "Gerenciamento de Projetos", traducao: "brille", responsavel: "Jose da Silva"},
-            {id: 005, status: 'cancelado', dataChegada: '02/08/2014', material: "Cinderela", traducao: "brille", responsavel: "Alisson Molinari"},
-            {id: 010, status: 'cancelado', dataChegada: '03/08/2014', material: "Motoqueiro Fantasma", traducao: "brille", responsavel: "Diogo Wegner"},
-            {id: 002, status: 'producao', dataChegada: '03/08/2014', material: "Matematica Discreta", traducao: "brille", responsavel: "Maria Pereira", ordem: '002'},
-            {id: 003, status: 'produzido', dataChegada: '04/08/2014', material: "Branca de Neve e os 7 anoes", traducao: "brille", responsavel: "Winicius Wanderlei", ordem: '004', },
-            {id: 004, status: 'finalizado', dataChegada: '05/08/2014', material: "Pocahontas", traducao: "brille", responsavel: "Jhonatan Catabriga", ordem: '006', dataEnvio: '10/09/2014'},
-            {id: 006, status: 'aguardando', dataChegada: '06/08/2014', material: "Alice no Pais das Maravilhas", traducao: "brille", responsavel: "Lorhan Bozza"},
-            {id: 007, status: 'producao', dataChegada: '07/08/2014', material: "Peter Pan", traducao: "brille", responsavel: "Walber Oliveira", ordem: '007'},
-            {id: 008, status: 'produzido', dataChegada: '08/08/2014', material: "O Magico do OZ", traducao: "brille", responsavel: "Martinho Omura", ordem: '001', },
-            {id: 009, status: 'finalizado', dataChegada: '06/08/2014', material: "Chapeuzinho Vermelho", traducao: "brille", responsavel: "Ricardo Tizatto", ordem: '003', dataEnvio: '11/09/2014'},
-            {id: 011, status: 'producao', dataChegada: '05/08/2014', material: "A Pequena Sereia", traducao: "brille", responsavel: "Rafael Prando", ordem: '006'},
-        ];
-
-    $scope.getTodos = function() {
-        $log.debug('acomapanhamento getTodos');
-        $scope.solicitacoes = $scope.solicitacoesDB;
+    $scope.init = function() {
+        $scope.getPesquisaSolicitacao('TODOS');
     };
     
+    $scope.getPesquisaSolicitacao = function(buscaStatus) {
+        $log.debug('Pesquisando status: ' + buscaStatus);
+
+        OrdemProducao.query({
+                solicitacaoId: $scope.buscaSolicitacao,
+                dataChegadaInicio : $scope.buscaDataChegadaIni,
+                dataChegadaFim : $scope.buscaDataChegadaFim,
+                status: buscaStatus,
+                traducaoMaterial : $scope.buscaTraducaoMaterial,
+                responsavel: $scope.buscaResponsavel,
+                material: $scope.buscaMaterial,                
+                revisor: $scope.buscaRevisor     
+            }, function(solicitacaoItens) {
+                $log.debug('solicitacaoItens.length: ' + solicitacaoItens.length);
+                $log.debug('$scope.buscaSolicitacao: ' + $scope.buscaSolicitacao);
+                $scope.solicitacaoItens = [];
+                if($scope.buscaSolicitacao === undefined || $scope.buscaSolicitacao === "" || $scope.buscaSolicitacao === null){
+                   $scope.solicitacaoItens = solicitacaoItens;
+                }else{
+                    for (i=0; i<solicitacaoItens.length; i++) {
+                        $log.debug('solicitacaoItens[i].solicitacaoId: ' + solicitacaoItens[i].solicitacaoId);
+                        if(solicitacaoItens[i].solicitacaoId === $scope.buscaSolicitacao){
+                            $scope.solicitacaoItens.push(solicitacaoItens[i]); 
+                        }
+                    }
+                }
+            //$scope.solicitacaoItens = solicitacaoItens;
+        });
+    };
     
-    $scope.getSolicitacaoStatus = function(status) {
-        $log.debug('acomapanhamento getSolicitacaoStatus');
-        $scope.solicitacoes = [];
-        for (var i=0; i< $scope.solicitacoesDB.length; i++) {
-            if($scope.solicitacoesDB[i].status == status){
-                $log.debug('status: '+ $scope.solicitacoesDB[i].status);
-                $scope.solicitacoes.push($scope.solicitacoesDB[i]);
-            }
-        }   
+    $scope.buscar = function(campoBusca, busca) {
+        switch (campoBusca) {
+            case "solicitacaoId":
+                $scope.buscaSolicitacao = busca;
+                break;
+            case "dataChegada":
+                $scope.buscaDataChegadaIni = busca;
+                $scope.buscaDataChegadaFim = busca;
+                break;
+            case "traducaoMaterial":
+                $scope.buscaTraducaoMaterial = busca;
+                break;     
+            case "responsavel":
+                $scope.buscaResponsavel = busca;
+                break;
+            case "material":
+                $scope.buscaMaterial = busca;
+                break;    
+        }
+        
+        $scope.getPesquisaSolicitacao('TODOS');
+    };
+    
+    $scope.limpar = function() {
+        $scope.buscaSolicitacao = "";
+        $scope.buscaDataChegadaIni = "";
+        $scope.buscaDataChegadaFim = "";
+        $scope.buscaTraducaoMaterial = "";
+        $scope.buscaResponsavel = "";
+        $scope.buscaMaterial = "";
+        $scope.buscaRevisor = "";  
     };
     
     $scope.produzir = function(soliciataoId) {
@@ -41,69 +74,85 @@ function acompanhamentoSolicitacaoController($scope, $location, $log, $http, $ro
     };
     
     $scope.expandir = function(soliciataoId) {
-        window.location = '#/ordemproducao/' + soliciataoId;
+        $location.path('/cadastrosolicitacao/'+ soliciataoId);
     };
     
-    $scope.cancelar = function(soliciataoId) {
-        $log.debug('cancelar: '+ soliciataoId);
-        BootstrapDialog.confirm('Deseja realmente cancelar a Solicitacao: <b>' + soliciataoId + '</b>?', function(result) {
+    $scope.cancelar = function(item) {
+        $log.debug('cancelar: '+ item.id);
+        BootstrapDialog.confirm('Deseja realmente cancelar a Ordem: <b>' + item.id + '</b>?', function(result) {
             if (result) {
-                for (var i=0; i < $scope.solicitacoes.length; i++) {
-                    if ($scope.solicitacoes[i].id == soliciataoId) {
-                        $scope.solicitacoes.splice(i ,1);
-                    }
-                }   
+                item.$cancelar();
+                return;
             }
+            return;
         });
     };
     
     $scope.getStatus = function(status) {
         switch (status) {
-            case "aguardando":
+            case "AGUARDANDO":
                 return "warning";
                 break;
-            case "producao":
+            case "PRODUCAO":
                 return "success";
                 break;
-            case "produzido":
+            case "PRODUZIDO":
                 return "info";
                 break;
-            case "finalizado":
+            case "FINALIZADO":
                 return "primary";
                 break;
-            case "cancelado":
+            case "CANCELADO":
                 return "danger";
                 break;
+            default :
+            return "warning";
         }
     };
     
     $scope.getIcone = function(status) {
         switch (status) {
-            case "aguardando":
+            case "ANDAMENTO":
                 return "fa fa-spinner";
                 break;
-            case "producao":
+            case "PRODUCAO":
                 return "fa fa-cogs";
                 break;
-            case "produzido":
+            case "PRODUZIDO":
                 return "fa fa-file-text-o";
                 break;
-            case "finalizado":
+            case "FINALIZADO":
                 return "fa fa-check-circle-o";
                 break;
-            case "cancelado":
+            case "CANCELADO":
                 return "fa fa-times";
                 break;
+            default : 
+            return "fa fa-spinner";
         }
     };
+
+//    $scope.cancelar = function (item) {
+//        var ordem = new OrdemProducao(item);
+//        ordem.$cancelar(function () {
+//            toastr.success('Ordem cancelada com sucesso');
+//        });
+//    };
+//
+    $scope.produzir = function (item) {
+
+        item.$produzir(function () {
+            toastr.success('Ordem enviada para produção');
+        });
+    }
+
 }
 
-controllers.controller('acompanhamentoSolicitacaoController',  
+controllers.controller('AcompanhamentoSolicitacaoController',  
 		[
 		 '$scope',
 		 '$location',
 		 '$log',
-		 '$http',
-		 '$routeParams',
-		 acompanhamentoSolicitacaoController
+         'OrdemProducaoFactory',
+		 AcompanhamentoSolicitacaoController
 		 ]);

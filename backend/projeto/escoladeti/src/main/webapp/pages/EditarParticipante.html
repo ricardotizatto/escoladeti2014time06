@@ -1,0 +1,66 @@
+<div class="container" ng-controller="participanteController" ng-init="carregarParticipante();">
+    <fieldset>
+        <legend> <span class="glyphicon glyphicon-list-alt"></span> Dados do Participante
+        </legend>
+        <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
+        <form action="" method="POST" name="formParticipante" ng-submit="salvarAlteracao();">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group {{formParticipante.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"><strong>Nome</strong></label>
+                    <input class="form-control" class="form-control" ng-pattern="/[a-zA-Z\s]{3,200}/" type="text" name="nome"  placeholder="Nome" ng-model="participante.nome" required >
+                    <span class="help-block" ng-show="formParticipante.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group {{formParticipante.email.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"><strong>Email</strong></label>
+                    <input class="form-control" type="text" name="email" placeholder="Endereço de email" ng-model="participante.email" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
+                    <span class="help-block" ng-show="formParticipante.email.$error.pattern">Dígite um email válido. Ex email@gmail.com</span>
+                </div>  
+            </div>
+            <div class="col-sm-3 ">
+                <div class="form-group {{participanteForm.pagamento.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"> <strong>Pagamento</strong></label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-usd"></span>
+                        </span>
+                        <select class="selectpicker show-tick form-control" name="pagamento" ng-model="participante.pagamento" data-live-search="true">
+                            <option value="PAGO" >PAGO</option>
+                            <option value="PENDENTE" >PENDENTE</option>
+                            <option value="GRATIS" >GRATIS</option>
+                        </select>
+                    </div>
+                    <span class="help-block" ng-show="formParticipante.pagamento.$error.required">Selecione o status do pagamento</span>
+                </div>   
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group {{formParticipante.telefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                    <label class="control-label"><strong>Telefone</strong></label>
+                    <input class="form-control" id="telefone" name="telefone" type="text" ng-model="participante.telefone"  ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required/>
+                    <span class="help-block" ng-show="formParticipante.telefone.$error.pattern">Dígite um telefone válido. Ex:(44)9999-4567</span>
+                </div>    
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group {{formParticipante.necessidade.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                    <label><strong>Quais Necessidades? </strong></label>
+                    <input class="form-control" type="text" name="necessidade" placeholder="QUAIS" title="Apenas letras" ng-model="participante.necessidade">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                    <div class="col-sm-12">
+                        <span class="pull-right">	
+                            <a class="btn btn-primary btn-padrao" ng-click="voltar()">
+                                <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+                            </a>
+                            <button class="btn btn-success btn-padrao" ng-disabled="formParticipante.$invalid"> <span class="glyphicon glyphicon-ok"></span> Salvar</button>
+                        </span>		
+                    </div>
+        </div>
+        </form>
+    </fieldset>
+</div>

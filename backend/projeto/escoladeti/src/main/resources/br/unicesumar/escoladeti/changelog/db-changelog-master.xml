@@ -8,7 +8,7 @@
     <property name="arquivo" value="oid" dbms="postgresql"/>
     <property name="texto" value="clob" dbms="oracle"/>
     <property name="texto" value="oid" dbms="postgresql"/>
-
+    
     <property name="monetario" value="java.sql.Types.NUMBER(24,4)" dbms="oracle"/>
     <property name="monetario" value="java.sql.Types.NUMERIC(24,4)" dbms="postgresql"/>
     <property name="ufm" value="java.sql.Types.NUMBER(14,4)" dbms="oracle"/>
@@ -47,5 +47,8 @@
     <property name="logico" value="java.sql.Types.BOOLEAN" dbms="postgresql"/>
 
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-001.xml" />
-        <include file="br/unicesumar/escoladeti/changelog/db-changelog-002.xml" />
-</databaseChangeLog> 
+    <include file="br/unicesumar/escoladeti/changelog/db-changelog-002.xml" />
+    <include file="br/unicesumar/escoladeti/changelog/db-changelog-003.xml" />
+    <include file="br/unicesumar/escoladeti/changelog/db-changelog-004.xml" />
+    <include file="br/unicesumar/escoladeti/changelog/db-changelog-005.xml" />
+</databaseChangeLog>

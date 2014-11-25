@@ -23,8 +23,11 @@ public class CidadeController implements Serializable {
     
     @RequestMapping(value= "/cidade", method = RequestMethod.POST)
     @ResponseBody
-    public Cidade salvar(@RequestBody Cidade cidade){
+    public Cidade salvar(@RequestBody Cidade cidade) throws Exception {
+        if (!cidade.equals(cidadeService.buscarCidadePorNomeFederativa(cidade))) {
         return this.cidadeService.salvar(cidade);
+        }
+        throw new Exception("A Cidade " + cidade.getNome() + " já está cadastrado!");
     }
     
     @RequestMapping(value = "/cidade", method = RequestMethod.PUT)
@@ -49,7 +52,7 @@ public class CidadeController implements Serializable {
     
     @RequestMapping(value = "/cidade",params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<Cidade> getPorNome(@RequestParam String q){
+    public DataPage<Cidade> getPorNome(@RequestParam() String q){
         return cidadeService.getCidadePorNome(q);
     }
     

@@ -1,46 +1,42 @@
 package br.unicesumar.escoladeti.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import org.hibernate.annotations.IndexColumn;
-import org.hibernate.validator.constraints.NotEmpty;
+import java.util.Set;
 
 @Entity
-public class PerfilAcesso extends Entidade {
-	private static final long serialVersionUID = 1L;
-	
-	@Column(nullable = false)
-    @NotEmpty
+public class PerfilAcesso {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @OneToMany(mappedBy = "perfilAcesso", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PerfilItemAcesso> itens = new HashSet<>();
+    
     private String nome;
-    
-//     @ManyToMany
-//     @JoinTable(name = "perficalacesso_itemacesso", joinColumns = @JoinColumn(name = "id_perfilacesso", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_itemacesso", referencedColumnName = "id"))
-//     private List<ItemAcesso> itemsAcesso;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "perfilAcesso",cascade = CascadeType.ALL)
-    @JsonIgnore
-    @JsonBackReference
-    private List<UsuarioPerfilAcesso> usuarioPerfilsAcesso;
 
-    public List<UsuarioPerfilAcesso> getUsuarioPerfilsAcesso() {
-        return usuarioPerfilsAcesso;
-    }
-
-    public void setUsuarioPerfilsAcesso(List<UsuarioPerfilAcesso> usuarioPerfilsAcesso) {
-        this.usuarioPerfilsAcesso = usuarioPerfilsAcesso;
-    }
-            
-    public PerfilAcesso(){
+    public PerfilAcesso() {
     }
     
-    public PerfilAcesso(String nome) {
-        this.nome = nome;
+    public PerfilAcesso(Long id) {
+        this.id = id;
+    }
+    
+    public PerfilAcesso(Long id, String nome) {
+        this.id = id;
+        this.nome = nome.toUpperCase();
+    }
+
+    public Set<PerfilItemAcesso> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<PerfilItemAcesso> itens) {
+        this.itens = itens;
     }
 
     public String getNome() {
@@ -48,7 +44,21 @@ public class PerfilAcesso extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void adcionarItem(Long idItemAcesso) {
+        PerfilItemAcesso perfilItemAcesso = new PerfilItemAcesso();
+        perfilItemAcesso.setPerfilAcesso(this);
+        perfilItemAcesso.setIdItemAcesso(idItemAcesso);
+        itens.add(perfilItemAcesso);
+    }
 }

@@ -1,0 +1,71 @@
+angular.module('controllers')
+    .controller('OrdemProducaoController',
+    [
+        '$routeParams',
+        '$location',
+        'OrdemProducaoFactory',
+        'VolumeFactory',
+        OrdemProducaoController
+    ]);
+
+function OrdemProducaoController($routeParams, $location, OrdemProducao, Volume) {
+    this.OrdemProducao = OrdemProducao;
+    this.routeParams = $routeParams;
+    this.location = $location;
+    this.Volume = Volume;
+    this.iniciar();
+}
+
+OrdemProducaoController.prototype = {
+    iniciar: function () {
+        var self = this,
+            param = {id: self.routeParams.id};
+
+
+        this.OrdemProducao.get(param, function (item) {
+            self.item = item;
+            if (self.item.outro) {
+                self.item.traducaoMaterial += ' - '+item.outro;
+            }
+        });
+
+    },
+
+    editarVolume: function (idVolume) {
+        var url = '/ordem-producao/' + this.item.id + '/volume/'+ idVolume;
+        this.location.path(url);
+    },
+
+    deletarVolume: function(item) {
+        var self = this;
+
+        BootstrapDialog.confirm('Deseja deletar o volume ?', function(result) {
+            if (result) {
+                self.Volume.delete(item, function () {
+                    toastr.success('Volume deletado com sucesso');
+                    self.item.volumes.splice(self.item.solicitacaoVolumes.indexOf(item), 1);
+                });
+            }
+        });
+    },
+
+    apresentarModalEnvio: function (solicitacaoVolume) {
+        var self = this;
+
+        this.marcarComoEnviado = function () {
+            var alterarData = {
+                data: self.dataEnvio
+            };
+
+            self.OrdemProducao.enviarVolume({idVolume: solicitacaoVolume.id}, alterarData, function () {
+                $('#modalEnvio').modal('hide');
+                self.iniciar();
+            });
+        };
+        $('#modalEnvio').modal('show');
+    },
+    
+    marcarComoEnviado: function () {
+
+    }
+};

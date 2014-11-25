@@ -1,9 +1,13 @@
-'use strict';
-
 function itemAcessoController($scope, $http, $routeParams) {
+
+    $scope.itemAcesso;
+    $scope.meuMenu;
+    $scope.menus;
+    $scope.subMenus;
 
     $scope.novo = function() {
         $scope.itemAcesso = getNovoItemAcesso();
+        $scope.menus = $scope.getMenus();
         window.location = '#/cadastroitemacesso';
     };
 
@@ -11,9 +15,11 @@ function itemAcessoController($scope, $http, $routeParams) {
         $http.post('./rest/itemAcessoSource/itemAcesso', $scope.itemAcesso)
                 .success(function(itemAcesso, status) {
                     $scope.itemAcesso = getNovoItemAcesso();
+                    toastr.success("Item de Acesso salvo com sucesso!");
                     console.log('Item de Acesso salva ' + itemAcesso);
                 })
                 .error(function(data) {
+                    toastr.warning("Erro ao salvar o item de acesso!");
                     console.log('Tela nao foi salva ' + data);
                 });
     };
@@ -23,6 +29,8 @@ function itemAcessoController($scope, $http, $routeParams) {
                     .success(function(itemAcesso) {
                         $scope.itemAcesso = itemAcesso;
                     });
+        } else {
+            $scope.novo();
         }
     };
 
@@ -31,6 +39,30 @@ function itemAcessoController($scope, $http, $routeParams) {
                 .success(function(itensAcesso) {
                     $scope.itensAcesso = itensAcesso;
                     console.log('Telas carregadas');
+                });
+    };
+
+    $scope.getSubMenus = function() {
+        $http.post('./rest/subMenuSource/subMenu/', $scope.meuMenu.id)
+                .success(function(subMenus) {
+                    $scope.subMenus = subMenus;
+                    console.log('Sub menus carregados');
+                    console.log(angular.toJson($scope.meuMenu, true));
+                    console.log(angular.toJson($scope.subMenus, true));
+                })
+                .error(function(data) {
+                    console.log('Não foi possivel carregar os sub menus ' + data);
+                });
+    };
+
+    $scope.getMenus = function() {
+        $http.get('./rest/menuSource/menu/')
+                .success(function(menus) {
+                    $scope.menus = menus;
+                    console.log('Menus carregados');
+                })
+                .error(function(data) {
+                    console.log('Não foi possivel carregar os menus ' + data);
                 });
     };
 

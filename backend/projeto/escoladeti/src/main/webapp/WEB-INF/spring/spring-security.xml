@@ -11,8 +11,11 @@
         <security:intercept-url pattern="/resources/**" access="permitAll" />
         <security:intercept-url pattern="/pages/**" access="isAuthenticated()" />
         <security:intercept-url pattern="/public/**" access="permitAll" />
+        <security:intercept-url pattern="/libs/**" access="permitAll" />
         <security:intercept-url pattern="/cadastroparticipanteevento" access="permitAll" />
         <security:intercept-url pattern="/consultalivro" access="permitAll" />
+        <security:intercept-url pattern="/externo/**" access="permitAll" />
+        <security:intercept-url pattern="/paginasexternas/**" access="permitAll" />
         <security:intercept-url pattern="/login" access="isAnonymous()" />
         <security:intercept-url pattern="/login-error" access="isAnonymous()" />
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
@@ -26,7 +29,16 @@
             <security:jdbc-user-service
                     data-source-ref="dataSource"
                     users-by-username-query="select login as username, senha as password, ativo as enabled from usuario where login = ?"
-                    authorities-by-username-query="select login as username, 'ADMIN' as authority from usuario where 1 = 1 or 'x' like ?" />
+                    authorities-by-username-query="
+                         select usu.login as username, it.nome  from usuario usu
+                         join PerfilAcessoUsuario pus on(usu.id = pus.id_usuario)
+                         join perfilacesso per on (per.id = pus.id_perfilacesso)
+                         join perfilitemacesso piac on (piac.id_perfilacesso = per.id)
+                         join itemacesso it on (it.id = piac.id_itemacesso)
+                         where usu.login = ?
+                         "
+
+                    />
 <!--    		<security:user-service> -->
 <!--       		<security:user name="adm" password="123" authorities="ROLE_USER" /> -->
         </security:authentication-provider>

@@ -10,14 +10,13 @@ function PaisController($scope, $routeParams, paisService) {
             if (result) {
                paisService.deletar(pais)
                		.success(function (data, status) {
-                        $scope.getTodos(1);
+                        $scope.getTodos($scope.pageNumber);
                         console.log('pais deletado');
                         toastr.success(pais.nome+" deletado com sucesso.");                       
                     })
                     .error(function (data, status) {
                         console.log('erro ao deletar pais ' + data);
                         console.log(data.messageDeveloper);
-                        toastr.error(data.message);
                     });
             }
         });
@@ -47,12 +46,10 @@ function PaisController($scope, $routeParams, paisService) {
         window.location = '#/cadastropais/' + pais.id;
     };
     
-    $scope.buscaPaisContendoNome = function () {
-    	console.log($scope.busca);    	
-    	paisService.buscarPorNome($scope.busca)
-    		.then(function (retorno){
-    			console.log(retorno.data.list);
-    			$scope.paises = retorno.data;
+    $scope.buscaPaisContendoNome = function (busca) {
+    	paisService.buscarPorNome(busca)
+    		.success(function (retorno){
+    			$scope.paises = retorno;
     		});
     };   		
 
@@ -61,25 +58,29 @@ function PaisController($scope, $routeParams, paisService) {
                 .success(function(pais, status) {
                     $scope.pais = getNovoPais();
                     toastr.success('Pais '+pais.nome+' salvo com sucesso.');
+                    window.location = '#/listapais';
                 })
                 .error(function(data, status) {
                     console.log('pais não salvo ', data);
-                    toastr.warning(data.message);
+                    //toastr.warning(data.message);
                     console.log(data.messageDeveloper);
                 });
     };
     
     $scope.getTodos = function(numeroPagina) {
-    	console.log(numeroPagina);
         paisService.listar(numeroPagina)
             .success(function(listaPaises, status) {
+                
+                listaPaises.list.forEach(function (pais) {
+                        delete pais.info; 
+                });
                 $scope.paises = listaPaises;
             })
             .error(function(data, status) {
                 console.log('erro ao buscar paises ' + data);
             });
     };
-
+   
     function getNovoPais() {
         console.log('novo pais');
         return {
@@ -91,9 +92,9 @@ function PaisController($scope, $routeParams, paisService) {
 
     $scope.voltar = function() {
         $scope.pais = {};
+        //$location.path('/listapais');
         window.location = '#/listapais';
     };
-
 }
 
 controllers.controller('PaisController', ['$scope', '$routeParams', 'paisService', PaisController ]);

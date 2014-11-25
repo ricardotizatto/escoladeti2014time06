@@ -1,6 +1,7 @@
 package br.unicesumar.escoladeti.entity;
 
 import java.util.Date;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -24,12 +25,16 @@ public class PessoaJuridica extends Pessoa {
 
     public PessoaJuridica(String cnpj, String inscricaoEstadual, String razaoSocial, Date dataCriacao) {
         this.cnpj = cnpj;
-        this.inscricaoEstadual = inscricaoEstadual;
-        this.razaoSocial = razaoSocial;
+        this.inscricaoEstadual = inscricaoEstadual.toUpperCase();
+        this.razaoSocial = razaoSocial.toUpperCase();
         this.dataCriacao = dataCriacao;
     }
 
-    public String getInscricaoMunicipal() {
+    public PessoaJuridica(Long id) {
+		this.id = id;
+	}
+
+	public String getInscricaoMunicipal() {
         return inscricaoMunicipal;
     }
 
@@ -66,6 +71,11 @@ public class PessoaJuridica extends Pessoa {
     }
 
     public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
+        this.razaoSocial = razaoSocial.toUpperCase();
     }
+
+	public static PessoaJuridica of(Long id) {
+		// TODO Auto-generated method stub
+		return new PessoaJuridica(id);
+	}
 }

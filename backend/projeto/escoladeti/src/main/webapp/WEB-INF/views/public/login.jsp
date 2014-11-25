@@ -31,7 +31,7 @@
 			<form name='f' action="j_spring_security_check" method='POST'>
 				<div class="row">
 					<div class="form-group col-md-4 col-md-offset-4">
-						<input type="text" class="form-control" placeholder="Usuário"
+						<input type="text" class="form-control"placeholder="Usuário"
 							name="j_username" />
 					</div>
 				</div>
@@ -44,7 +44,7 @@
 				<div class="row">
 					<div class="form-group col-md-4 col-md-offset-4">
 						<button type="submit" class="btn btn-success form-control">
-							<i class="glyphicon glyphicon-ok"></i> Entrar
+							<i class="glyphicon glyphicon-ok" id="entrar"></i> Entrar
 						</button>
 					</div>
 				</div>
@@ -63,5 +63,7 @@
 			<p>Unicesumar 2014 - Escola de T.I. - Time 06</p>
 		</div>
 	</footer>
+
+
 </body>
 </html>

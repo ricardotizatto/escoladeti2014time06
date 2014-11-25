@@ -1,45 +1,53 @@
 function PessoaFactory($resource) {
-	return $resource("./rest/pessoas/:id/:acao/:pagina/:busca/:tipo", {id: '@id'},{
+    return $resource("./rest/pessoas/:id/:acao/:pagina/:tipo", {id: '@id'},{
+    	
+    	save : {method : 'POST'},
 		
-		update: {method: 'PUT'},
-		paginarFisica: {
-			method: 'GET',
-			params: {
-				acao: 'paginarFisica'
-			}
-		},
-                paginarAluno: {
-                    method: 'GET',
-                    params: {
-                        acao: 'paginarAluno'
-                    }
-                },
-                paginarJuridica: {
-                        method: 'GET',
-                        params: {
-                                acao: 'paginarJuridica'
-                         }
-                },
-                buscarFisica: {
-                    method: 'GET',
-                    params: {
-                        acao: 'buscarFisica'
-                    }
-                },
-                buscarAluno: {
-                    method: 'GET',
-                    params: {
-                        acao: 'buscarAluno'
-                    }
-                },
-                buscarJuridica: {
-                    method: 'GET',
-                    params: {
-                        acao: 'buscarJuridica'
-                    }
-                }
+        update: {method: 'PUT'},
+
+        buscarPessoa: {
+            method: 'GET',
+            params: {
+                acao: 'buscarPessoa'
+            }
+        },
+        
+        listarTodasPessoaFisicas:{
+            method: 'GET',
+            isArray: true,
+            params: {
+                acao: 'todasPessoas'
+            }
+        },
+        
+        paginar : {
+            method : 'GET',
+            isArray : true
+        },
+        
+        listaTodasPessoas : {
+        	method : 'GET',
+        	isArray : true,
+        	params : {
+        		acao : 'todasPessoas'
+        	}
+        },
+        listaTodosAssociados : {
+        	method : 'GET',
+        	isArray : true,
+        	params : {
+        		acao : 'todosAssociados'
+        	}
+        },
+        listarTodasAsEscolas : {
+        	method : 'GET',
+        	isArray : true,
+        	params : {
+        		acao : 'listarTodasAsEscolas'
+        	}
+        }
                 
-	});
+    });
 }
 
 angular.module('services')

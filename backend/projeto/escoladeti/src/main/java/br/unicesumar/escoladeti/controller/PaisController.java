@@ -16,14 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/rest/paisSource")
 public class PaisController implements Serializable {
-	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	private PaisService paisService;
 
 	@RequestMapping(value = "/pais", method = RequestMethod.POST)
 	@ResponseBody
-	public Pais salvar(@RequestBody Pais pais) {
-		return paisService.salvar(pais);
+	public Pais salvar(@RequestBody Pais pais) throws Exception {
+		if (!pais.equals(paisService.buscarPaisPorNomeSiglaCodigo(pais))) {
+			return this.paisService.salvar(pais);
+		}
+		throw new Exception("O País " + pais.getNome() + " já está cadastrado!");
 	}
 
 	@RequestMapping(value = "/pais", method = RequestMethod.PUT)
@@ -40,21 +43,15 @@ public class PaisController implements Serializable {
 		return paisService.getById(id);
 	}
 
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
+	@RequestMapping(value = "/pais", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Pais> listarTodosPaises() {	
-		return paisService.listarTodosPaises();
+	public List<Pais> getTodos() {
+		return paisService.getTodos();
 	}
-        
-    @RequestMapping(value = "/pais", method = RequestMethod.GET)
-    @ResponseBody
-    public DataPage<Pais> getTodos() {
-        return paisService.getTodos(1);
-    }
-	
-	@RequestMapping(value = "/pais",params = {"q"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = "/pais", params = { "q" }, method = RequestMethod.GET)
 	@ResponseBody
-	public DataPage<Pais> getPorNome(@RequestParam String q) {
+	public DataPage<Pais> getTodosPorNome(@RequestParam String q) {
 		return paisService.getPaisPorNome(q);
 	}
 

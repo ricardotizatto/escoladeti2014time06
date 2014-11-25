@@ -1,55 +1,31 @@
 package br.unicesumar.escoladeti.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 import static liquibase.util.MD5Util.computeMD5;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario extends Entidade {
-
-    @NotNull
-    @NotEmpty
-    private String nome;
-
-    @NotNull
-    @NotEmpty
-    private String login;
-
-    @NotNull
-    @NotEmpty
-    private String senha;
-
-    @NotNull
-    @NotEmpty
-    private String email;
-
-    @NotNull
-    private Boolean ativo;
     
-    @OneToOne(mappedBy = "usuario")
-    @JsonBackReference
-    private UsuarioPerfilAcesso usuarioPerfilAcesso;
+    private static final long serialVersionUID = 1L;
 
-    public UsuarioPerfilAcesso getUsuarioPerfilAcesso() {
-        return usuarioPerfilAcesso;
-    }
-
-    public void setUsuarioPerfilAcesso(UsuarioPerfilAcesso usuarioPerfilAcesso) {
-        this.usuarioPerfilAcesso = usuarioPerfilAcesso;
-    }
-
+    private String nome;
+    private String login;
+    private String senha;
+    private String email;
+    private boolean ativo;
+    
     public Usuario() {
     }
 
     public Usuario(String nome, String senha, String login, String email) {
         this.login = login;
-        this.nome = nome;
-        this.email = email;
+        this.nome = nome.toUpperCase();
+        this.email = email.toUpperCase();
         setSenha(senha);
+    }
+
+    private Usuario(Long id) {
+        this.id = id;
     }
 
     public String getSenha() {
@@ -73,7 +49,7 @@ public class Usuario extends Entidade {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getEmail() {
@@ -81,15 +57,18 @@ public class Usuario extends Entidade {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toUpperCase();
     }
 
-    public Boolean getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-
+    
+    public static Usuario of(Long id) {
+        return new Usuario(id);
+    }
 }

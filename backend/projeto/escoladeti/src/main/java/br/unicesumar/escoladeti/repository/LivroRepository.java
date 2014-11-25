@@ -9,9 +9,11 @@ public interface LivroRepository extends JpaRepository<Livro, Long>{
     
     public Livro findById(Long id);
     
-    public Livro findByNomeAndAutorAndEditoraAndAnoEdicao(
-            String nome, String autor, String editora, Long anoEdicao);
+    public Livro findByNomeAndAutorAndEditoraAndAnoEdicaoAndIdNot(
+            String nome, String autor, String editora, Long anoEdicao, Long id);
     
     public Page<Livro> findByNomeContainingOrderByNomeAsc(String nome, Pageable pageable);
+    
+    public Page<Livro> findByNomeContainingOrEditoraContainingOrDisciplinaContainingOrderByNomeAsc(String nome, String editora, String disciplina, Pageable pageable);
     
 }

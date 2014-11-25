@@ -13,7 +13,7 @@ function livroController($scope, $http, $routeParams) {
                     headers: {'Content-Type': 'application/json; charset=UTF-8'}
                 })
                 .success(function(data, status) {
-                    $scope.getTodos(1);
+                    $scope.getTodos($scope.pageNumber);
                     console.log('Livro deletado!');
                     toastr.success('Livro ' + livro.nome + ' deletado com sucesso'); 
                 })
@@ -46,7 +46,7 @@ function livroController($scope, $http, $routeParams) {
                 $scope.livro = livro;
             });
             
-    }
+    };
 
     $scope.editar = function(livro) {
         console.log(livro);
@@ -65,10 +65,10 @@ function livroController($scope, $http, $routeParams) {
                 });
                 $scope.livros = retorno.data;
             });
-    } 
+    };
 
-    $scope.salvar = function() {
-  
+     $scope.salvar = function() {
+
         $scope.livro.nome = $scope.livro.nome.toUpperCase();
         $scope.livro.autor = $scope.livro.autor.toUpperCase();
         $scope.livro.editora = $scope.livro.editora.toUpperCase();
@@ -80,15 +80,21 @@ function livroController($scope, $http, $routeParams) {
                 $scope.livro = getNovoLivro();
                 console.log("livro salva = " + livro);
                 toastr.success('Livro ' + livro.nome + ' salvo com sucesso');
+
+                $scope.voltar();
+
+                window.location="#/listalivro";
+
             })
             .error(function(data, status) {
                 console.log("erro ao salvar livro" + data);
-                toastr.error(data.message);
+               // toastr.error(data.message);
             });
     };
+
     
     $scope.getTodos = function(numeroPagina) {
-    	console.log(numeroPagina);
+    	
         $http.get('./rest/livroSource/listar/pag/' + numeroPagina)
             .success(function(listaLivros, status) {
                 
@@ -96,11 +102,16 @@ function livroController($scope, $http, $routeParams) {
                     delete livro.info;
                 });
                 $scope.livros = listaLivros;
+                $http.get('./rest/livroSource/livros')
+                		.success(function(lista){
+                			$scope.totalItems = lista.length;
+                		})
+                
             })
             .error(function(data, status) {
                 console.log('erro ao buscar livros ' + data);
             });
-    }
+    };
 
     function getNovoLivro() {
         console.log('novo livro');
@@ -110,6 +121,5 @@ function livroController($scope, $http, $routeParams) {
     $scope.voltar = function() {
         $scope.livro = {};
         window.location = '#/listalivro';
-    }
-    
+    };
 }

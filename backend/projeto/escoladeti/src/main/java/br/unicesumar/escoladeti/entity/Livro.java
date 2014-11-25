@@ -1,8 +1,20 @@
 package br.unicesumar.escoladeti.entity;
 
+import br.unicesumar.escoladeti.enums.Transcricao;
+import br.unicesumar.escoladeti.util.data.DateUtil;
+import br.unicesumar.escoladeti.util.number.NumberUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import org.parboiled.common.Preconditions;
 
 @Entity
 public class Livro extends Entidade {
@@ -14,6 +26,10 @@ public class Livro extends Entidade {
     private String autor;
     private String editora;
     private Long anoEdicao;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_livro")
+    private Set<Volume> volumes = new HashSet<>();
     
     public Livro() {
 	}
@@ -62,48 +78,54 @@ public class Livro extends Entidade {
         this.anoEdicao = anoEdicao;
     }
 
+    public Set<Volume> getVolumes() {
+        return volumes;
+    }
+
+    public void setVolumes(Set<Volume> volumes) {
+        this.volumes = volumes;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.nome);
-        hash = 83 * hash + Objects.hashCode(this.disciplina);
-        hash = 83 * hash + Objects.hashCode(this.autor);
-        hash = 83 * hash + Objects.hashCode(this.editora);
-        hash = 83 * hash + Objects.hashCode(this.anoEdicao);
-        return hash;
+        return Objects.hash(this.id);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
+        if (obj == null || !(obj instanceof Livro)) {
+          return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Livro other = (Livro) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.disciplina, other.disciplina)) {
-            return false;
-        }
-        if (!Objects.equals(this.autor, other.autor)) {
-            return false;
-        }
-        if (!Objects.equals(this.editora, other.editora)) {
-            return false;
-        }
-        if (!Objects.equals(this.anoEdicao, other.anoEdicao)) {
-            return false;
-        }
-        return true;
+
+        Livro outroLivro = (Livro) obj;
+
+        boolean igual = outroLivro.nome.equals(this.nome)
+                && outroLivro.anoEdicao.equals(this.anoEdicao)
+                && outroLivro.disciplina.equals(this.disciplina)
+                && outroLivro.editora.equals(this.editora);
+
+        return igual;
     }
 
 	public static Livro of(Long id) {
 		return new Livro(id);
 	}
-    
-    
+
+
+    public void validarPaginas(Integer paginaInicio, Integer paginafinal, Transcricao transcricao) {
+
+        for (Volume volume : volumes) {
+            if (!volume.getTranscricao().equals(transcricao)) {
+                continue;
+            }
+
+            if (paginaInicio >= volume.getPaginaInicio()  && paginaInicio <=volume.getPaginaFim()
+                    || paginafinal >= volume.getPaginaInicio() && paginafinal <= volume.getPaginaFim()) {
+                throw new RuntimeException(
+                        String.format("Página inicial ou final esta dentro do intervalo %d a %d . Volume: %d.<br>" +
+                                " Insira paginás que não estejam nesse intervalo.", volume.getPaginaInicio(), volume.getPaginaFim(), volume.getId()));
+            }
+        }
+
+    }
 }

@@ -26,7 +26,8 @@ public class UnidadeFederativaController implements Serializable{
     @RequestMapping(value="/unidadeFederativa", method= RequestMethod.POST)
     @ResponseBody
     public UnidadeFederativa salvar(@RequestBody UnidadeFederativa unidadeFederativa) throws Exception {
-            return this.federativaService.salvar(unidadeFederativa);
+              return this.federativaService.salvar(unidadeFederativa); 
+             
     }
 
     @RequestMapping(value="/unidadeFederativa", method= RequestMethod.DELETE)

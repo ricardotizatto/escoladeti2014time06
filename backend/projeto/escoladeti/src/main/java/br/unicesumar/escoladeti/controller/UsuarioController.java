@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.unicesumar.escoladeti.controller;
 
-import br.unicesumar.escoladeti.entity.PerfilAcesso;
+import br.unicesumar.escoladeti.dto.UsuarioDTO;
 import br.unicesumar.escoladeti.entity.Usuario;
-import br.unicesumar.escoladeti.entity.UsuarioPerfilAcesso;
-import br.unicesumar.escoladeti.repository.UsuarioPerfilAcessoRepository;
 import br.unicesumar.escoladeti.service.UsuarioService;
+import br.unicesumar.escoladeti.view.ViewPerfilDeAcessoUsuario;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- *
- * @author Diogo
- */
 @Controller
 @RequestMapping("/rest/usuarioSource")
 public class UsuarioController implements Serializable {
@@ -34,27 +25,39 @@ public class UsuarioController implements Serializable {
 
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     @ResponseBody
-    public Usuario salvar(@RequestBody Usuario usuario) {
-        System.out.println(usuario.getNome());
-        return this.usuarioService.salvar(usuario);
+    public UsuarioDTO salvar(@RequestBody UsuarioDTO usuarioDTO) {
+        return this.usuarioService.salvar(usuarioDTO);
     }
 
     @RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Usuario getById(@PathVariable Long id) {
+    public ViewPerfilDeAcessoUsuario getById(@PathVariable Long id) {
         return this.usuarioService.getById(id);
     }
-
-    @RequestMapping(value = "/usuario", method = RequestMethod.GET)
+   
+    @RequestMapping(value = {"/listar/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<Usuario> getTodos() {
-        return this.usuarioService.getTodos();
+    public DataPage<ViewPerfilDeAcessoUsuario> listarUsuarios(@PathVariable Integer pagina) {
+        return usuarioService.listarUsuarios(pagina);
+    }
+    
+    @RequestMapping(value = "/usuarios", params = {"q"}, method = RequestMethod.GET)
+    @ResponseBody
+    public DataPage<ViewPerfilDeAcessoUsuario> getPorNome(@RequestParam String q) {
+        return usuarioService.getPerfilDeAcessoUsuarioPorNomeOrPerfilOrEmail(q);
     }
 
     @RequestMapping(value = "/usuario", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deletar(@RequestBody Usuario usuario) {
-        this.usuarioService.deletar(usuario);
+    public String deletar(@RequestBody UsuarioDTO usuarioDTO) {
+        this.usuarioService.deletar(usuarioDTO);
         return "deleted";
+    }
+    
+    @RequestMapping(value = "/usuario", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Usuario> getTodos() {
+        return this.usuarioService.getTodos();
+        
     }
 }

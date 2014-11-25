@@ -30,8 +30,6 @@ public class PessoaFisica extends Pessoa {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    private boolean aluno = false;
-
     public PessoaFisica() {
     }
 
@@ -39,7 +37,7 @@ public class PessoaFisica extends Pessoa {
         this.rg = rg;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
-        this.sobrenome = sobrenome;
+        this.sobrenome = sobrenome.toUpperCase();
     }
 
     public PessoaFisica(Long id) {
@@ -75,7 +73,7 @@ public class PessoaFisica extends Pessoa {
     }
 
     public void setSobrenome(String sobreNome) {
-        this.sobrenome = sobreNome;
+        this.sobrenome = sobreNome.toUpperCase();
     }
 
     public Sexo getSexo() {
@@ -86,15 +84,11 @@ public class PessoaFisica extends Pessoa {
         this.sexo = sexo;
     }
 
-    public boolean getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(boolean aluno) {
-        this.aluno = aluno;
-    }
-
     public static PessoaFisica of(Long id) {
         return new PessoaFisica(id);
+    }
+
+    public String getNomeCompleto() {
+        return  getNome()+ " " + sobrenome;
     }
 }

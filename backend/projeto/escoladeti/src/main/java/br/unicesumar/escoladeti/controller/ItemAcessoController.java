@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.unicesumar.escoladeti.controller;
 
 import br.unicesumar.escoladeti.entity.ItemAcesso;
+import br.unicesumar.escoladeti.entity.SubMenu;
 import br.unicesumar.escoladeti.service.ItemAcessoService;
+import br.unicesumar.escoladeti.service.SubMenuService;
 import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- *
- * @author Walber
- */
 @Controller
 @RequestMapping("/rest/itemAcessoSource")
 public class ItemAcessoController implements Serializable {
@@ -33,7 +26,7 @@ public class ItemAcessoController implements Serializable {
     @RequestMapping(value = "/itemAcesso", method = RequestMethod.POST)
     @ResponseBody
     public ItemAcesso salvar(@RequestBody ItemAcesso itemAcesso) {
-        return this.itemAcessoService.salvar(itemAcesso);
+           return this.itemAcessoService.salvar(itemAcesso);
     }
 
     @RequestMapping(value = "/itemAcesso", method = RequestMethod.GET)
@@ -47,6 +40,7 @@ public class ItemAcessoController implements Serializable {
     public ItemAcesso getById(@PathVariable Long id) {
         return this.itemAcessoService.getById(id);
     }
+    
 
     @RequestMapping(value = "/itemAcesso", method = RequestMethod.DELETE)
     @ResponseBody

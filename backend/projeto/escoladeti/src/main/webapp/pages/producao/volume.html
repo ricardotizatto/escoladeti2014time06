@@ -1,0 +1,204 @@
+<div class="container" ng-controller="VolumeController as ctrl" >
+    <fieldset>
+        <div class="row">
+            <legend> <span class="glyphicon glyphicon-file">Volume</span></legend>
+        </div>
+        <div class="row" data-ng-show="ctrl.volume.status == 'REVISADO'">
+            <div class="col-xs-12">
+                <div class="alert alert-success">
+                    Este volume está FINALIZADO
+                </div>
+            </div>
+        </div>
+        <form role="form" name="opForm" role="form">
+            <div class="col-lg-10">
+                <div class="row ">
+                    <div class="form-group col-sm-2">
+                        <label> Volume </label>
+                        <input class="form-control" type="text" data-ng-model="ctrl.volume.id" disabled />
+                    </div>
+
+                    <div class="form-group col-sm-3 {{opForm.paginaInicio.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"> Página Inicio *</label>
+                        <input class="form-control" type="number" data-ng-model="ctrl.volume.paginaInicio"
+                               name="paginaInicio" required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')"/>
+                    </div>
+                    <div class="form-group col-sm-3 {{opForm.paginaFim.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"> Página Fim *</label>
+                        <input class="form-control" type="number" data-ng-model="ctrl.volume.paginaFim" name="paginaFim"
+                               required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')"/>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="status"> Status </label>
+                        <input class="form-control" id="status" disabled data-ng-model="ctrl.volume.status">
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-6 {{opForm.responsavel.$error.required ? 'has-error' : 'has-success'}} has-feedback">
+                        <label class="control-label"> Responsável *</label>
+                        <select data-ui-select2="" data-ng-model="ctrl.volume.responsavel" class="input-default"
+                                required="" name="responsavel" required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">
+                            <option data-ng-repeat="usuario in ctrl.usuarios" value="{{usuario.id}}">{{usuario.nome}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 ">
+                        <label class="control-label"> Revisor </label>
+                        <input class="form-control" data-ng-model="ctrl.volume.responsavelRevisao.nome" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <label>Arquivo</label>
+                        <div class="input-group">
+                            <!--<span class="input-group-btn">-->
+                                <!--&lt;!&ndash;<span class="btn btn-primary btn-file" required data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">&ndash;&gt;-->
+                                     <!--&lt;!&ndash;<span class="glyphicon glyphicon-search " ></span> Procurar <input type="file" >&ndash;&gt;-->
+                                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                <!--<button type="file" class="form-control btn btn-success">teste</button>-->
+                            <!--</span>-->
+                            <input type="text" class="form-control" data-ng-model="ctrl.volume.nomeArquivo" disabled>
+                            <span class="input-group-btn" >
+                                <a class="btn btn-primary btn-file" href="./rest/upload/{{ctrl.volume.id}}"
+                                      data-ng-disabled="!ctrl.volume.caminhoAnexo">
+                                    <span class="glyphicon glyphicon-download " ></span> Download
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="">Arquivo à enviar</label>
+                        <input type="file" class="form-control " file-model="ctrl.arquivo"
+                               data-ng-disabled="!(ctrl.volume.status == 'ANDAMENTO')">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="control-label">Data Impressão </label>
+                        <input class="form-control" type="date" data-ng-model="ctrl.volume.dataImpressao" disabled>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="control-label">Data Revisão</label>
+                        <input  class="form-control" type="date" data-ng-model="ctrl.volume.dataRevisao" disabled>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <label> Observação</label>
+                        <textarea class="form-control" data-ng-model="ctrl.volume.observacao" data-ng-disabled="ctrl.volume.status == 'REVISADO'"
+                                  data-ng-disabled="(ctrl.volume.status == 'CANCELADO')"></textarea>
+                        <div class="required-icon">
+                            <div class="text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 form-group">
+                <div class="row">
+                    <div class="col-md-12"><label>&nbsp;</label></div>
+
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'ANDAMENTO' && ctrl.volume.id">
+                        <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.concluirVolume()">
+                            <span class="fa fa-print" ></span> &nbsp; Concluir
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'CONCLUIDO' && ctrl.volume.id">
+                        <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.marcarComoImpresso()"
+                                data-target="#modalImpressao" data-toggle="modal">
+                            <span class="fa fa-print" ></span> &nbsp; Impresso
+                        </button>
+                    </div>
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'IMPRESSO' || ctrl.volume.status == 'CONCLUIDO'">
+                        <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.marcarComoRevisado()" >
+                            <span class="fa fa-thumbs-o-up" ></span> &nbsp;Revisado
+                        </button>
+                    </div>
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status == 'IMPRESSO' || ctrl.volume.status == 'CONCLUIDO'">
+                        <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.rejeitar()" >
+                            <span class="fa fa-thumbs-o-down" ></span> &nbsp;Rejeitado
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 form-group" ng-show="ctrl.volume.status != 'CANCELADO' && ctrl.volume.status != 'REVISADO'
+                        && ctrl.volume.status != 'ANDAMENTO' ">
+                        <button type="submit" class="btn btn-warning form-control" ng-click="ctrl.reativar()" >
+                            <span class="fa fa-refresh" ></span>&nbsp; Reativar
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-6 form-group">
+                    <a class="btn btn-link form-control"  href="#/ordem-producao/{{ctrl.volume.idSolicitacaoItem}}">
+                        <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+                    </a>
+                </div>
+                <div class="col-sm-3 form-group">
+                    <button class="btn btn-success form-control" data-ng-disabled="opForm.$invalid"
+                            data-ng-click="ctrl.salvarVolume()">
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+
+    <div class="row">
+        <div class="modal  fade in" id="modalImpressao" tabindex="-1" role="dialog"
+             aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog">
+                <form role="form" name="modalForm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Alterar</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" data-ng-show="ctrl.aoAlterarStatus.revisar">
+                                <div class="col-md-12 control-label">
+                                    <label class="control-label">Revisor</label>
+                                    <select data-ui-select2="" data-ng-model="ctrl.volume.revisor" class="input-default">
+                                        <option data-ng-repeat="usuario in ctrl.usuarios" value="{{usuario.id}}">{{usuario.nome}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 control-label">
+                                    <label class="control-label">Data</label>
+                                    <input class="form-control" type="date" data-ng-model="ctrl.volume.data">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-3 col-md-offset-6 form-group">
+                                        <button class="btn btn-link form-control" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <button class="btn btn-success form-control" data-ng-click="ctrl.alterarStatus()">
+                                            Confirmar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

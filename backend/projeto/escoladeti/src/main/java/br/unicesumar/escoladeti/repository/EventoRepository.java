@@ -1,8 +1,6 @@
 package br.unicesumar.escoladeti.repository;
 
 import br.unicesumar.escoladeti.entity.Evento;
-import br.unicesumar.escoladeti.entity.Pais;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +9,12 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     public Evento findById(Long id);
 
-//    public List<Evento> findByTituloContainingOrderByTituloAsc(String titulo);
-    public Page<Evento> findByTituloContainingOrderByTituloAsc(String titulo, Pageable pageable);
+    public Page<Evento> findByTituloContainingAndStatuseventoTrueOrderByTituloAsc(String titulo, Pageable pageable);
+    
+    public Page<Evento> findByTituloContainingAndStatuseventoFalseOrderByTituloAsc(String titulo, Pageable pageable);
+    
+    public Page<Evento> findByStatuseventoTrue(Pageable pageable);
+
+    public Page<Evento> findByStatuseventoFalse(Pageable pageable);
+
 }

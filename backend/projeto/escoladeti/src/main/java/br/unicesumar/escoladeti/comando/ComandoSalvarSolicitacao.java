@@ -1,12 +1,17 @@
 package br.unicesumar.escoladeti.comando;
 
+import br.unicesumar.escoladeti.entity.PessoaJuridica;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 import java.util.List;
 
@@ -16,12 +21,11 @@ import java.util.List;
 public class ComandoSalvarSolicitacao {
 	   
     @NotNull(message = "Aluno é obrigatório" )
-    @Min(value = 0, message = "aluno é obrigatório")
-    @Max(value = 100)
+    @Min(value = 0, message = "Aluno é obrigatório")
     private Long aluno;
     
-    @NotBlank(message = "Escola é obrigatório")
-    private String escola;
+    
+    private Long escola;
     
     @Min(value = 0, message = "Nre inválido")
     private Long nre;
@@ -63,11 +67,11 @@ public class ComandoSalvarSolicitacao {
 		this.aluno = aluno;
 	}
 
-	public String getEscola() {
+	public Long getEscola() {
 		return escola;
 	}
 
-	public void setEscola(String escola) {
+	public void setEscola(Long escola) {
 		this.escola = escola;
 	}
 

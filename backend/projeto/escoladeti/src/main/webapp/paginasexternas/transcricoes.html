@@ -1,0 +1,78 @@
+ <!-- Page Title -->
+ <div class="page-title" ng-init="getLivrosTranscritos(1);ativaBotao('transcricoes')">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <i class="icon-book page-title-icon"></i>
+                <h2>Livros Transcritos pela AMACAP</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Us -->
+<div class="contact-us container">
+    <div class="row">
+        <div class="span12">
+            <form method="post" action="">
+                <div class="span12">
+                    <label class="nameLabel"><h3>Pesquisar Livro Transcrito</h3></label>
+                    <input class="form-control" type="text" name="busca" placeholder="Pesquisar Livro Transcrito" ng-model="busca" ng-change="buscaMateriaisContendoNome(busca)">
+                </div>   
+            </form>
+        </div>
+        <div class="span12 lista-transcricao">
+            <ul>
+                <li ng-repeat="livroTranscrito in livrosTranscritos.list">
+                    <div ng-show="livroTranscrito.volumes" class="material-transcricao">
+                        <h4>{{livroTranscrito.nome}}</h4>
+                        <p>
+                            <!--<b>TRANSCRIÇÃO: </b><span class="desc-transcricao"> {{livroTranscrito.transcricao != 'OUTRO' ? livroTranscrito.transcricao : livroTranscrito.outraTranscricao}} </span>-->
+                            <b>Autor: </b><span class="desc-transcricao"> {{livroTranscrito.autor}}</span>
+                            <b> - Editora: </b><span class="desc-transcricao">{{livroTranscrito.editora}}</span>
+                            <b> - Disciplina: </b><span class="desc-transcricao">{{livroTranscrito.disciplina}}</span>
+                            <b> - Ano de Edição: </b><span class="desc-transcricao">{{livroTranscrito.anoEdicao}}</span></p>
+                            <ul>
+                                <li ng-repeat="volume in livroTranscrito.volumes | orderBy: ['+transcricao','+paginaInicio'] ">
+                                    <div ng-show="volume.status === 'REVISADO' " >
+                                        Transcrição: {{volume.transcricao}} - 
+                                        Páginas: De {{volume.paginaInicio}} à {{volume.paginaFim}} 
+                                    </div>
+                                </li>
+                            </ul>    
+                        <hr>
+                    </div>
+                </li>  
+            </ul>
+        </div>
+        <div class="row" ng-show="livrosTranscritos.pagesAround.length > 1">
+            <div class="pagination pagination-sm pagination-centered">
+              <ul>
+                <li>                        
+                    <a ng-click="getLivrosTranscritos(1)"> 
+                        <span class="glyphicon  icon-fast-backward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="livrosTranscritos.pageCount <= 1 ? getLivrosTranscritos(1) : getLivrosTranscritos(livrosTranscritos.pageNumber - 1)"> 
+                        <span class="glyphicon icon-step-backward"></span>
+                    </a>
+                </li>
+                <li ng-repeat="numeroPagina in livrosTranscritos.pagesAround" class="{{numeroPagina == livrosTranscritos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="getLivrosTranscritos(numeroPagina)">{{numeroPagina}}</a>
+                </li>
+                <li>
+                    <a ng-click="livrosTranscritos.pageNumber === livrosTranscritos.pageCount ? getLivrosTranscritos(livrosTranscritos.pageCount) : getLivrosTranscritos(livrosTranscritos.pageNumber + 1)"> 
+                        <span class="glyphicon icon-step-forward"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="livrosTranscritos.pageCount == 0 ? getLivrosTranscritos(1) : getLivrosTranscritos(livrosTranscritos.pageCount)"> 
+                        <span class="glyphicon icon-fast-forward"></span>
+                    </a>
+                </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>

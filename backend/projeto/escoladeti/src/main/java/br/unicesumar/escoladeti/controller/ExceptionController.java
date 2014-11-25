@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
@@ -21,18 +22,41 @@ import br.unicesumar.escoladeti.common.InfoError;
 @ControllerAdvice
 public class ExceptionController {
 
-	@ExceptionHandler( Exception.class)
+	@ExceptionHandler( Exception.class)        
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public InfoError handleException(Exception e) {
-		return new InfoError(e.getMessage(), e.getLocalizedMessage() );
-	}	
+            e.printStackTrace();
+        String userMessage = e.getMessage();
+        String developerMessage = e.getLocalizedMessage();
+		return new InfoError(userMessage, developerMessage );
+	}
+
+    @ExceptionHandler( RuntimeException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public InfoError handleException(RuntimeException e) {
+        e.printStackTrace();
+        String userMessage = e.getMessage();
+        String developerMessage = e.getLocalizedMessage();
+		return new InfoError(userMessage, developerMessage );
+    }
+    
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public InfoError handleDataIntegrityViolationException(DataIntegrityViolationException e){
+    	e.printStackTrace();
+    	
+    	return new InfoError(e.getCause().getCause().getMessage(), e.getCause().getCause().getLocalizedMessage());
+    }
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public InfoError handleValidationException(HttpMessageNotReadableException e) {
 		System.out.println(e.getClass());
+                e.printStackTrace();
 		return new InfoError(e.getMostSpecificCause().getMessage() , e.getLocalizedMessage() );
 	}
 	
@@ -41,6 +65,7 @@ public class ExceptionController {
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public InfoError handleConstraintViolationException(TransactionSystemException e) {
 		System.out.println(e.getClass());
+                e.printStackTrace();
 		StringBuilder builder = new StringBuilder();
 		
 		//Percorrer  as constantes violadas, armazenando qual campo, e a mensagem de validação
@@ -66,7 +91,7 @@ public class ExceptionController {
         BindingResult result = ex.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
         StringBuilder builder = new StringBuilder();
-
+        ex.printStackTrace();
         for (FieldError error : fieldErrors) {
         	builder.append("*");
         	builder.append(error.getDefaultMessage());
