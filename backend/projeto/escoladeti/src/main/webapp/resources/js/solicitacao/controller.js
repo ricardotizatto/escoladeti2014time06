@@ -177,7 +177,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		} 
 				
 		$scope.solicitacao.$save(function () {
-			toastr.success('salvo com sucesso');
+			toastr.success('Salvo com sucesso.');
             $location.path('/listasolicitacoes');
 		});
 	};
@@ -214,6 +214,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 			$scope.solicitacao.nre = solicitacao.nre ? solicitacao.nre.id : null;
 			$scope.solicitacao.municipio = solicitacao.municipio ? solicitacao.municipio.id : null;
 			$scope.solicitacao.responsavel = solicitacao.responsavel ? solicitacao.responsavel.id : null;
+			$scope.solicitacao.escola = solicitacao.escola ? solicitacao.escola.id : null;
 			
 //			solicitacao.itensSolicitacao.forEach(function (item) {
 //				item.livro = item.livro.id;
@@ -234,6 +235,17 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
             return {
                 nome: pessoa.nome + ' ' + pessoa.sobrenome,
                 id: pessoa.id
+            };
+        });
+    });
+    
+    Pessoa.listarTodasAsEscolas(function (escolas) {
+        $scope.escolasOriginal = escolas;
+
+            $scope.escolas = escolas.map(function (escola) {
+            return {
+                nome: escola.nome,
+                id: escola.id
             };
         });
     });

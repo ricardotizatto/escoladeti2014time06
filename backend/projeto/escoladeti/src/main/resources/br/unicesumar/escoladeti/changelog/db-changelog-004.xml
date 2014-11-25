@@ -188,6 +188,44 @@
             <column name="caminho_anexo" type="varchar(255)"></column>
         </addColumn>
     </changeSet>
+    
+    <changeSet id="w201411242035" author="Walber">
+    	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+    		<sqlCheck expectedResult="0">select count(*) from caracteristica a where  a.descricao LIKE 'ESCOLA'</sqlCheck>
+    	</preConditions>
+    	<insert tableName="caracteristica">
+    		<column name="id" type="INT8" value="5"/>
+        <column name="descricao" type="VARCHAR(30)" value="ESCOLA"/>
+        <column name="tipo" type="CHAR" value="J"></column>
+    	</insert>
+    </changeSet>
+    <changeSet id="w201411242130" author="Walber">
+    	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+    		<columnExists tableName="solicitacao" columnName="escola"/>
+    	</preConditions>
+    	<dropColumn tableName="solicitacao" columnName="escola"/>
+    </changeSet>
+    
+    <changeSet id="w201411242149" author="Walber">
+    	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+    		<not>
+    			<columnExists tableName="solicitacao" columnName="id_escola"/>
+    		</not>
+    	</preConditions>
+    	<addColumn tableName="solicitacao">
+    		<column name="id_escola" type="INT8" >
+    		</column>
+    	</addColumn>
+    </changeSet>
+    
+    <changeSet id="w201411242150" author="Walber">
+    <preConditions onError="MARK_RAN" onFail="MARK_RAN">
+    	<not>
+    		<foreignKeyConstraintExists foreignKeyName="solicitacao_fk_escola"/>
+    	</not>
+    </preConditions>
+    	<addForeignKeyConstraint constraintName="solicitacao_fk_escola" referencedTableName="pessoajuridica" baseColumnNames="id_escola" baseTableName="solicitacao" referencedColumnNames="id"/>
+    </changeSet>
 
 </databaseChangeLog>
 

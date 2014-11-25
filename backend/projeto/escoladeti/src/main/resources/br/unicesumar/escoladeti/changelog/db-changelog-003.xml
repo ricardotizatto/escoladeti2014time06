@@ -113,7 +113,7 @@
                              tableName="pais" />
     </changeSet>
 
-    <changeSet author="catabriga" id="32465632">
+    <changeSet author="catabriga" id="3246563250">
     	
 
         <createView viewName="viewacompanhamentosolicitacao"
