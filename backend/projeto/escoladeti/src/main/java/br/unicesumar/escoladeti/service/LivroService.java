@@ -36,7 +36,8 @@ public class LivroService {
     }
 
     public DataPage<Livro> getLivroPorNome(String nomeParcial) {
-        return new DataPage<>(livroRepository.findByNomeContainingOrderByNomeAsc(nomeParcial, pageRequestForAsc(1, "nome")));
+        return new DataPage<>(livroRepository.findByNomeContainingOrEditoraContainingOrDisciplinaContainingOrderByNomeAsc
+        (nomeParcial, nomeParcial, nomeParcial, pageRequestForAsc(1, "nome")));
     }
 
     public void deletar(Livro livro) {

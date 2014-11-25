@@ -6,12 +6,9 @@ import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.entity.Periodo;
 import br.unicesumar.escoladeti.service.EventoService;
 import br.unicesumar.escoladeti.service.LivroService;
-import br.unicesumar.escoladeti.service.MaterialStatusService;
 import br.unicesumar.escoladeti.service.ParticipanteService;
 import br.unicesumar.escoladeti.service.PeriodoEventoService;
 import br.unicesumar.escoladeti.service.PeriodoService;
-import br.unicesumar.escoladeti.service.VolumeService;
-import br.unicesumar.escoladeti.view.ViewMaterialProduzido;
 import br.unicesumar.escoladeti.view.ViewPeriodoEvento;
 import java.io.Serializable;
 
@@ -28,13 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ExternoController implements Serializable{
-    
-    @Autowired
-    private MaterialStatusService materialStatusService;
-       
-    @Autowired
-    private VolumeService volumeService;
-    
+              
     @Autowired
     private LivroService livroService;
     
@@ -62,22 +53,16 @@ public class ExternoController implements Serializable{
         return this.participanteService.salvar(participante);
     }
     
-    @RequestMapping(value = {"public/rest/materiaisproduzidos/pag/{pagina}"}, method = RequestMethod.GET)
-    @ResponseBody
-    public DataPage<ViewMaterialProduzido> listarMateriaisProduzidos(@PathVariable Integer pagina) {
-        return this.materialStatusService.listarMateriaisProduzidos(pagina);
-    }
-    
     @RequestMapping(value = {"public/rest/livrostranscritos/pag/{pagina}"}, method = RequestMethod.GET)
     @ResponseBody
     public DataPage<Livro> listarLivrosTranscritos(@PathVariable Integer pagina) {
         return this.livroService.listarLivrosTranscritos(pagina);
     }
            
-    @RequestMapping(value = "public/rest/buscamateriaisproduzidos", params = {"q"}, method = RequestMethod.GET)
+    @RequestMapping(value = "public/rest/buscalivrostranscritos", params = {"q"}, method = RequestMethod.GET)
     @ResponseBody
-    public DataPage<ViewMaterialProduzido> buscaMateriaisProduzidos(@RequestParam String q) {
-        return this.materialStatusService.buscaMateriaisProduzidos(q);
+    public DataPage<Livro> buscaMateriaisProduzidos(@RequestParam String q) {
+        return this.livroService.getLivroPorNome(q);
     }
     
     @RequestMapping(value = "public/rest/eventos/pag/{pagina}", method = RequestMethod.GET)

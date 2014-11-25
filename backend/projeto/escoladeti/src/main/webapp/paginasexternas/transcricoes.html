@@ -1,5 +1,5 @@
  <!-- Page Title -->
- <div class="page-title" ng-init="getMateriaisProduzidos(1);ativaBotao('transcricoes')">
+ <div class="page-title" ng-init="getLivrosTranscritos(1);ativaBotao('transcricoes')">
     <div class="container">
         <div class="row">
             <div class="span12">
@@ -16,24 +16,24 @@
         <div class="span12">
             <form method="post" action="">
                 <div class="span12">
-                    <label for="name" class="nameLabel"><h3>Pesquisar Livro Transcrito</h3></label>
-                    <input class="form-control" id="name" type="text" name="busca" placeholder="Pesquisar Livro Transcrito" ng-model="busca" ng-change="buscaMateriaisContendoNome()">
+                    <label class="nameLabel"><h3>Pesquisar Livro Transcrito</h3></label>
+                    <input class="form-control" type="text" name="busca" placeholder="Pesquisar Livro Transcrito" ng-model="busca" ng-change="buscaMateriaisContendoNome(busca)">
                 </div>   
             </form>
         </div>
         <div class="span12 lista-transcricao">
             <ul>
-                <li ng-repeat="materialProduzido in materiaisProduzidos.list">
-                    <div ng-show="materialProduzido.volumes" class="material-transcricao">
-                        <h4>{{materialProduzido.nome}}</h4>
+                <li ng-repeat="livroTranscrito in livrosTranscritos.list">
+                    <div ng-show="livroTranscrito.volumes" class="material-transcricao">
+                        <h4>{{livroTranscrito.nome}}</h4>
                         <p>
-                            <!--<b>TRANSCRIÇÃO: </b><span class="desc-transcricao"> {{materialProduzido.transcricao != 'OUTRO' ? materialProduzido.transcricao : materialProduzido.outraTranscricao}} </span>-->
-                            <b>Autor: </b><span class="desc-transcricao"> {{materialProduzido.autor}}</span>
-                            <b> - Editora: </b><span class="desc-transcricao">{{materialProduzido.editora}}</span>
-                            <b> - Disciplina: </b><span class="desc-transcricao">{{materialProduzido.disciplina}}</span>
-                            <b> - Ano de Edição: </b><span class="desc-transcricao">{{materialProduzido.anoEdicao}}</span></p>
+                            <!--<b>TRANSCRIÇÃO: </b><span class="desc-transcricao"> {{livroTranscrito.transcricao != 'OUTRO' ? livroTranscrito.transcricao : livroTranscrito.outraTranscricao}} </span>-->
+                            <b>Autor: </b><span class="desc-transcricao"> {{livroTranscrito.autor}}</span>
+                            <b> - Editora: </b><span class="desc-transcricao">{{livroTranscrito.editora}}</span>
+                            <b> - Disciplina: </b><span class="desc-transcricao">{{livroTranscrito.disciplina}}</span>
+                            <b> - Ano de Edição: </b><span class="desc-transcricao">{{livroTranscrito.anoEdicao}}</span></p>
                             <ul>
-                                <li ng-repeat="volume in materialProduzido.volumes | orderBy: ['+transcricao','+paginaInicio'] ">
+                                <li ng-repeat="volume in livroTranscrito.volumes | orderBy: ['+transcricao','+paginaInicio'] ">
                                     <div ng-show="volume.status === 'REVISADO' " >
                                         Transcrição: {{volume.transcricao}} - 
                                         Páginas: De {{volume.paginaInicio}} à {{volume.paginaFim}} 
@@ -45,29 +45,29 @@
                 </li>  
             </ul>
         </div>
-        <div class="row">
+        <div class="row" ng-show="livrosTranscritos.pagesAround.length > 1">
             <div class="pagination pagination-sm pagination-centered">
               <ul>
                 <li>                        
-                    <a ng-click="getMateriaisProduzidos(1)"> 
+                    <a ng-click="getLivrosTranscritos(1)"> 
                         <span class="glyphicon  icon-fast-backward"></span>
                     </a>
                 </li>
                 <li>
-                    <a ng-click="materiaisProduzidos.pageCount <= 1 ? getMateriaisProduzidos(1) : getMateriaisProduzidos(materiaisProduzidos.pageNumber - 1)"> 
+                    <a ng-click="livrosTranscritos.pageCount <= 1 ? getLivrosTranscritos(1) : getLivrosTranscritos(livrosTranscritos.pageNumber - 1)"> 
                         <span class="glyphicon icon-step-backward"></span>
                     </a>
                 </li>
-                <li ng-repeat="numeroPagina in materiaisProduzidos.pagesAround" class="{{numeroPagina == materiaisProduzidos.pageNumber ? 'active' : ''}}">
-                    <a ng-click="getMateriaisProduzidos(numeroPagina)">{{numeroPagina}}</a>
+                <li ng-repeat="numeroPagina in livrosTranscritos.pagesAround" class="{{numeroPagina == livrosTranscritos.pageNumber ? 'active' : ''}}">
+                    <a ng-click="getLivrosTranscritos(numeroPagina)">{{numeroPagina}}</a>
                 </li>
                 <li>
-                    <a ng-click="materiaisProduzidos.pageNumber === materiaisProduzidos.pageCount ? getMateriaisProduzidos(materiaisProduzidos.pageCount) : getMateriaisProduzidos(materiaisProduzidos.pageNumber + 1)"> 
+                    <a ng-click="livrosTranscritos.pageNumber === livrosTranscritos.pageCount ? getLivrosTranscritos(livrosTranscritos.pageCount) : getLivrosTranscritos(livrosTranscritos.pageNumber + 1)"> 
                         <span class="glyphicon icon-step-forward"></span>
                     </a>
                 </li>
                 <li>
-                    <a ng-click="materiaisProduzidos.pageCount == 0 ? getMateriaisProduzidos(1) : getMateriaisProduzidos(materiaisProduzidos.pageCount)"> 
+                    <a ng-click="livrosTranscritos.pageCount == 0 ? getLivrosTranscritos(1) : getLivrosTranscritos(livrosTranscritos.pageCount)"> 
                         <span class="glyphicon icon-fast-forward"></span>
                     </a>
                 </li>

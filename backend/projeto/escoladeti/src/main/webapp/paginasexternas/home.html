@@ -62,7 +62,7 @@
     </div>
     <div class="row">
         <div class="service span3" ng-repeat="ultimoEvento in ultimosEventos.list" >
-            <div><img src="./resources/externo/assets/img/amacapimagenotfound.png" alt=""></div>
+            <!--<div><img src="./resources/externo/assets/img/amacapimagenotfound.png" alt=""></div>-->
             <div class="bloco-evento">
                 <h4>{{ultimoEvento.titulo | limitTo:tituloLimit }}{{ ultimoEvento.titulo.length > tituloLimit ? '...' : '' }}</h4>
                 <p>{{ultimoEvento.descricao | limitTo:descricaoLimit }}{{ ultimoEvento.descricao.length > descricaoLimit ? '...' : '' }}</p>
