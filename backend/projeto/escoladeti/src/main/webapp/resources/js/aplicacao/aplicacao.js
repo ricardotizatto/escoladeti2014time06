@@ -175,12 +175,12 @@ function Appcontroller($http) {
             telas: [
                 {
                     nome: 'PRODUTO',
-                    url: '/listaproduto',
+                    url: 'listaproduto',
                     auth: 'CADASTRO_PRODUTO'
                 },
                 {
                     nome: 'MOVIMENTO',
-                    url: '/listamovimento',
+                    url: 'listamovimento',
                     auth: 'MOVIMENTO'
                 }
             ]

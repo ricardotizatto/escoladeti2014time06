@@ -143,15 +143,9 @@
                         <div class="chat-toggler">
                             <a href="javascript:void(0)">
                                 <div class="user-details username">
-<<<<<<< HEAD
-                                    <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">	
-                                        <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                            ${pageContext.request.userPrincipal.name} 
-                                        </c:if>
-=======
+
                                     <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="javascript:void(0)" id="user-options">
                                         {{ctrl.user.username}}
->>>>>>> issue#4674
                                     </a>
                                     <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
                                         <li><a href="./logout"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Sair</a></li>
