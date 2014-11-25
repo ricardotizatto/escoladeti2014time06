@@ -113,7 +113,7 @@
                              tableName="pais" />
     </changeSet>
 
-    <changeSet author="catabriga" id="3246563250">
+    <changeSet author="catabriga" id="3246563252">
     	
 
         <createView viewName="viewacompanhamentosolicitacao"
@@ -134,7 +134,7 @@
         </createView>
     </changeSet>
 
-    <changeSet id="46516354631" author="catabriga">
+    <changeSet id="46516354653" author="catabriga">
         <dropView viewName="viewacompanhamentosolicitacao"></dropView>
         <createView viewName="viewacompanhamentosolicitacao"
                     replaceIfExists="true" schemaName="public">

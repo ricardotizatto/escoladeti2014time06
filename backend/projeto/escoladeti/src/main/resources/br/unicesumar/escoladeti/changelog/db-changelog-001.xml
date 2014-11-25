@@ -400,7 +400,7 @@
 			</column>
 		</createTable>
 	</changeSet>
-	<changeSet author="Jhonatan (generated)" id="1404066940885-29">
+	<changeSet author="Jhonatan (generated)" id="1404066940827-29">
 		<createTable tableName="usuario">
 			<column name="id" type="INT8">
 				<constraints nullable="false" />

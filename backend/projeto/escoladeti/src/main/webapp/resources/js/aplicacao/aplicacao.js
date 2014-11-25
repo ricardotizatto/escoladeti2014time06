@@ -6,7 +6,7 @@ function Appcontroller($http) {
         itens = [];
 
 
-    $http.get('/rest/sessao').success(function (userDetails) {
+    $http.get('./rest/sessao').success(function (userDetails) {
         vm.user = userDetails;
         vm.menu = montarMenu(userDetails.authorities, itens);
     });
