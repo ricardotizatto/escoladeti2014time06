@@ -1,4 +1,6 @@
 <%@page  pageEncoding="utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
 
 <html lang="pt-br" ng-app="app">
     <head>
@@ -55,7 +57,9 @@
         <script type="text/javascript" src="./resources/js/caracteristica/service.js" ></script>        
         <script type="text/javascript" src="./resources/js/estoque/ProdutoController.js" ></script>
         <script type="text/javascript" src="./resources/js/estoque/MovimentoController.js" ></script>
-        
+        <script type="text/javascript" src="./resources/js/estoque/MovimentoService.js"></script>
+        <script type="text/javascript" src="./resources/js/estoque/ProdutoService.js"></script>
+
         <script type="text/javascript" src="./resources/js/ordemProducao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/ordemProducao/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/service.js" ></script>
@@ -74,10 +78,10 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
-		<script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
+        <script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/relatorioAssociado/RelatorioController.js" ></script>
-        
+
 
         <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
         <link  href="./resources/vendor/css/jquery.sidr.light.css">
@@ -138,7 +142,9 @@
                             <a href="#">
                                 <div class="user-details username">
                                     <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">	
-                                        ADMIN
+                                        <c:if test="${pageContext.request.userPrincipal.name != null}">
+                                            ${pageContext.request.userPrincipal.name} 
+                                        </c:if>
                                     </a>
                                     <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
                                         <li><a href="./logout"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Sair</a></li>
@@ -162,7 +168,7 @@
                             <li><a href="#/listapais">Pais</a></li>
                             <li><a href="#/listaestado">Estado</a></li>
                             <li><a href="#/listacidade">Cidade</a></li>
-<!--                             <li><a href="#/listadistrito">Distrito</a></li> -->
+                            <!--                             <li><a href="#/listadistrito">Distrito</a></li> -->
                         </ul>
                     </li>
                     <li>
@@ -188,8 +194,8 @@
                             <span class="title">PESSOAS</span>
                         </a>
                         <ul class="sub-menu">
-                        <li><a href="#/listapessoa">Cadastro</a>
-                        <li><a href="#/relatorio/associados">Relatório Associado</a>
+                            <li><a href="#/listapessoa">Cadastro</a>
+                            <li><a href="#/relatorio/associados">Relatório Associado</a>
                         </ul>
                     </li>
                     <li>
@@ -232,7 +238,6 @@
                             <li><a href="#/listamovimento">Movimento</a></li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
 
