@@ -38,6 +38,13 @@ function PessoaFactory($resource) {
         	params : {
         		acao : 'todosAssociados'
         	}
+        },
+        listarTodasAsEscolas : {
+        	method : 'GET',
+        	isArray : true,
+        	params : {
+        		acao : 'listarTodasAsEscolas'
+        	}
         }
                 
     });

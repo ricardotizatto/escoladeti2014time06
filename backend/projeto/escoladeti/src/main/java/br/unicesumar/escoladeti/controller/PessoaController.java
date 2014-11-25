@@ -2,6 +2,7 @@ package br.unicesumar.escoladeti.controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -109,6 +110,12 @@ public class PessoaController implements Serializable {
   @ResponseBody
   public List<ViewPessoaAssociado> listarTodosAssociados(){
 	  return this.pessoaService.listaTodosAssociados();
+  }
+  
+  @RequestMapping(method = RequestMethod.GET, value = "/listarTodasAsEscolas")
+  @ResponseBody
+  public List<Map<String, Object>> listarTodasAsEscolas(){
+	  return this.pessoaService.listarTodasAsEscolas();
   }
 
 

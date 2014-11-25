@@ -24,8 +24,6 @@ public class Solicitacao extends Entidade {
     @JoinColumn(name="id_aluno")
     private PessoaFisica aluno;
     
-    private String escola;
-    
     @ManyToOne
     @JoinColumn(name="id_cidadenre")
     private Cidade nre;
@@ -54,6 +52,10 @@ public class Solicitacao extends Entidade {
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataChegada;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_escola")
+    private PessoaJuridica escola;
 
     public Solicitacao() {
     }
@@ -156,12 +158,12 @@ public class Solicitacao extends Entidade {
 	}
 
     
-	public String getEscola() {
+	public PessoaJuridica getEscola() {
 		return escola;
 	}
 	
 	
-	public void setEscola(String escola) {
+	public void setEscola(PessoaJuridica escola) {
 		this.escola = escola;
 	}
 
@@ -172,7 +174,7 @@ public class Solicitacao extends Entidade {
 	public static class SolicitacaoBuilder {
 	    private Long aluno;
 	    
-	    private String escola;
+	    private Long escola;
 	    
 	    private Long nre;
 	    
@@ -223,7 +225,7 @@ public class Solicitacao extends Entidade {
 			return this;
 		}
 	    
-	    public SolicitacaoBuilder escola(String escola) {
+	    public SolicitacaoBuilder escola(Long escola) {
 			this.escola = escola;
 			return this;
 		}
@@ -269,7 +271,8 @@ public class Solicitacao extends Entidade {
 	    	solicitacao.setDataChegada(this.dataChegada);
 	    	solicitacao.setEndereco(this.endereco);
 	    	solicitacao.setEnsino(this.ensino);
-	    	solicitacao.setEscola(this.escola);
+	    	if(this.escola != null)
+	    		solicitacao.setEscola(PessoaJuridica.of(this.escola));
 	    	solicitacao.setMunicipio(Cidade.of(this.municipio));
 	    	
 	    	if (id != null) {

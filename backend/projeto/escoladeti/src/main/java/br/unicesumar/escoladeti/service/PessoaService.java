@@ -3,7 +3,9 @@ package br.unicesumar.escoladeti.service;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -228,5 +230,17 @@ public class PessoaService {
 
 	public List<ViewPessoaAssociado> listaTodosAssociados() {
 		return this.viewPessoaAssociadoRepository.findAll();
+	}
+
+	public List<Map<String, Object>> listarTodasAsEscolas() {
+		List<Object[]> list = this.pessoaJuridicaRepository.findAllEscolas();
+		List<Map<String, Object>> lista = new ArrayList<>();
+		for (int i = 0; i < list.size(); i ++) {
+			Map<String, Object> mapa = new HashMap<String, Object>();
+			mapa.put("id", list.get(i)[0]);
+			mapa.put("nome", (String)list.get(i)[1]);
+			lista.add(mapa);
+		}
+		return lista;
 	}
 }
