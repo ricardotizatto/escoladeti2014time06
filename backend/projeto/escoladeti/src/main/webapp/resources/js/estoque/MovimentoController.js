@@ -1,140 +1,94 @@
 var controllers = angular.module('controllers');
 
-function movimentoController($scope, $http, $routeParams) {
-    console.log('Carregando controller');
+function movimentoController($scope, $routeParams, movimentoService) {
     $scope.select2 = 'one';
     $scope.info = {};
-
-    $scope.deletar = function(movimento) {
-        console.log('deletando movimento de produto' + JSON.stringify(movimento));
-
-        BootstrapDialog.confirm('Deseja realmente deletar o Movimento: <b>' + movimento.produto.nome + ' ' + movimento.quantidade + '</b>?', function(result) {
-            if (result) {
-                $http({
-                    method: 'DELETE',
-                    data: movimento,
-                    url: './rest/movimentacaoSource/movimentacao',
-                    headers: {'Content-Type': 'application/json; charset=UTF-8'}
-                })
-                        .success(function(data, status) {
-                    $scope.getTodos(1);
-                    console.log('Movimento deletado!');
-                    toastr.success('Movimento ' + movimento.produto.nome + ' ' + movimento.quantidade + ' deletado com sucesso');
-                })
-                        .error(function(data, status) {
-                    console.log('Movimento não foi deletado' + data);
-                    toastr.error('Erro ao deletar o movimento: ' + movimento.produto.nome + ' ' + movimento.quantidade + ' - ' + data.message);
-                });
-            } else {
-                $scope.getTodos(1);
-            }
-        });
-    };
 
     $scope.novo = function() {
         $scope.movimento = getNovoMovimento();
         window.location = '#/cadastromovimento';
     };
 
-    $scope.carregarMovimento = function() {
-        console.log('carregando movimento com id: ' + $routeParams.movimentoId);
-        if (!$routeParams.movimentoId) {
-            $scope.movimento = getNovoMovimento();
-            return;//se não tiver id não buscar
-        }
-
-        $http.get('./rest/movimentacaoSource/movimentacao/' + $routeParams.movimentoId)
+    $scope.extornar = function(movimento) {
+        movimento.tipo = movimento.tipo * (-1);
+        movimentoService.extornar(movimento)
                 .success(function(movimento, status) {
-            console.log(movimento);
-            
-            
-            $scope.movimento = movimento;
-            $scope.produto.list.forEach(function(produto) {
-                if (produto.id === $scope.movimento.produto.id) {
-                    $scope.movimento.produto = produto.id;
-                }
-
-            });
-        });
-
-    };
-
-    $scope.editar = function(movimento) {
-        console.log(movimento);
-        window.location = '#/cadastromovimento/' + movimento.id;
-    };
-
-
-
-    $scope.salvar = function() {
-
-//        $scope.movimento.tipo = $scope.movimento.tipo.toUpperCase();
-//        $scope.movimento.quantidade = $scope.movimento.quantidade;
-
-
-        $scope.produto.list.forEach(function(produto) {
-            if (produto.id == $scope.movimento.produto) {
-                $scope.movimento.produto = produto;
-            }
-
-        });
-
-        console.log($scope.movimento);
-        $http.post("./rest/movimentacaoSource/movimentacao", $scope.movimento)
-                .success(function(movimento, status) {
-            $scope.movimento = getNovoMovimento();
-            console.log("movimento salva = " + movimento);
-            toastr.success('Movimento ' + movimento.produto.nome + ' ' + movimento.quantidade + ' salvo com sucesso');
-            setTimeout(function() {
-                window.location = "#/listamovimento"
-            }, 2000);
-        })
+                    toastr.success('Movimentação salva com sucesso.');
+                    window.location = '#/listamovimento';
+                })
                 .error(function(data, status) {
-            console.log("erro ao salvar movimento" + data);
-            // toastr.error(data.message);
-        });
-    };
-
-
-    $scope.getTodos = function(numeroPagina) {
-        console.log(numeroPagina);
-        $http.get("./rest/movimentacaoSource/listar/pag/" + numeroPagina)
-                .success(function(listaMovimentos, status) {
-
-//            listaEstoques.list.forEach(function(estoque) {
-//                delete estoque.info;
-//            });
-            $scope.movimentos = listaMovimentos;
-        })
-                .error(function(data, status) {
-            console.log('erro ao buscar movimento ' + data);
-        });
-    };
-    $http.get("./rest/produtoSource/produto")
-            .success(function(listaProdutos, status) {
-
-        $scope.produto = listaProdutos;
-    })
-            .error(function(data, status) {
-        console.log('erro ao buscar produto ' + data);
-    });
-//    };
-
-
-    function getNovoMovimento() {
-        console.log('novo movimento movimento');
-        return {};
-    }
-    ;
-
-    $scope.voltar = function() {
-        $scope.movimento = {};
+                    toastr.error(data.message);
+                });
         window.location = '#/listamovimento';
     };
 
-    $scope.select2Options = {};
+    $scope.validaExtornado = function(movimento) {
+        return movimento.extornado;
+    };
 
+    $scope.editar = function(movimento) {
+        window.location = '#/cadastromovimento/' + movimento.id;
+    };
+
+    $scope.carregarMovimento = function() {
+        movimentoService.listarPessoas()
+                .success(function(listaPessoas, status) {
+                    $scope.pessoas = listaPessoas;
+                })
+                .error(function(data, status) {
+                    toastr.error(data.message);
+                });
+
+        movimentoService.listarProdutos()
+                .success(function(listaProdutos, status) {
+                    $scope.produtos = listaProdutos;
+                })
+                .error(function(data, status) {
+                    toastr.error(data.message);
+                });
+        if ($routeParams.movimentoId) {
+            movimentoService.buscar($routeParams.movimentoId)
+                    .success(function(movimento, status) {
+                        $scope.movimento = movimento;
+                    })
+                    .error(function(data, status) {
+                        toastr.error(data.message);
+                    });
+        } else {
+            $scope.movimento = getNovoMovimento();
+        }
+    };
+
+    $scope.salvar = function() {
+        movimentoService.salvar($scope.movimento)
+                .success(function(movimento, status) {
+                    toastr.success('Movimentação salva com sucesso.');
+                    window.location = '#/listamovimento';
+                })
+                .error(function(data, status) {
+                    toastr.error(data.message);
+                });
+    };
+
+    $scope.getTodos = function(numeroPagina) {
+        movimentoService.listar(numeroPagina)
+                .success(function(listaMovimentos, status) {
+                    $scope.movimentos = listaMovimentos;
+                })
+                .error(function(data, status) {
+                    toastr.error(data.message);
+                });
+    };
+
+    $scope.voltar = function() {
+        window.location = '#/listamovimento/';
+    };
+
+    function getNovoMovimento() {
+        return {tipo: "ENTRADA"};
+    }
+    ;
 }
 ;
 
-controllers.controller('MovimentoController', ['$scope', '$routeParams', 'movimentoService', 'produtoService', MovimentoController]);
+controllers.controller('movimentoController', ['$scope', '$routeParams', 'movimentoService', movimentoController]);

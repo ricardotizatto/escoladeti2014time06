@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="003" author="Jhonatan">
+        <createTable tableName="estoque">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="nome" type="varchar(255)"></column>
+        </createTable>
+
+        <createTable tableName="produto">
+            <column name="id" type="int8" >
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="nome" type="varchar(255)" ></column>
+            <column name="quantidade" type="varchar(255)" ></column>
+            <column name="id_estoque" type="int8" ></column>
+        </createTable>
+
+        <createTable tableName="movimentacao">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="id_destino"       type="bigint"></column>
+            <column name="id_origem"        type="bigint"></column>
+            <column name="id_produto"       type="bigint"></column>
+            <column name="datamovimentacao" type="date"></column>
+            <column name="extornado"        type="bool"></column>
+            <column name="quantidade"       type="bigint"></column>
+            <column name="tipo"             type="bigint"></column>
+        </createTable>
+
+        <insert tableName="estoque">
+            <column name="id" type="bigint" value="1"></column>
+            <column name="nome" type="bigint" value="producao"></column>
+        </insert>
+    </changeSet>
+    
+</databaseChangeLog>

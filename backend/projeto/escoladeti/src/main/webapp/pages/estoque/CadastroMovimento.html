@@ -1,60 +1,96 @@
 ﻿<div class="container" ng-controller="movimentoController" ng-init="carregarMovimento()">
-      <fieldset>
-      <div class="row">
-      <div class="form-group col-sm-12">
-        <legend> Movimentação de Produtos </legend>
-    </div>
-</div>
-<form action="" method="POST" role="form" name="formMovimento" ng-submit="salvar()" >							
-    <div class="row ">
-        <div class="col-md-5 form-group {{formMovimento.Produto.$error.required? 'has-error' : 'has-success' }} has-feedback col-sm-5">
-            <label class="control-label"><strong> Produto *</strong></label>
-            <select ui-select2 name="Produto" class="input-default" ng-model="movimento.produto" required >
-                <option value=""></option>
-                <option ng-repeat="produto in produto.list track by produto.id" value="{{produto.id}}">{{produto.nome}}</option>
-            </select>
-        </div>
-
-        <div class="form-group {{formMovimento.quantidade.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
-            <label class="control-label"><strong> Quantidade * </strong></label>
-            <input class="form-control" title="Quantidade deve ser somente números"  name="quantidade" type="text" ng-model="movimento.quantidade"  ng-pattern="/[0-9]{2,5}/" maxlength="5" id="quantidadeMovimento" required placeholder="Quantidade" >
-            <span class="help-block" ng-show="formMovimento.quantidade.$error.pattern">Apenas numeros e no mínimo 2.</span>
-        </div>
-
+    <fieldset>
         <div class="row">
-            <div class="form-group col-sm-3">
-                <label>Movimentação</label>
-                <div>
-                    <div class="btn-group">
-                        <label class="btn btn-primary btn-radio-amacapa">
-                            <input ng-model="movimento.tipo" value="ENTRADA" type="radio" /> ENTRADA
-                        </label> <label class="btn btn-primary btn-radio-amacapa">
-                            <input ng-model="movimento.tipo" value="SAIDA" type="radio" /> SAIDA
-                        </label>
+            <div class="form-group col-sm-12">
+                <legend> Movimentação de Produtos </legend>
+            </div>
+        </div>
+        <form action="" method="POST" role="form" name="formMovimento" ng-submit="salvar()">							
+            <div class="row">
+                <div class="form-group {{formMovimento.Produto.$error.required? 'has-error' : 'has-success' }} has-feedback col-md-5 ">
+                    <label class="control-label"><strong> Produto *</strong></label>
+                    <select data-ui-select2='select2options' name="Produto" class="input-default" data-ng-model="movimento.produto" required>
+                        <option value=""></option>
+                        <option data-ng-repeat="produto in produtos track by produto.id" value="{{produto.id}}">{{produto.nome}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group {{formMovimento.quantidade.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+                    <label class="control-label"><strong> Quantidade * </strong></label>
+                    <input class="form-control" title="Quantidade deve ser somente números"  name="quantidade" type="text" ng-model="movimento.quantidade"  ng-pattern="/^\d*$/" maxlength="5" id="quantidadeMovimento" required placeholder="Quantidade" >
+                    <span class="help-block" ng-show="formMovimento.quantidade.$error.pattern">Apenas numeros.</span>
+                </div>
+
+
+                <div class="form-group {{formMovimento.dataMovimentacao.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-2">
+                    <label class="control-label"><strong> Data * </strong></label>
+                    <input class="form-control" title="Data deve ser somente números"  name="dataMovimentacao" type="date" ng-model="movimento.dataMovimentacao" id="dataMovimento" required placeholder="dd/mm/aaaa" >
+                    <span class="help-block" ng-show="formMovimento.data.$error.pattern"></span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group {{formMovimento.pessoaOrigem.$error.required ? 'has-error' : 'has-sucess'}} has-feedback col-sm-4"> 
+                    <label class="control-label"><strong> Origem * </strong></label>
+                    <div class="input-group">
+                        <select ui-select2="select2Options" class="input-default" ng-model="movimento.pessoaOrigem" required="required" name="pessoaOrigem" >
+                            <option value=""></option>
+                            <option ng-repeat="p in pessoas track by p.id" value="{{p.id}}">{{p.nome}}</option>
+                        </select>
+                        <span class="input-group-btn">
+                            <a href="#/pessoa" class="btn btn-primary" target="_blank">
+                                <i class="fa fa-user"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group {{formMovimento.pessoaDestino.$error.required ? 'has-error' : 'has-sucess'}} has-feedback col-sm-4"> 
+                    <label class="control-label"><strong> Destino * </strong></label>
+                    <div class="input-group">
+                        <select data-ui-select2="select2Options"
+                                class="input-default"
+                                data-ng-model="movimento.pessoaDestino" required="required" name="pessoaDestino" >
+                            <option value=""></option>
+                            <option data-ng-repeat="p in pessoas track by p.id" value="{{p.id}}">{{p.nome}}</option>
+                        </select>
+                        <span class="input-group-btn">
+                            <a href="#/pessoa" class="btn btn-primary" target="_blank">
+                                <i class="fa fa-user"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label>Movimentação</label>
+                    <div>
+                        <div class="btn-group">
+                            <label class="btn btn-primary btn-radio-amacapa">
+                                <input ng-model="movimento.tipo" value="1" type="radio" name="tipo" /> ENTRADA
+                            </label>
+                            <label class="btn btn-primary btn-radio-amacapa">
+                                <input ng-model="movimento.tipo" value="-1" type="radio" name="tipo" /> SAIDA
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
-
-        <div class="row">
-            <div class="col-sm-12">
-                <span class="pull-right">	
-                    <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
-                        <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
-                    </a>  
-                    <button type="submit" class="btn btn-padrao btn-success" ng-disabled="formMovimento.$invalid">
-                        <span class="glyphicon glyphicon-ok" ></span> Salvar	
-                    </button>
-                </span>		
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="pull-right">	
+                        <a class="btn btn-primary btn-padrao" ng-click="voltar()" >
+                            <i class="glyphicon glyphicon-circle-arrow-left" ></i> Voltar
+                        </a>  
+                        <button type="submit" class="btn btn-padrao btn-success" ng-disabled="formMovimento.$invalid">
+                            <span class="glyphicon glyphicon-ok" ></span> Salvar	
+                        </button>
+                    </span>		
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12"><hr></div>
-        </div>
-    </div>
-</form>
-</fieldset>
+            <div class="row">
+                <div class="col-sm-12"><hr></div>
+            </div>
+        </form>
+    </fieldset>
 </div>

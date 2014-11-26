@@ -41,7 +41,7 @@
 				<tr ng-repeat="solicitacao in pagina.list">
 					<td>{{solicitacao.id}}</td>
 					<td>{{solicitacao.aluno.nome}}</td>
-					<td>{{solicitacao.escola}}</td>
+					<td>{{solicitacao.escola.nome}}</td>
 					<td>{{solicitacao.dataChegada | date:'dd/MM/yyyy'}}</td>
 					<td>
 						<button class='btn btn-warning btn-sm'

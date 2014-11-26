@@ -3,13 +3,11 @@ package br.unicesumar.escoladeti.service;
 import br.unicesumar.escoladeti.controller.DataPage;
 import static br.unicesumar.escoladeti.controller.DataPage.pageRequestForAsc;
 import br.unicesumar.escoladeti.dto.UsuarioDTO;
-import br.unicesumar.escoladeti.entity.PerfilAcesso;
-import br.unicesumar.escoladeti.entity.PerfilAcessoUsuario;
-import br.unicesumar.escoladeti.entity.Usuario;
-import br.unicesumar.escoladeti.repository.PerfilAcessoUsuarioRepository;
-import br.unicesumar.escoladeti.repository.PerfilDeAcessoUsuarioViewRepository;
-import br.unicesumar.escoladeti.repository.UsuarioRepository;
+import br.unicesumar.escoladeti.entity.*;
+import br.unicesumar.escoladeti.repository.*;
 import br.unicesumar.escoladeti.view.ViewPerfilDeAcessoUsuario;
+
+import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +29,20 @@ public class UsuarioService {
     @Autowired
     private PerfilDeAcessoUsuarioViewRepository perfilDeAcessoUsuarioViewRepository;
 
+    @Autowired
+    private ItemAcessoRepository itemAcessoRepository;
+
+    @Autowired
+    private PerfilAcessoRepository perfilAcessoRepository;
+
+    @Autowired
+    private PerfilItemAcessoRepository perfilItemAcessoRepository;
+
     public UsuarioRepository getUsuarioRepository() {
         return usuarioRepository;
     }
 
+    @Transactional
     public void inicializarUsuarioAdmin() {
         logger.info("Verificando existência do usuário 'admin'...");
         Usuario root = getUsuarioRepository().findByLogin("admin");
@@ -43,17 +51,32 @@ public class UsuarioService {
 
             root = new Usuario("Administrador", "123mudar", "admin", "adminescoladeti@gmail.com");
             root.setAtivo(true);
+            PerfilAcesso perfilAcesso = new PerfilAcesso();
+            perfilAcesso.setNome("ADMINISTRADOR");
+            List<ItemAcesso> todosItens = itemAcessoRepository.findAll();
 
+            for(ItemAcesso itemAcesso: todosItens) {
+                perfilAcesso.adcionarItem(itemAcesso.getId());
+            }
+
+            perfilAcessoRepository.save(perfilAcesso);
+
+            PerfilAcessoUsuario perfilAcessoUsuario = new PerfilAcessoUsuario();
+            Long umAnoAFrente = new Date().getTime() + 365 * 24 * 60 * 60 * 100;
+            perfilAcessoUsuario.setFimVigencia(new Date(umAnoAFrente));
+            perfilAcessoUsuario.setInicioVigencia(new Date());
+            perfilAcessoUsuario.setPerfilAcesso(perfilAcesso);
+            perfilAcessoUsuario.setUsuario(root);
             logger.debug("Salvando {}", root);
             getUsuarioRepository().save(root);
 
-            inicializarUsuarios();
+            perfilAcessoUsuarioRepository.save(perfilAcessoUsuario);
+
         }
         logger.info("Usuário 'admin' verificado.");
     }
 
-    private void inicializarUsuarios() {
-    }
+
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();

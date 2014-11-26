@@ -1,4 +1,6 @@
 <%@page  pageEncoding="utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
 
 <html lang="pt-br" ng-app="app">
     <head>
@@ -16,6 +18,7 @@
         <link href="./resources/css/estilo-geral.css" rel="stylesheet">
 
         <script type="text/javascript" src="./resources/libs/jquery.min.js"></script>
+        <script type="text/javascript" src="./resources/libs/underscore-min.js"></script>
         <script type="text/javascript" src="./resources/libs/jquery.maskedinput-1.3.1.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap.min.js"></script>
         <script type="text/javascript" src="./resources/libs/bootstrap-dialog.min.js"></script>
@@ -35,6 +38,7 @@
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>
+        <script type="text/javascript" src="./resources/js/aplicacao/aplicacao.js"></script>
         <script type="text/javascript" src="./resources/js/upload/directives.js"></script>
         <script type="text/javascript" src="./resources/js/upload/service.js"></script>
         <script type="text/javascript" src="./resources/js/directives.js"></script>
@@ -55,7 +59,9 @@
         <script type="text/javascript" src="./resources/js/caracteristica/service.js" ></script>        
         <script type="text/javascript" src="./resources/js/estoque/ProdutoController.js" ></script>
         <script type="text/javascript" src="./resources/js/estoque/MovimentoController.js" ></script>
-        
+        <script type="text/javascript" src="./resources/js/estoque/MovimentoService.js"></script>
+        <script type="text/javascript" src="./resources/js/estoque/ProdutoService.js"></script>
+
         <script type="text/javascript" src="./resources/js/ordemProducao/controller.js" ></script>
         <script type="text/javascript" src="./resources/js/ordemProducao/service.js" ></script>
         <script type="text/javascript" src="./resources/js/volume/service.js" ></script>
@@ -74,10 +80,10 @@
         <script type="text/javascript" src="./resources/js/ListaCepController.js" ></script>
         <script type="text/javascript" src="./resources/js/LivroController.js" ></script>
         <script type="text/javascript" src="./resources/js/EventoController.js" ></script>
-		<script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
+        <script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/relatorioAssociado/RelatorioController.js" ></script>
-        
+
 
         <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
         <link  href="./resources/vendor/css/jquery.sidr.light.css">
@@ -94,7 +100,7 @@
         <script type="text/javascript" src="./resources	/vendor/js/jquery.sidr.min.js"></script>
 
     </head>
-    <body>
+    <body data-ng-controller="Appcontroller as ctrl" ng-cloak >
         <div class="header navbar navbar-inverse "> 
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="navbar-inner">
@@ -135,10 +141,11 @@
                     </div>
                     <div class="pull-right">
                         <div class="chat-toggler">
-                            <a href="#">
+                            <a href="javascript:void(0)">
                                 <div class="user-details username">
-                                    <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">	
-                                        ADMIN
+
+                                    <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="javascript:void(0)" id="user-options">
+                                        {{ctrl.user.username}}
                                     </a>
                                     <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
                                         <li><a href="./logout"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Sair</a></li>
@@ -151,88 +158,21 @@
             </div>
         </div>    	
         <div class="page-container row">
-            <div class="page-sidebar" id="main-menu" style="position: fixed">
+            <div class="page-sidebar" id="main-menu" >
                 <ul>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-location-arrow"></i>
-                            <span class="title">LOCALIDADE</span>
+                    <li data-ng-repeat="item in ctrl.menu">
+                        <a href="#" >
+                            <i class="fa {{item.icone}}"></i>
+                            <span class="title">{{item.grupo}}</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#/listapais">Pais</a></li>
-                            <li><a href="#/listaestado">Estado</a></li>
-                            <li><a href="#/listacidade">Cidade</a></li>
-<!--                             <li><a href="#/listadistrito">Distrito</a></li> -->
+                            <li data-ng-repeat="tela in item.telas">
+                                <a href="#/{{tela.url}}">
+                                    <span class="title">{{tela.nome}}</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#/listalivro">
-                            <i class="fa fa-book"></i>
-                            <span class="title">LIVROS</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-user"></i>
-                            <span class="title">USUÁRIOS</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#/listausuario">Usuário</a></li>
-                            <li><a href="#/listaperfilacesso">Perfil de acesso</a></li>
-                            <li><a href="#/listaitemacesso">Item de acesso</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-male"></i>
-                            <span class="title">PESSOAS</span>
-                        </a>
-                        <ul class="sub-menu">
-                        <li><a href="#/listapessoa">Cadastro</a>
-                        <li><a href="#/relatorio/associados">Relatório Associado</a>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-star-half-o"></i>
-                            <span class="title">EVENTOS</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#/cadastroparticipante">Inscrições</a></li>
-                            <!--<li><a href="#/cadastroevento">Evento</a></li>-->
-                            <li><a href="#/listaevento">Eventos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-cog"></i>
-                            <span class="title">PRODUÇÃO</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#/listasolicitacoes">Solicitação</a></li>
-                            <li><a href="#/acompanhamento">Acompanhamento de Solicitação</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-folder"></i>
-                            <span class="title">Materiais</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#/listalivro">Livro</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-dropbox"></i>
-                            <span class="title">Estoque</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#/listaproduto">Produto</a></li>
-                            <li><a href="#/listamovimento">Movimento</a></li>
-                        </ul>
-                    </li>
-
                 </ul>
             </div>
 
