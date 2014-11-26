@@ -18,27 +18,27 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
     };
 
     $scope.buscarEndereco = function () {
-
-        var endereco = $scope.pessoasOriginal.filter(function (pessoa) {
-                console.log(pessoa);
-                return $scope.solicitacao.responsavel == pessoa.id;
-            })
-            .pop()
-            .enderecos
-            .filter(function (endereco) {
-                return endereco.principal == 'S';
-            })
-            .pop();
-
-        var solicitacao = $scope.solicitacao;
-        solicitacao.cep = endereco.cep;
-        solicitacao.numeroEndereco = endereco.numero;
-        solicitacao.endereco = endereco.logradouro;
-        solicitacao.municipio = {
-            text: endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla,
-            id: endereco.cidade.id
-        };
-
+//
+//        var endereco = $scope.pessoasOriginal.filter(function (pessoa) {
+//                console.log(pessoa);
+//                return $scope.solicitacao.responsavel == pessoa.id;
+//            })
+//            .pop()
+//            .enderecos
+//            .filter(function (endereco) {
+//                return endereco.principal == 'S';
+//            })
+//            .pop();
+//
+//        var solicitacao = $scope.solicitacao;
+//        solicitacao.cep = endereco.cep;
+//        solicitacao.numeroEndereco = endereco.numero;
+//        solicitacao.endereco = endereco.logradouro;
+//        solicitacao.municipio = {
+//            text: endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla,
+//            id: endereco.cidade.id
+//        };
+//
 
     };
 
@@ -177,7 +177,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		} 
 				
 		$scope.solicitacao.$save(function () {
-			toastr.success('salvo com sucesso');
+			toastr.success('Salvo com sucesso.');
             $location.path('/listasolicitacoes');
 		});
 	};
@@ -214,6 +214,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 			$scope.solicitacao.nre = solicitacao.nre ? solicitacao.nre.id : null;
 			$scope.solicitacao.municipio = solicitacao.municipio ? solicitacao.municipio.id : null;
 			$scope.solicitacao.responsavel = solicitacao.responsavel ? solicitacao.responsavel.id : null;
+			$scope.solicitacao.escola = solicitacao.escola ? solicitacao.escola.id : null;
 			
 //			solicitacao.itensSolicitacao.forEach(function (item) {
 //				item.livro = item.livro.id;
@@ -229,11 +230,16 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
     $log.debug('listar pessoas');
     Pessoa.listarTodasPessoaFisicas(function (pessoas) {
         $scope.pessoasOriginal = pessoas;
+        $scope.pessoas = pessoas;
+    });
+    
+    Pessoa.listarTodasAsEscolas(function (escolas) {
+        $scope.escolasOriginal = escolas;
 
-            $scope.pessoas = pessoas.map(function (pessoa) {
+            $scope.escolas = escolas.map(function (escola) {
             return {
-                nome: pessoa.nome + ' ' + pessoa.sobrenome,
-                id: pessoa.id
+                nome: escola.nome,
+                id: escola.id
             };
         });
     });

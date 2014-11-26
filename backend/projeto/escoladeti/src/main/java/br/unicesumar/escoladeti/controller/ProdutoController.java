@@ -22,9 +22,16 @@ public class ProdutoController {
     @RequestMapping(value = "/produto", method = RequestMethod.POST)
     @ResponseBody
     public Produto salvar(@RequestBody Produto produto) throws Exception {
+        System.out.println("salvando controller java");
         return this.produtoService.salvar(produto);
     }
 
+    @RequestMapping(value = "/produto/atualizar", method = RequestMethod.POST)
+    @ResponseBody
+    public Produto atualizar(@RequestBody Produto produto) throws Exception {
+        return this.produtoService.atualizar(produto);
+    }
+    
     @RequestMapping(value = "/produto/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Produto getById(@PathVariable Long id) {

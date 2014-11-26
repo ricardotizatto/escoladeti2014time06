@@ -27,13 +27,9 @@ function UsuarioController($scope, $http, $routeParams) {
     };
     
     $scope.getTodos = function(numeroPagina) {
-        console.log(numeroPagina);
         $http.get('./rest/usuarioSource/listar/pag/' + numeroPagina)
             .success(function(usuarios) {
                 $scope.pagina = usuarios;
-                console.log('usuarios ' + usuarios);
-            }).error(function(data) {
-                console.log('erro ao buscar usuarios ' + data);
             });
     };
     
