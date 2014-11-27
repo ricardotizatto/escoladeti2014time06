@@ -58,7 +58,6 @@ function movimentoController($scope, $routeParams, movimentoService) {
         }
     };
     $scope.salvar = function() {
-        console.log("salvando")
         movimentoService.salvar($scope.movimento)
                 .success(function(movimento, status) {
                     toastr.success('Movimentação salva com sucesso.');
@@ -80,6 +79,7 @@ function movimentoController($scope, $routeParams, movimentoService) {
     $scope.voltar = function() {
         window.location = '#/listamovimento/';
     };
+    
     function getNovoMovimento() {
         return {tipo: "ENTRADA"};
     }

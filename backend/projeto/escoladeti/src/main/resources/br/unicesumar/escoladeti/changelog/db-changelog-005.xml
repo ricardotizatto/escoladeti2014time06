@@ -39,10 +39,10 @@
         </insert>
     </changeSet>
     
-    <changeSet id="004" author="Jhonatan">
+    <changeSet id="006" author="Jhonatan">
 		<createView viewName="viewestoqueproduto" replaceIfExists="true"
 			schemaName="public">
-    		SELECT nome as "nomeProduto", quantidade as "Quantidade" from produto order by nome asc
+    		SELECT nome, quantidade, id from produto order by nome asc
     	</createView>
 	</changeSet>
 </databaseChangeLog>
