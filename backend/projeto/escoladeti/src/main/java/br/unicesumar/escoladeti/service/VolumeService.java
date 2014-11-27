@@ -149,6 +149,8 @@ public class VolumeService {
         volume.setCaminhoAnexo(volumeSalvo.getCaminhoAnexo());
         volume.setTranscricao(volumeSalvo.getTranscricao());
         volume.setDataEnviado(volumeSalvo.getDataEnviado());
+        volume.setDataImpressao(volumeSalvo.getDataImpressao());
+        volume.setDataRevisao(volumeSalvo.getDataRevisao());
         return volumeRepository.save(volume);
     }
 

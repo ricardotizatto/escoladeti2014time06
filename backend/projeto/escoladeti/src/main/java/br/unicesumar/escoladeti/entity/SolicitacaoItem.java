@@ -245,7 +245,7 @@ public class SolicitacaoItem extends Entidade{
 
         Short quantidadeEnviado = 0;
         for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
-            if (!solicitacaoVolume.estaEnviado()) {
+            if (solicitacaoVolume.estaEnviado()) {
                 quantidadeEnviado++;
                 break;
             }

@@ -38,6 +38,9 @@ public class Volume  {
     @Column(name = "caminho_anexo")
     private String caminhoAnexo;
 
+    @Column(name = "data_criacao")
+    private Date dataCriacao;
+
     @ManyToOne
     @JoinColumn(name = "id_responsavelrevisao")
     private Usuario responsavelRevisao;
@@ -59,6 +62,9 @@ public class Volume  {
     @Column(name = "id_livro")
     private Long idLivro;
 
+    public Volume() {
+        this.dataCriacao = new Date();
+    }
 
     public Usuario getResponsavel() {
         return responsavel;

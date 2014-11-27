@@ -16,13 +16,10 @@ public class ViewPerfilDeAcessoUsuario implements Serializable{
     private String login;
     private String nome;
     private Long perfildeacessousuarioid;
-    @Column(name="fimvigencia")
     @Temporal(TemporalType.DATE)
     private Date fimVigencia;
-    @Column(name="iniciovigencia")
     @Temporal(TemporalType.DATE)
     private Date inicioVigencia;
-    @Column(name="perfilacessoid")
     private String perfilAcessoId;
     private String perfil;
     

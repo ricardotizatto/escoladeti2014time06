@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.controller;
 
+import br.unicesumar.escoladeti.comando.ComandoSalvarPerfil;
 import br.unicesumar.escoladeti.entity.PerfilAcesso;
 import br.unicesumar.escoladeti.service.PerfilAcessoService;
 import java.io.Serializable;
@@ -23,7 +24,7 @@ public class PerfilAcessoController implements Serializable {
    
     @RequestMapping(value = "/perfilAcesso", method = RequestMethod.POST)
     @ResponseBody
-    public PerfilAcesso salvar(@RequestBody PerfilAcesso perfil) {
+    public PerfilAcesso salvar(@RequestBody ComandoSalvarPerfil perfil) {
            return this.perfilService.salvar(perfil);
     }
    

@@ -10,35 +10,41 @@ function perfilAcessoController($scope, $http, $routeParams) {
     $scope.salvar = function() {
         console.log($scope.perfilAcesso);
         $http.post("./rest/perfilAcessoSource/perfilAcesso", $scope.perfilAcesso)
-                .success(function(perfilAcesso, status) {
-                    $scope.perfilAcesso = getNovoPerfilDeAcesso();
-                    console.log('Perfil de acesso salvo ' + perfilAcesso);
-                })
-                .error(function(data, status) {
-                    console.log('Erro ao salvar ' + data);
-                });
+            .success(function(perfilAcesso, status) {
+                toastr.success("Perfil salvo com sucesso");
+                $scope.perfilAcesso = perfilAcesso;
+                perfilAcesso.itens = ajustarItensForm(perfilAcesso.itens);
+            });
     };
-    
+
     $scope.itensAcesso = getItensAcesso();
     //$scope.itensAcesso = [{nomeComponente : 'Componente1'},{nomeComponente : 'Componente1'}]
 
     $scope.getTodos = function() {
         $http.get("./rest/perfilAcessoSource/perfilAcesso")
-                .success(function(perfils, status) {
-                    $scope.perfilsAcesso = perfils;
-                }).error(function(data, status) {
-            console.log('Erro ao carregar perfis de acesso! ' + data);
-        });
+            .success(function(perfils, status) {
+                $scope.perfilsAcesso = perfils;
+            });
     };
 
     $scope.carregarPerfil = function() {
         if ($routeParams.perfilAcessoId) {
             $http.get('./rest/perfilAcessoSource/perfilAcesso/' + $routeParams.perfilAcessoId)
-                    .success(function(perfilAcesso, status) {
-                        $scope.perfilAcesso = perfilAcesso;
-                    });
+                .success(function(perfilAcesso, status) {
+                    $scope.perfilAcesso = perfilAcesso;
+
+                    perfilAcesso.itens = ajustarItensForm(perfilAcesso.itens);
+
+                });
         }
     };
+
+    function ajustarItensForm(itens) {
+        return itens.map(function (item) {
+            console.log(item);
+            return item.idItemAcesso;
+        });
+    }
 
     $scope.editar = function(perfil) {
         window.location = '#/cadastroperfilacesso/' + perfil.id;
@@ -51,13 +57,10 @@ function perfilAcessoController($scope, $http, $routeParams) {
             url: './rest/perfilAcessoSource/perfilAcesso',
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         })
-                .success(function(data, status) {
-                    $scope.getTodos();
-                    console.log('Perfil deletado!' + data)
-                })
-                .error(function(data, status) {
-                    console.log('Perfil não foi deletado' + data);
-                });
+            .success(function(data, status) {
+                $scope.getTodos();
+                console.log('Perfil deletado!' + data)
+            });
     };
 
     $scope.cancelar = function() {
@@ -65,14 +68,16 @@ function perfilAcessoController($scope, $http, $routeParams) {
     };
 
     function getNovoPerfilDeAcesso() {
-        return {};
+        return {
+            itens: []
+        };
     };
-    
+
     function getItensAcesso(){
         console.log('Carregando itens');
         $http.get('./rest/itemAcessoSource/itemAcesso')
-                .success(function(itensDeAcesso){
-                    $scope.itensAcesso = itensDeAcesso;
-                });
-        };
+            .success(function(itensDeAcesso){
+                $scope.itensAcesso = itensDeAcesso;
+            });
+    };
 }

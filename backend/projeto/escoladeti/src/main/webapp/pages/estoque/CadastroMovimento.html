@@ -17,7 +17,7 @@
 
                 <div class="form-group {{formMovimento.quantidade.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
                     <label class="control-label"><strong> Quantidade * </strong></label>
-                    <input class="form-control" title="Quantidade deve ser somente números"  name="quantidade" type="text" ng-model="movimento.quantidade"  ng-pattern="/[0-9]{1,5}/" maxlength="5" id="quantidadeMovimento" required placeholder="Quantidade" >
+                    <input class="form-control" title="Quantidade deve ser somente números"  name="quantidade" type="text" ng-model="movimento.quantidade"  ng-pattern="/^\d*$/" maxlength="5" id="quantidadeMovimento" required placeholder="Quantidade" >
                     <span class="help-block" ng-show="formMovimento.quantidade.$error.pattern">Apenas numeros.</span>
                 </div>
 

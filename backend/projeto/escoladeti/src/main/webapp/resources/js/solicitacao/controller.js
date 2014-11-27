@@ -18,27 +18,27 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
     };
 
     $scope.buscarEndereco = function () {
-
-        var endereco = $scope.pessoasOriginal.filter(function (pessoa) {
-                console.log(pessoa);
-                return $scope.solicitacao.responsavel == pessoa.id;
-            })
-            .pop()
-            .enderecos
-            .filter(function (endereco) {
-                return endereco.principal == 'S';
-            })
-            .pop();
-
-        var solicitacao = $scope.solicitacao;
-        solicitacao.cep = endereco.cep;
-        solicitacao.numeroEndereco = endereco.numero;
-        solicitacao.endereco = endereco.logradouro;
-        solicitacao.municipio = {
-            text: endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla,
-            id: endereco.cidade.id
-        };
-
+//
+//        var endereco = $scope.pessoasOriginal.filter(function (pessoa) {
+//                console.log(pessoa);
+//                return $scope.solicitacao.responsavel == pessoa.id;
+//            })
+//            .pop()
+//            .enderecos
+//            .filter(function (endereco) {
+//                return endereco.principal == 'S';
+//            })
+//            .pop();
+//
+//        var solicitacao = $scope.solicitacao;
+//        solicitacao.cep = endereco.cep;
+//        solicitacao.numeroEndereco = endereco.numero;
+//        solicitacao.endereco = endereco.logradouro;
+//        solicitacao.municipio = {
+//            text: endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla,
+//            id: endereco.cidade.id
+//        };
+//
 
     };
 
@@ -230,13 +230,7 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
     $log.debug('listar pessoas');
     Pessoa.listarTodasPessoaFisicas(function (pessoas) {
         $scope.pessoasOriginal = pessoas;
-
-            $scope.pessoas = pessoas.map(function (pessoa) {
-            return {
-                nome: pessoa.nome + ' ' + pessoa.sobrenome,
-                id: pessoa.id
-            };
-        });
+        $scope.pessoas = pessoas;
     });
     
     Pessoa.listarTodasAsEscolas(function (escolas) {
