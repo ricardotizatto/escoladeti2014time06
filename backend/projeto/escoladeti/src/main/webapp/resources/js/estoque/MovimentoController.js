@@ -3,33 +3,33 @@ var controllers = angular.module('controllers');
 function movimentoController($scope, $routeParams, movimentoService) {
     $scope.select2 = 'one';
     $scope.info = {};
-
     $scope.novo = function() {
         $scope.movimento = getNovoMovimento();
         window.location = '#/cadastromovimento';
     };
-
     $scope.extornar = function(movimento) {
-        movimento.tipo = movimento.tipo * (-1);
-        movimentoService.extornar(movimento)
-                .success(function(movimento, status) {
-                    toastr.success('Movimentação salva com sucesso.');
-                    window.location = '#/listamovimento';
-                })
-                .error(function(data, status) {
-                    toastr.error(data.message);
-                });
-        window.location = '#/listamovimento';
+        BootstrapDialog.confirm('Deseja realmente extornar o movimento?', function(result) {
+            if (result) {
+//                movimento.tipo = movimento.tipo * (-1);
+                movimentoService.extornar(movimento)
+                        .success(function(movimento, status) {
+                            toastr.success('Extorno realizado com sucesso.');
+                            $scope.getTodos(1);
+                        })
+                        .error(function(data, status) {
+                            toastr.error(data.message);
+                        });
+            } else {
+                $scope.getTodos(1);
+            }
+        });
     };
-
     $scope.validaExtornado = function(movimento) {
         return movimento.extornado;
     };
-
     $scope.editar = function(movimento) {
         window.location = '#/cadastromovimento/' + movimento.id;
     };
-
     $scope.carregarMovimento = function() {
         movimentoService.listarPessoas()
                 .success(function(listaPessoas, status) {
@@ -38,7 +38,6 @@ function movimentoController($scope, $routeParams, movimentoService) {
                 .error(function(data, status) {
                     toastr.error(data.message);
                 });
-
         movimentoService.listarProdutos()
                 .success(function(listaProdutos, status) {
                     $scope.produtos = listaProdutos;
@@ -58,8 +57,8 @@ function movimentoController($scope, $routeParams, movimentoService) {
             $scope.movimento = getNovoMovimento();
         }
     };
-
     $scope.salvar = function() {
+        console.log("salvando")
         movimentoService.salvar($scope.movimento)
                 .success(function(movimento, status) {
                     toastr.success('Movimentação salva com sucesso.');
@@ -69,7 +68,6 @@ function movimentoController($scope, $routeParams, movimentoService) {
                     toastr.error(data.message);
                 });
     };
-
     $scope.getTodos = function(numeroPagina) {
         movimentoService.listar(numeroPagina)
                 .success(function(listaMovimentos, status) {
@@ -79,16 +77,13 @@ function movimentoController($scope, $routeParams, movimentoService) {
                     toastr.error(data.message);
                 });
     };
-
     $scope.voltar = function() {
         window.location = '#/listamovimento/';
     };
-
     function getNovoMovimento() {
         return {tipo: "ENTRADA"};
     }
     ;
 }
 ;
-
 controllers.controller('movimentoController', ['$scope', '$routeParams', 'movimentoService', movimentoController]);

@@ -25,8 +25,7 @@
             <column name="id" type="int8">
                 <constraints nullable="false" primaryKey="true"></constraints>
             </column>
-            <column name="id_destino"       type="bigint"></column>
-            <column name="id_origem"        type="bigint"></column>
+            <column name="id_referencia"        type="bigint"></column>
             <column name="id_produto"       type="bigint"></column>
             <column name="datamovimentacao" type="date"></column>
             <column name="extornado"        type="bool"></column>
@@ -40,4 +39,10 @@
         </insert>
     </changeSet>
     
+    <changeSet id="004" author="Jhonatan">
+		<createView viewName="viewestoqueproduto" replaceIfExists="true"
+			schemaName="public">
+    		SELECT nome as "nomeProduto", quantidade as "Quantidade" from produto order by nome asc
+    	</createView>
+	</changeSet>
 </databaseChangeLog>
