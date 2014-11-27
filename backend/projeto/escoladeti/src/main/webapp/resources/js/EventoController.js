@@ -21,10 +21,13 @@ function eventoController($scope, $http, $routeParams) {
         console.log(evento);
         window.location = '#/cadastroevento/' + evento.id;
     };
-    $scope.chamadaPeriodo = function (id) {
-        window.location = '#/chamada/' + id;
+    $scope.chamadaPeriodo = function (id,evento) {
+        if(id == undefined || ($scope.evento.limite == $scope.evento.disponivel)){
+            toastr.warning("Não existem participantes inscritos neste evento.");
+        }else{
+         window.location = '#/chamada/' + id;   
+        }
     };
-
 
     $scope.deletar = function (evento) {
         console.log('deletando evento ' + JSON.stringify(evento));
@@ -68,7 +71,11 @@ function eventoController($scope, $http, $routeParams) {
 
 
     $scope.listarParticipantes = function (evento) {
-        window.location = '#/listaparticipantes/' + evento.id;
+        if(evento.limite === evento.disponivel){
+            toastr.warning("Não existem participantes inscritos neste evento.");
+        }else{
+            window.location = '#/listaparticipantes/' + evento.id;
+        }
     };
 
     $scope.getTotalParticipantes = function (id) {

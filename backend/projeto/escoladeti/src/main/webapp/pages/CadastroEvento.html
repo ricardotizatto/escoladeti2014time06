@@ -23,7 +23,7 @@
                             <option value="1">CURSO</option>
                             <option value="2">PALESTRA</option>
                             <option value="3">REUNIÃO</option>
-							<option value="4">OUTROS</option>
+                            <option value="4">OUTROS</option>
                         </select>
                     </div>
                 </div>
@@ -112,14 +112,17 @@
                                         <td ng-bind="periodo.inicio"></td>
                                         <td ng-bind="periodo.fim"></td>
                                         <td class="center-text">
-                                            <button class='btn btn-warning btn-sm'
+                                            <button class='btn btn-warning btn-sm' title="Editar periodo"
                                                     ng-click="editarPeriodo($index)" data-toggle="modal"
                                                         data-target="#modalData">
                                                 <span class='glyphicon glyphicon-edit'></span>
                                             </button>
                                             <button class='btn btn-danger btn-sm'
                                                     ng-click="delPeriodo($index)">
-                                                <span class='glyphicon glyphicon-remove-circle'></span>
+                                                <span class='glyphicon glyphicon-remove-circle' title="Remover periodo"></span>
+                                            </button>
+                                            <button type="button" title="Realizar chamada" class='btn btn-info btn-sm' data-dismiss="modal" ng-click="chamadaPeriodo(periodo.id, evento)">
+                                                <span class='glyphicon glyphicon-check'></span>
                                             </button>
                                         </td>
                                     </tr>

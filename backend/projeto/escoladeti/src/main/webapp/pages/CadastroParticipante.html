@@ -18,7 +18,7 @@
                         <th class="col-md-3" data-field="descricao">Descrição</th>
                         <th class="col-md-3" data-field="details"></th>
                     </tr>
-                    <tr ng-repeat="evento in eventos" ng-click="chk{{evento.id}}">
+                    <tr ng-repeat="evento in eventos" ng-click="chk{{evento.id}}" ng-show="(evento.disponivel > 0)">
                         <td ng-show="evento.statusevento == true"><input ng-show="(evento.disponivel > 0)" type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
                         <td ng-show="evento.statusevento == true">{{evento.titulo}}</td>
                         <td ng-show="evento.statusevento == true">{{evento.descricao.substring(0, 180)}}</td>
@@ -45,13 +45,23 @@
                 </div>    
                 <div class="form-group {{formParticipante.email.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong>Email *</strong></label>
-                    <input class="form-control" type="text" name="email" placeholder="Endereço de email" ng-model="participante.email" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
-                    <span class="help-block" ng-show="formParticipante.email.$error.pattern">Dígite um email válido. Ex email@gmail.com</span>
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" type="text" name="email" placeholder="Endereço de email" ng-model="participante.email" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
+                    </div>
+                    <span class="help-block" ng-show="formParticipante.email.$error.pattern">Email inválido.</span>
                 </div>  
                 <div class="form-group {{formParticipante.telefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong>Telefone *</strong></label>
-                    <input class="form-control" id="telefone" name="telefone" type="text" ng-model="participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required/>
-                    <span class="help-block" ng-show="formParticipante.telefone.$error.pattern">Dígite um telefone válido. Ex:(44)9999-4567</span>
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-phone-alt"></span>
+                        </span>
+                        <input class="form-control" id="telefone" name="telefone" type="text" ng-model="participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required/>
+                        <span class="help-block" ng-show="formParticipante.telefone.$error.pattern">Dígite um telefone válido. Ex:(44)9999-4567</span>
+                    </div>
                 </div>   
 
 

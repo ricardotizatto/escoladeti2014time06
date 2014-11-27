@@ -27,20 +27,7 @@
                     </div>
                 </div>
             </div>
-            <!--            <div class="form-group col-sm-4">
-                            <label> &nbsp; </label>
-                            <div class="btn-group">
-                                <div>
-                                    <button class='btn btn-primary btn-padrao' ng-click='getTodosAbertos(1)'>
-                                        Abertos
-                                    </button>
-                                    <button class='btn btn-primary btn-padrao' ng-click='getTodosFechados(1)'>
-                                        Finalizado
-                                    </button>
-                                </div>
-                            </div>
-                        </div>-->
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-3 pull-right">
                 <label> &nbsp; </label>
                 <div>
                     <span class="pull-right">
@@ -57,7 +44,7 @@
                 <th class="col-md-3">Titulo</th>
                 <th class="col-md-3">Descrição</th>
                 <th class="col-md-1">Tipo</th>
-                <th class="col-md-2">Participantes</th>
+<!--                <th class="col-md-2">Participantes</th>-->
                 <th class="col-md-2 text-center">Ações</th>
             </tr>
             <tr ng-repeat="ev in eventos.list| filter : busca">
@@ -72,11 +59,11 @@
                 <td>{{ev.titulo}}</td>
                 <td>{{ev.descricao.substring(0, 180)}}</td>
                 <td>{{getTipoEvento(ev.tipoEvento)}}</td>
-                <td>
+<!--                <td>
                     <button type='button' class='btn btn-warning btn-small' ng-click="listarParticipantes(ev)">
                         GERENCIAR 
                     </button>
-                </td>
+                </td>-->
                 <td class="text-center">
                     <button type='button' class='btn btn-warning btn-sm' ng-click="editar(ev)">
                         <span class='glyphicon glyphicon-edit'></span>
@@ -84,13 +71,12 @@
                     <button type='button' class='btn btn-danger btn-sm' ng-click="deletar(ev)">
                         <span class='glyphicon glyphicon-trash'></span>
                     </button>
-                    <button type='button' class='btn btn-info btn-sm' title="Chamada" ng-click="telaPeriodo(ev.id)">
-                        <span class='glyphicon glyphicon-list'></span>
+                    <button type='button' class='btn btn-info btn-sm' ng-click="listarParticipantes(ev)">
+                        <span class='fa fa-group'></span> 
                     </button>
                 </td>
             </tr>
         </table>
-
         <div class="text-center" ng-show="status == 'aberto' ">
             <pagination boundary-links="true" num-pages="eventos.pageCount" total-items="eventos.pageCount*eventos.maxRows" items-per-page="eventos.maxRows"
                         ng-model="pageNumber" ng-change="getTodosAbertos(pageNumber)" class="pagination-sm" max-size="eventos.maxPagesToShow"

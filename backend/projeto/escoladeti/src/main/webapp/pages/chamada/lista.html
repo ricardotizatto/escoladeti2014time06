@@ -7,7 +7,7 @@
                 <th class="col-md-3">Email</th>
                 <th class="col-md-2 text-center">Presença</th>
             </tr>
-            <tr ng-repeat="pp in participantesperiodos">
+            <tr ng-repeat="pp in participantesperiodos | orderBy: 'nome' ">
                 <td>{{pp.participante.nome}}</td>
                 <td>{{pp.participante.email}}</td>
                 <td class="text-center"><input class="bigCheckbox" type="checkbox" id="presensa{{pp.id}}" name="presensa{{pp.id}}" ng-checked="{{pp.presente}}" ng-click="salvar(pp)"></td>
