@@ -13,6 +13,8 @@ public interface PerfilAcessoUsuarioRepository extends JpaRepository<PerfilAcess
     public PerfilAcessoUsuario findById(Long id);
     
     public List<PerfilAcessoUsuario> findByUsuarioId(Long id);
+    
+    public PerfilAcessoUsuario findUniqueByUsuarioId(Long id);
 
     @Modifying
     @Transactional
