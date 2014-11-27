@@ -112,8 +112,9 @@ function ExternoController($scope, $http, $routeParams) {
             .success(function (participante) {
                 console.log('Participante Salvo: ' + participante);
                 $scope.novoParticipante();
+                $scope.carregaEvento();
                 $scope.info.status = 'success';
-                $scope.info.message = participante.nome + " inscrição realizada com sucesso!";
+                $scope.info.message = participante.nome + " inscrição realizada com sucesso!";      
             }).error(function (data) {
                 console.log('Erro ao salvar Participante: ' + data.messageDeveloper);
                 $scope.info.status = 'danger';
