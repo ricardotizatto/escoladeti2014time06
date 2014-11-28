@@ -289,4 +289,7 @@ select.select2 {
 .classe-forca-senha{ padding: 10px; margin-left: 5px; font-weight: bold;}
 input.bigCheckbox{
     width: 20px; height: 20px;
-} 
+}
+input.bigRadio{
+    width: 16px; height: 16px;
+}

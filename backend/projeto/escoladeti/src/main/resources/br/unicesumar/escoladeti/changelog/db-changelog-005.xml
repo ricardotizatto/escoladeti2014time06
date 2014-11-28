@@ -40,4 +40,8 @@
         </insert>
     </changeSet>
     
+    <changeSet id="85645234245435" author="Alisson Molinari">
+           <addUniqueConstraint tableName="usuario" columnNames="login"/> 
+    </changeSet>
+    
 </databaseChangeLog>

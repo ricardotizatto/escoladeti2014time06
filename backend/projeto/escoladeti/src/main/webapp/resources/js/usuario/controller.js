@@ -81,7 +81,6 @@ function UsuarioController($scope, $http, $routeParams) {
                 window.location = "#/listausuario";
             }).error(function(data) {
                 console.log("erro ao salvar usuario", data);
-                toastr.warning("Erro ao salvar usuário!");
             });
         }
     };
@@ -98,7 +97,6 @@ function UsuarioController($scope, $http, $routeParams) {
             $scope.getTodos(1);
         }).error(function(data) {
             console.log("erro ao deletar usuario " + data);
-            toastr.warning("Erro ao deletar usuário!");
         });
     };
     $scope.carregarUsuario = function() {
