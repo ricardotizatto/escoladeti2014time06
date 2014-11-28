@@ -8,6 +8,7 @@ import br.unicesumar.escoladeti.repository.EventoRepository;
 import br.unicesumar.escoladeti.repository.ParticipantePeriodoRepository;
 import br.unicesumar.escoladeti.repository.ParticipanteRepository;
 import br.unicesumar.escoladeti.repository.PeriodoRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,12 +37,33 @@ public class ParticipanteService {
           ev.setDisponivel(ev.getDisponivel() - 1);
           eventoRepository.save(ev);
         }
+        List<ParticipantePeriodo> countRegistros = new ArrayList<ParticipantePeriodo>();
         for(Periodo period : periodoRepository.findByEvento(eventoRepository.findById(participante.getIdevento()))){
-            ParticipantePeriodo pp = new ParticipantePeriodo();
-            pp.setParticipante(participante);
-            pp.setPeriodo(period);
-            pp.setPresente(false);
-            participantePeriodoRepository.save(pp);
+            if(participantePeriodoRepository.findByPeriodo_id(period.getId()).size() > 0){
+                  countRegistros = participantePeriodoRepository.findByPeriodo_id(period.getId());
+            }      
+        }
+        boolean condicaoAlteraOuNao = true;
+        for(ParticipantePeriodo pp:countRegistros ){
+           if(pp.getParticipante().equals(participante)) {
+             condicaoAlteraOuNao= false;  
+           }
+        }
+        
+        if(ev.getDisponivel() == 0){
+            condicaoAlteraOuNao= false;
+            throw new RuntimeException("Não possui vaga disponível para este evento");
+        }
+        
+        System.out.println("No count dos registros: " + countRegistros.size());
+        if(condicaoAlteraOuNao){
+            for(Periodo period : periodoRepository.findByEvento(eventoRepository.findById(participante.getIdevento()))){
+                ParticipantePeriodo pp = new ParticipantePeriodo();
+                pp.setParticipante(participante);
+                pp.setPeriodo(period);
+                pp.setPresente(false);
+                participantePeriodoRepository.save(pp);
+            }
         }
         System.out.println("Finalizou  cadastro participante");
         return p;

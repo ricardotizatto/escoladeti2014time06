@@ -1,6 +1,5 @@
 <div class="container" ng-controller="participanteController" ng-init="carregarEventos(); novo()">
     <fieldset>
-        <div class="alert alert-{{info.status}} alert-dismissable" ng-show="info">{{info.message}}</div>
         <div class="row">
             <div class="form-group col-sm-12">
                 <legend> Eventos Disponíveis </legend>
@@ -19,7 +18,7 @@
                         <th class="col-md-3" data-field="details"></th>
                     </tr>
                     <tr ng-repeat="evento in eventos" ng-click="chk{{evento.id}}" ng-show="(evento.disponivel > 0)">
-                        <td ng-show="evento.statusevento == true"><input ng-show="(evento.disponivel > 0)" type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
+                        <td ng-show="evento.statusevento == true"><input class="bigRadio" type="radio" id="chk{{evento.id}}" ng-model="participante.idevento" value="{{evento.id}}"></td>
                         <td ng-show="evento.statusevento == true">{{evento.titulo}}</td>
                         <td ng-show="evento.statusevento == true">{{evento.descricao.substring(0, 180)}}</td>
                         <td ng-show="evento.statusevento == true">
@@ -39,7 +38,7 @@
 
                 <div class="form-group {{formParticipante.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong>Nome *</strong></label>
-                    <input class="form-control" ng-pattern="/^[a-zA-Z\s]{3,200}$/" 
+                    <input class="form-control" 
                            type="text" name="nome"  id="nome" placeholder="Nome" ng-model="participante.nome" required >
                     <span class="help-block" ng-show="formParticipante.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
                 </div>    

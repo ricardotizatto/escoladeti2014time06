@@ -21,11 +21,11 @@ function eventoController($scope, $http, $routeParams) {
         console.log(evento);
         window.location = '#/cadastroevento/' + evento.id;
     };
-    $scope.chamadaPeriodo = function (id,evento) {
-        if(id == undefined || ($scope.evento.limite == $scope.evento.disponivel)){
+    $scope.chamadaPeriodo = function (id, evento) {
+        if (id == undefined || ($scope.evento.limite == $scope.evento.disponivel)) {
             toastr.warning("Não existem participantes inscritos neste evento.");
-        }else{
-         window.location = '#/chamada/' + id;   
+        } else {
+            window.location = '#/chamada/' + id;
         }
     };
 
@@ -42,10 +42,10 @@ function eventoController($scope, $http, $routeParams) {
                 })
                         .success(function (data, status) {
                             console.log($scope.status);
-                            if($scope.status == 'aberto'){
-                             $scope.getTodosAbertos(1);   
-                            }else{
-                             $scope.getTodosFechados(1);      
+                            if ($scope.status == 'aberto') {
+                                $scope.getTodosAbertos(1);
+                            } else {
+                                $scope.getTodosFechados(1);
                             }
                             console.log('evento deletado');
                             toastr.success("Evento deletado com sucesso");
@@ -66,14 +66,14 @@ function eventoController($scope, $http, $routeParams) {
         $http.get('./rest/eventoSource/evento/' + $scope.status + '?q=' + $scope.busca.toUpperCase())
                 .then(function (retorno) {
                     $scope.eventos = retorno.data;
-                    });
+                });
     };
 
 
     $scope.listarParticipantes = function (evento) {
-        if(evento.limite === evento.disponivel){
+        if (evento.limite === evento.disponivel) {
             toastr.warning("Não existem participantes inscritos neste evento.");
-        }else{
+        } else {
             window.location = '#/listaparticipantes/' + evento.id;
         }
     };
@@ -100,8 +100,9 @@ function eventoController($scope, $http, $routeParams) {
         console.log(angular.toJson($scope.evento, true));
         if (!($scope.evento.id > 0)) {
             $scope.evento.statusevento = true;
+            $scope.evento.disponivel = $scope.evento.limite;
         }
-        $scope.evento.disponivel = $scope.evento.limite;
+
         console.log("evento antes do post = " + $scope.evento.periodos.length);
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function (evento, status) {
@@ -244,17 +245,34 @@ function eventoController($scope, $http, $routeParams) {
 
     $scope.salvarPeriodo = function () {
         var dataAtual = dataHoje();
+
         if ($scope.indicePeriodo >= 0) {
             $scope.evento.periodos.splice($scope.indicePeriodo, 1);
         }
 
         if ($scope.periodo.inicio >= $scope.periodo.fim) {
             toastr.warning("Horário inválido");
-        } else if ($scope.periodo.data < dataAtual) {
+            return;
+        }
+        if ($scope.periodo.data < dataAtual) {
             console.log("data sis: " + $scope.periodo.data + "data atual " + dataAtual);
             toastr.warning("Data inválida!");
+            return;
         }
-        else {
+        if ($scope.evento.periodos) {
+            var periodoExistente = false;
+            console.log('entrou na funcao que valida data/hora');
+            $scope.evento.periodos.forEach(function (value, key) {
+                var novaData = transformaData(value.data)
+                if (novaData == $scope.periodo.data && value.inicio == $scope.periodo.inicio && value.fim == $scope.periodo.fim) {
+                    periodoExistente = true;
+                    toastr.warning("Periodo inválido.");
+                    return;
+                }
+            });
+        }
+        if (periodoExistente == false) {
+            console.log('entrou no else para salvar');
             var periodo = removeFusoHorarioData($scope.periodo.data);
             $scope.periodo.data = periodo;
             $scope.evento.periodos.push($scope.periodo);
@@ -262,6 +280,7 @@ function eventoController($scope, $http, $routeParams) {
             toastr.success("Periodo adicionado com sucesso.");
             $scope.indicePeriodo = {};
         }
+
     };
 
     $scope.editarPeriodo = function (indice) {
@@ -294,6 +313,19 @@ function eventoController($scope, $http, $routeParams) {
         return [ano, mes, dia].join('-');
     }
 
+    function transformaData(data) {
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+        var ano = data.getFullYear();
+        if (dia < 10) {
+            dia = '0' + dia;
+        }
+        if (mes < 10) {
+            mes = '0' + mes;
+        }
+
+        return [ano, mes, dia].join('-');
+    }
 }
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);
