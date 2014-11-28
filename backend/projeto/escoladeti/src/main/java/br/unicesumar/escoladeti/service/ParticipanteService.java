@@ -50,11 +50,6 @@ public class ParticipanteService {
            }
         }
         
-        if(ev.getDisponivel() == 0){
-            condicaoAlteraOuNao= false;
-            throw new RuntimeException("Não possui vaga disponível para este evento");
-        }
-        
         System.out.println("No count dos registros: " + countRegistros.size());
         if(condicaoAlteraOuNao){
             for(Periodo period : periodoRepository.findByEvento(eventoRepository.findById(participante.getIdevento()))){
