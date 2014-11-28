@@ -11,7 +11,8 @@ function perfilAcessoController($scope, $http, $routeParams) {
         console.log($scope.perfilAcesso);
         $http.post("./rest/perfilAcessoSource/perfilAcesso", $scope.perfilAcesso)
             .success(function(perfilAcesso, status) {
-                toastr.success("Perfil salvo com sucesso");
+                toastr.success("Perfil "+ perfilAcesso.nome + " salvo com sucesso");
+                window.location = "#/listaperfilacesso";
                 $scope.perfilAcesso = perfilAcesso;
                 perfilAcesso.itens = ajustarItensForm(perfilAcesso.itens);
             });

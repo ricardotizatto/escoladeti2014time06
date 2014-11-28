@@ -131,28 +131,20 @@ public class UsuarioService {
     }
 
     public void deletar(UsuarioDTO usuarioDTO) {
-        PerfilAcessoUsuario perfilAcessoUsuario
-                = perfilAcessoUsuarioRepository.findUniqueByUsuarioId(usuarioDTO.getId());
 
-        if (!perfilAcessoUsuario.getPerfilAcesso().getNome().equalsIgnoreCase("ADMINISTRADOR")) {
-            
-            UserDetails userDetails = Sessao.currentUserDetails();
-            if (!userDetails.getUsername().equalsIgnoreCase(usuarioDTO.getLogin())) {
+        UserDetails userDetails = Sessao.currentUserDetails();
+        if (!userDetails.getUsername().equalsIgnoreCase(usuarioDTO.getLogin())) {
 
-                Usuario usuario = new Usuario();
-                usuario.setId(usuarioDTO.getId());
+            Usuario usuario = new Usuario();
+            usuario.setId(usuarioDTO.getId());
 
-//                PerfilAcessoUsuario perfilAcessoUsuario = new PerfilAcessoUsuario();
-                perfilAcessoUsuario.setUsuario(usuario);
+            PerfilAcessoUsuario perfilAcessoUsuario = new PerfilAcessoUsuario();
+            perfilAcessoUsuario.setUsuario(usuario);
 
-                this.perfilAcessoUsuarioRepository.deleteByUsuario(usuario);
-                this.usuarioRepository.delete(usuario);
-            } else {
-                throw new RuntimeException("O usuário não pode se exluir");
-            }
-
+            this.perfilAcessoUsuarioRepository.deleteByUsuario(usuario);
+            this.usuarioRepository.delete(usuario);
         } else {
-            throw new RuntimeException("Impossível exluir o usuário administrador do sistema");
+            throw new RuntimeException("O usuário não pode se exluir");
         }
     }
 
