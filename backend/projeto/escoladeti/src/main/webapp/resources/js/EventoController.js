@@ -175,12 +175,21 @@ function eventoController($scope, $http, $routeParams) {
             $scope.evento = {};
             $scope.evento.periodos = [];
             $scope.periodosModal = [];
+            $scope.desabilidaEditPeriodo = false;
+            $scope.desabilidaDelPeriodo = false;
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
                 .success(function (ev) {
                     $scope.evento = ev;
                     $scope.periodo = ev.periodos[0];
+                    $scope.desabilidaEditPeriodo = true;
+                    $scope.desabilidaDelPeriodo = true;
+                    if ($scope.evento.limite == $scope.evento.disponivel) {
+                        $scope.alterarLimite = false;
+                    }else{
+                         $scope.alterarLimite = true;
+                    }
                     return;
                 });
     };
@@ -286,6 +295,7 @@ function eventoController($scope, $http, $routeParams) {
     $scope.editarPeriodo = function (indice) {
         $scope.indicePeriodo = indice;
         $scope.periodo = angular.copy($scope.evento.periodos[indice]);
+        $scope.periodo.data = transformaData($scope.periodo.data);
     };
 
     $scope.delPeriodo = function (index) {

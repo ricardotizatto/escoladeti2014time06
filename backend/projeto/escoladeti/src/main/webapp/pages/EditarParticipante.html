@@ -15,7 +15,12 @@
             <div class="col-sm-4">
                 <div class="form-group {{formParticipante.email.$error.required || formParticipante.email.$error.email ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong>Email</strong></label>
-                    <input class="form-control" type="email" name="email" placeholder="Endereço de email" ng-model="participante.email" ng-required="true">
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" type="email" name="email" placeholder="Endereço de email" ng-model="participante.email" ng-required="true">
+                    </div>
                     <span class="help-block" ng-show="formParticipante.email.$error.email && formParticipante.email.$invalid">Dígite um email válido. Ex email@gmail.com</span>
                 </div>  
             </div>
@@ -37,10 +42,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-group {{formParticipante.telefone.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                     <label class="control-label"><strong>Telefone</strong></label>
-                    <input class="form-control" id="telefone" name="telefone" type="text" ng-model="participante.telefone"  ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required/>
+                    <div class="input-group">
+                        <span class="input-group-addon"> 
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" id="telefone" name="telefone" type="text" ng-model="participante.telefone"  ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required/>
+                    </div>
                     <span class="help-block" ng-show="formParticipante.telefone.$error.pattern">Dígite um telefone válido. Ex:(44)9999-4567</span>
                 </div>    
             </div>
