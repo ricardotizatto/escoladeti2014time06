@@ -38,15 +38,29 @@
             <column name="nome" type="bigint" value="producao"></column>
         </insert>
     </changeSet>
+ 
     
-    <changeSet id="85645234245435" author="Alisson Molinari">
-           <addUniqueConstraint tableName="usuario" columnNames="login"/> 
-    </changeSet>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <changeSet id="006" author="Jhonatan">
-		<createView viewName="viewestoqueproduto" replaceIfExists="true"
-			schemaName="public">
-    		SELECT nome, quantidade, id from produto order by nome asc
-    	</createView>
-	</changeSet>
+        <createView viewName="viewestoqueproduto" replaceIfExists="true"
+                            schemaName="public">
+            SELECT nome, quantidade, id from produto order by nome asc
+        </createView>
+    </changeSet>
+        
+    <changeSet id="85645234245435" author="Alisson Molinari">
+        <addUniqueConstraint tableName="usuario" columnNames="login"/> 
+    </changeSet>
+    
+
 </databaseChangeLog>
