@@ -7,23 +7,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-sm-5">
-            <div class="input-group">
-                <!--                <span class="input-group-addon"> 
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </span> 
-                                <input class="form-control" name="busca" type="text" onkeydown="toUpper(this)" ng-model="busca" ng-change="buscaMovimentosContendoNome()"  placeholder="Busca movimento"/>-->
-            </div>
+        <div class="form-group col-sm-10">
         </div>
-        <div class="form-group col-sm-7">
-            <div>
-                <span class="pull-right">
-                    <button type='submit' class='btn btn-primary btn-padrao'
-                            value='novo' ng-click="novo()">
-                        <span class='glyphicon glyphicon-plus-sign'></span> Novo
-                    </button>
-                </span>
-            </div>
+       
+        <div class="form-group col-sm-2">
+            <span class="pull-right">
+                <button type='submit' class='btn btn-primary btn-padrao'
+                        value='novo' ng-click="novo()">
+                    <span class='glyphicon glyphicon-plus-sign'></span> Novo
+                </button>
+            </span>
+
         </div>
     </div>
     <div class="row">
@@ -34,8 +28,7 @@
                     <th class="col-md-1">Movimentação</th>
                     <th class="col-md-1">Quantidade</th>
                     <th class="col-md-1">Data</th>
-                    <th class="col-md-1">Origem</th>
-                    <th class="col-md-1">Destino</th>
+                    <th class="col-md-1">Referencia</th>
                     <th class="col-md-1">Ações</th>
                 </tr>
                 <tr ng-repeat="movimento in movimentos.list">
@@ -44,8 +37,7 @@
                     <td ng-if="movimento.tipo == -1">Saída</td>
                     <td>{{movimento.quantidade}}</td>
                     <td><span class="time"> {{movimento.dataMovimentacao| date:'dd/MM/yyyy'}}  </span></td>
-                    <td>{{movimento.pessoaOrigem.nome}}</td>
-                    <td>{{movimento.pessoaDestino.nome}}</td>
+                    <td>{{movimento.referencia.nome}}</td>
                     <td>
                         <button class='btn btn-danger btn-sm' ng-click="extornar(movimento)" ng-disabled="validaExtornado(movimento)">
                             <span class='glyphicon glyphicon-remove-circle'></span>
@@ -56,9 +48,11 @@
             </table>
         </div>
     </div>
+    
+    
     <div class="text-center">
-        <pagination boundary-links="true" num-pages="movimentacao.pageCount" total-items="movimentacao.pageCount*movimentacao.maxRows" items-per-page="movimentacao.maxRows"
-                    ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="movimentacao.maxPagesToShow"
+        <pagination boundary-links="true" num-pages="movimentos.pageCount" total-items="movimentos.pageCount*movimentos.maxRows" items-per-page="movimentos.maxRows"
+                    ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="movimentos.maxPagesToShow"
                     previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
         </pagination>
     </div>

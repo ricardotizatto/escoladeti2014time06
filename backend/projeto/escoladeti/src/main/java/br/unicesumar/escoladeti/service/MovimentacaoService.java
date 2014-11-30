@@ -31,8 +31,7 @@ public class MovimentacaoService {
     private ProdutoRepository produtoRepository;
 
     public Movimentacao salvar(ComandoSalvarMovimentacao comando) throws Exception {
-        Pessoa pessoaOrigem = this.pessoaFisicaRepository.findById(comando.getPessoaOrigem());
-        Pessoa pessoaDestino = this.pessoaFisicaRepository.findById(comando.getPessoaDestino());
+        Pessoa referencia = this.pessoaFisicaRepository.findById(comando.getReferencia());
         Produto produto = this.produtoRepository.findById(comando.getProduto());
         
         MovimentacaoBuilder movimentacaoBuilder = Movimentacao
@@ -40,8 +39,7 @@ public class MovimentacaoService {
                 .Tipo(comando.getTipo())
                 .Quantidade(comando.getQuantidade())
                 .DataMovimentacao(comando.getDataMovimentacao())
-                .PessoaOrigem(pessoaOrigem)
-                .PessoaDestino(pessoaDestino)
+                .Referencia(referencia)
                 .Produto(produto);
         
         Movimentacao movimentacao = movimentacaoBuilder.build();
@@ -80,12 +78,13 @@ public class MovimentacaoService {
     public Movimentacao extornar(Long id) throws Exception {
         Movimentacao movimentacao = this.movimentacaoRepository.findById(id);
         movimentacao.setTipo(movimentacao.getTipo() * -1);
+        movimentacao.setExtornado(true);
         this.alteraQuantidadeProduto(movimentacao);
         
-        movimentacao.setId(null);
-        this.movimentacaoRepository.save(movimentacao);
-        
-        movimentacao.setExtornado(true);
+//        movimentacao.setId(null);
+//        this.movimentacaoRepository.save(movimentacao);
+//        
+//        movimentacao.setExtornado(true);
         return this.movimentacaoRepository.save(movimentacao);
     }
 

@@ -7,14 +7,13 @@
         </div>
         <form action="" method="POST" role="form" name="formProduto" ng-submit="salvar()">							
             <div class="row ">
-                <div class="form-group {{formProduto.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+                <div class="form-group {{formProduto.nome.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-6">
                     <label class="control-label"><strong> Nome do Produto * </strong></label>
                     <input class="form-control" name="nome" type="text" ng-model="produto.nome" ng-pattern="/[a-zA-Z\s]{3,40}/" maxlength="40" required/>
                     <span class="help-block" ng-show="formProduto.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
                 </div>
-            </div>
-            <div class="row ">
-                <div class="form-group {{formProduto.quantidade.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-5">
+            
+                <div class="form-group {{formProduto.quantidade.$invalid ? 'has-error' : 'has-success'}} has-feedback col-sm-6">
                     <label class="control-label"><strong> Quantidade em estoque * </strong></label>
                     <input class="form-control" name="quantidade" type="text" ng-model="produto.quantidade" ng-pattern="/[0-9]/" required ng-disabled="validaEditar()"/>
                     <span class="help-block" ng-show="formProduto.quantidade.$error.pattern">Apenas números.</span>
