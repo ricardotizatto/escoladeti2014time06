@@ -11,6 +11,8 @@ function eventoController($scope, $http, $routeParams) {
     $scope.organizacao;
     $scope.tipoEvento;
     $scope.valor;
+	$scope.vagasDisponiveisTemp;
+	$scope.vagasLimiteTemp;
 //    $scope.selected;
     $scope.indicePeriodo = {};
     $scope.inicializar = function () {
@@ -101,7 +103,16 @@ function eventoController($scope, $http, $routeParams) {
         if (!($scope.evento.id > 0)) {
             $scope.evento.statusevento = true;
             $scope.evento.disponivel = $scope.evento.limite;
-        }
+        }else{
+			if($scope.evento.limite > $scope.vagasLimiteTemp){
+			   $scope.evento.disponivel = $scope.evento.disponivel + ($scope.evento.limite - $scope.vagasLimiteTemp); 
+			}else if(($scope.evento.limite < $scope.vagasLimiteTemp)&&($scope.evento.disponivel > $scope.evento.limite)){
+			   $scope.evento.disponivel = ($scope.evento.disponivel - ($scope.vagasLimiteTemp - $scope.evento.limite)) * -1; 
+			}else{
+				$scope.evento.disponivel = $scope.vagasDisponiveisTemp;
+				$scope.evento.limite = $scope.vagasLimiteTemp; 
+			}
+		}
 
         console.log("evento antes do post = " + $scope.evento.periodos.length);
         $http.post("./rest/eventoSource/evento", $scope.evento)
@@ -185,11 +196,13 @@ function eventoController($scope, $http, $routeParams) {
                     $scope.periodo = ev.periodos[0];
                     $scope.desabilidaEditPeriodo = true;
                     $scope.desabilidaDelPeriodo = true;
-                    if ($scope.evento.limite == $scope.evento.disponivel) {
-                        $scope.alterarLimite = false;
-                    }else{
-                         $scope.alterarLimite = true;
-                    }
+					$scope.vagasDisponiveisTemp = $scope.evento.disponivel;
+					$scope.vagasLimiteTemp = $scope.evento.limite;
+                    // if ($scope.evento.limite == $scope.evento.disponivel) {
+                        // $scope.alterarLimite = false;
+                    // }else{
+                         // $scope.alterarLimite = true;
+                    // }
                     return;
                 });
     };
