@@ -39,10 +39,10 @@
             <column name="nome" type="bigint" value="producao"></column>
         </insert>
     </changeSet>
-    <changeSet id="w201411262200" author="Walber">
-    	<createView viewName="viewrelatorioevento">
+    <changeSet id="w20141128219" author="Walber">
+    	<createView viewName="viewrelatorioevento" replaceIfExists="true">
     	SELECT
-  			T1.ID, T1.DESCRICAO, T1.LOCAL, T1.ORGANIZACAO, 
+  			T1.ID, T1.TITULO, T2.ID AS ID_PERIODO, T1.DESCRICAO, T1.LOCAL, T1.ORGANIZACAO, 
   			CASE
     			WHEN T1.TIPOEVENTO = '1' THEN 'CURSO'
     			WHEN T1.TIPOEVENTO = '2' THEN 'PALESTRA'
@@ -52,22 +52,36 @@
   			UPPER(T2.TITULOPERIODO) AS TITULOPERIODO, 
   			T1.MINISTRANTE, 
   			T1.VALOR,
-  			T2.DATA ||' '|| T2.INICIO || ' - ' || T2.FIM AS DATAHORA,  
-  			T1.DISPONIVEL||'/'||T1.LIMITE AS VAGAS,  
-  			COUNT(T3.ID_PARTICIPANTE) AS INSCRITOS,
+  			T2.INICIO || ' - ' || T2.FIM AS HORARIO,  
+  			COUNT(T3.ID_PARTICIPANTE)||'/'||T1.LIMITE AS PARTICIPANTES,  
   			COALESCE((SELECT COUNT(A.ID_PARTICIPANTE) FROM PARTICIPANTEPERIODO A WHERE A.PRESENTE = TRUE AND A.PERIODO_ID = T2.ID),0) AS PRESENTES,
-  			T2.DATA AS DATA
+  			T2.DATA AS DATA,
+  			CASE
+  				WHEN T1.STATUSEVENTO = TRUE THEN 'ABERTO'
+  				ELSE 'FECHADO'
+  		  END AS STATUS
 			FROM EVENTO T1
 			JOIN PERIODO T2 ON T1.ID = T2.EVENTOID
 			JOIN PARTICIPANTEPERIODO T3 ON T2.ID = T3.PERIODO_ID
-			WHERE T1.STATUSEVENTO = TRUE
 		GROUP BY
   		T1.ID, T1.DESCRICAO, T1.LOCAL, T1.ORGANIZACAO,T1.TIPOEVENTO,
   		T1.MINISTRANTE, T1.VALOR, T1.DISPONIVEL, T1.LIMITE,
   		T2.TITULOPERIODO, T2.DATA ,T2.INICIO,T2.FIM, T2.ID
 		ORDER BY
-  		T1.DESCRICAO ASC,T2.DATA ASC
+  		T2.DATA ASC,T1.TITULO ASC
     	</createView>
+    </changeSet>
+    
+    <changeSet id="w201411291807" author="Walber">
+	    <preConditions onFail="MARK_RAN" onError="MARK_RAN">
+		    <sqlCheck expectedResult="0">
+		    	SELECT COUNT(*) FROM ITEMACESSO WHERE ITEMACESSO.ID = 12 
+		    </sqlCheck>
+    	</preConditions>
+    	<insert tableName="itemacesso">
+        <column name="id" value="12" type="int8"></column>
+				<column name="nome" value="RELATORIO_EVENTO" type="varchar"></column>
+        </insert>
     </changeSet>
     
 </databaseChangeLog>

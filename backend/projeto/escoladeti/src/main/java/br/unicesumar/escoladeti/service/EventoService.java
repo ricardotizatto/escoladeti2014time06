@@ -101,4 +101,8 @@ public class EventoService {
 
         return evento;
     }
+
+	public List<Evento> obterEventosParaRelatorio() {
+		return null;
+	}
 }
