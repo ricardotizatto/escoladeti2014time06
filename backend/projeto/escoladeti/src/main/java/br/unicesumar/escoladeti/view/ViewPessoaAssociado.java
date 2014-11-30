@@ -1,7 +1,6 @@
 package br.unicesumar.escoladeti.view;
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,12 +20,9 @@ public class ViewPessoaAssociado implements Serializable {
 	private Long id;
 	private String nome;
 	private String email;
-	private Character tipo;
+	private String tipo;
 	private String cpf_cnpj;
 	private String rg_inscricaomunicipal;
-
-	@Temporal(TemporalType.DATE)
-	private Date nascimento_criacao;
 
 	private String descricao;
 
@@ -62,16 +58,16 @@ public class ViewPessoaAssociado implements Serializable {
 		this.email = email;
 	}
 
-	public Character getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Character tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
 	public String getCpf_cnpj() {
-		if (this.tipo.equals('F')) {
+		if (this.tipo.equals("F")) {
 			return Mascara.cpf(this.cpf_cnpj);
 		} else {
 			return Mascara.cpnj(this.cpf_cnpj);
@@ -88,14 +84,6 @@ public class ViewPessoaAssociado implements Serializable {
 
 	public void setRg_inscricaomunicipal(String rg_inscricaomunicipal) {
 		this.rg_inscricaomunicipal = rg_inscricaomunicipal;
-	}
-
-	public Date getNascimento_criacao() {
-		return nascimento_criacao;
-	}
-
-	public void setNascimento_criacao(Date nascimento_criacao) {
-		this.nascimento_criacao = nascimento_criacao;
 	}
 
 	public String getDescricao() {

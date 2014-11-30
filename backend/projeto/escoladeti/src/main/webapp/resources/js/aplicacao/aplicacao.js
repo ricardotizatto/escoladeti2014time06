@@ -130,6 +130,11 @@ function Appcontroller($http) {
                     nome: 'EVENTOS',
                     url: 'listaevento',
                     auth: 'LISTA_EVENTOS'
+                },
+                {
+                	nome : 'RELATÓRIO EVENTOS',
+                	url : 'relatorio/eventos',
+                	auth : 'RELATORIO_EVENTO'
                 }
             ]
         },

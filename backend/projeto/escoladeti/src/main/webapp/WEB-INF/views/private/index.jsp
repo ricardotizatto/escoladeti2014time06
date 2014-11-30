@@ -82,7 +82,7 @@
         <script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/relatorioAssociado/RelatorioController.js" ></script>
-
+        <script type="text/javascript" src="./resources/js/relatorioEvento/RelatorioController.js" ></script>
 
         <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
         <link  href="./resources/vendor/css/jquery.sidr.light.css">
