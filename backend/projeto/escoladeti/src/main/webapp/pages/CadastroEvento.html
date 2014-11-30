@@ -67,7 +67,7 @@
                 <div class="col-sm-2">
                     <div class="form-group {{formEvento.limite.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Limite de vagas *</strong></label>
-                        <input type="text" name="limite" title="Quantidade de vagas" class="form-control" ng-pattern="/^[0-9]+$/"
+                        <input type="text" ng-disabled="alterarLimite" name="limite" title="Quantidade de vagas" class="form-control" ng-pattern="/^[0-9]+$/"
                                ng-model="evento.limite" required />
                         <span class="help-block" ng-show="formEvento.limite.$error.pattern">Apenas números</span>
                     </div>
@@ -96,6 +96,7 @@
                                 </legend>
                             </div>    
                         </div>
+                        {{periodos}}
                         <div class="row" >  
                             <div class="col-sm-12"> 
                                 <table class="table table-hover table-striped">
@@ -115,12 +116,12 @@
                                             <button type="button" title="Realizar chamada" class='btn btn-info btn-sm' data-dismiss="modal" ng-click="chamadaPeriodo(periodo.id, evento)">
                                                 <span class='glyphicon glyphicon-check'></span>
                                             </button>
-                                            <button class='btn btn-warning btn-sm' title="Editar periodo"
+                                            <button ng-disabled="desabilidaEditPeriodo" class='btn btn-warning btn-sm' title="Editar periodo"
                                                     ng-click="editarPeriodo($index)" data-toggle="modal"
                                                         data-target="#modalData">
                                                 <span class='glyphicon glyphicon-edit'></span>
                                             </button>
-                                            <button class='btn btn-danger btn-sm'
+                                            <button ng-disabled="desabilidaDelPeriodo" class='btn btn-danger btn-sm'
                                                     ng-click="delPeriodo($index)">
                                                 <span class='glyphicon glyphicon-remove-circle' title="Remover periodo"></span>
                                             </button>
