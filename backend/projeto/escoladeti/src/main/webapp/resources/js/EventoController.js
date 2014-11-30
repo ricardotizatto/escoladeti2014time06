@@ -116,7 +116,10 @@ function eventoController($scope, $http, $routeParams) {
 			if($scope.evento.limite > $scope.vagasLimiteTemp){
 			   $scope.evento.disponivel = $scope.evento.disponivel + ($scope.evento.limite - $scope.vagasLimiteTemp); 
 			}else if(($scope.evento.limite < $scope.vagasLimiteTemp)&&($scope.evento.disponivel > $scope.evento.limite)){
-			   $scope.evento.disponivel = ($scope.evento.disponivel - ($scope.vagasLimiteTemp - $scope.evento.limite)) * -1; 
+			   $scope.evento.disponivel = ($scope.evento.disponivel - ($scope.vagasLimiteTemp - $scope.evento.limite)); 
+                           if($scope.evento.disponivel < 0)  {
+                               $scope.evento.disponivel = $scope.evento.disponivel * -1;
+                           }
 			}else{
 				$scope.evento.disponivel = $scope.vagasDisponiveisTemp;
 				$scope.evento.limite = $scope.vagasLimiteTemp; 
