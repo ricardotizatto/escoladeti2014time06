@@ -6,6 +6,9 @@
                 <legend> Cadastro de Evento  </legend>
             </div>
         </div>
+        <img ng-src="{{evento.foto}}" ng-model="evento.foto" />
+        {{evento.foto}}
+        
         <form action="" novalidate method="POST" role="form" name="formEvento" ng-submit="salvar('salvo')">	
             <div class="row">
                 <div class="col-sm-4">
@@ -85,7 +88,7 @@
                                 <!--<span class="help-block" ng-show="formEvento.local.$error.pattern">Apenas letras e no mínimo 3.</span>-->
                             </div>
                         </div>    
-                    </div>    
+                    </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <div flow-init="{singleFile:true}"
@@ -96,8 +99,9 @@
                                     <img src="./resources/imagens/no_image.gif" />
                                 </div>
                                 <div class="thumbnail" ng-show="$flow.files.length">
-                                    <img flow-img="$flow.files[0]" />
+                                    <img id="imagem" ng-model="evento.foto" ng-value="$flow.file[0]" flow-img="$flow.files[0]" />
                                 </div>
+                                <button ng-click="getFoto()">getFoto</button>
                                 <div>
                                     <span class="btn btn-primary" ng-show="!$flow.files.length" flow-btn>Procurar</span>
                                     <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>Trocar</span>
@@ -126,7 +130,6 @@
                                 </legend>
                             </div>    
                         </div>
-                        {{periodos}}
                         <div class="row" >  
                             <div class="col-sm-12"> 
                                 <table class="table table-hover table-striped">

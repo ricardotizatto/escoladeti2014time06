@@ -89,6 +89,7 @@ public class EventoService {
                 .valor(comando.getValor())
                 .limite(comando.getLimite())
                 .disponivel(comando.getDisponivel())
+                .foto(comando.getFoto())
                 .buildEvento();
         
         if (comando.getId() != null) {
