@@ -25,7 +25,6 @@
         <script type="text/javascript" src="./resources/libs/funcoes.js"></script>		
         <script type="text/javascript" src="./resources/libs/toastr.js"></script>
         <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script> 
-        <script type="text/javascript" src="./resources/libs/jquery.maskMoney.min.js" ></script>
 
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-bootstrap-tpls-0.11.0.min.js"></script>

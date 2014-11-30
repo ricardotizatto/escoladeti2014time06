@@ -61,6 +61,7 @@ function ItemAcessoController($scope, $routeParams, itemAcessoService) {
                 .success(function(itemAcesso, status) {
                     $scope.itemAcesso = getNovoItemAcesso();
                     toastr.success('Item de acesso '+itemAcesso.nomeComponente+' salvo com sucesso.');
+                    window.location = '#/listaitemAcesso/';
                 })
                 .error(function(data, status) {
                     console.log('item de acesso não salvo ', data);

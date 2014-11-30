@@ -71,9 +71,8 @@ function produtoController($scope, $http, $routeParams) {
                 .success(function(produto, status) {
                     $scope.produto = getNovoProduto();
                     toastr.success('Produto ' + produto.nome + ' salvo com sucesso');
-                    setTimeout(function() {
-                        window.location = "#/listaproduto"
-                    }, 2000);
+                   
+                        window.location = "#/listaproduto";
                 })
                 .error(function(data, status) {
                     console.log("erro ao salvar produto");

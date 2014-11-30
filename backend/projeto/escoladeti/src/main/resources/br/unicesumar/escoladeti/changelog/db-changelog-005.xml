@@ -25,8 +25,7 @@
             <column name="id" type="int8">
                 <constraints nullable="false" primaryKey="true"></constraints>
             </column>
-            <column name="id_destino"       type="bigint"></column>
-            <column name="id_origem"        type="bigint"></column>
+            <column name="id_referencia"        type="bigint"></column>
             <column name="id_produto"       type="bigint"></column>
             <column name="datamovimentacao" type="date"></column>
             <column name="extornado"        type="bool"></column>
@@ -72,16 +71,27 @@
     	</createView>
     </changeSet>
     
-    <changeSet id="w201411291807" author="Walber">
-	    <preConditions onFail="MARK_RAN" onError="MARK_RAN">
-		    <sqlCheck expectedResult="0">
-		    	SELECT COUNT(*) FROM ITEMACESSO WHERE ITEMACESSO.ID = 12 
-		    </sqlCheck>
-    	</preConditions>
-    	<insert tableName="itemacesso">
-        <column name="id" value="12" type="int8"></column>
-				<column name="nome" value="RELATORIO_EVENTO" type="varchar"></column>
-        </insert>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <changeSet id="006" author="Jhonatan">
+        <createView viewName="viewestoqueproduto" replaceIfExists="true"
+                            schemaName="public">
+            SELECT nome, quantidade, id from produto order by nome asc
+        </createView>
+    </changeSet>
+        
+    <changeSet id="85645234245435" author="Alisson Molinari">
+        <addUniqueConstraint tableName="usuario" columnNames="login"/> 
     </changeSet>
     
+
 </databaseChangeLog>

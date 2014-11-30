@@ -42,7 +42,7 @@
                 <th class="col-sm-3">Pagamento</th>
                 <th class="col-sm-1">Ações</th>
             </tr>
-            <tr ng-repeat="participante in participantes | filter : busca">
+            <tr ng-repeat="participante in participantes | filter : busca | orderBy: 'nome' ">
                 <td>{{participante.nome}}</td>
                 <td>{{participante.email}}</td>
                 <td>{{participante.telefone}}</td>
