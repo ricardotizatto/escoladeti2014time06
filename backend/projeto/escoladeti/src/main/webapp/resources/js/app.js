@@ -14,7 +14,8 @@ var app = angular.module('app',
             'filters',
             'ui.select2',
             'ui.bootstrap',
-            'ui.utils']);
+            'ui.utils',
+            'flow',]);
 
 app.config(['$routeProvider',
     function($routeProvider) {
