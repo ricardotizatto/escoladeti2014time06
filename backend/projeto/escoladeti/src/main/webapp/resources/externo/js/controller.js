@@ -92,7 +92,7 @@ function ExternoController($scope, $http, $routeParams) {
                 if (evento.foto) {
                     $scope.evento.foto = 'data:image/png;base64,' + evento.foto;
                 } else {
-                    $scope.evento.foto = './resources/imagens/no_image.gif';
+                    $scope.evento.foto = './resources/imagens/no-image-amacap.png';
                 }
             });
         }else{
