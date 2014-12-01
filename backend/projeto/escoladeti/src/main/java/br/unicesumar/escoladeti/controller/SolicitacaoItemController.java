@@ -5,6 +5,7 @@ import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.entity.SolicitacaoVolume;
 import br.unicesumar.escoladeti.entity.Volume;
+import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.pesquisa.PesquisaSolicitacao;
 import br.unicesumar.escoladeti.service.AcompanhamentoSolicitacaoService;
 import br.unicesumar.escoladeti.service.SolicitacaoItemService;
@@ -19,9 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Jhonatan on 16/09/2014.
- */
+
 @Controller
 @RequestMapping(value = "/rest/solicitacao-itens")
 public class SolicitacaoItemController {
@@ -44,13 +43,6 @@ public class SolicitacaoItemController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody SolicitacaoItem buscar(@PathVariable("id") Long id) {
         return solicitacaoItemService.buscarItem(id);
-    }
-
-    @RequestMapping(value = "/solicitacao-volume/{id}", method = RequestMethod.PUT)
-    public @ResponseBody SolicitacaoVolume marcarComoEnviado(
-            @PathVariable("id") Long id,
-            @RequestBody ComandoAlterarData comandoAlterarData) {
-        return solicitacaoVolumeService.marcarComoEnviado(id, comandoAlterarData);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -79,8 +71,9 @@ public class SolicitacaoItemController {
     @RequestMapping(value = "/{id}/sugestao", method = RequestMethod.GET)
     public @ResponseBody
     Map<String, Integer> sugerir(
-            @PathVariable("id") Long idSolicitacaoItem) {
-        return solicitacaoItemService.sugerirPagina(idSolicitacaoItem);
+            @PathVariable("id") Long idLivro,
+            @RequestParam("transcricao") String trancricao) {
+        return solicitacaoItemService.sugerirPagina(idLivro, Transcricao.of(trancricao));
     }
 
     @RequestMapping(value = "/{id}/finalizacao", method = RequestMethod.POST)
@@ -89,4 +82,45 @@ public class SolicitacaoItemController {
         return solicitacaoItemService.finalizar(idSolicitacaoItem);
     }
 
+
+    @RequestMapping(value = "/{id}/impresso", method = RequestMethod.PUT)
+    public @ResponseBody String marcarComoImpresso(
+            @PathVariable("id") Long idVolume,
+            @RequestBody List<ComandoAlterarData> comandos) {
+         solicitacaoVolumeService.marcarComoImpresso(idVolume, comandos);
+        return "ok";
+    }
+
+    @RequestMapping(value = "/solicitacao-volume/{id}/rejeitado", method = RequestMethod.PUT)
+    public @ResponseBody String rejeitar(
+            @PathVariable("id") Long idVolume,
+            @RequestBody List<ComandoAlterarData> comandos) {
+        solicitacaoVolumeService.rejeitar(idVolume, comandos);
+        return "ok";
+    }
+
+    @RequestMapping(value = "/solicitacao-volume/{id}/revisado", method = RequestMethod.PUT)
+    public @ResponseBody String marcarComoRevisado(
+            @PathVariable("id") Long idVolume,
+            @RequestBody List<ComandoAlterarData> comandos) {
+        solicitacaoVolumeService.marcarComoRevisado(idVolume, comandos);
+        return "ok";
+    }
+
+
+    @RequestMapping(value = "/solicitacao-volume/{id}/reativacao", method = RequestMethod.PUT)
+    public @ResponseBody String reativar(
+            @PathVariable("id") Long idVolume,
+            @RequestBody List<ComandoAlterarData> comandos) {
+        solicitacaoVolumeService.reativar(idVolume, comandos);
+        return "ok";
+    }
+
+    @RequestMapping(value = "/solicitacao-volume/{id}", method = RequestMethod.PUT)
+    public @ResponseBody String marcarComoEnviado(
+            @PathVariable("id") Long id,
+            @RequestBody List<ComandoAlterarData> comandos) {
+        solicitacaoVolumeService.marcarComoEnviado(id, comandos);
+        return "ok";
+    }
 }

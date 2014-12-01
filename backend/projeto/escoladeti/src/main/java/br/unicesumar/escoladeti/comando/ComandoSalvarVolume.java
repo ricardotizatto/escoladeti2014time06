@@ -23,8 +23,13 @@ public class ComandoSalvarVolume {
 
     private String observacao;
 
-    @NotNull(message = "SolicitacaoItem deve possuir valor")
-    private Long idSolicitacaoItem;
+    @NotNull(message =  "Livro deve ser informado")
+    private Long idLivro;
+
+    @NotNull(message =  "Transcrição deve ser informada")
+    private String transcricao;
+
+    private String outro;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -64,14 +69,6 @@ public class ComandoSalvarVolume {
         this.observacao = observacao;
     }
 
-    public Long getIdSolicitacaoItem() {
-        return idSolicitacaoItem;
-    }
-
-    public void setIdSolicitacaoItem(Long idSolicitacaoItem) {
-        this.idSolicitacaoItem = idSolicitacaoItem;
-    }
-
     public SimpleDateFormat getSimpleDateFormat() {
         return simpleDateFormat;
     }
@@ -103,5 +100,29 @@ public class ComandoSalvarVolume {
             e.printStackTrace();
             throw new RuntimeException("Data inválida");
         }
+    }
+
+    public Long getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(Long idLivro) {
+        this.idLivro = idLivro;
+    }
+
+    public String getTranscricao() {
+        return transcricao;
+    }
+
+    public void setTranscricao(String transcricao) {
+        this.transcricao = transcricao;
+    }
+
+    public String getOutro() {
+        return outro;
+    }
+
+    public void setOutro(String outro) {
+        this.outro = outro;
     }
 }

@@ -20,7 +20,7 @@ public class VolumeController {
     private VolumeService volumeService;
 
 
-    @RequestMapping( method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
     Volume novoVolume(
             @Valid @RequestBody ComandoSalvarVolume comandoSalvarVolume) {
@@ -47,30 +47,8 @@ public class VolumeController {
         return "deletado";
     }
 
-    @RequestMapping(value = "/{id}/impresso", method = RequestMethod.PUT)
-    public @ResponseBody Volume marcarComoImpresso(
-            @PathVariable("id") Long idVolume,
-            @RequestBody ComandoSalvarVolume comandoSalvarVolume) {
-        return volumeService.marcarComoImprimido(idVolume, comandoSalvarVolume);
-    }
 
-
-    @RequestMapping(value = "/{id}/rejeitado", method = RequestMethod.PUT)
-    public @ResponseBody Volume marcarComoRejeitado(
-            @PathVariable("id") Long idVolume,
-            @RequestBody ComandoSalvarVolume comando) {
-        return volumeService.rejeitar(idVolume, comando);
-    }
-
-    @RequestMapping(value = "/{id}/revisado", method = RequestMethod.PUT)
-    public @ResponseBody Volume marcarComoRevisado(
-            @PathVariable("id") Long idVolume,
-            @RequestBody ComandoSalvarVolume comando) {
-        return volumeService.marcarComoRevisado(idVolume, comando);
-    }
-
-
-    @RequestMapping(value = "/{id}/andamento", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/reativacao", method = RequestMethod.PUT)
     public @ResponseBody Volume reativar(
             @PathVariable("id") Long idVolume) {
         return volumeService.reativar(idVolume);
@@ -82,6 +60,8 @@ public class VolumeController {
             @RequestBody ComandoSalvarVolume comando) {
         return volumeService.concluir(idVolume, comando);
     }
+
+
 
 }
 

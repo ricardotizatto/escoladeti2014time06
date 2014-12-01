@@ -1,20 +1,14 @@
 package br.unicesumar.escoladeti.entity;
 
 import br.unicesumar.escoladeti.enums.Transcricao;
-import br.unicesumar.escoladeti.util.data.DateUtil;
-import br.unicesumar.escoladeti.util.number.NumberUtils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-import org.parboiled.common.Preconditions;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Livro extends Entidade {
@@ -127,5 +121,17 @@ public class Livro extends Entidade {
             }
         }
 
+    }
+
+    public Integer getMaiorPagina(Transcricao transcricao) {
+        Integer maior = 0;
+
+        for (Volume volume: volumes) {
+            if (volume.getTranscricao().equals(transcricao) && volume.getPaginaFim() > maior) {
+                maior = volume.getPaginaFim();
+            }
+        }
+
+        return maior;
     }
 }

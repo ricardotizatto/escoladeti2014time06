@@ -1,4 +1,7 @@
-function livroController($scope, $http, $routeParams) {
+var controllers = angular.module('controllers')
+    .controller('livroController', ['$scope', '$http', '$routeParams', 'VolumeFactory', livroController])
+
+function livroController($scope, $http, $routeParams, Volume) {
     console.log('Carregando controller');
 
     $scope.deletar = function(livro) {
@@ -122,4 +125,23 @@ function livroController($scope, $http, $routeParams) {
         $scope.livro = {};
         window.location = '#/listalivro';
     };
+
+    $scope.adicionarVolume = function() {
+        var volumeUrl = '#/'+$scope.livro.id+'/volume';
+        window.location = volumeUrl;
+        console.log(volumeUrl);
+    };
+
+    $scope.deletarVolume = function (volume) {
+        var self = this;
+
+        Volume.delete({
+            id : volume.id
+        }).$promise.then(function () {
+                toastr.success('Volume deletado com sucesso');
+                self.carregarLivro();
+            });
+    }
+
+
 }
