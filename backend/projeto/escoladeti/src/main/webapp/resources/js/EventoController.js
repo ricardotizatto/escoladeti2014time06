@@ -11,17 +11,17 @@ function eventoController($scope, $http, $routeParams) {
     $scope.organizacao;
     $scope.tipoEvento;
     $scope.valor;
-	$scope.vagasDisponiveisTemp;
-	$scope.vagasLimiteTemp;
-//    $scope.selected;
-    $scope.getFoto = function () {
-       var foto = $('#imagem').attr('src');
-       return foto;
-       //$scope.evento.foto = foto.substring(22);
-//       console.log('Foto sem trat: ', foto);
-//       console.log('Foto com trat: ', $scope.evento.foto);
-    };	
+    $scope.vagasDisponiveisTemp;
+    $scope.vagasLimiteTemp;
 
+    $scope.trocarFoto = function () {
+       $scope.evento.foto = "";
+    };	
+    
+    $scope.cancelarFoto = function () {
+       $scope.evento.foto = undefined;
+       $('#imagem').attr('src', "" );
+    };
 
     $scope.indicePeriodo = {};
     $scope.inicializar = function () {
@@ -125,9 +125,12 @@ function eventoController($scope, $http, $routeParams) {
 				$scope.evento.limite = $scope.vagasLimiteTemp; 
 			}
 		}
-
-        $scope.evento.foto = $('#imagem').attr('src');
+        if(!$scope.evento.foto){
+            $scope.evento.foto = $('#imagem').attr('src');
+        }        
         console.log('FOTO:', $scope.evento.foto);
+        console.log('Nova FOTO:', $scope.evento.novafoto);
+        
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function (evento, status) {
                     //carregarEvento();
