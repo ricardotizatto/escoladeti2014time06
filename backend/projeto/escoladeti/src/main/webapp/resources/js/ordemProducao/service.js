@@ -2,13 +2,8 @@ angular.module('services')
     .factory('OrdemProducaoFactory', ['$resource', OrdemProducaoFactory]);
 
 function OrdemProducaoFactory($resource) {
-    return $resource('./rest/solicitacao-itens/:id/:acao/:idVolume', {id: '@id'}, {
-        produzir: {
-            method: "POST",
-            params: {
-                acao: 'produzir'
-            }
-        },
+    return $resource('./rest/solicitacao-itens/:id/:acao/:idVolume/:acaoVolume', {id: '@id'}, {
+
         cancelar: {
             method: "POST",
             params: {

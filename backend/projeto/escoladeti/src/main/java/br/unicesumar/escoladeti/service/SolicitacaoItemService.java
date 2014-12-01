@@ -5,6 +5,8 @@ import br.unicesumar.escoladeti.dto.AcompanhamentoDTO;
 import br.unicesumar.escoladeti.entity.SolicitacaoItem;
 import br.unicesumar.escoladeti.entity.Volume;
 import br.unicesumar.escoladeti.enums.StatusItem;
+import br.unicesumar.escoladeti.enums.Transcricao;
+import br.unicesumar.escoladeti.repository.LivroRepository;
 import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
 import br.unicesumar.escoladeti.repository.VolumeRepository;
 import br.unicesumar.escoladeti.view.ViewAcompanhamentoSolicitacao;
@@ -25,7 +27,7 @@ public class SolicitacaoItemService {
     private SolicitacaoItemRepository  solicitacaoItemRepository;
 
     @Autowired
-    private VolumeRepository volumeRepository;
+    private LivroRepository livroRepository;
 
 //    public ViewAcompanhamentoSolicitacao enviarParaProducao(Long id) {
 //        SolicitacaoItem solicitacaoItem = solicitacaoItemRepository.findOne(id);
@@ -50,9 +52,9 @@ public class SolicitacaoItemService {
         return solicitacaoItemRepository.findOne(id);
     }
 
-    public Map<String, Integer> sugerirPagina(Long idSolicitacaoItem) {
-        Integer pagina = solicitacaoItemRepository.findOne(idSolicitacaoItem)
-                .getMaiorPagina() + 1;
+    public Map<String, Integer> sugerirPagina(Long idLivro, Transcricao transcricao) {
+        Integer pagina = livroRepository.findById(idLivro)
+                .getMaiorPagina(transcricao) + 1;
 
         Map<String, Integer> sugestao = new HashMap<>();
 

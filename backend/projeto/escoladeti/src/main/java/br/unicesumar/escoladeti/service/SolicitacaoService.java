@@ -81,7 +81,6 @@ public class SolicitacaoService {
                     .build();
 
             solicitacaoItemRepository.save(solicitacaoItem);
-            atualizarSolicitacaoVolumes(solicitacaoItem);
         }
 
         return solicitacaoRepository.findOne(solicitacaoSalva.getId());
@@ -89,8 +88,6 @@ public class SolicitacaoService {
 
     @Transactional
     public Solicitacao atualizar(Long id, ComandoSalvarSolicitacao comando) throws Exception {
-        Solicitacao solicitacaoEncontrada = solicitacaoRepository.findOne(id);
-//        limparItens(solicitacaoEncontrada);
 
          Solicitacao solicitacao = Solicitacao
                 .builder()
@@ -136,21 +133,10 @@ public class SolicitacaoService {
                     .build();
 
             solicitacaoItemRepository.save(solicitacaoItem);
-            atualizarSolicitacaoVolumes(solicitacaoItem);
         }
 
 
         return solicitacaoRepository.findOne(id);
-    }
-
-    private void atualizarSolicitacaoVolumes(SolicitacaoItem solicitacaoItem) {
-        List<Volume> volumes = volumeRepository.findByTranscricaoAndIdLivro(solicitacaoItem.getTraducaoMaterial(),
-                solicitacaoItem.getLivro().getId());
-
-        for (Volume volume : volumes) {
-            SolicitacaoVolume solicitacaoVolume = solicitacaoItem.gerarSolicitacaoVolume(volume);
-            solicitacaoVolumeRepository.save(solicitacaoVolume);
-        }
     }
 
 
