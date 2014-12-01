@@ -8,9 +8,9 @@
     <changeSet id="1" author="catabriga">
         <dropColumn tableName="volume" columnName="data_enviado"></dropColumn>
         <dropColumn tableName="volume" columnName="data_impressao"></dropColumn>
-        <dropColumn tableName="revisao" columnName="data_revisao"></dropColumn>
-        <dropColumn tableName="revisao" columnName="id_responsavelrevisao"></dropColumn>
-        <dropColumn tableName="revisao" columnName="observacao"></dropColumn>
+        <dropColumn tableName="volume" columnName="data_revisao"></dropColumn>
+        <dropColumn tableName="volume" columnName="id_responsavelrevisao"></dropColumn>
+        <dropColumn tableName="volume" columnName="observacao"></dropColumn>
 
         <addColumn tableName="solicitacaovolume">
             <column name="data_impressao" type="date"></column>
