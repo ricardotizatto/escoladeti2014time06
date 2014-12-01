@@ -57,7 +57,6 @@ VolumeController.prototype = {
     ajustarVolume: function () {
         var idSolicitacaoItem = this.routeParams.idOrdemProducao;
 
-        this.volume.idSolicitacaoItem = idSolicitacaoItem;
 
         if (this.volume.responsavel) {
             this.volume.responsavel = this.volume.responsavel.id;
@@ -65,6 +64,14 @@ VolumeController.prototype = {
 
         if (this.volume.dataImpressao) {
             this.volume.dataImpressao = moment(this.volume.dataImpressao).format('YYYY-MM-DD');
+        }
+
+        if (this.volume.dataAlteracao) {
+            this.volume.dataAlteracao = moment(this.volume.dataAlteracao).format('DD/MM/YYYY HH:mm:ss');
+        }
+
+        if (this.volume.dataCriacao) {
+            this.volume.dataCriacao = moment(this.volume.dataCriacao).format('YYYY-MM-DD');
         }
 
         if (this.volume.dataRevisao) {
@@ -79,18 +86,29 @@ VolumeController.prototype = {
     novoVolume: function () {
         var self = this;
 
-        var idSolicitacaoItem = this.routeParams.idOrdemProducao;
+        var idLivro = this.routeParams.idLivro;
 
         this.volume = new this.Volume({
             status: "ANDAMENTO",
-            idSolicitacaoItem: idSolicitacaoItem
+            idLivro: idLivro
         });
 
-        this.OrdemProducao.sugerir({id : idSolicitacaoItem}, function (sugestao) {
+
+        console.log(this.volume);
+    },
+
+    sugerirPaginaInicial: function () {
+        var idLivro = this.volume.idLivro,
+            self = this;
+
+        if (!this.volume.transcricao) {
+            return;
+        }
+
+        this.OrdemProducao.sugerir({id : idLivro, transcricao: this.volume.transcricao}, function (sugestao) {
             self.volume.paginaInicio = sugestao.pagina;
         });
 
-        console.log(this.volume);
     },
 
     enviarArquivo: function () {
