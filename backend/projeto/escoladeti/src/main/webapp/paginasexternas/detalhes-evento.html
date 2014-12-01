@@ -13,18 +13,20 @@
 <!-- Contact Us -->
 <div class="contact-us container">
     <div class="row">
+
         <div class="span6">
-            <div class="titulo-evento">
-                <h3>{{evento.titulo}}</h3>
-            </div>
-            <p>{{evento.descricao}} </p>
-            <p>
-                <b>Ministrante: </b> {{evento.ministrante}} <br>
-                <b>Organização: </b> {{evento.organizacao}} <br>
-                <b>Local do evento: </b> {{evento.local}} <br>
-                <b>Valor: </b> {{evento.valor === 0 ? 'Entrada Livre' : 'R$ ' + evento.valor}}  
-            </p>
-            <p>
+            <div class="descricao-evento">
+                <div class="titulo-evento">
+                    <h3>{{evento.titulo}}</h3>
+                </div>
+                <p>{{evento.descricao}} </p>
+                <p>
+                    <b>Ministrante: </b> {{evento.ministrante}} <br>
+                    <b>Organização: </b> {{evento.organizacao}} <br>
+                    <b>Local do evento: </b> {{evento.local}} <br>
+                    <b>Valor: </b> {{evento.valor === 0 ? 'Entrada Livre' : 'R$ ' + evento.valor}}  
+                </p>
+                <p>
                 <div ng-repeat="periodo in evento.periodos | orderBy:'data'">
                     <div class="col-periodo">
                         <div class="evento-data" >
@@ -37,10 +39,9 @@
                         </div>
                     </div> 
                 </div>    
-            </p>     
-        </div>
- 
-        <div class="span6">
+                </p> 
+            </div>
+            <div class="span12 espaco-evento">&nbsp;</div>
             <div class="contact-form">
                 <h4>Inscrição</h4>
                 <div class="msm-disponibilidade" ng-show="evento.disponivel === 0 " >
@@ -65,15 +66,15 @@
                         </div>    
 
                         <label for="nome" class="nameLabel">* Nome Completo</label>
-                          <input id="name" type="text" name="nome" ng-model="participante.nome" placeholder="ex: Nome Sobrenome" ng-pattern="/^[a-zA-Z\s]{3,200}$/" required>
-                          <span class="alert alert-warning" ng-show="form.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
+                        <input id="name" type="text" name="nome" ng-model="participante.nome" placeholder="ex: Nome Sobrenome" ng-pattern="/^[a-zA-Z\s]{3,200}$/" required>
+                        <span class="alert alert-warning" ng-show="form.nome.$error.pattern">Apenas letras e no mínimo 3.</span>
 
                         <label for="email" class="emailLabel">* Email</label>
-                          <input id="email" type="text" name="email" ng-model="participante.email" placeholder="ex: contato@email.com" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
-                          <span class="alert alert-warning" ng-show="form.email.$error.pattern">Dígite um email válido. Ex email@gmail.com</span>
+                        <input id="email" type="text" name="email" ng-model="participante.email" placeholder="ex: contato@email.com" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/" required>
+                        <span class="alert alert-warning" ng-show="form.email.$error.pattern">Dígite um email válido. Ex email@gmail.com</span>
 
-                          <label for="telefone">* Telefone  &nbsp;&nbsp;<span class="help-input" > Ex:(99)9999-9999</span> </label>
-                          <input id="telefone" name="telefone" type="text" ng-model="participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required >
+                        <label for="telefone">* Telefone  &nbsp;&nbsp;<span class="help-input" > Ex:(99)9999-9999</span> </label>
+                        <input id="telefone" name="telefone" type="text" ng-model="participante.telefone" ui-mask="(99)9999-9999?9" maxlength="15" ng-pattehn="/\([0-9]{2}[0-9]{4}-[0-9]{4})" required >
 
                         <span class="pull-right">  
                             <button class="btn-transcricao {{form.$invalid ? 'btn-invalido' : ''}}"  ng-click="salvarParticipante(evento.id)" ng-disabled="form.$invalid" >Inscrever</button>
@@ -81,6 +82,13 @@
                     </form>
                 </div>    
             </div>
-        </div>        
+            <div class="span12 espaco-evento">&nbsp;</div>
+        </div>
+        
+        <div class="span6">
+            <div class="contact-form">
+                <img ng-src="{{evento.foto}}" ng-model="evento.foto" />
+            </div>    
+        </div>      
     </div>
 </div>

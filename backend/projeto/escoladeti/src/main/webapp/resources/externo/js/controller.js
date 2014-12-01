@@ -88,7 +88,12 @@ function ExternoController($scope, $http, $routeParams) {
                 url: './public/rest/evento/' + $routeParams.eventoId
             }).success(function (evento) {
                 console.log('Detalhes Evento: ', evento);
-                $scope.evento = evento;               
+                $scope.evento = evento;  
+                if (evento.foto) {
+                    $scope.evento.foto = 'data:image/png;base64,' + evento.foto;
+                } else {
+                    $scope.evento.foto = './resources/imagens/no_image.gif';
+                }
             });
         }else{
             window.location = '#/eventos';
