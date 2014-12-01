@@ -201,6 +201,7 @@ function eventoController($scope, $http, $routeParams) {
             $scope.periodosModal = [];
             $scope.desabilidaEditPeriodo = false;
             $scope.desabilidaDelPeriodo = false;
+            $scope.evento.foto = './resources/imagens/no_image.gif';
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
@@ -209,9 +210,13 @@ function eventoController($scope, $http, $routeParams) {
                     $scope.periodo = ev.periodos[0];
                     $scope.desabilidaEditPeriodo = true;
                     $scope.desabilidaDelPeriodo = true;
-                    var foto = ev.foto;
-                    console.log('Foto:', foto);
-                    $scope.evento.foto = 'data:image/png;base64,' + ev.foto;
+
+                    if(ev.foto){
+                        $scope.evento.foto = 'data:image/png;base64,' + ev.foto;
+                    }else{
+                        $scope.evento.foto = './resources/imagens/no_image.gif';
+                    }
+                    
 //                    $scope.evento.foto = foto.substring(0, 3) ;
 					$scope.vagasDisponiveisTemp = $scope.evento.disponivel;
 					$scope.vagasLimiteTemp = $scope.evento.limite;
