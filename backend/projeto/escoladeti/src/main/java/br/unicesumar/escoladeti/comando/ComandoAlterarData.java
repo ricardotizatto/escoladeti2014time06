@@ -14,6 +14,7 @@ import java.util.Date;
 public class ComandoAlterarData {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private String data;
+    private Long usuario;
 
     public String getData() {
         return data;
@@ -30,5 +31,13 @@ public class ComandoAlterarData {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public Long getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Long usuario) {
+        this.usuario = usuario;
     }
 }

@@ -41,26 +41,13 @@ public class Volume  {
     @Column(name = "data_criacao")
     private Date dataCriacao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_responsavelrevisao")
-    private Usuario responsavelRevisao;
-
-    private String observacao;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "data_impressao")
-    private Date dataImpressao;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "data_revisao")
-    private Date dataRevisao;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "data_enviado")
-    private Date dataEnviado;
-
     @Column(name = "id_livro")
     private Long idLivro;
+
+    @Column(name = "data_alteracao")
+    private Date dataAlteracao;
+
+    private String outro;
 
     public Volume() {
         this.dataCriacao = new Date();
@@ -98,44 +85,20 @@ public class Volume  {
         this.status = status;
     }
 
-    public Usuario getResponsavelRevisao() {
-        return responsavelRevisao;
+    public Date getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setResponsavelRevisao(Usuario responsavelRevisao) {
-        this.responsavelRevisao = responsavelRevisao;
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public Date getDataAlteracao() {
+        return dataAlteracao;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public Date getDataImpressao() {
-        return dataImpressao;
-    }
-
-    public void setDataImpressao(Date dataImpressao) {
-        this.dataImpressao = dataImpressao;
-    }
-
-    public Date getDataRevisao() {
-        return dataRevisao;
-    }
-
-    public void setDataRevisao(Date dataRevisao) {
-        this.dataRevisao = dataRevisao;
-    }
-
-    public Date getDataEnviado() {
-        return dataEnviado;
-    }
-
-    public void setDataEnviado(Date dataEnviado) {
-        this.dataEnviado = dataEnviado;
+    public void setDataAlteracao(Date dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
     }
 
     public Long getId() {
@@ -177,71 +140,6 @@ public class Volume  {
         this.caminhoAnexo = caminhoAnexo;
     }
 
-    public void rejeitar(Date data, Long revisor, String observacao) {
-        if (data == null) {
-            throw  new RuntimeException("Data da rejeição deve ser informada.");
-        }
-
-        if (revisor == null) {
-            throw  new RuntimeException("Revisor deve ser informado.");
-        }
-
-        if (this.dataImpressao != null && data.before(this.dataImpressao)) {
-            throw  new RuntimeException("Data de rejeição deve ser maior ou igual a data de impressão.");
-        }
-
-        if (data.after(new Date())) {
-            throw  new RuntimeException("Data da rejeição deve ser menor ou igual a hoje.");
-        }
-
-        if (!this.getStatus().equals(VolumeStatus.CONCLUIDO) && !this.getStatus().equals(VolumeStatus.IMPRESSO)) {
-            throw new RuntimeException("Sómente volume concluido ou impresso pode ser marcado como rejeitado.");
-        }
-        setStatus(VolumeStatus.REJEITADO);
-        setResponsavelRevisao(Usuario.of(revisor));
-        setObservacao(observacao);
-        setDataRevisao(data);
-    }
-
-    public void reativar() {
-
-        if (this.getStatus().equals(VolumeStatus.CANCELADO)
-                || this.getStatus().equals(VolumeStatus.REVISADO)) {
-            throw new RuntimeException("Sómente volume rejeitado, ou impresso podem ser reativados.");
-        }
-
-        this.setStatus(VolumeStatus.ANDAMENTO);
-        this.dataImpressao = null;
-        this.dataRevisao = null;
-        this.responsavelRevisao = null;
-    }
-
-    public void marcarComoRevisado(Date data, Long revisor, String observacao) {
-        if (revisor == null) {
-            throw new RuntimeException("Informe um revisor.");
-        }
-
-        if (data == null) {
-            throw new RuntimeException("Informe data da revisão");
-        }
-
-        if (!getStatus().equals(VolumeStatus.CONCLUIDO) && !getStatus().equals(VolumeStatus.IMPRESSO)) {
-            throw new RuntimeException("Sómente volume Concluido ou Impresso pode ser marcado como revisado.");
-        }
-
-        if (dataImpressao != null && data.before(this.dataImpressao)) {
-            throw  new RuntimeException("Data de revisão deve ser maior ou igual a data de impressão.");
-        }
-
-        if (data.after(new Date())) {
-            throw new RuntimeException("Data de revisão deve ser menor ou igual a hoje.");
-        }
-
-        setDataRevisao(data);
-        setResponsavelRevisao(Usuario.of(revisor));
-        setObservacao(observacao);
-        setStatus(VolumeStatus.REVISADO);
-    }
 
     public void concluir(ComandoSalvarVolume comandoSalvarVolume) {
         if (!status.equals(VolumeStatus.ANDAMENTO)) {
@@ -252,36 +150,13 @@ public class Volume  {
             throw new RuntimeException("Arquivo é obrigatório para concluir volume");
         }
 
+        setDataAlteracao(new Date());
         setStatus(VolumeStatus.CONCLUIDO);
     }
 
-    public void marcarComoImpresso(ComandoSalvarVolume comandoSalvarVolume) {
-
-        if(caminhoAnexo == null) {
-            throw new RuntimeException("Arquivo é obrigatório para marcar como impresso");
-        }
-
-        if (!getStatus().equals(VolumeStatus.CONCLUIDO)) {
-            throw new RuntimeException("Sómente volume Concluido pode ser marcado como impresso.");
-        }
-
-        if (comandoSalvarVolume.getDataAsDate() == null) {
-            throw new RuntimeException("Informe data de impressão");
-        }
-
-        if (comandoSalvarVolume.getDataAsDate().after(new Date())) {
-            throw new RuntimeException("Data da impressão deve ser menor ou igual a data atual.");
-        }
-
-        setPaginaInicio(comandoSalvarVolume.getPaginaInicio());
-        setPaginaFim(comandoSalvarVolume.getPaginaFim());
-        setResponsavel(Usuario.of(comandoSalvarVolume.getResponsavel()));
-        setObservacao(comandoSalvarVolume.getObservacao());
-        setDataImpressao(comandoSalvarVolume.getDataAsDate());
-        setStatus(VolumeStatus.IMPRESSO);
+    public void reativar() {
+        setStatus(VolumeStatus.ANDAMENTO);
     }
-
-
 
 
     @Override
@@ -301,5 +176,17 @@ public class Volume  {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public void alterarDataAlteracao() {
+        dataAlteracao = new Date();
+    }
+
+    public String getOutro() {
+        return outro;
+    }
+
+    public void setOutro(String outro) {
+        this.outro = outro;
     }
 }
