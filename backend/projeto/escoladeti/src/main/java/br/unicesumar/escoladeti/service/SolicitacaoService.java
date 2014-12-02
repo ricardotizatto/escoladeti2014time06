@@ -55,16 +55,19 @@ public class SolicitacaoService {
         Solicitacao solicitacao = Solicitacao
                 .builder()
                 .aluno(comando.getAluno())
-                .cep(comando.getCep())
+                .cep(comando.getEnderecoCep())
                 .dataChegada(comando.getDataChegada())
-                .endereco(comando.getEndereco())
                 .escola(comando.getEscola())
                 .ensino(comando.getEnsino())
-                .municipio(comando.getMunicipio())
+                .municipio(comando.getEnderecoMunicipio())
                 .nre(comando.getNre())
-                .numeroEndereco(comando.getNumeroEndereco())
                 .responsavel(comando.getResponsavel())
                 .serie(comando.getSerie())
+                .bairro(comando.getEnderecoBairro())
+                .endereco(comando.getEnderecoLogradouro())
+                .numeroEndereco(comando.getEnderecoNumero())
+                .tipo(comando.getEnderecoTipo())
+                .complemento(comando.getEnderecoComplemento())
                 .build();
 
         Solicitacao solicitacaoSalva = solicitacaoRepository.save(solicitacao);
@@ -93,16 +96,19 @@ public class SolicitacaoService {
                 .builder()
                 .id(id)
                 .aluno(comando.getAluno())
-                .cep(comando.getCep())
+                .cep(comando.getEnderecoCep())
                 .dataChegada(comando.getDataChegada())
-                .endereco(comando.getEndereco())
-                .ensino(comando.getEnsino())
                 .escola(comando.getEscola())
-                .municipio(comando.getMunicipio())
+                .ensino(comando.getEnsino())
+                .municipio(comando.getEnderecoMunicipio())
                 .nre(comando.getNre())
-                .numeroEndereco(comando.getNumeroEndereco())
                 .responsavel(comando.getResponsavel())
                 .serie(comando.getSerie())
+                .bairro(comando.getEnderecoBairro())
+                .endereco(comando.getEnderecoLogradouro())
+                .numeroEndereco(comando.getEnderecoNumero())
+                .tipo(comando.getEnderecoTipo())
+                .complemento(comando.getEnderecoComplemento())
                 .build();
 
         Solicitacao solicitacaoSalva = solicitacaoRepository.save(solicitacao);

@@ -116,4 +116,10 @@ public class PessoaController implements Serializable {
     public List<Pessoa> getTodos() {
         return pessoaService.getTodos();
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/obterEnderecoDaEscola")
+    @ResponseBody
+    public Map<String, Object> obterEnderecoDaEscola(@PathVariable Long id){
+    	return this.pessoaService.obterEnderecoDaEscola(id);
+    }
 }

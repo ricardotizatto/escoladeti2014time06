@@ -17,29 +17,20 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
       allowClear: true
     };
 
-    $scope.buscarEndereco = function () {
-//
-//        var endereco = $scope.pessoasOriginal.filter(function (pessoa) {
-//                console.log(pessoa);
-//                return $scope.solicitacao.responsavel == pessoa.id;
-//            })
-//            .pop()
-//            .enderecos
-//            .filter(function (endereco) {
-//                return endereco.principal == 'S';
-//            })
-//            .pop();
-//
-//        var solicitacao = $scope.solicitacao;
-//        solicitacao.cep = endereco.cep;
-//        solicitacao.numeroEndereco = endereco.numero;
-//        solicitacao.endereco = endereco.logradouro;
-//        solicitacao.municipio = {
-//            text: endereco.cidade.nome + ' - ' + endereco.cidade.unidadeFederativa.sigla,
-//            id: endereco.cidade.id
-//        };
-//
-
+    $scope.buscarEnderecoDaEscola = function (escola) {
+    	if(escola){
+	    	Pessoa.obterEnderecoDaEscola({id : escola}
+	    	,function(data){
+	    		$scope.solicitacao.escola = data.escola;
+	    		$scope.solicitacao.enderecoCep = data.enderecoCep;
+	    		$scope.solicitacao.enderecoMunicipio = data.enderecoMunicipio;
+	    		$scope.solicitacao.enderecoTipo = data.enderecoTipo;
+	    		$scope.solicitacao.enderecoLogradouro = data.enderecoLogradouro;
+	    		$scope.solicitacao.enderecoNumero = data.enderecoNumero;
+	    		$scope.solicitacao.enderecoBairro = data.enderecoBairro;
+	    		$scope.solicitacao.enderecoComplemento = data.enderecoComplemento;
+	    	});
+    	}
     };
 
 	$scope.select2Cidade = {
@@ -159,8 +150,8 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
             item.livro = item.livro.id
         });
 		
-		if ($scope.solicitacao.municipio) {
-			$scope.solicitacao.municipio = $scope.solicitacao.municipio.id;
+		if ($scope.solicitacao.enderecoMunicipio) {
+			$scope.solicitacao.enderecoMunicipio = $scope.solicitacao.enderecoMunicipio.id;
 		}
 		
 		if ($scope.solicitacao.nre) {
@@ -210,9 +201,10 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
 		$log.debug('buscando solicitacao', Solicitacao);
 		Solicitacao.get({id: $routeParams.idSolicitacao}, function(solicitacao) {
 			$scope.solicitacao = solicitacao;
+			console.log("Solicitacao: ", solicitacao);
 			$scope.solicitacao.aluno = solicitacao.aluno ? solicitacao.aluno.id : null;
 			$scope.solicitacao.nre = solicitacao.nre ? solicitacao.nre.id : null;
-			$scope.solicitacao.municipio = solicitacao.municipio ? solicitacao.municipio.id : null;
+			$scope.solicitacao.enderecoMunicipio = solicitacao.municipio.id;
 			$scope.solicitacao.responsavel = solicitacao.responsavel ? solicitacao.responsavel.id : null;
 			$scope.solicitacao.escola = solicitacao.escola ? solicitacao.escola.id : null;
 			
