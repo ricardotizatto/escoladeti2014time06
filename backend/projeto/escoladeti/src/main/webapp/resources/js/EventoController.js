@@ -19,8 +19,9 @@ function eventoController($scope, $http, $routeParams) {
     };	
     
     $scope.cancelarFoto = function () {
-       $scope.evento.foto = undefined;
+       $scope.evento.foto = "";
        $('#imagem').attr('src', "" );
+       $('#imagem2').attr('src', "" );
     };
 
     $scope.indicePeriodo = {};
@@ -204,7 +205,7 @@ function eventoController($scope, $http, $routeParams) {
             $scope.periodosModal = [];
             $scope.desabilidaEditPeriodo = false;
             $scope.desabilidaDelPeriodo = false;
-            $scope.evento.foto = './resources/imagens/no_image.gif';
+//            $scope.evento.foto = './resources/imagens/no_image.gif';
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
@@ -217,7 +218,7 @@ function eventoController($scope, $http, $routeParams) {
                     if(ev.foto){
                         $scope.evento.foto = 'data:image/png;base64,' + ev.foto;
                     }else{
-                        $scope.evento.foto = './resources/imagens/no_image.gif';
+                        $scope.evento.foto = '';
                     }
                     
 //                    $scope.evento.foto = foto.substring(0, 3) ;
