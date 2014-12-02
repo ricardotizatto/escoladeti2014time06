@@ -51,8 +51,8 @@
                                     <li class="{{ ativa == 'sobre' ? 'current-page' : '' }}" ng-click="ativaBotao('sobre')" >
                                         <a href="#/sobre"><i class="icon-group"></i><br />Sobre</a>
                                     </li>
-                                    <li class="{{ ativa == 'contato' ? 'current-page' : '' }}" ng-click="ativaBotao('contato')" >
-                                        <a href="#/contato"><i class="icon-envelope-alt"></i><br />Contato</a>
+                                    <li class="{{ ativa == 'localizacao' ? 'current-page' : '' }}" ng-click="ativaBotao('localizacao')" >
+                                        <a href="#/localizacao"><i class="icon-map-marker"></i><br />Localização</a>
                                     </li>
                                 </ul>
                             </div>
