@@ -17,7 +17,6 @@ var app = angular.module('app',
             'ui.utils',
             'flow']);
 
-
 app.config(['$routeProvider',
     function($routeProvider) {
 
