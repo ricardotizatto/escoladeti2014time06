@@ -35,6 +35,8 @@
         <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>
         <script type="text/javascript" src="./resources/libs/select2.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
+        <script type="text/javascript" src="./resources/libs/ng-flow.min.js"></script>  
+        <script type="text/javascript" src="./resources/libs/ng-flow-standalone.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>
         <script type="text/javascript" src="./resources/js/aplicacao/aplicacao.js"></script>
