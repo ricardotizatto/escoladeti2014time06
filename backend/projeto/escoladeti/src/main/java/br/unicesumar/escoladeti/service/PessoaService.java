@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.unicesumar.escoladeti.comando.ComandoSalvarPessoa;
 import br.unicesumar.escoladeti.controller.DataPage;
 import br.unicesumar.escoladeti.entity.Caracteristica;
+import br.unicesumar.escoladeti.entity.Endereco;
 import br.unicesumar.escoladeti.entity.Pessoa;
 import br.unicesumar.escoladeti.entity.PessoaCaracteristica;
 import br.unicesumar.escoladeti.entity.PessoaFisica;
@@ -241,5 +242,22 @@ public class PessoaService {
 	}
 	public List<ViewPessoaAssociado> listaTodosAssociados() {
 		return this.viewPessoaAssociadoRepository.findAll();
+	}
+	public Map<String, Object> obterEnderecoDaEscola(Long id) {
+		PessoaJuridica escola = this.pessoaJuridicaRepository.findOne(id);
+		Map<String,Object> enderecoPrincipalDaEscola = new HashMap<String, Object>();
+		for (Endereco endereco : escola.getEnderecos()) {
+			if(endereco.getPrincipal() == 'S'){
+				enderecoPrincipalDaEscola.put("escola", escola.getId());
+				enderecoPrincipalDaEscola.put("enderecoCep", endereco.getCep());
+				enderecoPrincipalDaEscola.put("enderecoMunicipio", endereco.getCidade().getId());
+				enderecoPrincipalDaEscola.put("enderecoTipo", endereco.getTipo().name());
+				enderecoPrincipalDaEscola.put("enderecoLogradouro", endereco.getLogradouro());
+				enderecoPrincipalDaEscola.put("enderecoNumero", endereco.getNumero());
+				enderecoPrincipalDaEscola.put("enderecoBairro", endereco.getBairro());
+				enderecoPrincipalDaEscola.put("enderecoComplemento", endereco.getComplemento());
+			}
+		}
+		return enderecoPrincipalDaEscola;
 	}
 }

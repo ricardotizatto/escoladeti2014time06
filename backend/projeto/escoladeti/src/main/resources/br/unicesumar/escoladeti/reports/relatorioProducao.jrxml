@@ -2,7 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAssociado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01ef40d3-0794-43dd-922b-91db040371e6">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="67"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Projetos\\escoladeti2014time06\\backend\\projeto\\escoladeti\\src\\main\\resources\\br\\unicesumar\\escoladeti\\reports\\"]]></defaultValueExpression>
+	</parameter>
 	<field name="nome" class="java.lang.String"/>
 	<field name="cpf_cnpj" class="java.lang.String"/>
 	<field name="vigencia" class="java.lang.String"/>
@@ -27,7 +30,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="34" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[Relatório de Associados]]></text>
+				<text><![CDATA[Relatório de Produção]]></text>
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="125" height="87" uuid="53713fe0-e904-4084-b398-13c434596448"/>
@@ -145,7 +148,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="112" splitType="Stretch">
 			<textField>
 				<reportElement x="315" y="1" width="100" height="20" uuid="af2939b7-5145-4abc-9b11-9990c6ea5318"/>
 				<textElement verticalAlignment="Top">
@@ -185,6 +188,10 @@
 				<reportElement x="489" y="1" width="66" height="20" uuid="36a4cbf3-6aef-4417-9c92-3e1f8b513764"/>
 				<textFieldExpression><![CDATA[$F{vigencia}]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement x="238" y="12" width="200" height="100" uuid="871f7113-433d-430b-a881-5cd73895a78c"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subFormularioDoRelatorioDeProducao.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<pageFooter>
@@ -243,7 +250,7 @@
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Qtd Pendentes:]]></text>
+				<text><![CDATA[Qtd Pêndentes:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3" y="21" width="89" height="20" uuid="5e95e0ca-1d2c-447b-af54-447bb1144333"/>
