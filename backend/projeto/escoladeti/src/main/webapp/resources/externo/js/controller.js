@@ -74,6 +74,10 @@ function ExternoController($scope, $http, $routeParams) {
         console.log('Detalhes Evento id :', eventoId);
         window.location = '#/detalhes-evento/' + eventoId;
     },
+    $scope.eventoRealizado = function (eventoId) {
+        console.log('Detalhes Evento id :', eventoId);
+        window.location = '#/evento-realizado/' + eventoId;
+    },        
     $scope.carregaEvento = function (){
         console.log('Carrega Evento id :', $routeParams.eventoId);
         $scope.info = {};
@@ -84,7 +88,12 @@ function ExternoController($scope, $http, $routeParams) {
                 url: './public/rest/evento/' + $routeParams.eventoId
             }).success(function (evento) {
                 console.log('Detalhes Evento: ', evento);
-                $scope.evento = evento;               
+                $scope.evento = evento;  
+                if (evento.foto) {
+                    $scope.evento.foto = 'data:image/png;base64,' + evento.foto;
+                } else {
+                    $scope.evento.foto = './resources/imagens/no-image-amacap.png';
+                }
             });
         }else{
             window.location = '#/eventos';
@@ -108,8 +117,11 @@ function ExternoController($scope, $http, $routeParams) {
             .success(function (participante) {
                 console.log('Participante Salvo: ' + participante);
                 $scope.novoParticipante();
+                setTimeout(function () {
+                    $scope.carregaEvento();
+                }, 2000);
                 $scope.info.status = 'success';
-                $scope.info.message = participante.nome + " inscrição realizada com sucesso!";
+                $scope.info.message = participante.nome + " inscrição realizada com sucesso!";      
             }).error(function (data) {
                 console.log('Erro ao salvar Participante: ' + data.messageDeveloper);
                 $scope.info.status = 'danger';

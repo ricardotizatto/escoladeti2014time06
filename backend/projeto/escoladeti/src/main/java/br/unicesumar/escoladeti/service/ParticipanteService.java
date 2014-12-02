@@ -29,14 +29,18 @@ public class ParticipanteService {
     private EventoRepository eventoRepository;
 
     public Participante salvar(Participante participante) {
-         
+       System.out.println("Inicio Get id " + participante.getId());
+       Long idParticipante = participante.getId();
         Participante  p = participanteRepository.save(participante);
         System.out.println("Entrou no cadastro participante");
-        Evento  ev  = eventoRepository.findById(participante.getIdevento());
-        if (ev.getDisponivel() > 0){
-          ev.setDisponivel(ev.getDisponivel() - 1);
-          eventoRepository.save(ev);
-        }
+        System.out.println("F im Get id " + participante.getId());
+        if (idParticipante == null){
+            Evento  ev  = eventoRepository.findById(participante.getIdevento());
+                if (ev.getDisponivel() > 0){
+                  ev.setDisponivel(ev.getDisponivel() - 1);
+                  eventoRepository.save(ev);
+                }
+        }    
         List<ParticipantePeriodo> countRegistros = new ArrayList<ParticipantePeriodo>();
         for(Periodo period : periodoRepository.findByEvento(eventoRepository.findById(participante.getIdevento()))){
             if(participantePeriodoRepository.findByPeriodo_id(period.getId()).size() > 0){
