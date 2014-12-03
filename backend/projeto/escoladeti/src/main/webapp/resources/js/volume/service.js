@@ -7,38 +7,10 @@ function VolumeFactory($resource) {
             method: 'PUT'
         },
 
-        marcarComoImpresso: {
-            method: 'PUT',
-            params: {
-                acao: 'impresso'
-            }
-        },
-
-        rejeitar: {
-            method: 'PUT',
-            params: {
-                acao: 'rejeitado'
-            }
-        },
-
-        marcarComoRevisado: {
-            method: 'PUT',
-            params: {
-                acao: 'revisado'
-            }
-        },
-
-        marcarComoEnviado: {
-            method: 'PUT',
-            params: {
-                acao: 'enviado'
-            }
-        },
-
         reativar: {
             method: 'PUT',
             params: {
-                acao: 'andamento'
+                acao: 'reativacao'
             }
         },
 
@@ -48,6 +20,7 @@ function VolumeFactory($resource) {
                 acao: 'conclusao'
             }
         }
+
 
     });
 }

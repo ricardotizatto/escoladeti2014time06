@@ -8,6 +8,7 @@ import br.unicesumar.escoladeti.repository.EventoRepository;
 import br.unicesumar.escoladeti.repository.ParticipantePeriodoRepository;
 import br.unicesumar.escoladeti.repository.ParticipanteRepository;
 import br.unicesumar.escoladeti.repository.PeriodoRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,20 +29,40 @@ public class ParticipanteService {
     private EventoRepository eventoRepository;
 
     public Participante salvar(Participante participante) {
-         
+       System.out.println("Inicio Get id " + participante.getId());
+       Long idParticipante = participante.getId();
         Participante  p = participanteRepository.save(participante);
         System.out.println("Entrou no cadastro participante");
-        Evento  ev  = eventoRepository.findById(participante.getIdevento());
-        if (ev.getDisponivel() > 0){
-          ev.setDisponivel(ev.getDisponivel() - 1);
-          eventoRepository.save(ev);
-        }
+        System.out.println("F im Get id " + participante.getId());
+        if (idParticipante == null){
+            Evento  ev  = eventoRepository.findById(participante.getIdevento());
+                if (ev.getDisponivel() > 0){
+                  ev.setDisponivel(ev.getDisponivel() - 1);
+                  eventoRepository.save(ev);
+                }
+        }    
+        List<ParticipantePeriodo> countRegistros = new ArrayList<ParticipantePeriodo>();
         for(Periodo period : periodoRepository.findByEvento(eventoRepository.findById(participante.getIdevento()))){
-            ParticipantePeriodo pp = new ParticipantePeriodo();
-            pp.setParticipante(participante);
-            pp.setPeriodo(period);
-            pp.setPresente(false);
-            participantePeriodoRepository.save(pp);
+            if(participantePeriodoRepository.findByPeriodo_id(period.getId()).size() > 0){
+                  countRegistros = participantePeriodoRepository.findByPeriodo_id(period.getId());
+            }      
+        }
+        boolean condicaoAlteraOuNao = true;
+        for(ParticipantePeriodo pp:countRegistros ){
+           if(pp.getParticipante().equals(participante)) {
+             condicaoAlteraOuNao= false;  
+           }
+        }
+        
+        System.out.println("No count dos registros: " + countRegistros.size());
+        if(condicaoAlteraOuNao){
+            for(Periodo period : periodoRepository.findByEvento(eventoRepository.findById(participante.getIdevento()))){
+                ParticipantePeriodo pp = new ParticipantePeriodo();
+                pp.setParticipante(participante);
+                pp.setPeriodo(period);
+                pp.setPresente(false);
+                participantePeriodoRepository.save(pp);
+            }
         }
         System.out.println("Finalizou  cadastro participante");
         return p;

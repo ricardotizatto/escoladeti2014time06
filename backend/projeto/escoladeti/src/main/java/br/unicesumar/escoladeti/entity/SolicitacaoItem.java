@@ -106,33 +106,6 @@ public class SolicitacaoItem extends Entidade{
     }
 
 
-//    public void validarPaginas(Integer paginaInicio, Integer paginafinal) {
-//
-//        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
-//            Volume volume = solicitacaoVolume.getVolume();
-//            if (paginaInicio >= volume.getPaginaInicio()  && paginaInicio <=volume.getPaginaFim()
-//                    || paginafinal >= volume.getPaginaInicio() && paginafinal <= volume.getPaginaFim()) {
-//                throw new RuntimeException(
-//                        String.format("Página inicial ou final esta dentro do intervalo %d a %d . Volume: %d.<br>" +
-//                                " Insira paginás que não estejam nesse intervalo.", volume.getPaginaInicio(), volume.getPaginaFim(), volume.getId()));
-//            }
-//        }
-//
-//    }
-
-    public Integer getMaiorPagina() {
-        Integer maior = 0;
-
-        for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
-            Volume volume = solicitacaoVolume.getVolume();
-            if (volume.getPaginaFim() > maior) {
-                maior = volume.getPaginaFim();
-            }
-        }
-
-        return maior;
-    }
-
     public boolean possuiSolicitavaoVolumes() {
         return getSolicitacaoVolumes().size() > 0;
     }
@@ -245,7 +218,7 @@ public class SolicitacaoItem extends Entidade{
 
         Short quantidadeEnviado = 0;
         for (SolicitacaoVolume solicitacaoVolume : solicitacaoVolumes) {
-            if (!solicitacaoVolume.estaEnviado()) {
+            if (solicitacaoVolume.estaEnviado()) {
                 quantidadeEnviado++;
                 break;
             }

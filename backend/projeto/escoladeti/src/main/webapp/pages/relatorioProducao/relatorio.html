@@ -1,0 +1,77 @@
+<div class="container">
+	<div class="row">
+		<div class="form-group">
+			<legend>
+				<span class="glyphicon glyphicon-list-alt"></span> Relatório
+				Produção
+			</legend>
+		</div>
+	</div>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<strong>Filtros</strong>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data chegada inicial</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataChegadaInicio">
+				</div>
+				<div class="col-sm-4 ">
+					<label class="control-label">Data chegada final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataChegadaFim">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data impressão inicial</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataImpressaoInicio">
+				</div>
+				<div class="col-sm-4">
+					<label class="control-label">Data impressão final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataImpressaoFim">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data revisão inicial</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataRevisaoInicio">
+				</div>
+				<div class="col-sm-4">
+					<label class="control-label">Data revisão final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataRevisaoFim">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data envio inicial</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataEnvioInicio">
+				</div>
+				<div class="col-sm-4">
+					<label class="control-label">Data envio final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataEnvioFim">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group col-sm-6">
+		<button class="btn btn-warning" data-ng-click="limparCampos(pesquisa)">
+			Limpar campos <span class="glyphicon glyphicon-refresh"></span>
+		</button>
+	</div>
+	<div class="form-group col-sm-6">
+		<a
+			href="./relatorio/producao?dataChegadaInicio={{pesquisa.dataChegadaInicio}}&dataChegadaFim={{pesquisa.dataChegadaFim}}&dataImpressaoInicio={{pesquisa.dataImpressaoInicio}}&dataImpressaoFim={{pesquisa.dataImpressaoFim}}&dataRevisaoInicio={{pesquisa.dataRevisaoInicio}}&dataRevisaoFim={{pesquisa.dataRevisaoFim}}&dataEnvioInicio={{pesquisa.dataEnvioInicio}}&dataEnvioFim={{pesquisa.dataEnvioFim}}"
+			class="btn btn-info pull-right" title="Imprimir formulário"
+			target="_blank">Imprimir <span class="glyphicon glyphicon-print"></span>
+		</a>
+	</div>
+</div>

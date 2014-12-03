@@ -25,7 +25,6 @@
         <script type="text/javascript" src="./resources/libs/funcoes.js"></script>		
         <script type="text/javascript" src="./resources/libs/toastr.js"></script>
         <script type="text/javascript" src="./resources/js/MascaraValidacao.js" ></script> 
-        <script type="text/javascript" src="./resources/libs/jquery.maskMoney.min.js" ></script>
 
         <script type="text/javascript" src="./resources/libs/angular.min.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-bootstrap-tpls-0.11.0.min.js"></script>
@@ -36,9 +35,13 @@
         <script type="text/javascript" src="./resources/libs/ui-select2/select2.js"></script>
         <script type="text/javascript" src="./resources/libs/select2.js"></script>
         <script type="text/javascript" src="./resources/libs/ui-utils.min.js"></script>  
+        <script type="text/javascript" src="./resources/libs/ng-flow.min.js"></script>  
+        <script type="text/javascript" src="./resources/libs/ng-flow-standalone.min.js"></script>  
 
         <script type="text/javascript" src="./resources/js/app.js"></script>
         <script type="text/javascript" src="./resources/js/aplicacao/aplicacao.js"></script>
+        <script type="text/javascript" src="./resources/js/ordemProducao/producaoMaterialController.js"></script>
+        <script type="text/javascript" src="./resources/js/ordemProducao/materialService.js"></script>
         <script type="text/javascript" src="./resources/js/upload/directives.js"></script>
         <script type="text/javascript" src="./resources/js/upload/service.js"></script>
         <script type="text/javascript" src="./resources/js/directives.js"></script>
@@ -83,7 +86,8 @@
         <script type="text/javascript" src="./resources/js/ChamadaController.js" ></script>
         <script type="text/javascript" src="./resources/js/ParticipanteController.js" ></script>
         <script type="text/javascript" src="./resources/js/relatorioAssociado/RelatorioController.js" ></script>
-
+        <script type="text/javascript" src="./resources/js/relatorioEvento/RelatorioController.js" ></script>
+        <script type="text/javascript" src="./resources/js/relatorioProducao/RelatorioController.js" ></script>
 
         <link  rel="stylesheet" href="./resources/vendor/font-awesome/css/font-awesome.css" />
         <link  href="./resources/vendor/css/jquery.sidr.light.css">

@@ -1,0 +1,127 @@
+<div class="container" ng-controller="ProducaoMaterialController as ctrl" >
+    <fieldset>
+        <div class="row">
+            <legend> <span class="glyphicon glyphicon-cog">Produção Material</span></legend>
+        </div>
+        <form role="form" name="opForm" role="form">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="control-label">Ordem</label>
+                    <input disabled class="form-control" data-ng-model="ctrl.item.id">
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label class="control-label">Livro</label>
+                    <div class="input-group">
+                        <input disabled class="form-control" data-ng-model="ctrl.item.livro.nome">
+                        <div class="input-group-btn" data-ng-show="ctrl.item.livro.id">
+                            <a href="#/cadastrolivro/{{ctrl.item.livro.id}}" target="_blank" class="btn btn-primary">
+                                <i class="fa fa-book"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label class="control-label">Transcrição</label>
+                    <input disabled class="form-control" data-ng-model="ctrl.item.transcricao">
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label class="control-label">Status</label>
+                    <input disabled class="form-control" data-ng-model="ctrl.item.status">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group {{opForm.volume.$error.required? 'has-error' : 'has-success' }} has-feedback">
+                    <label class="control-label">Volume *</label>
+                    <input data-ui-select2="ctrl.select2Volume" data-ng-model="ctrl.item.volume" style="width: 100%;"
+                            name="volume" required="">
+                </div>
+
+                <div class="col-md-8 form-group" >
+                    <label class="control-label">Responsável</label>
+                    <select data-ui-select2="{allowClear: true}" class="control-label" style="width: 100%;"
+                            data-ng-model="ctrl.item.idResponsavel">
+                        <option value=""></option>
+                        <option data-ng-repeat="usu in ctrl.usuarios" value="{{usu.id}}">
+                            {{usu.nome}}
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-8 form-group">
+                    <label class="control-label">Impresso por</label>
+                    <input disabled class="form-control" data-ng-model="ctrl.item.responsavelImpressao.nome">
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label class="control-label">Data Impressão</label>
+                    <input type="date" disabled class="form-control" data-ng-model="ctrl.item.dataImpressao">
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-8 form-group">
+                    <label class="control-label">Revisado por</label>
+                    <input disabled class="form-control" data-ng-model="ctrl.item.responsavelRevisao.nome">
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label class="control-label">Data revisão</label>
+                    <input type="date" disabled class="form-control" data-ng-model="ctrl.item.dataRevisao" >
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-8 form-group">
+                    <label class="control-label">Enviado por</label>
+                    <input disabled class="form-control" data-ng-model="ctrl.item.responsavelEnvio.nome">
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label class="control-label">Data Envio</label>
+                    <input type="date" disabled class="form-control" data-ng-model="ctrl.item.dataEnvio">
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-12 form-group" >
+                    <label class="control-label">Observação</label>
+                    <textarea class="form-control" rows="5" data-ng-model="ctrl.item.observacao"></textarea>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-6 form-group">
+                    <a class="btn btn-link form-control"  href="#/ordem-producao/{{ctrl.item.idSolicitacaoItem}}">
+                        <span class="glyphicon glyphicon-circle-arrow-left" ></span> Voltar
+                    </a>
+                </div>
+                <div class="col-sm-3 form-group">
+                    <button class="btn btn-success form-control" data-ng-disabled="opForm.$invalid"
+                            data-ng-click="ctrl.salvar()">
+                        <span class="glyphicon glyphicon-ok" ></span> Salvar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>

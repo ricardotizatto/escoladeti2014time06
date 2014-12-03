@@ -53,7 +53,7 @@ public class RelatorioPessoaAssociadoService {
 			params.put("filtroDataFim", comando.getDataFim());
 
 			List<ViewPessoaAssociado> lista = this.viewPessoaAssociadoRepository
-					.findByVigenciaBetweenAndIdAndPagoContainingOrderByNome(
+					.findByVigenciaBetweenAndIdAndPagoContainingOrderByNomeAscAndVigenciaAsc(
 							comando.getDataInicio(), comando.getDataFim(),
 							comando.getId(), comando.getPago());
 

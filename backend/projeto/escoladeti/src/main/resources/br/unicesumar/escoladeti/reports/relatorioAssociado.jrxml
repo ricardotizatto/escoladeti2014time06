@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAssociado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01ef40d3-0794-43dd-922b-91db040371e6">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAssociado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01ef40d3-0794-43dd-922b-91db040371e6">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -9,6 +9,14 @@
 	<field name="tipo" class="java.lang.String"/>
 	<field name="email" class="java.lang.String"/>
 	<field name="pago" class="java.lang.String"/>
+	<variable name="PAGO_COUNT" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{pago}.equals("PAGO") ? $V{PAGO_COUNT} : null]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="PENDENTE_COUNT" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{pago}.equals("PENDENTE") ? $V{PENDENTE_COUNT} : null]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -139,20 +147,13 @@
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="489" y="1" width="66" height="20" uuid="59fe6601-6df1-4f40-9ed1-d7aa32f721ce"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vigencia}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="315" y="1" width="100" height="20" uuid="af2939b7-5145-4abc-9b11-9990c6ea5318"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cpf_cnpj}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="284" y="1" width="31" height="20" uuid="a0b26cf5-b26b-488a-875d-7a33ef096823"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial" size="12"/>
@@ -180,6 +181,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pago}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="489" y="1" width="66" height="20" uuid="36a4cbf3-6aef-4417-9c92-3e1f8b513764"/>
+				<textFieldExpression><![CDATA[$F{vigencia}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
@@ -193,28 +198,28 @@
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="23" y="5" width="42" height="20" uuid="4db5d641-536c-4789-af3b-53af085242e8"/>
+				<reportElement x="27" y="5" width="26" height="20" uuid="4db5d641-536c-4789-af3b-53af085242e8"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="5" width="21" height="20" uuid="368ebf0d-e6d2-4824-9db0-99b150203d63"/>
+				<reportElement x="2" y="5" width="25" height="20" uuid="368ebf0d-e6d2-4824-9db0-99b150203d63"/>
 				<textElement>
-					<font isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Qtd:]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="43" splitType="Stretch">
+		<band height="81" splitType="Stretch">
 			<textField>
-				<reportElement x="65" y="23" width="37" height="20" uuid="84bbecf5-d3ec-4994-824c-874d8953626a"/>
+				<reportElement x="92" y="61" width="30" height="20" uuid="84bbecf5-d3ec-4994-824c-874d8953626a"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="23" width="63" height="20" uuid="72cb99b1-be93-4f1b-ad4f-40e3dd14af54"/>
+				<reportElement x="3" y="61" width="89" height="20" uuid="72cb99b1-be93-4f1b-ad4f-40e3dd14af54"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -223,6 +228,30 @@
 			<line>
 				<reportElement x="0" y="18" width="555" height="1" uuid="a2525af6-173f-47b3-b30b-eca5ba24554e"/>
 			</line>
+			<textField>
+				<reportElement x="92" y="41" width="30" height="20" uuid="cc01ae9a-8b78-41ee-a916-5d8bc4291436"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PENDENTE_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="21" width="30" height="20" uuid="23c9a413-fe87-4154-9a36-353e321b4965"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGO_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="41" width="89" height="20" uuid="e97d6620-2dec-4eb6-b82b-8cb2e5179366"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Pendentes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="21" width="89" height="20" uuid="5e95e0ca-1d2c-447b-af54-447bb1144333"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Pagos:]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

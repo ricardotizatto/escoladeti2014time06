@@ -2,13 +2,8 @@ angular.module('services')
     .factory('OrdemProducaoFactory', ['$resource', OrdemProducaoFactory]);
 
 function OrdemProducaoFactory($resource) {
-    return $resource('./rest/solicitacao-itens/:id/:acao/:idVolume', {id: '@id'}, {
-        produzir: {
-            method: "POST",
-            params: {
-                acao: 'produzir'
-            }
-        },
+    return $resource('./rest/solicitacao-itens/:id/:acao/:idVolume/:acaoVolume', {id: '@id'}, {
+
         cancelar: {
             method: "POST",
             params: {
@@ -28,10 +23,43 @@ function OrdemProducaoFactory($resource) {
             }
         },
 
-        enviarVolume: {
+        marcarImpresso: {
             method: 'PUT',
             params: {
-                acao: 'solicitacao-volume'
+                acao: 'solicitacao-volume',
+                acaoVolume: 'impresso'
+            }
+        },
+
+        marcarRevisado: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'revisado'
+            }
+        },
+
+        marcarRejeitado: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'rejeitado'
+            }
+        },
+
+        marcarEnviado: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'enviado'
+            }
+        },
+
+        reativar: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'reativacao'
             }
         }
     });

@@ -26,8 +26,7 @@
             <table width="100%" border="0" class="table table-striped table-hover" >
                 <thead>
                 <th width="30%">Nome</th>
-                <th width="5%">Alterar</th>
-                <th width="5%">Excluir</th>
+                <th width="10%">Açoes</th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="perfilAcesso in perfilsAcesso| filter : busca">
@@ -36,8 +35,7 @@
                             <button type="button" class="btn btn-warning btn-sm" ng-click="editar(perfilAcesso)">
                                 <span class='glyphicon glyphicon-edit'></span>
                             </button>
-                        </td>
-                        <td>
+                        
                             <button type="button" class="btn btn-danger btn-sm" ng-click="deletar(perfilAcesso)">
                                 <span class='glyphicon glyphicon-remove-circle'></span>
                             </button>
@@ -47,12 +45,9 @@
             </table>
 
             <div class="text-center">
-                <pagination boundary-links="true" num-pages="pagina.pageCount"
-                            total-items="pagina.pageCount*pagina.maxRows"
-                            items-per-page="pagina.maxRows" ng-model="pageNumber"
-                            ng-change="getTodos(pageNumber)" class="pagination-sm"
-                            max-size="pagina.maxPagesToShow" previous-text="&lsaquo;"
-                            next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                <pagination boundary-links="true" num-pages="produtos.pageCount" total-items="produtos.pageCount*produtos.maxRows" items-per-page="produtos.maxRows"
+                            ng-model="pageNumber" ng-change="getTodos(pageNumber)" class="pagination-sm" max-size="produtos.maxPagesToShow"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
                 </pagination>
             </div>
         </form>

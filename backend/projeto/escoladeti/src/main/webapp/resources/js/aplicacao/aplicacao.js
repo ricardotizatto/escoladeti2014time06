@@ -6,7 +6,7 @@ function Appcontroller($http) {
         itens = [];
 
 
-    $http.get('/rest/sessao').success(function (userDetails) {
+    $http.get('./rest/sessao').success(function (userDetails) {
         vm.user = userDetails;
         vm.menu = montarMenu(userDetails.authorities, itens);
     });
@@ -130,6 +130,11 @@ function Appcontroller($http) {
                     nome: 'EVENTOS',
                     url: 'listaevento',
                     auth: 'LISTA_EVENTOS'
+                },
+                {
+                	nome : 'RELATÓRIO EVENTOS',
+                	url : 'relatorio/eventos',
+                	auth : 'RELATORIO_EVENTO'
                 }
             ]
         },
@@ -149,7 +154,12 @@ function Appcontroller($http) {
                     nome: 'ACOMPANHAMENTO DE SOLICITAÇÃO',
                     url: 'acompanhamento',
                     auth: 'ACOMPANHAMENTO_SOLICITACAO'
-                }
+                },
+                {
+                    nome: 'RELATÓRIO DE PRODUÇÃO',
+                    url: 'relatorio/producao',
+                    auth: 'RELATORIO_PRODUCAO'
+                }                
             ]
         },
 

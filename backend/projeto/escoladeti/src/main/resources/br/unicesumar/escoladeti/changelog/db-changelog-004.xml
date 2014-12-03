@@ -256,7 +256,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1000" author="catabriga">
+    <changeSet id="1000.1" author="catabriga">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">SELECT COUNT(*) FROM ITEMACESSO</sqlCheck>
         </preConditions>
