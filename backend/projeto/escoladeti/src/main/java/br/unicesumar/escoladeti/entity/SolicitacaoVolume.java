@@ -13,7 +13,11 @@ import java.util.Objects;
  * Created by Jhonatan on 22/10/2014.
  */
 @Entity
-public class SolicitacaoVolume extends Entidade {
+public class SolicitacaoVolume {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @Column(name = "data_envio")
     private Date dataEnvio;
@@ -81,7 +85,7 @@ public class SolicitacaoVolume extends Entidade {
             throw new RuntimeException("Informe o reponsável pelo envio");
         }
 
-        if (!volume.getStatus().equals(SolicitacaoVolumeStatus.REVISADO)) {
+        if (!getStatus().equals(SolicitacaoVolumeStatus.REVISADO)) {
             throw new RuntimeException("Sómente volume revisado pode ser marcado como enviado.");
         }
 
@@ -99,6 +103,7 @@ public class SolicitacaoVolume extends Entidade {
 
         setIdResponsavelEnvio(comando.getUsuario());
         setDataEnvio(comando.getDataAsDate());
+        setStatus(SolicitacaoVolumeStatus.ENVIADO);
     }
 
     public Date getDataEnvio() {
@@ -150,7 +155,7 @@ public class SolicitacaoVolume extends Entidade {
     }
 
     public boolean estaEnviado() {
-        return dataEnvio != null;
+        return status.equals(SolicitacaoVolumeStatus.ENVIADO);
     }
 
     public Date getDataImpressao() {
@@ -187,8 +192,8 @@ public class SolicitacaoVolume extends Entidade {
             throw  new RuntimeException("Data da rejeição deve ser menor ou igual a hoje.");
         }
 
-        if (!this.getStatus().equals(SolicitacaoVolumeStatus.ANDAMENTO) || !this.getStatus().equals(SolicitacaoVolumeStatus.IMPRESSO)) {
-            throw new RuntimeException("Somente volume em andamento ou impresso  pode ser marcado como rejeitado.");
+        if (!this.getStatus().equals(SolicitacaoVolumeStatus.ANDAMENTO) && !this.getStatus().equals(SolicitacaoVolumeStatus.IMPRESSO)) {
+            throw new RuntimeException("Sómente volume em andamento ou impresso  pode ser marcado como rejeitado.");
         }
 
         setStatus(SolicitacaoVolumeStatus.REJEITADO);
@@ -198,6 +203,10 @@ public class SolicitacaoVolume extends Entidade {
 
 
     public void marcarComoRevisado(ComandoAlterarData comando) {
+        if(!volume.getStatus().equals(VolumeStatus.CONCLUIDO)) {
+            throw new RuntimeException("Volume deve estar concluido para ser marcado como revisado.");
+        }
+
         if (comando.getUsuario() == null) {
             throw new RuntimeException("Informe um revisor.");
         }
@@ -206,8 +215,8 @@ public class SolicitacaoVolume extends Entidade {
             throw new RuntimeException("Informe data da revisão");
         }
 
-        if (!getStatus().equals(VolumeStatus.CONCLUIDO) && !getStatus().equals(SolicitacaoVolumeStatus.IMPRESSO)) {
-            throw new RuntimeException("Sómente volume Concluido ou Impresso pode ser marcado como revisado.");
+        if (!getStatus().equals(SolicitacaoVolumeStatus.ANDAMENTO) && !getStatus().equals(SolicitacaoVolumeStatus.IMPRESSO)) {
+            throw new RuntimeException("Sómente volume em Amdamento ou Impresso pode ser marcado como revisado.");
         }
 
         if (dataImpressao != null && comando.getDataAsDate().before(this.dataImpressao)) {
@@ -231,7 +240,7 @@ public class SolicitacaoVolume extends Entidade {
         }
 
         if (!volume.getStatus().equals(VolumeStatus.CONCLUIDO)) {
-            throw new RuntimeException("Sómente volume Concluido pode ser marcado como impresso.");
+            throw new RuntimeException("volume deve estar Concluido para ser marcado como impresso.");
         }
 
         if (comando.getDataAsDate() == null) {
@@ -340,10 +349,21 @@ public class SolicitacaoVolume extends Entidade {
     }
 
     public void retivar() {
+        if (estaEnviado()) {
+            throw new RuntimeException("Esta ordem já foi enviada e não pode ser reativada");
+        }
         this.dataImpressao = null;
         this.dataRevisao = null;
         this.idResponsavelImpressao = null;
         this.idResponsavelRevisao = null;
         setStatus(SolicitacaoVolumeStatus.ANDAMENTO);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

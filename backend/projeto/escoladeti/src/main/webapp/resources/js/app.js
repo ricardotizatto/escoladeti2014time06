@@ -284,6 +284,14 @@ app.config(['$routeProvider',
                 templateUrl: './pages/relatorioAssociado/relatorio.html',
                 controller: 'RelatorioAssociadoController'
             })
+            .when('/ordem-producao/:idOrdem/producao-material/', {
+                templateUrl: './pages/producao/producaoMaterial.html',
+                controller: ''
+            })
+            .when('/ordem-producao/:idOrdem/producao-material/:id', {
+                templateUrl: './pages/producao/producaoMaterial.html',
+                controller: ''
+            })
             .otherwise({redirectTo: '/principal'
             });
     }
