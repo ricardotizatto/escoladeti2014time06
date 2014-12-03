@@ -70,18 +70,18 @@
   		T2.DATA ASC,T1.TITULO ASC
     	</createView>
     </changeSet-->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
     <changeSet id="006" author="Jhonatan">
         <createView viewName="viewestoqueproduto" replaceIfExists="true"
                             schemaName="public">
