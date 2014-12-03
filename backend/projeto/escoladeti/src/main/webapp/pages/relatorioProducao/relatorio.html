@@ -2,7 +2,8 @@
 	<div class="row">
 		<div class="form-group">
 			<legend>
-				<span class="glyphicon glyphicon-list-alt"></span> Relatório Produção
+				<span class="glyphicon glyphicon-list-alt"></span> Relatório
+				Produção
 			</legend>
 		</div>
 	</div>
@@ -12,44 +13,51 @@
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label class="control-label">Evento</label> <select
-							data-ui-select2="select2Options" class="input-default"
-							data-ng-model="pesquisa.evento.id">
-							<option value=""></option>
-							<option data-ng-repeat="evento in eventos" value="{{evento.id}}">{{evento.titulo}}</option>
-						</select>
-					</div>
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data chegada inicial</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataChegadaInicio">
 				</div>
-				<div class="col-sm-3">
-					<label class="control-label">Status</label> <select
-						data-ng-model="pesquisa.status" class="form-control">
-						<option value="TODOS" selected="selected">TODOS</option>
-						<option value="ABERTO">ABERTO</option>
-						<option value="FECHADO">FECHADO</option>
-					</select>
-				</div>
-				<div class="col-sm-3">
-					<label class="control-label">Tipo</label> <select
-						data-ng-model="pesquisa.tipo" class="form-control">
-						<option value="TODOS" selected="selected">TODOS</option>
-						<option value="PALESTRA">PALESTRA</option>
-						<option value="REUNIAO">REUNIAO</option>
-						<option value="CURSO">CURSO</option>
-						<option value="OUTRO">OUTROS</option>
-					</select>
+				<div class="col-sm-4 ">
+					<label class="control-label">Data chegada final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataChegadaFim">
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6">
-					<label class="control-label">Data inicial</label> <input
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data impressão inicial</label> <input
 						type="date" class="form-control"
-						data-ng-model="pesquisa.dataInicio">
+						data-ng-model="pesquisa.dataImpressaoInicio">
 				</div>
-				<div class="col-sm-6">
-					<label class="control-label">Data final</label> <input type="date"
-						class="form-control" data-ng-model="pesquisa.dataFim">
+				<div class="col-sm-4">
+					<label class="control-label">Data impressão final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataImpressaoFim">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data revisão inicial</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataRevisaoInicio">
+				</div>
+				<div class="col-sm-4">
+					<label class="control-label">Data revisão final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataRevisaoFim">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-2">
+					<label class="control-label">Data envio inicial</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataEnvioInicio">
+				</div>
+				<div class="col-sm-4">
+					<label class="control-label">Data envio final</label> <input
+						type="date" class="form-control"
+						data-ng-model="pesquisa.dataEnvioFim">
 				</div>
 			</div>
 		</div>
@@ -61,8 +69,8 @@
 	</div>
 	<div class="form-group col-sm-6">
 		<a
-			href="./relatorio/eventos?id={{pesquisa.evento.id}}&status={{pesquisa.status}}&dataInicio={{pesquisa.dataInicio}}&dataFim={{pesquisa.dataFim}}&tipo={{pesquisa.tipo}}"
-			class="btn btn-info pull-right" title="Imprimir formul�rio"
+			href="./relatorio/producao?dataChegadaInicio={{pesquisa.dataChegadaInicio}}&dataChegadaFim={{pesquisa.dataChegadaFim}}&dataImpressaoInicio={{pesquisa.dataImpressaoInicio}}&dataImpressaoFim={{pesquisa.dataImpressaoFim}}&dataRevisaoInicio={{pesquisa.dataRevisaoInicio}}&dataRevisaoFim={{pesquisa.dataRevisaoFim}}&dataEnvioInicio={{pesquisa.dataEnvioInicio}}&dataEnvioFim={{pesquisa.dataEnvioFim}}"
+			class="btn btn-info pull-right" title="Imprimir formulário"
 			target="_blank">Imprimir <span class="glyphicon glyphicon-print"></span>
 		</a>
 	</div>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAssociado" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01ef40d3-0794-43dd-922b-91db040371e6">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="20"/>
+	<property name="ireport.x" value="118"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Projetos\\escoladeti2014time06\\backend\\projeto\\escoladeti\\src\\main\\resources\\br\\unicesumar\\escoladeti\\reports\\"]]></defaultValueExpression>
 	</parameter>
@@ -35,9 +35,6 @@
 			</image>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="40" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
 		<band height="22" splitType="Stretch">
 			<staticText>
@@ -139,7 +136,7 @@
 				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement stretchType="RelativeToTallestObject" x="2" y="21" width="802" height="57" uuid="871f7113-433d-430b-a881-5cd73895a78c"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2" y="21" width="802" height="57" uuid="871f7113-433d-430b-a881-5cd73895a78c"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{volumes})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subFormularioDoRelatorioDeProducao.jasper"]]></subreportExpression>
 			</subreport>
@@ -174,37 +171,37 @@
 				<reportElement x="0" y="2" width="802" height="1" uuid="c5ec801e-9752-4963-bad9-f2e8594fdb6b"/>
 			</line>
 			<textField>
-				<reportElement x="455" y="5" width="100" height="20" uuid="c5a7f1f2-bc7a-41ca-ab59-0a0fc09a7258"/>
+				<reportElement x="702" y="5" width="100" height="20" uuid="c5a7f1f2-bc7a-41ca-ab59-0a0fc09a7258"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="27" y="5" width="26" height="20" uuid="4db5d641-536c-4789-af3b-53af085242e8"/>
+				<reportElement x="125" y="5" width="26" height="20" uuid="4db5d641-536c-4789-af3b-53af085242e8"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="5" width="25" height="20" uuid="368ebf0d-e6d2-4824-9db0-99b150203d63"/>
+				<reportElement x="2" y="5" width="123" height="20" uuid="368ebf0d-e6d2-4824-9db0-99b150203d63"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Qtd:]]></text>
+				<text><![CDATA[Qtd aluno/pessoa(s):]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
 	<summary>
 		<band height="81" splitType="Stretch">
 			<textField>
-				<reportElement x="92" y="61" width="30" height="20" uuid="84bbecf5-d3ec-4994-824c-874d8953626a"/>
+				<reportElement x="155" y="61" width="30" height="20" uuid="84bbecf5-d3ec-4994-824c-874d8953626a"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="3" y="61" width="89" height="20" uuid="72cb99b1-be93-4f1b-ad4f-40e3dd14af54"/>
+				<reportElement x="3" y="61" width="152" height="20" uuid="72cb99b1-be93-4f1b-ad4f-40e3dd14af54"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Qtd Total:]]></text>
+				<text><![CDATA[Qtd Total aluno/pessoa(s):]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="18" width="802" height="1" uuid="a2525af6-173f-47b3-b30b-eca5ba24554e"/>

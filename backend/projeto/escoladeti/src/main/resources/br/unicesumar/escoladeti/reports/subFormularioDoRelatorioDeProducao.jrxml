@@ -16,6 +16,9 @@
 	<field name="dataImpressao" class="java.lang.String"/>
 	<field name="dataRevisao" class="java.lang.String"/>
 	<field name="dataEnvio" class="java.lang.String"/>
+	<variable name="CONTADOR_RETURN" class="java.lang.Integer" calculation="Count">
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -164,13 +167,11 @@
 			</staticText>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="88" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="18">
+			<line>
+				<reportElement x="0" y="8" width="802" height="1" uuid="bdba6875-eebd-4e33-a2d4-5828c539f5bc"/>
+			</line>
+		</band>
 	</summary>
 </jasperReport>

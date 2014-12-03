@@ -25,5 +25,5 @@ function RelatorioEventoController($scope, $location, $http) {
 	}
 }
 
-controllers.controller('RelatorioAssociadoController', [ '$scope', '$location',
-		'PessoaFactory', RelatorioAssociadoController ]);
+controllers.controller('RelatorioEventoController', [ '$scope', '$location',
+		'$http', RelatorioEventoController ]);

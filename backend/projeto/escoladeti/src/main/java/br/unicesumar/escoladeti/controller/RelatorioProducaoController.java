@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.unicesumar.escoladeti.dto.RelatorioProducaoDTO;
@@ -25,14 +26,29 @@ public class RelatorioProducaoController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public RelatorioProducaoDTO obterRelatorio(){
-		return this.relatorioProducaoService.obterRelatorio();
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/imprimir")
-	@ResponseBody
-	public void imprimir(HttpServletResponse response) throws IOException, JRException, SQLException{
-		this.relatorioProducaoService.imprimir(response);
+	public void imprimir(
+			@RequestParam(value = "dataChegadaInicio") String dataChegadaInicio,
+			@RequestParam(value = "dataChegadaFim") String dataChegadaFim,
+			@RequestParam(value = "dataImpressaoInicio") String dataImpressaoInicio,
+			@RequestParam(value = "dataImpressaoFim") String dataImpressaoFim,
+			@RequestParam(value = "dataRevisaoInicio") String dataRevisaoInicio,
+			@RequestParam(value = "dataRevisaoFim") String dataRevisaoFim,
+			@RequestParam(value = "dataEnvioInicio") String dataEnvioInicio,
+			@RequestParam(value = "dataEnvioFim") String dataEnvioFim,			
+			HttpServletResponse response
+			
+			) throws IOException, JRException, SQLException{
+		this.relatorioProducaoService.imprimir(
+				dataChegadaInicio,
+				dataChegadaFim,
+				dataImpressaoInicio,
+				dataImpressaoFim,
+				dataRevisaoInicio,
+				dataRevisaoFim,
+				dataEnvioInicio,
+				dataEnvioFim,
+				response
+				);
 	}
 	
 	

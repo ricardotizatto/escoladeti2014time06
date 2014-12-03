@@ -18,6 +18,7 @@ public class ViewRelatorioProducaoVolume implements Serializable {
 	private Long solicitacaoid;
 	private Long solicitacaoitemid;
 	@Id
+	private Long solicitacaovolumeid;
 	private Long volumeid;
 	private String nome;
 	private String disciplina;
@@ -36,7 +37,15 @@ public class ViewRelatorioProducaoVolume implements Serializable {
 
 	public ViewRelatorioProducaoVolume() {
 	}
-	
+
+	public Long getSolicitacaovolumeid() {
+		return solicitacaovolumeid;
+	}
+
+	public void setSolicitacaovolumeid(Long solicitacaovolumeid) {
+		this.solicitacaovolumeid = solicitacaovolumeid;
+	}
+
 	public Long getSolicitacaoid() {
 		return solicitacaoid;
 	}
@@ -142,7 +151,7 @@ public class ViewRelatorioProducaoVolume implements Serializable {
 	}
 
 	public String getDataChegada() {
-		if(this.dataChegada == null)
+		if (this.dataChegada == null)
 			return "";
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		return sdf.format(dataChegada);
@@ -153,7 +162,7 @@ public class ViewRelatorioProducaoVolume implements Serializable {
 	}
 
 	public String getDataImpressao() {
-		if(this.dataImpressao == null)
+		if (this.dataImpressao == null)
 			return "";
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		return sdf.format(dataImpressao);
@@ -164,7 +173,7 @@ public class ViewRelatorioProducaoVolume implements Serializable {
 	}
 
 	public String getDataRevisao() {
-		if(this.dataRevisao == null)
+		if (this.dataRevisao == null)
 			return "";
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		return sdf.format(dataRevisao);
@@ -175,7 +184,7 @@ public class ViewRelatorioProducaoVolume implements Serializable {
 	}
 
 	public String getDataEnvio() {
-		if(this.dataEnvio == null)
+		if (this.dataEnvio == null)
 			return "";
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		return sdf.format(dataEnvio);

@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,15 +50,33 @@ public class RelatorioProducaoService {
 		return relatorioProducao;
 	}
 
-	public void imprimir(HttpServletResponse response) throws IOException, JRException, SQLException{
+	public void imprimir(
+			String dataChegadaInicio,
+			String dataChegadaFim,
+			String dataImpressaoInicio,
+			String dataImpressaoFim,
+			String dataRevisaoInicio,
+			String dataRevisaoFim,
+			String dataEnvioInicio,
+			String dataEnvioFim,
+			HttpServletResponse response) throws IOException, JRException, SQLException{
         try {
             response.setHeader("Content-Disposition", "inline; filename=participantes.pdf");
 
             HashMap<String, Object> params = new HashMap<>();
-            params.put("nomeAlunoe", relatorioProducaoSolicitanteRepository.findOne(182L).getAluno());
+            params.put("nomeAluno", "Teste");
             List<RelatorioProducaoDTO> relatorio = new ArrayList<RelatorioProducaoDTO>();
+            List<ViewRelatorioProducaoSolicitante> lista = this.relatorioProducaoSolicitanteRepository.findByDatas(
+            		this.transformarDataStringEmData(dataChegadaInicio,"0001-01-01"), 
+            		this.transformarDataStringEmData(dataChegadaFim,"9999-12-31"),  
+            		this.transformarDataStringEmData(dataImpressaoInicio,"0001-01-01"), 
+            		this.transformarDataStringEmData(dataImpressaoFim,"9999-12-31"), 
+            		this.transformarDataStringEmData(dataRevisaoInicio,"0001-01-01"), 
+            		this.transformarDataStringEmData(dataRevisaoFim,"9999-12-31"), 
+            		this.transformarDataStringEmData(dataEnvioInicio,"0001-01-01"), 
+            		this.transformarDataStringEmData(dataEnvioFim,"9999-12-31"));
 
-            for (ViewRelatorioProducaoSolicitante participante : this.relatorioProducaoSolicitanteRepository.findAll()) {
+            for (ViewRelatorioProducaoSolicitante participante : lista) {
             	RelatorioProducaoDTO dados = new RelatorioProducaoDTO();
             	dados.setAluno(participante.getAluno());
             	dados.setBairro(participante.getBairro());
@@ -98,6 +119,20 @@ public class RelatorioProducaoService {
 		
 	}
 	
+	private Date transformarDataStringEmData(String data, String inicioOuFim){
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	        Date dataInicioOuFim = null;
+	        try {
+	            if (data == null || data.isEmpty()) {
+	            	dataInicioOuFim =  sdf.parse(inicioOuFim);
+	            } else {
+	            	dataInicioOuFim = sdf.parse(data);
+	            }
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+			return dataInicioOuFim;
+	}
 	
 
 }

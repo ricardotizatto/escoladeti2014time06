@@ -109,13 +109,14 @@
 			newColumnName="enderecoComplemento" />
 	</changeSet>
 
-	<changeSet id="w201412021532" author="Walber">
+	<changeSet id="w201412021557" author="Walber">
 		<createView viewName="viewrelatorioproducaovolume"
 			replaceIfExists="true">
 			select
 		  t1.id as solicitacaoid,
 		  t2.id as solicitacaoitemid,
 		  t5.id as volumeid,
+			t4.id as solicitacaovolumeid,		  
 		  t3.nome,
 		  t3.disciplina,
 		  t3.autor,
