@@ -1,7 +1,14 @@
 <div class="container" ng-controller="OrdemProducaoController as ctrl" >
     <div class="row">
-        <div class="form-group col-sm-12">
+        <div class="form-group col-sm-10">
             <legend> <span class="fa fa-cogs"></span> Produção </legend>
+        </div>
+        <div class="form-group col-sm-2">
+            <a  class='btn btn-success form-control' ng-click="ctrl.item.$finalizar()"
+                data-ng-disabled="ctrl.item.status == 'CANCELADO' || ctrl.item.status == 'FINALIZADO'">
+                <span class='glyphicon glyphicon-ok-circle' title="Finalizar" ></span>&nbsp;
+                Finalizar
+            </a>
         </div>
     </div>
     <form action="" method="POST" role="form" ng-submit="salvar()" >							
@@ -15,68 +22,103 @@
                 <input class="form-control " type="text" disabled ng-model="ctrl.item.livro.nome" pattern="[A-Za-z ]+" maxlength="40" required  />
             </div>
             <div class="form-group col-sm-3">
-                <label> Tradução </label>
+                <label> Transcição </label>
                 <input class="form-control " type="text" disabled ng-model="ctrl.item.traducaoMaterial" pattern="[A-Za-z ]+" maxlength="40" required  />
             </div>
             <div class="form-group col-sm-3">
                 <label> Status </label>
-                <input class="form-control " type="text" disabled ng-model="ctrl.item.status" pattern="[A-Za-z ]+" maxlength="40" required  />
+                <input class="form-control " type="text" disabled ng-model="ctrl.item.status"  maxlength="40" required  />
             </div>
         </div>
         <div class="row"> <div class="form-group col-sm-12">&nbsp;</div></div>
         <div class="row">
-            <div class="col-sm-3 form-group ">
-                <a  class='btn btn-primary form-control' href="#/ordem-producao/{{ctrl.item.id}}/volume"
+            <div class="col-sm-2 form-group " >
+                <a  class='btn btn-primary form-control' href="#/ordem-producao/{{ctrl.item.id}}/producao-material" style="height: 90px; width: 90px"
                     data-ng-disabled="ctrl.item.status == 'CANCELADO' || ctrl.item.status == 'FINALIZADO' ">
-                    <span class='glyphicon glyphicon-plus-sign' title="Novo volume"></span> Novo Volume
+                    <span class='glyphicon glyphicon-plus-sign' title="Novo volume" style="font-size: 35px"></span>
+                    <br>Nova
+                    <br>Ordem
                 </a>
             </div>
-            <div class="col-sm-3 form-group ">
-                <a  class='btn btn-success form-control' ng-click="ctrl.item.$finalizar()"
-                    data-ng-disabled="ctrl.item.status == 'CANCELADO' || ctrl.item.status == 'FINALIZADO'">
-                    <span class='glyphicon glyphicon-ok-circle' title="Finalizar"></span> Finalizar
+
+            <div class="col-sm-2 form-group ">
+                <a  class='btn btn-primary form-control'  style="height: 90px; width: 90px"
+                        data-ng-click="ctrl.acionarImpressao()">
+                    <span class='fa fa-print' title="marcar impresso" style="font-size: 40px"></span>
+                    <br/>Marcar
+                    <br>Impresso
                 </a>
             </div>
+
+            <div class="col-sm-2 form-group " >
+                <a  class='btn btn-primary form-control' style="height: 90px; width: 90px" data-ng-click="ctrl.acionarRejeicao()">
+                    <span class='fa fa-thumbs-o-down' title="rejeitado" style="font-size: 40px"></span>
+                    <br/>Marcar
+                    <br>Rejeitado
+                </a>
+            </div>
+
+            <div class="col-sm-2 form-group " >
+                <a  class='btn btn-primary form-control' style="height: 90px; width: 90px"
+                        data-ng-click="ctrl.acionarRevisao()">
+                    <span class='fa fa-thumbs-o-up' title="Revisado" style="font-size: 40px"></span>
+                    <br/>Marcar
+                    <br>Revisado
+                </a>
+            </div>
+
+
+            <div class="col-sm-2 form-group " >
+                <a  class='btn btn-primary form-control' data-ng-click="ctrl.acionarEnvio()" style="height: 90px; width: 90px">
+                    <span class='fa fa-mail-forward' title="Enviado" style="font-size: 40px"></span>
+                    <br/>Marcar
+                    <br>Enviado
+                </a>
+            </div>
+
+            <div class="col-sm-2 form-group " >
+                <a  class='btn btn-primary form-control' style="height: 90px; width: 90px">
+                    <span class='fa fa-refresh' title="reativar" data-ng-click="ctrl.acionarReativacao()" style="font-size: 40px"></span>
+                    <br/>Reativar
+                </a>
+            </div>
+
+
         </div>
         
         <div class="row">
             <div class="col-sm-12 table-responsive">
                 <table class="table table-bordered">
                         <tr>
-                            <th class="col-md-2">Volume</th>
+                            <th class="col-md-1">
+                                Selecionado
+                            </th>
+                            <th class="col-md-2">Ordem</th>
                             <th class="col-md-2">Responsável</th>
-                            <th class="col-md-2">Paginas</th>
                             <th class="col-md-2">Status</th>
-                            <th class="col-md-2">Enviado</th>
                             <th class="col-md-2"></th>
                         </tr>
-                        <tr ng-repeat="solicitacaoVolume in ctrl.item.solicitacaoVolumes | orderBy : 'volume.paginaInicio'"
-                            class=" {{solicitacaoVolume.dataEnvio? 'success' : ''}} ">
-                                <td>{{solicitacaoVolume.volume.id}}</td>
-                                <td>{{solicitacaoVolume.volume.responsavel.nome}}</td>
-                                <td>{{solicitacaoVolume.volume.paginaInicio}}/{{solicitacaoVolume.volume.paginaFim}}</td>
-                                <td>{{solicitacaoVolume.volume.status}}</td>
-                                <td>{{solicitacaoVolume.dataEnvio | date}}</td>
+                        <tr ng-repeat="solicitacaoVolume in ctrl.item.solicitacaoVolumes | orderBy : 'volume.paginaInicio'">
+                                <td>
+
+                                        <input class="bigCheckbox" type="checkbox" data-ng-model="solicitacaoVolume.selecionado">
+                                </td>
+                                <td>{{solicitacaoVolume.id}}</td>
+                                <td>{{solicitacaoVolume.responsavel.nome}}</td>
+                                <td>{{solicitacaoVolume.status}}</td>
                             <td>
                                 <a class='btn btn-primary btn-file btn-sm'  value='download' ng-click="" title="Download"
                                         data-ng-disabled="!solicitacaoVolume.volume.caminhoAnexo"
                                         href="./rest/upload/{{solicitacaoVolume.volume.id}}">
                                     <span class='glyphicon glyphicon-download'></span>
                                 </a>
-                                <a class='btn btn-warning btn-sm' ng-click="ctrl.editarVolume(solicitacaoVolume.volume.id)" title="Editar">
+                                <a class='btn btn-warning btn-sm' ng-click="ctrl.editarVolume(solicitacaoVolume.id)" title="Editar">
                                     <span class='glyphicon glyphicon-edit' ></span>
                                 </a>
-                                <a class='btn btn-danger btn-sm'  ng-click="ctrl.deletarVolume(solicitacaoVolume.volume)" title="Excluir"
-                                   data-ng-disabled="ctrl.item.status == 'CANCELADO'"
-                                   data-ng-show="solicitacaoVolume.volume.status != 'REVISADO'">
+                                <a class='btn btn-danger btn-sm'  ng-click="ctrl.deletarVolume(solicitacaoVolume)" title="Excluir"
+                                   data-ng-show="solicitacaoVolume.volume.status != 'ENVIADO'">
                                     <span class='glyphicon glyphicon-remove-circle'></span>
                                 </a>
-                                <button class="btn btn-success" title="enviado" data-target="#modalEnvio"
-                                        data-ng-click="ctrl.apresentarModalEnvio(solicitacaoVolume)"
-                                        data-toggle="modal"
-                                        data-ng-show="solicitacaoVolume.volume.status == 'REVISADO' && !solicitacaoVolume.dataEnvio">
-                                    <span class="fa fa-mail-forward"></span>
-                                </button>
                             </td>
                         </tr>
                 </table>
@@ -98,7 +140,7 @@
 
 
     <div class="row">
-        <div class="modal  fade in" id="modalEnvio" tabindex="-1" role="dialog"
+        <div class="modal  fade in" id="modalAcao" tabindex="-1" role="dialog"
              aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog">
                 <form role="form" name="modalForm">
@@ -110,7 +152,15 @@
                             <div class="row">
                                 <div class="col-md-12 control-label">
                                     <label class="control-label">Data Envio</label>
-                                    <input class="form-control" type="date" data-ng-model="ctrl.dataEnvio">
+                                    <input class="form-control" type="date" data-ng-model="ctrl.dataAcao">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 control-label">
+                                    <label class="control-label">Usuário</label>
+                                    <select data-ui-select2="" data-ng-model="ctrl.usuarioAcao" style="width: 100%">
+                                        <option data-ng-repeat="usu in ctrl.usuarios" value="{{usu.id}}">{{usu.nome}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +171,7 @@
                                         <button class="btn btn-link form-control" data-dismiss="modal">Cancelar</button>
                                     </div>
                                     <div class="col-md-3 form-group">
-                                        <button class="btn btn-success form-control" data-ng-click="ctrl.marcarComoEnviado()">
+                                        <button class="btn btn-success form-control" data-ng-click="ctrl.modalConfirmada()">
                                             Confirmar
                                         </button>
                                     </div>

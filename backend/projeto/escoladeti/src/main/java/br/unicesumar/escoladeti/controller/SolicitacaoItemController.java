@@ -83,44 +83,39 @@ public class SolicitacaoItemController {
     }
 
 
-    @RequestMapping(value = "/{id}/impresso", method = RequestMethod.PUT)
+    @RequestMapping(value = "/solicitacao-volume/impresso", method = RequestMethod.PUT)
     public @ResponseBody String marcarComoImpresso(
-            @PathVariable("id") Long idVolume,
             @RequestBody List<ComandoAlterarData> comandos) {
-         solicitacaoVolumeService.marcarComoImpresso(idVolume, comandos);
+         solicitacaoVolumeService.marcarComoImpresso( comandos);
         return "ok";
     }
 
-    @RequestMapping(value = "/solicitacao-volume/{id}/rejeitado", method = RequestMethod.PUT)
+    @RequestMapping(value = "/solicitacao-volume/rejeitado", method = RequestMethod.PUT)
     public @ResponseBody String rejeitar(
-            @PathVariable("id") Long idVolume,
             @RequestBody List<ComandoAlterarData> comandos) {
-        solicitacaoVolumeService.rejeitar(idVolume, comandos);
+        solicitacaoVolumeService.rejeitar( comandos);
         return "ok";
     }
 
-    @RequestMapping(value = "/solicitacao-volume/{id}/revisado", method = RequestMethod.PUT)
+    @RequestMapping(value = "/solicitacao-volume/revisado", method = RequestMethod.PUT)
     public @ResponseBody String marcarComoRevisado(
-            @PathVariable("id") Long idVolume,
             @RequestBody List<ComandoAlterarData> comandos) {
-        solicitacaoVolumeService.marcarComoRevisado(idVolume, comandos);
+        solicitacaoVolumeService.marcarComoRevisado(comandos);
         return "ok";
     }
 
 
-    @RequestMapping(value = "/solicitacao-volume/{id}/reativacao", method = RequestMethod.PUT)
+    @RequestMapping(value = "/solicitacao-volume/reativacao", method = RequestMethod.PUT)
     public @ResponseBody String reativar(
-            @PathVariable("id") Long idVolume,
             @RequestBody List<ComandoAlterarData> comandos) {
-        solicitacaoVolumeService.reativar(idVolume, comandos);
+        solicitacaoVolumeService.reativar(comandos);
         return "ok";
     }
 
-    @RequestMapping(value = "/solicitacao-volume/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/solicitacao-volume/enviado", method = RequestMethod.PUT)
     public @ResponseBody String marcarComoEnviado(
-            @PathVariable("id") Long id,
             @RequestBody List<ComandoAlterarData> comandos) {
-        solicitacaoVolumeService.marcarComoEnviado(id, comandos);
+        solicitacaoVolumeService.marcarComoEnviado(comandos);
         return "ok";
     }
 }

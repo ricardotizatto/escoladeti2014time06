@@ -1,14 +1,18 @@
 package br.unicesumar.escoladeti.entity;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
+import sun.misc.BASE64Decoder;
 
 @Entity
 public class Evento extends Entidade {
@@ -34,7 +38,8 @@ public class Evento extends Entidade {
     private boolean statusevento;
     private Integer limite;
     private Integer disponivel;
-
+    private byte[] foto;
+    
     public Integer getDisponivel() {
         return disponivel;
     }
@@ -127,9 +132,19 @@ public class Evento extends Entidade {
         this.limite = limite;
     }
     
+    public byte[] getFoto() {
+        return this.foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+    
     public static EventoBuilder builder(){
         return new EventoBuilder();
     }
+    
+   
     
     public static class EventoBuilder{
         private String tipoEvento;
@@ -144,6 +159,7 @@ public class Evento extends Entidade {
         private boolean statusevento;
         private Integer limite;
         private Integer disponivel;
+        private byte[] foto;
         
         public EventoBuilder tipoEvento(String tipoEvento){
             this.tipoEvento = tipoEvento;
@@ -203,6 +219,10 @@ public class Evento extends Entidade {
             this.disponivel = disponivel;
             return this;
         }
+        public EventoBuilder foto (byte[] foto){
+            this.foto = foto;
+            return this;
+        }
         public Evento buildEvento(){
             System.out.println("no build evento");
             Evento evento = new Evento();
@@ -218,6 +238,7 @@ public class Evento extends Entidade {
             evento.setStatusevento(this.statusevento);
             evento.setLimite(this.limite);
             evento.setDisponivel(this.disponivel);
+            evento.setFoto(this.foto);
             
             for (Periodo per: evento.getPeriodos()) {
               if (per.getId() != null){

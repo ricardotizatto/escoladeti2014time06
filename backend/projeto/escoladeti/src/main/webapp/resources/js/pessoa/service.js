@@ -32,6 +32,12 @@ function PessoaFactory($resource) {
         		acao : 'todasPessoas'
         	}
         },
+        obterEnderecoDaEscola : {
+        	method : 'GET',
+        	params : {
+        		acao : 'obterEnderecoDaEscola'
+        	}
+        },
         listaTodosAssociados : {
         	method : 'GET',
         	isArray : true,

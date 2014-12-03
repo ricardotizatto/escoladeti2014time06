@@ -23,10 +23,43 @@ function OrdemProducaoFactory($resource) {
             }
         },
 
-        enviarVolume: {
+        marcarImpresso: {
             method: 'PUT',
             params: {
-                acao: 'solicitacao-volume'
+                acao: 'solicitacao-volume',
+                acaoVolume: 'impresso'
+            }
+        },
+
+        marcarRevisado: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'revisado'
+            }
+        },
+
+        marcarRejeitado: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'rejeitado'
+            }
+        },
+
+        marcarEnviado: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'enviado'
+            }
+        },
+
+        reativar: {
+            method: 'PUT',
+            params: {
+                acao: 'solicitacao-volume',
+                acaoVolume: 'reativacao'
             }
         }
     });

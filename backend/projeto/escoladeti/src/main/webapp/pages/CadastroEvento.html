@@ -67,7 +67,7 @@
                 <div class="col-sm-2">
                     <div class="form-group {{formEvento.limite.$invalid ? 'has-error' : 'has-success'}} has-feedback">
                         <label class="control-label"><strong>Limite de vagas *</strong></label>
-                        <input type="text" name="limite" title="Quantidade de vagas" class="form-control" ng-pattern="/^[0-9]+$/"
+                        <input type="text" ng-disabled="alterarLimite" name="limite" title="Quantidade de vagas" class="form-control" ng-pattern="/^[0-9]+$/"
                                ng-model="evento.limite" required />
                         <span class="help-block" ng-show="formEvento.limite.$error.pattern">Apenas números</span>
                     </div>
@@ -75,12 +75,41 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-sm-5">
-                    <div class="form-group {{formEvento.local.$invalid ? 'has-error' : 'has-success'}} has-feedback">
-                        <label class="control-label"><strong>Local *</strong></label>
-                        <input class="form-control" name="local" type="text" title="Local do evento"
-                               ng-model="evento.local" required placeholder="Local do evento"/>
-                        <!--<span class="help-block" ng-show="formEvento.local.$error.pattern">Apenas letras e no mínimo 3.</span>-->
+                <div class="col-sm-5">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <div class="form-group {{formEvento.local.$invalid ? 'has-error' : 'has-success'}} has-feedback">
+                                <label class="control-label"><strong>Local *</strong></label>
+                                <input class="form-control" name="local" type="text" title="Local do evento"
+                                       ng-model="evento.local" required placeholder="Local do evento"/>
+                                <!--<span class="help-block" ng-show="formEvento.local.$error.pattern">Apenas letras e no mínimo 3.</span>-->
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <div flow-init="{singleFile:true}"
+                                 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+                                <h3>
+                                    <a name="image-example" class="anchor" href="#image-example"><span class="octicon octicon-link"></span></a>Selecione uma imagem</h3>
+                                <div class="thumbnail" ng-show="!$flow.files.length">
+                                    <img id="imagem2" ng-src="{{evento.foto}}" ng-model="evento.foto" />
+                                    <img ng-show="!evento.foto" src="./resources/imagens/no-image-amacap-pequena.png" />
+                                </div>
+                                <div class="thumbnail" ng-show="$flow.files.length">
+                                    <img id="imagem"  ng-model="evento.foto" ng-value="$flow.file[0]" flow-img="$flow.files[0]" />
+                                </div>
+                                <div>
+                                    <span class="btn btn-primary" ng-show="!$flow.files.length && !evento.foto" flow-btn>Procurar</span>
+                                    <span class="btn btn-info" ng-show="$flow.files.length || evento.foto" flow-btn ng-click="trocarFoto()" >Trocar</span>
+                                    <span class="btn btn-danger" ng-show="$flow.files.length || evento.foto"
+                                          ng-click="$flow.cancel();cancelarFoto()">
+                                        Remove
+                                    </span>
+                                    <b> Formatos aceitos: PNG e JPG.</b>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-7">
@@ -115,12 +144,12 @@
                                             <button type="button" title="Realizar chamada" class='btn btn-info btn-sm' data-dismiss="modal" ng-click="chamadaPeriodo(periodo.id, evento)">
                                                 <span class='glyphicon glyphicon-check'></span>
                                             </button>
-                                            <button class='btn btn-warning btn-sm' title="Editar periodo"
+                                            <button ng-disabled="desabilidaEditPeriodo" class='btn btn-warning btn-sm' title="Editar periodo"
                                                     ng-click="editarPeriodo($index)" data-toggle="modal"
                                                         data-target="#modalData">
                                                 <span class='glyphicon glyphicon-edit'></span>
                                             </button>
-                                            <button class='btn btn-danger btn-sm'
+                                            <button ng-disabled="desabilidaDelPeriodo" class='btn btn-danger btn-sm'
                                                     ng-click="delPeriodo($index)">
                                                 <span class='glyphicon glyphicon-remove-circle' title="Remover periodo"></span>
                                             </button>
@@ -131,7 +160,8 @@
                         </div> 
                     </div>
                 </div>
-            </div>            
+            </div>     
+              
             <div class="row">
                 <div class="col-sm-1"></div>
 

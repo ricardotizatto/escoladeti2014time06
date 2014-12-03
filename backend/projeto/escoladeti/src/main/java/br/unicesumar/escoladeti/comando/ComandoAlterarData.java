@@ -12,6 +12,7 @@ import java.util.Date;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoAlterarData {
+    private Long id;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private String data;
     private Long usuario;
@@ -39,5 +40,13 @@ public class ComandoAlterarData {
 
     public void setUsuario(Long usuario) {
         this.usuario = usuario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

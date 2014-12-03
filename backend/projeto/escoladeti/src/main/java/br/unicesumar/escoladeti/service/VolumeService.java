@@ -1,19 +1,17 @@
 package br.unicesumar.escoladeti.service;
 
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
+import br.unicesumar.escoladeti.controller.DataPage;
 import br.unicesumar.escoladeti.entity.*;
-import br.unicesumar.escoladeti.enums.SolicitacaoVolumeStatus;
 import br.unicesumar.escoladeti.enums.Transcricao;
 import br.unicesumar.escoladeti.enums.VolumeStatus;
 import br.unicesumar.escoladeti.repository.LivroRepository;
-import br.unicesumar.escoladeti.repository.SolicitacaoItemRepository;
 import br.unicesumar.escoladeti.repository.SolicitacaoVolumeRepository;
 import br.unicesumar.escoladeti.repository.VolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +39,17 @@ public class VolumeService {
         }
 
         volumeRepository.delete(id);
+    }
+
+    public DataPage<Volume> buscarPorIdLivroETranscricao(Long id, Long idLivro, String transcricao) {
+        if (id == null) {
+            return  new DataPage<>(volumeRepository.findByIdLivroAndTranscricao(
+                    idLivro, Transcricao.of(transcricao), DataPage.pageRequestForAsc(1, "paginaInicio"))
+            );
+        }
+        return  new DataPage<>(volumeRepository.findByIdAndIdLivroAndTranscricao(
+                id, idLivro, Transcricao.of(transcricao), DataPage.pageRequestForAsc(1, "paginaInicio"))
+        );
     }
 
     @Transactional

@@ -11,7 +11,19 @@ function eventoController($scope, $http, $routeParams) {
     $scope.organizacao;
     $scope.tipoEvento;
     $scope.valor;
-//    $scope.selected;
+    $scope.vagasDisponiveisTemp;
+    $scope.vagasLimiteTemp;
+
+    $scope.trocarFoto = function () {
+       $scope.evento.foto = "";
+    };	
+    
+    $scope.cancelarFoto = function () {
+       $scope.evento.foto = "";
+       $('#imagem').attr('src', "" );
+       $('#imagem2').attr('src', "" );
+    };
+
     $scope.indicePeriodo = {};
     $scope.inicializar = function () {
         $scope.getTodosAbertos(1);
@@ -101,9 +113,25 @@ function eventoController($scope, $http, $routeParams) {
         if (!($scope.evento.id > 0)) {
             $scope.evento.statusevento = true;
             $scope.evento.disponivel = $scope.evento.limite;
-        }
-
-        console.log("evento antes do post = " + $scope.evento.periodos.length);
+        }else{
+			if($scope.evento.limite > $scope.vagasLimiteTemp){
+			   $scope.evento.disponivel = $scope.evento.disponivel + ($scope.evento.limite - $scope.vagasLimiteTemp); 
+			}else if(($scope.evento.limite < $scope.vagasLimiteTemp)&&($scope.evento.disponivel > $scope.evento.limite)){
+			   $scope.evento.disponivel = ($scope.evento.disponivel - ($scope.vagasLimiteTemp - $scope.evento.limite)); 
+                           if($scope.evento.disponivel < 0)  {
+                               $scope.evento.disponivel = $scope.evento.disponivel * -1;
+                           }
+			}else{
+				$scope.evento.disponivel = $scope.vagasDisponiveisTemp;
+				$scope.evento.limite = $scope.vagasLimiteTemp; 
+			}
+		}
+        if(!$scope.evento.foto){
+            $scope.evento.foto = $('#imagem').attr('src');
+        }        
+        console.log('FOTO:', $scope.evento.foto);
+        console.log('Nova FOTO:', $scope.evento.novafoto);
+        
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function (evento, status) {
                     //carregarEvento();
@@ -175,12 +203,32 @@ function eventoController($scope, $http, $routeParams) {
             $scope.evento = {};
             $scope.evento.periodos = [];
             $scope.periodosModal = [];
+            $scope.desabilidaEditPeriodo = false;
+            $scope.desabilidaDelPeriodo = false;
+//            $scope.evento.foto = './resources/imagens/no_image.gif';
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
                 .success(function (ev) {
                     $scope.evento = ev;
                     $scope.periodo = ev.periodos[0];
+                    $scope.desabilidaEditPeriodo = true;
+                    $scope.desabilidaDelPeriodo = true;
+
+                    if(ev.foto){
+                        $scope.evento.foto = 'data:image/png;base64,' + ev.foto;
+                    }else{
+                        $scope.evento.foto = '';
+                    }
+                    
+//                    $scope.evento.foto = foto.substring(0, 3) ;
+					$scope.vagasDisponiveisTemp = $scope.evento.disponivel;
+					$scope.vagasLimiteTemp = $scope.evento.limite;
+                    // if ($scope.evento.limite == $scope.evento.disponivel) {
+                        // $scope.alterarLimite = false;
+                    // }else{
+                         // $scope.alterarLimite = true;
+                    // }
                     return;
                 });
     };
@@ -286,6 +334,7 @@ function eventoController($scope, $http, $routeParams) {
     $scope.editarPeriodo = function (indice) {
         $scope.indicePeriodo = indice;
         $scope.periodo = angular.copy($scope.evento.periodos[indice]);
+        $scope.periodo.data = transformaData($scope.periodo.data);
     };
 
     $scope.delPeriodo = function (index) {

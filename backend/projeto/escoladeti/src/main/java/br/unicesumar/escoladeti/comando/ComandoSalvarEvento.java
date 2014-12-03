@@ -2,9 +2,14 @@ package br.unicesumar.escoladeti.comando;
 
 import br.unicesumar.escoladeti.entity.Participante;
 import br.unicesumar.escoladeti.entity.Periodo;
+import br.unicesumar.escoladeti.entity.Pessoa;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sun.misc.BASE64Decoder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ComandoSalvarEvento {
@@ -22,7 +27,8 @@ public class ComandoSalvarEvento {
     private boolean statusevento;
     private Integer limite;
     private Integer disponivel;
-
+    private byte[] foto;
+    
     public Integer getDisponivel() {
         return disponivel;
     }
@@ -122,6 +128,26 @@ public class ComandoSalvarEvento {
 
     public void setLimite(Integer limite) {
         this.limite = limite;
+    }
+    
+    public byte[] getFoto() {
+        return this.foto;
+    }
+
+    public void setFoto(String foto) {
+        String imagem = foto.replaceAll("data:image/png;base64,", "");
+        imagem = imagem.replaceAll("data:image/jpeg;base64,", "");
+        byte[] imageByte = null;
+
+        try {
+                BASE64Decoder decoder;
+                decoder = new BASE64Decoder();
+                imageByte = decoder.decodeBuffer(imagem);
+        } catch (IOException ex) {
+                Logger.getLogger(Pessoa.class.getName())
+                                .log(Level.SEVERE, null, ex);
+        }
+        this.foto = imageByte;
     }
 
     @Override

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
@@ -12,56 +12,100 @@
         <dropColumn tableName="volume" columnName="id_responsavelrevisao"></dropColumn>
         <dropColumn tableName="volume" columnName="observacao"></dropColumn>
 
-        <addColumn tableName="solicitacaovolume">
-            <column name="data_impressao" type="date"></column>
-            <column name="data_revisao" type="date"></column>
-            <column name="id_responsavelrevisao" type="int8"></column>
-            <column name="id_responsavel" type="int8"></column>
-            <column name="id_responsavelimpressao" type="int8"></column>
-            <column name="id_responsavelenvio" type="int8"></column>
-            <column name="observacao" type="varchar(255)"></column>
-            <column name="status" type="varchar(20)">
-                <constraints nullable="false"></constraints>
-            </column>
-        </addColumn>
 
-        <addColumn tableName="volume">
-            <column name="data_alteracao" type="date"></column>
-        </addColumn>
+		<addColumn tableName="solicitacaovolume">
+			<column name="data_impressao" type="date"></column>
+			<column name="data_revisao" type="date"></column>
+			<column name="id_responsavelrevisao" type="int8"></column>
+			<column name="id_responsavel" type="int8"></column>
+			<column name="id_responsavelimpressao" type="int8"></column>
+			<column name="id_responsavelenvio" type="int8"></column>
+			<column name="observacao" type="varchar(255)"></column>
+			<column name="status" type="varchar(20)">
+				<constraints nullable="false"></constraints>
+			</column>
+		</addColumn>
 
-        <addForeignKeyConstraint baseTableName="solicitacaovolume"
-                                 baseColumnNames="id_responsavelrevisao"
-                                 constraintName="usuario_solvolume"
-                                 referencedTableName="usuario"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
+		<addColumn tableName="volume">
+			<column name="data_alteracao" type="date"></column>
+		</addColumn>
 
-        <addForeignKeyConstraint baseTableName="solicitacaovolume"
-                                 baseColumnNames="id_responsavel"
-                                 constraintName="usuario_solvolume_resp"
-                                 referencedTableName="usuario"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
+		<addForeignKeyConstraint baseTableName="solicitacaovolume"
+			baseColumnNames="id_responsavelrevisao" constraintName="usuario_solvolume"
+			referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
 
-
-        <addForeignKeyConstraint baseTableName="solicitacaovolume"
-                                 baseColumnNames="id_responsavelenvio"
-                                 constraintName="usuario_solvolume_resp"
-                                 referencedTableName="usuario"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
+		<addForeignKeyConstraint baseTableName="solicitacaovolume"
+			baseColumnNames="id_responsavel" constraintName="usuario_solvolume_resp"
+			referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint>
+		<!-- <addForeignKeyConstraint baseTableName="solicitacaovolume" baseColumnNames="id_responsavelenvio" 
+			constraintName="usuario_solvolume_resp" referencedTableName="usuario" referencedColumnNames="id"></addForeignKeyConstraint> -->
 
 
-        <addForeignKeyConstraint baseTableName="solicitacaovolume"
-                                 baseColumnNames="id_responsavelimpressao"
-                                 constraintName="usuario_solvolume_resp"
-                                 referencedTableName="usuario"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
+	</changeSet>
 
+	<changeSet id="2" author="catabriga">
+		<addColumn tableName="volume">
+			<column name="outro" type="varchar(255)"></column>
+		</addColumn>
+	</changeSet>
 
-    </changeSet>
+	<changeSet id="w201412012334" author="Walber">
+		<preConditions onFail="MARK_RAN" onError="MARK_RAN">
+			<not>
+				<columnExists tableName="solicitacao" columnName="bairro" />
+			</not>
+		</preConditions>
+		<addColumn tableName="solicitacao">
+			<column name="bairro" type="varchar(255)"></column>
+		</addColumn>
+	</changeSet>
 
-    <changeSet id="2" author="catabriga">
-        <addColumn tableName="volume">
-            <column name="outro" type="varchar(255)"></column>
-        </addColumn>
-    </changeSet>
-    
+	<changeSet id="w201412012336" author="Walber">
+		<preConditions onFail="MARK_RAN" onError="MARK_RAN">
+			<not>
+				<columnExists tableName="solicitacao" columnName="tipo" />
+			</not>
+		</preConditions>
+		<addColumn tableName="solicitacao">
+			<column name="tipo" type="varchar(255)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="w201412012337" author="Walber">
+		<preConditions onFail="MARK_RAN" onError="MARK_RAN">
+			<not>
+				<columnExists tableName="solicitacao" columnName="complemento" />
+			</not>
+		</preConditions>
+		<addColumn tableName="solicitacao">
+			<column name="complemento" type="varchar(255)"></column>
+		</addColumn>
+	</changeSet>
+	<changeSet id="w201412020138" author="Walber">
+		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+			<columnExists tableName="solicitacao" columnName="cep" />
+			<and>
+				<columnExists tableName="solicitacao" columnName="numeroendereco" />
+			</and>
+			<and>
+				<columnExists tableName="solicitacao" columnName="bairro" />
+			</and>
+			<and>
+				<columnExists tableName="solicitacao" columnName="tipo" />
+			</and>
+			<and>
+				<columnExists tableName="solicitacao" columnName="complemento" />
+			</and>
+		</preConditions>
+		<renameColumn tableName="solicitacao" oldColumnName="cep"
+			newColumnName="enderecocep" />
+		<renameColumn tableName="solicitacao" oldColumnName="numeroendereco"
+			newColumnName="endereconumero" />
+		<renameColumn tableName="solicitacao" oldColumnName="bairro"
+			newColumnName="enderecobairro" />
+		<renameColumn tableName="solicitacao" oldColumnName="tipo"
+			newColumnName="enderecotipo" />
+		<renameColumn tableName="solicitacao" oldColumnName="complemento"
+			newColumnName="enderecoComplemento" />
+	</changeSet>
 </databaseChangeLog>
