@@ -21,9 +21,10 @@ function SolicitacaoController($scope, $location, $log, $routeParams, $http, Sol
     	if(escola){
 	    	Pessoa.obterEnderecoDaEscola({id : escola}
 	    	,function(data){
+	    		console.log("Dados: ", data);
 	    		$scope.solicitacao.escola = data.escola;
 	    		$scope.solicitacao.enderecoCep = data.enderecoCep;
-	    		$scope.solicitacao.enderecoMunicipio = data.enderecoMunicipio;
+	    		$scope.solicitacao.enderecoMunicipio = data.enderecoMunicipio.id;
 	    		$scope.solicitacao.enderecoTipo = data.enderecoTipo;
 	    		$scope.solicitacao.enderecoLogradouro = data.enderecoLogradouro;
 	    		$scope.solicitacao.enderecoNumero = data.enderecoNumero;

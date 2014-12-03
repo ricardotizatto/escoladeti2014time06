@@ -250,7 +250,7 @@ public class PessoaService {
 			if(endereco.getPrincipal() == 'S'){
 				enderecoPrincipalDaEscola.put("escola", escola.getId());
 				enderecoPrincipalDaEscola.put("enderecoCep", endereco.getCep());
-				enderecoPrincipalDaEscola.put("enderecoMunicipio", endereco.getCidade().getId());
+				enderecoPrincipalDaEscola.put("enderecoMunicipio", endereco.getCidade());
 				enderecoPrincipalDaEscola.put("enderecoTipo", endereco.getTipo().name());
 				enderecoPrincipalDaEscola.put("enderecoLogradouro", endereco.getLogradouro());
 				enderecoPrincipalDaEscola.put("enderecoNumero", endereco.getNumero());

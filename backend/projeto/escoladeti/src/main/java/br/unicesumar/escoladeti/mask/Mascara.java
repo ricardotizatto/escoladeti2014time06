@@ -65,4 +65,34 @@ public class Mascara {
 		return mascarado;
 	}
 
+	public static String telefoneDdd(String valor) {
+		String pattern = "(##)####-####?#";
+		MaskFormatter mask;
+		String mascarado = null;
+		try {
+			mask = new MaskFormatter(pattern);
+			mask.setValueContainsLiteralCharacters(false);
+			mascarado = mask.valueToString(valor);
+		} catch (ParseException ex) {
+			Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		return mascarado;
+	}
+	
+	public static String cep(String valor) {
+		String pattern = "##.###-###";
+		MaskFormatter mask;
+		String mascarado = null;
+		try {
+			mask = new MaskFormatter(pattern);
+			mask.setValueContainsLiteralCharacters(false);
+			mascarado = mask.valueToString(valor);
+		} catch (ParseException ex) {
+			Logger.getLogger(Mascara.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		return mascarado;
+	}	
+
 }
