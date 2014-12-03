@@ -5,12 +5,12 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
-    <changeSet id="1" author="catabriga">
-        <dropColumn tableName="volume" columnName="data_enviado"></dropColumn>
-        <dropColumn tableName="volume" columnName="data_impressao"></dropColumn>
-        <dropColumn tableName="volume" columnName="data_revisao"></dropColumn>
-        <dropColumn tableName="volume" columnName="id_responsavelrevisao"></dropColumn>
-        <dropColumn tableName="volume" columnName="observacao"></dropColumn>
+	<changeSet id="1" author="catabriga">
+		<dropColumn tableName="volume" columnName="data_enviado"></dropColumn>
+		<dropColumn tableName="volume" columnName="data_impressao"></dropColumn>
+		<dropColumn tableName="volume" columnName="data_revisao"></dropColumn>
+		<dropColumn tableName="volume" columnName="id_responsavelrevisao"></dropColumn>
+		<dropColumn tableName="volume" columnName="observacao"></dropColumn>
 
 
 		<addColumn tableName="solicitacaovolume">
@@ -81,7 +81,7 @@
 			<column name="complemento" type="varchar(255)"></column>
 		</addColumn>
 	</changeSet>
-	<changeSet id="w201412020138" author="Walber">
+<!-- 	<changeSet id="w201412020138" author="Walber">
 		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
 			<columnExists tableName="solicitacao" columnName="cep" />
 			<and>
@@ -107,21 +107,24 @@
 			newColumnName="enderecotipo" />
 		<renameColumn tableName="solicitacao" oldColumnName="complemento"
 			newColumnName="enderecoComplemento" />
+	</changeSet> -->
+
+	<changeSet id="4.1" author="catabriga">
+		<insert tableName="itemacesso">
+			<column name="id" type="int8" value="12"></column>
+			<column name="nome" type="varchar" value="RELATORIO_EVENTO"></column>
+		</insert>
+		<insert tableName="itemacesso">
+			<column name="id" type="int8" value="13"></column>
+			<column name="nome" type="varchar" value="RELATORIO_PRODUCAO"></column>
+		</insert>
 	</changeSet>
 
-    <changeSet id="4" author="catabriga">
-        <insert tableName="itemacesso">
-            <column name="id" type="int8" value="12"></column>
-            <column name="nome" type="varchar" value="RELATORIO_EVENTO"></column>
-        </insert>
-    </changeSet>
-
-    <changeSet id="5" author="catabriga">
-        <renameColumn tableName="solicitacao" oldColumnName="enderecoComplemento" newColumnName="enderecocomplemento"></renameColumn>
-    </changeSet>
-	<changeSet id="w201412021557" author="Walber">
-		<createView viewName="viewrelatorioproducaovolume"
-			replaceIfExists="true">
+	<!-- <changeSet id="5" author="catabriga"> <renameColumn tableName="solicitacao" 
+		oldColumnName="enderecoComplemento" newColumnName="enderecocomplemento"></renameColumn> 
+		</changeSet> -->
+	<changeSet id="w201412030254" author="Walber">
+		<createView viewName="viewrelatorioproducaovolume" replaceIfExists="true">
 			select
 		  t1.id as solicitacaoid,
 		  t2.id as solicitacaoitemid,
@@ -150,9 +153,8 @@
 	</createView>
 	</changeSet>
 
-	<changeSet id="w201412030043" author="Walber">
-		<createView viewName="viewrelatorioproducaosolicitante"
-			replaceIfExists="true">
+	<changeSet id="w201412030259" author="Walber">
+		<createView viewName="viewrelatorioproducaosolicitante" replaceIfExists="true">
 			  select
 			  t1.id,
 			  t3.nome as aluno, 
@@ -167,7 +169,7 @@
 			  t7.email,
 			  t5.nome || ' - ' ||t6.sigla as municipiouf,  
 			  t1.enderecobairro as bairro,
-			  t1.enderecocomplemento as complemento,
+			  t1."enderecoComplemento" as complemento,
 			  t1.enderecocep as cep,
 			  t9.nome || ' - ' ||t10.sigla as nre,
 			  t1.datachegada,
@@ -195,4 +197,5 @@
 			order by t3.nome asc
 
 		</createView>
-	</changeSet></databaseChangeLog>
+	</changeSet>
+</databaseChangeLog>

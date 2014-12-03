@@ -154,7 +154,12 @@ function Appcontroller($http) {
                     nome: 'ACOMPANHAMENTO DE SOLICITAÇÃO',
                     url: 'acompanhamento',
                     auth: 'ACOMPANHAMENTO_SOLICITACAO'
-                }
+                },
+                {
+                    nome: 'RELATÓRIO DE PRODUÇÃO',
+                    url: 'relatorio/producao',
+                    auth: 'RELATORIO_PRODUCAO'
+                }                
             ]
         },
 
