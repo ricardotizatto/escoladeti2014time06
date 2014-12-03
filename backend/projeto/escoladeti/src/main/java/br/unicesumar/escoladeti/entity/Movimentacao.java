@@ -20,12 +20,8 @@ public class Movimentacao extends Entidade {
     private Date dataMovimentacao;
 
     @ManyToOne
-    @JoinColumn(name = "id_origem")
-    private Pessoa pessoaOrigem;
-
-    @ManyToOne
-    @JoinColumn(name = "id_destino")
-    private Pessoa pessoaDestino;
+    @JoinColumn(name = "id_referencia")
+    private Pessoa referencia;
 
     @OneToOne
     @JoinColumn(name = "id_produto", referencedColumnName = "id")
@@ -71,20 +67,12 @@ public class Movimentacao extends Entidade {
         this.dataMovimentacao = dataMovimentacao;
     }
 
-    public Pessoa getPessoaOrigem() {
-        return pessoaOrigem;
+    public Pessoa getReferencia() {
+        return referencia;
     }
 
-    public void setPessoaOrigem(Pessoa pessoaOrigem) {
-        this.pessoaOrigem = pessoaOrigem;
-    }
-
-    public Pessoa getPessoaDestino() {
-        return pessoaDestino;
-    }
-
-    public void setPessoaDestino(Pessoa pessoaDestino) {
-        this.pessoaDestino = pessoaDestino;
+    public void setReferencia(Pessoa referencia) {
+        this.referencia = referencia;
     }
 
     public static MovimentacaoBuilder builder() {
@@ -97,8 +85,7 @@ public class Movimentacao extends Entidade {
         private Long tipo;
         private Long quantidade;
         private Date dataMovimentacao;
-        private Pessoa pessoaOrigem;
-        private Pessoa pessoaDestino;
+        private Pessoa referencia;
         private Produto produto;
 
         public MovimentacaoBuilder() {
@@ -124,13 +111,8 @@ public class Movimentacao extends Entidade {
             return this;
         }
 
-        public MovimentacaoBuilder PessoaOrigem(Pessoa pessoaOrigem) {
-            this.pessoaOrigem = pessoaOrigem;
-            return this;
-        }
-
-        public MovimentacaoBuilder PessoaDestino(Pessoa pessoaDestino) {
-            this.pessoaDestino = pessoaDestino;
+        public MovimentacaoBuilder Referencia(Pessoa referencia) {
+            this.referencia = referencia;
             return this;
         }
 
@@ -143,8 +125,7 @@ public class Movimentacao extends Entidade {
             checkNotNull(this.tipo, "Tipo é obrigatório");
             checkNotNull(this.quantidade, "Quantidade é obrigatório");
             checkNotNull(this.dataMovimentacao, "Data de movimento é obrigatório");
-            checkNotNull(this.pessoaOrigem, "Pessoa Origem é obrigatório");
-            checkNotNull(this.pessoaDestino, "Pessoa Destino é obrigatório");
+            checkNotNull(this.referencia, "Referencia é obrigatório");
             checkNotNull(this.produto, "Produto é obrigatório");
 
             Movimentacao movimentacao = new Movimentacao();
@@ -153,8 +134,7 @@ public class Movimentacao extends Entidade {
             movimentacao.setExtornado(false);
             movimentacao.setQuantidade(this.quantidade);
             movimentacao.setDataMovimentacao(this.dataMovimentacao);
-            movimentacao.setPessoaOrigem(this.pessoaOrigem);
-            movimentacao.setPessoaDestino(this.pessoaDestino);
+            movimentacao.setReferencia(this.referencia);
             movimentacao.setProduto(this.produto);
 
             if (this.id != null) {

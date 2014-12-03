@@ -35,7 +35,7 @@
                          join perfilacesso per on (per.id = pus.id_perfilacesso)
                          join perfilitemacesso piac on (piac.id_perfilacesso = per.id)
                          join itemacesso it on (it.id = piac.id_itemacesso)
-                         where usu.login = ?
+                         where usu.login = ? and usu.ativo = true
                          "
 
                     />

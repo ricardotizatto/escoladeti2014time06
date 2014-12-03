@@ -37,7 +37,7 @@ public class EventoService {
         if (participanteRepository.findByIdevento(evento.getId()).isEmpty()) {
             eventoRepository.delete(evento);
         }else{
-            throw new RuntimeException("Evento " + evento.getDescricao() + " não pode ser deletado, pois possuí participante inscrito");
+            throw new RuntimeException("Evento " + evento.getTitulo() + " não pode ser deletado, pois possuí participante inscrito");
         }
     }
     
@@ -89,6 +89,7 @@ public class EventoService {
                 .valor(comando.getValor())
                 .limite(comando.getLimite())
                 .disponivel(comando.getDisponivel())
+                .foto(comando.getFoto())
                 .buildEvento();
         
         if (comando.getId() != null) {
@@ -101,4 +102,8 @@ public class EventoService {
 
         return evento;
     }
+
+	public List<Evento> obterEventosParaRelatorio() {
+		return null;
+	}
 }

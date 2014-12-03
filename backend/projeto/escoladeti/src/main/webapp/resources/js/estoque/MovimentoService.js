@@ -30,8 +30,7 @@ function movimentoService($http) {
                 tipo: movimentacao.tipo,
                 quantidade: movimentacao.quantidade,
                 dataMovimentacao: movimentacao.dataMovimentacao,
-                pessoaOrigem: movimentacao.pessoaOrigem,
-                pessoaDestino: movimentacao.pessoaDestino,
+                referencia: movimentacao.referencia,
                 produto: movimentacao.produto
             });
         },

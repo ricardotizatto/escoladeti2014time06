@@ -1,233 +1,280 @@
 <div class="grid simple">
-    <div class="container" ng-controller="SolicitacaoController"
-         ng-init="carregarSolicitacao()">
-        <div class="row">
-            <div class="form-group col-sm-12">
-                <legend> Solicitação</legend>
-            </div>
-        </div>
-        <form  role="form"
-               ng-submit="enviarSolicitacao()" name="solicitacaoForm">
-            <div class="row">
-                <div class="col-md-2 form-group">
-                    <label>Número</label>
-                    <input type="number" class="form-control" disabled="disabled" ng-model="solicitacao.id">
-                </div>
-                <div class="col-md-5 form-group {{solicitacaoForm.aluno.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                    <label class="control-label">Aluno *</label>
-                    <div class="input-group">
-                        <select data-ui-select2="select2Options"
-                                class="input-default"
-                                data-ng-model="solicitacao.aluno" required name="aluno" >
-                            <option value=""></option>
-                            <option data-ng-repeat="pessoa in pessoas" value="{{pessoa.id}}">{{pessoa.nome}}</option>
-                        </select>
-                        <span class="input-group-btn">
-                            <a href="#/pessoa" class="btn btn-primary" target="_blank">
-                                <i class="fa fa-user"></i>
-                            </a>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-3 form-group">
-                    <label>Ensino</label>
-                    <select class="form-control" ng-model="solicitacao.ensino">
-                        <option value=""></option>
-                        <option value="MEDIO">MEDIO</option>
-                        <option value="FUNDAMENTAL">FUNDAMENTAL</option>
-                        <option VALUE="SUPERIOR">SUPERIOR</option>
-                    </select>
-                </div>
-                <div class="col-md-2 form-group">
-                    <label>Série</label>
-                    <select class="form-control" ng-model="solicitacao.serie">
-                        <option value=""></option>
-                        <option value="1-ANO">1-ANO</option>
-                        <option value="2-ANO">2-ANO</option>
-                        <option VALUE="3-ANO">3-ANO</option>
-                        <option VALUE="4-ANO">4-ANO</option>
-                        <option VALUE="5-ANO">5-ANO</option>
-                        <option VALUE="6-ANO">6-ANO</option>
-                        <option VALUE="7-ANO">7-ANO</option>
-                        <option VALUE="8-ANO">8-ANO</option>
-                        <option VALUE="9-ANO">9-ANO</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 form-group">
-                    <label>Escola</label>
-                    <div class="input-group">
-                        <select ui-select2="select2Options" class="input-default"
-                                ng-model="solicitacao.escola" name="responsavel">
-                            <option value=""></option>
-                            <option ng-repeat="p in escolas" value="{{p.id}}">{{p.nome}}</option>
-                        </select>
-                        <div class="input-group-btn">
-                            <a href="#/pessoa" class="btn btn-primary" target="_blank">
-                                <i class="fa fa-user"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 form-group {{solicitacaoForm.responsavel.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                    <label class="control-label">Responsável *</label>
-                    <div class="input-group">
-                        <select ui-select2="select2Options" class="input-default" data-ng-change="buscarEndereco()"
-                                ng-model="solicitacao.responsavel" name="responsavel" required="required">
-                            <option value=""></option>
-                            <option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
-                        </select>
-                        <div class="input-group-btn">
-                            <a href="#/pessoa" class="btn btn-primary" target="_blank">
-                                <i class="fa fa-user"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+	<div class="container" ng-controller="SolicitacaoController"
+		ng-init="carregarSolicitacao()">
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<legend> Solicitação</legend>
+			</div>
+		</div>
+		<form role="form" ng-submit="enviarSolicitacao()"
+			name="solicitacaoForm">
+			<div class="row">
+				<div class="col-md-2 form-group">
+					<label>Número</label> <input type="number" class="form-control"
+						disabled="disabled" ng-model="solicitacao.id">
+				</div>
+				<div
+					class="col-md-5 form-group {{solicitacaoForm.aluno.$error.required? 'has-error' : 'has-success' }} has-feedback">
+					<label class="control-label">Aluno *</label>
+					<div class="input-group">
+						<select data-ui-select2="select2Options" class="input-default"
+							data-ng-model="solicitacao.aluno" required name="aluno">
+							<option value=""></option>
+							<option data-ng-repeat="pessoa in pessoas" value="{{pessoa.id}}">{{pessoa.nome}}</option>
+						</select> <span class="input-group-btn"> <a href="#/pessoa"
+							class="btn btn-primary" target="_blank"> <i
+								class="fa fa-user"></i>
+						</a>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-3 form-group">
+					<label>Ensino</label> <select class="form-control"
+						ng-model="solicitacao.ensino">
+						<option value=""></option>
+						<option value="MEDIO">MEDIO</option>
+						<option value="FUNDAMENTAL">FUNDAMENTAL</option>
+						<option VALUE="SUPERIOR">SUPERIOR</option>
+					</select>
+				</div>
+				<div class="col-md-2 form-group">
+					<label>Série</label> <select class="form-control"
+						ng-model="solicitacao.serie">
+						<option value=""></option>
+						<option value="1-ANO">1-ANO</option>
+						<option value="2-ANO">2-ANO</option>
+						<option VALUE="3-ANO">3-ANO</option>
+						<option VALUE="4-ANO">4-ANO</option>
+						<option VALUE="5-ANO">5-ANO</option>
+						<option VALUE="6-ANO">6-ANO</option>
+						<option VALUE="7-ANO">7-ANO</option>
+						<option VALUE="8-ANO">8-ANO</option>
+						<option VALUE="9-ANO">9-ANO</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 form-group">
+					<label>Escola</label>
+					<div class="input-group">
+						<select ui-select2="select2Options" class="input-default"
+							ng-model="solicitacao.escola" name="responsavel" data-ng-change="buscarEnderecoDaEscola(solicitacao.escola)">
+							<option value=""></option>
+							<option ng-repeat="p in escolas" value="{{p.id}}">{{p.nome}}</option>
+						</select>
+						<div class="input-group-btn">
+							<a href="#/pessoa" class="btn btn-primary" target="_blank"> <i
+								class="fa fa-user"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div
+					class="col-md-3 form-group {{solicitacaoForm.responsavel.$error.required? 'has-error' : 'has-success' }} has-feedback">
+					<label class="control-label">Responsável *</label>
+					<div class="input-group">
+						<select ui-select2="select2Options" class="input-default"
+							data-ng-change="buscarEndereco()"
+							ng-model="solicitacao.responsavel" name="responsavel"
+							required="required">
+							<option value=""></option>
+							<option ng-repeat="p in pessoas" value="{{p.id}}">{{p.nome}}</option>
+						</select>
+						<div class="input-group-btn">
+							<a href="#/pessoa" class="btn btn-primary" target="_blank"> <i
+								class="fa fa-user"></i>
+							</a>
+						</div>
+					</div>
+				</div>
 
-                <div class="col-md-3 form-group {{solicitacaoForm.dataChegada.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                    <label class="control-label">Data de chegada *</label>
-                    <input type="date" class="form-control" ng-model="solicitacao.dataChegada" name="dataChegada" required="required">
-                </div>
-                <div class="col-md-3 form-group">
-                    <label>NRE</label>
-                    <input ui-select2="select2Cidade" class="input-default" ng-model="solicitacao.nre" name="nre" >
-                </div>
-            </div>
-            <fieldset>
-                <legend>Endereço</legend>
-                <div class="row">
-                    <div class="col-md-3 form-group {{solicitacaoForm.cep.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                        <label class="control-label">CEP *</label>
-                        <input type="text" class="form-control" ng-model="solicitacao.cep" ui-mask="99.999-999" name="cep" required>
-                    </div>
-                    <div class="col-md-3 form-group {{solicitacaoForm.municipio.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                        <label class="control-label">Município *</label>
-                        <input ui-select2="select2Cidade" class="input-default" ng-model="solicitacao.municipio" name="municipio" required>
-                    </div>
-                    <div class="col-md-3 form-group {{solicitacaoForm.endereco.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                        <label class="control-label">Endereço *</label>
-                        <input type="text" class="form-control" ng-model="solicitacao.endereco" name="endereco" required maxlength="100">
-                    </div>
-                    <div class="col-md-3 form-group {{solicitacaoForm.numero.$error.required ||
-                         solicitacaoForm.numero.$error.pattern? 'has-error' : 'has-success' }} has-feedback">
-                        <label class="control-label">Número *</label>
-                        <input type="text" class="form-control" ng-model="solicitacao.numeroEndereco" name="numero" ng-pattern="/^\d{4,4}$/"
-                               maxlength="4" required="">
-                        <span class="help-block" ng-show="solicitacaoForm.numero.$error.pattern">4 números.</span>
-                    </div>
+				<div
+					class="col-md-3 form-group {{solicitacaoForm.dataChegada.$error.required? 'has-error' : 'has-success' }} has-feedback">
+					<label class="control-label">Data de chegada *</label> <input
+						type="date" class="form-control"
+						ng-model="solicitacao.dataChegada" name="dataChegada"
+						required="required">
+				</div>
+				<div class="col-md-3 form-group">
+					<label>NRE</label> <input ui-select2="select2Cidade"
+						class="input-default" ng-model="solicitacao.nre" name="nre">
+				</div>
+			</div>
+			<fieldset>
+				<legend>Endereço</legend>
+				<div class="row">
+					<div
+						class="col-md-3 form-group {{solicitacaoForm.cep.$error.required? 'has-error' : 'has-success' }} has-feedback">
+						<label class="control-label">CEP *</label> <input type="text"
+							class="form-control" ng-model="solicitacao.enderecoCep"
+							ui-mask="99.999-999" name="cep" required>
+					</div>
+					<div
+						class="col-md-9 form-group {{solicitacaoForm.municipio.$error.required? 'has-error' : 'has-success' }} has-feedback">
+						<label class="control-label">Município *</label> <input
+							ui-select2="select2Cidade" class="input-default"
+							ng-model="solicitacao.enderecoMunicipio" name="municipio"
+							required>
+					</div>
+				</div>
+				<div class="row">
+					<div
+						class="col-md-3 form-group {{solicitacaoForm.tipo.$error.required? 'has-error' : 'has-success' }} has-feedback">
+						<label class="control-label">Tipo *</label> <select
+							class="selectpicker show-tick form-control" name="tipo"
+							data-ng-model="solicitacao.enderecoTipo" data-live-search="true"
+							required="required">
+							<option value="ALAMEDA">Alameda</option>
+							<option value="AVENIDA">Avenida</option>
+							<option value="RUA" selected>Rua</option>
+							<option value="ESTRADA">Estrada</option>
+							<option value="LADEIRA">Ladeira</option>
+							<option value="PRACA">Praça</option>
+							<option value="TRAVESSA">Travessa</option>
+							<option value="RODOVIA">Rodovia</option>
+							<option value="OUTROS">Outros</option>
+						</select>
+					</div>
+					<div
+						class="col-md-6 form-group {{solicitacaoForm.endereco.$error.required? 'has-error' : 'has-success' }} has-feedback">
+						<label class="control-label">Endereço *</label> <input type="text"
+							class="form-control" ng-model="solicitacao.enderecoLogradouro"
+							name="endereco" required maxlength="100">
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="control-label">Número</label> <input type="text"
+							class="form-control" ng-model="solicitacao.enderecoNumero"
+							name="numero">
+					</div>
+				</div>
+				<div class="row">
+					<div
+						class="col-md-6 form-group {{solicitacaoForm.bairro.$error.required? 'has-error' : 'has-success' }} has-feedback">
+						<label class="control-label">Bairro</label> <input type="text"
+							class="form-control" ng-model="solicitacao.enderecoBairro"
+							name="bairro">
+					</div>
+					<div class="col-md-6 form-group has-feedback">
+						<label class="control-label">Complemento</label> <input
+							type="text" class="form-control"
+							ng-model="solicitacao.enderecoComplemento" name="complemento">
+					</div>
+				</div>
+			</fieldset>
 
-                </div>
-            </fieldset>
+			<fieldset>
+				<legend>Materiais</legend>
+				<div class="row form-group">
+					<div class="col-md-3 col-md-offset-9">
+						<a class="btn btn-primary form-control" data-toggle="modal"
+							data-target="#modalLivro">Adicionar Material</a>
+					</div>
+				</div>
 
-            <fieldset>
-                <legend>Materiais</legend>
-                <div class="row form-group">
-                    <div class="col-md-3 col-md-offset-9">
-                        <a class="btn btn-primary form-control" data-toggle="modal"
-                           data-target="#modalLivro">Adicionar Material</a>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="">
+						<table class="table table-striped">
+							<thead>
+								<th class="col-md-6">Material</th>
+								<th class="col-md-3">Transcrição</th>
+								<th class="col-md-2">Status</th>
+								<th class="col-md-1"></th>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in solicitacao.itensSolicitacao">
+									<td><a href="#/cadastrolivro/{{item.livro.id}}">{{getDescricaoMaterial(item)}}</a></td>
+									<td>{{item.traducaoMaterial}}{{item.traducaoMaterial ==
+										'OUTRO' ? '-'+item.outro : ''}}</td>
+									<td><span class="label label-inverse">{{item.status}}</span>
+									</td>
+									<td><a href="javascript:void(0)"
+										ng-click="excluirItem(item)"
+										data-ng-show="item.status == 'AGUARDANDO'"> <i
+											class="glyphicon glyphicon-trash"></i>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</fieldset>
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="pull-right"> <a
+						class="btn btn-primary btn-padrao" ng-click="voltar()"> <i
+							class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
+					</a>
+						<button type="submit" class="btn btn-success btn-padrao"
+							ng-disabled="solicitacaoForm.$invalid">
+							<span class="glyphicon glyphicon-ok"></span> Salvar
+						</button>
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<hr>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="modal  fade in" id="modalLivro" tabindex="-1"
+				role="dialog" aria-labelledby="" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<form role="form" name="modalForm">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4>Material</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<!--<div class="col-md-4 form-group {{modalForm.livro.$error.required? 'has-error' : 'has-success' }} has-feedback">-->
+									<div
+										class="col-md-4 form-group {{modalForm.livro.$error.required? 'has-error' : 'has-success' }} has-feedback">
+										<label class="control-label">Livro *</label>
+										<!--<select ui-select2="select2Options" class="input-default"-->
+										<!--ng-model="itemCorrente.livro" required name="livro">-->
+										<!--<option value=""></option>-->
+										<!--<option ng-repeat="l in livros" value="{{l.id}}">{{l.nome}}</option>-->
+										<!--</select>-->
+										<input ui-select2="select2Livro" class="input-default"
+											ng-model="itemCorrente.livro" name="livro">
+									</div>
 
-                <div class="row">
-                    <div class="">
-                        <table class="table table-striped">
-                            <thead>
-                            <th class="col-md-6">Material</th>
-                            <th class="col-md-3">Tradução</th>
-                            <th class="col-md-2">Status</th>
-                            <th class="col-md-1"></th>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="item in solicitacao.itensSolicitacao">
-                                <td><a href="#/cadastrolivro/{{item.livro.id}}">{{getDescricaoMaterial(item)}}</a></td>
-                                <td>{{item.traducaoMaterial}}{{item.traducaoMaterial == 'OUTRO' ? '-'+item.outro : ''}}</td>
-                                <td><span class="label label-inverse" >{{item.status}}</span> </td>
-                                <td>
-                                    <a href="javascript:void(0)" ng-click="excluirItem(item)" data-ng-show="item.status == 'AGUARDANDO'">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </fieldset>
-            <div class="row">
-                <div class="col-sm-12">
-                    <span class="pull-right"> <a
-                            class="btn btn-primary btn-padrao" ng-click="voltar()"> <i
-                            class="glyphicon glyphicon-circle-arrow-left"></i> Voltar
-                    </a>
-                        <button type="submit" class="btn btn-success btn-padrao" ng-disabled="solicitacaoForm.$invalid">
-                            <span class="glyphicon glyphicon-ok"></span> Salvar
-                        </button>
-                    </span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <hr>
-                </div>
-            </div>
-        </form>
-        <div class="row">
-            <div class="modal  fade in" id="modalLivro" tabindex="-1" role="dialog"
-                 aria-labelledby="" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <form role="form" name="modalForm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4>Material</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!--<div class="col-md-4 form-group {{modalForm.livro.$error.required? 'has-error' : 'has-success' }} has-feedback">-->
-                                    <div class="col-md-4 form-group {{modalForm.livro.$error.required? 'has-error' : 'has-success' }} has-feedback">
-                                        <label class="control-label">Livro *</label>
-                                        <!--<select ui-select2="select2Options" class="input-default"-->
-                                            <!--ng-model="itemCorrente.livro" required name="livro">-->
-                                            <!--<option value=""></option>-->
-                                            <!--<option ng-repeat="l in livros" value="{{l.id}}">{{l.nome}}</option>-->
-                                        <!--</select>-->
-                                        <input ui-select2="select2Livro" class="input-default" ng-model="itemCorrente.livro" name="livro" >
-                                    </div>
+									<div class="col-md-4">
+										<label>Transcrição</label> <select
+											ng-model="itemCorrente.traducaoMaterial" class="form-control">
+											<option value="BRAILLE">BRAILLE</option>
+											<option value="MECDAISY">MECDAISY</option>
+											<option value="DOSVOX">DOSVOX</option>
+											<option value="OUTRO">OUTRO</option>
+										</select>
+									</div>
 
-                                    <div class="col-md-4">
-                                        <label>Tradução</label>
-                                        <select ng-model="itemCorrente.traducaoMaterial" class="form-control">
-                                            <option value="BRAILLE">BRAILLE</option>
-                                            <option value="MECDAISY">MECDAISY</option>
-                                            <option value="DOSVOX">DOSVOX</option>
-                                            <option value="OUTRO">OUTRO</option>
-                                        </select>
-                                    </div>
+									<div class="col-md-4"
+										ng-show="itemCorrente.traducaoMaterial == 'OUTRO'">
+										<label>Especificar</label> <input type="text"
+											class="form-control" ng-model="itemCorrente.outro">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<div class="row">
+									<div class="col-md-2 col-md-offset-8 form-group">
+										<a class="btn btn-danger form-control" data-dismiss="modal">Fechar</a>
+									</div>
+									<div class="col-md-2 form-group">
+										<button class="btn btn-success form-control"
+											ng-click="adicionarMaterial()">Adicionar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 
-                                    <div class="col-md-4" ng-show="itemCorrente.traducaoMaterial == 'OUTRO'">
-                                        <label>Especificar</label>
-                                        <input type="text" class="form-control" ng-model="itemCorrente.outro">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="row">
-                                    <div class="col-md-2 col-md-offset-8 form-group">
-                                        <a class="btn btn-danger form-control" data-dismiss="modal">Fechar</a>
-                                    </div>
-                                    <div class="col-md-2 form-group">
-                                        <button class="btn btn-success form-control"
-                                                ng-click="adicionarMaterial()">Adicionar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </div>
+		</div>
+	</div>
 
 </div>

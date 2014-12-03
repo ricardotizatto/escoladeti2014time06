@@ -15,10 +15,8 @@ public class ComandoSalvarMovimentacao {
     private Date dataMovimentacao;
     
     @NotNull
-    private Long pessoaOrigem;
-    
-    @NotNull
-    private Long pessoaDestino;
+    private Long referencia;
+ 
         
     @NotNull
     private Long produto;
@@ -47,20 +45,12 @@ public class ComandoSalvarMovimentacao {
         this.dataMovimentacao = dataMovimentacao;
     }
 
-    public Long getPessoaOrigem() {
-        return pessoaOrigem;
+    public Long getReferencia() {
+        return referencia;
     }
 
-    public void setPessoaOrigem(Long pessoaOrigem) {
-        this.pessoaOrigem = pessoaOrigem;
-    }
-
-    public Long getPessoaDestino() {
-        return pessoaDestino;
-    }
-
-    public void setPessoaDestino(Long pessoaDestino) {
-        this.pessoaDestino = pessoaDestino;
+    public void setReferencia(Long referencia) {
+        this.referencia = referencia;
     }
 
     public Long getProduto() {

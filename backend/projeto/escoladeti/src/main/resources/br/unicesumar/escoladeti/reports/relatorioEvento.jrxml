@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAssociado" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01ef40d3-0794-43dd-922b-91db040371e6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="143"/>
+	<property name="ireport.y" value="0"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="local" class="java.lang.String"/>
+	<field name="organizacao" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="tituloPeriodo" class="java.lang.String"/>
+	<field name="ministrante" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="data" class="java.util.Date"/>
+	<field name="horario" class="java.lang.String"/>
+	<field name="participantes" class="java.lang.String"/>
+	<field name="id_periodo" class="java.lang.Long"/>
+	<variable name="STATUS_COUNT" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{status}.equals("ABERTO") ? $V{STATUS_COUNT} : null]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="STATUS_CLOSED_COUNT" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{status}.equals("FECHADO") ? $V{STATUS_COUNT} : null]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement x="125" y="0" width="677" height="87" uuid="b4161bc2-228c-4bf3-8557-703b4a350b24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="34" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Relatório de Eventos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="125" height="87" uuid="53713fe0-e904-4084-b398-13c434596448"/>
+				<imageExpression><![CDATA["C:\\Projetos\\escoladeti2014time06\\backend\\projeto\\escoladeti\\src\\main\\webapp\\resources\\imagens\\imagem-amacap.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="20" width="37" height="20" uuid="c399726b-d23e-4fb7-9815-1758ff6b2dd1"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="0" width="48" height="20" uuid="1d60f469-1c4a-4abb-a2a5-99984f7cfd76"/>
+				<textElement>
+					<font fontName="Arial" size="15" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Filtros]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="20" width="55" height="20" uuid="9335a102-7429-43c0-b6af-18ec959560b1"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("filtroDataInicio")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="20" width="55" height="20" uuid="47797247-33b9-4515-8f50-4aeb4e9f99cc"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="102" y="20" width="55" height="20" uuid="de9d27b0-7ee3-418c-a2a1-b5d56dae3158"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("filtroDataFim")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="20" width="86" height="20" uuid="f7b5d287-163d-4018-b090-fbb8a56a54be"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("filtroStatus")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="20" width="100" height="20" uuid="6727184a-4806-4992-90d4-97e30e7bda4d"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("filtroTitulo")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="20" width="69" height="20" uuid="7b44c79e-d4d8-4cdd-a8e5-c5787e47510a"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="577" y="20" width="55" height="20" uuid="2a1f05d3-3798-4d01-a90a-39f17978f30a"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="632" y="20" width="86" height="20" uuid="6153b185-9fe2-41cf-b5d6-97d37c89dc8e"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("filtroTipo")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="525" y="0" width="67" height="20" uuid="b6a76ea0-1b3e-45ff-8d78-55306b23fbd3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="0" width="74" height="20" uuid="e5bd16d2-5a26-417f-b501-b0e26791e566"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Título]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="79" y="0" width="126" height="20" uuid="97bef07f-ae61-47a4-91e1-3ff9589e1c06"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Local]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="100" height="20" uuid="af6c7692-1466-4dd3-8003-de3a0de16162"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Ministrante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="80" height="20" uuid="a1fab53d-bdcc-4e1f-a26c-066911dbe666"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Organização]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="802" height="1" uuid="3458c56e-56ef-4f8f-9a07-358636f5d377"/>
+			</line>
+			<staticText>
+				<reportElement x="287" y="0" width="38" height="20" uuid="abf6f00c-30a1-4880-b266-73b4e5786643"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="0" width="100" height="20" uuid="8643ffbb-2c94-413f-9f65-1b0c8ac12643"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Título Período]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="592" y="0" width="51" height="20" uuid="ed0e7b26-9876-4794-a314-477430a58cef"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="657" y="0" width="67" height="20" uuid="55825f7d-7352-46d3-bdb3-da166351e210"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Horário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="724" y="0" width="78" height="20" uuid="f40cd948-3b88-448f-aa91-cdf01a14becd"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Participantes]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="80" height="20" uuid="038e9073-7a12-4de1-9f01-794a4dc11267"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="2" width="125" height="20" uuid="8bfdf50f-ed22-4f9f-9026-04c8302f205f"/>
+				<textFieldExpression><![CDATA[$F{local}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="2" width="35" height="20" uuid="90a5d5d8-2e01-42cc-8474-19ace40316e2"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="2" width="105" height="20" uuid="39c6a16c-45e1-4e8a-b698-79839b3e8416"/>
+				<textFieldExpression><![CDATA[$F{tituloPeriodo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="2" width="100" height="20" uuid="e4a4fbdc-afae-4a3a-a057-c61a97395a8f"/>
+				<textFieldExpression><![CDATA[$F{ministrante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="525" y="2" width="67" height="20" uuid="43121844-301b-425e-972e-a4a0a87857e4"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="657" y="2" width="67" height="20" uuid="1c8aa12f-a73d-4daf-8a68-f4f91f633c49"/>
+				<textFieldExpression><![CDATA[$F{horario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="592" y="2" width="65" height="20" uuid="fafa5c4c-1947-4442-997a-870c588e3fac"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{data})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="2" width="80" height="20" uuid="7e793a0c-f49d-476a-9a08-a60c1fb0ee40"/>
+				<textFieldExpression><![CDATA[$F{organizacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="766" y="2" width="36" height="20" uuid="59f55fbb-31d2-4648-8595-b606b8bc06b5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{participantes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="802" height="1" uuid="c5ec801e-9752-4963-bad9-f2e8594fdb6b"/>
+			</line>
+			<textField>
+				<reportElement x="702" y="5" width="100" height="20" uuid="c5a7f1f2-bc7a-41ca-ab59-0a0fc09a7258"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="5" width="42" height="20" uuid="4db5d641-536c-4789-af3b-53af085242e8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="5" width="21" height="20" uuid="368ebf0d-e6d2-4824-9db0-99b150203d63"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="80" splitType="Stretch">
+			<textField>
+				<reportElement x="89" y="60" width="30" height="20" uuid="84bbecf5-d3ec-4994-824c-874d8953626a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="89" height="20" uuid="72cb99b1-be93-4f1b-ad4f-40e3dd14af54"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Total:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="18" width="802" height="1" uuid="a2525af6-173f-47b3-b30b-eca5ba24554e"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="20" width="89" height="20" uuid="233f9df8-845c-4037-8827-5354364b3f80"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Abertos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="20" width="30" height="20" uuid="7c222efe-becf-4a47-ad9c-6fd94e89e432"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{STATUS_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="89" height="20" uuid="7f2b0ae7-a4e2-4eed-9a86-7793a41e7129"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Fechados:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="40" width="30" height="20" uuid="d9629199-8c17-4a5b-894c-abfe33ea1b75"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{STATUS_CLOSED_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

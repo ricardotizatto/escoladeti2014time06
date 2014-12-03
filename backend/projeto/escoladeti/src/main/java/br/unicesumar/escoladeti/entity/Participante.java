@@ -1,5 +1,6 @@
 package br.unicesumar.escoladeti.entity;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 
 @Entity
@@ -68,4 +69,49 @@ public class Participante extends Entidade {
     public void setDeficiente(String deficiente) {
         this.deficiente = deficiente.toUpperCase();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + Objects.hashCode(this.idevento);
+        hash = 37 * hash + Objects.hashCode(this.email);
+        hash = 37 * hash + Objects.hashCode(this.telefone);
+        hash = 37 * hash + Objects.hashCode(this.deficiente);
+        hash = 37 * hash + Objects.hashCode(this.pagamento);
+        hash = 37 * hash + Objects.hashCode(this.necessidade);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Participante other = (Participante) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.idevento, other.idevento)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefone, other.telefone)) {
+            return false;
+        }
+        if (!Objects.equals(this.deficiente, other.deficiente)) {
+            return false;
+        }
+        if (!Objects.equals(this.pagamento, other.pagamento)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

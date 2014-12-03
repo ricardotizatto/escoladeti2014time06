@@ -7,14 +7,15 @@ angular.module('directives', []);
 angular.module('filters', []);
 
 var app = angular.module('app',
-    ['ngRoute',
-        'ngResource',
-        'controllers',
-        'directives',
-        'filters',
-        'ui.select2',
-        'ui.bootstrap',
-        'ui.utils']);
+        ['ngRoute',
+            'ngResource',
+            'controllers',
+            'directives',
+            'filters',
+            'ui.select2',
+            'ui.bootstrap',
+            'ui.utils',
+            'flow']);
 
 app.config(['$routeProvider',
     function($routeProvider) {
@@ -292,8 +293,13 @@ app.config(['$routeProvider',
                 templateUrl: './pages/producao/producaoMaterial.html',
                 controller: ''
             })
+            .when('/relatorio/eventos', {
+                    templateUrl: './pages/relatorioEvento/relatorio.html',
+                    controller: 'RelatorioEventoController'
+                })
             .otherwise({redirectTo: '/principal'
             });
+
     }
 ]);
 

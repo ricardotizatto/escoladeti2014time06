@@ -11,7 +11,19 @@ function eventoController($scope, $http, $routeParams) {
     $scope.organizacao;
     $scope.tipoEvento;
     $scope.valor;
-//    $scope.selected;
+    $scope.vagasDisponiveisTemp;
+    $scope.vagasLimiteTemp;
+
+    $scope.trocarFoto = function () {
+       $scope.evento.foto = "";
+    };	
+    
+    $scope.cancelarFoto = function () {
+       $scope.evento.foto = "";
+       $('#imagem').attr('src', "" );
+       $('#imagem2').attr('src', "" );
+    };
+
     $scope.indicePeriodo = {};
     $scope.inicializar = function () {
         $scope.getTodosAbertos(1);
@@ -21,10 +33,13 @@ function eventoController($scope, $http, $routeParams) {
         console.log(evento);
         window.location = '#/cadastroevento/' + evento.id;
     };
-    $scope.chamadaPeriodo = function (id) {
-        window.location = '#/chamada/' + id;
+    $scope.chamadaPeriodo = function (id, evento) {
+        if (id == undefined || ($scope.evento.limite == $scope.evento.disponivel)) {
+            toastr.warning("Não existem participantes inscritos neste evento.");
+        } else {
+            window.location = '#/chamada/' + id;
+        }
     };
-
 
     $scope.deletar = function (evento) {
         console.log('deletando evento ' + JSON.stringify(evento));
@@ -39,10 +54,10 @@ function eventoController($scope, $http, $routeParams) {
                 })
                         .success(function (data, status) {
                             console.log($scope.status);
-                            if($scope.status == 'aberto'){
-                             $scope.getTodosAbertos(1);   
-                            }else{
-                             $scope.getTodosFechados(1);      
+                            if ($scope.status == 'aberto') {
+                                $scope.getTodosAbertos(1);
+                            } else {
+                                $scope.getTodosFechados(1);
                             }
                             console.log('evento deletado');
                             toastr.success("Evento deletado com sucesso");
@@ -63,12 +78,16 @@ function eventoController($scope, $http, $routeParams) {
         $http.get('./rest/eventoSource/evento/' + $scope.status + '?q=' + $scope.busca.toUpperCase())
                 .then(function (retorno) {
                     $scope.eventos = retorno.data;
-                    });
+                });
     };
 
 
     $scope.listarParticipantes = function (evento) {
-        window.location = '#/listaparticipantes/' + evento.id;
+        if (evento.limite === evento.disponivel) {
+            toastr.warning("Não existem participantes inscritos neste evento.");
+        } else {
+            window.location = '#/listaparticipantes/' + evento.id;
+        }
     };
 
     $scope.getTotalParticipantes = function (id) {
@@ -93,9 +112,26 @@ function eventoController($scope, $http, $routeParams) {
         console.log(angular.toJson($scope.evento, true));
         if (!($scope.evento.id > 0)) {
             $scope.evento.statusevento = true;
-        }
-        $scope.evento.disponivel = $scope.evento.limite;
-        console.log("evento antes do post = " + $scope.evento.periodos.length);
+            $scope.evento.disponivel = $scope.evento.limite;
+        }else{
+			if($scope.evento.limite > $scope.vagasLimiteTemp){
+			   $scope.evento.disponivel = $scope.evento.disponivel + ($scope.evento.limite - $scope.vagasLimiteTemp); 
+			}else if(($scope.evento.limite < $scope.vagasLimiteTemp)&&($scope.evento.disponivel > $scope.evento.limite)){
+			   $scope.evento.disponivel = ($scope.evento.disponivel - ($scope.vagasLimiteTemp - $scope.evento.limite)); 
+                           if($scope.evento.disponivel < 0)  {
+                               $scope.evento.disponivel = $scope.evento.disponivel * -1;
+                           }
+			}else{
+				$scope.evento.disponivel = $scope.vagasDisponiveisTemp;
+				$scope.evento.limite = $scope.vagasLimiteTemp; 
+			}
+		}
+        if(!$scope.evento.foto){
+            $scope.evento.foto = $('#imagem').attr('src');
+        }        
+        console.log('FOTO:', $scope.evento.foto);
+        console.log('Nova FOTO:', $scope.evento.novafoto);
+        
         $http.post("./rest/eventoSource/evento", $scope.evento)
                 .success(function (evento, status) {
                     //carregarEvento();
@@ -167,12 +203,32 @@ function eventoController($scope, $http, $routeParams) {
             $scope.evento = {};
             $scope.evento.periodos = [];
             $scope.periodosModal = [];
+            $scope.desabilidaEditPeriodo = false;
+            $scope.desabilidaDelPeriodo = false;
+//            $scope.evento.foto = './resources/imagens/no_image.gif';
             return;
         }
         $http.get('./rest/eventoSource/evento/' + $routeParams.eventoId)
                 .success(function (ev) {
                     $scope.evento = ev;
                     $scope.periodo = ev.periodos[0];
+                    $scope.desabilidaEditPeriodo = true;
+                    $scope.desabilidaDelPeriodo = true;
+
+                    if(ev.foto){
+                        $scope.evento.foto = 'data:image/png;base64,' + ev.foto;
+                    }else{
+                        $scope.evento.foto = '';
+                    }
+                    
+//                    $scope.evento.foto = foto.substring(0, 3) ;
+					$scope.vagasDisponiveisTemp = $scope.evento.disponivel;
+					$scope.vagasLimiteTemp = $scope.evento.limite;
+                    // if ($scope.evento.limite == $scope.evento.disponivel) {
+                        // $scope.alterarLimite = false;
+                    // }else{
+                         // $scope.alterarLimite = true;
+                    // }
                     return;
                 });
     };
@@ -237,17 +293,34 @@ function eventoController($scope, $http, $routeParams) {
 
     $scope.salvarPeriodo = function () {
         var dataAtual = dataHoje();
+
         if ($scope.indicePeriodo >= 0) {
             $scope.evento.periodos.splice($scope.indicePeriodo, 1);
         }
 
         if ($scope.periodo.inicio >= $scope.periodo.fim) {
             toastr.warning("Horário inválido");
-        } else if ($scope.periodo.data < dataAtual) {
+            return;
+        }
+        if ($scope.periodo.data < dataAtual) {
             console.log("data sis: " + $scope.periodo.data + "data atual " + dataAtual);
             toastr.warning("Data inválida!");
+            return;
         }
-        else {
+        if ($scope.evento.periodos) {
+            var periodoExistente = false;
+            console.log('entrou na funcao que valida data/hora');
+            $scope.evento.periodos.forEach(function (value, key) {
+                var novaData = transformaData(value.data)
+                if (novaData == $scope.periodo.data && value.inicio == $scope.periodo.inicio && value.fim == $scope.periodo.fim) {
+                    periodoExistente = true;
+                    toastr.warning("Periodo inválido.");
+                    return;
+                }
+            });
+        }
+        if (periodoExistente == false) {
+            console.log('entrou no else para salvar');
             var periodo = removeFusoHorarioData($scope.periodo.data);
             $scope.periodo.data = periodo;
             $scope.evento.periodos.push($scope.periodo);
@@ -255,11 +328,13 @@ function eventoController($scope, $http, $routeParams) {
             toastr.success("Periodo adicionado com sucesso.");
             $scope.indicePeriodo = {};
         }
+
     };
 
     $scope.editarPeriodo = function (indice) {
         $scope.indicePeriodo = indice;
         $scope.periodo = angular.copy($scope.evento.periodos[indice]);
+        $scope.periodo.data = transformaData($scope.periodo.data);
     };
 
     $scope.delPeriodo = function (index) {
@@ -287,6 +362,19 @@ function eventoController($scope, $http, $routeParams) {
         return [ano, mes, dia].join('-');
     }
 
+    function transformaData(data) {
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+        var ano = data.getFullYear();
+        if (dia < 10) {
+            dia = '0' + dia;
+        }
+        if (mes < 10) {
+            mes = '0' + mes;
+        }
+
+        return [ano, mes, dia].join('-');
+    }
 }
 function Ctrl($scope) {
     $scope.value = new Date(2010, 11, 28, 14, 57);
