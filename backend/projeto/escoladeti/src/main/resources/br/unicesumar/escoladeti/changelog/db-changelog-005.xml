@@ -38,7 +38,6 @@
             <column name="nome" type="bigint" value="producao"></column>
         </insert>
     </changeSet>
-    <changeSet id="w20141128219" author="Walber">
     	<createView viewName="viewrelatorioevento" replaceIfExists="true">
     	SELECT
   			T1.ID, T1.TITULO, T2.ID AS ID_PERIODO, T1.DESCRICAO, T1.LOCAL, T1.ORGANIZACAO, 
@@ -69,19 +68,18 @@
 		ORDER BY
   		T2.DATA ASC,T1.TITULO ASC
     	</createView>
-    </changeSet>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
     <changeSet id="006" author="Jhonatan">
         <createView viewName="viewestoqueproduto" replaceIfExists="true"
                             schemaName="public">

@@ -109,6 +109,16 @@
 			newColumnName="enderecoComplemento" />
 	</changeSet>
 
+    <changeSet id="4" author="catabriga">
+        <insert tableName="itemacesso">
+            <column name="id" type="int8" value="12"></column>
+            <column name="nome" type="varchar" value="RELATORIO_EVENTO"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="5" author="catabriga">
+        <renameColumn tableName="solicitacao" oldColumnName="enderecoComplemento" newColumnName="enderecocomplemento"></renameColumn>
+    </changeSet>
 	<changeSet id="w201412021557" author="Walber">
 		<createView viewName="viewrelatorioproducaovolume"
 			replaceIfExists="true">
@@ -185,5 +195,4 @@
 			order by t3.nome asc
 
 		</createView>
-	</changeSet>
-</databaseChangeLog>
+	</changeSet></databaseChangeLog>
