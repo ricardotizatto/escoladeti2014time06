@@ -297,6 +297,10 @@ app.config(['$routeProvider',
                     templateUrl: './pages/relatorioEvento/relatorio.html',
                     controller: 'RelatorioEventoController'
                 })
+            .when('/relatorio/producao', {
+                    templateUrl: './pages/relatorioProducao/relatorio.html',
+                    controller: 'RelatorioProducaoController'
+                })                
             .otherwise({redirectTo: '/principal'
             });
 

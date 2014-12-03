@@ -5,12 +5,12 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
-    <changeSet id="1" author="catabriga">
-        <dropColumn tableName="volume" columnName="data_enviado"></dropColumn>
-        <dropColumn tableName="volume" columnName="data_impressao"></dropColumn>
-        <dropColumn tableName="volume" columnName="data_revisao"></dropColumn>
-        <dropColumn tableName="volume" columnName="id_responsavelrevisao"></dropColumn>
-        <dropColumn tableName="volume" columnName="observacao"></dropColumn>
+	<changeSet id="1" author="catabriga">
+		<dropColumn tableName="volume" columnName="data_enviado"></dropColumn>
+		<dropColumn tableName="volume" columnName="data_impressao"></dropColumn>
+		<dropColumn tableName="volume" columnName="data_revisao"></dropColumn>
+		<dropColumn tableName="volume" columnName="id_responsavelrevisao"></dropColumn>
+		<dropColumn tableName="volume" columnName="observacao"></dropColumn>
 
 
 		<addColumn tableName="solicitacaovolume">
@@ -81,7 +81,7 @@
 			<column name="complemento" type="varchar(255)"></column>
 		</addColumn>
 	</changeSet>
-	<changeSet id="w201412020138" author="Walber">
+<!-- 	<changeSet id="w201412020138" author="Walber">
 		<preConditions onError="MARK_RAN" onFail="MARK_RAN">
 			<columnExists tableName="solicitacao" columnName="cep" />
 			<and>
@@ -107,16 +107,95 @@
 			newColumnName="enderecotipo" />
 		<renameColumn tableName="solicitacao" oldColumnName="complemento"
 			newColumnName="enderecoComplemento" />
+	</changeSet> -->
+
+	<changeSet id="4.1" author="catabriga">
+		<insert tableName="itemacesso">
+			<column name="id" type="int8" value="12"></column>
+			<column name="nome" type="varchar" value="RELATORIO_EVENTO"></column>
+		</insert>
+		<insert tableName="itemacesso">
+			<column name="id" type="int8" value="13"></column>
+			<column name="nome" type="varchar" value="RELATORIO_PRODUCAO"></column>
+		</insert>
 	</changeSet>
 
-    <changeSet id="4" author="catabriga">
-        <insert tableName="itemacesso">
-            <column name="id" type="int8" value="12"></column>
-            <column name="nome" type="varchar" value="RELATORIO_EVENTO"></column>
-        </insert>
-    </changeSet>
+	<!-- <changeSet id="5" author="catabriga"> <renameColumn tableName="solicitacao" 
+		oldColumnName="enderecoComplemento" newColumnName="enderecocomplemento"></renameColumn> 
+		</changeSet> -->
+	<changeSet id="w201412030254" author="Walber">
+		<createView viewName="viewrelatorioproducaovolume" replaceIfExists="true">
+			select
+		  t1.id as solicitacaoid,
+		  t2.id as solicitacaoitemid,
+		  t5.id as volumeid,
+			t4.id as solicitacaovolumeid,		  
+		  t3.nome,
+		  t3.disciplina,
+		  t3.autor,
+		  t3.editora,
+		  t3.anoedicao,
+		  t2.traducaomaterial as transcricao,
+		  t5.pagina_inicio as paginainicio,
+		  t5.pagina_fim as paginafim,
+		  t5.status,
+		  t6.nome as responsavel,
+		  t1.datachegada as datachegada,
+		  t4.data_impressao as dataimpressao,
+		  t4.data_revisao as datarevisao,
+		  t4.data_envio as dataenvio
+		from solicitacao t1 join solicitacaoitem t2 on t1.id = t2.id_solicitacao
+		join livro t3 on t2.id_material = t3.id
+		join solicitacaovolume t4 on t2.id = t4.id_solicitacaoitem
+		join volume t5 on t4.id_volume = t5.id
+		left join usuario t6 on t5.id_responsavel = t6.id
+		order by t1.datachegada asc
+	</createView>
+	</changeSet>
 
-    <changeSet id="5" author="catabriga">
-        <renameColumn tableName="solicitacao" oldColumnName="enderecoComplemento" newColumnName="enderecocomplemento"></renameColumn>
-    </changeSet>
+	<changeSet id="w201412030259" author="Walber">
+		<createView viewName="viewrelatorioproducaosolicitante" replaceIfExists="true">
+			  select
+			  t1.id,
+			  t3.nome as aluno, 
+			  (extract( year from now()) - extract(year from t3.nascimento_criacao)) as idade,
+			  t3.nascimento_criacao as nascimentocriacao,
+			  t1.serie,
+			  t1.ensino,
+			  t7.nome as responsavel,
+				t12.nome as escola,			  
+			  upper(t1.enderecologradouro || case when t1.endereconumero is null then 'S/N' else ', ' || t1.endereconumero end) as endereco,  
+			  t15.ddd || t15.numero as telefone,
+			  t7.email,
+			  t5.nome || ' - ' ||t6.sigla as municipiouf,  
+			  t1.enderecobairro as bairro,
+			  t1."enderecoComplemento" as complemento,
+			  t1.enderecocep as cep,
+			  t9.nome || ' - ' ||t10.sigla as nre,
+			  t1.datachegada,
+    		t16.data_impressao as dataimpressao,
+    		t16.data_revisao as datarevisao,
+    		t16.data_envio as dataenvio			  
+			from solicitacao t1
+			join solicitacaoitem t2    	on t1.id = t2.id_solicitacao
+			join viewpessoa t3 	   	on t1.id_aluno = t3.id
+			join endereco t4 	   	on t3.id = t4.pessoaid
+			join cidade t5 		   	on t1.id_municipio = t5.id
+			join unidadefederativa t6  	on t5.unidadefederativaid = t6.id
+			join viewpessoa t7 	   	on t1.id_responsavel = t7.id
+			join endereco t8 	   	on t7.id = t8.pessoaid
+			left join cidade t9		on t1.id_cidadenre = t9.id
+			left join unidadefederativa t10 on t9.unidadefederativaid = t10.id
+			join telefone t11 		on t7.id = t11.pessoaid
+			left join viewpessoa t12 on t1.id_escola = t12.id
+			left join pessoacaracteristica t13 on t12.id = t13.pessoa_id
+			left join caracteristica t14 on t13.caracteristica_id = t4.id
+			left join telefone t15 on t15.pessoaid = t12.id
+   		join solicitacaovolume t16 on t16.id_solicitacaoitem = t2.id			
+			where t4.principal = 'S'
+			and coalesce(t4.id,0) = coalesce(coalesce(t4.id,0),5)
+			order by t3.nome asc
+
+		</createView>
+	</changeSet>
 </databaseChangeLog>
