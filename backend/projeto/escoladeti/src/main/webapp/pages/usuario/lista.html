@@ -42,11 +42,11 @@
                         <td>{{usuario.inicioVigencia| date: 'dd-MM-yyyy'}}</td>
                         <td>{{usuario.fimVigencia| date: 'dd-MM-yyyy'}}</td>
                         <td>
-                            <span class="center-text">
+                            <span class="pull-right">
                             <button class='btn btn-warning btn-sm' ng-click="editar(usuario)">
                                     <span class='glyphicon glyphicon-edit'></span>
                             </button>
-                            <button class='btn btn-danger btn-sm' ng-click="deletar(usuario)">
+                            <button class='btn btn-danger btn-sm' ng-disabled="!usuario.ativo" ng-click="deletar(usuario)">
                                     <span class='glyphicon glyphicon-remove-circle'></span>
                             </button>
                             </span>    

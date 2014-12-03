@@ -17,7 +17,6 @@ var app = angular.module('app',
             'ui.utils',
             'flow']);
 
-
 app.config(['$routeProvider',
     function($routeProvider) {
 
@@ -285,6 +284,14 @@ app.config(['$routeProvider',
             .when('/relatorio/associados', {
                 templateUrl: './pages/relatorioAssociado/relatorio.html',
                 controller: 'RelatorioAssociadoController'
+            })
+            .when('/ordem-producao/:idOrdem/producao-material/', {
+                templateUrl: './pages/producao/producaoMaterial.html',
+                controller: ''
+            })
+            .when('/ordem-producao/:idOrdem/producao-material/:id', {
+                templateUrl: './pages/producao/producaoMaterial.html',
+                controller: ''
             })
             .when('/relatorio/eventos', {
                     templateUrl: './pages/relatorioEvento/relatorio.html',

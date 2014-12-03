@@ -1,7 +1,5 @@
 package br.unicesumar.escoladeti.controller;
 
-import br.unicesumar.escoladeti.comando.ComandoAlterarData;
-import br.unicesumar.escoladeti.comando.ComandoMarcarRevisado;
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.entity.Volume;
 import br.unicesumar.escoladeti.service.VolumeService;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/rest/volumes")
@@ -25,6 +22,14 @@ public class VolumeController {
     Volume novoVolume(
             @Valid @RequestBody ComandoSalvarVolume comandoSalvarVolume) {
         return volumeService.criarVolume(comandoSalvarVolume);
+    }
+
+    @RequestMapping( method = RequestMethod.GET)
+    public @ResponseBody
+    DataPage<Volume> buscarPorTranscricao(@RequestParam("idLivro") Long idLivro,
+                                          @RequestParam("transcricao") String transcricao,
+                                          @RequestParam("id") Long id) {
+        return volumeService.buscarPorIdLivroETranscricao(id, idLivro, transcricao);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

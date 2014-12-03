@@ -28,6 +28,19 @@ public class UsuarioController implements Serializable {
     public UsuarioDTO salvar(@RequestBody UsuarioDTO usuarioDTO) {
         return this.usuarioService.salvar(usuarioDTO);
     }
+    
+    @RequestMapping(value = "/usuario/atualizar", method = RequestMethod.POST)
+    @ResponseBody
+    public UsuarioDTO atualizar(@RequestBody UsuarioDTO usuarioDTO) {
+        return this.usuarioService.atualizar(usuarioDTO);
+    }
+     
+    @RequestMapping(value = "/usuario/desativar", method = RequestMethod.POST)
+    @ResponseBody
+    public void desativar(@RequestBody Long id) {
+        this.usuarioService.desativar(id);
+    }
+
 
     @RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET)
     @ResponseBody

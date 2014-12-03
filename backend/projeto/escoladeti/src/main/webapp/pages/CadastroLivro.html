@@ -36,7 +36,7 @@
                 <span class="help-block" ng-show="formLivro.anoEdicao.$error.pattern">Apenas numeros e no mínimo 4.</span>
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-ng-show="!!livro.id">
             <div class="col-sm-12">
                 <span class="pull-right">
                     <a class="btn btn-primary" ng-click="adicionarVolume()" >

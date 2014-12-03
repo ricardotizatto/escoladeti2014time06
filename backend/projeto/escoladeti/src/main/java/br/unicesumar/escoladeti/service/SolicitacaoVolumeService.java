@@ -5,6 +5,7 @@ import br.unicesumar.escoladeti.comando.ComandoSalvarSolicitacaoVolume;
 import br.unicesumar.escoladeti.comando.ComandoSalvarVolume;
 import br.unicesumar.escoladeti.entity.SolicitacaoVolume;
 import br.unicesumar.escoladeti.entity.Volume;
+import br.unicesumar.escoladeti.enums.SolicitacaoVolumeStatus;
 import br.unicesumar.escoladeti.repository.SolicitacaoVolumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,13 @@ public class SolicitacaoVolumeService {
     private SolicitacaoVolumeRepository solicitacaoVolumeRepository;
 
     @Transactional
-    public SolicitacaoVolume criar(Long idSolicitacaoItem, ComandoSalvarSolicitacaoVolume comando) {
+    public SolicitacaoVolume criar( ComandoSalvarSolicitacaoVolume comando) {
         SolicitacaoVolume solicitacaoVolume = new SolicitacaoVolume();
         solicitacaoVolume.setIdVolume(comando.getVolume());
         solicitacaoVolume.setIdResponsavel(comando.getResponsavel());
-        solicitacaoVolume.setIdSolicitacaoItem(idSolicitacaoItem);
+        solicitacaoVolume.setIdSolicitacaoItem(comando.getIdSolicitacaoItem());
         solicitacaoVolume.setObservacao(comando.getObservacao());
+        solicitacaoVolume.setStatus(SolicitacaoVolumeStatus.ANDAMENTO);
         return solicitacaoVolumeRepository.save(solicitacaoVolume);
     }
 
@@ -47,10 +49,10 @@ public class SolicitacaoVolumeService {
     }
 
     @Transactional
-    public void marcarComoEnviado(Long id, List<ComandoAlterarData> comandos) {
+    public void marcarComoEnviado(List<ComandoAlterarData> comandos) {
 
         for(ComandoAlterarData comandoAlterarData : comandos) {
-            SolicitacaoVolume solicitacaoVolume = getById(id);
+            SolicitacaoVolume solicitacaoVolume = getById(comandoAlterarData.getId());
             solicitacaoVolume.marcarComoEnviado(comandoAlterarData);
             solicitacaoVolumeRepository.save(solicitacaoVolume);
         }
@@ -58,10 +60,10 @@ public class SolicitacaoVolumeService {
     }
 
     @Transactional
-    public void reativar(Long id, List<ComandoAlterarData> comandos) {
+    public void reativar(List<ComandoAlterarData> comandos) {
 
         for(ComandoAlterarData comandoAlterarData : comandos) {
-            SolicitacaoVolume solicitacaoVolume = getById(id);
+            SolicitacaoVolume solicitacaoVolume = getById(comandoAlterarData.getId());
             solicitacaoVolume.retivar();
             solicitacaoVolumeRepository.save(solicitacaoVolume);
         }
@@ -69,21 +71,21 @@ public class SolicitacaoVolumeService {
     }
 
     @Transactional
-    public void rejeitar(Long id, List<ComandoAlterarData> comandos) {
+    public void rejeitar( List<ComandoAlterarData> comandos) {
 
         for(ComandoAlterarData comandoAlterarData : comandos) {
-            SolicitacaoVolume solicitacaoVolume = getById(id);
+            SolicitacaoVolume solicitacaoVolume = getById(comandoAlterarData.getId());
             solicitacaoVolume.rejeitar(comandoAlterarData);
             solicitacaoVolumeRepository.save(solicitacaoVolume);
         }
     }
 
     @Transactional
-    public void marcarComoImpresso(Long id,  List<ComandoAlterarData> comandos) {
+    public void marcarComoImpresso( List<ComandoAlterarData> comandos) {
 
 
         for(ComandoAlterarData comandoAlterarData : comandos) {
-            SolicitacaoVolume solicitacaoVolume = getById(id);
+            SolicitacaoVolume solicitacaoVolume = getById(comandoAlterarData.getId());
             solicitacaoVolume.marcarComoImpresso(comandoAlterarData);
             solicitacaoVolumeRepository.save(solicitacaoVolume);
         }
@@ -91,13 +93,30 @@ public class SolicitacaoVolumeService {
     }
 
     @Transactional
-    public void marcarComoRevisado(Long id,  List<ComandoAlterarData> comandos) {
+    public void marcarComoRevisado(List<ComandoAlterarData> comandos) {
 
         for(ComandoAlterarData comandoAlterarData : comandos) {
-            SolicitacaoVolume solicitacaoVolume = getById(id);
+            SolicitacaoVolume solicitacaoVolume = getById(comandoAlterarData.getId());
             solicitacaoVolume.marcarComoRevisado(comandoAlterarData);
             solicitacaoVolumeRepository.save(solicitacaoVolume);
         }
 
+    }
+
+    public SolicitacaoVolume buscar(Long id) {
+        return solicitacaoVolumeRepository.findOne(id);
+    }
+
+    public SolicitacaoVolume atualizar(Long id, ComandoSalvarSolicitacaoVolume comandoSalvarSolicitacaoVolume) {
+        SolicitacaoVolume solicitacaoVolume = solicitacaoVolumeRepository.findOne(id);
+        solicitacaoVolume.setObservacao(comandoSalvarSolicitacaoVolume.getObservacao());
+
+        if (solicitacaoVolume.getStatus().equals(SolicitacaoVolumeStatus.ANDAMENTO)) {
+            solicitacaoVolume.setIdVolume(comandoSalvarSolicitacaoVolume.getVolume());
+            solicitacaoVolume.setIdResponsavel(comandoSalvarSolicitacaoVolume.getResponsavel());
+        }
+
+
+        return solicitacaoVolumeRepository.save(solicitacaoVolume);
     }
 }

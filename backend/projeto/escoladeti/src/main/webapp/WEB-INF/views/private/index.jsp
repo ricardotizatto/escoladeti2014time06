@@ -40,6 +40,8 @@
 
         <script type="text/javascript" src="./resources/js/app.js"></script>
         <script type="text/javascript" src="./resources/js/aplicacao/aplicacao.js"></script>
+        <script type="text/javascript" src="./resources/js/ordemProducao/producaoMaterialController.js"></script>
+        <script type="text/javascript" src="./resources/js/ordemProducao/materialService.js"></script>
         <script type="text/javascript" src="./resources/js/upload/directives.js"></script>
         <script type="text/javascript" src="./resources/js/upload/service.js"></script>
         <script type="text/javascript" src="./resources/js/directives.js"></script>
