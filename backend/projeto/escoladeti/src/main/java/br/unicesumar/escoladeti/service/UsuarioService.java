@@ -77,6 +77,33 @@ public class UsuarioService {
         }
         logger.info("Usuário 'admin' verificado.");
     }
+    
+    public UsuarioDTO atualizar(UsuarioDTO usuarioDTO){
+        
+             Usuario usuario = new Usuario();
+
+            usuario.setId(usuarioDTO.getId());
+            usuario.setLogin(usuarioDTO.getLogin());
+            usuario.setNome(usuarioDTO.getNome());
+            usuario.setSenha(usuarioDTO.getSenha());
+            usuario.setEmail(usuarioDTO.getEmail());
+            usuario.setAtivo(usuarioDTO.getAtivo());
+
+            Usuario usuSalvo = this.usuarioRepository.save(usuario);
+            
+            return usuarioDTO;
+        
+    }
+    
+    public void desativar(Long id){
+        
+        Usuario usuario = getUsuarioRepository().findById(id);
+
+        usuario.setAtivo(false);
+
+        this.usuarioRepository.save(usuario);
+            
+    }
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
         
